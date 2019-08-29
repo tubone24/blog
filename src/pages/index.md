@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
 title: tubone's BOYAKI
-image: /img/dsc7061-1-e1550286965139.jpg
+image: /img/enosham-011c-1.jpg
 heading: 'Goodbye, Shameful days. Aim for the next world.'
 subheading: 'Goodbye, Shameful days. Aim for the next world.'
 mainpitch:
