@@ -30,28 +30,13 @@ const Footer = class extends React.Component {
                       </Link>
                     </li>
                     <li>
-                      <Link className="navbar-item" to="/about">
-                        About
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/products">
-                        Products
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact/examples">
-                        Form Examples
-                      </Link>
-                    </li>
-                    <li>
                       <a
                         className="navbar-item"
-                        href="/admin/"
+                        href="https://tubone-project24.xyz/index.php/work/"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Admin
+                        Work
                       </a>
                     </li>
                   </ul>
@@ -63,11 +48,6 @@ const Footer = class extends React.Component {
                     <li>
                       <Link className="navbar-item" to="/blog">
                         Latest Stories
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact">
-                        Contact
                       </Link>
                     </li>
                   </ul>
@@ -93,13 +73,6 @@ const Footer = class extends React.Component {
                   <img
                     src={instagram}
                     alt="Instagram"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="vimeo" href="https://vimeo.com">
-                  <img
-                    src={vimeo}
-                    alt="Vimeo"
                     style={{ width: '1em', height: '1em' }}
                   />
                 </a>
