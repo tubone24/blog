@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-netlify-cms",
-  "description": "Example Gatsby, and Netlify CMS project",
+  "name": "tubone-blog",
+  "description": "Blog using Gatsby, and Netlify CMS project",
   "version": "1.1.3",
-  "author": "Austin Green",
+  "author": "tubone",
   "dependencies": {
     "bulma": "^0.7.0",
     "gatsby": "^2.13.31",
