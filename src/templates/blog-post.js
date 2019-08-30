@@ -54,6 +54,28 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
 }
 
+const Meta = ({ post }) => {
+  const origin = 'https://blog.tubone-project24.xyz';
+  let meta = [
+    { name: 'description', content: post.frontmatter.description },
+    { property: 'og:title', content: post.frontmatter.title },
+    { property: 'og:description', content: post.frontmatter.description },
+  ];
+  if (post.frontmatter.image) {
+    meta.push(
+      { property: 'og:image', content: `${origin}${post.frontmatter.image}` }
+    );
+  }
+
+  return (
+    <Helmet
+      title={`${post.frontmatter.title} | Blog`}
+      meta={meta}
+    />
+  );
+};
+
+
 const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
 
