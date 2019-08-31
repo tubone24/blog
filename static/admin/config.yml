@@ -107,7 +107,7 @@ collections:
       - { label: "Header Image", name: "headerImage", widget: "string" }
       - {
           label: "Template Key",
-          hint: " blog-post",
+          hint: "Images are created by https://imgur.com/",
           name: "templateKey",
           widget: "string",
           default: "blog-post",
