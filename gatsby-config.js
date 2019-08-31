@@ -158,6 +158,29 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    {
+                        resolve: 'gatsby-remark-emojis',
+                        options: {
+                            active : true,
+                            size   : 64,
+                            class  : 'emoji-icon',
+                            styles : {
+                                display      : 'inline',
+                                margin       : '0',
+                                'margin-top' : '1px',
+                                position     : 'relative',
+                                top          : '5px',
+                                width        : '25px'
+                            }
+                        }
+                    }
+                ]
+            }
+        },
     ],
     // for avoiding CORS while developing Netlify Functions locally
     // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
