@@ -18,7 +18,7 @@ import Header from '../components/Header';
 // import TableOfContent from '../components/TableOfContent';
 import ShareBox from '../components/ShareBox';
 
-import { config } from '../../data';
+import { config, githubClientId, githubClientSecret } from '../../data';
 
 // Styles
 import './blog-post.scss';
@@ -43,8 +43,8 @@ class BlogPost extends Component {
 
     const GitTalkInstance = new Gitalk({
       ...gitalk,
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientID: githubClientId,
+      clientSecret: githubClientId,
       title,
       id: id || graphqlId,
     });
