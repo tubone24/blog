@@ -35,11 +35,15 @@
     {
       "href": "/tags/",
       "title": "Tags"
+    },
+    {
+      "href": "/rss.xml",
+      "title": "RSS"
     }
   ],
   "redirectors": [
     {
-      "toPath": "/2018/05/01/about-calpa-liu/",
+      "toPath": "/2ll/",
       "fromPath": "/about/"
     }
   ],
