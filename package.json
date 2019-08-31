@@ -13,6 +13,7 @@
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-sass": "^2.0.7",
     "gatsby-plugin-sharp": "^2.2.9",
+    "gatsby-plugin-twitter": "^2.1.4",
     "gatsby-remark-autolink-headers": "^2.1.8",
     "gatsby-remark-copy-linked-files": "^2.0.7",
     "gatsby-remark-embed-youtube": "0.0.7",
