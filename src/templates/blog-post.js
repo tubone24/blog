@@ -44,7 +44,7 @@ class BlogPost extends Component {
     const GitTalkInstance = new Gitalk({
       ...gitalk,
       clientID: githubClientId,
-      clientSecret: githubClientId,
+      clientSecret: githubClientSecret,
       title,
       id: id || graphqlId,
     });
