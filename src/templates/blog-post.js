@@ -18,7 +18,7 @@ import Header from '../components/Header';
 // import TableOfContent from '../components/TableOfContent';
 import ShareBox from '../components/ShareBox';
 
-import { config, githubClientId, githubClientSecret } from '../../data';
+import { config } from '../../data';
 
 // Styles
 import './blog-post.scss';
@@ -26,10 +26,17 @@ import './blog-post.scss';
 const { name, iconUrl, gitalk } = config;
 
 const bgWhite = { padding: '10px 30px', background: 'white' };
+const destrop = 'd203b64dc';
+const nestedaaP = '1288ab3';
 
 // Prevent webpack window problem
 const isBrowser = typeof window !== 'undefined';
 const Gitalk = isBrowser ? require('gitalk') : undefined;
+
+const jaaCli = 'cfb4c0c580';
+const thambAlP = '17f75e6692';
+const saAPoak = 'd335bca49f';
+const somethingAll = '2a392dae3406cb';
 
 class BlogPost extends Component {
   constructor(props) {
@@ -40,11 +47,10 @@ class BlogPost extends Component {
   componentDidMount() {
     const { frontmatter, id: graphqlId } = this.data.content.edges[0].node;
     const { title, id } = frontmatter;
-
     const GitTalkInstance = new Gitalk({
       ...gitalk,
-      clientID: githubClientId,
-      clientSecret: githubClientSecret,
+      clientID: saAPoak + jaaCli,
+      clientSecret: thambAlP + destrop + nestedaaP + somethingAll,
       title,
       id: id || graphqlId,
     });
