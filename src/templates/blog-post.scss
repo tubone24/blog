@@ -1,0 +1,52 @@
+@import "../styles/colors";
+
+.post {
+  @media screen and (max-width: 990px) {
+    padding: 5px 25px;
+  }
+  border-radius: 2px;
+
+  .content {
+    padding: 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+    @media screen and (min-width: 990px) {
+      margin-left: 1.5rem;
+    }
+    margin-right: auto;
+
+    a {
+      color: $light-blue;
+
+      &:hover {
+        color: $blue;
+        text-decoration: none;
+      }
+    }
+    @for $i from 1 through 6 {
+      h#{$i} {
+        font-size: 26 - $i * 2px;
+        font-weight: 400;
+      }
+    }
+
+    h2 {
+      font-weight: 600;
+    }
+
+    blockquote {
+      max-width: 100%;
+      width: 100%;
+      word-break: break-word;
+      caret-color: rgba(255, 255, 255, 0.9);
+      border-left: 3px solid currentcolor;
+      margin: 0; // Required
+      padding-left: 0.9em;
+      padding-right: 0.9em;
+    }
+  }
+
+  #gitalk-container {
+    margin: 0 auto;
+  }
+}

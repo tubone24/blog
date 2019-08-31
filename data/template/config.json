@@ -1,0 +1,54 @@
+{
+  "url": "https://blog.tubone-project24.xyz",
+  "meta": {
+    "favicon": "https://tubone-project24.xyz/wp-content/uploads/2017/01/490c3b36235132868346a520af37a84a.jpeg",
+    "keyword": "blog",
+    "description": "tubone's BOYAKI",
+    "theme_color": "#33b546"
+  },
+  "name": "tubone",
+  "email": "tubo.yyyuuu@gmail.com",
+  "stats": {
+    "image": "https://tubone-project24.xyz/wp-content/uploads/2017/01/DBGfokJg.jpg",
+    "title": "aaa",
+    "description": "aaaaaaa"
+  },
+  "title": "tubone BOYAKI",
+  "gitalk": {
+    "repo": "blog",
+    "admin": ["tubone24"],
+    "owner": "tubone24",
+    "pagerDirection": "first",
+    "distractionFreeMode": true
+  },
+  "License": "by",
+  "friends": [
+    {
+      "href": "https://tubone-project24.xyz",
+      "title": "tubone-project"
+    }
+  ],
+  "iconUrl": "https://tubone-project24.xyz/wp-content/uploads/2017/01/DBGfokJg.jpg",
+  "wordings": ["AWS, Docker", "Python"],
+  "gaTrackId": "UA-146792080-1",
+  "navbarList": [
+    {
+      "href": "/tags/",
+      "title": "Tags"
+    }
+  ],
+  "redirectors": [
+    {
+      "toPath": "/2018/05/01/about-calpa-liu/",
+      "fromPath": "/about/"
+    }
+  ],
+  "carouselItems": [
+    {
+      "src": "https://i.imgur.com/gw91CuI.jpg",
+      "target": "/stats/"
+    }
+  ],
+  "githubUsername": "tubone24",
+  "maxPostsInPage": 10
+}

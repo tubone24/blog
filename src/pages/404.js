@@ -1,13 +1,33 @@
-import React from 'react'
-import Layout from '../components/Layout'
+/* eslint-disable react/prop-types */
+import React from 'react';
 
-const NotFoundPage = () => (
-  <Layout>
-    <div>
-      <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+import { Link, graphql } from 'gatsby';
+
+const NotFoundPage = ({ data }) => (
+  <div className="container">
+    <div className="row">
+      <div className="col">
+        <h4>Not Found..</h4>
+        {data.allSitePage.edges.map(page => (
+          <Link to={page.node.path} href={page.node.path} key={page.node.path}>
+            <li>{page.node.path}</li>
+          </Link>
+        ))}
+      </div>
     </div>
-  </Layout>
-)
+  </div>
+);
 
-export default NotFoundPage
+export const pageQuery = graphql`
+  query getAllPages {
+    allSitePage {
+      edges {
+        node {
+          path
+        }
+      }
+    }
+  }
+`;
+
+export default NotFoundPage;
