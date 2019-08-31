@@ -22,6 +22,12 @@ module.exports = {
       resolve: 'gatsby-plugin-feed',
     },
     {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography',
+      },
+    },
+    {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
@@ -50,6 +56,12 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-sitemap',
+    },
+    {
+      resolve: 'gatsby-plugin-lodash',
+      options: {
+        disabledFeatures: ['shorthands', 'cloning'],
+      },
     },
     {
       resolve: 'gatsby-plugin-nprogress',
