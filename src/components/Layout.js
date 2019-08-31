@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import './all.sass'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from "gatsby"
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata()
