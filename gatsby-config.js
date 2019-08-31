@@ -103,6 +103,8 @@ module.exports = {
                             }
                         }
                     },
+                    `gatsby-remark-embed-youtube`,
+                    `gatsby-remark-responsive-iframe`,
                     {
                         resolve: `gatsby-remark-prismjs`,
                         options: {
@@ -164,8 +166,6 @@ module.exports = {
                             },
                         },
                     },
-                    `gatsby-remark-embed-youtube`,
-                    `gatsby-remark-responsive-iframe`,
                 ],
             },
         },
