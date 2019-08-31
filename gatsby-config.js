@@ -164,18 +164,12 @@ module.exports = {
                             },
                         },
                     },
-                    {
-                        resolve: 'gatsby-remark-embed-youtube',
-                        options: {
-                            width: 800,
-                            height: 400
-                        }
-                    },
-                    'gatsby-remark-responsive-iframe',
+                    `gatsby-remark-embed-youtube`,
+                    `gatsby-remark-responsive-iframe`,
                 ],
             },
         },
-        'gatsby-plugin-twitter',
+        `gatsby-plugin-twitter`,
     ],
     // for avoiding CORS while developing Netlify Functions locally
     // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
