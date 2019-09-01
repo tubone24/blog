@@ -7,6 +7,8 @@
 
 This is tubone BOYAKI, I mean tubone's Blog by Gatsby and Netlify.
 
+![Home Page](https://raw.githubusercontent.com/tubone24/blog/master/docs/images/boyaki.png)
+
 ## How deploy?
 
 Run at local, execute commands below, and access [http://localhost:8000](http://localhost:8000)
