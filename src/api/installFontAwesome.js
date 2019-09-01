@@ -7,6 +7,9 @@ import {
   faFacebook,
   faSoundcloud,
   faTwitter,
+  faGooglePlay,
+  faSlideshare,
+  faGetPocket,
 } from '@fortawesome/free-brands-svg-icons';
 
 const installFontAwesome = () => {
@@ -21,6 +24,9 @@ const installFontAwesome = () => {
     faFacebook,
     faSoundcloud,
     faTwitter,
+    faGooglePlay,
+    faSlideshare,
+    faGetPocket,
   );
 };
 

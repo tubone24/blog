@@ -43,6 +43,18 @@ const Sidebar = ({ totalCount, latestPosts }) => (
         href="https://soundcloud.com/user-453736300"
         icon={['fab', 'soundcloud']}
       />
+      <Icon
+        href="https://twitter.com/meitante1conan"
+        icon={['fab', 'twitter']}
+      />
+      <Icon
+        href="https://www.slideshare.net/tubone24"
+        icon={['fab', 'slideshare']}
+      />
+      <Icon
+        href="https://play.google.com/store/apps/developer?id=tubone&hl=ja"
+        icon={['fab', 'google-play']}
+      />
       <Information totalCount={totalCount} posts={latestPosts} />
     </div>
   </header>

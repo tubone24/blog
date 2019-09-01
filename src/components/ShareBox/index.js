@@ -51,6 +51,33 @@ const ShareBox = ({ url, hasCommentBox }) => (
     >
       <FontAwesomeIcon icon={['fab', 'twitter']} />
     </a>
+    <a
+      href={`http://getpocket.com/edit?url=${url}`}
+      title=""
+      className="share-button"
+      onClick={() => ReactGA.event({
+        category: 'Share',
+        action: 'Pocket Share',
+      })
+      }
+    >
+      <FontAwesomeIcon icon={['fab', 'get-pocket']} />
+    </a>
+    <a
+      href={`http://b.hatena.ne.jp/add?mode=confirm&url=${url}`}
+      className="hatena-bookmark-button"
+      data-hatena-bookmark-layout="vertical-normal"
+      data-hatena-bookmark-lang="ja"
+      title="このエントリーをはてなブックマークに追加"
+    >
+      <img
+        src="//b.st-hatena.com/images/entry-button/button-only@2x.png"
+        alt=""
+        width="25"
+        height="25"
+        style={{position: 'absolute', top: 10}}
+      />
+    </a>
     {hasCommentBox && <CommentButton />}
 
     <a
