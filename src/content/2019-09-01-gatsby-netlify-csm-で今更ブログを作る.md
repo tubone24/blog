@@ -59,5 +59,11 @@ MarkdownをGithubにPostすれば完全に求めている感じのことがで�
 
 ## さっそく作ってみた
 
-![Imgur](https://imgur.com/mIcrB6K)
+![Imgur](https://i.imgur.com/mIcrB6K.png)
+
+Blog Postsの行間があれなのでちょい直しますがいい感じ。
+
+## 結論
+
+Netlify CMSはすごいぞ！
 
