@@ -22,7 +22,6 @@ templateKey: blog-post
 
 <https://www.netlify.com/>
 
-#### tubone的な理解
 
 Netlifyとは静的ホスティングサービスですが、S3とは違いGithubのpush契機にBuildが走るCI機能などが充実していてこれでOK感ある。
 
@@ -32,7 +31,7 @@ Identityという認証も用意されているのでCMSサイトも作れちゃ
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/tubone24/blog)
 
-#### 実はすごかった Netlify CMS
+### 実はすごかった Netlify CMS
 
 <https://www.netlifycms.org/>
 
@@ -44,8 +43,6 @@ NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコ�
 ### Gatsby
 
 <https://www.gatsbyjs.org/>
-
-#### tubone的な理解
 
 便利便利といったものの、一からCMSを作るのはそれなりに骨が折れます。
 
