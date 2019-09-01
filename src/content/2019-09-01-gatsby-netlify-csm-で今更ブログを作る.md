@@ -127,6 +127,8 @@ Githubの[PersonalAccessToken](https://github.com/settings/tokens/new)から作�
 
 結構爆速。
 
+他の人のGatsbyを見るとTravisとか使ってCI回している・・。真似しよう・・。
+
 ![Imgur](https://i.imgur.com/mIcrB6K.png)
 
 ## 結論
