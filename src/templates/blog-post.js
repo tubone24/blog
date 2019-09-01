@@ -9,7 +9,6 @@ import 'gitalk/dist/gitalk.css';
 
 import { parseChineseDate } from '../api';
 
-import ExternalLink from '../components/ExternalLink';
 import Sidebar from '../components/Sidebar';
 import Content from '../components/Content';
 import SEO from '../components/SEO';
@@ -25,7 +24,7 @@ import './blog-post.scss';
 
 const { name, iconUrl, gitalk } = config;
 
-const bgWhite = { padding: '10px 30px', background: 'white' };
+// const bgWhite = { padding: '10px 30px', background: 'white' };
 const destrop = 'd203b64dc';
 const nestedaaP = '1288ab3';
 

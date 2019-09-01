@@ -13,22 +13,20 @@ const Footer = () => (
           <p className="architecture">
 
             Build with&nbsp;
-            <ExternalLink href="https://www.gatsbyjs.org/" title="GatsbyJS" />
-
+            <ExternalLink href="https://www.gatsbyjs.org/" title="GatsbyJS"/>
             &nbsp;and&nbsp;
             <ExternalLink
               href="https://reactjs.org/"
               title={`React ${React.version}`}
             />
-
             .&nbsp;Hosted on&nbsp;
-            <ExternalLink href="https://www.netlify.com/" title="Netlify" />
-            <br />
+            <ExternalLink href="https://www.netlify.com/" title="Netlify"/>
+            <br/>
           </p>
           <p className="copyright">
 
             Copyright&nbsp;
-            <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone" />
+            <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone"/>
 
             &nbsp;
             {config.title}
@@ -36,7 +34,7 @@ const Footer = () => (
 
             &nbsp;Theme by
             &nbsp;
-            <ExternalLink href="https://github.com/calpa" title="Calpa Liu" />
+            <ExternalLink href="https://github.com/calpa" title="Calpa Liu"/>
           </p>
         </div>
       </div>
