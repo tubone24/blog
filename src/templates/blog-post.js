@@ -83,7 +83,8 @@ class BlogPost extends Component {
           <div id="gitalk-container" />
         </div>
 
-        <ShareBox url={slug} />
+        {/* eslint-disable-next-line no-restricted-globals */}
+        <ShareBox url={location.href} />
 
         <SEO
           title={title}
