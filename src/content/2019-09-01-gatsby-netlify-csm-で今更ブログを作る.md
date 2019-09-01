@@ -41,6 +41,14 @@ NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコ�
 
 これ結構いいアイディア！
 
-Gatsby
+### Gatsby
+
+[https://www.gatsbyjs.org/](https://www.gatsbyjs.org/)
+
+#### tubone的な理解
+
+便利便利といったものの、一からCMSを作るのはそれなりに骨が折れます。
+
+と思っていたら最近はGatsbyというReactで作られた 
 
 
