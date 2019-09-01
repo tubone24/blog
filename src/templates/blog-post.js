@@ -22,7 +22,9 @@ import { config } from '../../data';
 // Styles
 import './blog-post.scss';
 
-const { name, iconUrl, gitalk } = config;
+const {
+  url, name, iconUrl, gitalk,
+} = config;
 
 // const bgWhite = { padding: '10px 30px', background: 'white' };
 const destrop = 'd203b64dc';
@@ -67,6 +69,8 @@ class BlogPost extends Component {
 
     const { date, headerImage, title } = frontmatter;
 
+    const shareURL = url + slug;
+
     return (
       <div className="row post order-2">
         <Header
@@ -83,8 +87,7 @@ class BlogPost extends Component {
           <div id="gitalk-container" />
         </div>
 
-        {/* eslint-disable-next-line no-restricted-globals */}
-        <ShareBox url={location.href} />
+        <ShareBox url={shareURL} />
 
         <SEO
           title={title}
