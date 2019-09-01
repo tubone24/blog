@@ -7,6 +7,8 @@
 
 This is tubone BOYAKI, I mean tubone's Blog by Gatsby and Netlify.
 
+[https://blog.tubone-project24.xyz/](https://blog.tubone-project24.xyz/)
+
 ![Home Page](https://raw.githubusercontent.com/tubone24/blog/master/docs/images/boyaki.png)
 
 ## How deploy?
