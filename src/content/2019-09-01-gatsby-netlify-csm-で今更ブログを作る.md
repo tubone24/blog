@@ -10,6 +10,8 @@ tags:
 headerImage: 'https://i.imgur.com/dovylqZ.png'
 templateKey: blog-post
 ---
+# Github + Gatsby + Netlify CMS で今更ブログを作る
+
 ## なぜこんなことを・・・。
 
 今更にはなりますがNetlify CMSを使ってみたくなったのでGatsbyを使ってブログ作ってみました。
@@ -50,3 +52,12 @@ NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコ�
 と思っていたら最近はGatsbyというReactで作られたCMSがありました。すごい。
 
 ![Imgur](https://i.imgur.com/wVxAzAl.png)
+
+[公式](https://www.gatsbyjs.org/)に載っていた図を見ると数多のDatasourceにGraphQLで接続し、Reactで静的なページを作るという感じ。
+
+MarkdownをGithubにPostすれば完全に求めている感じのことができそう。すごいすごい。
+
+## さっそく作ってみた
+
+![Imgur](https://imgur.com/mIcrB6K)
+
