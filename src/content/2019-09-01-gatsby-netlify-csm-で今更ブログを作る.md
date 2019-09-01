@@ -1,4 +1,5 @@
 ---
+slug: 2019-09-01-netlify-and-gatsby
 title: Github + Gatsby + Netlify CMS で今更ブログを作る
 date: 2019-09-01T07:33:38.830Z
 description: 今更にはなりますがNetlify CMSを使ってみたくなったのでGatsbyを使ってブログ作ってみました。
