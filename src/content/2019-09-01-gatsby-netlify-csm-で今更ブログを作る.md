@@ -18,8 +18,7 @@ templateKey: blog-post
 
 ### Netlify
 
-[https://www.netlify.com/](https://www.netlify.com/)
-
+<https://www.netlify.com/>
 
 #### tubone的な理解
 
@@ -33,8 +32,7 @@ Identityという認証も用意されているのでCMSサイトも作れちゃ
 
 #### 実はすごかった Netlify CMS
 
-[https://www.netlifycms.org/](https://www.netlifycms.org/)
-
+<https://www.netlifycms.org/>
 
 NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコンテンツを編集、GithubへのPushを一気にやってしまうことができます。
 さらに記事のWorkflowも[Github Flow](http://scottchacon.com/2011/08/31/github-flow.html) に乗っけることができるので、CMSで編集しながらにしてレポジトリはぐちゃぐちゃにならない。
@@ -43,12 +41,12 @@ NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコ�
 
 ### Gatsby
 
-[https://www.gatsbyjs.org/](https://www.gatsbyjs.org/)
+<https://www.gatsbyjs.org/>
 
 #### tubone的な理解
 
 便利便利といったものの、一からCMSを作るのはそれなりに骨が折れます。
 
-と思っていたら最近はGatsbyというReactで作られた 
+と思っていたら最近はGatsbyというReactで作られたCMSがありました。すごい。
 
-
+![Imgur](https://i.imgur.com/wVxAzAl.png)
