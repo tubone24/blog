@@ -10,6 +10,7 @@ yarn-error.log
 
 # Local keys
 .env.development
+.env
 
 # idea
 .idea

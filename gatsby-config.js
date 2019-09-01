@@ -1,3 +1,6 @@
+const queries = require('./src/utils/algolia');
+require('dotenv').config();
+
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
@@ -18,6 +21,16 @@ module.exports = {
         name: 'pages',
       },
     },
+    {
+      resolve: 'gatsby-plugin-algolia',
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries,
+        chunkSize: 10000, // default: 1000
+      },
+    },
+    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-plugin-feed',
     },
@@ -65,45 +78,6 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-nprogress',
-    },
-    {
-      resolve: 'gatsby-plugin-flexsearch',
-      options: {
-        languages: ['en', 'ja'],
-        type: 'MarkdownRemark',
-        fields: [
-          {
-            name: 'title',
-            indexed: true,
-            resolver: 'frontmatter.title',
-            attributes: {
-              encode: 'balance',
-              tokenize: 'strict',
-              threshold: 6,
-              depth: 3,
-            },
-            store: true,
-          },
-          {
-            name: 'description',
-            indexed: true,
-            resolver: 'frontmatter.description',
-            attributes: {
-              encode: 'balance',
-              tokenize: 'strict',
-              threshold: 6,
-              depth: 3,
-            },
-            store: false,
-          },
-          {
-            name: 'url',
-            indexed: false,
-            resolver: 'fields.slug',
-            store: true,
-          },
-        ],
-      },
     },
     {
       resolve: 'gatsby-plugin-manifest',

@@ -4,6 +4,11 @@ import ExternalLink from '../ExternalLink';
 import { config } from '../../../data';
 
 import './index.scss';
+import Search from '../Search';
+
+const searchIndices = [
+  { name: 'Posts', hitComp: 'PostHit' },
+];
 
 const Footer = () => (
   <footer className="footer">
@@ -36,6 +41,9 @@ const Footer = () => (
             &nbsp;
             <ExternalLink href="https://github.com/calpa" title="Calpa Liu"/>
           </p>
+        </div>
+        <div className="col-sm-12 text-center">
+          <Search collapse indices={searchIndices} />
         </div>
       </div>
     </div>

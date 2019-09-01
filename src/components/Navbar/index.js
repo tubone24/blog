@@ -43,6 +43,7 @@ const Navbar = () => (
       >
         <FontAwesomeIcon icon={faBars} />
       </button>
+
       <GithubCorner url="https://github.com/tubone24/blog" />
       <div
         className="collapse navbar-collapse flex-row-reverse"
