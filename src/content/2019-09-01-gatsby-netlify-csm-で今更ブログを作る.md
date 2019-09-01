@@ -54,13 +54,85 @@ NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコ�
 
 MarkdownをGithubにPostすれば完全に求めている感じのことができそう。すごいすごい。
 
-## さっそく作ってみた
+## さっそく作ってみる
+
+### Netlify対応版のGatsby-starterをダウンロードする
+
+[https://github.com/netlify-templates/gatsby-starter-netlify-cms
+](https://github.com/netlify-templates/gatsby-starter-netlify-cms
+)
+
+git cloneしてきます。
+
+とりあえずローカル上で動かしてみます。
+
+```console{numberLines: 1}
+$ npm install
+$ npm start
+```
+
+するとコーヒー屋さん（？）のページが出てきます。
+
+![Imgur](https://i.imgur.com/fRY1Ss4.png)
+
+このままだとコーヒーショップを経営することになるのでゴリゴリReact書いていい感じにしてください。
+
+CMSの要素は残す必要があるため、ComponentsのTemplateを編集するときはMarkdownで定義している要素に過不足なくするようご注意ください。
+
+私が慣れていないだけですが、GraphQLでエラーが出るとエラーがめっちゃ追いにくい・・・。
+
+### Netlifyのアカウント用意する
+
+無事サイトができたら、Netlifyに挙げていきます。
+
+
+![Imgur](https://i.imgur.com/P0E2109.png)
+
+アカウントを作ってGithubと連携するとDeployするレポジトリを選択できます。
+
+今回は[blog](https://github.com/tubone24/blog/)というレポジトリを作りましたのでそちらを連携させます。
+
+画面に沿って進んでいけば、特に追加の設定なくサイトがDeployできると思います。
+
+Deployできるとデプロイ先のURLが発行されます。
+
+独自ドメインを持っていましたらここで設定してしまえばいいと思います。
+
+参考: [Custom Domains
+](https://www.netlify.com/docs/custom-domains/)
+
+![Imgur](https://i.imgur.com/Z07HTMG.png)
+
+### CMSの管理画面を設定する
+
+無事にDeployできましたら、CMSの管理画面を設定します。
+
+![Imgur](https://i.imgur.com/kOuCJAo.png)
+
+General => Site Members から、アカウントを作成し登録します。
+
+できたら、作ったサイトの管理画面 `/admin` にアクセスします。
+
+設定がうまくいっていればログイン画面からコンテンツの編集画面が開けます。
+
+![Imgur](https://i.imgur.com/LY84I80.png)
+
+CMSから記事を登録したい(GithubにCMSからPushしたい)時は追加でGitGatewayを設定します。
+
+Githubの[PersonalAccessToken](https://github.com/settings/tokens/new)から作成したAPIキーを設定してあげればよいです。
+
+![Imgur](https://i.imgur.com/V2Aobi8.png)
+
+## 完成
+
+結構爆速。
 
 ![Imgur](https://i.imgur.com/mIcrB6K.png)
-
-Blog Postsの行間があれなのでちょい直しますがいい感じ。
 
 ## 結論
 
 Netlify CMSはすごいぞ！
+
+![Imgur](https://i.imgur.com/mIcrB6K.png)
+
 
