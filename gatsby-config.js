@@ -1,21 +1,55 @@
+const {
+  NODE_ENV,
+  URL: NETLIFY_SITE_URL = 'https://blog.tubone-project24.xyz',
+  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
+  CONTEXT: NETLIFY_ENV = NODE_ENV,
+} = process.env;
+const isNetlifyProduction = NETLIFY_ENV === 'production';
+const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
     title: 'tubone BOYAKI',
     description: 'tubone BOYAKI',
-    siteUrl: 'https://blog.tubone-project24.xyz',
+    siteUrl,
     author: 'tubone',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     'gatsby-plugin-catch-links',
-    'gatsby-plugin-webpack-bundle-analyzer',
+    {
+      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      options: {
+        openAnalyzer: false,
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/content`,
         name: 'pages',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        resolveEnv: () => NETLIFY_ENV,
+        env: {
+          production: {
+            policy: [{ userAgent: '*' }],
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null,
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null,
+          },
+        },
       },
     },
     {

@@ -28,7 +28,7 @@ const Icon = ({ href, icon }) => (
   </a>
 );
 
-const Sidebar = ({ totalCount, latestPosts }) => (
+const Sidebar = ({ latestPosts }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
       <a href="https://www.gitshowcase.com/tubone24"><img className="avatar" src={iconUrl} alt="tubone" /></a>
@@ -55,7 +55,7 @@ const Sidebar = ({ totalCount, latestPosts }) => (
         href="https://play.google.com/store/apps/developer?id=tubone&hl=ja"
         icon={['fab', 'google-play']}
       />
-      <Information totalCount={totalCount} posts={latestPosts} />
+      <Information posts={latestPosts} />
     </div>
   </header>
 );
