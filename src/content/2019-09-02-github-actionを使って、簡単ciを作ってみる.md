@@ -24,7 +24,7 @@ Github Actionとは、 ***built by you, run by us*** です。[（公式より�
 
 ## Github Actionのプレビューに応募する
 
-Github Action自体はまだプレビュー版ですので、こちらのサイトから
+Github Action自体はまだプレビュー版ですので、[こちらのサイト](https://github.com/features/actions)から
 利用申請をする必要があります。
 
 私は申し込みから一週間くらいで使えるようになりました。
@@ -32,6 +32,51 @@ Github Action自体はまだプレビュー版ですので、こちらのサイ�
 無事利用できるようになりますと、レポジトリにActionボタンが
 出てきます。
 
+![Img](https://i.imgur.com/ZYya5eA.png)
+
 ## Workflowを設定する
 
 Github ActionはほかのCIと同じくYAMLファイルで定義します。
+
+今回はPythonのPytestでテストを回します。
+
+下記のようにPython環境の設定、のパッケージBuild、Pytestまでを設定します。
+
+```yaml{numberLines: 1}
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.6, 3.7]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Setup ebook-homebrew
+      run: |
+        python setup.py install
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pip install -r requirements-test.txt
+        pytest --it
+    - name: Lint check
+      run: |
+        black ebook_homebrew setup.py --check
+```
+
+
