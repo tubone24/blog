@@ -2,12 +2,12 @@
 slug: 2019-09-02-github-action
 title: Github Actionを使って、簡単CIを作ってみる
 date: 2019-09-02T11:33:53.870Z
-description: 最近Github Actionを使って簡単Ciを作ってみました。
+description: 最近Github Actionを使って簡単CIを作ってみました。
 tags:
   - Github
   - GithubAction
   - CI
-headerImage: 'https://imgur.com/V2Aobi8.png'
+headerImage: 'https://i.imgur.com/6T4kjdf.png'
 templateKey: blog-post
 ---
 # CIマニアと化したtubone
@@ -115,4 +115,47 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
 ```
 
+### Stepの設定
+
+StepはほかのCIと同じような感じで設定します。
+
+```yaml{numberLines: 14}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Setup ebook-homebrew
+      run: |
+        python setup.py install
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pip install -r requirements-test.txt
+        pytest --it
+    - name: Lint check
+      run: |
+        black ebook_homebrew setup.py --check
+```
+
+### CI起動時の動き
+
+無事PushでCIが動くと各push、PRごとにActionに結果がでます。
+
+![Img](https://i.imgur.com/dVJdYdh.png)
+
+さらに、実行ログも確認できます。
+
+もう普通のCIですね。
+
+![Img](https://i.imgur.com/6T4kjdf.png)
+
+## 結論
+
+Github Actionを使えば、めんどっちいCIサーバ連携も不要で楽々です。
 
