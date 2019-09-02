@@ -45,6 +45,7 @@
     "gatsby-remark-prismjs": "^3.2.6",
     "gatsby-remark-responsive-iframe": "^2.2.10",
     "gatsby-source-filesystem": "^2.0.27",
+    "gatsby-source-wordpress": "^3.1.28",
     "gatsby-transformer-remark": "^2.3.7",
     "gitalk": "^1.4.0",
     "han-css": "^3.3.0",

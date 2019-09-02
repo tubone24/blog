@@ -19,6 +19,20 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-catch-links',
     {
+      resolve: 'gatsby-source-wordpress',
+      options: {
+        baseUrl: 'tubone-project24.xyz',
+        hostingWPCOM: false,
+        protocol: 'https',
+        useACF: false,
+        auth: {},
+        verboseOutput: false,
+        includedRoutes: [
+          '**/posts',
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {
         openAnalyzer: false,
@@ -79,7 +93,11 @@ module.exports = {
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: null,
+              aliases: {},
               showLineNumbers: true,
+              noInlineHighlight: false,
             },
           },
           {

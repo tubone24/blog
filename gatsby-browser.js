@@ -5,6 +5,7 @@ import { config } from './data';
 import installFontAwesome from './src/api/installFontAwesome';
 
 import 'prismjs/themes/prism-solarizedlight.css';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 const {
   url, gaTrackId, gaOptimizeId,
