@@ -16,4 +16,5 @@ templateKey: blog-post
 
 ## Github Actionとは？
 
-Github Actionとは
+Github Actionとは、 ***built by you, run by us*** です。[（公式より）](https://github.blog/2018-10-17-action-demos/)
+
