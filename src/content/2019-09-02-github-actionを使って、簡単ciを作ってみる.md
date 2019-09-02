@@ -10,4 +10,10 @@ tags:
 headerImage: 'https://imgur.com/V2Aobi8.png'
 templateKey: blog-post
 ---
-# すずしくなってきたので。
+# CIマニアと化したtubone
+
+最近Github Actionを触って便利さに気がついてしまったのでご紹介します。
+
+## Github Actionとは？
+
+Github Actionとは
