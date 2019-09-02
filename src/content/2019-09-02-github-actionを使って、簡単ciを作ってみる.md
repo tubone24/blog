@@ -18,3 +18,6 @@ templateKey: blog-post
 
 Github Actionとは、 ***built by you, run by us*** です。[（公式より）](https://github.blog/2018-10-17-action-demos/)
 
+詰まるところGithub製のCIです。
+
+結構簡単に使えたのでご紹介します。
