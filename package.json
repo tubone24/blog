@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
+    "@emotion/core": "^10.0.17",
+    "@emotion/styled": "^10.0.17",
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "@fortawesome/free-brands-svg-icons": "^5.3.1",
     "@fortawesome/free-regular-svg-icons": "^5.3.1",
@@ -20,6 +22,7 @@
     "gatsby-link": "^2.0.16",
     "gatsby-paginate": "^1.0.17",
     "gatsby-plugin-catch-links": "^2.0.13",
+    "gatsby-plugin-emotion": "^4.1.5",
     "gatsby-plugin-feed": "^2.3.9",
     "gatsby-plugin-flexsearch": "^1.0.3",
     "gatsby-plugin-layout": "^1.0.13",

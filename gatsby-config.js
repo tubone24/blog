@@ -32,6 +32,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-emotion',
+      options: {
+        // Accepts all options defined by `babel-plugin-emotion` plugin.
+      },
+    },
+    {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         resolveEnv: () => NETLIFY_ENV,
