@@ -34,4 +34,4 @@ Github Action自体はまだプレビュー版ですので、こちらのサイ�
 
 ## Workflowを設定する
 
-Github
+Github ActionはほかのCIと同じくYAMLファイルで定義します。
