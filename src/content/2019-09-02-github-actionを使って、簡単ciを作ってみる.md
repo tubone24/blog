@@ -79,4 +79,17 @@ jobs:
         black ebook_homebrew setup.py --check
 ```
 
+### Trigger設定
+
+今回はpush時に動くようにしますので
+
+```yaml{numberLines: 1}{3}
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+```
+
 
