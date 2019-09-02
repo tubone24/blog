@@ -92,4 +92,27 @@ jobs:
   build:
 ```
 
+のように設定します。
+
+Triggerについては[こちら](https://developer.github.com/actions/managing-workflows/workflow-configuration-options/)をご確認ください。
+
+### Matrixでテスト
+
+Matrixでテストする場合は下記のようにPythonのバージョンを複数設定します。
+
+```yaml{numberLines: 5}{11,12}
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.6, 3.7]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+```
+
 
