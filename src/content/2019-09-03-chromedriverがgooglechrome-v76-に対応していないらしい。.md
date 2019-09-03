@@ -32,5 +32,22 @@ ChromeのVersionを71～75の間にしなさいとのこと。
 
 今回はCircleCIを使っているのでDockerfileを編集して、何とかならないか試してみます。
 
-## ChromeDriver
+## ChromeDriverとChromeのVersionを確認する
+
+CircleCIが
+
+```javascript{numberLines: 7}{9, 10}
+    steps:
+      - checkout
+      - restore_cache:
+          key: projectname-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: System information
+          command: |
+            echo "Node $(node -v)"
+            echo "NPM v$(npm --version)"
+            chromedriver -v
+            google-chrome --version
+```
+
 
