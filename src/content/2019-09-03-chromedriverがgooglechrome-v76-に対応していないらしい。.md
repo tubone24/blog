@@ -14,9 +14,13 @@ templateKey: blog-post
 
 Vue.jsで書いているコードのCI(CircleCI)が通らなくなっていろいろ調べていると原因がわかってきました。
 
+***いろいろやってますが、結論失敗してます！！　読む時間がもったいない！***
+
 ## ChromeDriverは Chrome v76に非対応
 
 エラーメッセージが出ていました。
+
+![Img](https://i.imgur.com/6WFqOEs.png)
 
 ```javascript{numberLines: 1}
 { value:
@@ -63,7 +67,7 @@ ChromeDriver 76.0.3809.126 (d80a294506b4c9d18015e755cee48f953ddc3f2f-refs/branch
 Google Chrome 76.0.3809.132 
 ```
 
-## Chrome Betaに変えてみる
+## CircleCIのDockerfileを確認してみる
 
 [CircleCIのDockerfile](https://github.com/tubone24/circleci-dockerfiles/blob/master/node/images/10.16.3-stretch/browsers/Dockerfile)をみると
 
@@ -88,5 +92,60 @@ RUN CHROME_VERSION="$(google-chrome --version)" \
     && sudo chmod +x /usr/local/bin/chromedriver \
     && chromedriver --version
 
+```
+
+どうやらsedでChromeのstableのバージョンと合わせているらしい。なるほど。
+
+Chrome stableからbetaに変えれば通るかもしれない・・。
+
+## Chrome Betaに変えてみる
+
+CircleCIは自前のDockerから環境を作り、CIを回すことができます。
+
+なので、Dockerfileを作り、個人Dockerレポジトリにpushし、config.ymlファイルを編集します。
+
+[こんな感じ](https://github.com/tubone24/ebook-homebrew-vue-typescript-client/blob/master/docker/circleci/fix_chromedriver/Dockerfile)で書き換えたDockerfileを作ります。
+
+```dockerfile{numberLines: 42}
+# install chrome
+
+RUN curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-beta_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-beta_current_amd64.deb \
+    && (sudo dpkg -i /tmp/google-chrome-beta_current_amd64.deb || sudo apt-get -fy install)  \
+    && rm -rf /tmp/google-chrome-beta_current_amd64.deb \
+    && google-chrome --version
+
+# Fix ChromeDriverVersion
+RUN curl --silent --show-error --location --fail --retry 4 --retry-delay 5 --output /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip" \
+    && cd /tmp \
+    && unzip chromedriver_linux64.zip \
+    && rm -rf chromedriver_linux64.zip \
+    && sudo mv chromedriver /usr/local/bin/chromedriver \
+    && sudo chmod +x /usr/local/bin/chromedriver \
+    && chromedriver --version
+```
+
+ChromeのBeta版 `google-chrome-beta_current_amd64.deb` ChromeDriverの最新版`https://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip`をダウンロードインストールするように変更します。
+
+続けて、[DockerHub](https://cloud.docker.com/i)にDocker個人レポジトリを作っておきます。CircleCIから確認できるように公開設定をpublicにしておきます。
+
+![Img](https://i.imgur.com/8xlE18N.png)
+
+その後、Docker build & pushします。
+
+```console
+$ docker build -t circle-node:10.16.3-stretch-browsers-fix .
+$ docker tag circle-node:10.16.3-stretch-browsers-fix tubone24/circleci:10.16.3-stretch-browsers-fi
+$ docker push tubone24/circleci:10.16.3-stretch-browsers-fix
+```
+
+無事pushまで出来たらCircleCIのconfig.ymlのImageを変更します。
+
+```yaml{numberLines: 1}
+version: 2
+jobs:
+  build:
+    working_directory: ~/workspace
+    docker:
+      - image: tubone24/circleci:10.16.3-stretch-browsers-fix
 ```
 
