@@ -149,3 +149,12 @@ jobs:
       - image: tubone24/circleci:10.16.3-stretch-browsers-fix
 ```
 
+では、 ![rerun](https://i.imgur.com/w7LQ34r.png) しましょう！
+
+# 結果
+
+ダメ見たいですね・・
+
+ここまでやったのに解決しない。
+
+![failed](https://i.imgur.com/p2WKJeV.png)
