@@ -34,7 +34,7 @@ class SearchBox extends Component {
                 `;
           },
           footer:
-            '<div class="branding"><img src="../../../static/assets/search-by-algolia-light-background.svg" /></div>',
+            '<div class="branding"><img src="https://i.imgur.com/MIPOSCQ.png" /></div>',
         },
       },
     ]).on('autocomplete:selected', (
