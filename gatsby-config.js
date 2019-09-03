@@ -76,6 +76,11 @@ module.exports = {
       resolve: 'gatsby-plugin-feed',
     },
     {
+      resolve: 'gatsby-plugin-algolia',
+      // eslint-disable-next-line global-require
+      options: require('./gatsby-plugin-algolia-config.js'),
+    },
+    {
       resolve: 'gatsby-plugin-typography',
       options: {
         pathToConfigModule: 'src/utils/typography',

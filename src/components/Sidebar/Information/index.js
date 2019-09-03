@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Friend from '../Friend';
 import LatestPost from '../LatestPost';
 import './index.scss';
+import SearchBox from '../../SearchBox';
 
 // eslint-disable-next-line react/prop-types
 const Information = ({ posts }) => (
@@ -13,6 +14,8 @@ const Information = ({ posts }) => (
     <LatestPost posts={posts} />
     <hr />
     <Friend />
+    <hr />
+    <SearchBox />
   </div>
 );
 
