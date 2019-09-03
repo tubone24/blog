@@ -31,10 +31,11 @@ class SearchBox extends Component {
           suggestion({ _highlightResult: { title, description } }) {
             return `
                 <p class="title">${title.value}</p>
+                <p class="description">${description.value}</p>
                 `;
           },
           footer:
-            '<div class="branding"><img src="https://i.imgur.com/MIPOSCQ.png" /></div>',
+            '<div class="branding"><img src="https://i.imgur.com/MIPOSCQ.png"  alt="Powered by Algolia"/></div>',
         },
       },
     ]).on('autocomplete:selected', (
