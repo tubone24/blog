@@ -32,11 +32,13 @@ ChromeのVersionを71～75の間にしなさいとのこと。
 
 今回はCircleCIを使っているのでDockerfileを編集して、何とかならないか試してみます。
 
-## ChromeDriverとChromeのVersionを確認する
+## ChromeDriverとGoogleChromeのVersionを確認する
 
-CircleCIが
+CircleCIでどんなVersionのChromeDriverとGoogleChromeを使っているのか確認します。
 
-```javascript{numberLines: 7}{9, 10}
+CircleCIの[config.yml](https://github.com/tubone24/ebook-homebrew-vue-typescript-client/blob/master/.circleci/config.yml)にバージョン出力を追加します。
+
+```javascript{numberLines: 7}{16, 17}
     steps:
       - checkout
       - restore_cache:
@@ -49,5 +51,15 @@ CircleCIが
             chromedriver -v
             google-chrome --version
 ```
+
+## Run結果
+
+```console{numberLines: 1}{3, 4}
+Node v10.16.3
+NPM v6.9.0
+ChromeDriver 76.0.3809.126 (d80a294506b4c9d18015e755cee48f953ddc3f2f-refs/branch-heads/3809@{#1024})
+Google Chrome 76.0.3809.132 
+```
+
 
 
