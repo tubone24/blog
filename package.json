@@ -68,6 +68,7 @@
     "smooth-scroll": "^16.0.0",
     "typography": "^0.16.19",
     "typography-theme-grand-view": "^0.16.19",
+    "typography-theme-japanese-tofu": "0.0.1",
     "webpack": "^4.19.0"
   },
   "keywords": [
