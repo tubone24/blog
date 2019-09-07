@@ -91,10 +91,18 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers',
+          'gatsby-remark-graphviz',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
+          {
+            resolve: 'gatsby-remark-embed-snippet',
+            options: {
+              classPrefix: 'language-',
+              directory: `${__dirname}/examples/`,
+            },
+          },
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
