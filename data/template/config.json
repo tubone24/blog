@@ -36,10 +36,6 @@
     {
       "href": "/tags/",
       "title": "Tags"
-    },
-    {
-      "href": "/rss.xml",
-      "title": "RSS"
     }
   ],
   "redirectors": [
