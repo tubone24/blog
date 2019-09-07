@@ -97,6 +97,13 @@ module.exports = {
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           {
+            resolve: 'gatsby-remark-embed-gist',
+            options: {
+              username: 'tubone24',
+              includeDefaultCss: true,
+            },
+          },
+          {
             resolve: 'gatsby-remark-prismjs',
             options: {
               classPrefix: 'language-',
