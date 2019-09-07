@@ -103,6 +103,7 @@ module.exports = {
               includeDefaultCss: true,
             },
           },
+          'gatsby-remark-embed-spotify',
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
