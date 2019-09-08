@@ -60,7 +60,7 @@ CircleCIの[config.yml](https://github.com/tubone24/ebook-homebrew-vue-typescrip
 
 v76で統一されているなぁ・・。
 
-```console{numberLines: 1}{3, 4}
+```bash{numberLines: 1}{3, 4}
 Node v10.16.3
 NPM v6.9.0
 ChromeDriver 76.0.3809.126 (d80a294506b4c9d18015e755cee48f953ddc3f2f-refs/branch-heads/3809@{#1024})
@@ -132,7 +132,7 @@ ChromeのBeta版 `google-chrome-beta_current_amd64.deb` ChromeDriverの最新版
 
 その後、Docker build & pushします。
 
-```console
+```bash
 $ docker build -t circle-node:10.16.3-stretch-browsers-fix .
 $ docker tag circle-node:10.16.3-stretch-browsers-fix tubone24/circleci:10.16.3-stretch-browsers-fi
 $ docker push tubone24/circleci:10.16.3-stretch-browsers-fix
