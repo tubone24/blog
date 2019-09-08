@@ -67,7 +67,7 @@ git cloneしてきます。
 
 とりあえずローカル上で動かしてみます。
 
-```console{numberLines: 1}
+```bash{numberLines: 1}
 $ npm install
 $ npm start
 ```
