@@ -55,7 +55,7 @@ CircleCIで出ているエラーを見てみると次のようなエラーが出
 
 ちゃんとこちらはCIのログに出力されていまして、Chromeのバージョンとも合っています。
 
-```bash{numberLines: 1}{9, 10}
+```bash{numberLines: 1}{9,10}
 $ #!/bin/bash -eo pipefail
   echo "Node $(node -v)"
   echo "NPM v$(npm --version)"
@@ -113,7 +113,7 @@ node_module内にChromeDriverをダウンロードしている？？
 Dockerfileを次のように変更します。
 
 
-```dockerfile{numberLines: 1}{3, 16, 17}
+```dockerfile{numberLines: 1}{3,16,17}
 # install chrome
 
 RUN curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -142,7 +142,7 @@ RUN CHROME_VERSION="$(google-chrome --version)" \
 
 CircleCIのconfig.ymlを次のように変えました。
 
-```yaml{numberLines: 1}{4, 5, 6}
+```yaml{numberLines: 1}{4,5,6}
       - run:
           name: Install dependencies
           command: npm install
@@ -151,3 +151,18 @@ CircleCIのconfig.ymlを次のように変えました。
           command: mv -f /tmp/chromedriver node_modules/chromedriver/lib/chromedriver/chromedriver
 ```
 
+- npm install後、node_modulesのChromeDriverを最新のもの(/tmpに入れたもの)と置き換えます。
+
+## 実行！
+
+なんとうまくいきました。
+
+直ったのでOKです。
+
+![Img](https://i.imgur.com/71HlXYT.png)
+
+## あとがき
+
+Nightwatch.jsの動きが気になったのでもう少し深く見ていくとNightwatch.js自体はChromeDriverを依存パッケージとしては入れないようです。
+
+[Package.json](https://github.com/nightwatchjs/nightwatch/blob/master/package.json)
