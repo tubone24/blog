@@ -166,3 +166,11 @@ CircleCIのconfig.ymlを次のように変えました。
 Nightwatch.jsの動きが気になったのでもう少し深く見ていくとNightwatch.js自体はChromeDriverを依存パッケージとしては入れないようです。
 
 [Package.json](https://github.com/nightwatchjs/nightwatch/blob/master/package.json)
+
+代わりにChromeDriverを入れていたのは`vue-cli` のテストパッケージでした。
+
+[Package.json](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-e2e-nightwatch/package.json)
+
+また、最新のnpm installできる[ChromeDriver](https://www.npmjs.com/package/chromedriver)は`76.0.1`でしたので、もしかしたらnpm updateするだけでよかったのかもしれません。
+
+一応、依存パッケージのアップデートはCI契機([Dependabot Preview](https://github.com/marketplace/dependabot-preview))で動かすようにしていたのがあだになったかもしれませんねー。
