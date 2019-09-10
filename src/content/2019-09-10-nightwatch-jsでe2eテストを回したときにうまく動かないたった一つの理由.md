@@ -67,3 +67,87 @@ NPM v6.9.0
 ChromeDriver 77.0.3865.40 (f484704e052e0b556f8030b65b953dce96503217-refs/branch-heads/3865@{#442})
 Google Chrome 77.0.3865.56 beta
 ```
+
+ただエラーのほうでは `Driver info: chromedriver=2.46.628388` となっており明らかにバージョンが違います。
+
+## chromedriver=2.46.628388の謎
+
+ChromeDriverの[配布サイト](https://chromedriver.chromium.org/downloads)に行くと、2.46のChromeDriverは**Supports Chrome v71-73**なことがわかります。
+
+あれれ、おかしいぞ・・・。
+
+## Nightwatch.jsのChromeテストの挙動
+
+いよいよ怪しくなってきたので、エラーが出ていない箇所のCIログも追っていきます。
+
+すると `npm install` する際の動作ログに怪しい動作が見当たりました。
+
+```
+> chromedriver@2.46.0 install /home/circleci/workspace/node_modules/chromedriver
+> node install.js
+
+Current existing ChromeDriver binary is unavailable, proceding with download and extraction.
+Downloading from file:  https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
+Saving to file: /tmp/2.46/chromedriver/chromedriver_linux64.zip
+Received 782K...
+Received 1573K...
+Received 2357K...
+Received 3141K...
+Received 3925K...
+Received 4709K...
+Received 5277K total.
+Extracting zip contents
+Copying to target path /home/circleci/workspace/node_modules/chromedriver/lib/chromedriver
+Fixing file permissions
+Done. ChromeDriver binary available at /home/circleci/workspace/node_modules/chromedriver/lib/chromedriver/chromedriver
+```
+
+node_module内にChromeDriverをダウンロードしている？？
+
+**まさか、Nightwatch.jsはこれを使っているのでは？？ バージョンもあっているし**
+
+## 試しにnode_moduleの中に入っているChromeDriverを最新のものと置き換える
+
+以前作った自前Bulid環境をふんだんに使ってみます。
+
+Dockerfileを次のように変更します。
+
+
+```dockerfile{numberLines: 1}{3, 16, 17}
+# install chrome
+
+RUN curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && (sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb || sudo apt-get -fy install)  \
+    && rm -rf /tmp/google-chrome-stable_current_amd64.deb \
+    && google-chrome --version
+
+#  Install ChromeDriver
+RUN CHROME_VERSION="$(google-chrome --version)" \
+    && export CHROMEDRIVER_RELEASE="$(echo $CHROME_VERSION | sed 's/^Google Chrome //')" && export CHROMEDRIVER_RELEASE=${CHROMEDRIVER_RELEASE%%.*} \
+    && CHROMEDRIVER_VERSION=$(curl --silent --show-error --location --fail --retry 4 --retry-delay 5 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROMEDRIVER_RELEASE}) \
+    && curl --silent --show-error --location --fail --retry 4 --retry-delay 5 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" \
+    && cd /tmp \
+    && unzip chromedriver_linux64.zip \
+    && rm -rf chromedriver_linux64.zip \
+    && sudo cp chromedriver /usr/local/bin/chromedriver \
+    && sudo chmod +x chromedriver \
+    && sudo chmod +x /usr/local/bin/chromedriver \
+    && chromedriver --version
+```
+
+- とりあえず、ChromeBetaではなく、安定版を入れるように変更しました。
+- 最新のChromeDriverを/tmp領域に実行権限を入れたまま放置するようにしました。
+
+続いてCI側です。
+
+CircleCIのconfig.ymlを次のように変えました。
+
+```yaml{numberLines: 1}{4, 5, 6}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Fix ChromeDriver with nightwatch.js
+          command: mv -f /tmp/chromedriver node_modules/chromedriver/lib/chromedriver/chromedriver
+```
+
