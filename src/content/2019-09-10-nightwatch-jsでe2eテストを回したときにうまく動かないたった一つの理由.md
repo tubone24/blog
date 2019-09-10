@@ -32,3 +32,7 @@ CircleCIで出ているエラーを見てみると次のようなエラーが出
      error: 'session not created' },
   status: 33 }
 ```
+
+本エラーを詳しく見ていくと、GoogleChromeのバージョンをv71～v75の間にしなさいというもので、いろいろなサイトを見るとChromeのバージョンアップに合わせてChromeDriverのバージョンも上げないといけない、ということを知りました。
+
+[GitHub Issue #4800 Message: session not created: Chrome version must be between 71 and 75](https://github.com/timgrossmann/InstaPy/issues/4800)
