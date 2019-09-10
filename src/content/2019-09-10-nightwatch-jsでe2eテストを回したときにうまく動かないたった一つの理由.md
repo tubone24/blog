@@ -161,6 +161,10 @@ CircleCIのconfig.ymlを次のように変えました。
 
 ![Img](https://i.imgur.com/71HlXYT.png)
 
+久しぶりにsuccessを見た・・。
+
+![Img](https://i.imgur.com/FYjENBL.png)
+
 ## あとがき
 
 Nightwatch.jsの動きが気になったのでもう少し深く見ていくとNightwatch.js自体はChromeDriverを依存パッケージとしては入れないようです。
