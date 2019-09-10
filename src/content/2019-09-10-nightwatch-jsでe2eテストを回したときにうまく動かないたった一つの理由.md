@@ -33,6 +33,37 @@ CircleCIで出ているエラーを見てみると次のようなエラーが出
   status: 33 }
 ```
 
-本エラーを詳しく見ていくと、GoogleChromeのバージョンをv71～v75の間にしなさいというもので、いろいろなサイトを見るとChromeのバージョンアップに合わせてChromeDriverのバージョンも上げないといけない、ということを知りました。
+本エラーを詳しく見ていくと、**GoogleChromeのバージョンをv71～v75の間にしなさい**というもので、いろいろなサイトを見るとChromeのバージョンアップに合わせて**ChromeDriverのバージョンも上げないといけない**、ということを知りました。
 
 [GitHub Issue #4800 Message: session not created: Chrome version must be between 71 and 75](https://github.com/timgrossmann/InstaPy/issues/4800)
+
+そこで、前回の記事内で下記のことを実施しました。
+
+- [ChromeDriverとGoogleChromeのVersionを確認する](https://blog.tubone-project24.xyz/2019-09-03-chromedriver#chromedriver%E3%81%A8googlechrome%E3%81%AEversion%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
+- [CircleCIのDockerfileを確認してみる](https://blog.tubone-project24.xyz/2019-09-03-chromedriver#circleciのdockerfileを確認してみる)
+- [Chrome Betaに変えてみる (自前Build環境の作成)](https://blog.tubone-project24.xyz/2019-09-03-chromedriver#chrome-beta%E3%81%AB%E5%A4%89%E3%81%88%E3%81%A6%E3%81%BF%E3%82%8B)
+
+が、しかし結局直りませんでした。
+
+## もう少しちゃんとエラーを見てみる
+
+もう少しちゃんとエラーを見てみます。すると、あることに気が付きます。
+
+***ChromeBetaにバージョンアップしてChromeDriverもバージョンアップしたのにエラーメッセージに出ているChromeDriverのバージョンが想定のものと違う・・***
+
+自前Build環境の作成時に入れたChromeDriverのバージョンは`77.0.3865.40`でした。
+
+ちゃんとこちらはCIのログに出力されていまして、Chromeのバージョンとも合っています。
+
+```bash{numberLines: 1}{9, 10}
+$ #!/bin/bash -eo pipefail
+  echo "Node $(node -v)"
+  echo "NPM v$(npm --version)"
+  chromedriver -v
+  google-chrome --version
+
+Node v10.16.3
+NPM v6.9.0
+ChromeDriver 77.0.3865.40 (f484704e052e0b556f8030b65b953dce96503217-refs/branch-heads/3865@{#442})
+Google Chrome 77.0.3865.56 beta
+```
