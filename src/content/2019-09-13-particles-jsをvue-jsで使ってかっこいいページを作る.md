@@ -6,7 +6,7 @@ description: particles.jsをVue.jsで使う方法
 tags:
   - Vue.js
   - particle.js
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/CafEJCU.png'
 templateKey: blog-post
 ---
 # とりあえずかっこよくしたい
