@@ -19,5 +19,83 @@ particles.jsをVue.jsで簡単に使えるようにしたものがすでにnpm�
 
 今回はこちらを使います。
 
+[vue-particles](https://github.com/creotip/vue-particles)
+
 ## 簡単な使い方
 
+まず、main.tsでvue-particlesをimportします。
+
+```typescript{numberLines: 1}
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+// @ts-ignore
+import VueParticles from 'vue-particles';
+
+import store from './store/';
+
+Vue.use(BootstrapVue);
+Vue.use(VueParticles);
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount('#app');
+```
+
+importしたあとに、Vue.useします。
+
+次にApp.vueでparticles.jsを設定します。まずはTemplateにcomponentを設定します。
+
+```vue{numberLines: 1}
+      <vue-particles
+              color="#add8e6"
+              :particleOpacity="0.7"
+              linesColor="#add8e6"
+              :particlesNumber="80"
+              shapeType="circle"
+              :particleSize="6"
+              :linesWidth="2"
+              :lineLinked="true"
+              :lineOpacity="0.4"
+              :linesDistance="150"
+              :moveSpeed="4"
+              :hoverEffect="true"
+              hoverMode="grab"
+              :clickEffect="true"
+              clickMode="push"
+              retina_detect="true"
+      >
+      </vue-particles>
+```
+
+次にCSSですのでstyleで設定します。
+
+```css{numberLines: 1}
+#particles-js {
+    background-image: url("https://raw.githubusercontent.com/tubone24/ebook-homebrew-vue-typescript-client/master/src/assets/bg.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+}
+```
+
+z-indexを-999にしました。こうすることでほかのコンポーネントの下に滑り込ませられます。
+
+## 完成！
+
+これでかっこよいサイトになりました。
+
+
+![Img](https://i.imgur.com/CafEJCU.png)
