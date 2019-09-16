@@ -13,3 +13,11 @@ templateKey: blog-post
 
 とりあえず作ったWebページをかっこよくしたいと思い手軽に使えるparticles.jsをVue.jsで使ってみます。
 
+## npm
+
+particles.jsをVue.jsで簡単に使えるようにしたものがすでにnpmで公開されてました。
+
+今回はこちらを使います。
+
+## 簡単な使い方
+
