@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({ dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608' });
 
 const HTML = ({
   htmlAttributes,
