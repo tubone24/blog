@@ -98,6 +98,13 @@ module.exports = {
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
           {
+            resolve: '@weknow/gatsby-remark-codepen',
+            options: {
+              theme: 'dark',
+              height: 400,
+            },
+          },
+          {
             resolve: 'gatsby-remark-embed-gist',
             options: {
               username: 'tubone24',
