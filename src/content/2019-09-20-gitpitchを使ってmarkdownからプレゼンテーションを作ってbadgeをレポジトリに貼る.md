@@ -9,3 +9,9 @@ headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
 # とりあえずBadge増やしたい
+
+[GitPitch](https://gitpitch.com/)を使って、[Ebook Homebrew](https://github.com/tubone24/ebook_homebrew)の紹介プレゼンを作りたいと思います。
+
+## GitPitchとは？
+
+GitPitchとは、GitHubのレポジトリにMarkdownで書いた
