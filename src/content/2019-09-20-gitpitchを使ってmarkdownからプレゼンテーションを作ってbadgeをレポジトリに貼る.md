@@ -46,3 +46,9 @@ GitPitchとは、GitHubのレポジトリにMarkdownで書いたファイルを�
 またGitPitch専用の形式もあるので、そちらで書くことで色味やレイアウトも細かく設定できます。
 
 [Documentはこちら](https://gitpitch.com/docs)
+
+## 実際に作ってみた
+
+まずは実際に作ってみたプレゼンを見てください！かっこいいでしょ。
+
+[https://gitpitch.com/tubone24/ebook_homebrew/master?grs=github#/](https://gitpitch.com/tubone24/ebook_homebrew/master?grs=github#/)
