@@ -14,4 +14,29 @@ templateKey: blog-post
 
 ## GitPitchとは？
 
-GitPitchとは、GitHubのレポジトリにMarkdownで書いた
+GitPitchとは、GitHubのレポジトリにMarkdownで書いたファイルを置いておくだけで勝手にかっちょいいプレゼンが作れるサービスです。
+
+```markdown
+### テスト
+
+
+これはテストスライド
+
+
+---
+
+
+### 2スライド
+
+
+---
+
+
+### 3スライド
+
+
+---
+
+
+### おわり
+```
