@@ -5,7 +5,7 @@ date: 2019-09-19T15:26:30.987Z
 description: GitPitchを使ってMarkdownからプレゼンテーションを作ってBadgeをレポジトリに貼る
 tags:
   - GitPitch
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/CBPn3gW.png'
 templateKey: blog-post
 ---
 # とりあえずBadge増やしたい
@@ -45,3 +45,4 @@ GitPitchとは、GitHubのレポジトリにMarkdownで書いたファイルを�
 
 またGitPitch専用の形式もあるので、そちらで書くことで色味やレイアウトも細かく設定できます。
 
+[Documentはこちら](https://gitpitch.com/docs)
