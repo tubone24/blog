@@ -21,6 +21,13 @@ $ npm install
 $ npm start
 ```
 
+## Code with Codesandbox
+
+Use the button below to code with the blog system:
+
+[![Edit blog](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/tubone24/blog/tree/master/)
+
+
 ## Deploy at Netlify
 
 Push the button below.
