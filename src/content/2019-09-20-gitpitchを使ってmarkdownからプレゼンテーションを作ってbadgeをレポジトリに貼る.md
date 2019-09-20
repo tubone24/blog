@@ -43,6 +43,10 @@ GitPitchとは、GitHubのレポジトリにMarkdownで書いたファイルを�
 
 こんな感じでよくあるMarkdownの形式で書いてもちゃんとそれっぽいプレゼンが作れます。
 
+- 区切り線で次のスライドへ
+- 見出しはMarkdownの#そのまま
+- 画像やリンクもMarkdown形式そのまま
+
 またGitPitch専用の形式もあるので、そちらで書くことで色味やレイアウトも細かく設定できます。
 
 [Documentはこちら](https://gitpitch.com/docs)
@@ -203,3 +207,95 @@ Heroku Deploy!
 Ebook Homebrew's journey is not over yet..
 @snapend
 ```
+
+### デフォルトの設定
+
+デフォルトの設定は`PITCHME.yaml`に書きます。
+
+今回は[Azusa Colors](http://sanographix.github.io/azusa-colors/)を参考に配色を決めさせていただきました！
+
+Azusaは結構LTとかで使わせてもらっています。
+
+```yaml
+title : "What is Ebook Homebrew"
+
+theme: template
+
+theme-background: [ "#FFF5E3" ]
+theme-headline: [ "Raleway", "#01BBD4", "none" ]
+theme-byline: [ "Raleway", "#464E70", "none" ]
+theme-text: [ "Ubuntu", "#464E70", "none" ]
+theme-links: [ "#5289F7", "#5254F7" ]
+theme-code: [ "Source Code Pro" ]
+theme-controls: [ "#464E70" ]
+theme-margins: [ "0", "15px" ]
+
+logo: assets/gitpitch/img/logo.png
+
+highlight: monokai
+
+slide-number: true
+
+footnote: "© 2019 tubone-project24"
+
+
+vertical-center: true
+
+theme-override: assets/gitpitch/css/main.css
+
+transition: concave
+```
+
+また、独自でCSSを当てることもできます。 `theme-override`で設定できます。
+
+### 背景色を変える
+
+背景色を変えるのは区切り線にパラメータをつけるだけです。
+
+```
+---?color=#B867C6
+```
+
+![Img](https://i.imgur.com/tJFkIB5.png)
+
+### 背景に画像をつける
+
+背景に画像をつけるのも背景色を変えるようなイメージで区切り線にパラメータを入れます。
+
+```
+---?image=assets/gitpitch/img/journey.jpg
+```
+
+![Img](https://i.imgur.com/UE6a3e1.png)
+
+### フォント、色などを変える
+
+こんな感じで `@snap` `@snapend` で囲った範囲が適用されます。 
+
+```
+@snap[silver-fox text-italics]
+Ebook Homebrew's journey is not over yet..
+@snapend
+```
+
+![Img](https://i.imgur.com/YlJxm1U.png)
+
+### 引用文
+
+引用文は`@quote[hoge](fuga)` 
+
+hogeが引用文、fugaが人
+
+```
+## Think about..
+
+@img[clip-img clean-img span-20](assets/gitpitch/img/author.png)
+
+@quote[I want to learn more!](tubone)
+```
+
+![Img](https://i.imgur.com/v9iyA2y.png)
+
+## 結論
+
+そのままのMarkdownでもそれなりなプレゼンテーションができますが、カスタマイズも結構できます。LT用に作ってみようかなぁ・・。
