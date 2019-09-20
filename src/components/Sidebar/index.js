@@ -51,10 +51,6 @@ const Sidebar = ({ latestPosts }) => (
         href="https://www.slideshare.net/tubone24"
         icon={['fab', 'slideshare']}
       />
-      <Icon
-        href="https://play.google.com/store/apps/developer?id=tubone&hl=ja"
-        icon={['fab', 'google-play']}
-      />
       <Information posts={latestPosts} />
     </div>
   </header>
