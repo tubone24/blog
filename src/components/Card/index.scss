@@ -14,6 +14,24 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
 }
 // Base styles
 
+.data {
+  transform: translateY(0);
+  transition: transform 0.3s;
+
+  .content {
+    padding: 1em;
+    position: relative;
+    z-index: 1;
+
+    // Tags, Date
+    .stats {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+}
+
 .custom-card {
   transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
@@ -40,24 +58,6 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
       .data {
         transform: translateY(-1em);
         transition: transform 0.3s;
-      }
-    }
-  }
-
-  .data {
-    transform: translateY(0);
-    transition: transform 0.3s;
-
-    .content {
-      padding: 1em;
-      position: relative;
-      z-index: 1;
-
-      // Tags, Date
-      .stats {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
       }
     }
   }
