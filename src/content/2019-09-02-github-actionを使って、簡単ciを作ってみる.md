@@ -4,8 +4,8 @@ title: Github Actionを使って、簡単CIを作ってみる
 date: 2019-09-02T11:33:53.870Z
 description: 最近Github Actionを使って簡単CIを作ってみました。
 tags:
-  - Github
-  - GithubAction
+  - GitHub
+  - GitHubAction
   - CI
 headerImage: 'https://i.imgur.com/6T4kjdf.png'
 templateKey: blog-post
@@ -90,7 +90,8 @@ on: [push]
 
 jobs:
   build:
-```
+
+```
 
 のように設定します。
 
