@@ -94,12 +94,6 @@ Examples..
 
 ---
 
-```bash
-$ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
-```
-
----
-
 ## Think about..
 
 @img[clip-img clean-img span-20](assets/gitpitch/img/author.png)
