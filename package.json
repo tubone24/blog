@@ -70,7 +70,7 @@
     "react-helmet": "^5.2.0",
     "react-transition-group": "^2.5.2",
     "react-typography": "^0.16.19",
-    "rimraf": "^2.6.2",
+    "rimraf": "^3.0.0",
     "smooth-scroll": "^16.0.0",
     "typography": "^0.16.19",
     "typography-theme-grand-view": "^0.16.19",
