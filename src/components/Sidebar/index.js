@@ -7,10 +7,11 @@ import { config } from '../../../data';
 
 import Information from './Information';
 
+import Subscription from './Subscription';
+
 import './index.scss';
 
 const {
-  wordings = [],
   githubUsername,
   iconUrl,
 } = config;
@@ -33,8 +34,7 @@ const Sidebar = ({ latestPosts }) => (
     <div className="about-me">
       <a href="https://www.gitshowcase.com/tubone24"><img className="avatar" src={iconUrl} alt="tubone" /></a>
       <a href="https://www.gitshowcase.com/tubone24"><h4>tubone</h4></a>
-      <p className="mb-1">{wordings[0]}</p>
-      <p className="mb-3">{wordings[1]}</p>
+      <p className="mb-1">Japan Boyaki Ojisan</p>
       <Icon
         href={`https://github.com/${githubUsername}`}
         icon={['fab', 'github']}
@@ -52,6 +52,7 @@ const Sidebar = ({ latestPosts }) => (
         icon={['fab', 'slideshare']}
       />
       <Information posts={latestPosts} />
+      <Subscription />
     </div>
   </header>
 );
@@ -62,7 +63,7 @@ Icon.propTypes = {
 };
 
 Sidebar.propTypes = {
-  totalCount: PropTypes.number,
+  totalCount: PropTypes.number, //eslint-disable-line
   latestPosts: PropTypes.array, //eslint-disable-line
 };
 
