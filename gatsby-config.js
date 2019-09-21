@@ -108,7 +108,7 @@ module.exports = {
             options: {
               width: 800, // default is "100%"
               height: 500, // default is 300
-              color: '#ff00ff', // default is #ff5500
+              color: '#6cff8c', // default is #ff5500
               autoplay: false, // default is false
             },
           },
