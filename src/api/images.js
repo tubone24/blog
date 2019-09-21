@@ -43,7 +43,7 @@ const parseTitle = (title, text) => `title="${title || text}"`;
 const parseImageTag = ({ href, title, text }) => `<img class="lozad d-block mx-auto" data-src=${parseImgur(
   href,
   'large',
-)} ${parseTitle(title, text)} />`;
+)} ${parseTitle(title, text)}  alt=${parseTitle(title, text)} loading="lazy" />`;
 
 const getGalleryImage = ({ href, title, text }) => `<a data-fancybox="gallery" href="${parseImgur(
   href,
