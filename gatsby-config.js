@@ -19,6 +19,12 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-catch-links',
     {
+      resolve: 'gatsby-plugin-zopfli',
+      options: {
+        extensions: ['css', 'html', 'js', 'svg'],
+      },
+    },
+    {
       resolve: 'gatsby-source-wordpress',
       options: {
         baseUrl: 'tubone-project24.xyz',
