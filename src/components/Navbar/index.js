@@ -58,7 +58,7 @@ const Navbar = () => (
               key={item.href}
             />
           ))}
-          <ExternalLink className="nav-btn btn btn-link" title="note" href="https://note.tubone-project24.xyz" />
+          <ExternalLink className="nav-btn btn btn-link" title="Note" href="https://note.tubone-project24.xyz" />
         </ul>
       </div>
     </div>
