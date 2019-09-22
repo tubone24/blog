@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import GithubCorner from '../GithubCorner';
 
 import NavItem from './NavItem';
+import ExternalLink from '../ExternalLink';
 import { gotoPage } from '../../api/url';
 import './index.scss';
 import { config } from '../../../data';
@@ -57,6 +58,7 @@ const Navbar = () => (
               key={item.href}
             />
           ))}
+          <ExternalLink className="nav-btn btn btn-link" title="note" href="https://note.tubone-project24.xyz" />
         </ul>
       </div>
     </div>
