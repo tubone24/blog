@@ -18,3 +18,6 @@ templateKey: blog-post
 ## JSON Resumeとは？
 JSON Resumeとは、JSON形式で職務経歴を記載するオープンソースのスキーマー定義です。
 
+OSSプロジェクトですので、[こちら](https://github.com/jsonresume/resume-schema)からIssueやPRを出すことができます。足りないスキーマがあれば積極的にコントリビュートしてみては？
+
+今回は[APIs With GitHubとJSON-Resumeでサクッとプロフィールを返すAPIをつくる](https://qiita.com/kai_kou/items/779bdcdfc7ea5def3dfc)を参考に
