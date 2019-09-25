@@ -21,3 +21,16 @@ JSON Resumeとは、JSON形式で職務経歴を記載するオープンソー�
 OSSプロジェクトですので、[こちら](https://github.com/jsonresume/resume-schema)からIssueやPRを出すことができます。足りないスキーマがあれば積極的にコントリビュートしてみては？
 
 今回は[APIs With GitHubとJSON-Resumeでサクッとプロフィールを返すAPIをつくる](https://qiita.com/kai_kou/items/779bdcdfc7ea5def3dfc)を参考にまずJSON ResumeのAPIを作ろうと思います。
+
+## API With GitHubの設定
+
+[API With GitHub](https://apiwithgithub.com/)にアクセスするとGitHubアカウントとの連携を求められるので同意してしまいます。
+
+そうすると、Repositoryを作る画面に進みますので迷わず新しいレポジトリを作ります。
+
+![Img](https://i.imgur.com/6Lti5I8.png)
+
+あとは普通にレポジトリを新規作成する手順で作っていきます。
+
+![Img](https://i.imgur.com/d4nmRXZ.png)
+
