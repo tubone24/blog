@@ -40,7 +40,7 @@ class Content extends Component {
         dangerouslySetInnerHTML={{ __html: post }}
         style={{
           padding: 30,
-          lineHeight: 4,
+          lineHeight: 3,
           background: 'white',
         }}
       />
