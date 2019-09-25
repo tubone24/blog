@@ -6,7 +6,9 @@ description: JSON Resume + API With GitHubを使って、さくっと職務経�
 tags:
   - JSON Resume
   - GitHub Pages
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+  - Resume
+  - CV
+headerImage: 'https://i.imgur.com/eQ7uBsO.png'
 templateKey: blog-post
 ---
 # JSON Resumeを使ってさくさくっとそれっぽい職務経歴書を作ってみます
@@ -301,7 +303,8 @@ LinkからAPIにアクセスしてみましょう
 
 JSON ResumeにはHTMLのテンプレートで記載内容をきれいなResumeにするCLIが用意されています。
 
-[resume-cli](https://github.com/jsonresume/resume-cli)
+[resume-cli
+](https://github.com/jsonresume/resume-cli)
 
 こちらを利用すれば・・
 
