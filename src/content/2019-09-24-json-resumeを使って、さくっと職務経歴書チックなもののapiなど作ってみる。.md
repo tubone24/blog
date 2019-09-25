@@ -56,7 +56,7 @@ resume.jsonを作ったばかりだと空のオブジェクトしかないので
 
 ## JSON Resumeでがつがつ書いていく
 
-JSON Resumeの公式Docにもスキーマが載っていますが、完全なスキーマはGitHubにあるExamplesを見たほうがよいです。
+JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが載っていますが、完全なスキーマはGitHubにある[Examples](https://github.com/jsonresume/resume-schema/blob/v1.0.0/examples/valid/complete.json)を見たほうがよいです。
 
 こんな感じのお手本
 
@@ -221,3 +221,66 @@ JSON Resumeの公式Docにもスキーマが載っていますが、完全なス
   }
 }
 ```
+
+海外だとボランティアや学歴欄へのGPA記載とかがあるんですねー。
+
+なんとなく生きているマンにはきついキツい。
+
+軽く項目を解説すると
+
+- basics
+  - 名前や連絡先など基本情報。
+  - 電話番号や詳細な住所載せていない海外兄貴は多かった。記載しない項目は空文字""にしている海外兄貴が多い。(nullにしている兄貴はほとんどいなかった)
+  - 海外兄貴のJSON Resumeを見るとSummeryには経験年数の他、大学の専攻や経験した言語、関わったプロジェクトなど様々書いている
+- profiles
+  - いわゆるSNSのリンク
+- work
+  - 言わずもがな、職務経歴
+  - 現在も続けている職場の場合はendDateを空文字""にする
+  - highlights欄に箇条書きでポイントを書いておく(初めてPythonでAPI作成、デザイナーとして従事など)
+- volunteer
+  - 言わずもがな、ボランティア経験
+  - 海外の就職支援サイト[TheBaranceCareer](https://www.thebalancecareers.com/how-to-include-volunteer-work-on-your-resume-2063297)を参考にするとボランティアは `イベントの計画、資金集め、問題解決などの重要なスキルを紹介する優れた方法であり、他の有給の仕事の経験と確実に統合されるべきです。`とのこと
+  - ~~私はボランティアはほとんどしたことないです。たばこの吸い殻を拾う活動は1度参加したことありますが、それっきりです。~~
+
+- education
+  - 学歴
+  - 学士はBachelor、修士はMaster、博士はDoctor
+  - 海外ではちゃんと勉強しているかどうかGPAも重要視するみたいです。またもや[TheBaranceCarrer](https://www.thebalancecareers.com/when-to-include-your-gpa-on-your-resume-2059859)を参考にすると3.5以上あると就職に有利、3.0を下回る場合は書かないほうがいいらしいです。（大学サボりがここにきてつらくなってきた）
+  - 副専攻とかってどう書けばいいんだろう・・
+
+- awards
+  - 受賞歴
+  - 海外兄貴のResumeを見ると会社の月間売上一位みたいなのも書いていた
+  - 会社内で表彰された場合はawarderをCompanyにする
+
+- publications
+  - 出版歴
+  - 機械学習系海外兄貴のものをみると論文の寄稿が目立った（かっこいい）
+
+- skills
+  - スキル
+  - 配列になっているので好きなだけ書ける~~アピールしまくる~~
+  - level欄は熟達度をMaster, Advanced, Intermediate, Beginnerで記載
+
+- languages
+  - 使える言語
+  - ネイティブの場合Native Speaker、それ以外のレベルはスキルと同じ
+
+- interests
+  - いわゆる趣味欄
+  - 重要性がいまいちわからん・・。
+  - 生き物が好き的な話を書いている海外兄貴は多い。イメージ戦略か？
+
+- references
+  - いわゆる推薦人
+  - 海外だと第三者である推薦人（referee）に連絡をし過去の働きぶりなどを聞くらしい
+  - だいたい過去の上司、それも2人は最低書くべきらしいですね
+
+- projects
+  - プロジェクト欄
+  - どれくらいの売り上げや貢献をしたか、数値で表しましょう！
+  - ここの欄は[結構重要](https://work.chron.com/describe-projects-resume-3241.html)らしい。うまく書くことで、自分のスキルセットと経験がどれくらい貴社にマッチしているか示せるチャンス！
+
+- meta
+  - 一応JSON ResumeはAPIなので、URLや改版、更新日などメタ情報を記載しましょう
