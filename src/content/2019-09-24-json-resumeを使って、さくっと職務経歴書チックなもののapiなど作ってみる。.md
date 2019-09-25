@@ -284,3 +284,31 @@ JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが�
 
 - meta
   - 一応JSON ResumeはAPIなので、URLや改版、更新日などメタ情報を記載しましょう
+
+## APIができたら実際アクセスしてみる
+
+上記の項目を無事に記載出来たら
+
+![Img](https://i.imgur.com/PSokx4v.png)
+
+LinkからAPIにアクセスしてみましょう
+
+![Img](https://i.imgur.com/wF82uti.png)
+
+ちゃんとJSON ResumeがAPIで返却されました！
+
+## おまけ
+
+JSON ResumeにはHTMLのテンプレートで記載内容をきれいなResumeにするCLIが用意されています。
+
+[resume-cli](https://github.com/jsonresume/resume-cli)
+
+こちらを利用すれば・・
+
+![Img](https://i.imgur.com/IIzgYrK.png)
+
+かっこいい！！！感じでResumeがサクサク作れてしまいます。
+
+## 結論
+
+よく考えたら、海外向けのResumeを作るほど海外志向ないのでただの海外就活サイトの読み漁りになりました
