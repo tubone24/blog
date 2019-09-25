@@ -1,8 +1,8 @@
 ---
 slug: 2019/09/24/json-resume
-title: JSON Resumeを使って、さくっと職務経歴書チックなもののAPIなど作ってみる
+title: JSON Resume + API With GitHubを使って、さくっと職務経歴書チックなもののAPIなど作ってみる
 date: 2019-09-24T10:41:02.386Z
-description: JSON Resumeを使って、さくっと職務経歴書チックなもののAPIなど作ってみます
+description: JSON Resume + API With GitHubを使って、さくっと職務経歴書チックなもののAPIなど作ってみます
 tags:
   - JSON Resume
   - GitHub Pages
@@ -24,6 +24,10 @@ OSSプロジェクトですので、[こちら](https://github.com/jsonresume/re
 
 ## API With GitHubの設定
 
+API With GitHubはGitHubのJSONファイルの編集画面と、rawgithubusercontent.comを使ってJSONファイルをHTTPで返却するLINKを作成するお手軽Webサービスです。
+
+固定値のJSONを返すだけならこいつでサクサク作っちゃえばええやん。さっそく使っていきます。
+
 [API With GitHub](https://apiwithgithub.com/)にアクセスするとGitHubアカウントとの連携を求められるので同意してしまいます。
 
 そうすると、Repositoryを作る画面に進みますので迷わず新しいレポジトリを作ります。
@@ -34,3 +38,10 @@ OSSプロジェクトですので、[こちら](https://github.com/jsonresume/re
 
 ![Img](https://i.imgur.com/d4nmRXZ.png)
 
+Make APIボタンを押すと・・・。
+
+![Img](https://i.imgur.com/W3Paou3.png)
+
+新規JSONファイルを作る画面に進みます。
+
+![Img](https://i.imgur.com/vzhzqiI.png)
