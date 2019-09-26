@@ -242,7 +242,7 @@ JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが�
   - highlights欄に箇条書きでポイントを書いておく(初めてPythonでAPI作成、デザイナーとして従事など)
 - volunteer
   - 言わずもがな、ボランティア経験
-  - 海外の就職支援サイト[TheBaranceCareer](https://www.thebalancecareers.com/how-to-include-volunteer-work-on-your-resume-2063297)を参考にするとボランティアは `イベントの計画、資金集め、問題解決などの重要なスキルを紹介する優れた方法であり、他の有給の仕事の経験と確実に統合されるべきです。`とのこと
+  - 海外の就職支援サイト[TheBaranceCareer](https://www.thebalancecareers.com/how-to-include-volunteer-work-on-your-resume-2063297)を参考にするとボランティアは **イベントの計画、資金集め、問題解決などの重要なスキルを紹介する優れた方法であり、他の有給の仕事の経験と確実に統合されるべきです。**とのこと
   - ~~私はボランティアはほとんどしたことないです。たばこの吸い殻を拾う活動は1度参加したことありますが、それっきりです。~~
 
 - education
