@@ -20,9 +20,9 @@ const parseImgur = (rawImage, size = 'large') => {
     huge: 'h',
   };
 
-  // Don't resize the png image
+  // Don't resize the gif image
   // as there is a transparent bug in imgur
-  if (rawImage.match('(png)|(gif)')) {
+  if (rawImage.match('gif')) {
     // Prevent double http url
     if (rawImage.match('http')) {
       return rawImage;
