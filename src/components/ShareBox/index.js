@@ -75,7 +75,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
         alt=""
         width="25"
         height="25"
-        style={{position: 'absolute', top: 10}}
+        style={{ position: 'absolute', top: 10 }}
       />
     </a>
     {hasCommentBox && <CommentButton />}

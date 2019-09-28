@@ -45,8 +45,6 @@ Header.propTypes = {
   subTitle: PropTypes.string,
   authorName: PropTypes.string,
   authorImage: PropTypes.string,
-  jueJinPostLink: PropTypes.string,
-  jueJinLikeIconLink: PropTypes.string,
 };
 
 Header.defaultProps = {
@@ -54,8 +52,6 @@ Header.defaultProps = {
   subTitle: '',
   authorName: '',
   authorImage: '',
-  jueJinPostLink: '',
-  jueJinLikeIconLink: '',
 };
 
 export default Header;

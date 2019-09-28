@@ -221,10 +221,12 @@ module.exports = {
       options: {
         name: 'tubone BOYAKI',
         short_name: 'tuboneBOYAKI',
+        description: 'Japan Boyaki Ojisan',
+        lang: 'ja',
         start_url: '/',
         background_color: '#ededed',
-        theme_color: '#384f7c',
-        display: 'standalone',
+        theme_color: '#33b546',
+        display: 'minimal-ui',
         icons: [
           {
             src: '/favicons/android-chrome-192x192.png',

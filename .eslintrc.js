@@ -19,6 +19,7 @@ const eslintrc = {
     'no-shadow': 'warn',
     'no-console': 0,
     'linebreak-style': 0,
+    'react/jsx-one-expression-per-line': 0,
     'import/extensions': [
       2,
       'never',

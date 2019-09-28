@@ -29,12 +29,12 @@ const Icon = ({ href, icon }) => (
   </a>
 );
 
-const Sidebar = ({ latestPosts }) => (
+const Sidebar = ({ latestPosts, totalCount }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
       <a href="https://www.gitshowcase.com/tubone24"><img className="avatar" src={iconUrl} alt="tubone" /></a>
       <a href="https://www.gitshowcase.com/tubone24"><h4>tubone</h4></a>
-      <p className="mb-1">Japan Boyaki Ojisan</p>
+      <p className="text-md-center">Japan Boyaki Ojisan</p>
       <Icon
         href={`https://github.com/${githubUsername}`}
         icon={['fab', 'github']}
@@ -51,7 +51,7 @@ const Sidebar = ({ latestPosts }) => (
         href="https://www.slideshare.net/tubone24"
         icon={['fab', 'slideshare']}
       />
-      <Information posts={latestPosts} />
+      <Information posts={latestPosts} totalCount={totalCount} />
       <Subscription />
     </div>
   </header>

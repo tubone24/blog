@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-const LatestPost = ({ posts }) => (
+const LatestPost = ({ posts, totalCount }) => (
   <div className="latest-post">
-    <p>Recent posts</p>
+    <p>
+Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
+      {totalCount}
+    </p>
     {posts.map(({ node }) => (
       <Link
         to={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
@@ -21,6 +24,7 @@ const LatestPost = ({ posts }) => (
 );
 
 LatestPost.propTypes = {
+  totalCount: PropTypes.number.isRequired,
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

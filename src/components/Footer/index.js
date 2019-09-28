@@ -11,7 +11,6 @@ const Footer = () => (
       <div className="row">
         <div className="col-sm-12 text-center">
           <p className="architecture">
-
             Build with&nbsp;
             <ExternalLink href="https://www.gatsbyjs.org/" title="GatsbyJS" />
             &nbsp;and&nbsp;
@@ -26,11 +25,9 @@ const Footer = () => (
           <p className="copyright">
             Copyright&nbsp;
             <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone" />
-
             &nbsp;
             {config.title}
             {new Date().getFullYear()}
-
             &nbsp;Theme by
             &nbsp;
             <ExternalLink href="https://github.com/calpa" title="Calpa Liu" />

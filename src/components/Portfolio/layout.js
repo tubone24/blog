@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 
+// eslint-disable-next-line react/prop-types
 const Layout = ({ children, location }) => {
-
   let content;
 
   if (location && location.pathname === '/') {
@@ -12,7 +12,7 @@ const Layout = ({ children, location }) => {
       <div>
         {children}
       </div>
-    )
+    );
   } else {
     content = (
       <div id="wrapper" className="page">
@@ -20,7 +20,7 @@ const Layout = ({ children, location }) => {
           {children}
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -49,11 +49,11 @@ const Layout = ({ children, location }) => {
         </>
       )}
     />
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;

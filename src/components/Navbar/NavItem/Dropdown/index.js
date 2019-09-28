@@ -28,6 +28,13 @@ const Dropdown = ({ title, list }) => (
 
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      href: PropTypes.string,
+    }),
+  ),
 };
 
 export default Dropdown;

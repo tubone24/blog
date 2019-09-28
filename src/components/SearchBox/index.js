@@ -41,7 +41,9 @@ class SearchBox extends Component {
     ]).on('autocomplete:selected', (
       event,
       suggestion,
+      // eslint-disable-next-line no-unused-vars
       dataset,
+      // eslint-disable-next-line no-unused-vars
       context,
     ) => {
       navigate(suggestion.url);

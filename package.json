@@ -102,7 +102,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "functions": "netlify-lambda serve functions",
     "reset": "rimraf pubilc/ .cache/",
-    "commit": "npx git-cz",
     "revert": "node ./scripts/revertConfig.js"
   },
   "devDependencies": {

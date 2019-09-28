@@ -10,7 +10,7 @@ class Main extends React.Component {
       <div
         className="close"
         onClick={() => {
-        this.props.onCloseArticle();
+          this.props.onCloseArticle();
         }}
       />
     );
@@ -33,13 +33,17 @@ class Main extends React.Component {
             <img src={pic01} alt="" />
           </span>
           <p>
+
             Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin
             aliquam facilisis ante interdum congue. Integer mollis, nisl amet
             convallis, porttitor magna ullamcorper, amet egestas mauris. Ut
             magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas.
-            By the way, check out my <a href="#work">awesome work</a>.
+            By the way, check out my
+            <a href="#work">awesome work</a>
+.
           </p>
           <p>
+
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
             dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora
             torquent per conubia nostra, per inceptos himenaeos. Etiam tristique
@@ -67,12 +71,14 @@ class Main extends React.Component {
             <img src={pic02} alt="" />
           </span>
           <p>
+
             Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu,
             at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent
             urna nisi, fringila lorem et vehicula lacinia quam. Integer
             sollicitudin mauris nec lorem luctus ultrices.
           </p>
           <p>
+
             Nullam et orci eu lorem consequat tincidunt vivamus et sagittis
             libero. Mauris aliquet magna magna sed nunc rhoncus pharetra.
             Pellentesque condimentum sem. In efficitur ligula tate urna.
@@ -96,6 +102,7 @@ class Main extends React.Component {
             <img src={pic03} alt="" />
           </span>
           <p>
+
             Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent
             eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam
             erat volutpat. Praesent urna nisi, fringila lorem et vehicula
@@ -126,7 +133,7 @@ class Main extends React.Component {
             </div>
             <div className="field">
               <label htmlFor="message">Message</label>
-              <textarea name="message" id="message" rows="4"></textarea>
+              <textarea name="message" id="message" rows="4" />
             </div>
             <ul className="actions">
               <li>
@@ -168,7 +175,7 @@ class Main extends React.Component {
           {close}
         </article>
       </div>
-    )
+    );
   }
 }
 
@@ -179,6 +186,6 @@ Main.propTypes = {
   onCloseArticle: PropTypes.func,
   timeout: PropTypes.bool,
   setWrapperRef: PropTypes.func.isRequired,
-}
+};
 
 export default Main;

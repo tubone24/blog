@@ -7,11 +7,10 @@ import LatestPost from '../LatestPost';
 import './index.scss';
 import SearchBox from '../../SearchBox';
 
-// eslint-disable-next-line react/prop-types
-const Information = ({ posts }) => (
+const Information = ({ totalCount, posts }) => (
   <div className="d-none d-lg-block information my-2">
     <hr />
-    <LatestPost posts={posts} />
+    <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
     <Friend />
     <hr />
