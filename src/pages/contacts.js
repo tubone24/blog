@@ -66,14 +66,14 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Your name:<br/>
-                  <input type="text" name="name" class="form-control" placeholder="Enter your name" onChange={this.handleChange}/>
+                  <input type="text" name="name" class="form-control" maxLength="30" minLength="2" required placeholder="Enter your name" onChange={this.handleChange}/>
 
                 </label>
               </p>
               <p>
                 <label>
                   Your email:<br/>
-                  <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter your email" onChange={this.handleChange}/>
+                  <input type="email" name="email" class="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" onChange={this.handleChange}/>
                   <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </label>
               </p>
