@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 import './index.scss';
 
+import { gotoPage } from '../../api/url';
+
 let algoliasearch; let autocomplete; let client; let
   index;
 
@@ -30,7 +32,7 @@ class SearchBox extends Component {
         templates: {
           suggestion({ _highlightResult: { title, description } }) {
             return `
-                <p class="title">${title.value}</p>
+                <b><p class="title">${title.value}</p></b>
                 <p class="description">${description.value}</p>
                 `;
           },
@@ -47,6 +49,9 @@ class SearchBox extends Component {
       context,
     ) => {
       navigate(suggestion.url);
+      console.log(event, suggestion, dataset, context);
+      // eslint-disable-next-line no-underscore-dangle
+      gotoPage(event._args[0].path);
     });
   }
 

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 const Tag = ({ name, count }) => (
   <a href={`/tag/${name}`} className="header-tag">
     {name}
-
-
     &nbsp;
     {count}
   </a>
