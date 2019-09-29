@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import { navigateTo } from 'gatsby-link';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
@@ -22,6 +23,10 @@ export default class Contact extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
+    ReactGA.event({
+      category: 'User',
+      action: 'Submit Contact Form',
+    });
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

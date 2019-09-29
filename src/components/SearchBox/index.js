@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 import './index.scss';
-
+import ReactGA from 'react-ga';
 import { gotoPage } from '../../api/url';
+
 
 let algoliasearch; let autocomplete; let client; let
   index;
@@ -49,6 +50,10 @@ class SearchBox extends Component {
       context,
     ) => {
       navigate(suggestion.url);
+      ReactGA.event({
+        category: 'User',
+        action: 'Click navbar logo',
+      });
       // eslint-disable-next-line no-underscore-dangle
       gotoPage(event._args[0].path);
     });
