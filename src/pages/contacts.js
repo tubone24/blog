@@ -20,6 +20,10 @@ export default class Contact extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleAttachment = e => {
+    this.setState({ [e.target.name]: e.target.files[0] });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
@@ -86,6 +90,16 @@ export default class Contact extends React.Component {
                 <label>
                   Message:<br/>
                   <textarea name="message" class="form-control" placeholder="Something writing..." onChange={this.handleChange}/>
+                </label>
+              </p>
+              <p>
+                <label>
+                  File:<br />
+                  <input
+                    type="file"
+                    name="attachment"
+                    onChange={this.handleAttachment}
+                  />
                 </label>
               </p>
               <p>
