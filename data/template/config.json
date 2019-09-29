@@ -39,6 +39,10 @@
     {
       "href": "/tags/",
       "title": "Tags"
+    },
+    {
+      "href": "/contacts/",
+      "title": "Contacts"
     }
   ],
   "redirectors": [

@@ -27,7 +27,7 @@ class SearchBox extends Component {
     }
     autocomplete('#algolia-search-input', { hint: false }, [
       {
-        source: autocomplete.sources.hits(index, { hitsPerPage: 5 }),
+        source: autocomplete.sources.hits(index, { hitsPerPage: 3 }),
         displayKey: 'title',
         templates: {
           suggestion({ _highlightResult: { title, description } }) {
@@ -49,7 +49,6 @@ class SearchBox extends Component {
       context,
     ) => {
       navigate(suggestion.url);
-      console.log(event, suggestion, dataset, context);
       // eslint-disable-next-line no-underscore-dangle
       gotoPage(event._args[0].path);
     });
