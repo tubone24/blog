@@ -25,11 +25,30 @@ const CommentButton = () => (
   </a>
 );
 
+const GotoTopButton = () => (
+  <a
+    className="share-button"
+    href="#header"
+    onClick={() => {
+      ReactGA.event({
+        category: 'User',
+        action: 'Scroll to Top',
+      });
+    }}
+    style={{
+      lineHeight: '1.7rem',
+      paddingLeft: '0.1rem',
+    }}
+  >
+    <FontAwesomeIcon icon={['fas', 'chevron-up']} />
+  </a>
+);
+
 const ShareBox = ({ url, hasCommentBox }) => (
   <div className="m-share-box">
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
-      title=""
+      title="FacebookでShareする"
       className="share-button"
       onClick={() => ReactGA.event({
         category: 'Share',
@@ -41,7 +60,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
     </a>
     <a
       href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${url}`}
-      title=""
+      title="TwitterでShareする"
       className="share-button"
       onClick={() => ReactGA.event({
         category: 'Share',
@@ -53,7 +72,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
     </a>
     <a
       href={`http://getpocket.com/edit?url=${url}`}
-      title=""
+      title="Pocketに追加する"
       className="share-button"
       onClick={() => ReactGA.event({
         category: 'Share',
@@ -80,22 +99,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
     </a>
     {hasCommentBox && <CommentButton />}
 
-    <a
-      className="share-button"
-      href="#header"
-      onClick={() => {
-        ReactGA.event({
-          category: 'User',
-          action: 'Scroll to Top',
-        });
-      }}
-      style={{
-        lineHeight: '1.7rem',
-        paddingLeft: '0.1rem',
-      }}
-    >
-      <FontAwesomeIcon icon={['fas', 'chevron-up']} />
-    </a>
+    {hasCommentBox && <GotoTopButton />}
   </div>
 );
 
