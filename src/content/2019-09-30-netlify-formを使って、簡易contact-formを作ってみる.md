@@ -51,3 +51,14 @@ Gatsby.jsではpagesに入れたJavaScriptは固定ページとして動作し�
 Netlify FormではいわゆるスパムBot除けとして2種類のオプションが
 
 用意されてます。
+
+1. いわゆる人間だったらこのフォームに何も入れるなという隠れフォームを作る（data-netlify-honeypot）
+2. reCaptureを設定する
+
+今回はお手軽に実装したいため、1番で進めます。
+
+### data-netlify-honeypot
+
+data-netlify-honeypotの設定はFormのattributeに
+
+data-netlify-honeypot=隠れフォームのname を設定します。
