@@ -16,3 +16,12 @@ templateKey: blog-post
 Netlifyに簡単にFormを作る機能が用意されているので利用用途ないですが、BlogにFormを作ってみようかと思います。
 
 [https://www.netlify.com/docs/form-handling/](https://www.netlify.com/docs/form-handling/)
+
+## Gatsby.jsでForm用ページを個別に作る
+
+せっかくのReactなのでコンポーネントにしてもよいのですが、Formなんて1ページしか使わないので
+再利用性を考えずページとして作っちゃいます。
+
+公式Docを読むとFormタグを打つ際にattributeに data-netlify=true とするだけらしいですね。こりりゃ簡単。
+
+早速作ってみます。
