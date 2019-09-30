@@ -6,7 +6,9 @@ description: Netlify Formを使って、簡易Contact Formを作ってみます�
 tags:
   - Netlify
   - Netlify Form
+  - Gatsby.js
+  - React
 headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
-# くっそかんたんにできた
+# くっそかんたんにFormできた
