@@ -12,3 +12,7 @@ headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
 # くっそかんたんにFormできた
+
+Netlifyに簡単にFormを作る機能が用意されているので利用用途ないですが、BlogにFormを作ってみようかと思います。
+
+[https://www.netlify.com/docs/form-handling/](https://www.netlify.com/docs/form-handling/)
