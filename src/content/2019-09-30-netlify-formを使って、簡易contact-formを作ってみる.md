@@ -8,7 +8,7 @@ tags:
   - Netlify Form
   - Gatsby.js
   - React
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/uWmwQRq.png'
 templateKey: blog-post
 ---
 # くっそかんたんにFormできた
@@ -120,11 +120,18 @@ export default class Contact extends React.Component {
 　
 もちろん、タグには通常のHTML同様、Bootstrapやラベル、patternを当てることもできますので、
 
-ソース
+```
+<button type="submit" class="btn btn-primary">Send</button> <!-- btn classの設定 -->
+```
 
 のような形や
 
-ソース
+```html
+<label>Your email:<br/> <!-- ラベルを使ったり・・ -->
+  <input type="email" name="email" class="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" />　<!-- patternやrequired, placeholderも設定可能 -->
+  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+</label>
+```
 
 のような形で直感的なFormを作ることもできます。
 
@@ -145,7 +152,23 @@ data-netlify-honeypotの設定はFormのattributeに
 
 data-netlify-honeypot=隠れフォームのname を設定します。
 
-ソース
+```
+<form
+  name="contact"
+  method="post"
+  action="/thanks/"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+ >
+
+<input type="hidden" name="form-name" value="contact"/>
+<p hidden>
+  <label>
+    Don’t fill this out:{' '}
+    <input name="bot-field" onChange={this.handleChange}/>
+  </label>
+</p>
+```
 
 そして実際に隠れフォームを設定します。
 
@@ -155,9 +178,13 @@ hiddenにしてるため、ふつう人間が入力することはないです�
 
 ## 内容の確認
 
-内容の確認はNetlifyから簡単にできます。
+内容の確認はNetlify=>Forms=>Activity Formsから簡単にできます。
+
+![Img](https://i.imgur.com/uWmwQRq.png)
 
 また、Formが送信された時にメール or Slack or Webhookを流す機能もあります。
+
+![Img](https://i.imgur.com/BnS7iSC.png)
 
 これでお問い合わせを見逃すことがなくなりますね！
 
