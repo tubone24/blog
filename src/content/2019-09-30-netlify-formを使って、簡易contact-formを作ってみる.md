@@ -152,7 +152,7 @@ data-netlify-honeypotの設定はFormのattributeに
 
 data-netlify-honeypot=隠れフォームのname を設定します。
 
-```
+```html
 <form
   name="contact"
   method="post"
