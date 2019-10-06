@@ -55,6 +55,7 @@ Homebrewでのインストールは次のように定義します。
 │          └─dev-tools
 │              ├─tasks
 |              |    └─main.yml
+|              |    └─hoge.yml
 │              └─vars
                  └─main.yml
 ```
@@ -102,21 +103,45 @@ ansible_connection: 'local'
 
 とそれぞれインストールするアプリが異なる場合、全員に共通して入れたい設定やAさんは開発者兼デザイナーで両方のアプリが入れたいなどの要求もある場合はそれぞれ
 
-- dev-tool
-- design-tool
-- ops-tool
+- dev-tools
+- design-tools
+- ops-tools
 
 みたくRoleをわけておくのがセオリーです。
 
 さて、今回は開発者用のRoleだけつくればいいことにしますので、
 
-dev-toolだけ用意します。
+dev-toolsだけ用意します。
+
+また、各RoleにはTaskというプロビジョニングの実行単位があります。
+
+例えば、Pythonを入れるTask、Node.jsを入れるTaskという具合です。
+
+AnsibleではTaskｓディレクトリのmain.ymlが読み込まれるため、各Taskごとに分けたYamlをmain.ymlでIncludeして上げればいいわけです。
+
+```yaml
+- include: 'tools.yml'
+- include: 'git.yml'
+- include: 'nodejs.yml'
+- include: 'terraform.yml'
+- include: 'python.yml'
+- include: 'ruby.yml'
+- include: 'docker.yml'
+```
+
+かんたんです。
 
 #### Homebrew
 
 上記にも書いたとおり、AnsibleではHomebrewモジュールが用意されているため、
 
-ソース
+
+```yaml
+- name: 'Install nodenv'
+  homebrew:
+    name: 'nodenv'
+    state: 'present'
+```
 
 と記載すればインストールが実現できます。
 
@@ -128,11 +153,39 @@ dev-toolだけ用意します。
 
 構成の中でいくつかPATHを通す必要があり、bash_profileに環境変数のexportを記載する必要がでてきました。
 
-ソース
+```bash
+# bash_profileに書きたい
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH=${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}
+
+if [ -d "${PYENV_ROOT}" ]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+```
 
 そのようなときに役立つのがinlinefileとblockinlineです。
 
-ソース
+```yaml
+# inlinefile
+- name: 'Add PATH'
+  lineinfile:
+    dest: '~/.bash_profile'
+    line: '{{ item }}'
+  with_items:
+    - 'export PYENV_ROOT="${HOME}/.pyenv"'
+    - 'export PATH=${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}'
+
+# blockinline
+- name: 'Setup pyenv-virtualenv'
+  blockinfile:
+    dest: '~/.bash_profile'
+    block: |
+      if [ -d "${PYENV_ROOT}" ]; then
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+      fi
+```
 
 のように呼び出すだけでbash_profileに冪等性を保ったまま、コンフィグを書き込むことができます。
 
@@ -144,6 +197,12 @@ blockinlineで複数行を記載するとblockの中身の順番が担保され�
 
 モジュールが見あたらなく、プロビジョニングができないときは仕方なくshellモジュールを使うことができます。
 
+```yaml
+- name: 'Install Python 3.6.1'
+  shell: 'pyenv install 3.6.1'
+  ignore_errors: yes
+```
+
 ただし、冪等性は保たれないため、すでに環境ができていた場合、エラーになってしまう可能性があります。
 
 少し乱暴ですが、ignore_errors: yes を使うことでエラーがでても読み飛ばして次のタスクに進むことができます。
@@ -154,11 +213,23 @@ blockinlineで複数行を記載するとblockの中身の順番が担保され�
 
 変数を管理したくなったらvarsに記載することでtask側でも呼び出すことができます。
 
-ソース
+vars/main.yml に
+
+```yaml
+git:
+  name: "foobar"
+  mail: "hoge@example.com"
+```
 
 と記載し、
 
-ソース
+```yaml
+- name: 'Set git name'
+  shell: 'git config --global user.name "{{ git.name }}"'
+
+- name: 'Set git mail'
+  shell: 'git config --global user.email "{{ git.mail }}"'
+```
 
 と宣言すれば利用できます。
 
@@ -168,13 +239,21 @@ Ansible最後はplaybookです。
 
 とはいったものの、roleとinventoryを紐付ければいいだけですので、
 
-ソース
+playbooks/my-mac.yml
+
+```yaml
+- hosts: 'local'
+  roles:
+    - 'dev-tools'
+```
 
 とすれば出来上がりです。
 
 これで
 
-コマンド
+```bash
+ansible-playbook playbooks/my-mac.yml
+```
 
 のように実行すればansibleの実行が可能です。
 
@@ -182,9 +261,27 @@ Ansible最後はplaybookです。
 
 仕上げにMakefileをディレクトリルートに作り、煩わしいコマンドから解放されましょう。
 
-ソース
+Makefileに
+
+```
+TARGET = $1
+CD_ANSIBLE = cd ansible/${TARGET}
+CD_SERVERSPEC = cd serverspec/${TARGET}
+
+setup:
+	@${CD_ANSIBLE} && \
+	ansible-playbook playbooks/my-mac.yml
+```
 
 のように設定しました。
+
+これで、
+
+```bash
+make setup TARGET=mac
+```
+
+で実行可能になりました。
 
 ## 結論
 
