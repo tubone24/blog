@@ -27,3 +27,16 @@ AnsibleとはPython製のOSS構成管理ツールです。
 ### MacでAnsibleを使う
 
 ローカル環境であるMacの構成管理にもAnsibleが使えます。
+
+ansible_connectionというパラメータをlocalにすることで、localhost上のマシンに対してコマンドが発行できるのでそれをうまく使います。
+
+また、Macでパッケージをインストールするときにたびたびお世話になる**Homebrew**もAnsibleのモジュールにちゃんと用意されていますのでそちらを使います。
+
+Homebrewでのインストールは次のように定義します。
+
+```yaml
+- name: 'Install Git'
+  homebrew:
+    name: 'git'
+    state: 'present'
+```
