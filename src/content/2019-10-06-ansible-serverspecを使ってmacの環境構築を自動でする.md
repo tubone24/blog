@@ -78,6 +78,8 @@ Inventoryは複数のサーバをグルーピングして、同時にプロビ�
 
 inventoryをコマンドで指定しない場合にdefalutで設定される`defalut`ファイルに下記を設定します。
 
+[inventory/defalut](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/default) に
+
 ```ini
 [local]
 localhost
@@ -87,9 +89,13 @@ localhost
 
 今回は複数サーバで共有させる変数が見当たらないので特に設定しません。
 
+[inventory/group_vars/local/ansible.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/group_vars/local/ansible.yml) に
+
 ```yaml
 ansible_connection: 'local'
 ```
+
+と設定しておけばいいです。
 
 ### Roleを設定
 
@@ -119,6 +125,8 @@ dev-toolsだけ用意します。
 
 AnsibleではTaskｓディレクトリのmain.ymlが読み込まれるため、各Taskごとに分けたYamlをmain.ymlでIncludeして上げればいいわけです。
 
+roles/dev-tools/tasks/main.yml に
+
 ```yaml
 - include: 'tools.yml'
 - include: 'git.yml'
@@ -129,12 +137,13 @@ AnsibleではTaskｓディレクトリのmain.ymlが読み込まれるため、�
 - include: 'docker.yml'
 ```
 
-かんたんです。
+とIncludeさせるだけです。かんたんです。
 
 #### Homebrew
 
 上記にも書いたとおり、AnsibleではHomebrewモジュールが用意されているため、
 
+[roles/dev-tools/tasks/nodejs.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/tasks/nodejs.yml)
 
 ```yaml
 - name: 'Install nodenv'
@@ -165,6 +174,8 @@ fi
 ```
 
 そのようなときに役立つのがinlinefileとblockinlineです。
+
+[roles/dev-tools/tasks/python.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/tasks/python.yml)
 
 ```yaml
 # inlinefile
@@ -197,6 +208,9 @@ blockinlineで複数行を記載するとblockの中身の順番が担保され�
 
 モジュールが見あたらなく、プロビジョニングができないときは仕方なくshellモジュールを使うことができます。
 
+
+[roles/dev-tools/tasks/python.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/tasks/python.yml)
+
 ```yaml
 - name: 'Install Python 3.6.1'
   shell: 'pyenv install 3.6.1'
@@ -213,7 +227,7 @@ blockinlineで複数行を記載するとblockの中身の順番が担保され�
 
 変数を管理したくなったらvarsに記載することでtask側でも呼び出すことができます。
 
-vars/main.yml に
+[vars/main.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/vars/main.yml) に
 
 ```yaml
 git:
@@ -239,7 +253,7 @@ Ansible最後はplaybookです。
 
 とはいったものの、roleとinventoryを紐付ければいいだけですので、
 
-playbooks/my-mac.yml
+[playbooks/my-mac.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/playbooks/my-mac.yml)
 
 ```yaml
 - hosts: 'local'
@@ -261,7 +275,7 @@ ansible-playbook playbooks/my-mac.yml
 
 仕上げにMakefileをディレクトリルートに作り、煩わしいコマンドから解放されましょう。
 
-Makefileに
+[Makefile](https://github.com/tubone24/mac-auto-setup/blob/master/Makefile)に
 
 ```
 TARGET = $1
