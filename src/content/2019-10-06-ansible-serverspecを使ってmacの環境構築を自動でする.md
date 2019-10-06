@@ -1,6 +1,6 @@
 ---
 slug: 2019/10/6/mac-auto-setup
-title: Ansible + Serverspecを使ってMacの環境構築を自動でする
+title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Ansible編)
 date: 2019-10-06T02:20:10.067Z
 description: Ansible + Serverspecを使ってMacの環境構築を自動でします
 tags:
@@ -171,3 +171,25 @@ Ansible最後はplaybookです。
 ソース
 
 とすれば出来上がりです。
+
+これで
+
+コマンド
+
+のように実行すればansibleの実行が可能です。
+
+## Makefileで一発実行
+
+仕上げにMakefileをディレクトリルートに作り、煩わしいコマンドから解放されましょう。
+
+ソース
+
+のように設定しました。
+
+## 結論
+
+長くなったのでServerspecは次項で話します。
+
+Ansibleはディレクトリが複雑なイメージがありますが、意味を理解すれば簡単です。
+
+みなさまもMacの構成管理にトライしてみてください。
