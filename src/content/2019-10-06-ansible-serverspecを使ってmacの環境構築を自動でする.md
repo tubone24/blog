@@ -72,3 +72,10 @@ inventoryをコマンドで指定しない場合にdefalutで設定される`def
 localhost
 ```
 
+これで、特にInventoryを指定しない場合は`localhost`として接続がされます。また、InventoryGroupとして`local`を指定しているため、`group_vars/local`にlocalとして共通の変数を定義することもできます。
+
+今回は複数サーバで共有させる変数が見当たらないので特に設定しません。
+
+```yaml
+ansible_connection: 'local'
+```
