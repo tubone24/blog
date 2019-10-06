@@ -18,11 +18,11 @@ templateKey: blog-post
 
 ![Img](https://i.imgur.com/oBucHNe.png)
 
-AnsibleとはPython製のOSS構成管理ツールです。
+Ansibleとは**Python**製の**OSS構成管理ツール**です。
 
-便利なモジュールが多数用意されており、パッケージのインストール、コンフィグの書き換え、サービスの立ち上げ、有効化etc.. 様々な構成をYaml形式でパパっとかけることがポイントです。
+便利なモジュールが多数用意されており、パッケージのインストール、コンフィグの書き換え、サービスの立ち上げ、有効化etc.. 様々な構成を**Yaml形式**でパパっとかけることがポイントです。
 
-また、冪等（べきとう）性、つまり何回実行しても結果が変わらないことを保証したり、エージェントレスで構成管理対象のサーバに事前インストールが必要ないことが評価されている点です。
+また、**冪等（べきとう）性**、つまり何回実行しても結果が変わらないことを保証したり、**エージェントレス**で構成管理対象のサーバに事前インストールが必要ないことが評価されている点です。
 
 ### MacでAnsibleを使う
 
@@ -123,7 +123,7 @@ dev-toolsだけ用意します。
 
 例えば、Pythonを入れるTask、Node.jsを入れるTaskという具合です。
 
-AnsibleではTaskｓディレクトリのmain.ymlが読み込まれるため、各Taskごとに分けたYamlをmain.ymlでIncludeして上げればいいわけです。
+AnsibleではTaskｓディレクトリのmain.ymlが読み込まれるため、**各Taskごとに分けたYaml**を**main.ymlでInclude**して上げればいいわけです。
 
 roles/dev-tools/tasks/main.yml に
 
@@ -173,7 +173,7 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 ```
 
-そのようなときに役立つのがinlinefileとblockinlineです。
+そのようなときに役立つのが**inlinefile**と**blockinline**です。
 
 [roles/dev-tools/tasks/python.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/tasks/python.yml)
 
@@ -198,11 +198,11 @@ fi
       fi
 ```
 
-のように呼び出すだけでbash_profileに冪等性を保ったまま、コンフィグを書き込むことができます。
+のように呼び出すだけでbash_profileに**冪等性を保ったまま、コンフィグを書き込むこと**ができます。
 
 inlinefileとblockinlineの違いは一行か複数行かということです。
 
-blockinlineで複数行を記載するとblockの中身の順番が担保されます。
+blockinlineで複数行を記載するとblockの中身の順番が**担保**されます。
 
 #### shell
 
@@ -219,7 +219,7 @@ blockinlineで複数行を記載するとblockの中身の順番が担保され�
 
 ただし、冪等性は保たれないため、すでに環境ができていた場合、エラーになってしまう可能性があります。
 
-少し乱暴ですが、ignore_errors: yes を使うことでエラーがでても読み飛ばして次のタスクに進むことができます。
+少し乱暴ですが、**ignore_errors: yes** を使うことでエラーがでても読み飛ばして次のタスクに進むことができます。
 
 今回はignore_errors: yesした部分をServerspecで確認する形でOKとしてます。
 
