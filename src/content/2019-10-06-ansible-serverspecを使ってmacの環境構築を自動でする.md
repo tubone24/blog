@@ -40,3 +40,35 @@ Homebrewでのインストールは次のように定義します。
     name: 'git'
     state: 'present'
 ```
+
+簡単そうですね。では早速作っていきましょう。
+
+```
+├─ansible
+│  └─mac
+│      ├─inventory
+|      |  ├─default
+│      │  └─group_vars
+│      │      └─local
+│      ├─playbooks
+│      └─roles
+│          └─dev-tools
+│              ├─tasks
+│              └─vars
+```
+
+Ansibleのディレクトリ構成は上記のようにしてます。
+
+### Inventoryを設定する
+
+Inventoryは複数のサーバをグルーピングして、同時にプロビジョンするためにサーバの接続情報をまとめておくコンフィグです。
+
+今回はMacに適用するため、接続先情報はlocalとなります。
+
+inventoryをコマンドで指定しない場合にdefalutで設定される`defalut`ファイルに下記を設定します。
+
+```ini
+[local]
+localhost
+```
+
