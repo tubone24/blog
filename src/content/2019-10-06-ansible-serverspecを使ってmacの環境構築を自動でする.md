@@ -14,6 +14,8 @@ templateKey: blog-post
 
 開発用MacBookの構成管理がしたくなり、AnsibleとServerspecを使って作りました。
 
+記事が長くなりそうなので、今回は前半戦ということでAnsibleの設定について解説します。
+
 ## Ansible
 
 ![Img](https://i.imgur.com/oBucHNe.png)
