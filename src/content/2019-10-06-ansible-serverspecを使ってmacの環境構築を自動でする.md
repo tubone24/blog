@@ -11,3 +11,13 @@ headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
 # 毎回Macの環境構築めんどくさい
+
+開発用MacBookの構成管理がしたくなり、AnsibleとServerspecを使って作りました。
+
+## Ansible
+
+AnsibleとはPython製のOSS構成管理ツールです。
+
+便利なモジュールが多数用意されており、パッケージのインストール、コンフィグの書き換え、サービスの立ち上げ、有効化etc.. 様々な構成をYaml形式でパパっとかけることがポイントです。
+
+また、冪等（べきとう）性
