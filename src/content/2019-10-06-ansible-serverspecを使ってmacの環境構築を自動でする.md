@@ -54,10 +54,20 @@ Homebrewでのインストールは次のように定義します。
 │      └─roles
 │          └─dev-tools
 │              ├─tasks
+|              |    └─main.yml
 │              └─vars
+                 └─main.yml
 ```
 
 Ansibleのディレクトリ構成は上記のようにしてます。
+
+Ansibleのplaybookを作るにはざっくり3つの手順を取ります。
+
+1. 接続先情報をまとめたInventoryを設定
+2. 実際の構成情報を記載したRoleを設定
+3. InventoryとRoleをひとまとめにしたplaybookを設定
+
+では早速Inventoryの設定から進めていきます。
 
 ### Inventoryを設定する
 
@@ -79,3 +89,5 @@ localhost
 ```yaml
 ansible_connection: 'local'
 ```
+
+### Roleを設定
