@@ -56,10 +56,11 @@ Homebrewでのインストールは次のように定義します。
 │      └─roles
 │          └─dev-tools
 │              ├─tasks
-|              |    └─main.yml
-|              |    └─hoge.yml
+|              |   |
+|              |   └─main.yml
+|              |   └─hoge.yml
 │              └─vars
-                 └─main.yml
+|                 └─main.yml
 ```
 
 Ansibleのディレクトリ構成は上記のようにしてます。
