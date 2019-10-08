@@ -48,11 +48,50 @@ gem "serverspec"
 gem "rake"
 ```
 
-最後に
+そうしたら、bundle installしていきます。
 
 ```bash
 bundle install --path=vendor/bundle
 ```
+
+## Serverspecの初期化
+
+ServerspecがインストールできたらServerspecの初期化をしていきます。
+
+bundleで
+
+```bash
+bundle exec serverspec-init
+```
+
+と実行すると、
+
+```bash
+Select OS type:
+ 
+  1) UN*X
+  2) Windows
+ 
+Select number: 1  # MacなのでUnix系を選択
+ 
+Select a backend type:
+ 
+  1) SSH
+  2) Exec (local) # MacなのでLocal Execを選択
+ 
+Select number: 2
+ 
+ + spec/
+ + spec/localhost/
+ + spec/localhost/sample_spec.rb
+ + spec/spec_helper.rb
+ + Rakefile
+ + .rspec
+```
+
+とします。
+
+
 
 ## テストヘルパーの作成
 
