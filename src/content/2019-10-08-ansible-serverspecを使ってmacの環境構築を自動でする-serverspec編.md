@@ -141,3 +141,5 @@ vars:
     - tubone24
     - hogehoge@gmail.com
 ```
+
+今回はHomebrewでインストールするパッケージの一覧とgit configで設定する名前、メール情報を変数化してます。
