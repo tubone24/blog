@@ -26,8 +26,18 @@ RubyのRSpecベースでできているツールなのでRubyでテストを書�
 
 まずServerspecを入れるディレクトリにServerspecをインストールします。
 
-あらかじめRubyが動く環境で
+あらかじめRubyが動く環境を作った上でbundle installしていきます。
+
+bundleを使うのでGemfileにserverspecを指定しておきます。
+
+```bash
+bundle init
+echo 'gem "serverspec"' >> Gemfile
+bundle install --path=vendor/bundle
+```
 
 ## テストヘルパーの作成
 
 Serverspecは上述したとおり、Ruby(RSpec)でできてるので、テスト用のヘルパーを作成し、テストに使う変数をspecファイル（テストコード）で利用できるようにしておきます。
+
+
