@@ -28,11 +28,29 @@ RubyのRSpecベースでできているツールなのでRubyでテストを書�
 
 あらかじめRubyが動く環境を作った上でbundle installしていきます。
 
-bundleを使うのでGemfileにserverspecを指定しておきます。
+まずbundleのベースファイルを作っていきます。
 
 ```bash
 bundle init
-echo 'gem "serverspec"' >> Gemfile
+```
+
+次に、GemfileにserverspecとRakeを指定しておきます。
+
+```gemfile
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+# gem "rails"
+gem "serverspec"
+gem "rake"
+```
+
+最後に
+
+```bash
 bundle install --path=vendor/bundle
 ```
 
