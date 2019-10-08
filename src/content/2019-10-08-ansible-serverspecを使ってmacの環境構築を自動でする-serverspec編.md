@@ -11,3 +11,13 @@ headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
 # Serverspecで構築した環境を確認したい！！
+
+前回、Ansibleを使って、Macの環境を構築しました。一部べきとう性が保てない箇所があったりしたので、正しく設定値が入っているかServerspecを使ってMacの状態を確認していきます。
+
+## Serverspecとは
+
+Serverspecとはサーバの自動テストツールです。
+
+せっかくAnsibleとかで自動でたくさんのサーバをプロビジョニングしたのに、確認はテスト項目書片手に目で見て確認…みたいな頭の悪いことをしないために作られたツールです。
+
+RubyのrspecベースでできているツールなのでRubyでテストを書いたことある人なら取っつきやすいのも特徴です。
