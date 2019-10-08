@@ -89,12 +89,55 @@ Select number: 2
  + .rspec
 ```
 
-とします。
-
+とします。これで準備はOKです。
 
 
 ## テストヘルパーの作成
 
 Serverspecは上述したとおり、Ruby(RSpec)でできてるので、テスト用のヘルパーを作成し、テストに使う変数をspecファイル（テストコード）で利用できるようにしておきます。
 
+今回は `spec/spec_helper.rb` に
 
+```ruby
+require 'serverspec'
+
+set :backend, :exec
+
+# Load Variables for variables.yml
+def load_configuration (key)
+    configuration = YAML.load_file 'variables.yml'
+    configuration['vars'][key].map do |package|
+      package.kind_of?(Hash) ? package['name'] : package
+    end
+end
+
+# Load Homebrew packages
+def homebrew_packages
+    load_configuration 'homebrew_packages'
+end
+
+def git_conf
+  load_configuration 'git_conf'
+end
+```
+
+という感じでhelperを作り、別に `variables.yml` を作りました。
+
+```yaml
+vars:
+  homebrew_packages:
+    - git
+    - nodenv
+    - pyenv
+    - pyenv-virtualenv
+    - rbenv
+    - ruby-build
+    - tfenv
+    - awscli
+    - packer
+    - jq
+    - docker
+  git_conf:
+    - tubone24
+    - hogehoge@gmail.com
+```
