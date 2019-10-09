@@ -16,6 +16,8 @@ templateKey: blog-post
 
 ## Serverspecとは
 
+![Img](https://i.imgur.com/E3tw8J2.png)
+
 Serverspecとはサーバの自動テストツールです。
 
 せっかくAnsibleとかで自動でたくさんのサーバをプロビジョニングしたのに、確認はテスト項目書片手に目で見て確認…みたいな頭の悪いことをしないために作られたツールです。
