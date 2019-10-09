@@ -1,7 +1,7 @@
 ---
 slug: 2019/10/08/serverspec
 title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Serverspec編)
-date: 2019-10-08T11:34:59.707Z
+date: 2019-10-09T11:34:59.707Z
 description: Ansible + Serverspecを使ってMacの環境構築を自動でします。
 tags:
   - Serverspec
@@ -154,9 +154,13 @@ helperでYamlに記載した変数をSpecで利用できるようになりまし
 
 Homebrewで正しくアプリがインストールされているかの確認は
 
-ソース
+```ruby
+describe package(package) do
+  it { should be_installed }
+end
+```
 
-を使います。
+とします。
 
 HomebrewでインストールしていればAssert OKとなるはずです。
 
@@ -192,7 +196,18 @@ HomebrewでインストールしていればAssert OKとなるはずです。
 
 Rubyのbundle installがあるため、before-checkという定義も作ってます。
 
-ソース
+```makefile
+TARGET = $1
+CD_SERVERSPEC = cd serverspec/${TARGET}
+
+before-check:
+	@${CD_SERVERSPEC} && \
+	bundle install --path=vendor/bundle
+
+check:
+	@${CD_SERVERSPEC} && \
+	bundle exec rake
+```
 
 ## 結論
 
