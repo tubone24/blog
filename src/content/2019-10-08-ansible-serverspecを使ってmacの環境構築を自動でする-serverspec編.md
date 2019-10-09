@@ -7,7 +7,7 @@ tags:
   - Serverspec
   - Mac
   - 自動化
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
 # Serverspecで構築した環境を確認したい！！
