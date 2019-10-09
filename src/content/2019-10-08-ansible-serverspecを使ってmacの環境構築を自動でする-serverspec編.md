@@ -155,12 +155,12 @@ helperでYamlに記載した変数をSpecで利用できるようになりまし
 Homebrewで正しくアプリがインストールされているかの確認は
 
 ```ruby
-describe package(package) do
+describe package(hoge) do
   it { should be_installed }
 end
 ```
 
-とします。
+とします。(hogeをテストしたいアプリ名にしてください)
 
 HomebrewでインストールしていればAssert OKとなるはずです。
 
@@ -168,13 +168,21 @@ HomebrewでインストールしていればAssert OKとなるはずです。
 
 コマンドの結果、例えばインストールしたアプリのバージョン確認は
 
-ソース
+```ruby
+describe command('pyenv versions') do
+  its(:stdout) { should match /py361/ }
+end
+```
 
-とすることで実現できます。
+とすることで実現できます。 上記では`pyenv versions` のコマンドの実行結果を比較してます。
 
-正規表現でマッチさせるため、例えば否定系は
+正規表現でマッチさせるため、例えば否定系は先読み否定を使い
 
-ソース
+```ruby
+describe command('git --version') do
+  its(:stdout) { should match /(?!Apple Git-98)/ }
+end
+```
 
 と書けます。
 
@@ -182,7 +190,11 @@ HomebrewでインストールしていればAssert OKとなるはずです。
 
 今回作ったレポジトリには入れてませんが、configファイルに文字列が含まれているかということもServerspecで確認できます。
 
-ソース
+```ruby
+describe file('/etc/sysconfig/clock') do
+  its(:content) { should match /ZONE="Asia\/Tokyo"/ }
+end
+```
 
 このようにすることで、ファイルが存在することとファイルに指定した文字列が記載されてるかをテストできます。
 
