@@ -32,6 +32,24 @@ templateKey: blog-post
 
 結論から先にかけばあります。
 
-CircleCIだってTravisCIだってMacOS XのOSイメージは用意されています。
+私の大好きなCIのCircleCIだってMacOS XのOSイメージは用意されています。
 
-ですが、CircleCIの場合で[$39/Month](https://circleci.jp/pricing/#build-os-x)、TravisCIで
+ですが、CircleCIの場合で[$39/Month](https://circleci.jp/pricing/#build-os-x)とお金がかかってしまいます…。
+
+こんな個人プロジェクトにお金を払うわけにはいきませんで、別のCIを考えます。
+
+## Azure DevOps Build Pipeline
+
+MacOS Xが無料で使えるCIはいくつかあるのですが、今回はAzure DevOps Build Pipelineにしました。
+
+選定の理由はUIがかっこよくて見やすいのと、
+
+ソース
+
+とすることで、Build上必要なパッケージが利用可能になるからです。
+
+(今回はServerspecでRubyを使うのですが、Rubyも構成管理してるので本機能は不要でした…)
+
+## Yamlを書く
+
+CIの定義を万と書いてきた私からしたら、つらい…とも思わないのですがCIを動かすための定義をYamlに書いていきます。
