@@ -34,4 +34,4 @@ templateKey: blog-post
 
 CircleCIだってTravisCIだってMacOS XのOSイメージは用意されています。
 
-ですが、
+ですが、CircleCIの場合で[$39/Month](https://circleci.jp/pricing/#build-os-x)、TravisCIで
