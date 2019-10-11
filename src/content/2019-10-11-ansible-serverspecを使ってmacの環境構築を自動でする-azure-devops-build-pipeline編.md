@@ -62,6 +62,7 @@ MacOS Xが無料で使えるCIはいくつかあるのですが、今回はAzure
 ## Yamlを書く
 
 CIの定義を万と書いてきた私からしたら、つらい…とも思わないのですがCIを動かすための定義をYamlに書いていきます。
+rootディレクトリに`azure-pipelines.yml`を作り、定義を書いていきます。
 
 ```yaml
 trigger:
@@ -105,4 +106,10 @@ jobs:
 
 ScriptにMakefileで定義したコマンドを入れているだけです。
 
+![img](https://i.imgur.com/ZpMjdsY.png)
 
+無事CIが通りました！
+
+## 結論
+
+Azure DevOps Build Pipelineで簡単にできました！
