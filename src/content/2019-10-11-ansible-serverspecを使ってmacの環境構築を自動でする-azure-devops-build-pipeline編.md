@@ -17,9 +17,9 @@ templateKey: blog-post
 
 それが**CIにのせる**ことです。
 
-は？
+**は？**
 
-いみあるの？と思われた人も多いと思いますが、そこそこ意味のある活動になります。
+意味あるの？と思われた人も多いと思いますが、そこそこ意味のある活動になります。
 
 なぜなら…
 
@@ -29,12 +29,11 @@ templateKey: blog-post
 
 ## MacOS X が使えるCIってあるの？
 
-
 結論から先にかけばあります。
 
 私の大好きなCIのCircleCIだってMacOS XのOSイメージは用意されています。
 
-ですが、CircleCIの場合で[$39/Month](https://circleci.jp/pricing/#build-os-x)とお金がかかってしまいます…。
+ですが、CircleCIの場合で[$39/Month](https://circleci.jp/pricing/#build-os-x)とお金がかかってしまいます…。(2019/10現在)
 
 こんな個人プロジェクトにお金を払うわけにはいきませんで、別のCIを考えます。
 
@@ -44,7 +43,17 @@ MacOS Xが無料で使えるCIはいくつかあるのですが、今回はAzure
 
 選定の理由はUIがかっこよくて見やすいのと、
 
-ソース
+![Img](https://i.imgur.com/5ckVCUf.png)
+
+```yaml
+- task: UseRubyVersion@0
+  inputs:
+    versionSpec: '>= 2.4'
+
+- task: NodeTool@0 
+  inputs:
+    versionSpec: '10.15.3'
+```
 
 とすることで、Build上必要なパッケージが利用可能になるからです。
 
