@@ -62,3 +62,43 @@ MacOS Xが無料で使えるCIはいくつかあるのですが、今回はAzure
 ## Yamlを書く
 
 CIの定義を万と書いてきた私からしたら、つらい…とも思わないのですがCIを動かすための定義をYamlに書いていきます。
+
+```yaml
+trigger:
+- master
+
+jobs:
+
+- job: Run_Ansible_and_Serverspec
+  pool:
+    vmImage: 'macOS-10.14'
+  steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4'
+
+  - task: NodeTool@0 
+    inputs:
+      versionSpec: '10.15.3'
+
+  - script: |
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      brew install ansible
+    displayName: 'Install Ansible'
+    
+  - script: |
+      rm -rf /usr/local/bin/node
+    displayName: 'Uninstall default node'
+    
+    
+  - script: |
+      make setup TARGET=mac
+    displayName: 'Run Ansible'
+    
+  - script: |
+      make before-check TARGET=mac
+    displayName: 'Before Run Serverspec'
+  - script: |
+      make check TARGET=mac
+    displayName: 'Run Serverspec'
+```
