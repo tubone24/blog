@@ -102,3 +102,7 @@ jobs:
       make check TARGET=mac
     displayName: 'Run Serverspec'
 ```
+
+ScriptにMakefileで定義したコマンドを入れているだけです。
+
+
