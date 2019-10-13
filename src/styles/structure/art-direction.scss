@@ -1,0 +1,68 @@
+@import "variables/index";
+
+@mixin art-direction($color) {
+  $dark: mix($black, $color, 75);
+  $light: mix($white, $color, 50);
+
+  color: $dark;
+
+  .content-wrapper,
+  .page-footer {
+    a {
+      color: mix($black, $color, 50);
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: mix($black, $color, 75);
+      }
+    }
+  }
+
+  .highlight {
+    background: $light;
+  }
+
+  .main-nav {
+    background: $color;
+  }
+
+  .nav-logo {
+    background: mix($black, $color, 10);
+  }
+
+  &.index .nav-logo {
+    background: $color;
+  }
+
+  .footer-wrapper {
+    background: $dark;
+
+    a {
+      color: $light;
+    }
+  }
+}
+
+.green {
+  @include art-direction($green);
+}
+
+.blue {
+  @include art-direction($blue);
+}
+
+.pink {
+  @include art-direction($pink);
+}
+
+.orange {
+  @include art-direction($orange);
+}
+
+.salmon {
+  @include art-direction($salmon);
+}
+
+.purple {
+  @include art-direction($purple);
+}
