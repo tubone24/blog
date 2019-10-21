@@ -73,8 +73,17 @@ Claspを使ったTypeSciptテンプレートを作ってました。天才かよ
 
 API FLASH自体はAWS Lambdaを使ってるらしく、スケーラビリティが高いと主張してます。
 
-おそらく、Serverless-chromiumをLambdaで実行しているものと思われます。
+おそらく、[Serverless-chrome](https://github.com/adieuadieu/serverless-chrome)をLambdaで実行しているものと思われます。
 
 Chromeベースのキャプチャリングなので、レンダリングも正確で非対応ページがすくないのもうれしいところです。
 
 さらに、うれしい機能として遅延キャプチャリング機能があり、ページのレンダリングを待ってからキャプチャを撮ることも可能です。
+
+### 実際できあがったコード
+
+TypeSciptでこんな感じのサービス層を作りました。
+
+コード
+
+GASの場合APIのコールにはURLFetchが利用できます。
+
