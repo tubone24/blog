@@ -66,3 +66,9 @@ Claspを使ったTypeSciptテンプレートを作ってました。天才かよ
 ## API FLASH のサービス層作成
 
 今回のGASの目的は、**WEBページのスクリーンショットを撮る**ということですので、スクリーンショットを簡単に取得する方法としてAPI FLASHを使います、
+
+### API FLASHとは
+
+[API FLASH](https://apiflash.com/)とは、ChromeベースのWebscreenshotAPI提供サービスです。
+
+API FLASH自体はAWS Lambda
