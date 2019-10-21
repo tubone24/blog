@@ -71,4 +71,10 @@ Claspを使ったTypeSciptテンプレートを作ってました。天才かよ
 
 [API FLASH](https://apiflash.com/)とは、ChromeベースのWebscreenshotAPI提供サービスです。
 
-API FLASH自体はAWS Lambda
+API FLASH自体はAWS Lambdaを使ってるらしく、スケーラビリティが高いと主張してます。
+
+おそらく、Serverless-chromiumをLambdaで実行しているものと思われます。
+
+Chromeベースのキャプチャリングなので、レンダリングも正確で非対応ページがすくないのもうれしいところです。
+
+さらに、うれしい機能として遅延キャプチャリング機能があり、ページのレンダリングを待ってからキャプチャを撮ることも可能です。
