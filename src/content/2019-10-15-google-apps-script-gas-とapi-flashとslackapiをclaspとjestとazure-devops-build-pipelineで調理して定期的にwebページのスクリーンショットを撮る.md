@@ -114,4 +114,17 @@ Jestのグローバル変数定義であらかじめURLFetchを作り、JestのM
 
 コード
 
-## Buildと
+## Buildとdeploy
+
+StarterではWebpackを使ってTypeSciptのGAS化を実行しているようです。
+
+コード
+
+とすることで、dist配下にGASのコードが配置されました。
+
+デプロイは、claspを利用します。
+
+コード
+
+とするだけでデプロイできちゃいます。
+
