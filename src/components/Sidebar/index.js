@@ -32,8 +32,8 @@ const Icon = ({ href, icon }) => (
 const Sidebar = ({ latestPosts, totalCount }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
-      <a href="https://www.gitshowcase.com/tubone24"><img className="avatar" src={iconUrl} alt="tubone" /></a>
-      <a href="https://www.gitshowcase.com/tubone24"><h4>tubone</h4></a>
+      <a href="https://portfolio.tubone-project24.xyz/"><img className="avatar" src={iconUrl} alt="tubone" /></a>
+      <a href="https://portfolio.tubone-project24.xyz/"><h4>tubone</h4></a>
       <p className="text-md-center">Japan Boyaki Ojisan</p>
       <Icon
         href={`https://github.com/${githubUsername}`}
@@ -50,6 +50,10 @@ const Sidebar = ({ latestPosts, totalCount }) => (
       <Icon
         href="https://www.slideshare.net/tubone24"
         icon={['fab', 'slideshare']}
+      />
+      <Icon
+        href="https://500px.com/tubone24"
+        icon={['fab', '500px']}
       />
       <Information posts={latestPosts} totalCount={totalCount} />
       <Subscription />

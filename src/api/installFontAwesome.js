@@ -9,6 +9,7 @@ import {
   faTwitter,
   faSlideshare,
   faGetPocket,
+  fa500px,
 } from '@fortawesome/free-brands-svg-icons';
 
 const installFontAwesome = () => {
@@ -25,6 +26,7 @@ const installFontAwesome = () => {
     faTwitter,
     faSlideshare,
     faGetPocket,
+    fa500px,
   );
 };
 
