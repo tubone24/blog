@@ -21,6 +21,8 @@ templateKey: blog-post
 
 くっそ長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build Pipelineで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
 
+また、GASへの詳しい設定方法はReadmeをご参照いただければと思います。
+
 ## Google Apps Script(GAS)とは？
 
 Google Driveをご存じでしょうか？
@@ -128,3 +130,20 @@ StarterではWebpackを使ってTypeSciptのGAS化を実行しているようで
 
 とするだけでデプロイできちゃいます。
 
+## GitHub Actionで自動デプロイさせる
+
+ここまできたらあとはCIに乗っけるだけです。
+
+clasp loginをローカル上で実施したときに取得できるトークンがclasprc.jsonに出力されているので、こちらをGitHub ActionのSecret機能で渡してあげます。
+
+画像
+
+あとは、testが通ったらclasp loginして、build, deployする定義をかけばよいです。
+
+コード
+
+## 完成！
+
+GASにデプロイできたらcronでトリガーさせてあげれば定期的にキャプチャをとります。
+
+やったー！！
