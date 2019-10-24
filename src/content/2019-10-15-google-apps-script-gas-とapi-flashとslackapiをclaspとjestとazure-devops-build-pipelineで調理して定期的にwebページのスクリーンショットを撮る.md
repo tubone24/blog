@@ -14,7 +14,7 @@ tags:
   - Clasp
   - Azure DevOps Build Pipeline
   - Jest
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/QCjxEBN.png'
 templateKey: blog-post
 ---
 # タイトル長い
