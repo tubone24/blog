@@ -3,7 +3,7 @@ slug: 2019/10/15/gas-webscreenshot
 title: >-
   Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build
   Pipelineで調理して定期的にWebページのスクリーンショットを撮る
-date: 2019-10-14T22:22:26.996Z
+date: 2019-10-11T22:22:00.000Z
 description: >-
   Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build
   Pipelineで調理して定期的にWebページのスクリーンショットを撮る
@@ -61,9 +61,11 @@ GAS専用のマクロ用関数がある程度用意されてるのでマクロ�
 と悲しい気持ちになってるところで見つけたのがclaspです。
 
 claspはGoogle謹製のGASデプロイツールなのですが、勇者が
-Claspを使ったTypeSciptテンプレートを作ってました。天才かよ。
+[Claspを使ったTypeSciptテンプレートを作ってました。](https://github.com/howdy39/gas-clasp-starter)天才かよ。
 
 今回はこちらのテンプレートを借りて開発を進めたいとおもいます。
+
+作成したコード [GitHub](https://github.com/tubone24/web-screenshot-to-slack-gas)
 
 ## API FLASH のサービス層作成
 
@@ -71,7 +73,7 @@ Claspを使ったTypeSciptテンプレートを作ってました。天才かよ
 
 ### API FLASHとは
 
-[API FLASH](https://apiflash.com/)とは、ChromeベースのWebscreenshotAPI提供サービスです。
+[API FLASH](https://apiflash.com/)とは、**Chrome**ベースのWebscreenshotAPI提供サービスです。
 
 API FLASH自体はAWS Lambdaを使ってるらしく、スケーラビリティが高いと主張してます。
 
@@ -172,7 +174,7 @@ describe('sendSlackServiceOK', () => {
 
 とすることでfetch関数がmockに置き換わり、テスト可能です。
 
-mock関数をあらかじめ作成しておくと、コールのassertも可能です。
+mock関数をあらかじめ作成しておくと、コールのassertも可能です。
 
 ## Buildとdeploy
 
