@@ -116,9 +116,11 @@ export class ApiFlashService {
 }
 ```
 
-GASの場合APIのコールにはURLFetchが利用できます。
+GASの場合APIのコールには**URLFetchApp**が利用できます。
 
-URLFetchはもちろんGAS専用のAPIですが、TypeSciptのLintがちゃんと利くのが何気にすごいと思いました。
+`UrlFetchApp.fetch(url)` とするだけでAPIがコールできます。
+
+URLFetchAppはもちろんGAS専用のAPIですが、TypeSciptのLintがちゃんと利くのが何気にすごいと思いました。
 
 画像
 
@@ -135,15 +137,48 @@ URLFetchはもちろんGAS専用のAPIですが、TypeSciptのLintがちゃん�
 
 Jestのグローバル変数定義であらかじめURLFetchを作り、JestのMock関数をテストケースごとにfetch関数と置き換えることで実現できます。
 
-コード
+package.jsonに
 
-コード
+```json
+  "jest": {
+    "verbose": true,
+    "globals": {
+      "UrlFetchApp": {}
+    },
+  },
+```
+
+とすることでグローバルにUrlFetchAppができますので、テストコードで
+
+```typescript
+const mockFetch = jest.fn();
+UrlFetchApp.fetch = mockFetch;
+
+describe('sendSlackServiceOK', () => {
+  it('sendImage', () => {
+    const actual = SendSlackService.sendImage('test-token', 'test-image', 'test-title', '#test');
+    const expectedOption = {
+      method: 'post',
+      payload: { token: 'test-token', file: 'test-image', channels: '#test', title: 'test-title' }
+    };
+    expect(mockFetch.mock.calls[0][0]).toBe('https://slack.com/api/files.upload');
+    expect(mockFetch.mock.calls[0][1]).toEqual(expectedOption);
+    expect(actual).toBe(true);
+  });
+});
+```
+
+とすることでfetch関数がmockに置き換わり、テスト可能です。
+
+mock関数をあらかじめ作成しておくと、コールのassertも可能です。
 
 ## Buildとdeploy
 
 StarterではWebpackを使ってTypeSciptのGAS化を実行しているようです。
 
-コード
+```
+npm run build
+```
 
 とすることで、dist配下にGASのコードが配置されました。
 
