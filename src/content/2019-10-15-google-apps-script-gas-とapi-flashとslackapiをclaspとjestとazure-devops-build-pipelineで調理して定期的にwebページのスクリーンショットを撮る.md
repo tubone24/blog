@@ -1,9 +1,9 @@
 ---
-slug: 2019/10/15/gas-webscreenshot
+slug: 2019/10/24/gas-webscreenshot
 title: >-
   Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build
   Pipelineで調理して定期的にWebページのスクリーンショットを撮る
-date: 2019-10-11T22:22:00.000Z
+date: 2019-10-23T22:22:00.000Z
 description: >-
   Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build
   Pipelineで調理して定期的にWebページのスクリーンショットを撮る
@@ -65,7 +65,7 @@ claspはGoogle謹製のGASデプロイツールなのですが、勇者が
 
 今回はこちらのテンプレートを借りて開発を進めたいとおもいます。
 
-作成したコード [GitHub](https://github.com/tubone24/web-screenshot-to-slack-gas)
+作成したコード [GitHub](https://github.com/tubone24/web-screenshot-to-slack-gas)はこちら。
 
 ## API FLASH のサービス層作成
 
