@@ -198,7 +198,10 @@ clasp loginをローカル上で実施したときに取得できるトークン
 
 あとは、testが通ったらclasp loginして、build, deployする定義をかけばよいです。
 
-コード
+```
+clasp login
+clasp push
+```
 
 ## 完成！
 
