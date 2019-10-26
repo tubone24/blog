@@ -10,7 +10,7 @@ tags:
   - API FLASH
   - SlackAPI
   - Clasp
-  - Azure DevOps Build Pipeline
+  - GitHub Action
   - Jest
 headerImage: 'https://i.imgur.com/QCjxEBN.png'
 templateKey: blog-post
