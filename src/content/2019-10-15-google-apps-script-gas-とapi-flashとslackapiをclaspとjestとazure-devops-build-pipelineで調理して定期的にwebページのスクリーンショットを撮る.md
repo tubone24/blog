@@ -1,12 +1,10 @@
 ---
 slug: 2019/10/24/gas-webscreenshot
 title: >-
-  Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build
-  Pipelineで調理して定期的にWebページのスクリーンショットを撮る
+  Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮る
 date: 2019-10-23T22:22:00.000Z
 description: >-
-  Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build
-  Pipelineで調理して定期的にWebページのスクリーンショットを撮る
+  Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮る
 tags:
   - GAS
   - API FLASH
@@ -19,7 +17,7 @@ templateKey: blog-post
 ---
 # タイトル長い
 
-くっそ長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとAzure DevOps Build Pipelineで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
+くっそ長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
 
 また、GASへの詳しい設定方法はReadmeをご参照いただければと思います。
 
