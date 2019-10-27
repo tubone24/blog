@@ -214,3 +214,7 @@ echo "${{ secrets.CLASPRC_JSON }}" > ~/.clasprc.json
 GASにデプロイできたらcronでトリガーさせてあげれば定期的にキャプチャをとります。
 
 やったー！！
+
+無事にSlackへキャプチャが送られてきました！
+
+![Img](https://raw.githubusercontent.com/tubone24/web-screenshot-to-slack-gas/master/docs/images/slack-preview.png)
