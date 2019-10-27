@@ -19,7 +19,9 @@ templateKey: blog-post
 
 くっそ長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
 
-また、GASへの詳しい設定方法はReadmeをご参照いただければと思います。
+作成したコード [GitHub](https://github.com/tubone24/web-screenshot-to-slack-gas)はこちらとなります。
+
+GASへの詳しい設定方法は拙作コードの[Readme](https://github.com/tubone24/web-screenshot-to-slack-gas/blob/master/README.md)をご参照いただければと思います。
 
 ## Google Apps Script(GAS)とは？
 
@@ -62,8 +64,6 @@ claspはGoogle謹製のGASデプロイツールなのですが、勇者が
 [Claspを使ったTypeSciptテンプレートを作ってました。](https://github.com/howdy39/gas-clasp-starter)天才かよ。
 
 今回はこちらのテンプレートを借りて開発を進めたいとおもいます。
-
-作成したコード [GitHub](https://github.com/tubone24/web-screenshot-to-slack-gas)はこちら。
 
 ## API FLASH のサービス層作成
 
