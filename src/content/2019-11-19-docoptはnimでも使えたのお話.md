@@ -13,3 +13,6 @@ templateKey: blog-post
 
 Pythonで結構有名なdocoptがNimという言語でも使えたので喜びのあまり記事を書く運びになりました。
 
+## そもそもNimとは？
+
+Nimとは、公式Doc https://nim-lang.org/  によると、静的型付なコンパイラ言語でPython, Ada, modulaの影響を受けてます～。な言語です。
