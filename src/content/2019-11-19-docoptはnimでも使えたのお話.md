@@ -1,7 +1,7 @@
 ---
-slug: 2019/11/19/docopt-nim
+slug: 2019/11/20/docopt-nim
 title: docoptはNimでも使えたのお話
-date: 2019-11-19T11:55:07.057Z
+date: 2019-11-20T11:55:00.000Z
 description: Pythonですごい便利なdocoptはNimでも使えるという発見をした人のぼやき。
 tags:
   - docopt
