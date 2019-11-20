@@ -77,3 +77,5 @@ when isMainModule:
     of cmdEnd:
       echo "end"
 ```
+
+直感的じゃない・・・。
