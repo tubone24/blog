@@ -25,5 +25,5 @@ script:
   - npm run build
 
 branches:
-  only: 
+  only:
     - master
