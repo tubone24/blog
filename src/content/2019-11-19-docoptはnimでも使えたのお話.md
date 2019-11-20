@@ -55,4 +55,25 @@ Goとの優位差を見せつけるには、Nimのコンパイラの優秀さを
 
 CLIなので、コマンドラインから引数を受け取らなければなりません。
 
-ちょっと調べて出てきた **parseopt** がよいと思いこちらで実装進めてましたが、めんどくさくて
+ちょっと調べて出てきた **parseopt** がよいと思いこちらで実装進めてましたが、めんどくさくてレポジトリをほったらかしにしてました。
+
+parseoptを使うとこんな感じです。
+
+```
+import parseopt2
+
+when isMainModule:
+  for kind, key, val in getopt() :
+    case kind
+    of cmdArgument:
+      if key == "status":
+        echo("status")
+      if key == "upload":
+        echo("upload")
+    of cmdLongOption, cmdShortOption:
+      if key == "h" or key == "help":
+        echo("help")
+      echo "Options > ",key,"=" ,val
+    of cmdEnd:
+      echo "end"
+```
