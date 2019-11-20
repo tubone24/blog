@@ -79,3 +79,7 @@ when isMainModule:
 ```
 
 直感的じゃない・・・。
+
+## そこで僕はdocopt
+
+[docopt](http://docopt.org/)はPythonで
