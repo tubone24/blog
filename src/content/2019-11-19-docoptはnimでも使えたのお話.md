@@ -119,3 +119,10 @@ proc main() =
 when isMainModule:
   main()
 ```
+
+先頭で **const doc** として、Overview, Usage, Optionsを書きます。
+
+よく見かける書き方ですね。
+
+- サブコマンドは**status**, **convert** のように直接指定します。
+- 位置引数は<hoge> とカッコで囲みます。位置引数は特性上必須パラメータとなります。
