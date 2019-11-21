@@ -4,19 +4,19 @@ import { navigateTo } from 'gatsby-link';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
-// const encode = (data) => {
-//   return Object.keys(data)
-//     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-//     .join('&');
-// };
-
 const encode = (data) => {
-  const formData = new FormData();
-  Object.keys(data).forEach((k)=>{
-    formData.append(k,data[k])
-  });
-  return formData
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
 };
+
+// const encode = (data) => {
+//   const formData = new FormData();
+//   Object.keys(data).forEach((k)=>{
+//     formData.append(k,data[k])
+//   });
+//   return formData
+// };
 
 export default class Contact extends React.Component {
   constructor(props) {
@@ -112,7 +112,7 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   File:<br />
-                  <input type="file" name="attachment" class="btn btn-info" onChange={this.handleAttachment} />
+                  <input type="file" name="file" class="btn btn-info" onChange={this.handleAttachment} />
                 </label>
               </p>
               <p>
