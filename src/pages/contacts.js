@@ -10,7 +10,7 @@ import SEO from '../components/SEO';
 //     .join('&');
 // };
 
-const encode = (data) => {
+function encode(data) {
   const formData = new FormData();
 
   for (const key of Object.keys(data)) {
@@ -51,6 +51,7 @@ export default class Contact extends React.Component {
     })
       .then(() => navigateTo(form.getAttribute('action')))
       .catch(error => alert(error));
+    console.log(this.state);
   };
 
   render() {
