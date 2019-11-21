@@ -12,10 +12,10 @@ import SEO from '../components/SEO';
 
 const encode = (data) => {
   const formData = new FormData();
-  Object.keys(data).forEach((k)=>{
-    formData.append(k,data[k])
-  });
-  return formData
+  for (const key of Object.keys(data)) {
+    formData.append(key, data[key]);
+  }
+  return formData;
 };
 
 export default class Contact extends React.Component {
