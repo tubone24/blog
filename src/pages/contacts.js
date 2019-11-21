@@ -90,7 +90,6 @@ export default class Contact extends React.Component {
                 <label>
                   Subject:<br/>
                   <input type="text" name="subject" className="form-control" maxLength="30"
-                         minLength="2" required placeholder="Enter your name"
                          onChange={this.handleChange}/>
 
                 </label>
@@ -98,13 +97,13 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Message:<br/>
-                  <textarea name="message" class="form-control" placeholder="Something writing..."/>
+                  <textarea name="message" class="form-control" placeholder="Something writing..." onChange={this.handleChange} />
                 </label>
               </p>
               <p>
                 <label>
                   File:<br />
-                  <input type="file" name="attachment" class="btn btn-info glyphicon glyphicon-folder-open" onChange={this.handleAttachment} />
+                  <input type="file" name="attachment" class="btn btn-info glyphicon glyphicon-folder-open" onChange={this.handleChange} />
                 </label>
               </p>
               <p>
