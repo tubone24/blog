@@ -88,8 +88,17 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
+                  Subject:<br/>
+                  <input type="text" name="subject" className="form-control" maxLength="30"
+                         minLength="2" required placeholder="Enter your name"
+                         onChange={this.handleChange}/>
+
+                </label>
+              </p>
+              <p>
+                <label>
                   Message:<br/>
-                  <textarea name="message" class="form-control" placeholder="Something writing..." onChange={this.handleChange}/>
+                  <textarea name="message" class="form-control" placeholder="Something writing..."/>
                 </label>
               </p>
               <p>
