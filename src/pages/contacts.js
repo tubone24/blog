@@ -4,19 +4,19 @@ import { navigateTo } from 'gatsby-link';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
-const encode = (data) => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&');
-};
-
 // const encode = (data) => {
-//   const formData = new FormData();
-//   Object.keys(data).forEach((k)=>{
-//     formData.append(k,data[k])
-//   });
-//   return formData
+//   return Object.keys(data)
+//     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+//     .join('&');
 // };
+
+const encode = (data) => {
+  const formData = new FormData();
+  Object.keys(data).forEach((k)=>{
+    formData.append(k,data[k])
+  });
+  return formData
+};
 
 export default class Contact extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class Contact extends React.Component {
     });
     fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
         ...this.state
