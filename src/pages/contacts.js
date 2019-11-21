@@ -111,8 +111,10 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  File:<br />
-                  <input type="file" name="file" class="btn btn-info" onChange={this.handleAttachment} />
+                  <span class="btn btn-info">
+                  Choose File
+                  <input type="file" name="file" style="display:none" onChange={this.handleAttachment} />
+                  </span>
                 </label>
               </p>
               <p>
