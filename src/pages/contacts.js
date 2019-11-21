@@ -4,11 +4,21 @@ import { navigateTo } from 'gatsby-link';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
+// const encode = (data) => {
+//   return Object.keys(data)
+//     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+//     .join('&');
+// };
+
 const encode = (data) => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&');
-};
+  const formData = new FormData();
+
+  for (const key of Object.keys(data)) {
+    formData.append(key, data[key]);
+  }
+
+  return formData;
+}
 
 export default class Contact extends React.Component {
   constructor(props) {
