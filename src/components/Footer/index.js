@@ -28,9 +28,6 @@ const Footer = () => (
             &nbsp;
             {config.title}
             {new Date().getFullYear()}
-            &nbsp;Theme by
-            &nbsp;
-            <ExternalLink href="https://github.com/calpa" title="Calpa Liu" />
             &nbsp;
             <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />
           </p>
