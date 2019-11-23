@@ -20,7 +20,7 @@ const Footer = () => (
             />
             .&nbsp;Hosted on&nbsp;
             <ExternalLink href="https://www.netlify.com/" title="Netlify" />
-          </p>&nbsp;
+          </p>
           <p className="copyright">
             Copyright&nbsp;
             <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone" />
