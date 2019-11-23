@@ -104,7 +104,7 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Message:<br/>
-                  <textarea name="message" className="form-control" placeholder="Something writing..." onChange={this.handleChange} />
+                  <textarea name="message" className="form-control" placeholder="Something writing..." rows="6" cols="50" onChange={this.handleChange} />
                 </label>
               </p>
               <p>
