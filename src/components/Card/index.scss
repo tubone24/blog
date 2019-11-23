@@ -36,7 +36,7 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
   transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
   &:hover {
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
   }
 
   .wrapper {
@@ -53,7 +53,7 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
     transition: all 0.5s ease 0s;
 
     &:hover {
-      opacity: 0.7;
+      opacity: 0.9;
 
       .data {
         transform: translateY(-1em);

@@ -4,25 +4,21 @@ import { navigateTo } from 'gatsby-link';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
-// const encode = (data) => {
-//   return Object.keys(data)
-//     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-//     .join('&');
-// };
-
-const encode = (data) => {
-  const formData = new FormData();
-  for (const key of Object.keys(data)) {
-    formData.append(key, data[key]);
-  }
-  return formData;
-};
+import './contacts.scss';
 
 export default class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  encode = (data) => {
+    const formData = new FormData();
+    for (const key of Object.keys(data)) {
+      formData.append(key, data[key]);
+    }
+    return formData;
+  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -41,8 +37,7 @@ export default class Contact extends React.Component {
     });
     fetch('/', {
       method: 'POST',
-      // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
+      body: this.encode({
         'form-name': form.getAttribute('name'),
         ...this.state
       })
@@ -62,9 +57,12 @@ export default class Contact extends React.Component {
           }}
         >
           <Sidebar/>
-          <div className="col order-2">
+          <div className="col-7 order-1 contactForm">
             <h1>Contact Form</h1>
-            <p>Please your Comment.</p>
+            <div className="mx-auto contactFormContent">
+            <p>Please your Comment here.</p>
+              <br />
+
             <form
               name="contact"
               method="post"
@@ -84,21 +82,21 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Your name:<br/>
-                  <input type="text" name="name" class="form-control" maxLength="30" minLength="2" required placeholder="Enter your name" onChange={this.handleChange}/>
+                  <input type="text" name="name" className="form-control" maxLength="30" minLength="2" required placeholder="Enter your name" onChange={this.handleChange}/>
 
                 </label>
               </p>
               <p>
                 <label>
                   Your email:<br/>
-                  <input type="email" name="email" class="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" onChange={this.handleChange}/>
+                  <input type="email" name="email" className="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" onChange={this.handleChange}/>
                   <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </label>
               </p>
               <p>
                 <label>
                   Subject:<br/>
-                  <input type="text" name="subject" className="form-control" maxLength="30"
+                  <input type="text" name="subject" className="form-control" maxLength="30" placeholder="Subject here..."
                          onChange={this.handleChange}/>
 
                 </label>
@@ -106,19 +104,24 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Message:<br/>
-                  <textarea name="message" class="form-control" placeholder="Something writing..." onChange={this.handleChange} />
+                  <textarea name="message" className="form-control" placeholder="Something writing..." onChange={this.handleChange} />
                 </label>
               </p>
               <p>
-                <label>
-                  File:<br />
-                  <input type="file" name="file" class="btn btn-info" onChange={this.handleAttachment} />
+                File:<br />
+                <label className="input-group-btn">
+                  <span className="btn btn-info">
+                    Attachment File<input type="file" name="file" className="file-upload" onChange={this.handleAttachment} />
+                    <small id="fileHelp" className="form-text">Please Attachment File Size less small as possible</small>
+                  </span>
                 </label>
               </p>
               <p>
+                <br />
                 <button type="submit" class="btn btn-primary">Send</button>
               </p>
             </form>
+            </div>
           </div>
         </div>
         <SEO
