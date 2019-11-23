@@ -24,14 +24,11 @@ const getPath = () => (isBrowser() ? window.location.pathname : '');
 
 const getMaxPages = amount => Math.ceil(amount / maxPostsInPage);
 
-// Array.fill() is added by trial and error
 const getPages = amount => new Array(amount).fill().map((_, index) => `/page/${index + 1}`);
 
 const overflow = () => getCurrentPage() === getMaxPages();
 
 const parseDate = date => dayjs(date).format('YYYY/MM/DD');
-
-const parseChineseDate = date => dayjs(date).format('DD/MM/YYYY');
 
 export {
   isBrowser,
@@ -40,7 +37,6 @@ export {
   getPages,
   overflow,
   parseDate,
-  parseChineseDate,
   getPath,
   getPageNumber,
 };
