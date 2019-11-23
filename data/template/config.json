@@ -25,12 +25,12 @@
   "License": "by",
   "friends": [
     {
-      "href": "https://tubone-project24.xyz",
-      "title": "tubone-project"
-    },
-    {
       "href": "https://note.tubone-project24.xyz",
       "title": "personal note"
+    },
+    {
+      "href": "https://portfolio.tubone-project24.xyz",
+      "title": "portfolio"
     }
   ],
   "iconUrl": "https://i.imgur.com/VUti8s3.png",

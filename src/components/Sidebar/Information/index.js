@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Friend from '../Friend';
 import LatestPost from '../LatestPost';
 import './index.scss';
-import SearchBox from '../../SearchBox';
 
 const Information = ({ totalCount, posts }) => (
   <div className="d-none d-lg-block information my-2">
@@ -14,7 +13,7 @@ const Information = ({ totalCount, posts }) => (
     <hr />
     <Friend />
     <hr />
-    <SearchBox />
+
   </div>
 );
 

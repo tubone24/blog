@@ -7,6 +7,8 @@ import { config } from '../../../data';
 
 import Information from './Information';
 
+import SearchBox from '../SearchBox';
+
 import Subscription from './Subscription';
 
 import './index.scss';
@@ -56,6 +58,8 @@ const Sidebar = ({ latestPosts, totalCount }) => (
         icon={['fab', '500px']}
       />
       <Information posts={latestPosts} totalCount={totalCount} />
+      <SearchBox />
+      <hr />
       <Subscription />
     </div>
   </header>

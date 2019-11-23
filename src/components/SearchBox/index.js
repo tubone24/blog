@@ -62,6 +62,7 @@ class SearchBox extends Component {
   render() {
     return (
       <div style={{ marginBottom: '1rem' }}>
+        <p>SearchBox</p>
         <input
           type="search"
           id="algolia-search-input"
@@ -70,6 +71,7 @@ class SearchBox extends Component {
             border: 'none',
           }}
         />
+        <small id="searchboxHelp" className="form-text text-muted">Search your interesting by Algolia in this blog.</small>
       </div>
     );
   }

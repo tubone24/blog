@@ -60,7 +60,7 @@ export default class Contact extends React.Component {
           <div className="col-7 order-1 contactForm">
             <h1>Contact Form</h1>
             <div className="mx-auto contactFormContent">
-            <p>Please your Comment here.</p>
+              <p><b>Please your Comment here.</b></p>
               <br />
 
             <form
