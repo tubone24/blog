@@ -57,11 +57,10 @@ export default class Contact extends React.Component {
           }}
         >
           <Sidebar/>
-          <div className="col-7 order-1 contactForm">
+          <div className="col order-2 contactForm">
             <h1>Contact Form</h1>
-            <div className="mx-auto contactFormContent">
-              <p><b>Please your Comment here.</b></p>
-              <br />
+            <p><b>Please your Comment here.</b></p>
+            <br/>
 
             <form
               name="contact"
@@ -82,21 +81,29 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Your name:<br/>
-                  <input type="text" name="name" className="form-control" maxLength="30" minLength="2" required placeholder="Enter your name" onChange={this.handleChange}/>
+                  <input type="text" name="name" className="form-control" maxLength="30"
+                         minLength="2" required placeholder="Enter your name"
+                         onChange={this.handleChange}/>
 
                 </label>
               </p>
               <p>
                 <label>
                   Your email:<br/>
-                  <input type="email" name="email" className="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" onChange={this.handleChange}/>
-                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <input type="email" name="email" className="form-control"
+                         aria-describedby="emailHelp"
+                         pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                         required placeholder="Enter your email" onChange={this.handleChange}/>
+                  <small id="emailHelp" className="form-text text-muted">We'll never share your
+                    email with anyone else.
+                  </small>
                 </label>
               </p>
               <p>
                 <label>
                   Subject:<br/>
-                  <input type="text" name="subject" className="form-control" maxLength="30" placeholder="Subject here..."
+                  <input type="text" name="subject" className="form-control" maxLength="30"
+                         placeholder="Subject here..."
                          onChange={this.handleChange}/>
 
                 </label>
@@ -104,24 +111,26 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Message:<br/>
-                  <textarea name="message" className="form-control" placeholder="Something writing..." rows="6" cols="50" onChange={this.handleChange} />
+                  <textarea name="message" className="form-control"
+                            placeholder="Something writing..." rows="6" cols="50"
+                            onChange={this.handleChange}/>
                 </label>
               </p>
               <p>
-                File:<br />
+                File:<br/>
                 <label className="input-group-btn">
                   <span className="btn btn-info">
-                    Attachment File<input type="file" name="file" className="file-upload" onChange={this.handleAttachment} />
+                    Attachment File<input type="file" name="file" className="file-upload"
+                                          onChange={this.handleAttachment}/>
                     <small id="fileHelp" className="form-text">Please Attachment File Size less small as possible</small>
                   </span>
                 </label>
               </p>
               <p>
-                <br />
+                <br/>
                 <button type="submit" class="btn btn-primary">Send</button>
               </p>
             </form>
-            </div>
           </div>
         </div>
         <SEO
