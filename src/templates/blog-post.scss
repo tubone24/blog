@@ -25,7 +25,7 @@
     }
     @for $i from 1 through 6 {
       h#{$i} {
-        font-size: 26 - $i * 2px;
+        font-size: 32 - $i * 2px;
         font-weight: 400;
       }
     }
