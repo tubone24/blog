@@ -90,7 +90,7 @@ func getLangList () (mapset.Set){
 	langlist := mapset.NewSet()
 
 	variables := map[string]interface{}{
-		"q": githubv4.String("user:tubone24"),
+		"q": githubv4.String("user:tubone24"), //検索するuser名
 		"searchType":  githubv4.SearchTypeRepository,
 	}
 	
@@ -126,15 +126,169 @@ func main() {
 
 Goはまぎれもなくサーバーサイドな言語なのでどちらかというと関心事がGraphQLで返すという感じではありますが、ちゃんとGraphQLクライアントみつけました。
 
-（リンク）
+[shurcooL/graphql](shurcooL/graphql)
 
 さらに、GitHubAPI専用のクライアントも見つけましたのでこっちを使うことにします。
 
-使い方はそこまで難しくなく、HttpClientやAuthをすませた後、GraphQLのクエリを構造体として定義して投げつければよいです。
+[shurcooL/githubv4](https://github.com/shurcooL/githubv4)
 
-簡単と思ったものの、上記のようにNodesは取得できたのですが、Edgesに定義された値がどうやってもとれない。。
+GitHubAPIv4はGitHubのPersonal access tokensでAccess Tokenを発行する必要があります。
 
-こちらのPR（リンク）の通りEdgesは構造体のスライスで宣言してね～というのも試したのですがうまくいかず。。
+[New personal access token](https://github.com/settings/tokens/new)から発行できます。
+
+![img](https://i.imgur.com/k926T60.png)
+
+shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClientやAuthをすませた後、GraphQLのクエリを構造体として定義して投げつければよいです。
+
+このようなGraphQLなら・・
+
+```json
+{
+  search(query: "user:tubone24", type: REPOSITORY, first: 100) {
+    edges {
+      node {
+        ... on Repository {
+          name
+          languages(first: 100) {
+            edges {
+              node {
+                name
+                color
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+下記のようにすれば取得できます。
+
+```go
+//main.go
+
+import (
+	"context"
+	"fmt"
+	"github.com/shurcooL/githubv4"
+)
+
+// 構造体でGraphQL定義
+
+type Language struct {
+	Name  string
+	Color string
+}
+
+type Repository struct {
+	Name string
+	Languages struct {
+		Nodes []struct {
+			Language `graphql:"... on Language"`
+		}
+	} `graphql:"languages(first: 100)"`
+}
+
+var query struct {
+	Search struct {
+		Nodes []struct {
+			Repository `graphql:"... on Repository"`
+		}
+	} `graphql:"search(first: 100, query: $q, type: $searchType)"`
+}
+
+
+func hoge () {
+	src := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: "7xxxxxxxxxxxxxxxxxxxxxxxx"},
+	) //AccessTokenを設定
+
+	httpClient := oauth2.NewClient(context.Background(), src) //AccessTokenをhttpClientに設定
+
+	client := githubv4.NewClient(httpClient) //先ほど作ったhttpClient使ってclientを作成
+
+	variables := map[string]interface{}{
+		"q": githubv4.String("user:tubone24"), //検索するuser名
+		"searchType":  githubv4.SearchTypeRepository,
+	}
+	
+	err := client.Query(context.Background(), &query, variables) //client.Queryで実行。エラーのみが戻りで実行結果は咲くほど定義した構造体に格納
+	if err != nil {
+		// Handle error.
+		fmt.Println(err)
+	}
+
+	for _, repo := range query.Search.Nodes {
+		fmt.Println("---------")
+		fmt.Println(repo.Name)
+		for _, lang := range repo.Languages.Nodes {
+			fmt.Println(lang.Name)
+                        fmt.Println(lang.Color)
+		}
+	}
+
+}
+
+```
+
+あらまぁ、簡単！と思ったものの、上記のようにNodesは取得できたのですが、Edgesに定義された値がどうやってもとれない。。例えば・・
+
+```json{numberLines: 1}{9}
+{
+  search(query: "user:tubone24", type: REPOSITORY, first: 100) {
+    edges {
+      node {
+        ... on Repository {
+          name
+          languages(first: 100) {
+            edges {
+              size
+              node {
+                name
+                color
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+のようにedgesに項目がありnodeを取りたい場合
+
+```go{numberLines: 1}{9-13}
+type Language struct {
+	Name  string
+	Color string
+}
+
+type Repository struct {
+	Name string
+	Languages struct {
+            Edges []struct {
+		Node struct {
+			Language `graphql:"... on Language"`
+		}
+            }
+	} `graphql:"languages(first: 100)"`
+}
+
+var query struct {
+	Search struct {
+		Nodes []struct {
+			Repository `graphql:"... on Repository"`
+		}
+	} `graphql:"search(first: 100, query: $q, type: $searchType)"`
+}
+```
+
+とやってもエラーになってしまう・・。
+
+[こちらのPR](https://github.com/shurcooL/githubv4/issues/30)の通りEdgesは構造体のスライスで宣言してね～というのも試したのですがうまくいかず。。
 
 使用言語のサイズが取りたいだけなんですよ…。
 
@@ -145,5 +299,19 @@ Goはまぎれもなくサーバーサイドな言語なのでどちらかとい
 
 main関数には AWSが用意している `github.com/aws/aws-lambda-go/lambda` からロジックを
 Invokeさせないと問答無用でLambdaでエラーになってしまいます。
+
+そこで `github.com/aws/aws-lambda-go/lambda` の `lambda.Start` を使って動かします。
+
+```go
+func LambdaHandler () (string, error){
+	result := hoge()
+	return fmt.Sprint(result), nil
+}
+
+func main() {
+	lambda.Start(LambdaHandler)
+}
+
+```
 
 
