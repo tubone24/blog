@@ -340,3 +340,39 @@ Lambdaのテスト実行をしてみます。
 printしているものはCloudwatchにも出てきていました。(goのlogを使ってもきちんとCWにログ出るそうです。)
 
 ![img](https://i.imgur.com/DDLSLo4.png)
+
+## おまけ
+
+上記のコードでは、レポジトリ群に重複した言語があった場合は重複を避ける形で出力しています。
+
+PythonではSetという便利なものがあるのですが、Goではあるのでしょうか・・・。
+
+ありました。
+
+[deckarep/golang-set](https://github.com/deckarep/golang-set)
+
+```go{numberLines: 1}{3,9,16}
+import (
+	"fmt"
+	"github.com/deckarep/golang-set"
+)
+
+// 中略・・
+
+func main () {
+	langlist := mapset.NewSet() // setを作る
+        // 中略
+	for _, repo := range query.Search.Nodes {
+		fmt.Println("---------")
+		fmt.Println(repo.Name)
+		for _, lang := range repo.Languages.Nodes {
+			fmt.Println(lang.Name)
+			langlist.Add(lang.Name) //setにAddする
+		}
+	}
+	return langlist // set{hoge, fuga} 重複がないsetが返る
+}
+```
+
+便利！
+
