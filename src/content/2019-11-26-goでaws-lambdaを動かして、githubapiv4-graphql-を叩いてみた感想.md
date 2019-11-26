@@ -30,9 +30,13 @@ Lambda自体は、裏側の基盤にFire Clackerを導入したことがきっ�
 
 別件でGitHub API（GraphQL）を触る必要もあったのでまとめてやってしまいます。
 
-### つくるもの
+### やること
 
 - main.goのみ
   - RepositoryとかModelとかUsecaseとかそういうのは作らないよ
 
-- GitHub API
+- GitHub APIv4 GraphQLを使うよ
+  - とりあえず自分の公開されてるレポジトリの使用言語を一覧取るよ
+
+- 手でビルドし、手でデプロイするよ
+
