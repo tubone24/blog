@@ -14,23 +14,28 @@ templateKey: blog-post
 ---
 # やらねば。（風立ちぬ）
 
-案件でGoを使った開発にシフトしつつあるので必死こいて勉強してるわけですが、AWS LambdaをGoで実装したことがなかったのでちょっと触ってみました、というお話。
+案件で**Go**を使った開発にシフトしつつあるので必死こいて勉強してるわけですが、**AWS Lambda**を**Go**で実装したことがなかったのでちょっと触ってみました、というお話。
 
 ## AWS LambdaがGoで動くことを知ってますか？
 
 ![img](https://i.imgur.com/h1EK5QS.png)
 
-知っている人も多いと思いますが、2018年のReinvent(AWSのカンファレンスイベント)でLambdaに関するアップデートの中でGoで動くようになったよ～というのがありました。
+知っている人も多いと思いますが、2017年のre:Invent 2017(AWSのカンファレンスイベント)でLambdaに関するアップデートの中でGoで動くようになったよ～というのがありました。[［速報］AWS Lambdaが機能強化。.NETとGo言語をサポート、サーバレスアプリケーションのリポジトリも登場。AWS re:Invent 2017
+](https://www.publickey1.jp/blog/17/aws_lambdanetgoaws_reinvent_2017.html)
 
-Lambda自体は、裏側の基盤にFire Clackerを導入したことがきっかけで、集約化と安全性がめちゃんこあがったので、タイムアウトが長くなったり、カスタムランタイムに対応したりと一気に進化したイメージがありましたが、いまだにPythonか、Node.jsで書くかしかして無かったです。（怠け）
+![img](https://www.publickey1.jp/2017/lambda01.gif)
 
-仕事上使う機会に恵まれたので今回初めて触ることにしました。
+Lambda自体は、裏側の基盤に[AWS Firecracker](https://aws.amazon.com/jp/blogs/news/firecracker-lightweight-virtualization-for-serverless-computing/)を導入したことがきっかけで、集約化と安全性がめちゃんこあがったので、タイムアウトが長くなったり、カスタムランタイムに対応したりと一気に進化したイメージがありましたが、いまだにPythonか、Node.jsで書くかしかして無かったです。（怠け）
+
+~~どこかでFirecrackerをいじりたいですね。~~
+
+仕事上使う機会に恵まれたので今回Go Lambdaを初めて触ることにしました。
 
 ## 今回の開発スコープ
 
 今回はお勉強というか、感触をつかむためにやるだけなのでちゃんとしたサービスは作りません。
 
-別件でGitHub API（GraphQL）を触る必要もあったのでまとめてやってしまいます。
+別件で**GitHub API（GraphQL）**を触る必要もあったのでまとめてやってしまいます。
 
 ### やること
 
@@ -126,21 +131,21 @@ func main() {
 
 ## GraphQLをGoで叩く
 
-Goはまぎれもなくサーバーサイドな言語なのでどちらかというと関心事がGraphQLで返すという感じではありますが、ちゃんとGraphQLクライアントみつけました。
+Goはまぎれもなくサーバーサイドな言語なのでどちらかというと関心事がGraphQLのサーバサイド実装でBFFたくさん作るのめんどくさいからまとめてGraphQLで返したい！という感じのモチベーションの記事が多めではありますが、ちゃんと**GraphQLクライアント**みつけました。
 
 [shurcooL/graphql](shurcooL/graphql)
 
-さらに、GitHubAPI専用のクライアントも見つけましたのでこっちを使うことにします。
+さらに、**GitHubAPIv4専用のクライアント**も見つけましたのでこっちを使うことにします。
 
 [shurcooL/githubv4](https://github.com/shurcooL/githubv4)
 
-GitHubAPIv4はGitHubのPersonal access tokensでAccess Tokenを発行する必要があります。
+話は逸れますがGitHubAPIv4はGitHubの**Personal access tokens**で**Access Token**を発行する必要があります。
 
-[New personal access token](https://github.com/settings/tokens/new)から発行できます。
+[New personal access token](https://github.com/settings/tokens/new)から発行できます。発行しておきましょう。shurcooL/githubv4でも使います。
 
 ![img](https://i.imgur.com/k926T60.png)
 
-shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClientやAuthをすませた後、GraphQLのクエリを構造体として定義して投げつければよいです。
+shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClientやAuthをすませた後、**GraphQLのクエリ**を**Goの構造体**として定義して投げつければよいです。
 
 このようなGraphQLなら・・
 
@@ -236,7 +241,9 @@ func hoge () {
 
 ```
 
-あらまぁ、簡単！と思ったものの、上記のようにNodesは取得できたのですが、Edgesに定義された値がどうやってもとれない。。例えば・・
+**あらまぁ、簡単！**と思ったものの、上記のように**Nodes**は取得できたのですが、**Edgesに定義された値**がどうやってもとれない。。
+
+例えば・・
 
 ```json{numberLines: 1}{9}
 {
@@ -295,6 +302,8 @@ var query struct {
 
 使用言語のサイズが取りたいだけなんですよ…。
 
+[取りたい項目](https://developer.github.com/v4/object/languageedge/)
+
 今回は趣旨から反するので一旦塩漬け。。
 
 
@@ -319,9 +328,11 @@ func main() {
 
 ## AWS Lambdaにデプロイする
 
-GoをLambdaにデプロイするときは、実行ファイルにBuildしたものをZIPで固めてあげます。
+GoをLambdaにデプロイするときは、**実行ファイルにBuild**したものを**ZIPで固めて**あげます。
 
-実行ファイル、ということはビルドするプラットフォームに依存してしまうのでは？と思ったのですが、 ベストプラクティスとして `GOOS=linux` をgo build時につけることでLinux互換な実行ファイルになるみたいです。
+Lambda画面のCloud9から編集できないんですね・・・
+
+実行ファイル、ということはビルドするプラットフォーム(OSとか)に依存してしまうのでは？と思ったのですが、 ベストプラクティスとして `GOOS=linux` をgo build時につけることでLinux互換な実行ファイルになるみたいです。
 
 ```
 $ GOOS=linux go build main.go
@@ -340,6 +351,8 @@ Lambdaのテスト実行をしてみます。
 printしているものはCloudwatchにも出てきていました。(goのlogを使ってもきちんとCWにログ出るそうです。)
 
 ![img](https://i.imgur.com/DDLSLo4.png)
+
+ひとまず完成っぽいです。
 
 ## おまけ
 
@@ -376,3 +389,4 @@ func main () {
 
 便利！
 
+こういう便利なもの、もっと作っていきたいですね。
