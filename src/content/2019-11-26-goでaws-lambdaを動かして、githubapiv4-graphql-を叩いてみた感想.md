@@ -174,6 +174,7 @@ shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClient�
 import (
 	"context"
 	"fmt"
+        "golang.org/x/oauth2"
 	"github.com/shurcooL/githubv4"
 )
 
@@ -316,4 +317,26 @@ func main() {
 
 ```
 
+## AWS Lambdaにデプロイする
 
+GoをLambdaにデプロイするときは、実行ファイルにBuildしたものをZIPで固めてあげます。
+
+実行ファイル、ということはビルドするプラットフォームに依存してしまうのでは？と思ったのですが、 ベストプラクティスとして `GOOS=linux` をgo build時につけることでLinux互換な実行ファイルになるみたいです。
+
+```
+$ GOOS=linux go build main.go
+```
+
+あとは実行ファイルをZIPで固めて、Lambda作ってアップロードして保存すれば終わりです。
+
+## 実行
+
+Lambdaのテスト実行をしてみます。
+
+![img](https://i.imgur.com/HBHjuZk.png)
+
+無事、GitHubの私のレポジトリ群の言語一覧が取れました。
+
+printしているものはCloudwatchにも出てきていました。(goのlogを使ってもきちんとCWにログ出るそうです。)
+
+![img](https://i.imgur.com/DDLSLo4.png)
