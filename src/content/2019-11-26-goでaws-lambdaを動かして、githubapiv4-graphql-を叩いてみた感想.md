@@ -9,7 +9,7 @@ tags:
   - AWS
   - GraphQL
   - GitHub
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/h1EK5QS.png'
 templateKey: blog-post
 ---
 # やらねば。（風立ちぬ）
@@ -17,6 +17,8 @@ templateKey: blog-post
 案件でGoを使った開発にシフトしつつあるので必死こいて勉強してるわけですが、AWS LambdaをGoで実装したことがなかったのでちょっと触ってみました、というお話。
 
 ## AWS LambdaがGoで動くことを知ってますか？
+
+![img](https://i.imgur.com/h1EK5QS.png)
 
 知っている人も多いと思いますが、2018年のReinvent(AWSのカンファレンスイベント)でLambdaに関するアップデートの中でGoで動くようになったよ～というのがありました。
 
@@ -302,9 +304,9 @@ Invokeさせないと問答無用でLambdaでエラーになってしまいま�
 
 そこで `github.com/aws/aws-lambda-go/lambda` の `lambda.Start` を使って動かします。
 
-```go
+```go{numberLines: 1}{7}
 func LambdaHandler () (string, error){
-	result := hoge()
+	result := hoge() //login
 	return fmt.Sprint(result), nil
 }
 
