@@ -62,3 +62,81 @@ Goはまぎれもなくサーバーサイドな言語なのでどちらかとい
 ## LambdaでGoを使うとき
 
 main関数には
+
+```
+package main
+
+import (
+	"context"
+	"fmt"
+	"github.com/shurcooL/githubv4"
+	"golang.org/x/oauth2"
+	"github.com/deckarep/golang-set"
+	"github.com/aws/aws-lambda-go/lambda"
+)
+
+type Language struct {
+	Name  string
+	Color string
+}
+
+type Repository struct {
+	Name string
+	Languages struct {
+		Nodes []struct {
+			Language `graphql:"... on Language"`
+		}
+	} `graphql:"languages(first: 100)"`
+}
+
+var query struct {
+	Search struct {
+		Nodes []struct {
+			Repository `graphql:"... on Repository"`
+		}
+	} `graphql:"search(first: 100, query: $q, type: $searchType)"`
+}
+
+
+func getLangList () (mapset.Set){
+	src := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: "7xxxxxxxxxxxxxxxxxxxxxxxx"},
+	)
+	httpClient := oauth2.NewClient(context.Background(), src)
+
+	client := githubv4.NewClient(httpClient)
+
+	langlist := mapset.NewSet()
+
+	variables := map[string]interface{}{
+		"q": githubv4.String("user:tubone24"),
+		"searchType":  githubv4.SearchTypeRepository,
+	}
+	
+	err := client.Query(context.Background(), &query, variables)
+	if err != nil {
+		// Handle error.
+		fmt.Println(err)
+	}
+
+	for _, repo := range query.Search.Nodes {
+		fmt.Println("---------")
+		fmt.Println(repo.Name)
+		for _, lang := range repo.Languages.Nodes {
+			fmt.Println(lang.Name)
+			langlist.Add(lang.Name)
+		}
+	}
+	return langlist
+
+}
+
+func LambdaHandler () (string, error){
+	result := getLangList()
+	return fmt.Sprint(result), nil
+}
+
+func main() {
+	lambda.Start(LambdaHandler)
+}
+```
