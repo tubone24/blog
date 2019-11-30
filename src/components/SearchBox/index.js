@@ -52,7 +52,8 @@ class SearchBox extends Component {
       navigate(suggestion.url);
       ReactGA.event({
         category: 'User',
-        action: 'Click navbar logo',
+        // eslint-disable-next-line no-underscore-dangle
+        action: `Click Searchbox item: ${event._args[0].path}`,
       });
       // eslint-disable-next-line no-underscore-dangle
       gotoPage(event._args[0].path);
