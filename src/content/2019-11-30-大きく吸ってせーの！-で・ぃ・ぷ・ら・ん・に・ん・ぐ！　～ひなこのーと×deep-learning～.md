@@ -385,3 +385,195 @@ epoch: 30
 train mean loss=0.110197391031, accuracy=0.958742856298
 test mean loss=0.401306927204, accuracy=0.920000010067
 ```
+
+計32エポックで学習終了です。
+
+## 主要キャラの分類モデルを作成し、イラストを読み込ませて判定する
+
+予測用のコードも以下からお借りしています。
+
+[python: chainerを使って化物語キャラを認識させるよ！ 〜part5.5 主要キャラで多値分類(改良編)〜](https://www.mathgram.xyz/entry/chainer/bake/part5.5_1)
+
+```python
+# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+import sys
+
+import numpy as np
+import six
+import cv2
+import os
+
+
+import chainer
+from chainer import computational_graph as c
+import chainer.functions as F
+import chainer.serializers as S
+
+from chainer import optimizers
+
+from clf_hinako_model import clf_hinako
+
+
+model = clf_hinako()
+S.load_hdf5('./model32', model) # 32モデルだったので。
+#model = pickle.load(open('model30','rb'))
+
+chara_name = ['Unknown', "Hinako","Kuina","Mayuki","Yua","Chiaki"]
+
+def forward(x_data):
+    x = chainer.Variable(x_data, volatile=False)
+    h = F.max_pooling_2d(F.relu(model.conv1(x)), ksize = 5, stride = 2, pad =2)
+    h = F.max_pooling_2d(F.relu(model.conv2(h)), ksize = 5, stride = 2, pad =2)
+    h = F.dropout(F.relu(model.l3(h)), train=False)
+    y = model.l4(h)
+
+    return y
+
+def detect(image, cascade_file = "./lbpcascade_animeface.xml"): # アニメ顔抽出時使ったXMLを指定
+    if not os.path.isfile(cascade_file):
+        raise RuntimeError("%s: not found" % cascade_file)
+
+    cascade = cv2.CascadeClassifier(cascade_file)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray = cv2.equalizeHist(gray)
+
+    faces = cascade.detectMultiScale(gray,
+                                     scaleFactor = 1.1,
+                                     minNeighbors = 1,
+                                     minSize = (20, 20))
+
+    print(faces)
+
+    return faces
+
+def recognition(image, faces):
+    face_images = []
+
+    for (x, y, w, h) in faces:
+        dst = image[y:y+h, x:x+w]
+        dst = cv2.resize(dst, (50, 50))
+        face_images.append(dst)
+
+    face_images = np.array(face_images).astype(np.float32).reshape((len(face_images),3, 50, 50)) / 255
+
+    #face_images = cuda.to_gpu(face_images)
+
+    return forward(face_images) , image
+
+def draw_result(image, faces, result):
+
+    count = 0
+    for (x, y, w, h) in faces:
+        classNum = 0
+        result_data = result.data[count]
+        classNum = result_data.argmax()
+        recognized_class = chara_name[result_data.argmax()]
+        font = cv2.FONT_HERSHEY_TRIPLEX # 名前を入れたいので、OpenCVのFont機能を使います。
+        font_size = 1.1
+        if classNum == 0:
+                cv2.rectangle(image, (x, y), (x+w, y+h), (255,255,3), 3)
+                cv2.putText(image, chara_name[0], (x,y), font, font_size,
+                            (255, 255, 3)) # 重ねたい画像を選択し、フォントサイズ等を指定
+        elif classNum == 1:
+                cv2.rectangle(image, (x, y), (x+w, y+h), (0,0,255), 3)
+                cv2.putText(image, chara_name[1], (x,y), font, font_size,
+                            (0, 0, 255))
+        elif classNum == 2:
+                cv2.rectangle(image, (x, y), (x+w, y+h),  (255,0,0), 3)
+                cv2.putText(image, chara_name[2], (x,y), font, font_size,
+                            (255, 0, 0))
+        elif classNum == 3:
+                cv2.rectangle(image, (x, y), (x+w, y+h), (255,255,255), 3)
+                cv2.putText(image, chara_name[3], (x,y), font, font_size,
+                            (255, 255, 255))
+        elif classNum == 4:
+                cv2.rectangle(image, (x, y), (x+w, y+h), (255,0,255), 3)
+                cv2.putText(image, chara_name[4], (x,y), font, font_size,
+                            (255, 0, 255))
+        elif classNum == 5:
+                cv2.rectangle(image, (x, y), (x+w, y+h), (0,255,255), 3)
+                cv2.putText(image, chara_name[5], (x,y), font, font_size,
+                            (255, 128, 255))
+
+        count+=1
+
+    return image
+
+#ファイル読み込み
+img = cv2.imread("test.jpg")
+
+faces = detect(img)
+
+result, image = recognition(img, faces)
+
+image = draw_result(image, faces, result)
+cv2.imwrite('out.png',image)
+```
+
+### 実際、読み込ませる
+
+実際読み込ませてみたものがこちら。
+
+- 水色はUnknown
+- 赤がひなこ
+- 青がくいな
+- 白がまゆき
+- 紫がゆあ
+- オレンジがちあき
+
+です。
+
+![img](https://i.imgur.com/1tudTrI.png)
+
+大家さんだけがUnknownとなってしまいました。。。
+
+データ量が少なかったためでしょうね。
+
+## できあがったモデルでごちうさの画像を読み込ませて、ひなこのーとのキャラに分類されないことを確認する
+
+いよいよオーラスです。これをやるためにつくったモデルです。
+
+さっそく読み込ませて見ます。
+
+![img](https://i.imgur.com/N909ILj.png)
+
+むむっ。ココアさんがひなこに、シャロちゃんがまゆちゃんと認識されているではないか。
+
+ココアさんとひなこ、なんか似ているように感じなくもなくもない？？？？？
+
+フルール・ド・ラパンの制服と、まゆちゃんの私服が似ているというのはあるが、髪色で判断しているわけではないよな？？
+
+ 
+
+金髪で判断しているという可能性がぬぐいきれないので。これでもくらえ！きんモザ＆ごちうさのコラボじゃあああ。
+
+![img](https://i.imgur.com/mWRGXtm.png)
+
+![img](https://i.imgur.com/KLiwNQR.png)
+
+金髪で判断しているというわけではなかった。
+
+それにしてもココアさん＝ひなこは覆らないな。
+
+### 絵のタッチを変えてみる
+
+こうなったら徹底討論じゃあ。絵のタッチを変えてどうなるか試してみましょう。
+
+![img](https://i.imgur.com/GwUtdtM.png)
+
+<span style="font-size: 200%">ココア、お前だったのか！！ （結論）</span>
+
+### おまけ１　ひなこのーともイラストで認識させてみる
+
+![img](https://i.imgur.com/85nBHnf.png)
+
+![img](https://i.imgur.com/YQrn166.png)
+
+どうやら、くいなちゃんの認識率が一番いい。くいなちゃんかわいいからね。
+
+### おまけ２ くいなちゃん、某オタク少女に似ている説を確かめる。
+
+![img](https://i.imgur.com/DCkFvv2.png)
+
+大丈夫でした！！！
