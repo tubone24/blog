@@ -11,7 +11,8 @@ tags:
   - OpenCV
   - 機械学習
   - CNN
-  - 分類
+  - 分類学習
+  - 顔認識
 headerImage: 'https://i.imgur.com/1tudTrI.png'
 templateKey: blog-post
 ---
