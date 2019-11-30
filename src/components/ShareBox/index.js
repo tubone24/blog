@@ -88,6 +88,11 @@ const ShareBox = ({ url, hasCommentBox }) => (
       data-hatena-bookmark-layout="vertical-normal"
       data-hatena-bookmark-lang="ja"
       title="このエントリーをはてなブックマークに追加"
+      onClick={() => ReactGA.event({
+        category: 'Share',
+        action: 'Hatebu Share',
+      })
+      }
     >
       <img
         src="//b.st-hatena.com/images/entry-button/button-only@2x.png"
