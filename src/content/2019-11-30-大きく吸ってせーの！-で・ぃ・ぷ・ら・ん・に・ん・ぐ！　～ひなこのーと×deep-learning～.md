@@ -131,3 +131,257 @@ class clf_hinako(chainer.Chain):
         y = self.l4(h)
         return F.softmax_cross_entropy(y, y_data), F.accuracy(y, y_data)
 ```
+
+モデル定義に合わせて分類の数を変更し、画像の枚数に合わせて学習用、テスト用画像の枚数等を調整しました。
+
+```python
+#coding: utf-8
+
+import cv2
+import os
+import six
+import datetime
+
+import chainer
+from chainer import optimizers
+import chainer.functions as F
+import chainer.links as L
+import chainer.serializers as S
+from clf_hinako_model import clf_hinako
+
+import numpy as np
+
+def getDataSet():
+
+X_train = []
+X_test = []
+y_train = []
+y_test = []
+
+for i in range(0,6):
+path = “dataset/”
+if i == 0:
+
+cutNum = 5493 # その他の画像数です。
+cutNum2 = 5393 # 内100枚をテスト用にします。
+
+elif i == 1:
+cutNum = 1164 # ひなこの画像数です。
+cutNum2 = 1139 # 内25枚をテスト用にします。
+
+elif i == 2:
+cutNum = 678 # くいなの画像数です。
+cutNum2 = 653 # 内25枚をテスト用にします。
+
+elif i == 3:
+cutNum = 563 # まゆきの画像数です。
+cutNum2 = 538 # 内25枚をテスト用にします。
+
+elif i == 4:
+cutNum = 541 # ゆあの画像数です。
+cutNum2 = 516 # 内25枚をテスト用にします。
+
+elif i == 5:
+cutNum = 536 # ちあきの画像数です。
+cutNum2 = 511 # 内25枚をテスト用にします。
+
+imgList = os.listdir(path+str(i))
+imgNum = len(imgList)
+for j in range(cutNum):
+imgSrc = cv2.imread(path+str(i)+”/”+imgList[j])
+
+if imgSrc is None:continue
+if j < cutNum2:
+X_train.append(imgSrc)
+y_train.append(i)
+else:
+X_test.append(imgSrc)
+y_test.append(i)
+
+return X_train,y_train,X_test,y_test
+
+def train():
+
+X_train,y_train,X_test,y_test = getDataSet()
+
+X_train = np.array(X_train).astype(np.float32).reshape((len(X_train),3, 50, 50)) / 255
+y_train = np.array(y_train).astype(np.int32)
+X_test = np.array(X_test).astype(np.float32).reshape((len(X_test),3, 50, 50)) / 255
+y_test = np.array(y_test).astype(np.int32)
+
+model = clf_hinako()
+optimizer = optimizers.Adam()
+optimizer.setup(model)
+
+epochNum = 30
+batchNum = 50
+epoch = 1
+
+while epoch <= epochNum:
+print(“epoch: {}”.format(epoch))
+print(datetime.datetime.now())
+
+trainImgNum = len(y_train)
+testImgNum = len(y_test)
+
+sumAcr = 0
+sumLoss = 0
+
+perm = np.random.permutation(trainImgNum)
+
+for i in six.moves.range(0, trainImgNum, batchNum):
+
+X_batch = X_train[perm[i:i+batchNum]]
+y_batch = y_train[perm[i:i+batchNum]]
+
+optimizer.zero_grads()
+loss, acc = model.forward(X_batch, y_batch)
+loss.backward()
+optimizer.update()
+
+sumLoss += float(loss.data) * len(y_batch)
+sumAcr += float(acc.data) * len(y_batch)
+print(‘train mean loss={}, accuracy={}’.format(sumLoss / trainImgNum, sumAcr / trainImgNum))
+
+sumAcr = 0
+sumLoss = 0
+
+for i in six.moves.range(0, testImgNum, batchNum):
+X_batch = X_test[i:i+batchNum]
+y_batch = y_test[i:i+batchNum]
+loss, acc = model.forward(X_batch, y_batch, train=False)
+
+sumLoss += float(loss.data) * len(y_batch)
+sumAcr += float(acc.data) * len(y_batch)
+print(‘test mean loss={}, accuracy={}’.format(
+sumLoss / testImgNum, sumAcr / testImgNum))
+epoch += 1
+
+S.save_hdf5(‘model’+str(epoch+1), model)
+```
+
+### 学習結果
+
+```bash
+(py27con) C:\Users\tubone\PycharmProjects\anime-learn>python train.py
+epoch: 1
+2017-07-16 21:40:03.060000
+train mean loss=1.16183573621, accuracy=0.619771432281
+test mean loss=1.05560781558, accuracy=0.506666666104
+epoch: 2
+2017-07-16 21:42:13.192000
+train mean loss=0.800489272901, accuracy=0.69348571573
+test mean loss=0.871727473206, accuracy=0.577777779765
+epoch: 3
+2017-07-16 21:44:23.290000
+train mean loss=0.698785139833, accuracy=0.743085714408
+test mean loss=0.780110951927, accuracy=0.631111116873
+epoch: 4
+2017-07-16 21:46:33.502000
+train mean loss=0.597107084649, accuracy=0.786971424307
+test mean loss=0.548737568988, accuracy=0.83111111323
+epoch: 5
+2017-07-16 21:48:44.037000
+train mean loss=0.500077148761, accuracy=0.82479999406
+test mean loss=0.480820135938, accuracy=0.857777780957
+epoch: 6
+2017-07-16 21:50:57.706000
+train mean loss=0.451180534618, accuracy=0.841257137571
+test mean loss=0.448005066978, accuracy=0.87555554178
+epoch: 7
+2017-07-16 21:53:09.992000
+train mean loss=0.405994535514, accuracy=0.861028568063
+test mean loss=0.472903796368, accuracy=0.835555553436
+epoch: 8
+2017-07-16 21:55:22.262000
+train mean loss=0.358310819779, accuracy=0.87851428066
+test mean loss=0.306394663122, accuracy=0.911111103164
+epoch: 9
+2017-07-16 21:57:34.985000
+train mean loss=0.337241342791, accuracy=0.880799995831
+test mean loss=0.308397501707, accuracy=0.902222216129
+epoch: 10
+2017-07-16 21:59:47.595000
+train mean loss=0.324274266022, accuracy=0.886742852415
+test mean loss=0.323723706934, accuracy=0.871111101574
+epoch: 11
+2017-07-16 22:01:59.865000
+train mean loss=0.296059874466, accuracy=0.897142853737
+test mean loss=0.390861597326, accuracy=0.848888880677
+epoch: 12
+2017-07-16 22:04:12.384000
+train mean loss=0.28229231613, accuracy=0.900799994469
+test mean loss=0.381249505613, accuracy=0.888888888889
+epoch: 13
+2017-07-16 22:06:25.189000
+train mean loss=0.242525527115, accuracy=0.915771426473
+test mean loss=0.304150695602, accuracy=0.906666656335
+epoch: 14
+2017-07-16 22:08:37.995000
+train mean loss=0.231497560718, accuracy=0.919314283303
+test mean loss=0.275258473224, accuracy=0.906666662958
+epoch: 15
+2017-07-16 22:10:50.532000
+train mean loss=0.219778511652, accuracy=0.923199997629
+test mean loss=0.354618171851, accuracy=0.91555554337
+epoch: 16
+2017-07-16 22:13:02.623000
+train mean loss=0.218345963359, accuracy=0.926285712378
+test mean loss=0.36049440172, accuracy=0.897777775923
+epoch: 17
+2017-07-16 22:15:15.105000
+train mean loss=0.199432469181, accuracy=0.933599996226
+test mean loss=0.403067363633, accuracy=0.87555554178
+epoch: 18
+2017-07-16 22:17:27.614000
+train mean loss=0.188562800608, accuracy=0.936114283289
+test mean loss=0.316384883391, accuracy=0.911111109787
+epoch: 19
+2017-07-16 22:19:40.506000
+train mean loss=0.187215176012, accuracy=0.933028570243
+test mean loss=0.360161377324, accuracy=0.906666676203
+epoch: 20
+2017-07-16 22:21:53.107000
+train mean loss=0.165474589265, accuracy=0.94388571058
+test mean loss=0.282101011939, accuracy=0.919999996821
+epoch: 21
+2017-07-16 22:24:05.521000
+train mean loss=0.153822022751, accuracy=0.947999996117
+test mean loss=0.33798650321, accuracy=0.919999996821
+epoch: 22
+2017-07-16 22:26:18.048000
+train mean loss=0.140677581344, accuracy=0.952228568281
+test mean loss=0.309250995517, accuracy=0.924444450272
+epoch: 23
+2017-07-16 22:28:30.608000
+train mean loss=0.138967069973, accuracy=0.951314284801
+test mean loss=0.488151417838, accuracy=0.871111101574
+epoch: 24
+2017-07-16 22:30:43.540000
+train mean loss=0.150780805051, accuracy=0.945828568935
+test mean loss=0.305154048734, accuracy=0.924444450272
+epoch: 25
+2017-07-16 22:32:55.811000
+train mean loss=0.133075305953, accuracy=0.952799998692
+test mean loss=0.421937998798, accuracy=0.906666662958
+epoch: 26
+2017-07-16 22:35:08.076000
+train mean loss=0.119467954348, accuracy=0.954514285156
+test mean loss=0.384507967366, accuracy=0.902222222752
+epoch: 27
+2017-07-16 22:37:20.527000
+train mean loss=0.138162662153, accuracy=0.949028568949
+test mean loss=0.317712697718, accuracy=0.928888883856
+epoch: 28
+2017-07-16 22:39:32.964000
+train mean loss=0.114523774907, accuracy=0.961485714912
+test mean loss=0.39709764719, accuracy=0.919999996821
+epoch: 29
+2017-07-16 22:41:45.211000
+train mean loss=0.120365411943, accuracy=0.958171426228
+test mean loss=0.379737239745, accuracy=0.93333334393
+epoch: 30
+2017-07-16 22:43:57.336000
+train mean loss=0.110197391031, accuracy=0.958742856298
+test mean loss=0.401306927204, accuracy=0.920000010067
+```
