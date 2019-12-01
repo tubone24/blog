@@ -12,3 +12,11 @@ headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
 # すすめられたので使ってみた。
+
+以前、vue-particleを使って、（リンク）という記事を書いたところ、記事にコメントがありました。
+
+lindelof（リンク）さんというOSS作者さんからでparticles.jsをVue.jsのBackgroundにするならparticles-bg-vue（リンク）がいいよ～と紹介されましたので早速使ってみました。
+
+## particles-bg-vueとは？
+
+
