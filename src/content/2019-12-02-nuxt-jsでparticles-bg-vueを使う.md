@@ -7,6 +7,8 @@ tags:
   - Nuxt.js
   - Vue.js
   - particles-bg-vue
+  - particle
+  - Proton
   - particles.js
 headerImage: 'https://i.imgur.com/IAstOlF.png'
 templateKey: blog-post
