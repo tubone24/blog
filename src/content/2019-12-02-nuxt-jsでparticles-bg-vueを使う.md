@@ -15,7 +15,7 @@ templateKey: blog-post
 
 以前、[particles.jsをVue.jsで使ってかっこいいページを作る]（https://blog.tubone-project24.xyz/2019-09-12-particles-js）という記事を書いたところ、記事にコメントがありました。
 
-lindelof（リンク）さんというOSS作者さんからでparticles.jsをVue.jsのBackgroundにするなら[particles-bg-vue]（https://github.com/lindelof/particles-bg）がいいよ～と紹介されましたので早速使ってみました。
+[lindelof](https://github.com/lindelof)さんというOSS作者さんからでparticles.jsをVue.jsのBackgroundにするなら[particles-bg-vue]（https://github.com/lindelof/particles-bg-vue）がいいよ～と紹介されましたので早速使ってみました。
 
 ## particles-bg-vueとは？
 
