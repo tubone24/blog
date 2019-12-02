@@ -25,5 +25,15 @@ particles.js以上にかっちょいいparticleをVueで使うためのOSSぽい
 
 ## Nuxt.jsでの利用法
 
+ただ、particles-bg-vueをVue.jsで使うだけなら、READMEを読みましょうというだけなので、Nuxt.jsでの利用法を確認していきます。
+
+### インストール
+
+インストールはnpmまたはyarnを使います。
+
+簡単ですね。
+
+### pluginsでVue useする
+
 
 
