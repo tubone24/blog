@@ -8,40 +8,48 @@ tags:
   - Vue.js
   - particles-bg-vue
   - particles.js
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/IAstOlF.png'
 templateKey: blog-post
 ---
 # すすめられたので使ってみた。
 
 以前、[particles.jsをVue.jsで使ってかっこいいページを作る](https://blog.tubone-project24.xyz/2019-09-12-particles-js)という記事を書いたところ、記事にコメントがありました。
 
-[lindelof](https://github.com/lindelof)さんというOSS作者さんからでparticles.jsをVue.jsのBackgroundにするなら[particles-bg-vue](https://github.com/lindelof/particles-bg-vue)がいいよ～と紹介されましたので早速使ってみました。
+[lindelof](https://github.com/lindelof)さんというOSS作者さんからでparticleをVue.jsのBackgroundに当てたいなら[indelof/particles-bg-vue](https://github.com/lindelof/particles-bg-vue)がいいよ～と紹介されましたので早速使ってみました。
 
 ## particles-bg-vueとは？
 
 particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが、[Proton](https://github.com/a-jie/Proton)という軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
 
-仕上がりはこんな感じ！
+仕上がりはこんな感じ！ (READMEから引用)
 
 ![img](https://raw.githubusercontent.com/lindelof/particles-bg-vue/master/images/01.jpg)
 
 ![img](https://raw.githubusercontent.com/lindelof/particles-bg/master/image/07.jpg)
 
+![img](https://raw.githubusercontent.com/lindelof/particles-bg-vue/master/images/03.jpg)
+
+Vue.js版だけでなく、[React版](https://github.com/lindelof/particles-bg)もあります。
+
 細かいことはともかく早速使ってみます。
 
 ## Nuxt.jsでの利用法
 
-ただ、particles-bg-vueをVue.jsで使うだけなら、READMEを読みましょうというだけなので、Nuxt.jsでの利用法を確認していきます。
+ただ、particles-bg-vueをVue.jsで使うだけなら、[README](https://github.com/lindelof/particles-bg-vue/blob/master/README.md)を読みましょうというだけなので、Nuxt.jsでの利用法を確認していきます。
 
 ### インストール
 
 インストールはnpmまたはyarnを使います。
 
+```bash
+$ npm install --save particles-bg-vue
+```
+
 簡単ですね。
 
 ### pluginsでVue useする
 
-Nuxt.jsでVue useする一番簡単な方法はpluginsとして読み込むことです。
+Nuxt.jsでVue useする一番簡単な方法は[plugins](https://ja.nuxtjs.org/guide/plugins/)として読み込むことです。
 
 ```javascript
 // plugins/particles.ts
@@ -81,7 +89,7 @@ export default {
 
 ### layoutsで共通的にparticleを当てる
 
-Nuxt.js共通的にレイアウトを当てる時は、layoutsに宣言し、各ページで利用します。
+Nuxt.js共通的にレイアウトを当てる時は、[layouts](https://ja.nuxtjs.org/api/pages-layout/)に宣言し、各ページで利用します。
 
 ```javascript
 //layouts/default.vue
@@ -134,7 +142,9 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 
 とすると適用できます。
 
-![img]
+![img](https://i.imgur.com/IAstOlF.png)
+
+簡単ですね！！
 
 ## 結論
 
