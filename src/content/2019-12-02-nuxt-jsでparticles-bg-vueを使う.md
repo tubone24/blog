@@ -81,10 +81,11 @@ Nuxt.js共通的にレイアウトを当てる時は、layoutsに宣言し、各
 //layouts/default.vue
 <template>
   <div class="app">
-    <particles-bg type="circle" :bg="true" /> // templateでparticles-bgを宣言
+    <particles-bg type="circle" :bg="true" /> // templateでparticles-bgを利用
     <nuxt/>
   </div>
 </template>
 ```
 
+typeに設定する内容については、[particles-bg-vueのREADME: Parameter Description](https://github.com/lindelof/particles-bg-vue/blob/master/README.md#parameter-description)をご確認ください。
 
