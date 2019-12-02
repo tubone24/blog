@@ -19,7 +19,13 @@ templateKey: blog-post
 
 ## particles-bg-vueとは？
 
-particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが、Protonという軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
+particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが、[Proton](https://github.com/a-jie/Proton)という軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
+
+仕上がりはこんな感じ！
+
+![img](https://raw.githubusercontent.com/lindelof/particles-bg-vue/master/images/01.jpg)
+
+![img](https://raw.githubusercontent.com/lindelof/particles-bg/master/image/07.jpg)
 
 細かいことはともかく早速使ってみます。
 
@@ -48,7 +54,7 @@ Vue.use(VueParticlesBg);
 
 Nuxt.jsで上記のpluginsを読み込むために `nuxt.config.ts` のコンフィグを変更します。
 
-```
+```javascript
 // nuxt.config.ts
 export default {
   mode: 'spa',
@@ -77,7 +83,7 @@ export default {
 
 Nuxt.js共通的にレイアウトを当てる時は、layoutsに宣言し、各ページで利用します。
 
-```
+```javascript
 //layouts/default.vue
 <template>
   <div class="app">
@@ -89,3 +95,49 @@ Nuxt.js共通的にレイアウトを当てる時は、layoutsに宣言し、各
 
 typeに設定する内容については、[particles-bg-vueのREADME: Parameter Description](https://github.com/lindelof/particles-bg-vue/blob/master/README.md#parameter-description)をご確認ください。
 
+### layoutsを読み込む
+
+particleを当てたいページに対しては上記で作成したlayoutsを読み込みます。
+
+今回は最新のVue.jsのAPI [Vue Composition API](https://vue-composition-api-rfc.netlify.com/)を例に使ってみます。
+
+たとえばトップページ(index)に当てたい場合
+
+```javascript
+<template>
+  <section class="section">
+    <div class="container">
+      <hoge  prop="hogeeee!!"/>
+    </div>
+  </section>
+</template>
+
+<script lang="ts">
+  import {
+    createComponent,
+    reactive,
+    onMounted,
+    computed,
+    ref
+  } from '@vue/composition-api';
+  import FileList from '@/components/hoge.vue';
+  export default createComponent({
+    layout: 'default', // createComponentでlayoutを呼ぶ
+    components: {
+      hoge
+    },
+    setup() {
+    }
+  })
+</script>
+```
+
+とすると適用できます。
+
+![img]
+
+## 結論
+
+Nuxt.jsに入門したばかりですが、こんなに簡単にかっこいいページが作れるとは！という感動です。
+
+Thanks! [lindelof](https://github.com/lindelof)-san
