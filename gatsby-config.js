@@ -151,6 +151,16 @@ module.exports = {
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
           {
+            resolve: 'gatsby-remark-audio',
+            options: {
+              preload: 'auto',
+              loop: false,
+              controls: true,
+              muted: false,
+              autoplay: false,
+            },
+          },
+          {
             resolve: 'gatsby-plugin-sentry',
             options: {
               dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
