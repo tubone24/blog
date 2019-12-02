@@ -19,5 +19,11 @@ lindelof（リンク）さんというOSS作者さんからでparticles.jsをVue
 
 ## particles-bg-vueとは？
 
-particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが
+particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが、Protonという軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
+
+細かいことはともかく早速使ってみます。
+
+## Nuxt.jsでの利用法
+
+
 
