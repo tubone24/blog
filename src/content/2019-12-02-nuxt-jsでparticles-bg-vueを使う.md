@@ -19,5 +19,5 @@ lindelof（リンク）さんというOSS作者さんからでparticles.jsをVue
 
 ## particles-bg-vueとは？
 
-particles.jsをVueで使いつつ、さらに書くページの背景で使いたい人向けの
+particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが
 
