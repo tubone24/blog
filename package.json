@@ -61,6 +61,7 @@
     "gatsby-remark-prismjs": "^3.2.6",
     "gatsby-remark-responsive-iframe": "^2.2.10",
     "gatsby-remark-slideshare": "git+https://github.com/weknowinc/gatsby-remark-slideshare.git",
+    "gatsby-remark-video": "^1.2.5",
     "gatsby-source-filesystem": "^2.0.27",
     "gatsby-source-wordpress": "^3.1.28",
     "gatsby-transformer-remark": "^2.3.7",

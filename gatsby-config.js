@@ -161,6 +161,19 @@ module.exports = {
             },
           },
           {
+            resolve: 'gatsby-remark-video',
+            options: {
+              width: 'auto',
+              height: 'auto',
+              preload: 'auto',
+              muted: true,
+              autoplay: true,
+              playsinline: true,
+              controls: true,
+              loop: true,
+            },
+          },
+          {
             resolve: 'gatsby-plugin-sentry',
             options: {
               dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
@@ -171,8 +184,8 @@ module.exports = {
           {
             resolve: 'gatsby-remark-embed-soundcloud',
             options: {
-              width: 800, // default is "100%"
-              height: 500, // default is 300
+              width: '80%', // default is "100%"
+              height: 200, // default is 300
               color: '#6cff8c', // default is #ff5500
               autoplay: false, // default is false
             },
