@@ -7,6 +7,8 @@ tags:
   - Nuxt.js
   - Vue.js
   - particles-bg-vue
+  - particle
+  - Proton
   - particles.js
 headerImage: 'https://i.imgur.com/IAstOlF.png'
 templateKey: blog-post
@@ -19,7 +21,7 @@ templateKey: blog-post
 
 ## particles-bg-vueとは？
 
-particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを呼んでみましたが、[Proton](https://github.com/a-jie/Proton)という軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
+particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを読んでみましたが、[Proton](https://github.com/a-jie/Proton)という軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
 
 仕上がりはこんな感じ！ (READMEから引用)
 
