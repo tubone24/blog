@@ -14,17 +14,17 @@ templateKey: blog-post
 ---
 # わからん
 
-最近[Nuxt.js](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[CompositionAPI](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
+最近[**Nuxt.js**](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[**CompositionAPI**](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
 
 いよいよツラミもわかってきた頃合いなので一つずつまとめていこうかと思います。
 
-今回はNuxt.jsのmodulesをCompositionAPIでどう使っていくかを書きます。
+今回は**Nuxt.js**の**modules**を**CompositionAPI**でどう使っていくかを書きます。
 
 ![img](https://i.imgur.com/29nafu5.png)
 
 ## そもそもCompositionAPIとは？
 
-[CompositionAPI](https://vue-composition-api-rfc.netlify.com/)とは、Vue3.x系から正式採用される新しいVue.jsの使い方です。
+[CompositionAPI](https://vue-composition-api-rfc.netlify.com/)とは、**Vue3.x系**から正式採用される新しいVue.jsの使い方です。
 
 公式的には
 
@@ -257,6 +257,21 @@ export default {
 共通のエラーハンドリングをpluginsに記載するだけで冗長なハンドリングを回避できるのはすごいですね。
 
 ポイントはmodulesで宣言した`@nuxtjs/axios`は書くpage, componentで利用可能でVueインスタンス内では`this.$axios`で取得できるということです。
+
+## CompositionAPIだとVueインスタンスにアクセスできるのはsetup内のみ
+
+ということは先ほど話した通りなのですがそうするとmodulesの利用側はsetup内でのみ使えることになります。
+
+ということを頭に入れながら`@nuxtjs/toast`を実装していきます。
+
+```javascript
+//nuxt.config.ts
+
+(中略)
+modules: [
+    '@nuxtjs/toast',
+  ],
+```
 
 
 
