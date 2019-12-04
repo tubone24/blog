@@ -72,7 +72,7 @@ export default class HelloWorld extends Vue {
 }
 </script>
 ```
-CompositionAPI
+CompositionAPIで書くパターン
 
 ```javascript
 <script lang="ts">
@@ -88,12 +88,17 @@ CompositionAPI
   import toast from '@nuxtjs/toast';
   import {PdfFileNotFoundError} from "~/types/error";
   const backendURL = 'https://ebook-homebrew.herokuapp.com/';
+
   // data
+  // ref,またはreactiveとして設定するとTemplateでreactiveに変更が反映される
+  // setup()の外でも中でもOK
   const state = reactive<{
     uploadList: Array<Map<string, string>>
   }>({
     uploadList: []
   });
+
+  // methods
   const updateFileList = async (): Promise<void> => {
     const res = await axios.get(backendURL + 'data/upload/list');
     if (res.status === 200) {
@@ -113,19 +118,30 @@ CompositionAPI
     );
     return new Blob([res.data], {type: 'application/pdf'});
   };
+  
+  // typeまたはinterfaceでpropsの型指定
   type Props = {
     propHello: string;
   };
+  
+  //createComponet内でprops, components, layoutなどを設定
   export default createComponent({
+    //props
     props: {
       propHello: {
         type: String
       }
     },
+    //setup()で初めてVueインスタンス化されるのでinjectされたものはsetup内でしかとれない。
     setup (props: Props, ctx) {
-      // props
+
+      // propsをsetup内ローカル変数で再設定
       const propsHello = props.propHello;
+
+      //Contextをsetupで受け取ることができ、module化されたものはroot要素からとれる
       const toast = ctx.root.$root.$toast;
+
+      //setup内でもmethods作成可能。Context rootから取得するものを使わないといけない場合、setup内で実装するしか道はなさそう
       const doDownload = async (filePath: string): Promise<void> => {
         const options = {
           position: 'top-center',
@@ -141,16 +157,19 @@ CompositionAPI
           link.click();
         } catch (e) {
           if (e instanceof PdfFileNotFoundError) {
+            //先ほど取り出したtoast
             toast.show('No File!!', options)
           } else {
             toast.show('UnknownError!!', options)
           }
         }
       };
+      //ライフサイクルはsetup内で記載、またライフサイクル自体も従来と異なる
       onBeforeMount( async () => {
         await updateFileList()
         }
       );
+      //setupのreturnで返したものがtemplateで使える変数
       return {
         state,
         propsHello,
