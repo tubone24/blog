@@ -213,7 +213,7 @@ CompositionAPIとNuxt.jsの相性は今のところよくないと思います�
 
 - HeadlessCMSなど他コンテンツURIをProxyしている場合などで、APIコール時にHTTP Statusチェックし、404だった場合は別ページを表示させる
 
-こういったケースだとClassAPIでは下記のような実装例があります。
+こういったケースだとOptionsAPIでは下記のような実装例があります。
 
 ```javascript
 //あらかじめnuxt.config.jsにmodules: ['@nuxtjs/axios']を宣言し、同configにplugins: ['~/plugins/axios'] も宣言しておく
@@ -235,14 +235,20 @@ export default function ({ $axios, redirect }) {
 //利用側components: hoge.vue
 
 export default {
-  async asyncData({ $axios }) {
+  methods: {
+    async sendRequest() { //methods内では this.$axios
+      const response = await this.$axios.$get('https://hoge.com');
+      res = response.headers.Accept;
+    }
+  },
+  async asyncData({ $axios }) { //asyncData, fetchなどでは $axiosで取得
     const hoges= await $axios.$get("https://hoge/hoge",{
         params: {
           userId: "hoon"
         }
       }
     )
-    return { hoges};
+    return { hoges };
   }
 };
 
@@ -250,7 +256,7 @@ export default {
 
 共通のエラーハンドリングをpluginsに記載するだけで冗長なハンドリングを回避できるのはすごいですね。
 
-ポイントはmodulesで宣言した`@nuxtjs/axios`
+ポイントはmodulesで宣言した`@nuxtjs/axios`は書くpage, componentで利用可能でVueインスタンス内では`this.$axios`で取得できるということです。
 
 
 
