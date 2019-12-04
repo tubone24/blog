@@ -20,3 +20,19 @@ templateKey: blog-post
 ## そもそもCompositionAPIとは？
 
 CompositionAPIとは、Vue3.x系から正式採用される新しいVue.jsの使い方です。
+
+もはやTypeScriptで書かないと現場でいじめられてしまうこの世の中なので、VueもTypeScriptで書くことが急務なわけですが、その中で一定のデファクトスタンダードを勝ち得たClassAPIという使い方が、色々問題になっているようでしてVue3.xから採用される運びらしいです。
+
+詳しくは（リンク）を御確認ください。
+
+ざっくりと書き方の違いとしては
+
+ClassAPI
+(コード)
+
+CompositionAPI
+(コード)
+
+となります。
+
+## Nuxt.jsのモジュールがCompositionAPIで使いたいんだが
