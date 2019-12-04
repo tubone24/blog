@@ -64,7 +64,7 @@ Vue.use(VueParticlesBg);
 
 Nuxt.jsで上記のpluginsを読み込むために `nuxt.config.ts` のコンフィグを変更します。
 
-```javascript
+```javascript{numberLines: 1}{22}
 // nuxt.config.ts
 export default {
   mode: 'spa',
@@ -93,7 +93,7 @@ export default {
 
 Nuxt.js共通的にレイアウトを当てる時は、[layouts](https://ja.nuxtjs.org/api/pages-layout/)に宣言し、各ページで利用します。
 
-```javascript
+```javascript{numberLines: 1}{4}
 //layouts/default.vue
 <template>
   <div class="app">
@@ -113,7 +113,7 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 
 たとえばトップページ(index)に当てたい場合
 
-```javascript
+```javascript{numberLines: 1}{19}
 <template>
   <section class="section">
     <div class="container">
@@ -172,10 +172,52 @@ F12(開発者ツール)などで、particle部分のElementsを確認すると�
 
 ![img](https://i.imgur.com/hw6bydF.png)
 
-こちらのcanvasのstyleはcanvasObjectというObjectをparticle-bgのpropsに渡すと実現できます。
+こちらのcanvasのstyleはcanvasObjectというObjectをparticle-bgのpropsに渡すと変更が実現できます。
 
-```
-canvas
+さらに、Vue.jsの新しいAPI、CompositionAPIでは、templateに渡す変数はreactive、reactiveじゃないに関わらずsetup()のreturnで渡す必要があります。
+
+なので
+
+```javascript{numberLines: 1}{3,26-28,34-36}
+<template>
+  <div class="app">
+    <particles-bg type="circle" :bg="true" :canvas="canvasObject"/> //propsでcanvasObject渡す
+    <div id="nav">
+      <nuxt-link to="/">Home</nuxt-link> |
+      <nuxt-link to="/sample">sample</nuxt-link> |
+      <nuxt-link to="/list">list</nuxt-link>
+    </div>
+    <nuxt/>
+  </div>
+</template>
+
+<script lang='ts'>
+  import {
+    createComponent,
+    reactive,
+    onBeforeMount,
+    onUpdated,
+    onMounted,
+    computed,
+    watch,
+    ref
+  } from '@vue/composition-api';
+
+  const canvasObject = {  //canvasObject宣言
+    height: '120%'
+    };
+
+  export default createComponent({
+
+    setup () {
+
+      return {
+        canvasObject  //templateで使うのでreturn
+      };
+    }
+  });
+</script>
+
 ```
 
 
