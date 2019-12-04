@@ -9,7 +9,7 @@ tags:
   - modules
   - toast
   - CompositionAPI
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/29nafu5.png'
 templateKey: blog-post
 ---
 # わからん
@@ -17,6 +17,10 @@ templateKey: blog-post
 最近[Nuxt.js](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[CompositionAPI](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
 
 いよいよツラミもわかってきた頃合いなので一つずつまとめていこうかと思います。
+
+今回はNuxt.jsのmodulesをCompositionAPIでどう使っていくかを書きます。
+
+![img](https://i.imgur.com/29nafu5.png)
 
 ## そもそもCompositionAPIとは？
 
@@ -32,7 +36,9 @@ templateKey: blog-post
 
 CompositionAPIを使おうと思ったのは、Vue3.xで採用されるというのと、もはやTypeScriptで書かないと現場でいじめられてしまうこの世の中で、VueもTypeScriptで書くことが急務になりつつある状況の中、Vue + TypeScriptで一定のデファクトスタンダードを勝ち得た[ClassAPI](https://github.com/vuejs/vue-class-component)という使い方が、色々問題になっているようだったので採用しました。
 
-詳しくは（リンク）を御確認ください。
+上記のツラミ・スゴミについて詳しくは下記のプレゼンがすごくわかりやすかったです。
+
+[Composition API TypeScriptはVue.jsの夢を見るか?](https://speakerdeck.com/daikids2/composition-api-typescripthavue-dot-jsfalsemeng-wojian-ruka)
 
 ざっくりと書き方の違いとしては
 
@@ -106,6 +112,7 @@ CompositionAPIで書くパターン
     }
     console.log(JSON.stringify(state.uploadList));
   };
+
   const downloadPDF = async (filePath: string): Promise<Blob> => {
     const res = await axios.post(backendURL + 'convert/pdf/download', { uploadId: filePath, },
       {responseType: 'blob'}).catch((err) => {
@@ -182,11 +189,13 @@ CompositionAPIで書くパターン
 
 となります。
 
-ぜんぜんかきっぷり違ってびっくり。ぱっと見ClassAPIのデコレーターの方がコード量少なくて見通しはいい気がしますが、ロジック、ステート、レンダリングを好きなように（究極別ファイルに切り出しも可）宣言して、setupでまとめ上げるのは確かに見通しよいかもしれませんね。
+ぜんぜんかきっぷり違ってびっくり。
+
+ぱっと見ClassAPIのデコレーターの方がコード量少なくて見通しはいい気がしますが、ロジック、ステート、レンダリングを好きなように（究極別ファイルに切り出しも可）宣言して、setupでまとめ上げるのは確かに見通しよいかもしれませんね。
 
 まだ、ここらへんは自分の中でのベストプラクティスができあがってないので今後考察します。
 
-あと、テストコードはまだ書いてないのですが、毎回VueインスタンスをShadowMountして頑張って書く感じから解放されそうでテストコード的なメリットはありそうです。
+あと、テストコードはまだ書いてないのですが、毎回VueインスタンスをshallowMountして頑張って書く感じから解放されそうでテストコード的なメリットはありそうです。
 
 ## Nuxt.jsとの相性
 
