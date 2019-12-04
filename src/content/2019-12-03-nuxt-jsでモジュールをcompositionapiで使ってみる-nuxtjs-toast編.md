@@ -36,9 +36,11 @@ CompositionAPIを使おうと思ったのは、Vue3.xで採用されるという
 
 ざっくりと書き方の違いとしては
 
-ClassAPI
-(コード)
+ClassAPI(decoratorを使ったパターン)
 
+```javascript
+
+```
 CompositionAPI
 (コード)
 
