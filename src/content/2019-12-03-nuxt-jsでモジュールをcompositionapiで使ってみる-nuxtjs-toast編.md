@@ -24,6 +24,8 @@ templateKey: blog-post
 
 実装方法だけ見たい人は下記に進んでください。
 
+[CompositionAPIだとVueインスタンスにアクセスできるのはsetup内のみ](#CompositionAPIだとVueインスタンスにアクセスできるのはsetup内のみ)
+
 また、本実装を施したWebアプリを作ってみました。
 
 [ebook-homebrew-nuxt-with-typescript-client](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client)
