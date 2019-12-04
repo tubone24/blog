@@ -1,6 +1,6 @@
 ---
 slug: 2019/12/03/nuxt-toast
-title: Nuxt.jsでモジュールをCompositionAPIで使ってみる(@nuxtjs/toast編)
+title: Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
 date: 2019-12-02T23:43:19.895Z
 description: Nuxt.jsのわかりにくい機能の一つ、modulesを使ってみます。
 tags:
@@ -13,15 +13,23 @@ templateKey: blog-post
 ---
 # わからん
 
-最近Nuxt.jsと戯れるようにしてますが、Nuxt.jsとVue.jsの新しいAPIであるCompositionAPI（リンク）の相性があまりよくないのか色々苦戦してます。
+最近[Nuxt.js](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[CompositionAPI](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
 
 いよいよツラミもわかってきた頃合いなので一つずつまとめていこうかと思います。
 
 ## そもそもCompositionAPIとは？
 
-CompositionAPIとは、Vue3.x系から正式採用される新しいVue.jsの使い方です。
+[CompositionAPI](https://vue-composition-api-rfc.netlify.com/)とは、Vue3.x系から正式採用される新しいVue.jsの使い方です。
 
-もはやTypeScriptで書かないと現場でいじめられてしまうこの世の中なので、VueもTypeScriptで書くことが急務なわけですが、その中で一定のデファクトスタンダードを勝ち得たClassAPIという使い方が、色々問題になっているようでしてVue3.xから採用される運びらしいです。
+公式的には
+
+> a set of additive, function-based APIs that allow flexible composition of component logic. （コンポーネントロジックの構成を柔軟にできる関数ベースな追加API）
+
+とのこと。
+
+ここら辺はだんだん使っていけば何となく良いところが見えてきますが、そちらのまとめはまた今度。
+
+CompositionAPIを使おうと思ったのは、もはやTypeScriptで書かないと現場でいじめられてしまうこの世の中で、VueもTypeScriptで書くことが急務なわけですが、その中で一定のデファクトスタンダードを勝ち得たClassAPIという使い方が、色々問題になっているようでしてVue3.xから採用される運びらしいです。
 
 詳しくは（リンク）を御確認ください。
 
