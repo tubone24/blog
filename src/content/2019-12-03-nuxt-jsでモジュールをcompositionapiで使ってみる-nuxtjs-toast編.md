@@ -64,7 +64,7 @@ export default class HelloWorld extends Vue {
   }
 
   // methods
-  getDate() {
+  getData() {
     axios
       .get("https://hogehoge.com")
       .then(response => (this.message = response));
@@ -75,7 +75,90 @@ export default class HelloWorld extends Vue {
 CompositionAPI
 
 ```javascript
-
+<script lang="ts">
+  import {
+    createComponent,
+    reactive,
+    onBeforeMount,
+    onMounted,
+    computed,
+    ref
+  } from '@vue/composition-api';
+  import axios from 'axios';
+  import toast from '@nuxtjs/toast';
+  import {PdfFileNotFoundError} from "~/types/error";
+  const backendURL = 'https://ebook-homebrew.herokuapp.com/';
+  // data
+  const state = reactive<{
+    uploadList: Array<Map<string, string>>
+  }>({
+    uploadList: []
+  });
+  const updateFileList = async (): Promise<void> => {
+    const res = await axios.get(backendURL + 'data/upload/list');
+    if (res.status === 200) {
+      state.uploadList = res.data.fileList;
+    }
+    console.log(JSON.stringify(state.uploadList));
+  };
+  const downloadPDF = async (filePath: string): Promise<Blob> => {
+    const res = await axios.post(backendURL + 'convert/pdf/download', { uploadId: filePath, },
+      {responseType: 'blob'}).catch((err) => {
+      if (err.response.status === 404) {
+        throw new PdfFileNotFoundError('PdfFileNotFound');
+      } else {
+        throw err;
+      }
+    },
+    );
+    return new Blob([res.data], {type: 'application/pdf'});
+  };
+  type Props = {
+    propHello: string;
+  };
+  export default createComponent({
+    props: {
+      propHello: {
+        type: String
+      }
+    },
+    setup (props: Props, ctx) {
+      // props
+      const propsHello = props.propHello;
+      const toast = ctx.root.$root.$toast;
+      const doDownload = async (filePath: string): Promise<void> => {
+        const options = {
+          position: 'top-center',
+          duration: 2000,
+          fullWidth: true,
+          type: 'error',
+        } as any;
+        try{
+          const blob = await downloadPDF(filePath);
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'result.pdf';
+          link.click();
+        } catch (e) {
+          if (e instanceof PdfFileNotFoundError) {
+            toast.show('No File!!', options)
+          } else {
+            toast.show('UnknownError!!', options)
+          }
+        }
+      };
+      onBeforeMount( async () => {
+        await updateFileList()
+        }
+      );
+      return {
+        state,
+        propsHello,
+        doDownload
+      };
+    }
+  });
+</script>
 ```
 
 となります。
