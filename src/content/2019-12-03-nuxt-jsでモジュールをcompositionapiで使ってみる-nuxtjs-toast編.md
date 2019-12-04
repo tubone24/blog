@@ -12,3 +12,11 @@ headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
 # わからん
+
+最近Nuxt.jsと戯れるようにしてますが、Nuxt.jsとVue.jsの新しいAPIであるCompositionAPI（リンク）の相性があまりよくないのか色々苦戦してます。
+
+いよいよツラミもわかってきた頃合いなので一つずつまとめていこうかと思います。
+
+## そもそもCompositionAPIとは？
+
+CompositionAPIとは、Vue3.x系から正式採用される新しいVue.jsの使い方です。
