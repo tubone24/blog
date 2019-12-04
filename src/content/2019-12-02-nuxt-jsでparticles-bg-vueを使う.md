@@ -153,3 +153,30 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 Nuxt.jsに入門したばかりですが、こんなに簡単にかっこいいページが作れるとは！という感動です。
 
 Thanks! [lindelof](https://github.com/lindelof)-san
+
+## 追記(particleのcanvasのstyleを変えたい！)
+
+[indelof/particles-bg-vue](https://github.com/lindelof/particles-bg-vue)をしばらく使い続け、ちょっとした悩みがでてきました。
+
+![img](https://i.imgur.com/FhOet7R.png)
+
+ブラウザの拡大率を上げた場合、particleのcanvasがそれに追従せず、きれいなparticleのcanvasからはみ出る・・・。
+
+ということで、なにかできないか確認したところ[particles-bg-vueのREADME: Parameter Description]([particles-bg-vueのREADME: Parameter Description](https://github.com/lindelof/particles-bg-vue/blob/master/README.md#parameter-description))に書いてありました。
+
+とはいったものの、ちょっと記載がわかりにくいのでここに追記します。
+
+### canvasObjectの作成
+
+F12(開発者ツール)などで、particle部分のElementsを確認すると、canvasタグでparticleを表現していることがわかります。
+
+![img](https://i.imgur.com/hw6bydF.png)
+
+こちらのcanvasのstyleはcanvasObjectというObjectをparticle-bgのpropsに渡すと実現できます。
+
+```
+canvas
+```
+
+
+
