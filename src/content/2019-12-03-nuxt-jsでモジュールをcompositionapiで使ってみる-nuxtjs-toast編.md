@@ -39,10 +39,44 @@ CompositionAPIを使おうと思ったのは、Vue3.xで採用されるという
 ClassAPI(decoratorを使ったパターン)
 
 ```javascript
+<script lang="ts">
+import axios from 'axios';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
+@Component
+export default class HelloWorld extends Vue {
+
+  // props
+  @Prop() private propHoge!: string;
+
+  // data
+  message: string = "Hoge";
+  hogeCount: number = 0;
+
+  // computed
+  get double() {
+    return this.hogeCount* 2;
+  }
+
+  // mounted
+  mounted() {
+    this.gethoge();
+  }
+
+  // methods
+  getDate() {
+    axios
+      .get("https://hogehoge.com")
+      .then(response => (this.message = response));
+  }
+}
+</script>
 ```
 CompositionAPI
-(コード)
+
+```javascript
+
+```
 
 となります。
 
