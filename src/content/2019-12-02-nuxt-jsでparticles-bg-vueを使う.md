@@ -220,5 +220,12 @@ F12(開発者ツール)などで、particle部分のElementsを確認すると�
 
 ```
 
+とやってみると
 
+![img](https://i.imgur.com/ct8mkR2.png)
 
+正しくstyleが変更され、
+
+![img](https://i.imgur.com/0rTlW56.png)
+
+期待通りのcanvasができました！
