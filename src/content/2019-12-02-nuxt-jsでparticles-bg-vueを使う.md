@@ -64,7 +64,7 @@ Vue.use(VueParticlesBg);
 
 Nuxt.jsで上記のpluginsを読み込むために `nuxt.config.ts` のコンフィグを変更します。
 
-```javascript
+```javascript{numberLines: 1}{22}
 // nuxt.config.ts
 export default {
   mode: 'spa',
@@ -93,7 +93,7 @@ export default {
 
 Nuxt.js共通的にレイアウトを当てる時は、[layouts](https://ja.nuxtjs.org/api/pages-layout/)に宣言し、各ページで利用します。
 
-```javascript
+```javascript{numberLines: 1}{4}
 //layouts/default.vue
 <template>
   <div class="app">
@@ -113,7 +113,7 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 
 たとえばトップページ(index)に当てたい場合
 
-```javascript
+```javascript{numberLines: 1}{19}
 <template>
   <section class="section">
     <div class="container">
@@ -153,3 +153,79 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 Nuxt.jsに入門したばかりですが、こんなに簡単にかっこいいページが作れるとは！という感動です。
 
 Thanks! [lindelof](https://github.com/lindelof)-san
+
+## 追記(particleのcanvasのstyleを変えたい！)
+
+[indelof/particles-bg-vue](https://github.com/lindelof/particles-bg-vue)をしばらく使い続け、ちょっとした悩みがでてきました。
+
+![img](https://i.imgur.com/FhOet7R.png)
+
+ブラウザの拡大率を上げた場合、particleのcanvasがそれに追従せず、きれいなparticleのcanvasからはみ出る・・・。
+
+ということで、なにかできないか確認したところ[particles-bg-vueのREADME: Parameter Description]([particles-bg-vueのREADME: Parameter Description](https://github.com/lindelof/particles-bg-vue/blob/master/README.md#parameter-description))に書いてありました。
+
+とはいったものの、ちょっと記載がわかりにくいのでここに追記します。
+
+### canvasObjectの作成
+
+F12(開発者ツール)などで、particle部分のElementsを確認すると、canvasタグでparticleを表現していることがわかります。
+
+![img](https://i.imgur.com/hw6bydF.png)
+
+こちらのcanvasのstyleはcanvasObjectというObjectをparticle-bgのpropsに渡すと変更が実現できます。
+
+さらに、Vue.jsの新しいAPI、CompositionAPIでは、templateに渡す変数はreactive、reactiveじゃないに関わらずsetup()のreturnで渡す必要があります。
+
+なので
+
+```javascript{numberLines: 1}{3,26-28,34-36}
+<template>
+  <div class="app">
+    <particles-bg type="circle" :bg="true" :canvas="canvasObject"/> //propsでcanvasObject渡す
+    <div id="nav">
+      <nuxt-link to="/">Home</nuxt-link> |
+      <nuxt-link to="/sample">sample</nuxt-link> |
+      <nuxt-link to="/list">list</nuxt-link>
+    </div>
+    <nuxt/>
+  </div>
+</template>
+
+<script lang='ts'>
+  import {
+    createComponent,
+    reactive,
+    onBeforeMount,
+    onUpdated,
+    onMounted,
+    computed,
+    watch,
+    ref
+  } from '@vue/composition-api';
+
+  const canvasObject = {  //canvasObject宣言
+    height: '120%'
+    };
+
+  export default createComponent({
+
+    setup () {
+
+      return {
+        canvasObject  //templateで使うのでreturn
+      };
+    }
+  });
+</script>
+
+```
+
+とやってみると
+
+![img](https://i.imgur.com/ct8mkR2.png)
+
+正しくstyleが変更され、
+
+![img](https://i.imgur.com/0rTlW56.png)
+
+期待通りのcanvasができました！
