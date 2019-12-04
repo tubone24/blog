@@ -211,9 +211,30 @@ CompositionAPIとNuxt.jsの相性は今のところよくないと思います�
 
 次のようなお困りごとを解決する使い方が例によく出ます。
 
-- APIコール時にx-api-keyなどのHeaderをつける必要があるが、毎回各Componentsでaxiosに設定したくない
-- 全体通してあらかじめheaderを付与したaxiosを呼び出して使いたい
+- HeadlessCMSなど他コンテンツURIをProxyしている場合などで、APIコール時にHTTP Statusチェックし、404だった場合は別ページを表示させる
 
-こういったケースだと
+こういったケースだとClassAPIでは下記のような実装例があります。
+
+```javascript
+//あらかじめnuxt.config.jsにmodules: ['@nuxtjs/axios']を宣言し、同configにplugins: ['~/plugins/axios'] も宣言しておく
+//@/plugins/axios.js
+
+// modulesのaxiosを呼び出す際の共通のエラー処理を記載
+export default function ({ $axios, redirect }) {
+    $axios.onError(err => {
+        const statusCode = parseInt(err.response && err.response.status)
+        if (statusCode === 404) {
+            redirect('/not-found-page') 
+        }
+    })
+
+}
+```
+
+```javascript
+
+```
+
+
 
 
