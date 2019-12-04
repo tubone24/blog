@@ -20,6 +20,16 @@ templateKey: blog-post
 
 今回は**Nuxt.js**の**modules**を**CompositionAPI**でどう使っていくかを書きます。
 
+## 先に結論
+
+実装方法だけ見たい人は下記に進んでください。
+
+また、本実装を施したWebアプリを作ってみました。
+
+[ebook-homebrew-nuxt-with-typescript-client](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client)
+
+[該当のComponent](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client/blob/master/components/FileList.vue#L28)
+
 ![img](https://i.imgur.com/29nafu5.png)
 
 ## そもそもCompositionAPIとは？
@@ -106,24 +116,11 @@ CompositionAPIで書くパターン
 
   // methods
   const updateFileList = async (): Promise<void> => {
-    const res = await axios.get(backendURL + 'data/upload/list');
-    if (res.status === 200) {
-      state.uploadList = res.data.fileList;
-    }
-    console.log(JSON.stringify(state.uploadList));
+     (ロジック)
   };
 
   const downloadPDF = async (filePath: string): Promise<Blob> => {
-    const res = await axios.post(backendURL + 'convert/pdf/download', { uploadId: filePath, },
-      {responseType: 'blob'}).catch((err) => {
-      if (err.response.status === 404) {
-        throw new PdfFileNotFoundError('PdfFileNotFound');
-      } else {
-        throw err;
-      }
-    },
-    );
-    return new Blob([res.data], {type: 'application/pdf'});
+　　　(ロジック)
   };
   
   // typeまたはinterfaceでpropsの型指定
@@ -150,26 +147,7 @@ CompositionAPIで書くパターン
 
       //setup内でもmethods作成可能。Context rootから取得するものを使わないといけない場合、setup内で実装するしか道はなさそう
       const doDownload = async (filePath: string): Promise<void> => {
-        const options = {
-          position: 'top-center',
-          duration: 2000,
-          fullWidth: true,
-          type: 'error',
-        } as any;
-        try{
-          const blob = await downloadPDF(filePath);
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = 'result.pdf';
-          link.click();
-        } catch (e) {
-          if (e instanceof PdfFileNotFoundError) {
-            //先ほど取り出したtoast
-            toast.show('No File!!', options)
-          } else {
-            toast.show('UnknownError!!', options)
-          }
-        }
+         (ロジック)
       };
       //ライフサイクルはsetup内で記載、またライフサイクル自体も従来と異なる
       onBeforeMount( async () => {
@@ -264,6 +242,8 @@ export default {
 
 ということを頭に入れながら`@nuxtjs/toast`を実装していきます。
 
+まずnuxt.config.tsにmodulesを設定していきます。
+
 ```javascript
 //nuxt.config.ts
 
@@ -273,6 +253,89 @@ modules: [
   ],
 ```
 
+toastの利用側のコンポーネントではsetup内で使います。
 
+ただ、できるだけロジックをsetup内にごちゃごちゃ書きたくないので、エラーハンドリングを使いながら頑張ります。
 
+```javascript
+<script lang="ts">
+  import {
+    createComponent,
+    reactive,
+    onBeforeMount,
+    onMounted,
+    computed,
+    ref
+  } from '@vue/composition-api';
+  import axios from 'axios';
+  import toast from '@nuxtjs/toast';
+
+  // 独自エラー(404 NotFound)を作ってtoastを出しわける
+  class PdfFileNotFoundError extends Error {
+    constructor(e?: string) {
+      super(e);
+      this.name = new.target.name;
+      Object.setPrototypeOf(this, new.target.prototype);
+    }  
+  }
+
+  const backendURL = 'https://ebook-homebrew.herokuapp.com/';
+
+  // ロジック
+  const downloadPDF = async (filePath: string): Promise<Blob> => {
+    const res = await axios.post(backendURL + 'convert/pdf/download', { uploadId: filePath, },
+      {responseType: 'blob'}).catch((err) => {
+      if (err.response.status === 404) {
+        throw new PdfFileNotFoundError('PdfFileNotFound'); //404 NotFoundだったら独自エラーをthrow
+      } else {
+        throw err;
+      }
+    },
+    );
+    return new Blob([res.data], {type: 'application/pdf'});
+  };
+
+  export default createComponent({
+
+    setup (ctx) { //setupでContextを受け取れるので受け取る
+      
+      //modulesはContextのrootから取れる
+      const toast = ctx.root.$root.$toast;
+      const doDownload = async (filePath: string): Promise<void> => {
+        const options = {
+          position: 'top-center',
+          duration: 2000,
+          fullWidth: true,
+          type: 'error',
+        } as any;
+        try{
+          const blob = await downloadPDF(filePath);
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'result.pdf';
+          link.click();
+        } catch (e) {
+          //errorをキャッチ
+          if (e instanceof PdfFileNotFoundError) {
+            toast.show('No File!!', options) //エラーハンドリングでtoast呼び出し
+          } else {
+            toast.show('UnknownError!!', options)
+          }
+        }
+      };
+      return {
+        state,
+        doDownload
+      };
+    }
+  });
+</script>
+
+```
+
+とまぁ、結局のところmodulesはsetupで使うのですが、stateの処理やAPIコール部分はなるべく外だししました。
+
+## 結論
+
+むずかしい。
 
