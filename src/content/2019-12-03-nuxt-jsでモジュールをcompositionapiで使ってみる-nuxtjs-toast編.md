@@ -30,7 +30,7 @@ templateKey: blog-post
 
 ここら辺はだんだん使っていけば何となく良いところが見えてきますが、そちらのまとめはまた今度。
 
-CompositionAPIを使おうと思ったのは、Vue3.xで採用されるというのと、もはやTypeScriptで書かないと現場でいじめられてしまうこの世の中で、VueもTypeScriptで書くことが急務になりつつある状況の中、Vue + TypeScriptで一定のデファクトスタンダードを勝ち得た[ClassAPI](https://github.com/vuejs/rfcs/blob/class-api/active-rfcs/0000-class-api.md)という使い方が、色々問題になっているようだったので採用しました。
+CompositionAPIを使おうと思ったのは、Vue3.xで採用されるというのと、もはやTypeScriptで書かないと現場でいじめられてしまうこの世の中で、VueもTypeScriptで書くことが急務になりつつある状況の中、Vue + TypeScriptで一定のデファクトスタンダードを勝ち得た[ClassAPI](https://github.com/vuejs/vue-class-component)という使い方が、色々問題になっているようだったので採用しました。
 
 詳しくは（リンク）を御確認ください。
 
