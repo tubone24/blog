@@ -232,8 +232,25 @@ export default function ({ $axios, redirect }) {
 ```
 
 ```javascript
+//利用側components: hoge.vue
+
+export default {
+  async asyncData({ $axios }) {
+    const hoges= await $axios.$get("https://hoge/hoge",{
+        params: {
+          userId: "hoon"
+        }
+      }
+    )
+    return { hoges};
+  }
+};
 
 ```
+
+共通のエラーハンドリングをpluginsに記載するだけで冗長なハンドリングを回避できるのはすごいですね。
+
+ポイントはmodulesで宣言した`@nuxtjs/axios`
 
 
 
