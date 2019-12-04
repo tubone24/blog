@@ -41,4 +41,6 @@ Nuxt.jsとの相性を考えると色々ツラミがあるのですが、ロジ�
 
 ## Nuxt.jsのモジュールがCompositionAPIで使いたいんだが
 
-ここからが本題なのですが、
+ここからが本題なのですが、よくあるNuxt.jsのmodulesを使う例は全くといっていいほどCompositionAPIでやってるものがないので、Nuxt.jsの動き方を逐次確認しながらmodulesを使ってみます。
+
+例えば、ClassAPI（またはDataAPI）の場合よくあるNuxt.jsモジュールの例はaxiosです。
