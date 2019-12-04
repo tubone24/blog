@@ -1,7 +1,7 @@
 ---
-slug: 2019/12/03/nuxt-toast
+slug: 2019/12/04/nuxt-toast
 title: Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
-date: 2019-12-02T23:43:19.895Z
+date: 2019-12-04T23:43:19.895Z
 description: Nuxt.jsのわかりにくい機能の一つ、modulesを使ってみます。
 tags:
   - Nuxt.js
@@ -141,7 +141,7 @@ CompositionAPIで書くパターン
     //setup()で初めてVueインスタンス化されるのでinjectされたものはsetup内でしかとれない。
     setup (props: Props, ctx) {
 
-      // propsをsetup内ローカル変数で再設定
+      // propsをsetup内ローカル変数で再設定
       const propsHello = props.propHello;
 
       //Contextをsetupで受け取ることができ、module化されたものはroot要素からとれる
@@ -200,11 +200,13 @@ CompositionAPIとNuxt.jsの**相性**は今のところ**よくない**と思い
 //@/plugins/axios.js
 
 // modulesのaxiosを呼び出す際の共通のエラー処理を記載
-export default function ({ $axios, redirect }) {
+export default function ({ $axios, redirect }) {
+
     $axios.onError(err => {
         const statusCode = parseInt(err.response && err.response.status)
         if (statusCode === 404) {
-            redirect('/not-found-page') 
+            redirect('/not-found-page')
+ 
         }
     })
 
@@ -216,12 +218,14 @@ export default function ({ $axios, redirect }) {
 
 export default {
   methods: {
-    async sendRequest() { //methods内では this.$axios
+    async sendRequest() {
+ //methods内では this.$axios
       const response = await this.$axios.$get('https://hoge.com');
       res = response.headers.Accept;
     }
   },
-  async asyncData({ $axios }) { //asyncData, fetchなどでは $axiosで取得
+  async asyncData({ $axios }) {
+ //asyncData, fetchなどでは $axiosで取得
     const hoges= await $axios.$get("https://hoge/hoge",{
         params: {
           userId: "hoon"
@@ -244,7 +248,8 @@ export default {
 
 ということを頭に入れながら`@nuxtjs/toast`を実装していきます。
 
-まずnuxt.config.tsにmodulesを設定していきます。
+まずnuxt.config.ts
+にmodulesを設定していきます。
 
 ```javascript
 //nuxt.config.ts
@@ -288,7 +293,8 @@ toastの利用側のコンポーネントではsetup内で使います。
     const res = await axios.post(backendURL + 'convert/pdf/download', { uploadId: filePath, },
       {responseType: 'blob'}).catch((err) => {
       if (err.response.status === 404) {
-        throw new PdfFileNotFoundError('PdfFileNotFound'); //404 NotFoundだったら独自エラーをthrow
+        throw new PdfFileNotFoundError('PdfFileNotFound');
+ //404 NotFoundだったら独自エラーをthrow
       } else {
         throw err;
       }
@@ -299,7 +305,8 @@ toastの利用側のコンポーネントではsetup内で使います。
 
   export default createComponent({
 
-    setup (ctx) { //setupでContextを受け取れるので受け取る
+    setup (ctx) {
+ //setupでContextを受け取れるので受け取る
       
       //modulesはContextのrootから取れる
       const toast = ctx.root.$root.$toast;
@@ -319,7 +326,8 @@ toastの利用側のコンポーネントではsetup内で使います。
         } catch (e) {
           //errorをキャッチ
           if (e instanceof PdfFileNotFoundError) {
-            toast.show('No File!!', options) //エラーハンドリングでtoast呼び出し
+            toast.show('No File!!', options)
+ //エラーハンドリングでtoast呼び出し
           } else {
             toast.show('UnknownError!!', options)
           }
