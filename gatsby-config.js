@@ -25,6 +25,9 @@ module.exports = {
     //   },
     // },
     {
+      resolve: 'gatsby-remark-copy-linked-files',
+    },
+    {
       resolve: 'gatsby-source-wordpress',
       options: {
         baseUrl: 'tubone-project24.xyz',
