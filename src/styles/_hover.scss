@@ -4,18 +4,20 @@
 %hover {
   position: relative;
 
-  &:after {
-    background: none repeat scroll 0 0 transparent;
-    content: "";
+  &::after {
     display: block;
+    width: 0;
     height: 0.1rem;
+    content: "";
+    background: none repeat scroll 0 0 transparent;
     background-color: #0f457f;
     transition: width 0.4s ease 0s;
-    width: 0;
   }
+
   &:hover {
     text-decoration: none;
-    &:after {
+
+    &::after {
       // width: auto;
       width: 100%;
     }

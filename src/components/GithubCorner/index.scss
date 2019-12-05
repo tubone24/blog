@@ -3,13 +3,13 @@
 }
 
 .github-corner {
-  fill: #151513;
-  color: #fff;
   position: absolute;
   top: 0;
-  border: 0;
   right: 0;
   z-index: 1021;
+  color: #fff;
+  border: 0;
+  fill: #151513;
   // Animation
   @keyframes octocat-wave {
     0%,
@@ -27,14 +27,15 @@
       transform: rotate(10deg);
     }
   }
+
   @keyframes fade-out {
     0% {
       opacity: 100%;
     }
 
     100% {
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
     }
   }
 
@@ -46,7 +47,7 @@
     }
   }
 
-  @media (max-width:662px) {
+  @media (max-width: 662px) {
     animation: fade-out 1560ms;
     animation-fill-mode: forwards;
 

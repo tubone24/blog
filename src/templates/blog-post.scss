@@ -4,16 +4,18 @@
   @media screen and (max-width: 990px) {
     padding: 5px 25px;
   }
+
   border-radius: 2px;
 
   .content {
     padding: 0;
+
+    margin-right: auto;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
     @media screen and (min-width: 990px) {
       margin-left: 1.5rem;
     }
-    margin-right: auto;
 
     a {
       color: $light-blue;
@@ -23,20 +25,21 @@
         text-decoration: none;
       }
     }
+
     @for $i from 3 through 6 {
       h#{$i} {
         margin-top: 60px;
+        margin-bottom: 30px;
         font-size: 32 - $i * 3px;
         font-weight: 400;
-        margin-bottom: 30px;
       }
     }
 
     h1 {
       margin-top: 70px;
       margin-bottom: 50px;
-      font-weight: 600;
       font-size: 48px;
+      font-weight: 600;
     }
 
     h2 {
@@ -47,14 +50,14 @@
 
 
     blockquote {
-      max-width: 100%;
       width: 100%;
-      word-break: break-word;
-      caret-color: rgba(255, 255, 255, 0.9);
-      border-left: 3px solid currentcolor;
-      margin: 0; // Required
-      padding-left: 0.9em;
+      max-width: 100%;
       padding-right: 0.9em;
+      padding-left: 0.9em;
+      margin: 0; // Required
+      word-break: break-word;
+      border-left: 3px solid currentcolor;
+      caret-color: rgba(255, 255, 255, 0.9);
     }
   }
 
@@ -64,31 +67,32 @@
 }
 
 .gatsby-highlight-code-line {
-  background-color: #2d2d2d;
   display: block;
-  margin-right: -1em;
-  margin-left: -1em;
   padding-right: 1em;
   padding-left: 0.75em;
+  margin-right: -1em;
+  margin-left: -1em;
+  background-color: #2d2d2d;
   border-left: 0.25em solid #f99;
 }
 
 .gatsby-highlight {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
   background-color: rgb(22, 22, 22);
   border-radius: 0.3em;
-  margin: 0.5em 0;
-  padding: 1em;
-  overflow: auto;
 }
 
 .gatsby-highlight pre[class*="language-"] {
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-  overflow: initial;
   float: left; /* 1 */
   min-width: 100%; /* 2 */
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  background-color: transparent;
 }
+
 .gatsby-highlight pre[class*="language-"].line-numbers {
   padding-left: 2.8em; /* 3 */
 }

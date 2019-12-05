@@ -1,11 +1,12 @@
 @import "../../styles/colors";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700); // Variables
 $open-sans: "Open Sans", sans-serif; // clear-fix mixin
+
 @mixin cf {
   &::after,
   &::before {
-    content: "";
     display: table;
+    content: "";
   }
 
   &::after {
@@ -15,19 +16,19 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
 // Base styles
 
 .data {
-  transform: translateY(0);
   transition: transform 0.3s;
+  transform: translateY(0);
 
   .content {
-    padding: 1em;
     position: relative;
     z-index: 1;
+    padding: 1em;
 
     // Tags, Date
     .stats {
       display: flex;
-      align-items: center;
       flex-wrap: wrap;
+      align-items: center;
     }
   }
 }
@@ -40,24 +41,26 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
   }
 
   .wrapper {
+    position: relative;
+    min-height: 5.7rem;
+    overflow: hidden;
+    background-repeat: no-repeat;
     background-position: center;
+
+    background-size: contain;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease 0s;
+
     @media (min-width: 576px) {
       min-height: 15rem;
     }
-    background-size: contain;
-    background-repeat: no-repeat;
-    min-height: 5.7rem;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    transition: all 0.5s ease 0s;
 
     &:hover {
       opacity: 0.9;
 
       .data {
-        transform: translateY(-1em);
         transition: transform 0.3s;
+        transform: translateY(-1em);
       }
     }
   }
@@ -67,9 +70,9 @@ $open-sans: "Open Sans", sans-serif; // clear-fix mixin
   }
 
   .date {
-    background-color: $bermuda;
-    color: $white;
     padding: 0.8em;
+    color: $white;
+    background-color: $bermuda;
 
     span {
       display: block;

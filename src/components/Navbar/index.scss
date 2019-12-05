@@ -3,12 +3,11 @@
 .custom-navbar {
   $item-color: $white;
   $radius: 6px;
+  padding: 0.5rem 1.5rem;
 
   background-color: #f3f8f4;
   box-shadow: 0 0 20px rgba(14, 14, 14, 0.26);
-
   transition: background 0.5s;
-  padding: 0.5rem 1.5rem;
 
   .navbar-toggler {
     border: 0;
@@ -20,22 +19,23 @@
       background: transparent;
 
       .brand-logo {
+        padding: 1px 5px 2px;
+        color: $white;
         background: $main-green;
         border-radius: $radius;
-        color: $white;
-        padding: 1px 5px 2px;
       }
 
       &:hover {
-        background-color: darken($white, 5%);
         color: $regal-blue;
         cursor: pointer;
+        background-color: darken($white, 5%);
       }
     }
   }
 
   &.is-fixed {
     background: transparent;
+
     .btn-link {
       color: $white;
     }

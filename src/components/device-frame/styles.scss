@@ -1,35 +1,36 @@
 $base-name: ".device-frame";
+
 #{$base-name} {
-  box-shadow: 0 2px 30px 10px rgba(0, 0, 0, 0.1);
-  margin: auto;
   max-width: 1000px;
+  margin: auto;
+  box-shadow: 0 2px 30px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 
   &-header {
+    position: relative;
+    display: flex;
+    align-items: center;
     height: 4vw;
     max-height: 36px;
+    vertical-align: middle;
     background: #e6e6e6;
     border-radius: 2px 2px 0 0;
-    display: flex;
-    vertical-align: middle;
-    align-items: center;
-    position: relative;
   }
 
   &-controls {
-    line-height: 0;
     margin-left: 0.25vw;
+    line-height: 0;
   }
 
   &-control {
-    width: 1vw;
-    height: 1vw;
-    border-radius: 50%;
-    background: #ddd;
     display: inline-block;
-    margin-left: 0.5vw;
+    width: 1vw;
     max-width: 10px;
+    height: 1vw;
     max-height: 10px;
+    margin-left: 0.5vw;
+    background: #ddd;
+    border-radius: 50%;
 
     &--close {
       background: #ff7f50;
@@ -51,10 +52,10 @@ $base-name: ".device-frame";
   // Variations.
   &--phone {
     max-width: 320px;
-    overflow: hidden;
-    border-radius: 3.4vw;
-    background: #111;
     padding: 0.5vw;
+    overflow: hidden;
+    background: #111;
+    border-radius: 3.4vw;
 
     @media (min-width: 1200px) {
       padding: 4px;
@@ -66,15 +67,15 @@ $base-name: ".device-frame";
         max-height: 40px;
         background: inherit;
 
-        &:after {
-          content: "";
+        &::after {
+          position: absolute;
+          left: 50%;
           width: 4vw;
           max-width: 40px;
           height: 0.4vw;
-          border-radius: 0.2vw;
+          content: "";
           background: #333;
-          position: absolute;
-          left: 50%;
+          border-radius: 0.2vw;
           transform: translateX(-50%);
         }
       }
@@ -95,10 +96,11 @@ $base-name: ".device-frame";
 
   &--phone--light {
     @extend #{$base-name}--phone;
+
     background: #efefef;
 
     #{$base-name}-header {
-      &:after {
+      &::after {
         background: #ddd;
       }
     }
@@ -107,10 +109,10 @@ $base-name: ".device-frame";
   // Variations.
   &--tablet {
     max-width: 768px;
-    overflow: hidden;
-    border-radius: 34px;
-    background: #fff;
     padding: 5px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 34px;
 
     #{$base-name} {
       &-header {
@@ -118,14 +120,14 @@ $base-name: ".device-frame";
         max-height: initial;
         background: inherit;
 
-        &:after {
-          content: "";
-          width: 40px;
-          height: 4px;
-          border-radius: 2px;
-          background: #eee;
+        &::after {
           position: absolute;
           left: 50%;
+          width: 40px;
+          height: 4px;
+          content: "";
+          background: #eee;
+          border-radius: 2px;
           transform: translateX(-50%);
         }
       }
@@ -138,16 +140,16 @@ $base-name: ".device-frame";
         position: relative;
         height: 49px;
 
-        &:after {
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          display: block;
+          width: 24px;
+          height: 24px;
           content: "";
           background: #eee;
-          height: 24px;
-          width: 24px;
           border-radius: 50%;
-          display: block;
-          position: absolute;
-          left: 50%;
-          top: 50%;
           transform: translate(-50%, -50%);
         }
       }

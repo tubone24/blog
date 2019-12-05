@@ -1,25 +1,23 @@
 .m-share-box {
-  display: flex;
-  justify-content: space-around;
-  z-index: 10;
-  width: 100%;
   position: fixed;
   top: auto;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
   background: rgba(255, 255, 255, 0.9);
 
   .share-button {
-    border: 1px solid #337ab7;
-    border-radius: 50%;
-    line-height: 2rem;
-    height: 2rem;
     width: 2rem;
-    text-align: center;
+    height: 2rem;
     margin: 0.4rem;
     font-size: 1rem;
-
+    line-height: 2rem;
+    text-align: center;
+    border: 1px solid #337ab7;
+    border-radius: 50%;
   }
 }

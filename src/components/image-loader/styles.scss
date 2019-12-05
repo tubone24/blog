@@ -3,11 +3,11 @@
   overflow: hidden;
 
   .placeholder {
-    filter: blur(2vw);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    filter: blur(2vw);
     opacity: 1;
     transition: opacity 0.5s linear;
 
@@ -17,10 +17,10 @@
   }
 
   .img {
-    animation: fade-in 0.5s linear forwards;
     position: relative;
     width: 100%;
     opacity: 0;
+    animation: fade-in 0.5s linear forwards;
   }
 
   &--placeholder {
