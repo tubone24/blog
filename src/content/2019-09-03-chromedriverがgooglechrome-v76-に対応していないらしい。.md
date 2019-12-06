@@ -22,7 +22,7 @@ Vue.jsで書いているコードのCI(CircleCI)が通らなくなっていろ�
 
 ![Img](https://i.imgur.com/6WFqOEs.png)
 
-```javascript{numberLines: 1}
+```bash{numberLines: 1}
 { value:
    { message:
       'session not created: Chrome version must be between 71 and 75\n  (Driver info: chromedriver=2.46.628388 (4a34a70827ac54148e092aafb70504c4ea7ae926),platform=Linux 4.15.0-1043-aws x86_64) (WARNING: The server did not provide any stacktrace information)\nCommand duration or timeout: 668 milliseconds\nBuild info: version: \'3.141.59\', revision: \'e82be7d358\', time: \'2018-11-14T08:25:53\'\nSystem info: host: \'5d045d2f1712\', ip: \'192.168.32.3\', os.name: \'Linux\', os.arch: \'amd64\', os.version: \'4.15.0-1043-aws\', java.version: \'11.0.4\'\nDriver info: driver.version: unknown',
@@ -42,7 +42,7 @@ CircleCIでどんなVersionのChromeDriverとGoogleChromeを使っているの�
 
 CircleCIの[config.yml](https://github.com/tubone24/ebook-homebrew-vue-typescript-client/blob/master/.circleci/config.yml)にバージョン出力を追加します。
 
-```javascript{numberLines: 7}{16, 17}
+```yaml{numberLines: 7}{16, 17}
     steps:
       - checkout
       - restore_cache:

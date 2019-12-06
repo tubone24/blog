@@ -92,7 +92,7 @@ export default class HelloWorld extends Vue {
 ```
 CompositionAPIで書くパターン
 
-```javascript
+```typescript
 <script lang="ts">
   import {
     createComponent,
@@ -251,7 +251,7 @@ export default {
 まずnuxt.config.ts
 にmodulesを設定していきます。
 
-```javascript
+```typescript
 //nuxt.config.ts
 
 (中略)
@@ -264,7 +264,7 @@ toastの利用側のコンポーネントではsetup内で使います。
 
 ただ、できるだけ**ロジックをsetup内にごちゃごちゃ書きたくないので**、**エラーハンドリング**を使いながら頑張ります。
 
-```javascript
+```typescript
 <script lang="ts">
   import {
     createComponent,

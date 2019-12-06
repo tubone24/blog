@@ -39,7 +39,7 @@ bundle init
 
 次に、GemfileにserverspecとRakeを指定しておきます。
 
-```gemfile
+```ruby
 # frozen_string_literal: true
 
 source "https://rubygems.org"

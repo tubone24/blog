@@ -53,7 +53,7 @@ $ npm install --save particles-bg-vue
 
 Nuxt.jsでVue useする一番簡単な方法は[plugins](https://ja.nuxtjs.org/guide/plugins/)として読み込むことです。
 
-```javascript
+```typescript
 // plugins/particles.ts
 
 import Vue from 'vue';

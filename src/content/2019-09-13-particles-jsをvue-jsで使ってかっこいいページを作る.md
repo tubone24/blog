@@ -54,7 +54,7 @@ importしたあとに、Vue.useします。
 
 次にApp.vueでparticles.jsを設定します。まずはTemplateにcomponentを設定します。
 
-```vue{numberLines: 1}
+```typescript{numberLines: 1}
       <vue-particles
               color="#add8e6"
               :particleOpacity="0.7"
