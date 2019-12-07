@@ -35,6 +35,14 @@ const schemaOrgJSONLD = ({
             '@type': 'ListItem',
             position: 1,
             item: {
+              '@id': 'https://blog.tubone-project24.xyz',
+              name: 'tubone BOYAKI',
+            },
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            item: {
               '@id': url,
               name: title,
               image,
