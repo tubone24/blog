@@ -15,8 +15,6 @@ const schemaOrgJSONLD = ({
 }) => {
   let returnJson = [];
 
-  console.log(title);
-
   returnJson.push(
     {
       '@context': 'http://schema.org',

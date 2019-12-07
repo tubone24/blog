@@ -93,7 +93,7 @@ class BlogPost extends Component {
           title={title}
           url={slug}
           siteTitleAlt="tubone BOYAKI"
-          isPost={false}
+          isPost={true}
           description={excerpt}
           image={headerImage || 'https://i.imgur.com/M795H8A.jpg'}
         />
