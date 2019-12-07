@@ -12,89 +12,103 @@ const schemaOrgJSONLD = ({
   isPost,
   image,
   description,
-}) => [
-  {
-    '@context': 'http://schema.org',
-    '@type': 'WebSite',
-    url,
-    name: title,
-    alternateName: siteTitleAlt || '',
-  },
-  isPost
-    ? {
+}) => {
+  let returnJson = [];
+
+  console.log(title);
+
+  returnJson.push(
+    {
       '@context': 'http://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          item: {
-            '@id': url,
-            name: title,
-            image,
-          },
-        },
-      ],
-    }
-    : '',
-  isPost
-    ? {
-      '@context': 'http://schema.org',
-      '@type': 'BlogPosting',
+      '@type': 'WebSite',
       url,
       name: title,
-      alternateName: siteTitleAlt || '',
-      headline: title,
-      image: {
-        '@type': 'ImageObject',
-        url: image,
-      },
-      description,
-    }
-    : '',
-];
+      alternateName: siteTitleAlt || 'tubone BOYAKI',
+    },
+  );
+
+  if (isPost) {
+    returnJson.push(
+      {
+        '@context': 'http://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            item: {
+              '@id': url,
+              name: title,
+              image,
+            },
+          },
+        ],
+      }
+    );
+
+    returnJson.push(
+      {
+        '@context': 'http://schema.org',
+        '@type': 'BlogPosting',
+        url,
+        name: title,
+        alternateName: siteTitleAlt || '',
+        headline: title,
+        image: {
+          '@type': 'ImageObject',
+          url: image,
+        },
+        description,
+      }
+    );
+  }
+  return returnJson;
+};
+
 
 const SEO = ({
   url, title, description, image, siteTitleAlt, isPost,
-}) => (
-  <Helmet>
-    <title>{title}</title>
+}) => {
+  return (
+    <Helmet>
+      <title>{title}</title>
 
-    {/* General tags */}
-    <meta name="description" content={description} />
-    <meta name="image" content={image} />
+      {/* General tags */}
+      <meta name="description" content={description} />
+      <meta name="image" content={image} />
 
-    {/* Schema.org tags */}
-    <script type="application/ld+json">
-      {JSON.stringify(schemaOrgJSONLD(url, title, siteTitleAlt, isPost))}
-    </script>
+      {/* Schema.org tags */}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgJSONLD({url, title, siteTitleAlt, isPost, image, description}))}
+      </script>
 
-    {/* OpenGraph tags */}
-    <meta property="og:url" content={url} />
-    {isPost ? (
-      <meta property="og:type" content="article" />
-    ) : (
-      <meta property="og:type" content="website" />
-    )}
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta
-      property="fb:app_id"
-      content={config.siteFBAppID ? config.siteFBAppID : ''}
-    />
+      {/* OpenGraph tags */}
+      <meta property="og:url" content={url} />
+      {isPost ? (
+        <meta property="og:type" content="article" />
+      ) : (
+        <meta property="og:type" content="website" />
+      )}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta
+        property="fb:app_id"
+        content={config.siteFBAppID ? config.siteFBAppID : ''}
+      />
 
-    {/* Twitter Card tags */}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:creator"
-      content={config.twitter_username ? config.twitter_username : ''}
-    />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-  </Helmet>
-);
+      {/* Twitter Card tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:creator"
+        content={config.twitter_username ? config.twitter_username : ''}
+      />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+    </Helmet>
+  )
+};
 
 SEO.propTypes = {
   url: PropTypes.string.isRequired,
