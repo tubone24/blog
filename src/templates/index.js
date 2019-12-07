@@ -7,6 +7,7 @@ import Sidebar from '../components/Sidebar';
 import ShareBox from '../components/ShareBox';
 
 import './index.scss';
+import SEO from "../components/SEO";
 
 const NavLinkText = ({ color, text }) => (
   <div
@@ -72,6 +73,14 @@ const Page = ({ pageContext, location }) => {
         <div className="col-xl-2 col-lg-1 order-3" />
       </div>
       <ShareBox url={location.href} hasCommentBox={false} />
+      <SEO
+        title={'tubone BOYAKI'}
+        url={'https://blog.tubone-project24.xyz/'}
+        siteTitleAlt='tubone BOYAKI'
+        isPost={false}
+        description='tubone BLOG: Python, Docker, TS and other techs..'
+        image={'https://i.imgur.com/StLyXdu.png'}
+      />
     </React.Fragment>
   );
 };
