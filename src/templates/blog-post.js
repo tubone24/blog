@@ -91,7 +91,7 @@ class BlogPost extends Component {
 
         <SEO
           title={title}
-          url={slug}
+          url={shareURL}
           siteTitleAlt="tubone BOYAKI"
           isPost={true}
           description={excerpt}
