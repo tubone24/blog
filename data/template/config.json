@@ -41,14 +41,22 @@
       "title": "Tags"
     },
     {
+      "href": "/about/",
+      "title": "About"
+    },
+    {
       "href": "/contacts/",
       "title": "Contacts"
     }
   ],
   "redirectors": [
     {
-      "toPath": "/2ll/",
-      "fromPath": "/tags/"
+      "toPath": "/about/",
+      "fromPath": "/profile/"
+    },
+    {
+      "toPath": "/2019/02/13/my-gear/",
+      "fromPath": "/gear/"
     }
   ],
   "carouselItems": [

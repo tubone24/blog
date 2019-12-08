@@ -72,7 +72,7 @@ const html = `
   <li>GCP</li>
   <li>Heroku</li>
   </ul>
-  <li>ギター</li>
+  <li><a href="https://blog.tubone-project24.xyz/2019/02/13/my-gear">ギター</a></li>
   <li>アニメ</li>
   <li>写真</li>
   <ul>
