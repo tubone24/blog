@@ -22,3 +22,30 @@ templateKey: blog-post
 という声が聞こえてきそうです。
 
 いやはやその通りだとは思いますのでmodulesのもう一つの魅力、global optionsの実装を進めようかと思います。
+
+## toastのオプション問題
+
+```typescript
+      const doDownload = async (filePath: string): Promise<void> => {
+        const options = {
+          position: 'top-center',
+          duration: 2000,
+          fullWidth: true,
+          type: 'error',
+        } as any;
+        try{
+          const blob = await downloadPDF(filePath);
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'result.pdf';
+          link.click();
+        } catch (e) {
+          if (e instanceof PdfFileNotFoundError) {
+            toast.show('No File!!', options)
+          } else {
+            toast.show('UnknownError!!', options)
+          }
+        }
+```
+
+
