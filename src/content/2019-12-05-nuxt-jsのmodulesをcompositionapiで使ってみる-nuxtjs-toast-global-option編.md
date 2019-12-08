@@ -81,3 +81,32 @@ const doDownload = async (filePath: string): Promise<void> => {
 たったこれだけ簡単！
 
 ## もっと見通しをよくしたい。registerを使おう
+
+さらにコードの見通しをよくしたければ、registerという機能を使うことができます。
+
+たとえば致命的なエラーの時は共通のメッセージを出すtoastを各コンポーネントに量産しなければならない場合など、コードのコピペはしんどいしメンテナンスもよくないのでこいつが便利です。
+
+```typescript{numberLines: 1}{11-19}
+//nuxt.config.ts
+
+  modules: [
+    '@nuxtjs/toast',,
+  ],
+  toast: {
+    position: 'top-center',
+    duration: 2000,
+    fullWidth: true,
+    iconPack : 'material',
+    register: [
+      {
+        name: 'unknownError', //toast名
+        message: 'UnknownError!!', //toastのmessage
+        options: {
+          type: 'error', //個別に設定したいオプションがあれば
+        },
+      },
+    ],
+
+  },
+
+```
