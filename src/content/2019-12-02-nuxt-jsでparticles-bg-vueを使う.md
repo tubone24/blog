@@ -4,6 +4,8 @@ title: Nuxt.jsでparticles-bg-vueを使う
 date: 2019-12-01T23:44:00.665Z
 description: Nuxt.jsでparticles-bg-vueを使う記事です。
 tags:
+  - JavaScript
+  - TypeScript
   - Nuxt.js
   - Vue.js
   - particles-bg-vue

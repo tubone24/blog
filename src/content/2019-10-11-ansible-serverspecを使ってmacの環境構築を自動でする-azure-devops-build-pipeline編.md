@@ -4,6 +4,7 @@ title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Azu
 date: 2019-10-10T15:04:39.398Z
 description: Ansible + Serverspecを使ってMacの環境構築を自動化し、Azure DevOps Build PipelineでCIを回します。
 tags:
+  - Auto Provisioning
   - Ansible
   - Serverspec
   - Mac

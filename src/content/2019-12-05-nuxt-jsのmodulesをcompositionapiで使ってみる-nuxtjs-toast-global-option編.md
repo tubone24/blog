@@ -4,6 +4,8 @@ title: Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast Global
 date: 2019-12-08T04:16:00.000Z
 description: Nuxt.jsのmodulesでGlobal Optionを使ってみます。
 tags:
+  - JavaScript
+  - TypeScript
   - Nuxt.js
   - Vue.js
   - CompositionAPI
@@ -46,7 +48,8 @@ const doDownload = async (filePath: string): Promise<void> => {
     if (e instanceof PdfFileNotFoundError) {
       toast.show('No File!!', options)
     } else {
-      toast.show('UnknownError!!', options)
+
+      toast.show('UnknownError!!', options)
     }
   }
 }
@@ -107,10 +110,13 @@ const doDownload = async (filePath: string): Promise<void> => {
         },
       },
       {
-        name: 'unknownError', //toast名: 利用するときに使う名前
-        message: 'UnknownError!!', //toastのmessage
+        name: 'unknownError',
+ //toast名: 利用するときに使う名前
+        message: 'UnknownError!!',
+ //toastのmessage
         options: {
-          type: 'error', //個別に設定したいオプションがあれば
+          type: 'error',
+ //個別に設定したいオプションがあれば
         },
       },
     ],
@@ -132,7 +138,8 @@ const doDownload = async (filePath: string): Promise<void> => {
     if (e instanceof PdfFileNotFoundError) {
       toast.global.nofileError(); //呼び出し
     } else {
-      toast.global.unknownError(); //呼び出し
+      toast.global.unknownError();
+ //呼び出し
     }
   }
 };

@@ -4,6 +4,8 @@ title: Nightwatch.jsでE2Eテストを回したときにうまく動かないた
 date: 2019-09-10T13:00:00.411Z
 description: ChromeDriverがGoogleChrome v76 に対応していないらしい。の続編
 tags:
+  - 自動テスト
+  - E2Eテスト
   - ChromeDriver
   - Nightwatch.js
 headerImage: 'https://i.imgur.com/MyBxJCZ.png'
@@ -171,10 +173,13 @@ Nightwatch.jsの動きが気になったのでもう少し深く見ていくとN
 
 [Package.json](https://github.com/nightwatchjs/nightwatch/blob/master/package.json)
 
-代わりにChromeDriverを入れていたのは`vue-cli` のテストパッケージでした。
+代わりにChromeDriverを入れていたのは`vue-cli
+` のテストパッケージでした。
 
 [Package.json](https://github.com/vuejs/vue-cli/blob/dev/packages/%40vue/cli-plugin-e2e-nightwatch/package.json)
 
-また、最新のnpm installできる[ChromeDriver](https://www.npmjs.com/package/chromedriver)は`76.0.1`でしたので、もしかしたらnpm updateするだけでよかったのかもしれません。
+また、最新のnpm installできる[ChromeDriver](https://www.npmjs.com/package/chromedriver)は`76.0.1
+`でしたので、もしかしたらnpm updateするだけでよかったのかもしれません。
 
-一応、依存パッケージのアップデートはCI契機([Dependabot Preview](https://github.com/marketplace/dependabot-preview))で動かすようにしていたのがあだになったかもしれませんねー。
+一応、依存パッケージのアップデートはCI契機([Dependabot Preview
+](https://github.com/marketplace/dependabot-preview))で動かすようにしていたのがあだになったかもしれませんねー。

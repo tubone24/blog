@@ -4,6 +4,8 @@ title: Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
 date: 2019-12-04T23:43:19.895Z
 description: Nuxt.jsのわかりにくい機能の一つ、modulesを使ってみます。
 tags:
+  - JavaScript
+  - TypeScript
   - Nuxt.js
   - Vue.js
   - modules

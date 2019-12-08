@@ -4,8 +4,10 @@ title: docoptはNimでも使えたのお話
 date: 2019-11-20T11:55:00.000Z
 description: Pythonですごい便利なdocoptはNimでも使えるという発見をした人のぼやき。
 tags:
-  - docopt
   - Nim
+  - docopt
+  - GitHub Action
+  - CLI
 headerImage: 'https://i.imgur.com/FeDnyEc.jpg'
 templateKey: blog-post
 ---

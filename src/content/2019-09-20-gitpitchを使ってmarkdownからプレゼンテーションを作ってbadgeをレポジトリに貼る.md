@@ -6,6 +6,8 @@ description: GitPitchを使ってMarkdownからプレゼンテーションを作
 tags:
   - GitPitch
   - GitHub
+  - GitHub Badges
+  - Azusa Colors
 headerImage: 'https://i.imgur.com/CBPn3gW.png'
 templateKey: blog-post
 ---

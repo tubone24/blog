@@ -6,12 +6,16 @@ date: 2019-10-23T22:22:00.000Z
 description: >-
   Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮る
 tags:
-  - GAS
+  - JavaScript
+  - TypeScript
+  - Google Apps Script
   - API FLASH
   - SlackAPI
   - Clasp
   - GitHub Action
   - Jest
+  - 自動テスト
+  - Unit Test
 headerImage: 'https://i.imgur.com/QCjxEBN.png'
 templateKey: blog-post
 ---

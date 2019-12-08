@@ -4,10 +4,12 @@ title: Netlify Formを使って、簡易Contact Formを作ってみる
 date: 2019-09-30T03:47:34.524Z
 description: Netlify Formを使って、簡易Contact Formを作ってみます。
 tags:
+  - JavaScript
   - Netlify
   - Netlify Form
   - Gatsby.js
   - React
+  - Contact Form
 headerImage: 'https://i.imgur.com/uWmwQRq.png'
 templateKey: blog-post
 ---
@@ -127,8 +129,10 @@ export default class Contact extends React.Component {
 のような形や
 
 ```html
-<label>Your email:<br/> <!-- ラベルを使ったり・・ -->
-  <input type="email" name="email" class="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" />　<!-- patternやrequired, placeholderも設定可能 -->
+<label>Your email:<br/>
+ <!-- ラベルを使ったり・・ -->
+  <input type="email" name="email" class="form-control" aria-describedby="emailHelp" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required placeholder="Enter your email" />
+　<!-- patternやrequired, placeholderも設定可能 -->
   <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
 </label>
 ```

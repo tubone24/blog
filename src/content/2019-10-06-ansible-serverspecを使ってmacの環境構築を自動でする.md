@@ -4,6 +4,7 @@ title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Ans
 date: 2019-10-06T02:20:10.067Z
 description: Ansible + Serverspecを使ってMacの環境構築を自動でします
 tags:
+  - Auto Provisioning
   - Ansible
   - Serverspec
   - Mac

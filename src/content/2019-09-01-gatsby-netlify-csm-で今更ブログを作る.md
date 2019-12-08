@@ -4,10 +4,12 @@ title: Github + Gatsby + Netlify CMS で今更ブログを作る
 date: 2019-09-01T07:33:38.830Z
 description: 今更にはなりますがNetlify CMSを使ってみたくなったのでGatsbyを使ってブログ作ってみました。
 tags:
+  - JavaScript
   - Gatsby
   - Netlify
   - Travis
   - React
+  - Headless CMS
 headerImage: 'https://i.imgur.com/dovylqZ.png'
 templateKey: blog-post
 ---

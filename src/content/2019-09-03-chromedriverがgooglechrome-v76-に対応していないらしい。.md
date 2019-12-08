@@ -4,6 +4,8 @@ title: ChromeDriverがGoogleChrome v76 に対応していないらしい。
 date: 2019-09-03T13:09:22.595Z
 description: ChromeDriverがGoogleChrome v76 に対応していないらしい。
 tags:
+  - 自動テスト
+  - E2E Test
   - Selenium
   - GoogleChrome
   - ChromeDriver

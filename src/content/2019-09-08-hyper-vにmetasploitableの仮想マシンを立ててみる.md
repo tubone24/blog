@@ -4,9 +4,10 @@ title: Hyper-vにMetasploitableの仮想マシンを立ててみる
 date: 2019-09-08T12:55:31.132Z
 description: Hyper-vにMetasploitableの仮想マシンを立ててみる
 tags:
+  - 仮想化
   - Hyper-v
   - metasploitable
-  - powershell
+  - powerShell
 headerImage: 'https://i.imgur.com/oV13syg.png'
 templateKey: blog-post
 ---
