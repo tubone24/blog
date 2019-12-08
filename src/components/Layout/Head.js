@@ -28,9 +28,9 @@ const Head = () => (
     />
     <link
       rel="alternate"
-      type="application/atom+xml"
+      type="application/rdf+xml"
       title={config.title}
-      href="/atom.xml"
+      href="https://blog.tubone-project24.xyz/rss.xml"
     />
     <meta
       name="google-site-verification"
