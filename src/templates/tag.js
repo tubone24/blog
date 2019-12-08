@@ -42,11 +42,11 @@ const TagPage = ({ data, pageContext }) => {
 
       <SEO
         title={tag}
-        url={`/tag/${tag}`}
+        url={`https://blog.tubone-project24.xyz/tag/${tag}`}
         siteTitleAlt="tubone BOYAKI"
         isPost={false}
         description={tag}
-        image="https://i.imgur.com/M795H8A.jpg"
+        image="https://i.imgur.com/StLyXdu.png"
       />
     </div>
   );

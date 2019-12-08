@@ -95,7 +95,7 @@ class BlogPost extends Component {
           siteTitleAlt="tubone BOYAKI"
           isPost={true}
           description={excerpt}
-          image={headerImage || 'https://i.imgur.com/M795H8A.jpg'}
+          image={headerImage || 'https://i.imgur.com/StLyXdu.png'}
         />
       </div>
     );

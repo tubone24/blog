@@ -13,12 +13,12 @@ export default () => (
       <Sidebar />
       <div className="col order-2">
         <h1>Thank you!</h1>
-        <p>This is a custom thank you page for form submissions</p>
+        <p>This is thank you page for form submissions</p>
       </div>
     </div>
     <SEO
       title="Contacts Thanks"
-      url="/thanks/"
+      url="https://blog.tubone-project24.xyz/thanks/"
       siteTitleAlt="tubone BOYAKI"
       isPost={false}
       description="Contact Thanks Page"

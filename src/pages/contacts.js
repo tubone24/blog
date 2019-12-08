@@ -135,7 +135,7 @@ export default class Contact extends React.Component {
         </div>
         <SEO
           title="Contacts"
-          url="/contacts/"
+          url="https://blog.tubone-project24.xyz/contacts/"
           siteTitleAlt="tubone BOYAKI"
           isPost={false}
           description="Contact Form Page"
