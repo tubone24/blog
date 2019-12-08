@@ -9,7 +9,6 @@
 
   .content {
     padding: 0;
-
     margin-right: auto;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
@@ -48,17 +47,47 @@
       font-weight: 600;
     }
 
-
     blockquote {
-      width: 100%;
-      max-width: 100%;
-      padding-right: 0.9em;
-      padding-left: 0.9em;
-      margin: 0; // Required
-      word-break: break-word;
-      border-left: 3px solid currentcolor;
-      caret-color: rgba(255, 255, 255, 0.9);
+      position: relative;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      font-style: italic;
+      color: #464646;
+      border: solid 3px #3ca5d4;
+      border-left-width: 50px;
     }
+  }
+
+  blockquote::before {
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    color: #fff;
+    content: ">";
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  blockquote p {
+    position: relative;
+    z-index: 3;
+    padding: 0;
+    margin: 10px 0;
+    line-height: 1.7;
+  }
+
+  blockquote cite {
+    display: block;
+    font-size: 0.9em;
+    color: #888;
+    text-align: right;
   }
 
   #gitalk-container {

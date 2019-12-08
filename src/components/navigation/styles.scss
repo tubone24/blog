@@ -173,10 +173,10 @@
 
     .close-btn {
       $close-btn-size: 40px;
+
       width: $close-btn-size;
       height: $close-btn-size;
       cursor: pointer;
-
       transform: scale(1);
 
       @media (max-height: 400px) {
