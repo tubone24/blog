@@ -91,7 +91,7 @@ const doDownload = async (filePath: string): Promise<void> => {
 //nuxt.config.ts
 
   modules: [
-    '@nuxtjs/toast',,
+    '@nuxtjs/toast',
   ],
   toast: {
     position: 'top-center',
