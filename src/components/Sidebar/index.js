@@ -13,6 +13,7 @@ import Subscription from './Subscription';
 
 import './index.scss';
 import ReactGA from 'react-ga';
+import TagCloud from "./TagCloud";
 
 const {
   githubUsername,
@@ -62,6 +63,8 @@ const Sidebar = ({ latestPosts, totalCount }) => (
       <SearchBox />
       <hr />
       <Subscription />
+      <hr />
+      <TagCloud />
     </div>
   </header>
 );
