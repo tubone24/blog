@@ -25,7 +25,7 @@ templateKey: blog-post
 
 ## toastのオプション問題
 
-```typescript
+```typescript{numberLines: 1}{2-7,16,18}
       const doDownload = async (filePath: string): Promise<void> => {
         const options = {
           position: 'top-center',
