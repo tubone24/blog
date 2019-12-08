@@ -23,29 +23,61 @@ templateKey: blog-post
 
 いやはやその通りだとは思いますのでmodulesのもう一つの魅力、global optionsの実装を進めようかと思います。
 
-## toastのオプション問題
+## toastのoption問題
+
+toastを使う際にはtoastを出す場所(position), toastをひっこめるまでの時間(duration)、色合いなどをtoastを呼び出す際に設定しますが・・・。
 
 ```typescript{numberLines: 1}{2-7,16,18}
-      const doDownload = async (filePath: string): Promise<void> => {
-        const options = {
-          position: 'top-center',
-          duration: 2000,
-          fullWidth: true,
-          type: 'error',
-        } as any;
-        try{
-          const blob = await downloadPDF(filePath);
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = 'result.pdf';
-          link.click();
-        } catch (e) {
-          if (e instanceof PdfFileNotFoundError) {
-            toast.show('No File!!', options)
-          } else {
-            toast.show('UnknownError!!', options)
-          }
-        }
+const doDownload = async (filePath: string): Promise<void> => {
+  const options = {
+    position: 'top-center',
+    duration: 2000,
+    fullWidth: true,
+    type: 'error',
+  } as any;
+  try{
+    const blob = await downloadPDF(filePath);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'result.pdf';
+    link.click();
+  } catch (e) {
+    if (e instanceof PdfFileNotFoundError) {
+      toast.show('No File!!', options)
+    } else {
+      toast.show('UnknownError!!', options)
+    }
+  }
+}
 ```
 
+コードの見通しが悪いですね・・。
 
+同じような設定を複数のtoastにoptionsで設定するのはめんどくさい・・。
+
+## modules global optionを使ってみる
+
+では、こちらを改善していきます。
+
+@nuxtjs/toastにはglobal optionsの機能があります。
+
+```typescript
+//nuxt.config.ts
+
+  modules: [
+    '@nuxtjs/toast',
+  ],
+  toast: {
+    position: 'top-center',
+    duration: 2000,
+    fullWidth: true,
+    iconPack : 'material',
+
+  },
+```
+
+このようにmodulesで@nuxtjs/toastを読み込んだ後、toast共通設定を入れます。
+
+たったこれだけ簡単！
+
+## もっと見通しをよくしたい。registerを使おう
