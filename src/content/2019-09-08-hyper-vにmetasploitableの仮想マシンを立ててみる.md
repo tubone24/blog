@@ -15,6 +15,12 @@ templateKey: blog-post
 
 セキュリティのテストやトレーニング用に意図的に脆弱性を作った仮想マシン **Metasploitable** はVirtualBox用のVMですが、Hyper-vに入れてみます。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## ダウンロード
 
 [sourceforge](https://sourceforge.net/projects/metasploitable/)からMetasploitableをダウンロードします。

@@ -21,6 +21,12 @@ templateKey: blog-post
 
 [lindelof](https://github.com/lindelof)さんというOSS作者さんからでparticleをVue.jsのBackgroundに当てたいなら[indelof/particles-bg-vue](https://github.com/lindelof/particles-bg-vue)がいいよ～と紹介されましたので早速使ってみました。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## particles-bg-vueとは？
 
 particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを読んでみましたが、[Proton](https://github.com/a-jie/Proton)という軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。

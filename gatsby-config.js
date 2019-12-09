@@ -156,6 +156,15 @@ module.exports = {
           'gatsby-remark-slideshare',
           'gatsby-remark-mermaid',
           {
+            resolve: 'gatsby-remark-table-of-contents',
+            options: {
+              exclude: 'Table of Contents',
+              tight: false,
+              fromHeading: 2,
+              toHeading: 4,
+            },
+          },
+          {
             resolve: 'gatsby-remark-images',
             options: {
               withWebp: true,

@@ -15,6 +15,12 @@ templateKey: blog-post
 ---
 # Github + Gatsby + Netlify CMS で今更ブログを作る
 
+## Table of Contents
+
+```toc
+
+```
+
 ## なぜこんなことを・・・。
 
 今更にはなりますがNetlify CMSを使ってみたくなったのでGatsbyを使ってブログ作ってみました。

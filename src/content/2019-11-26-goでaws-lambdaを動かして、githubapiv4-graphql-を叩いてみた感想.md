@@ -16,6 +16,12 @@ templateKey: blog-post
 
 案件で**Go**を使った開発にシフトしつつあるので必死こいて勉強してるわけですが、**AWS Lambda**を**Go**で実装したことがなかったのでちょっと触ってみました、というお話。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## AWS LambdaがGoで動くことを知ってますか？
 
 ![img](https://i.imgur.com/h1EK5QS.png)
@@ -139,7 +145,8 @@ Goはまぎれもなくサーバーサイドな言語なのでどちらかとい
 
 [shurcooL/githubv4](https://github.com/shurcooL/githubv4)
 
-話は逸れますがGitHubAPIv4はGitHubの**Personal access tokens**で**Access Token**を発行する必要があります。
+話は逸れますがGitHubAPIv4はGitHubの**Personal access tokens**
+で**Access Token**を発行する必要があります。
 
 [New personal access token](https://github.com/settings/tokens/new)から発行できます。発行しておきましょう。shurcooL/githubv4でも使います。
 

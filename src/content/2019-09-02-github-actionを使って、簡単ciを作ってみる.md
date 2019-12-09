@@ -14,7 +14,13 @@ templateKey: blog-post
 
 最近Github Actionを触って便利さに気がついてしまったのでご紹介します。
 
-# Github Actionとは？
+## Table of Contents
+
+```toc
+
+```
+
+## Github Actionとは？
 
 Github Actionとは、 ***built by you, run by us*** です。[（公式より）](https://github.blog/2018-10-17-action-demos/)
 
@@ -22,7 +28,7 @@ Github Actionとは、 ***built by you, run by us*** です。[（公式より�
 
 結構簡単に使えたのでご紹介します。
 
-# Github Actionのプレビューに応募する
+## Github Actionのプレビューに応募する
 
 Github Action自体はまだプレビュー版ですので、[こちらのサイト](https://github.com/features/actions)から
 利用申請をする必要があります。
@@ -34,7 +40,7 @@ Github Action自体はまだプレビュー版ですので、[こちらのサイ
 
 ![Img](https://i.imgur.com/ZYya5eA.png)
 
-# Workflowを設定する
+## Workflowを設定する
 
 Github ActionはほかのCIと同じくYAMLファイルで定義します。
 
@@ -79,7 +85,7 @@ jobs:
         black ebook_homebrew setup.py --check
 ```
 
-## Trigger設定
+### Trigger設定
 
 今回はpush時に動くようにしますので
 
@@ -97,7 +103,7 @@ jobs:
 
 Triggerについては[こちら](https://developer.github.com/actions/managing-workflows/workflow-configuration-options/)をご確認ください。
 
-## Matrixでテスト
+### Matrixでテスト
 
 Matrixでテストする場合は下記のようにPythonのバージョンを複数設定します。
 
@@ -116,7 +122,7 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
 ```
 
-## Stepの設定
+### Stepの設定
 
 StepはほかのCIと同じような感じで設定します。
 
@@ -144,7 +150,7 @@ StepはほかのCIと同じような感じで設定します。
         black ebook_homebrew setup.py --check
 ```
 
-## CI起動時の動き
+### CI起動時の動き
 
 無事PushでCIが動くと各push、PRごとにActionに結果がでます。
 
@@ -156,7 +162,7 @@ StepはほかのCIと同じような感じで設定します。
 
 ![Img](https://i.imgur.com/6T4kjdf.png)
 
-# 結論
+## 結論
 
 Github Actionを使えば、めんどっちいCIサーバ連携も不要で楽々です。
 

@@ -15,6 +15,12 @@ templateKey: blog-post
 
 [GitPitch](https://gitpitch.com/)を使って、[Ebook Homebrew](https://github.com/tubone24/ebook_homebrew)の紹介プレゼンを作りたいと思います。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## GitPitchとは？
 
 GitPitchとは、GitHubのレポジトリにMarkdownで書いたファイルを置いておくだけで勝手にかっちょいいプレゼンが作れるサービスです。

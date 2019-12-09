@@ -28,6 +28,12 @@ templateKey: blog-post
 
 なんかの格言ぽいですが、常にクリーンなMacで作った構成管理を確かめてみたい、ということでCIに乗っけてしまいます。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## MacOS X が使えるCIってあるの？
 
 結論から先にかけばあります。

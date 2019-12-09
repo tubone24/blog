@@ -26,6 +26,12 @@ templateKey: blog-post
 
 いやはやその通りだとは思いますのでmodulesのもう一つの魅力、**global options**の実装を進めようかと思います。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## toastのoption問題
 
 toastを使う際にはtoastを出す場所(**position**), toastをひっこめるまでの時間(**duration**)、色合いなどをtoastを呼び出す際に設定しますが・・・。

@@ -30,6 +30,12 @@ Netlifyに簡単にFormを作る機能が用意されているので利用用途
 
 そんなときにNetlify FormやGoogle Formは役立つのかもしれませんね。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## Gatsby.jsでForm用ページを個別に作る
 
 せっかくのReactなのでコンポーネントにしてもよいのですが、Formなんて1ページしか使わないので

@@ -18,6 +18,12 @@ Vue.jsで書いているコードのCI(CircleCI)が通らなくなっていろ�
 
 ***いろいろやってますが、結論失敗してます！！　読む時間がもったいない！***
 
+## Table of Contents
+
+```toc
+
+```
+
 ## ChromeDriverは Chrome v76に非対応
 
 エラーメッセージが出ていました。
@@ -153,7 +159,7 @@ jobs:
 
 では、 ![rerun](https://i.imgur.com/w7LQ34r.png) しましょう！
 
-# 結果
+## 結果
 
 ダメ見たいですね・・
 

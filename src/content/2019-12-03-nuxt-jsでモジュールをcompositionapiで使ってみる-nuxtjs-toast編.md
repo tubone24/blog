@@ -22,6 +22,12 @@ templateKey: blog-post
 
 今回は**Nuxt.js**の**modules**を**CompositionAPI**でどう使っていくかを書きます。
 
+## Table of Contents
+
+```toc
+
+```
+
 ## 先に結論
 
 **実装方法だけ見たい人は下記に進んでください。**
