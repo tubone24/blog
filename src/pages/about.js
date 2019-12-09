@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Content from "../components/Content";
-import ShareBox from "../components/ShareBox";
-import SEO from "../components/SEO";
+import React, { Component } from 'react';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import Content from '../components/Content';
+import ShareBox from '../components/ShareBox';
+import SEO from '../components/SEO';
 
 import { config } from '../../data';
 
@@ -72,28 +72,29 @@ const html = `
   <li>GCP</li>
   <li>Heroku</li>
   </ul>
-  <li><a href="https://blog.tubone-project24.xyz/2019/02/13/my-gear">ギター</a></li>
+  <li><a href="/2019/02/13/my-gear#%E3%82%AE%E3%82%BF%E3%83%BC">ギター</a></li>
   <li>アニメ</li>
   <li>写真</li>
   <ul>
   <li>Nikon D600</li>
   </ul>
-  <li>ダーツ</li>
+  <li><a href="/2019/02/13/my-gear#ダーツ">ダーツ</a></li>
   <li>ごろごろ</li>
   <li>牛丼</li>
   </ul>
 `;
 
+// eslint-disable-next-line react/prefer-stateless-function
 class About extends Component {
   render() {
     return (
       <div className="row post order-2">
         <Header
-          img={'https://i.imgur.com/M795H8A.jpg'}
-          title={'Who is tubone?'}
+          img="https://i.imgur.com/M795H8A.jpg"
+          title="Who is tubone?"
           authorName={name}
           authorImage={iconUrl}
-          subTitle={'20xx/xx/xx'}
+          subTitle="20xx/xx/xx"
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
@@ -104,16 +105,16 @@ class About extends Component {
         <ShareBox url={shareURL} />
 
         <SEO
-          title={'Who is tubone?'}
+          title="Who is tubone?"
           url={shareURL}
           siteTitleAlt="tubone BOYAKI Profile"
-          isPost={true}
-          description={'About tubone Profile'}
-          image={'https://i.imgur.com/VUti8s3.png'}
+          isPost
+          description="About tubone Profile"
+          image="https://i.imgur.com/VUti8s3.png"
         />
       </div>
-    )
+    );
   }
 }
 
-export default About
+export default About;
