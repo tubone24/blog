@@ -43,4 +43,9 @@ collections:
           widget: "string",
           default: "blog-post",
         }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - {
+          label: "Body",
+          name: "body",
+          widget: "markdown" ,
+          default: "## Table of Contents\n\n```toc\n\n```\n",
+        }
