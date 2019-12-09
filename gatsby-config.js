@@ -154,6 +154,7 @@ module.exports = {
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
+          'gatsby-remark-mermaid',
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -275,6 +276,7 @@ module.exports = {
         ],
       },
     },
+    'gatsby-plugin-cdn-files',
     'gatsby-plugin-offline', // put this after gatsby-plugin-manifest
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
