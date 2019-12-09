@@ -82,7 +82,7 @@ Nuxt.jsではVuexのストアを使いたい場合比較的簡単に実装でき
 
 詳しくは後で解説しますが、いたって普通のVuexストアを書いています。
 
-```typescript:store/status.ts
+```typescript
 import axios from 'axios';
 
 const backendURL = 'https://ebook-homebrew.herokuapp.com/';
@@ -145,7 +145,7 @@ export const getters = {
 **何度も言っていますがVuexストアを正しく直さないと動きませんよ**。
 
 
-```vuejs:components/StatusCheck.vue
+```typescript
 <template>
   <div id="status">
     <!-- actionの呼び出し(※5) -->
@@ -252,7 +252,7 @@ Actionを正しくdispatchしていても、ServerStatus, ServerVersionはtempla
 
 ストアを次のように作り直します。
 
-```typescript:store/status.ts
+```typescript
 import axios from 'axios';
 
 import {
@@ -341,7 +341,7 @@ toRefsはどうやら[Composition APIのソース](https://github.com/vuejs/comp
 
 インターセプトな動き・・・。なるほどわからん。
 
-```typescript:vuejs/composition-api/blob/master/src/reactivity/ref.ts#L142
+```typescript
 export function toRefs<T extends Data = Data>(obj: T): Refs<T> {
   if (!isPlainObject(obj)) return obj as any;
 
@@ -371,7 +371,7 @@ export function toRefs<T extends Data = Data>(obj: T): Refs<T> {
 
 間違った旧ストアコードではVuexストアのStateにinterfaceを使ってきちんと型を設定していたかと思いますが新コードではできてません。
 
-```typescript:旧store/status.ts
+```typescript
  //Stateの型を宣言
 export default interface State {
   status: string;
@@ -385,7 +385,7 @@ export const state = (): State => ({
 });
 ```
 
-```typescript:新store/status.ts
+```typescript
  //Stateの型を宣言
 export default interface State {
   status: string;
@@ -407,7 +407,7 @@ export const state = () => { //型がないよ！！
 
 実はStateの型問題はかなりトリッキーというか、Composition APIの深掘れば何とか解決できます。
 
-```typescript:直したstore/status.ts
+```typescript
 import {
   reactive,
   Ref,
@@ -441,7 +441,7 @@ Ref型は**@vue/composition-api**からimportで取ってこれるのですが�
 
 新しいgetterは謎のif文がかまされています。
 
-```typescript:謎のif文
+```typescript
 export const getters = {
   getStatus(state): string{ //引数の型ないよー
     if (state.status.value === '') { //謎if文
