@@ -99,7 +99,7 @@ module.exports = {
         feeds: [
           {
             // eslint-disable-next-line max-len
-            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map(edge => Object.assign({}, edge.node.frontmatter, {
+            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => Object.assign({}, edge.node.frontmatter, {
               description: edge.node.excerpt,
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
@@ -155,6 +155,16 @@ module.exports = {
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
           'gatsby-remark-mermaid',
+          {
+            resolve: 'gatsby-plugin-html-minifier',
+            options: {
+              caseSensitive: false,
+              collapseBooleanAttributes: false,
+              useShortDoctype: false,
+              removeEmptyElements: true,
+              removeComments: true,
+            },
+          },
           {
             resolve: 'gatsby-remark-table-of-contents',
             options: {
