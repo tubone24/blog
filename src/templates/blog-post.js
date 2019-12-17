@@ -59,11 +59,14 @@ class BlogPost extends Component {
   }
 
   render() {
-    const { node } = this.data.content.edges[0];
+    const { node, next, previous } = this.data.content.edges[0];
 
     const {
-      html, frontmatter, fields, excerpt,
+      html, frontmatter, fields, excerpt
     } = node;
+
+    console.log(previous)
+    console.log(next)
 
     const { slug } = fields;
 
@@ -115,12 +118,36 @@ export const pageQuery = graphql`
       headerImage
     }
   }
+  fragment nextPost on MarkdownRemark {
+      fields {
+          nextSlug: slug
+      }
+      frontmatter {
+          nextId: id
+          nextTitle: title
+          nextSlug: slug
+          nextDate: date
+          nextHeaderImage: headerImage
+      }
+  }
+
+  fragment prevPost on MarkdownRemark {
+      fields {
+          prevSlug: slug
+      }
+      frontmatter {
+          prevId: id
+          prevTitle: title
+          prevSlug: slug
+          prevDate: date
+          prevHeaderImage: headerImage
+      }
+  }
 
   query BlogPostQuery($index: Int) {
     content: allMarkdownRemark(
       sort: { order: DESC, fields: frontmatter___date }
       skip: $index
-      limit: 1
     ) {
       edges {
         node {
@@ -131,11 +158,11 @@ export const pageQuery = graphql`
         }
 
         previous {
-          ...post
+          ...prevPost
         }
 
         next {
-          ...post
+          ...nextPost
         }
       }
     }
