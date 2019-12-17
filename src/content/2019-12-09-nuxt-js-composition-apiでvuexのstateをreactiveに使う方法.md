@@ -14,7 +14,6 @@ tags:
 headerImage: 'https://i.imgur.com/BWyjwja.png'
 templateKey: blog-post
 ---
-# 新しく出たComposition APIに苦戦
 
 フロントエンド初学者の私が、Vue.jsの新しいAPIである[Composition API](https://vue-composition-api-rfc.netlify.com/#summary)を使って**Nuxt.js**の実装を行う機会があり、**Vuexを使ったストアで非常につらい思いをした**のでまとめます。
 
