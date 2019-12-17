@@ -13,7 +13,6 @@ tags:
 headerImage: 'https://i.imgur.com/dovylqZ.png'
 templateKey: blog-post
 ---
-# Github + Gatsby + Netlify CMS で今更ブログを作る
 
 ## Table of Contents
 

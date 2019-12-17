@@ -10,7 +10,6 @@ tags:
 headerImage: 'https://i.imgur.com/lYpsth4.png'
 templateKey: blog-post
 ---
-# 初めに
 
 Slackにはスタンプ機能があり、回りくどい文章を書かずに感情を相手に適切に伝えることができます。
 

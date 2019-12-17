@@ -14,7 +14,7 @@ tags:
 headerImage: 'https://i.imgur.com/29nafu5.png'
 templateKey: blog-post
 ---
-# わからん
+わからん
 
 最近[**Nuxt.js**](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[**CompositionAPI**](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
 

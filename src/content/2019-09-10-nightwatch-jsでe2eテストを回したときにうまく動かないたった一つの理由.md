@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/MyBxJCZ.png'
 templateKey: blog-post
 ---
-# エラーをよく読もう・・
+エラーをよく読もう・・
 
 前回書いた記事[ChromeDriverがGoogleChrome v76 に対応していないらしい。](https://blog.tubone-project24.xyz/2019-09-03-chromedriver)の解決編です。
 

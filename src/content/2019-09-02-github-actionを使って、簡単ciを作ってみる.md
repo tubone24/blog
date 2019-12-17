@@ -10,7 +10,6 @@ tags:
 headerImage: 'https://i.imgur.com/6T4kjdf.png'
 templateKey: blog-post
 ---
-# CIマニアと化したtubone
 
 最近Github Actionを触って便利さに気がついてしまったのでご紹介します。
 

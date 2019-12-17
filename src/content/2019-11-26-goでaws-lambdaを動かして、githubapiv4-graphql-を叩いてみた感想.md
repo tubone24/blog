@@ -12,7 +12,7 @@ tags:
 headerImage: 'https://i.imgur.com/h1EK5QS.png'
 templateKey: blog-post
 ---
-# やらねば。（風立ちぬ）
+やらねば。（風立ちぬ）
 
 案件で**Go**を使った開発にシフトしつつあるので必死こいて勉強してるわけですが、**AWS Lambda**を**Go**で実装したことがなかったのでちょっと触ってみました、というお話。
 

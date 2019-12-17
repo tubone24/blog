@@ -15,7 +15,7 @@ tags:
 headerImage: 'https://i.imgur.com/IAstOlF.png'
 templateKey: blog-post
 ---
-# すすめられたので使ってみた。
+すすめられたので使ってみた。
 
 以前、[particles.jsをVue.jsで使ってかっこいいページを作る](https://blog.tubone-project24.xyz/2019-09-12-particles-js)という記事を書いたところ、記事にコメントがありました。
 

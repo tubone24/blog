@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/FeDnyEc.jpg'
 templateKey: blog-post
 ---
-# めっちゃ便利じゃんアゼルバイジャン
+めっちゃ便利じゃんアゼルバイジャン
 
 Pythonで結構有名なdocoptがNimという言語でも使えたので喜びのあまり記事を書く運びになりました。
 

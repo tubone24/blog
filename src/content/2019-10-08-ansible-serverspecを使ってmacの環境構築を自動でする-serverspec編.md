@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
-# Serverspecで構築した環境を確認したい！！
+Serverspecで構築した環境を確認したい！！
 
 前回、Ansibleを使って、Macの環境を構築しました。一部べきとう性が保てない箇所があったりしたので、正しく設定値が入っているかServerspecを使ってMacの状態を確認していきます。
 

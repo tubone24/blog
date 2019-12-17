@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/eQ7uBsO.png'
 templateKey: blog-post
 ---
-# JSON Resumeを使ってさくさくっとそれっぽい職務経歴書を作ってみます
+JSON Resumeを使ってさくさくっとそれっぽい職務経歴書を作ってみます
 
 [JSON resume](https://jsonresume.org/)というものがあるようです。
 

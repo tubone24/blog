@@ -12,7 +12,7 @@ tags:
 headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
-# CIで回そう！
+CIで回そう！
 
 前回まででついにAnsible + ServerspecでMacの構成管理ができたわけですが、まだ残ってることがあります。
 

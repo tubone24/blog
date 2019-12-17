@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
-# 毎回Macの環境構築めんどくさい
+毎回Macの環境構築めんどくさい
 
 開発用MacBookの構成管理がしたくなり、AnsibleとServerspecを使って作りました。
 

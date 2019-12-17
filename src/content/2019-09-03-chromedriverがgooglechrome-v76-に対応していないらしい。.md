@@ -12,7 +12,6 @@ tags:
 headerImage: 'https://i.imgur.com/6WFqOEs.png'
 templateKey: blog-post
 ---
-# CIがこけた・・
 
 Vue.jsで書いているコードのCI(CircleCI)が通らなくなっていろいろ調べていると原因がわかってきました。
 

@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/CBPn3gW.png'
 templateKey: blog-post
 ---
-# とりあえずBadge増やしたい
+とりあえずBadge増やしたい
 
 [GitPitch](https://gitpitch.com/)を使って、[Ebook Homebrew](https://github.com/tubone24/ebook_homebrew)の紹介プレゼンを作りたいと思います。
 
