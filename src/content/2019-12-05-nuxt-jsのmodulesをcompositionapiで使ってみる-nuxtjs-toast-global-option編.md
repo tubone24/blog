@@ -13,7 +13,7 @@ tags:
 headerImage: 'https://i.imgur.com/29nafu5.png'
 templateKey: blog-post
 ---
-# 前回の続きです
+前回の続きです。
 
 前回[Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
 ](https://blog.tubone-project24.xyz/2019/12/04/nuxt-toast)ではNuxt.jsのmodulesを使ってtoastを出してみました。
