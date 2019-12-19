@@ -64,6 +64,7 @@
     "gatsby-remark-images": "^3.1.35",
     "gatsby-remark-mermaid": "^1.2.0",
     "gatsby-remark-prismjs": "^3.3.25",
+    "gatsby-remark-reading-time": "^1.1.0",
     "gatsby-remark-responsive-iframe": "^2.2.28",
     "gatsby-remark-slideshare": "git+https://github.com/weknowinc/gatsby-remark-slideshare.git",
     "gatsby-remark-table-of-contents": "0.0.8",

@@ -155,6 +155,7 @@ module.exports = {
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
           'gatsby-remark-mermaid',
+          'gatsby-remark-reading-time',
           {
             resolve: 'gatsby-plugin-html-minifier',
             options: {

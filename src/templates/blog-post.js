@@ -59,16 +59,15 @@ class BlogPost extends Component {
   }
 
   render() {
-    const { node, next, previous } = this.data.content.edges[0];
+    const { node } = this.data.content.edges[0];
 
     const {
-      html, frontmatter, fields, excerpt
+      html, frontmatter, fields, excerpt,
     } = node;
 
-    console.log(previous)
-    console.log(next)
+    const { slug, readingTime } = fields;
 
-    const { slug } = fields;
+    const { minutes, words } = readingTime;
 
     const { date, headerImage, title } = frontmatter;
 
@@ -85,6 +84,13 @@ class BlogPost extends Component {
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
+          <div style={{
+            padding: 30,
+            background: '#00ff7f',
+          }}
+          >
+            <p>この記事は<b>{words}文字</b>で読み終わるまでに約<b>{Math.round(minutes * 10) / 10}分</b>かかります</p>
+          </div>
           <Content post={html} />
 
           <div id="gitalk-container" />
@@ -109,6 +115,10 @@ export const pageQuery = graphql`
   fragment post on MarkdownRemark {
     fields {
       slug
+      readingTime {
+          minutes
+          words
+      }
     }
     frontmatter {
       id
@@ -118,36 +128,12 @@ export const pageQuery = graphql`
       headerImage
     }
   }
-  fragment nextPost on MarkdownRemark {
-      fields {
-          nextSlug: slug
-      }
-      frontmatter {
-          nextId: id
-          nextTitle: title
-          nextSlug: slug
-          nextDate: date
-          nextHeaderImage: headerImage
-      }
-  }
-
-  fragment prevPost on MarkdownRemark {
-      fields {
-          prevSlug: slug
-      }
-      frontmatter {
-          prevId: id
-          prevTitle: title
-          prevSlug: slug
-          prevDate: date
-          prevHeaderImage: headerImage
-      }
-  }
 
   query BlogPostQuery($index: Int) {
     content: allMarkdownRemark(
       sort: { order: DESC, fields: frontmatter___date }
       skip: $index
+      limit: 1
     ) {
       edges {
         node {
@@ -155,14 +141,6 @@ export const pageQuery = graphql`
           html
           excerpt
           ...post
-        }
-
-        previous {
-          ...prevPost
-        }
-
-        next {
-          ...nextPost
         }
       }
     }
