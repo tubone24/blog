@@ -19,6 +19,8 @@ import ShareBox from '../components/ShareBox';
 
 import { config } from '../../data';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 // Styles
 import './blog-post.scss';
 
@@ -84,13 +86,13 @@ class BlogPost extends Component {
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
-          <div style={{
-            padding: 30,
-            background: '#00ff7f',
-          }}
-          >
-            <p>この記事は<b>{words}文字</b>です</p>
-            <p>読み終わるまでに約<b>{Math.round(minutes * 10) / 10}分</b>かかります</p>
+          <div
+            className="countdown"
+            style={{
+              padding: 5,
+              background: '#97ff85',
+            }}
+          ><FontAwesomeIcon icon={['fa', 'clock']} /><p>この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます</p>
           </div>
           <Content post={html} />
 
