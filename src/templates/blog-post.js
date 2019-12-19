@@ -105,7 +105,7 @@ class BlogPost extends Component {
           title={title}
           url={shareURL}
           siteTitleAlt="tubone BOYAKI"
-          isPost={true}
+          isPost
           description={excerpt}
           image={headerImage || 'https://i.imgur.com/StLyXdu.png'}
         />
