@@ -89,7 +89,8 @@ class BlogPost extends Component {
             background: '#00ff7f',
           }}
           >
-            <p>この記事は<b>{words}文字</b>で読み終わるまでに約<b>{Math.round(minutes * 10) / 10}分</b>かかります</p>
+            <p>この記事は<b>{words}文字</b>です</p>
+            <p>読み終わるまでに約<b>{Math.round(minutes * 10) / 10}分</b>かかります</p>
           </div>
           <Content post={html} />
 
