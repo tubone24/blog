@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ExternalLink from '../ExternalLink';
 import { config } from '../../../data';
 
@@ -25,7 +24,7 @@ const Footer = () => (
             Copyright&nbsp;
             <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone" />
             &nbsp;
-            {config.title}
+            {config.title}&nbsp;
             {new Date().getFullYear()}
             &nbsp;
             <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />

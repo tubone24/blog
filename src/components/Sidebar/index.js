@@ -1,4 +1,5 @@
 import React from 'react';
+import { Profile } from 'react-github-info';
 import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -63,6 +64,11 @@ const Sidebar = ({ latestPosts, totalCount }) => (
       <SearchBox />
       <hr />
       <Subscription />
+      <hr />
+      <div className="github-profile">
+        <p>GitHub Card</p>
+        <Profile username="tubone24" custom="#1bd77f" />
+      </div>
       <hr />
       <TagCloud />
     </div>

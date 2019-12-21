@@ -43,11 +43,11 @@ export default () => (
       </div>
     </div>
     <SEO
-      title="Contacts Thanks"
-      url="https://blog.tubone-project24.xyz/thanks/"
+      title="GitHub Repos"
+      url="https://blog.tubone-project24.xyz/github/"
       siteTitleAlt="tubone BOYAKI"
       isPost={false}
-      description="Contact Thanks Page"
+      description="GitHub Repos list"
       image="https://i.imgur.com/M795H8A.jpg"
     />
   </div>
