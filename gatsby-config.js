@@ -273,6 +273,9 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-nprogress',
+      options: {
+        color: 'tomato',
+      },
     },
     {
       resolve: 'gatsby-plugin-manifest',
