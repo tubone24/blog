@@ -65,15 +65,23 @@ const Sidebar = ({ latestPosts, totalCount }) => (
       <hr />
       <Subscription />
       <hr />
-      <div className="github-profile">
+      <div className="d-none d-lg-block information my-2 github-profile">
         <p>GitHub Card</p>
         <Profile username="tubone24" custom="#1bd77f" />
+        <hr />
       </div>
-      <hr />
-      <a className="twitter-timeline" data-lang="en" data-height="400" data-theme="dark"
-         href="https://twitter.com/meitante1conan?ref_src=twsrc%5Etfw">Tweets by meitante1conan</a>
-      <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-      <hr />
+      <div className="d-none d-lg-block information my-2">
+        <a
+          className="twitter-timeline"
+          data-lang="en"
+          data-height="400"
+          data-theme="dark"
+          href="https://twitter.com/meitante1conan?ref_src=twsrc%5Etfw"
+        >Tweets by meitante1conan
+        </a>
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+        <hr />
+      </div>
       <TagCloud />
     </div>
   </header>
