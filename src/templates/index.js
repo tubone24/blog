@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar';
 import ShareBox from '../components/ShareBox';
 
 import './index.scss';
-import SEO from "../components/SEO";
+import SEO from '../components/SEO';
 
 const NavLinkText = ({ color, text }) => (
   <div
@@ -51,7 +51,7 @@ const Page = ({ pageContext, location }) => {
         <Sidebar />
         <div className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
           {group.map(({ node }) => (
-            // eslint-disable-next-line max-len
+            // eslint-disable-next-line max-len,react/jsx-props-no-spreading
             <Card {...node.frontmatter} url={node.frontmatter.slug ? node.frontmatter.slug : node.fields.slug} key={node.fields.slug} />
           ))}
 
@@ -74,8 +74,8 @@ const Page = ({ pageContext, location }) => {
       </div>
       <ShareBox url={location.href} hasCommentBox={false} />
       <SEO
-        title={'tubone BOYAKI'}
-        url={'https://blog.tubone-project24.xyz/'}
+        title='tubone BOYAKI'
+        url='https://blog.tubone-project24.xyz/'
         siteTitleAlt='tubone BOYAKI'
         isPost={false}
         description='tubone BLOG: Python, Docker, TS and other techs..'

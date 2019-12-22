@@ -205,6 +205,7 @@ module.exports = {
               loop: true,
             },
           },
+          'gatsby-remark-numbered-footnotes',
           {
             resolve: 'gatsby-plugin-sentry',
             options: {
