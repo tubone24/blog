@@ -45,7 +45,7 @@ const RelatedPosts = ({ post }) => (
       );
       if (!relatedPosts) { return null; }
       return (
-        <div className="related-posts" style={{padding: 30, background: 'white',}}>
+        <div className="related-posts" style={{padding: 30, background: '#dcdcdc',}}>
           <h3 className="related-posts-title">関連記事</h3>
           {relatedPosts.map(relatedPost => (
             <div className="related-post">
