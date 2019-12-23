@@ -1,5 +1,4 @@
 import React from 'react';
-import { Profile } from 'react-github-info';
 import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
