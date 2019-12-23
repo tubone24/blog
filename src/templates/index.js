@@ -32,16 +32,24 @@ const NavLink = ({ test, url, text }) => {
   );
 };
 
+const PageNum = ({ page, all }) => (
+  <div
+    className="pagenum"
+  >
+    {page}/{all}
+  </div>
+);
+
 const Page = ({ pageContext, location }) => {
   const {
-    group, index, first, last, pathPrefix,
+    group, index, first, last, pathPrefix, pageCount,
   } = pageContext;
 
   const previousUrl = index - 1 === 1 ? '' : `/${pathPrefix}/${index - 1}`;
   const nextUrl = `/${pathPrefix}/${index + 1}`;
 
   return (
-    <React.Fragment>
+    <>
       <div
         className="row homepage"
         style={{
@@ -65,6 +73,9 @@ const Page = ({ pageContext, location }) => {
             <div className="previousLink">
               <NavLink test={!first} url={previousUrl} text="Previous" />
             </div>
+            <div className="pageNum">
+              <PageNum page={index} all={pageCount} />
+            </div>
             <div className="nextLink">
               <NavLink test={!last} url={nextUrl} text="Next" />
             </div>
@@ -74,14 +85,14 @@ const Page = ({ pageContext, location }) => {
       </div>
       <ShareBox url={location.href} hasCommentBox={false} />
       <SEO
-        title='tubone BOYAKI'
-        url='https://blog.tubone-project24.xyz/'
-        siteTitleAlt='tubone BOYAKI'
+        title="tubone BOYAKI"
+        url="https://blog.tubone-project24.xyz/"
+        siteTitleAlt="tubone BOYAKI"
         isPost={false}
-        description='tubone BLOG: Python, Docker, TS and other techs..'
-        image={'https://i.imgur.com/StLyXdu.png'}
+        description="tubone BLOG: Python, Docker, TS and other techs.."
+        image="https://i.imgur.com/StLyXdu.png"
       />
-    </React.Fragment>
+    </>
   );
 };
 

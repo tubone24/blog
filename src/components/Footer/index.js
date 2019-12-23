@@ -22,11 +22,11 @@ const Footer = () => (
           </p>
           <p className="copyright">
             Copyright&nbsp;
-            <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone" />
+            <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone24" />
             &nbsp;
-            {config.title}&nbsp;
-            {new Date().getFullYear()}
-            &nbsp;
+            <b>{config.title}&nbsp;</b>
+            2017-{new Date().getFullYear()}
+            &nbsp;&nbsp;
             <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />
           </p>
         </div>
