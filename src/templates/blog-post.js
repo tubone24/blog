@@ -23,6 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Styles
 import './blog-post.scss';
+import RelatedPosts from "../components/Relateds";
 
 const {
   url, name, iconUrl, gitalk,
@@ -97,6 +98,7 @@ class BlogPost extends Component {
           <Content post={html} />
 
           <div id="gitalk-container" />
+          <RelatedPosts post={node} />
         </div>
 
         <ShareBox url={shareURL} />
@@ -129,6 +131,7 @@ export const pageQuery = graphql`
       slug
       date
       headerImage
+      tags
     }
   }
 
