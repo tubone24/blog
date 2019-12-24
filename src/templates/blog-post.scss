@@ -67,6 +67,22 @@
       background-color: #3bff3d;
     }
 
+    ul,
+    ol {
+      padding: 0.5em 0.5em 0.5em 2em;
+      margin-right: 10px;
+      margin-left: 10px;
+      background: #f1f8ff;
+      border-radius: 9px;
+      box-shadow: 0px 0px 0px 10px #f1f8ff;
+    }
+
+    ul li,
+    ol li {
+      padding: 0.5em 0;
+      line-height: 1.5;
+    }
+
     blockquote {
       position: relative;
       box-sizing: border-box;
