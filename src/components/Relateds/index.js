@@ -46,7 +46,7 @@ const RelatedPosts = ({ post }) => (
       if (!relatedPosts) { return null; }
       return (
         <div className="related-posts">
-          <h2 className="related-posts-title">関連記事</h2>
+          <h2 className="related-posts-title">Related Posts</h2>
           {relatedPosts.map(relatedPost => (
             <div className="related-post">
               <RelatedCard title={relatedPost.node.frontmatter.title} tags={relatedPost.node.frontmatter.tags} date={relatedPost.node.frontmatter.date} headerImage={relatedPost.node.frontmatter.headerImage} url={relatedPost.node.fields.slug} />
