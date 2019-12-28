@@ -142,7 +142,7 @@ module.exports = {
         pathToConfigModule: 'src/utils/typography',
       },
     },
-    'gatsby-plugin-sharp',
+    // 'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -175,13 +175,13 @@ module.exports = {
               toHeading: 4,
             },
           },
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              withWebp: true,
-              quality: 80,
-            },
-          },
+          // {
+          //   resolve: 'gatsby-remark-images',
+          //   options: {
+          //     withWebp: true,
+          //     quality: 80,
+          //   },
+          // },
           {
             resolve: 'gatsby-remark-audio',
             options: {
