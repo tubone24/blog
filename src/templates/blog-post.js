@@ -93,7 +93,7 @@ class BlogPost extends Component {
               padding: 5,
               background: '#97ff85',
             }}
-          ><FontAwesomeIcon icon={['fa', 'clock']} /><p>この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます</p>
+          ><FontAwesomeIcon icon={['fa', 'clock']} />この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます
           </div>
           <Content post={html} />
 
@@ -101,7 +101,7 @@ class BlogPost extends Component {
           <RelatedPosts post={node} />
         </div>
 
-        <ShareBox url={shareURL} />
+        <ShareBox url={shareURL} />˚
 
         <SEO
           title={title}
