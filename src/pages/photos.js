@@ -34,11 +34,11 @@ export default () => (
     </div>
     <ShareBox url={shareURL} />
     <SEO
-      title="GitHub Repos"
+      title="Photos"
       url="https://blog.tubone-project24.xyz/github/"
       siteTitleAlt="tubone BOYAKI"
       isPost={false}
-      description="GitHub Repos list"
+      description="Photos"
       image="https://i.imgur.com/M795H8A.jpg"
     />
   </div>
