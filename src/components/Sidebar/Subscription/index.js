@@ -4,7 +4,7 @@ import ReactGA from 'react-ga';
 
 const Subscription = () => (
   <div className="subscription">
-    <a href="/rss.xml" className="btn btn-warning" role="button" onClick={() => ReactGA.event({ category: 'User', action: 'push RSS Button' })}>
+    <a href="/rss.xml" className="btn btn-danger subrss" role="button" onClick={() => ReactGA.event({ category: 'User', action: 'push RSS Button' })}>
 
 
       SUBSCRIBE RSS&nbsp;
