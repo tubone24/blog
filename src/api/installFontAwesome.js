@@ -5,6 +5,7 @@ import {
   faIdBadge,
   faRss,
   faClock,
+  faQuoteLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faEnvelope, faComment } from '@fortawesome/free-regular-svg-icons';
@@ -36,6 +37,7 @@ const installFontAwesome = () => {
     fa500px,
     faRss,
     faClock,
+    faQuoteLeft,
   );
 };
 
