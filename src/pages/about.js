@@ -33,6 +33,7 @@ const html = `
   </ul>
   </li>
   <li><a href="#like">2 好きなこと</a></li>
+  <li><a href="#aboutblog">3 このブログについて</a></li>
 </ul>
 </div>
   <h2 id="cv">経歴</h2>
@@ -82,6 +83,9 @@ const html = `
   <li>ごろごろ</li>
   <li>牛丼</li>
   </ul>
+  <h2 id="aboutblog">このブログについて</h2>
+  <p>このブログは・・・</p>
+  <img src="/assets/logo3.svg" alt="logo" title="logo">
 `;
 
 // eslint-disable-next-line react/prefer-stateless-function
