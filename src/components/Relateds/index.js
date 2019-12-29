@@ -47,9 +47,6 @@ const RelatedPosts = ({ post }) => (
       if (!relatedPosts) { return null; }
       return (
         <div className="related-posts">
-          <span className="fa-layers fa-fw fa-1x">
-              <FontAwesomeIcon icon={['fas', 'newspaper']} />
-          </span>
           <h2 className="related-posts-title">Related Posts</h2>
           {relatedPosts.map(relatedPost => (
             <div className="related-post">
