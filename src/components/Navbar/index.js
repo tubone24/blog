@@ -34,7 +34,7 @@ const Navbar = () => (
           gotoPage('/');
         }}
       >
-        <span className="brand-logo">tubone BOYAKI</span>
+        <img src={"static/assets/logo.svg"} alt={"logo"} />
       </button>
       <button
         className="navbar-toggler"
