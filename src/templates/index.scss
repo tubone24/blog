@@ -1,3 +1,5 @@
+@import "../styles/colors";
+
 .navlink {
   display: inline-block;
   padding: 0.5rem 0.9rem;
@@ -16,7 +18,7 @@
   color: #f6fcff;
   text-align: center;
   text-decoration: none;
-  background: #0089e0;
+  background: $tag-blue;
   border: solid 1px #d7d7d7;
   border-radius: 0.2rem;
 }
