@@ -91,9 +91,11 @@ class BlogPost extends Component {
             className="countdown"
             style={{
               padding: 5,
-              background: '#97ff85',
+              background: '#1bd77f',
             }}
-          ><FontAwesomeIcon icon={['fa', 'clock']} />この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます
+          ><span className="fa-layers fa-fw fa-1x">
+        <FontAwesomeIcon icon={['fas', 'rss']} />
+      </span>この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます
           </div>
           <Content post={html} />
 
