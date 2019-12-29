@@ -34,7 +34,7 @@ const Navbar = () => (
           gotoPage('/');
         }}
       >
-        <img src={"/assets/logo.svg"} alt={"logo"} />
+        <img src={"/assets/logo2.svg"} alt={"logo"} />
       </button>
       <button
         className="navbar-toggler"
