@@ -4,6 +4,7 @@ import { StaticQuery, graphql , Link } from "gatsby";
 import RelatedCard from '../RelatedCard';
 
 import './index.scss';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // eslint-disable-next-line react/prop-types
 const RelatedPosts = ({ post }) => (
@@ -46,6 +47,9 @@ const RelatedPosts = ({ post }) => (
       if (!relatedPosts) { return null; }
       return (
         <div className="related-posts">
+          <span className="fa-layers fa-fw fa-1x">
+              <FontAwesomeIcon icon={['fas', 'newspaper']} />
+          </span>
           <h2 className="related-posts-title">Related Posts</h2>
           {relatedPosts.map(relatedPost => (
             <div className="related-post">
