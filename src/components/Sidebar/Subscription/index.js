@@ -2,6 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactGA from 'react-ga';
 
+import './index.scss';
+
 const Subscription = () => (
   <div className="subscription">
     <a href="/rss.xml" className="btn btn-danger subrss" role="button" onClick={() => ReactGA.event({ category: 'User', action: 'push RSS Button' })}>
