@@ -17,6 +17,10 @@
     .navbar-brand {
       color: black;
       background: transparent;
+      img {
+        width: 200px;
+        height: auto;
+      }
 
       .brand-logo {
         padding: 1px 5px 2px;
