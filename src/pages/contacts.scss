@@ -7,6 +7,10 @@
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+
+  input:focus {
+    border:solid 1px #1bd77f;
+  }
 }
 
 .form-control {
