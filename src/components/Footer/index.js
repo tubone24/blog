@@ -19,12 +19,12 @@ const Footer = () => (
             />
             .&nbsp;Hosted on&nbsp;
             <ExternalLink href="https://www.netlify.com/" title="Netlify" />
-            .&nbsp;Also indexed posts with
+            .&nbsp;Also indexed posts with&nbsp;
             <ExternalLink href="https://www.algolia.com/" title="Algolia" />
           </p>
           <p className="copyright">
             Copyright&nbsp;
-            <ExternalLink href="https://tubone-project24.xyz" title="&copy;tubone24" />
+            <ExternalLink href="https://portfolio.tubone-project24.xyz/" title="&copy;tubone24" />
             &nbsp;
             <b>{config.title}&nbsp;</b>
             2017-{new Date().getFullYear()}
