@@ -81,7 +81,7 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Your name:<br/>
-                  <input type="text" name="name" className="form-control" maxLength="30"
+                  <input type="text" name="name" className="form-control" maxLength="30" cols="50"
                          minLength="2" required placeholder="Enter your name"
                          onChange={this.handleChange}/>
 
@@ -91,7 +91,7 @@ export default class Contact extends React.Component {
                 <label>
                   Your email:<br/>
                   <input type="email" name="email" className="form-control"
-                         aria-describedby="emailHelp"
+                         aria-describedby="emailHelp" cols="50"
                          pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                          required placeholder="Enter your email" onChange={this.handleChange}/>
                   <small id="emailHelp" className="form-text text-muted">We'll never share your
@@ -102,7 +102,7 @@ export default class Contact extends React.Component {
               <p>
                 <label>
                   Subject:<br/>
-                  <input type="text" name="subject" className="form-control" maxLength="30"
+                  <input type="text" name="subject" className="form-control" maxLength="30" cols="50"
                          placeholder="Subject here..."
                          onChange={this.handleChange}/>
 
