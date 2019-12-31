@@ -2,6 +2,16 @@ import React from 'react';
 import { Repository } from 'react-github-info';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
+import Chart from '../components/Chart';
+
+const options = {
+  title: "Like languages",
+};
+const data = [
+  ["Language", "Size"],
+  ["Python", 12],
+  ["JavaScript", 5.5],
+];
 
 
 export default () => (
@@ -22,6 +32,7 @@ export default () => (
           flexDirection: 'row',
         }}
       >
+        <Chart data={data} height={"100%"} width={"85%"} options={options} />
         <Repository username="tubone24" repos="blog" custom="green" mode="dark" />
         <Repository username="tubone24" repos="portfolio" custom="green" />
         <Repository username="tubone24" repos="ebook-homebrew-nuxt-with-typescript-client" custom="green" />
