@@ -82,35 +82,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-github',
-      options: {
-        headers: {
-          Authorization: '',
-        },
-        queries: [
-          `{
-            repository(owner: "tubone24", name: "blog") {
-              issues(last: 20, states: OPEN) {
-                edges {
-                  node {
-                    id
-                    author {
-                      avatarUrl
-                      login
-                      url
-                    }
-                    bodyHTML
-                    title
-                    url
-                  }
-                }
-              }
-            }
-          }`,
-        ],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-feed',
       options: {
         query: `
