@@ -9,6 +9,9 @@ import {
   faFile,
   faAngleRight,
   faUser,
+  faLink,
+  faSearch,
+  faTags,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faEnvelope, faComment, faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
@@ -45,6 +48,9 @@ const installFontAwesome = () => {
     faAngleRight,
     faUser,
     faCalendarAlt,
+    faLink,
+    faSearch,
+    faTags,
   );
 };
 

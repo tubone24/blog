@@ -51,7 +51,7 @@ const html = `
   <p><b>サーバの保守運用業務</b>になる</p>
   <p>自宅に<b>サーバを買う</b></p>
   <h3 id="secondCareer">開発</h3>
-  <p>開発を希望して<b>保守運用業務脱出成功</b>></p>
+  <p>開発を希望して<b>保守運用業務脱出成功</b></p>
   <p>社内データ基盤の開発業務で<b>Hadoop</b>に触れる。<b>開発マネジメント業務</b>をする</p>
   <p>開発マネジメントに未来を感じられなくなり<b>AWS</b>での開発案件に移りデベロッパーになる</p>
   <p>今に至る</p>
@@ -86,6 +86,8 @@ const html = `
   <h2 id="aboutblog">このブログについて</h2>
   <p>このブログは・・・</p>
   <img src="/assets/logo3.svg" alt="logo" title="logo">
+  <p>ぼやきという言葉は常々マイナスに捉えられがちですが実はアイディアややる気の源泉だったりします。</p>
+  <p>そんな源泉になるようなことを届けられるブログしていきます。</p>
 `;
 
 // eslint-disable-next-line react/prefer-stateless-function

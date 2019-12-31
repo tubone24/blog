@@ -1,5 +1,6 @@
 import React from 'react';
 import {StaticQuery, graphql} from 'gatsby';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Tag from '../../../components/Tag';
 
@@ -25,7 +26,7 @@ const TagCloud = ({data}) => {
 
   return (
     <div className="d-none d-lg-block information my-2">
-      <p>Tags</p>
+      <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;Tags</p>
       {tags.map(item => (
         <Tag name={item} key={item} count={mapping[item]}/>
       ))}
