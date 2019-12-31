@@ -6,9 +6,12 @@ import {
   faRss,
   faClock,
   faNewspaper,
+  faFile,
+  faAngleRight,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faEnvelope, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faComment, faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import {
   faGithub,
   faFacebookF,
@@ -38,6 +41,10 @@ const installFontAwesome = () => {
     faRss,
     faClock,
     faNewspaper,
+    faFile,
+    faAngleRight,
+    faUser,
+    faCalendarAlt,
   );
 };
 

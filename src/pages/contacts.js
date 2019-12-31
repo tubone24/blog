@@ -4,6 +4,8 @@ import { navigateTo } from 'gatsby-link';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import './contacts.scss';
 
 export default class Contact extends React.Component {
@@ -58,6 +60,7 @@ export default class Contact extends React.Component {
         >
           <Sidebar/>
           <div className="col order-2 contactForm">
+        <FontAwesomeIcon icon={['far', 'envelope']} size="2x" pull="left" />
             <h1>Contact Form</h1>
             <p><b>Please your Comment here.</b></p>
             <br/>
@@ -80,8 +83,8 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  Your name:<br/>
-                  <input type="text" name="name" className="form-control" maxLength="30" cols="50"
+                  <FontAwesomeIcon icon={['fas', 'user']} pull="left" />Your name<br/>
+                  <input type="text" name="name" className="form-control" maxLength="30"
                          minLength="2" required placeholder="Enter your name"
                          onChange={this.handleChange}/>
 
@@ -89,9 +92,9 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  Your email:<br/>
+                  <FontAwesomeIcon icon={['far', 'envelope']} pull="left" />Your email<br/>
                   <input type="email" name="email" className="form-control"
-                         aria-describedby="emailHelp" cols="50"
+                         aria-describedby="emailHelp"
                          pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                          required placeholder="Enter your email" onChange={this.handleChange}/>
                   <small id="emailHelp" className="form-text text-muted">We'll never share your
@@ -101,7 +104,7 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  Subject:<br/>
+                  Subject<br/>
                   <input type="text" name="subject" className="form-control" maxLength="30" cols="50"
                          placeholder="Subject here..."
                          onChange={this.handleChange}/>
@@ -110,16 +113,17 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  Message:<br/>
+                  Message<br/>
                   <textarea name="message" className="form-control"
                             placeholder="Something writing..." rows="6" cols="50"
                             onChange={this.handleChange}/>
                 </label>
               </p>
               <p>
-                File:<br/>
+                File<br/>
                 <label className="input-group-btn">
                   <span className="btn btn-info">
+                    <FontAwesomeIcon icon={['fas', 'file']} pull="left" />
                     Attachment File<input type="file" name="file" className="file-upload"
                                           onChange={this.handleAttachment}/>
                     <small id="fileHelp" className="form-text">Please Attachment File Size less small as possible</small>
@@ -128,7 +132,7 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <br/>
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" class="btn btn-primary">Send<FontAwesomeIcon icon={['fas', 'angle-right']} pull="right" /></button>
               </p>
             </form>
           </div>
