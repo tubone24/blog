@@ -24,3 +24,9 @@ Goの勉強をしておかないと社内でニートになってしまうので
 ## Echoとは？
 
 **High performance**で**extensible**で**minimalist**な **Go web framework**だそうです。
+
+よくわかりませんね。まぁ公式のGitHubを見るに、
+
+### はやい
+
+![img](https://camo.githubusercontent.com/d8800e2ee37115207efc1f3e937a28fb49d90e22/68747470733a2f2f692e696d6775722e636f6d2f49333256644d4a2e706e67)
