@@ -11,6 +11,10 @@ tags:
 headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
 templateKey: blog-post
 ---
+Goの勉強をしておかないと社内でニートになってしまうので、GoのWebフレームワークのEchoを使ったアプリケーションを作成中です。
+
+その中でボトルネック調査をする必要があったので、Opentracing形式のトレースアプリケーションであるJaegerをローカル環境で使ってみたいと思います。
+
 ## Table of Contents
 
 ```toc
