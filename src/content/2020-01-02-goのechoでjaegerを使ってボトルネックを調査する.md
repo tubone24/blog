@@ -79,4 +79,84 @@ func main() {
 
 echo.New()したあとに、echo-contribで提供されているjaegerteacingを呼びます。
 
-これだけで、各APIの呼び出しをrouterごとに
+これだけで、各APIの呼び出しをrouterごとに記録することができるようになっています。
+簡単ですね！便利ですね！
+
+## child spanを記録する
+
+さらにAPI内部の動き、例えばDBの書き込みスピードなどを計測する場合には**child span**という機能を使うことで実現できます。
+
+**/get/:username**というAPIのハンドラーを見てみます。
+
+```go
+package handler
+
+import (
+	"github.com/labstack/echo-contrib/jaegertracing"
+	"github.com/labstack/echo/v4"
+	"net/http"
+
+	"github.com/tubone24/what-is-your-color/api"
+)
+
+func GetColor() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		username := c.Param("username")
+		github := &api.GitHub{Client: &api.GithubClientImpl{}}
+		sp := jaegertracing.CreateChildSpan(c, "Call API")
+		defer sp.Finish()
+		sp.SetBaggageItem("Func", "GetColor")
+		sp.SetTag("Func", "GetColor")
+		err, langs := github.DoGetColor(username)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusInternalServerError, "Internal Error")
+		}
+		return c.JSON(http.StatusOK, langs)
+	}
+}
+```
+
+このコード例では、GitHubのAPIからの結果を**github.DoGetColor(username)** で取得していますが、手前で**CreateChildSpan** でchildspanを指定してます。
+
+## jaegerで結果を見る
+
+jaegerを起動します。起動には[公式ドキュメント](https://www.jaegertracing.io/docs/1.9/getting-started/#all-in-one)にのっているall-in-one dockerを使います。(あらかじめDockerコンテナが動く環境を作っておきます。)
+
+```bash
+docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14268:14268 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:1.9
+
+```
+
+~~不要な開放ポートがありますが、めんどくさいのでドキュメントそのままです。~~
+
+起動すると、jaegerUIが<http://localhost:16686/>で立ち上がります。
+
+![img](https://i.imgur.com/CRKvFq6.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
