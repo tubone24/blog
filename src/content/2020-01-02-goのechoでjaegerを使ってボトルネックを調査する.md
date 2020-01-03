@@ -29,19 +29,19 @@ Goの勉強をしておかないと社内でニートになってしまうので
 
 ### はやい
 
-Goの中でもパフォーマンスがいいと言われているGinに比べても十分な速度がでていることが公式のGitHubにのってました。
+Goの中でもパフォーマンスがいいと言われている[Gin](https://gin-gonic.com/)に比べても**十分な速度がでている**ことが公式のGitHubにのってました。
 
 ![img](https://camo.githubusercontent.com/d8800e2ee37115207efc1f3e937a28fb49d90e22/68747470733a2f2f692e696d6775722e636f6d2f49333256644d4a2e706e67)
 
 Ginより早いならEcho使っておけばええんや！と思いますが、
 
-GitHubレポジトリのスター数はEchoは16.1k, Ginは34.4kとGinの方が人気なのは間違いありませんので、プロジェクトによって見極める必要はありそうです。
+GitHubレポジトリのスター数はEchoは**16.1k**, Ginは**34.4k**とGinの方が人気なのは間違いありませんので、プロジェクトによって見極める必要はありそうです。
 
-また、Goの場合は標準のnet/httpライブラリがそこそこ優秀なので簡単なAPI作成であればWAF不要論もあります。
+また、Goの場合は標準のnet/httpライブラリがそこそこ優秀なので簡単なAPI作成であれば**WAF不要論**もあります。
 
 ### 公式ドキュメントが優秀
 
-Echoの場合、Ginに比べて公式のドキュメントが充実しているような気がしました。気のせいかもしれません。
+Echoの場合、Ginに比べて**公式のドキュメントが充実**しているような気がしました。気のせいかもしれません。
 
 Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄があります。これはいいアイディアですね。
 
@@ -53,11 +53,11 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 ## jaegerとは？
 
-[jeager](https://www.jaegertracing.io/docs/1.16/)は[Uber Technologies Inc.](https://uber.github.io/#/)がOSSとして公開した分散トレーシングシステムです。
+[jeager](https://www.jaegertracing.io/docs/1.16/)は[Uber Technologies Inc.](https://uber.github.io/#/)が**OSS**として公開した**分散トレーシングシステム**です。
 
 ![img](https://i.imgur.com/69WEZfu.png)
 
-マイクロサービスなアーキテクチャを横串で監視できる強みとGo, Java, Node, Python, C++でクライアントが提供されていることが魅力です。
+マイクロサービスなアーキテクチャを横串で監視できる強みと**Go, Java, Node, Python, C++** でクライアントが提供されていることが魅力です。
 
 また、トレーシングの結果収集も[OpenTracing](https://opentracing.io/)としてドキュメントがありますので、別言語にも移植できそうです。
 
@@ -93,7 +93,7 @@ func main() {
 }
 ```
 
-echo.New()したあとに、echo-contribで提供されているjaegerteacingを呼びます。
+echo.New()したあとに、[echo-contrib](https://github.com/labstack/echo-contrib)で提供されている**jaegerteacing**を呼びます。
 
 これだけで、各APIの呼び出しをrouterごとに記録することができるようになっています。
 簡単ですね！便利ですね！
@@ -136,7 +136,7 @@ func GetColor() echo.HandlerFunc {
 
 ## jaegerで結果を見る
 
-jaegerを起動します。起動には[公式ドキュメント](https://www.jaegertracing.io/docs/1.9/getting-started/#all-in-one)にのっているall-in-one dockerを使います。(あらかじめDockerコンテナが動く環境を作っておきます。)
+jaegerを起動します。起動には[公式ドキュメント](https://www.jaegertracing.io/docs/1.9/getting-started/#all-in-one)にのっている**all-in-one docker**を使います。(あらかじめDockerコンテナが動く環境を作っておきます。)
 
 ```bash
 docker run -d --name jaeger \
@@ -172,7 +172,7 @@ APIをコールしてみるとTracingされているのがわかります。
 
 こまかく見ていきますと、:username はpath parameterなのですが、APIコール時に**tubone24**というユーザ名を設定しコールしたことがわかります。
 
-1.04sかかってますね・・・。
+**1.04sかかってますね・・・。**
 
 ![img](https://i.imgur.com/c0y81lE.png)
 
@@ -182,7 +182,7 @@ APIをコールしてみるとTracingされているのがわかります。
 
 ![img](https://i.imgur.com/dh3WfC2.png)
 
-どうやらバックエンド(GitHub)へのコールはそこまで0.48msとそこまで遅くはないみたいです。
+どうやらバックエンド(GitHub)へのコールはそこまで**0.48ms**とそこまで遅くはないみたいです。
 
 別のところにボトルネックがあるんですかね・・。
 
