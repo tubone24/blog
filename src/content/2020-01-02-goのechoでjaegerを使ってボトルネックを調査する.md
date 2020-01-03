@@ -47,11 +47,21 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 [Ginの公式ドキュメント](https://gin-gonic.com/docs/)
 
-さて、Echoがいいという話はこんなところにして早速実装してみます。
+さて、Echoがいいという話はこんなところにして早速jaegerの実装してみます。
+
+## jaegerとは？
+
+[jeager](https://www.jaegertracing.io/docs/1.16/)は[Uber Technologies Inc.](https://uber.github.io/#/)がOSSとして公開した分散トレーシングシステムです。
+
+マイクロサービスなアーキテクチャを横串で監視できる強みとGo, Java, Node, Python, C++でクライアントが提供されていることが魅力です。
+
+![img](https://www.jaegertracing.io/img/trace-detail-ss.png)
+
+かっこいいですね。今回はマイクロサービスな作り方をしていないので、そこまでかっこよくはなりませんが、さっそく使っていきましょう!
 
 ## jaeger tracing
 
-Jaegerの実装と関係ないコードは省いてます。
+**Jaegerの実装と関係ないコードは省いてます。**
 
 まずは、**main.go** エントリーポイントから
 
@@ -156,6 +166,8 @@ APIをコールしてみるとTracingされているのがわかります。
 
 こまかく見ていきますと、:username はpath parameterなのですが、APIコール時に**tubone24**というユーザ名を設定しコールしたことがわかります。
 
+1.04sかかってますね・・・。
+
 ![img](https://i.imgur.com/c0y81lE.png)
 
 また、childspanも無事記録してます。
@@ -164,19 +176,10 @@ APIをコールしてみるとTracingされているのがわかります。
 
 ![img](https://i.imgur.com/dh3WfC2.png)
 
+どうやらバックエンド(GitHub)へのコールはそこまで0.48msとそこまで遅くはないみたいです。
 
-
+別のところにボトルネックがあるんですかね・・。
 
 ## 結論
 
-
-
-
-
-
-
-
-
-
-
-
+jaegerでトレーシングが簡単にできましたが、ボトルネック発見は難しいということがよくわかりました。
