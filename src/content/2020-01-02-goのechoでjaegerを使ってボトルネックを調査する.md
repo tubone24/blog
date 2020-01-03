@@ -1,7 +1,7 @@
 ---
-slug: 2019/1/2/go-jaeger
+slug: 2019/1/3/go-jaeger
 title: GoのEchoでJaegerを使ってボトルネックを調査する
-date: 2020-01-02T08:07:30.122Z
+date: 2020-01-03T08:07:30.122Z
 description: GoのEchoでJaegerを使ってボトルネックを調査します。
 tags:
   - Go
@@ -140,14 +140,34 @@ docker run -d --name jaeger \
 
 起動すると、jaegerUIが<http://localhost:16686/>で立ち上がります。
 
+先程作ったEchoサーバも立ち上げます。
+
+```bash
+go run main.go
+```
+
+APIをコールしてみるとTracingされているのがわかります。
+
 ![img](https://i.imgur.com/CRKvFq6.png)
 
+**/get/:username**というAPIのコールも出ています。
+
+![img](https://i.imgur.com/1uQdmdX.png)
+
+こまかく見ていきますと、:username はpath parameterなのですが、APIコール時に**tubone24**というユーザ名を設定しコールしたことがわかります。
+
+![img](https://i.imgur.com/c0y81lE.png)
+
+また、childspanも無事記録してます。
+
+![img](https://i.imgur.com/1uQdmdX.png)
+
+![img](https://i.imgur.com/dh3WfC2.png)
 
 
 
 
-
-
+## 結論
 
 
 
