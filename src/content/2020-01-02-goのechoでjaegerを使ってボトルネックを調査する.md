@@ -8,7 +8,7 @@ tags:
   - Echo
   - Jaeger
   - ボトルネック調査
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/69WEZfu.png'
 templateKey: blog-post
 ---
 Goの勉強をしておかないと社内でニートになってしまうので、お勉強を兼ねてGoのWebフレームワークのEchoを使ったアプリケーションを作成中です。
@@ -37,6 +37,8 @@ Ginより早いならEcho使っておけばええんや！と思いますが、
 
 GitHubレポジトリのスター数はEchoは16.1k, Ginは34.4kとGinの方が人気なのは間違いありませんので、プロジェクトによって見極める必要はありそうです。
 
+また、Goの場合は標準のnet/httpライブラリがそこそこ優秀なので簡単なAPI作成であればWAF不要論もあります。
+
 ### 公式ドキュメントが優秀
 
 Echoの場合、Ginに比べて公式のドキュメントが充実しているような気がしました。気のせいかもしれません。
@@ -53,11 +55,15 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 [jeager](https://www.jaegertracing.io/docs/1.16/)は[Uber Technologies Inc.](https://uber.github.io/#/)がOSSとして公開した分散トレーシングシステムです。
 
+![img](https://i.imgur.com/69WEZfu.png)
+
 マイクロサービスなアーキテクチャを横串で監視できる強みとGo, Java, Node, Python, C++でクライアントが提供されていることが魅力です。
 
-![img](https://www.jaegertracing.io/img/trace-detail-ss.png)
+また、トレーシングの結果収集も[OpenTracing](https://opentracing.io/)としてドキュメントがありますので、別言語にも移植できそうです。
 
-かっこいいですね。今回はマイクロサービスな作り方をしていないので、そこまでかっこよくはなりませんが、さっそく使っていきましょう!
+(Nimに移植しますかね・・・。)
+
+ともかく、かっこいいですね。今回はマイクロサービスな作り方をしていないので、そこまでかっこよくはなりませんが、さっそく使っていきましょう!
 
 ## jaeger tracing
 
