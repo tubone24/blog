@@ -49,5 +49,34 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 さて、Echoがいいという話はこんなところにして早速実装してみます。
 
-## 実装
+## jaeger tracing
 
+Jaegerの実装と関係ないコードは省いてます。
+
+まずは、**main.go** エントリーポイントから
+
+```go
+// main.go
+
+package main
+
+import (
+	"github.com/labstack/echo/v4"
+	"github.com/tubone24/what-is-your-color/handler"
+	"github.com/labstack/echo-contrib/jaegertracing"
+)
+
+func main() {
+	e := echo.New()
+	c := jaegertracing.New(e, nil)
+	defer c.Close()
+
+	e.GET("/get/:username", handler.GetColor())
+
+	log.Fatal(e.Start(":9090"))
+}
+```
+
+echo.New()したあとに、echo-contribで提供されているjaegerteacingを呼びます。
+
+これだけで、各APIの呼び出しをrouterごとに
