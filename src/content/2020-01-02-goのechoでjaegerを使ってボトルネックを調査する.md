@@ -23,7 +23,11 @@ Goの勉強をしておかないと社内でニートになってしまうので
 
 ## そもそもEchoとは？
 
-**High performance**で**extensible**で**minimalist**な **Go web framework**だそうです。
+![img](https://i.imgur.com/3ZjGzeX.png)
+
+EchoとはGoのWAF(Web Framework)です。
+
+特徴として公式によると、**High performance**で**extensible**で**minimalist**な **Go web framework**だそうです。
 
 よくわかりませんね。ちょっと特徴を洗い出してみます。
 
