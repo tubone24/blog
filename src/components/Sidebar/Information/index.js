@@ -9,6 +9,8 @@ import './index.scss';
 const Information = ({ totalCount, posts }) => (
   <div className="d-none d-lg-block information my-2">
     <hr />
+      <figure><embed src="https://wakatime.com/share/@tubone/5306754c-dfb1-45dc-a9ec-e4a276518529.svg"/></figure>
+    <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
     <Friend />
