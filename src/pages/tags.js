@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import Sidebar from '../components/Sidebar';
 import Tag from '../components/Tag';
 import SEO from '../components/SEO';
+import Heatmap from "../components/Heatmap";
 
 // eslint-disable-next-line react/prop-types
 const TagPage = ({ data }) => {
@@ -35,6 +36,8 @@ const TagPage = ({ data }) => {
         }}
       >
         <Sidebar />
+
+        <Heatmap />
 
         <div className="col order-2">
           {tags.map(item => (
