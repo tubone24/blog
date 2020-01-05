@@ -20,7 +20,7 @@ const getTooltipDataAttrs = (value) => {
     }
 
     return {
-        'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count}`,
+        'data-tip': `${value.date} has count: ${value.count}`,
     };
 
 };
@@ -45,7 +45,7 @@ const Heatmap = ({data}) => {
 
     return (
       <>
-        <CalendarHeatmap
+       <CalendarHeatmap
         startDate={getLastYearDate()}
         endDate={new Date()}
         values={values}
@@ -53,8 +53,8 @@ const Heatmap = ({data}) => {
         showWeekdayLabels={true}
         onMouseOver={getSlug}
         tooltipDataAttrs={getTooltipDataAttrs}
-    />
-    <ReactTooltip />
+      />
+      <ReactTooltip />
     </>)
 };
 
