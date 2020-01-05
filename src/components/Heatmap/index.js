@@ -4,6 +4,10 @@ import React from "react";
 import ReactTooltip from 'react-tooltip';
 import {graphql, StaticQuery} from "gatsby";
 
+import gotoPage from '../../api/url';
+
+const slugs = {};
+
 const getLastYearDate = () => {
     const today = new Date();
     today.setFullYear( today.getFullYear() - 1 );
@@ -17,7 +21,9 @@ const getLast3MonthDate = () => {
 };
 
 const getSlug = (event, value) => {
-    console.log(value)
+    const {date} = value;
+    const slug = slugs[date];
+    gotoPage(slug);
 };
 
 const getTooltipDataAttrs = (value) => {
@@ -51,12 +57,13 @@ const Heatmap = ({data, minify=false}) => {
     }
 
     allMarkdownRemark.edges.forEach(({node}) => {
-        const {date} = node.frontmatter;
+        const {date, slug} = node.frontmatter;
         if (mapping[date]) {
             mapping[date] += 1;
         } else {
             mapping[date] = 1;
         }
+        slug[date] = slug;
     });
 
     Object.keys(mapping).forEach( (date) => {
@@ -71,7 +78,7 @@ const Heatmap = ({data, minify=false}) => {
         values={values}
         showMonthLabels={true}
         showWeekdayLabels={true}
-        onMouseOver={getSlug}
+        onClick={getSlug}
         tooltipDataAttrs={getTooltipDataAttrs}
       />
       <ReactTooltip />
