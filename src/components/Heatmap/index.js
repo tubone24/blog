@@ -20,7 +20,7 @@ const getLast3MonthDate = () => {
     return today
 };
 
-const getSlug = (event, value) => {
+const getSlug = (value) => {
     console.log(value);
     const {date} = value;
     const slug = slugs[date];
