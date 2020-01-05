@@ -6,6 +6,8 @@ import {graphql, StaticQuery} from "gatsby";
 
 import {gotoPage} from '../../api/url';
 
+const slugs = {};
+
 const getLastYearDate = () => {
     const today = new Date();
     today.setFullYear( today.getFullYear() - 1 );
@@ -20,7 +22,9 @@ const getLast3MonthDate = () => {
 
 const getSlug = (event, value) => {
     console.log(value);
-    const {slug} = value;
+    const {date} = value;
+    const slug = slugs[date];
+    console.log(slug)
     gotoPage(slug);
 };
 
@@ -44,7 +48,6 @@ const getTooltipDataAttrs = (value) => {
 const Heatmap = ({data, minify=false}) => {
     const {allMarkdownRemark} = data;
     const mapping = {};
-    const slugs = {};
     const values = [];
 
     let startDate;
@@ -66,7 +69,7 @@ const Heatmap = ({data, minify=false}) => {
     });
 
     Object.keys(mapping).forEach( (date) => {
-        values.push({date: date, count: mapping[date], slug: slugs[date]})
+        values.push({date: date, count: mapping[date]})
     });
 
     return (
