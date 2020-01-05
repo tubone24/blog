@@ -239,36 +239,17 @@ export default props => (
 
 としてやっているのです。
 
-肝心なreact-carender-heatmap部分は
+肝心なreact-carender-heatmap部分はL47〜ですが、基本的にはGraphQLから取得した日付のカウントを取りつつvaluesに渡しているだけです。
 
-```javascipt
-const Heatmap = ({data, minify=false}) => {
-    const {allMarkdownRemark} = data;
-    const mapping = {};
-    const slugs = {};
-    const values = [];
+heatmapクリック時には該当記事へジャンプする機能とtooltipを表示させる機能を実現するためにCalendarHeatmapにonClickとtooltipDataAttrs propsを設定し、関数を設定してあげています。 
 
-    let startDate;
+また、tooltip利用にはReactTooltipを用意してあげる必要があります。
 
-    if (minify) {
-        startDate = getLast5MonthDate()
-    } else {
-        startDate = getLastYearDate()
-    }
+Reactではcomponentが複数要素を返すことが基本的にはできないので、React.fragmentを使ってCalendarHeatmapとReactTooltipの2要素をreturnしてあげます。
 
-    allMarkdownRemark.edges.forEach(({node}) => {
-        const {date, slug} = node.frontmatter;
-        if (mapping[date]) {
-            mapping[date] += 1;
-        } else {
-            mapping[date] = 1;
-        }
-        slugs[date] = slug;
-    });
+<> </>はfragmentの短縮形です。
 
-    Object.keys(mapping).forEach( (date) => {
-        values.push({date: date, count: mapping[date], slug: slugs[date]})
-    });
+```javascript
 
     return (
       <>
@@ -283,11 +264,7 @@ const Heatmap = ({data, minify=false}) => {
       />
       <ReactTooltip />
     </>)
-};
-
 ```
-
-とやっています。
 
 
 
