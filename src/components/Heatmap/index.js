@@ -28,7 +28,7 @@ const Heatmap = ({data}) => {
     });
 
     return (<CalendarHeatmap
-        startDate={new getLastYearDate()}
+        startDate={getLastYearDate()}
         endDate={new Date()}
         values={values}
     />)
