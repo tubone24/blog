@@ -31,6 +31,8 @@ const Heatmap = ({data}) => {
         startDate={getLastYearDate()}
         endDate={new Date()}
         values={values}
+        showMonthLabels={true}
+        showWeekdayLabels={true}
     />)
 };
 
