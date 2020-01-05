@@ -93,6 +93,7 @@
     "react-google-charts": "^3.0.15",
     "react-google-recaptcha": "^2.0.1",
     "react-helmet": "^5.2.1",
+    "react-tooltip": "^3.11.2",
     "react-transition-group": "^4.3.0",
     "react-typography": "^0.16.19",
     "rimraf": "^3.0.0",

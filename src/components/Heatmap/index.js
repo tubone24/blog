@@ -10,8 +10,19 @@ const getLastYearDate = () => {
 }
 
 const getSlug = (event, value) => {
-    console.log(event, value)
+    console.log(value)
 }
+
+const getTooltipDataAttrs = (value) => {
+    if (!value || !value.date) {
+        return null;
+    }
+
+    return {
+        'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count}`,
+    };
+
+};
 
 const Heatmap = ({data}) => {
     const {allMarkdownRemark} = data;
@@ -38,6 +49,7 @@ const Heatmap = ({data}) => {
         showMonthLabels={true}
         showWeekdayLabels={true}
         onMouseOver={getSlug}
+        tooltipDataAttrs={getTooltipDataAttrs}
     />)
 };
 
@@ -50,6 +62,8 @@ export default props => (
           node {
             frontmatter {
               date(formatString: "YYYY-MM-DD")
+              slug
+              title
             }
           }
         }
