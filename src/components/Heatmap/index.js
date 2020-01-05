@@ -1,18 +1,56 @@
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import React from "react";
+import {graphql, StaticQuery} from "gatsby";
 
-const Heatmap = () => (
-    <CalendarHeatmap
-        startDate={new Date('2016-01-01')}
-        endDate={new Date('2016-04-01')}
-        values={[
-            { date: '2016-01-01', count: 12 },
-            { date: '2016-01-22', count: 122 },
-            { date: '2016-01-30', count: 38 },
-            // ...and so on
-        ]}
+const getLastYearDate = () => {
+    const today = new Date();
+    today.setFullYear( today.getFullYear() - 1 );
+    return today
+}
+
+const Heatmap = ({data}) => {
+    const {allMarkdownRemark} = data;
+    const mapping = {};
+    const values = [];
+
+    allMarkdownRemark.edges.forEach(({node}) => {
+        const {date} = node.frontmatter;
+        if (mapping[date]) {
+            mapping[date] += 1;
+        } else {
+            mapping[date] = 1;
+        }
+    });
+
+    Object.keys(mapping).forEach( (date) => {
+        values.push({date: date, count: mapping[date]})
+    });
+
+    return (<CalendarHeatmap
+        startDate={new getLastYearDate()}
+        endDate={new Date()}
+        values={values}
+    />)
+};
+
+export default props => (
+    <StaticQuery
+        query={graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              date(formatString: "YYYY-MM-DD")
+            }
+          }
+        }
+      }
+    }
+    }
+    `}
+        render={data => <Heatmap data={data} {...props} />}
     />
 )
 
-export default Heatmap;
