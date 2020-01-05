@@ -18,3 +18,216 @@ templateKey: blog-post
 ```toc
 
 ```
+
+## 中国兄貴たちの技術ブログがかっこいい！
+
+と思った正月でした。多くのエンジニアが使っていたBlog技術要素が[Hexo](https://hexo.io/)だったのですが、その中でもひときわかっこいいデザインのThemeを使っている兄貴が多数おりました。
+
+そのThemeこそ、[hexo-theme-matery](https://github.com/blinkfox/hexo-theme-matery)です。
+
+Theme Demoページは[こちら](https://blinkfox.github.io/)
+
+Themeの中で特にかっこいいなぁと思ったのは、Blogの投稿日、投稿数に応じてGitHubの草(Heatmap)を表現するところです。
+
+![img](https://i.imgur.com/X2ehG18.png)
+
+Demoページは全然草生えてませんが・・・。
+
+自分のブログにも導入したい！！ということで早速作ってみることにします。
+
+## ReactでGitHub Heat mapを作る
+
+このブログはGatsby.jsでフレームワークはReactなのでReactでGitHubのHeat mapを作る方法を探していきます。
+
+見つけました。
+
+[Kevin Qi](kevinqi.com)さんが[React Calendar Heatmap](https://github.com/kevinsqi/react-calendar-heatmap)というものを提供してくれていました。
+
+さっそく使っていきます。
+
+### Component作成
+
+まずは何はともあれインストール
+
+```bash
+npm install --save react-calendar-heatmap
+```
+
+使い方はとっても簡単で[react-calendar-heatmap#usage](https://github.com/kevinsqi/react-calendar-heatmap#usage)に載っている通り、
+
+```javascript
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
+
+<CalendarHeatmap
+  startDate={new Date('2016-01-01')}
+  endDate={new Date('2016-04-01')}
+  values={[
+    { date: '2016-01-01', count: 12 },
+    { date: '2016-01-22', count: 122 },
+    { date: '2016-01-30', count: 38 },
+    // ...and so on
+  ]}
+/>
+```
+
+という具合で、propsにstartDate, endDate, valuesを指定すればOK。
+
+今回はValuesをGatsby.jsのGraphQLに対応させたいので、Componentを作っていきます。
+
+Componentでは、staticQueryを使って、全記事の日付を取得し、日付ごとにカウントを取りカウントをreact-calendar-heatmapに渡してあげることまでが役割とします。
+
+サイドバーで使う場合、1年分の長さのheatmapだと長すぎるのでpropsで長さを直近から5ヶ月までと1年分と切り替えられるようにしたいと思います。
+
+ということで実装したものが下記です。
+
+```javascript
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
+import React from "react";
+import ReactTooltip from 'react-tooltip';
+import {graphql, StaticQuery} from "gatsby";
+
+import {gotoPage} from '../../api/url';
+
+const getLastYearDate = () => {
+    const today = new Date();
+    today.setFullYear( today.getFullYear() - 1 );
+    return today
+};
+
+const getLast5MonthDate = () => {
+    const today = new Date();
+    today.setMonth( today.getMonth() - 5 );
+    return today
+};
+
+const getSlug = (value) => {
+    if (!value || !value.date) {
+        return null;
+    }
+
+    const {slug} = value;
+    gotoPage(slug);
+};
+
+const getTooltipDataAttrs = (value) => {
+    if (!value || !value.date) {
+        return null;
+    }
+
+    if (value.count === 1) {
+        return {
+            'data-tip': `${value.date} has ${value.count} post`,
+        };
+    } else {
+        return {
+            'data-tip': `${value.date} has ${value.count} posts`,
+        };
+    }
+
+};
+
+const Heatmap = ({data, minify=false}) => {
+    const {allMarkdownRemark} = data;
+    const mapping = {};
+    const slugs = {};
+    const values = [];
+
+    let startDate;
+
+    if (minify) {
+        startDate = getLast5MonthDate()
+    } else {
+        startDate = getLastYearDate()
+    }
+
+    allMarkdownRemark.edges.forEach(({node}) => {
+        const {date, slug} = node.frontmatter;
+        if (mapping[date]) {
+            mapping[date] += 1;
+        } else {
+            mapping[date] = 1;
+        }
+        slugs[date] = slug;
+    });
+
+    Object.keys(mapping).forEach( (date) => {
+        values.push({date: date, count: mapping[date], slug: slugs[date]})
+    });
+
+    return (
+      <>
+       <CalendarHeatmap
+        startDate={startDate}
+        endDate={new Date()}
+        values={values}
+        showMonthLabels={true}
+        showWeekdayLabels={true}
+        onClick={getSlug}
+        tooltipDataAttrs={getTooltipDataAttrs}
+      />
+      <ReactTooltip />
+    </>)
+};
+
+export default props => (
+    <StaticQuery
+        query={graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              date(formatString: "YYYY-MM-DD")
+              slug
+              title
+            }
+          }
+        }
+      }
+    }
+    `}
+        render={data => <Heatmap data={data} {...props} />}
+    />
+)
+```
+
+要素ごとにお話すると、Gatsby.js templateでGraphQLを実行するわけではないので、GraphQLはStaticQueryを使わないといけません。下記のようなクエリにすれば全記事の日付が取得できます。
+
+```graphql
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              date(formatString: "YYYY-MM-DD")
+              slug
+              title
+            }
+          }
+        }
+      }
+    }
+    `}
+```
+
+簡単ですね。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
