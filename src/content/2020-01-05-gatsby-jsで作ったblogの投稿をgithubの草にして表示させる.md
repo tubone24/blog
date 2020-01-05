@@ -214,7 +214,7 @@ export default props => (
 
 簡単ですね。さらにGraphQLのデータを渡し、renderしたものを別componentに渡すために、
 
-```javasctipt
+```javascript
 export default props => (
     <StaticQuery
         query={graphql`
