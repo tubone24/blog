@@ -37,7 +37,7 @@ Themeの中で特にかっこいいなぁと思ったのは、Blogの投稿日�
 
 ## ReactでGitHub Heat mapを作る
 
-このブログは**Gatsby.js**でフレームワークは**React**なのでReactでGitHubのHeat mapを作る方法を探していきます。
+このブログは**Gatsby.js**というフレームワークで実装しているので要素技術は**React**なのでReactでGitHubのHeat mapを作る方法を探していきます。
 
 見つけました。
 
