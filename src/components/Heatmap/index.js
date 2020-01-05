@@ -25,9 +25,15 @@ const getTooltipDataAttrs = (value) => {
         return null;
     }
 
-    return {
-        'data-tip': `${value.date} has count: ${value.count}`,
-    };
+    if (value.count === 1) {
+        return {
+            'data-tip': `${value.date} has ${value.count} post`,
+        };
+    } else {
+        return {
+            'data-tip': `${value.date} has ${value.count} posts`,
+        };
+    }
 
 };
 
