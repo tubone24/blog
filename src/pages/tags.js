@@ -41,8 +41,9 @@ const TagPage = ({ data }) => {
           {tags.map(item => (
             <Tag name={item} key={item} count={mapping[item]} />
           ))}
-            <Heatmap />
         </div>
+          <h2>Recent activity</h2>
+          <Heatmap/>
       </div>
       <SEO
         title="Tags"
