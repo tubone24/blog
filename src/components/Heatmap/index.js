@@ -4,7 +4,7 @@ import React from "react";
 import ReactTooltip from 'react-tooltip';
 import {graphql, StaticQuery} from "gatsby";
 
-import gotoPage from '../../api/url';
+import {gotoPage} from '../../api/url';
 
 const slugs = {};
 
