@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import Heatmap from '../../Heatmap';
+
 import './index.scss';
 
 const LatestPost = ({ posts, totalCount }) => (
@@ -13,6 +15,7 @@ const LatestPost = ({ posts, totalCount }) => (
 <FontAwesomeIcon icon={['fas', 'newspaper']} />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
       {totalCount}
     </p>
+      <Heatmap minify={true} />
     {posts.map(({ node }) => (
       <Link
         to={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
