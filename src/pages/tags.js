@@ -37,12 +37,11 @@ const TagPage = ({ data }) => {
       >
         <Sidebar />
 
-        <Heatmap />
-
         <div className="col order-2">
           {tags.map(item => (
             <Tag name={item} key={item} count={mapping[item]} />
           ))}
+            <Heatmap />
         </div>
       </div>
       <SEO
