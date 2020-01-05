@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 import Friend from '../Friend';
 import LatestPost from '../LatestPost';
+import Heatmap from '../../Heatmap';
 import './index.scss';
 
 const Information = ({ totalCount, posts }) => (
   <div className="d-none d-lg-block information my-2">
     <hr />
-      <figure><embed src="https://wakatime.com/share/@tubone/5306754c-dfb1-45dc-a9ec-e4a276518529.svg"/></figure>
+      <Heatmap minify={true} />
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
