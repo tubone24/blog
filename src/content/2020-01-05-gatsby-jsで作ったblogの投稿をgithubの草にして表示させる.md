@@ -21,7 +21,7 @@ templateKey: blog-post
 
 ## 中国兄貴たちの技術ブログがかっこいい！
 
-と思った正月でした。多くのエンジニアが使っていたBlog技術要素が[Hexo](https://hexo.io/)だったのですが、その中でもひときわかっこいいデザインのThemeを使っている兄貴が多数おりました。
+と思った**正月**でした。多くのエンジニアが使っていたBlog技術要素が[**Hexo**](https://hexo.io/)だったのですが、その中でもひときわかっこいいデザインのThemeを使っている兄貴が多数おりました。
 
 そのThemeこそ、[hexo-theme-matery](https://github.com/blinkfox/hexo-theme-matery)です。
 
@@ -31,13 +31,13 @@ Themeの中で特にかっこいいなぁと思ったのは、Blogの投稿日�
 
 ![img](https://i.imgur.com/X2ehG18.png)
 
-Demoページは全然草生えてませんが・・・。
+~~Demoページは全然草生えてませんが・・・。~~
 
 自分のブログにも導入したい！！ということで早速作ってみることにします。
 
 ## ReactでGitHub Heat mapを作る
 
-このブログはGatsby.jsでフレームワークはReactなのでReactでGitHubのHeat mapを作る方法を探していきます。
+このブログは**Gatsby.js**でフレームワークは**React**なのでReactでGitHubのHeat mapを作る方法を探していきます。
 
 見つけました。
 
@@ -71,11 +71,11 @@ import 'react-calendar-heatmap/dist/styles.css';
 />
 ```
 
-という具合で、propsにstartDate, endDate, valuesを指定すればOK。
+という具合で、propsにstartDate, endDate, valuesを指定すれば最低限OK。
 
-今回はValuesをGatsby.jsのGraphQLに対応させたいので、Componentを作っていきます。
+今回はValuesをGatsby.jsのGraphQLに対応させたいので、**React Component**を作っていきます。
 
-Componentでは、staticQueryを使って、全記事の日付を取得し、日付ごとにカウントを取りカウントをreact-calendar-heatmapに渡してあげることまでが役割とします。
+Componentでは、**StaticQuery**を使って、全記事の日付を取得し、日付ごとにカウントを取りカウントをreact-calendar-heatmapに渡してあげることまでが役割とします。
 
 サイドバーで使う場合、1年分の長さのheatmapだと長すぎるのでpropsで長さを直近から5ヶ月までと1年分と切り替えられるようにしたいと思います。
 
@@ -193,7 +193,7 @@ export default props => (
 )
 ```
 
-要素ごとにお話すると、Gatsby.js templateでGraphQLを実行するわけではないので、GraphQLはStaticQueryを使わないといけません。下記のようなクエリにすれば全記事の日付が取得できます。
+要素ごとにお話すると、Gatsby.js templateでGraphQLを実行するわけではないので、GraphQLは**StaticQuery**を使わないといけません。下記のようなクエリにすれば全記事の日付が取得できます。
 
 ```graphql
     query {
@@ -241,11 +241,11 @@ export default props => (
 
 肝心なreact-carender-heatmap部分はL47〜ですが、基本的にはGraphQLから取得した日付のカウントを取りつつvaluesに渡しているだけです。
 
-heatmapクリック時には該当記事へジャンプする機能とtooltipを表示させる機能を実現するためにCalendarHeatmapにonClickとtooltipDataAttrs propsを設定し、関数を設定してあげています。 
+heatmapクリック時には該当記事へジャンプする機能と**Tooltip**を表示させる機能を実現するためにCalendarHeatmapにonClickとtooltipDataAttrs propsを設定し、関数を設定してあげています。 
 
-また、tooltip利用にはReactTooltipを用意してあげる必要があります。
+また、tooltip利用には[ReactTooltip](https://www.npmjs.com/package/react-tooltip)を用意してあげる必要があります。
 
-Reactではcomponentが複数要素を返すことが基本的にはできないので、React.fragmentを使ってCalendarHeatmapとReactTooltipの2要素をreturnしてあげます。
+Reactではcomponentが複数要素を返すことが基本的にはできないので、**React.fragment**を使ってCalendarHeatmapとReactTooltipの2要素をreturnしてあげます。
 
 <> </>はfragmentの短縮形です。
 
@@ -266,7 +266,19 @@ Reactではcomponentが複数要素を返すことが基本的にはできない
     </>)
 ```
 
-またstartDateはサイドバー用は5ヶ月前、ページに埋め込む用は1年と変更できるようにしています。
+またComponentのpropsを使ってstartDateはサイドバー用は5ヶ月前、ページに埋め込む用は1年と変更できるようにしています。
+
+残念ながらクソコードです。
+
+```javascript
+    let startDate;
+
+    if (minify) {
+        startDate = getLast5MonthDate()
+    } else {
+        startDate = getLastYearDate()
+    }
+```
 
 ## 導入してみた
 
