@@ -48,7 +48,6 @@ export default props => (
         }
       }
     }
-    }
     `}
         render={data => <Heatmap data={data} {...props} />}
     />
