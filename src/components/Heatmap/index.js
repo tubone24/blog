@@ -27,6 +27,14 @@ const getSlug = (value) => {
     gotoPage(slug);
 };
 
+const getTitle = (value) => {
+    if (!value || !value.date) {
+        return null;
+    }
+
+    return value.title;
+};
+
 const getTooltipDataAttrs = (value) => {
     if (!value || !value.date) {
         return null;
@@ -48,6 +56,7 @@ const Heatmap = ({data, minify=false}) => {
     const {allMarkdownRemark} = data;
     const mapping = {};
     const slugs = {};
+    const titles = {};
     const values = [];
 
     let startDate;
@@ -59,17 +68,18 @@ const Heatmap = ({data, minify=false}) => {
     }
 
     allMarkdownRemark.edges.forEach(({node}) => {
-        const {date, slug} = node.frontmatter;
+        const {date, slug, title} = node.frontmatter;
         if (mapping[date]) {
             mapping[date] += 1;
         } else {
             mapping[date] = 1;
         }
         slugs[date] = slug;
+        titles[date] = title;
     });
 
     Object.keys(mapping).forEach( (date) => {
-        values.push({date: date, count: mapping[date], slug: slugs[date]})
+        values.push({date: date, count: mapping[date], slug: slugs[date], title: titles[date]})
     });
 
     return (
@@ -82,6 +92,7 @@ const Heatmap = ({data, minify=false}) => {
         showWeekdayLabels={true}
         onClick={getSlug}
         tooltipDataAttrs={getTooltipDataAttrs}
+        titleForValue={getTitle}
       />
       <ReactTooltip />
     </>)
