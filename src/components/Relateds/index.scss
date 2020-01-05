@@ -1,11 +1,11 @@
 @import "../../styles/colors";
 .related-posts {
   padding: 10px;
-  background: linear-gradient($main-green, $bg),
+  background: linear-gradient(rgba(27, 215, 127, 0.1), $bg),
     url("https://raw.githubusercontent.com/tubone24/blog/master/static/assets/bg.jpg");
-  background: -moz-linear-gradient($main-green, $bg),
+  background: -moz-linear-gradient(rgba(27, 215, 127, 0.1), $bg),
     url("https://raw.githubusercontent.com/tubone24/blog/master/static/assets/bg.jpg");
-  background: -webkit-linear-gradient($main-green, $bg),
+  background: -webkit-linear-gradient(rgba(27, 215, 127, 0.1), $bg),
     url("https://raw.githubusercontent.com/tubone24/blog/master/static/assets/bg.jpg");
   background-size: cover;
 }
