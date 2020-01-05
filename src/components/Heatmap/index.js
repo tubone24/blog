@@ -10,9 +10,9 @@ const getLastYearDate = () => {
     return today
 };
 
-const getLastMonthDate = () => {
+const getLast3MonthDate = () => {
     const today = new Date();
-    today.setMonth( today.getMonth() - 1 );
+    today.setMonth( today.getMonth() - 3 );
     return today
 };
 
@@ -39,7 +39,7 @@ const Heatmap = ({data, minify=false}) => {
     let startDate;
 
     if (minify) {
-        startDate = getLastMonthDate()
+        startDate = getLast3MonthDate()
     } else {
         startDate = getLastYearDate()
     }
