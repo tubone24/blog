@@ -9,6 +9,10 @@ const getLastYearDate = () => {
     return today
 }
 
+const getSlug = (event, value) => {
+    console.log(event, value)
+}
+
 const Heatmap = ({data}) => {
     const {allMarkdownRemark} = data;
     const mapping = {};
@@ -33,6 +37,7 @@ const Heatmap = ({data}) => {
         values={values}
         showMonthLabels={true}
         showWeekdayLabels={true}
+        onMouseOver={getSlug}
     />)
 };
 
