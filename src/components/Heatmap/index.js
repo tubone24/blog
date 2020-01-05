@@ -1,6 +1,7 @@
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import React from "react";
+import ReactTooltip from 'react-tooltip';
 import {graphql, StaticQuery} from "gatsby";
 
 const getLastYearDate = () => {
@@ -42,7 +43,9 @@ const Heatmap = ({data}) => {
         values.push({date: date, count: mapping[date]})
     });
 
-    return (<CalendarHeatmap
+    return (
+      <>
+        <CalendarHeatmap
         startDate={getLastYearDate()}
         endDate={new Date()}
         values={values}
@@ -50,7 +53,9 @@ const Heatmap = ({data}) => {
         showWeekdayLabels={true}
         onMouseOver={getSlug}
         tooltipDataAttrs={getTooltipDataAttrs}
-    />)
+    />
+    <ReactTooltip />
+    </>)
 };
 
 export default props => (
