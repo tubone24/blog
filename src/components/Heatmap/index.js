@@ -8,11 +8,17 @@ const getLastYearDate = () => {
     const today = new Date();
     today.setFullYear( today.getFullYear() - 1 );
     return today
-}
+};
+
+const getLastMonthDate = () => {
+    const today = new Date();
+    today.setMonth( today.getMonth() - 1 );
+    return today
+};
 
 const getSlug = (event, value) => {
     console.log(value)
-}
+};
 
 const getTooltipDataAttrs = (value) => {
     if (!value || !value.date) {
@@ -25,10 +31,18 @@ const getTooltipDataAttrs = (value) => {
 
 };
 
-const Heatmap = ({data}) => {
+const Heatmap = ({data, minify=false}) => {
     const {allMarkdownRemark} = data;
     const mapping = {};
     const values = [];
+
+    let startDate;
+
+    if (minify) {
+        startDate = getLastMonthDate()
+    } else {
+        startDate = getLastYearDate()
+    }
 
     allMarkdownRemark.edges.forEach(({node}) => {
         const {date} = node.frontmatter;
@@ -46,7 +60,7 @@ const Heatmap = ({data}) => {
     return (
       <>
        <CalendarHeatmap
-        startDate={getLastYearDate()}
+        startDate={startDate}
         endDate={new Date()}
         values={values}
         showMonthLabels={true}
