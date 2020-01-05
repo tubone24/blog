@@ -19,6 +19,7 @@ const getLast3MonthDate = () => {
 };
 
 const getSlug = (event, value) => {
+    console.log(value);
     const {slug} = value;
     gotoPage(slug);
 };
