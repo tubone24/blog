@@ -26,7 +26,7 @@ const TagCloud = ({data}) => {
 
   return (
     <div className="d-none d-lg-block information my-2">
-      <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;Tags</p>
+      <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;All {tags.length} Tags</p>
       {tags.map(item => (
         <Tag name={item} key={item} count={mapping[item]}/>
       ))}
