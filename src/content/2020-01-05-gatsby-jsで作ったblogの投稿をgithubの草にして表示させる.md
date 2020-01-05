@@ -212,8 +212,82 @@ export default props => (
     `}
 ```
 
-簡単ですね。
+簡単ですね。さらにGraphQLのデータを渡し、renderしたものを別componentに渡すために、
 
+```javasctipt
+export default props => (
+    <StaticQuery
+        query={graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              date(formatString: "YYYY-MM-DD")
+              slug
+              title
+            }
+          }
+        }
+      }
+    }
+    `}
+        render={data => <Heatmap data={data} {...props} />}
+    />
+)
+```
+
+としてやっているのです。
+
+肝心なreact-carender-heatmap部分は
+
+```javascipt
+const Heatmap = ({data, minify=false}) => {
+    const {allMarkdownRemark} = data;
+    const mapping = {};
+    const slugs = {};
+    const values = [];
+
+    let startDate;
+
+    if (minify) {
+        startDate = getLast5MonthDate()
+    } else {
+        startDate = getLastYearDate()
+    }
+
+    allMarkdownRemark.edges.forEach(({node}) => {
+        const {date, slug} = node.frontmatter;
+        if (mapping[date]) {
+            mapping[date] += 1;
+        } else {
+            mapping[date] = 1;
+        }
+        slugs[date] = slug;
+    });
+
+    Object.keys(mapping).forEach( (date) => {
+        values.push({date: date, count: mapping[date], slug: slugs[date]})
+    });
+
+    return (
+      <>
+       <CalendarHeatmap
+        startDate={startDate}
+        endDate={new Date()}
+        values={values}
+        showMonthLabels={true}
+        showWeekdayLabels={true}
+        onClick={getSlug}
+        tooltipDataAttrs={getTooltipDataAttrs}
+      />
+      <ReactTooltip />
+    </>)
+};
+
+```
+
+とやっています。
 
 
 
