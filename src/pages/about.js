@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import Content from '../components/Content';
 import ShareBox from '../components/ShareBox';
 import SEO from '../components/SEO';
+import Heatmap from '../components/Heatmap';
 
 import { config } from '../../data';
 
@@ -111,7 +112,8 @@ class About extends Component {
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
           <Content post={html} />
-
+          <h3>更新頻度</h3>
+          <Heatmap />
         </div>
 
         <ShareBox url={shareURL} />
