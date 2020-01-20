@@ -41,3 +41,11 @@ AWSのTracingサービスのX-Rayを使って、LambdaのService MapやTraceを�
 実は、X-Rayをお勉強する前に、この手のサービス(Tracing)の基本を押さえる必要があると思い、お正月に[GoのEchoでJaegerを使ってボトルネックを調査する](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)という記事を書いてました。
 
 X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な情報を知りたい方は上記も読んでみてくださいませ。
+
+さて、話をX-Rayに戻すと、X-Rayを使うと**Tracing**と
+
+![img](https://i.imgur.com/CSr8mCd.png)
+
+**Service Map**を作ることができます。
+
+![img](https://i.imgur.com/Fs498Yd.png)
