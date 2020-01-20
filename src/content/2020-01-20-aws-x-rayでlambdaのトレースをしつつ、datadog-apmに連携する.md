@@ -56,14 +56,52 @@ X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な�
 
 LambdaはPythonで作っていくことにします。
 
-X-Rayを使うには、X-Rayクライアントをソースコード上で使えるようにするため、X-Rayを入れた**Lambda Layer**を作っていきます。(ついでに使うのでRequestsも入れちゃいます。)
+### Lambda Layerを作って利用できるようにする
+
+X-Rayを使うには、X-Rayクライアント(<https://github.com/aws/aws-xray-sdk-python>)をソースコード上で使えるようにするため、X-Rayを入れた**Lambda Layer**を作っていきます。
 
 ローカル上で
 
 ```bash
 mkdir python
 
-pip install requests -t python/
-
 pip install aws-xray-sdk -t python/
+
+zip -r python.zip python/
+```
+
+としてX-Ray Client入りの**python.zip**を作ります。
+
+そして、AWSコンソールのLambda Layersからアップロードします。
+
+![img](https://i.imgur.com/iyjRI2u.png)
+
+作ったLambda LayerはLambda関数にアタッチ(マージ)することで利用できるようになります。
+
+Lambdaで外部APIをたたくため、[Requests](https://requests-docs-ja.readthedocs.io/en/latest/)のLambda Layerも作ってアタッチしてます。
+
+![img](https://i.imgur.com/ho3V22u.png)
+
+### Pythonコード実装
+
+PythonでX-RayのTracingを使うには大きく2種類の方法があります。
+
+- xray_recorder
+- patch
+
+xray_recorderはPython関数にデコレータとして設定することで、関数のIn/Outをキャプチャすることができます。
+
+patchはRequestsやBoto3などいくつかライブラリをpatchして、リクエストをTracingします。
+今回はめんどくさいのでpatch対応しているライブラリに全部patchするpatch_allを使います。
+
+
+```python
+from aws_xray_sdk.core import xray_recorder # デコレータをつけた関数をキャプチャ
+from aws_xray_sdk.core import patch_all # boto3やrequestsにX-Rayパッチを適用し、監視する
+
+patch_all() # X-Rayパッチ
+
+@xray_recorder.capture("hoge_function") # 関数キャプチャ
+def hoge_function(hogeeee, hogeeee):
+    hogehoge_logic(hogeeee)
 ```
