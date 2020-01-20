@@ -49,3 +49,21 @@ X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な�
 **Service Map**を作ることができます。
 
 ![img](https://i.imgur.com/Fs498Yd.png)
+
+今回はService Mapで監視するような多段でマイクロサービスなアーキテクチャの監視はしませんが、さっそく、X-RayでLambdaのリクエストをTracingしていきましょう！
+
+## X-Rayを使う for Lambda (Python)
+
+LambdaはPythonで作っていくことにします。
+
+X-Rayを使うには、X-Rayクライアントをソースコード上で使えるようにするため、X-Rayを入れた**Lambda Layer**を作っていきます。(ついでに使うのでRequestsも入れちゃいます。)
+
+ローカル上で
+
+```bash
+mkdir python
+
+pip install requests -t python/
+
+pip install aws-xray-sdk -t python/
+```
