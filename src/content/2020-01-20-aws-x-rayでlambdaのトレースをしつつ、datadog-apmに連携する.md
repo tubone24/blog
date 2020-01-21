@@ -114,7 +114,49 @@ LambdaのコンソールからX-Rayを有効化することを忘れずに
 
 ![img](https://i.imgur.com/5MzpyAw.png)
 
+これで無事にX-Rayが利用できるようになりました。
+
+Lambdaが動くことでTracingされます。
+
+![img](https://i.imgur.com/cpAdeXe.png)
+
+Lambda単体なのでService Mapもショボいですができてます。
+
+![img](https://i.imgur.com/Y3aQ44O.png)
+
 ## Datadog APMと連携する
 
 X-RayはDatadogにも連携可能です。
 
+早速Datadogに連携していきましょう。
+
+### DatadogがアクセスするRoleのポリシー設定
+
+DatadogがあなたのアカウントにIntegrationするRoleにX-Rayの読み取り権限を追加します。
+
+```javascript
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "XRay",
+            "Effect": "Allow",
+            "Action": [
+                "xray:GetSamplingTargets",
+                "xray:GetGroup",
+                "xray:GetTraceGraph",
+                "xray:GetServiceGraph",
+                "xray:GetTimeSeriesServiceStatistics",
+                "xray:GetEncryptionConfig",
+                "xray:GetSamplingRules",
+                "xray:GetGroups",
+                "xray:GetTraceSummaries",
+                "xray:GetSamplingStatisticSummaries",
+                "xray:BatchGetTraces",
+                "xray:PutEncryptionConfig"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
