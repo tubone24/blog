@@ -105,3 +105,11 @@ patch_all() # X-Rayパッチ
 def hoge_function(hogeeee, hogeeee):
     hogehoge_logic(hogeeee)
 ```
+
+さぁ、Lambdaのコードを無事に書き終えたらLambdaをデプロイして終わりです。
+
+今回は手でLambdaを作りましたので、特にCIな話題はないです。すみません。
+
+LambdaのコンソールからX-Rayを有効化することを忘れずに
+
+![img](https://i.imgur.com/5MzpyAw.png)
