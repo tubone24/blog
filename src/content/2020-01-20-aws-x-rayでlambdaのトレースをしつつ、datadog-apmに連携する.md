@@ -134,6 +134,8 @@ X-RayはDatadogにも連携可能です。
 
 DatadogがあなたのアカウントにIntegrationするRoleにX-Rayの読み取り権限を追加します。
 
+追加するポリシーは以下です。
+
 ```javascript
 {
     "Version": "2012-10-17",
@@ -160,3 +162,40 @@ DatadogがあなたのアカウントにIntegrationするRoleにX-Rayの読み�
     ]
 }
 ```
+
+### DatadogのAWS Integrationを確認
+
+DatadogのWebコンソールから、X-Rayを取得する設定が入っているか確認します。入っていなければチェックして下さい。
+
+![img](https://i.imgur.com/XWhfj7x.png)
+
+これでAPMからX-Rayが使えるようになります。次のメトリック取得でAPMにTracing関連が追加されているはず。
+
+
+![img](https://i.imgur.com/YxAhK5X.png)
+
+### APMからTracing情報を確認する
+
+Serviceからダッシュボードの形で、APMに送られてくるTracingをパパっと見ることができます。
+
+![img](https://i.imgur.com/uRkRqqP.png)
+
+細かくみると、こんな感じでAPMからRequestの内訳やレイテンシーが確認できるようになっているはずです。
+
+![img](https://i.imgur.com/WbF4DOc.png)
+
+Service MapもDatadogから確認できますが、こちらはAWSのコンソールのほうが見やすいですね。
+
+![img](https://i.imgur.com/cecuvOW.png)
+
+### Monitorを設定する
+
+APMのメトリックを使って、Monitorを作ることもできます。
+
+例えば、P99のレイテンシーがxx秒を超えてきたらWarningなどにしておくと安心感あるかもですね。
+
+![img](https://i.imgur.com/2FB3QjB.png)
+
+## 結論
+
+DatadogのAPMはLambda + X-Rayでも問題なく利用できる機能とわかりました。
