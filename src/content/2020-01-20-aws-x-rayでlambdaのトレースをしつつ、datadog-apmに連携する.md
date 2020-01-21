@@ -113,3 +113,8 @@ def hoge_function(hogeeee, hogeeee):
 LambdaのコンソールからX-Rayを有効化することを忘れずに
 
 ![img](https://i.imgur.com/5MzpyAw.png)
+
+## Datadog APMと連携する
+
+X-RayはDatadogにも連携可能です。
+
