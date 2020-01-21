@@ -29,6 +29,8 @@ AWSのTracingサービスのX-Rayを使って、LambdaのService MapやTraceを�
 > データを表示、フィルタリング、洞察を取得して問題の識別や最適化の機会を識別するために使用するツールを提供します。
 > 
 > アプリケーションに対するトレース対象のリクエストの場合、リクエストとレスポンスに関する情報だけではなく、アプリケーションがダウンストリーム AWS リソース、マイクロサービス、データベース、および HTTP ウェブ API に対して行う呼び出しの詳細な情報も表示できます。
+> 
+> <site>[公式Doc AWS X-Ray とは何ですか。](https://docs.aws.amazon.com/ja_jp/xray/latest/devguide/aws-xray.html)</site>
 
 とのことです。
 
@@ -36,7 +38,7 @@ AWSのTracingサービスのX-Rayを使って、LambdaのService MapやTraceを�
 
 **アプリケーション**が**AWSのサービス(DynamoDBとかS3とか)と通信したり**、**外部サービスのAPIをコールしたり**するリクエストとレスポンスを**収集**し、**記録**し、良き感じに**可視化**してくれるサービスです。
 
-このようなサービスのことをTracingとか言ったりします。
+このようなサービスのことを**Tracing**とか言ったりします。
 
 実は、X-Rayをお勉強する前に、この手のサービス(Tracing)の基本を押さえる必要があると思い、お正月に[GoのEchoでJaegerを使ってボトルネックを調査する](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)という記事を書いてました。
 
@@ -54,7 +56,7 @@ X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な�
 
 ## X-Rayを使う for Lambda (Python)
 
-LambdaはPythonで作っていくことにします。
+Lambdaは**Python**で作っていくことにします。
 
 ### Lambda Layerを作って利用できるようにする
 
@@ -89,10 +91,10 @@ PythonでX-RayのTracingを使うには大きく2種類の方法があります�
 - xray_recorder
 - patch
 
-xray_recorderはPython関数にデコレータとして設定することで、関数のIn/Outをキャプチャすることができます。
+xray_recorderはPython関数に**デコレータ**として設定することで、関数のIn/Outをキャプチャすることができます。
 
-patchはRequestsやBoto3などいくつかライブラリをpatchして、リクエストをTracingします。
-今回はめんどくさいのでpatch対応しているライブラリに全部patchするpatch_allを使います。
+patchは**Requests**や**Boto3**などいくつかライブラリをPatchして、リクエストをTracingします。
+今回はめんどくさいのでpatch対応しているライブラリに全部Patchする**patch_all**を使います。
 
 
 ```python
@@ -110,7 +112,7 @@ def hoge_function(hogeeee, hogeeee):
 
 今回は手でLambdaを作りましたので、特にCIな話題はないです。すみません。
 
-LambdaのコンソールからX-Rayを有効化することを忘れずに
+最後に、**LambdaのコンソールからX-Rayを有効化することを忘れずに**
 
 ![img](https://i.imgur.com/5MzpyAw.png)
 
@@ -126,13 +128,13 @@ Lambda単体なのでService Mapもショボいですができてます。
 
 ## Datadog APMと連携する
 
-X-RayはDatadogにも連携可能です。
+X-Rayは**Datadogにも連携可能**です。
 
 早速Datadogに連携していきましょう。
 
 ### DatadogがアクセスするRoleのポリシー設定
 
-DatadogがあなたのアカウントにIntegrationするRoleにX-Rayの読み取り権限を追加します。
+DatadogがあなたのアカウントにIntegrationするRoleに**X-Rayの読み取り権限**を追加します。
 
 追加するポリシーは以下です。
 
@@ -199,3 +201,5 @@ APMのメトリックを使って、Monitorを作ることもできます。
 ## 結論
 
 DatadogのAPMはLambda + X-Rayでも問題なく利用できる機能とわかりました。
+
+もう少しX-Rayを使いこなせるように頑張りますね。
