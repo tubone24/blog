@@ -162,8 +162,8 @@ module.exports = {
               caseSensitive: false,
               collapseBooleanAttributes: false,
               useShortDoctype: false,
-              removeEmptyElements: true,
-              removeComments: true,
+              removeEmptyElements: false,
+              removeComments: false,
             },
           },
           {
