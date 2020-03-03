@@ -160,10 +160,13 @@ module.exports = {
             resolve: 'gatsby-plugin-html-minifier',
             options: {
               caseSensitive: false,
-              collapseBooleanAttributes: false,
+              collapseBooleanAttributes: true,
               useShortDoctype: false,
               removeEmptyElements: false,
               removeComments: false,
+              removeAttributeQuotes: true,
+              minifyCSS: true,
+              minifyJS: true,
             },
           },
           {
