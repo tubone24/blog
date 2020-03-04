@@ -34,7 +34,7 @@ const Navbar = () => (
           gotoPage('/');
         }}
       >
-        <img src={"/assets/logo3.svg"} alt={"logo"} />
+        <img src={"/assets/logo3.svg"} alt={"Japanese IT Developer Blog tubone BOYAKI"} />
       </button>
       <button
         className="navbar-toggler"
