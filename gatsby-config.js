@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
-    'gatsby-plugin-catch-links',
+    // 'gatsby-plugin-catch-links',
     // {
     //   resolve: 'gatsby-plugin-zopfli',
     //   options: {
@@ -27,20 +27,20 @@ module.exports = {
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
-    {
-      resolve: 'gatsby-source-wordpress',
-      options: {
-        baseUrl: 'tubone-project24.xyz',
-        hostingWPCOM: false,
-        protocol: 'https',
-        useACF: false,
-        auth: {},
-        verboseOutput: false,
-        includedRoutes: [
-          '**/posts',
-        ],
-      },
-    },
+    // {
+    //   resolve: 'gatsby-source-wordpress',
+    //   options: {
+    //     baseUrl: 'tubone-project24.xyz',
+    //     hostingWPCOM: false,
+    //     protocol: 'https',
+    //     useACF: false,
+    //     auth: {},
+    //     verboseOutput: false,
+    //     includedRoutes: [
+    //       '**/posts',
+    //     ],
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {
@@ -54,12 +54,12 @@ module.exports = {
         name: 'pages',
       },
     },
-    {
-      resolve: 'gatsby-plugin-emotion',
-      options: {
-        // Accepts all options defined by `babel-plugin-emotion` plugin.
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-emotion',
+    //   options: {
+    //     // Accepts all options defined by `babel-plugin-emotion` plugin.
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
@@ -136,12 +136,12 @@ module.exports = {
       // eslint-disable-next-line global-require
       options: require('./gatsby-plugin-algolia-config.js'),
     },
-    {
-      resolve: 'gatsby-plugin-typography',
-      options: {
-        pathToConfigModule: 'src/utils/typography',
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-typography',
+    //   options: {
+    //     pathToConfigModule: 'src/utils/typography',
+    //   },
+    // },
     // 'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
@@ -226,20 +226,20 @@ module.exports = {
               autoplay: false, // default is false
             },
           },
-          {
-            resolve: '@weknow/gatsby-remark-codepen',
-            options: {
-              theme: 'dark',
-              height: 400,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-embed-gist',
-            options: {
-              username: 'tubone24',
-              includeDefaultCss: true,
-            },
-          },
+          // {
+          //   resolve: '@weknow/gatsby-remark-codepen',
+          //   options: {
+          //     theme: 'dark',
+          //     height: 400,
+          //   },
+          // },
+          // {
+          //   resolve: 'gatsby-remark-embed-gist',
+          //   options: {
+          //     username: 'tubone24',
+          //     includeDefaultCss: true,
+          //   },
+          // },
           'gatsby-remark-embed-spotify',
           {
             resolve: 'gatsby-remark-prismjs',

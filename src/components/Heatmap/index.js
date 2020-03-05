@@ -92,6 +92,7 @@ const Heatmap = ({data, minify=false}) => {
         showWeekdayLabels={true}
         onClick={getSlug}
         tooltipDataAttrs={getTooltipDataAttrs}
+        titleForValue={getTitle}
       />
       <ReactTooltip />
     </>)

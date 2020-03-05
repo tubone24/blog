@@ -10,7 +10,7 @@ const eslintrc = {
       'react-router-dom',
       'config',
       'react-helmet',
-      'prop-types',
+      // 'prop-types',
     ],
   },
   rules: {

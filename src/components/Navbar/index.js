@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import ReactGA from 'react-ga';
 
-import GithubCorner from '../GithubCorner';
-
 import NavItem from './NavItem';
 import ExternalLink from '../ExternalLink';
 import { gotoPage } from '../../api/url';
@@ -34,7 +32,7 @@ const Navbar = () => (
           gotoPage('/');
         }}
       >
-        <img src={"/assets/logo3.svg"} alt={"Japanese IT Developer Blog tubone BOYAKI"} />
+        <img src="/assets/logo3.svg" alt="Japanese IT Developer Blog tubone BOYAKI" />
       </button>
       <button
         className="navbar-toggler"
@@ -44,13 +42,12 @@ const Navbar = () => (
       >
         <FontAwesomeIcon icon={faBars} />
       </button>
-      <GithubCorner url="https://github.com/tubone24/blog" />
       <div
         className="collapse navbar-collapse flex-row-reverse"
         id="navbarSupportedContent"
       >
         <ul className="navbar-nav mr-2">
-          {navbarList.map(item => (
+          {navbarList.map((item) => (
             <NavItem
               url={item.href}
               name={item.title}

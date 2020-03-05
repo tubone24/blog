@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import Tag from '../Tag';
 
@@ -56,23 +56,23 @@ const Card = ({
   </div>
 );
 
-Card.propTypes = {
-  title: PropTypes.string.isRequired,
-  date: PropTypes.string,
-  url: PropTypes.string.isRequired,
-  headerImage: PropTypes.string,
-  headerBackgroundColor: PropTypes.string,
-  description: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string),
-};
-
-CardHeader.propTypes = Card.propTypes;
-
-Card.defaultProps = {
-  headerImage: '',
-  tags: [],
-  date: '',
-  headerBackgroundColor: '',
-};
+// Card.propTypes = {
+//   title: PropTypes.string.isRequired,
+//   date: PropTypes.string,
+//   url: PropTypes.string.isRequired,
+//   headerImage: PropTypes.string,
+//   headerBackgroundColor: PropTypes.string,
+//   description: PropTypes.string.isRequired,
+//   tags: PropTypes.arrayOf(PropTypes.string),
+// };
+//
+// CardHeader.propTypes = Card.propTypes;
+//
+// Card.defaultProps = {
+//   headerImage: '',
+//   tags: [],
+//   date: '',
+//   headerBackgroundColor: '',
+// };
 
 export default Card;

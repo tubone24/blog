@@ -49,6 +49,8 @@ const ShareBox = ({ url, hasCommentBox }) => (
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
       title="FacebookでShareする"
+      target="_blank"
+      rel="noopener noreferrer"
       className="share-button"
       onClick={() => ReactGA.event({
         category: 'Share',
@@ -61,6 +63,8 @@ const ShareBox = ({ url, hasCommentBox }) => (
     <a
       href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${url}`}
       title="TwitterでShareする"
+      target="_blank"
+      rel="noopener noreferrer"
       className="share-button"
       onClick={() => ReactGA.event({
         category: 'Share',
@@ -73,6 +77,8 @@ const ShareBox = ({ url, hasCommentBox }) => (
     <a
       href={`http://getpocket.com/edit?url=${url}`}
       title="Pocketに追加する"
+      target="_blank"
+      rel="noopener noreferrer"
       className="share-button"
       onClick={() => ReactGA.event({
         category: 'Share',
@@ -88,6 +94,8 @@ const ShareBox = ({ url, hasCommentBox }) => (
       data-hatena-bookmark-layout="vertical-normal"
       data-hatena-bookmark-lang="ja"
       title="このエントリーをはてなブックマークに追加"
+      target="_blank"
+      rel="noopener noreferrer"
       onClick={() => ReactGA.event({
         category: 'Share',
         action: 'Hatebu Share',
