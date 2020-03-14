@@ -16,6 +16,12 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography.js',
+      },
+    },
     'gatsby-plugin-sass',
     {
       resolve: 'gatsby-plugin-minify-classnames',
@@ -142,12 +148,6 @@ module.exports = {
       resolve: 'gatsby-plugin-algolia',
       // eslint-disable-next-line global-require
       options: require('./gatsby-plugin-algolia-config.js'),
-    },
-    {
-      resolve: 'gatsby-plugin-typography',
-      options: {
-        pathToConfigModule: 'src/utils/typography',
-      },
     },
     // 'gatsby-plugin-sharp',
     {

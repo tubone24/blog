@@ -3,5 +3,9 @@ import theme from 'typography-theme-japanese-tofu';
 
 const typography = new Typography(theme);
 
-const { rhythm, scale } = typography;
-export { rhythm, scale, typography as default };
+if (process.env.NODE_ENV !== 'production') {
+  typography.injectStyles();
+}
+
+export default typography;
+export const { rhythm, scale } = typography;
