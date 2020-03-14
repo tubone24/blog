@@ -8,20 +8,29 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 
-// const imageStyle = (headerImage, color) => ({
-//   backgroundColor: `#${color}`,
-//   backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
-// });
+const imageStyle = (headerImage) => ({
+  backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
+});
 
-const imageStyle = (headerImage) => (
+const imageStyleLazy = (headerImage) => (
   `${parseImgur(headerImage, 'large')}`
 );
 
-const CardHeader = ({ url, image }) => (
-  <Link to={url} href={url}>
-    <div className="wrapper lazyload" data-bg={imageStyle(image)} />
-  </Link>
-);
+const CardHeader = ({ url, image, index }) => {
+  if (index > 1) {
+    return (
+      <Link to={url} href={url}>
+        <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
+      </Link>
+    );
+  }
+  return (
+    <Link to={url} href={url}>
+      <div className="wrapper" style={imageStyle(image)} />
+    </Link>
+  );
+};
+
 
 const Card = ({
   title,
@@ -31,6 +40,7 @@ const Card = ({
   headerBackgroundColor,
   description,
   tags = [],
+  index,
 }) => (
   <div className="col-sm-12 pb-4">
     <div className="custom-card">
@@ -38,7 +48,7 @@ const Card = ({
         <CardHeader
           url={url}
           image={headerImage}
-          backgroundColor={headerBackgroundColor}
+          index={index}
         />
       )}
       <div className="data">
