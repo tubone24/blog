@@ -35,3 +35,13 @@ export const onRouteUpdate = (state) => {
     console.log('isLocalDevelopment is true, so ReactGA is not activated');
   }
 };
+
+export const onServiceWorkerUpdateReady = () => {
+  const answer = window.confirm(
+    'The application has been updated. Show latest version?',
+  );
+
+  if (answer === true) {
+    window.location.reload();
+  }
+};

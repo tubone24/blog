@@ -157,19 +157,6 @@ module.exports = {
           'gatsby-remark-mermaid',
           'gatsby-remark-reading-time',
           {
-            resolve: 'gatsby-plugin-html-minifier',
-            options: {
-              caseSensitive: false,
-              collapseBooleanAttributes: true,
-              useShortDoctype: false,
-              removeEmptyElements: false,
-              removeComments: false,
-              removeAttributeQuotes: true,
-              minifyCSS: true,
-              minifyJS: true,
-            },
-          },
-          {
             resolve: 'gatsby-remark-table-of-contents',
             options: {
               exclude: 'Table of Contents',
@@ -307,7 +294,20 @@ module.exports = {
       },
     },
     'gatsby-plugin-cdn-files',
-    'gatsby-plugin-offline', // put this after gatsby-plugin-manifest
+    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-html-minifier',
+      options: {
+        caseSensitive: false,
+        collapseBooleanAttributes: true,
+        useShortDoctype: false,
+        removeEmptyElements: false,
+        removeComments: true,
+        removeAttributeQuotes: true,
+        minifyCSS: true,
+        minifyJS: true,
+      },
+    },// put this after gatsby-plugin-manifest
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
 };
