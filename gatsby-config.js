@@ -275,6 +275,7 @@ module.exports = {
         color: '#1bd77f',
       },
     },
+    'gatsby-plugin-optimize-svgs',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -303,7 +304,7 @@ module.exports = {
     'gatsby-plugin-cdn-files',
     'gatsby-plugin-offline',
     {
-      resolve: 'gatsby-plugin-html-minifier',
+      resolve: 'gatsby-plugin-minify',
       options: {
         caseSensitive: false,
         collapseBooleanAttributes: true,
