@@ -42,7 +42,7 @@ const Head = () => (
     />
     <link
       rel="stylesheet"
-      href="/vendors/css/solarized-light.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"
     />
   </Helmet>
 );
