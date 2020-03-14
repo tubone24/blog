@@ -38,7 +38,7 @@ const Head = () => (
     />
     <link
       rel="stylesheet"
-      href="/vendors/css/bootstrap.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
     />
     <link
       rel="stylesheet"
