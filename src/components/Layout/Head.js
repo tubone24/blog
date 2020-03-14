@@ -37,12 +37,14 @@ const Head = () => (
       content={config.meta.google_site_verification}
     />
     <link
-      rel="stylesheet"
+      rel="preload"
       href="/vendors/css/bootstrap.min.css"
+      as="style"
     />
     <link
-      rel="stylesheet"
+      rel="preload"
       href="/vendors/css/solarized-light.min.css"
+      as="style"
     />
   </Helmet>
 );
