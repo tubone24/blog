@@ -36,6 +36,15 @@
 .custom-card {
   transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
+  .lazyloading {
+    opacity: 0;
+  }
+
+  .lazyloaded {
+    opacity: 1;
+    transition: opacity 1000ms;
+  }
+
   &:hover {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
   }

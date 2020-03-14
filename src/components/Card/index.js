@@ -8,14 +8,18 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 
-const imageStyle = (headerImage, color) => ({
-  backgroundColor: `#${color}`,
-  backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
-});
+// const imageStyle = (headerImage, color) => ({
+//   backgroundColor: `#${color}`,
+//   backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
+// });
 
-const CardHeader = ({ url, image, backgroundColor }) => (
+const imageStyle = (headerImage) => (
+  `${parseImgur(headerImage, 'large')}`
+);
+
+const CardHeader = ({ url, image }) => (
   <Link to={url} href={url}>
-    <div className="wrapper" style={imageStyle(image, backgroundColor)} />
+    <div className="wrapper lazyload" data-bg={imageStyle(image)} />
   </Link>
 );
 
