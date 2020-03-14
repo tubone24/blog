@@ -13,7 +13,7 @@ import Subscription from './Subscription';
 
 import './index.scss';
 import ReactGA from 'react-ga';
-import TagCloud from "./TagCloud";
+import TagCloud from './TagCloud';
 
 const {
   githubUsername,
@@ -119,6 +119,6 @@ export default () => (
         }
       }
     `}
-    render={data => <Sidebar {...data.all} {...data.limited} />}
+    render={(data) => <Sidebar {...data.all} {...data.limited} />}
   />
 );

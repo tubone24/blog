@@ -18,8 +18,7 @@ const CommentButton = () => (
     onClick={() => ReactGA.event({
       category: 'User',
       action: 'Goto Comment Box',
-    })
-    }
+    })}
   >
     <FontAwesomeIcon icon={['far', 'comment']} />
   </a>
@@ -55,8 +54,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
       onClick={() => ReactGA.event({
         category: 'Share',
         action: 'Facebook Share',
-      })
-      }
+      })}
     >
       <FontAwesomeIcon icon={['fab', 'facebook-f']} />
     </a>
@@ -69,8 +67,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
       onClick={() => ReactGA.event({
         category: 'Share',
         action: 'Twitter Share',
-      })
-      }
+      })}
     >
       <FontAwesomeIcon icon={['fab', 'twitter']} />
     </a>
@@ -83,8 +80,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
       onClick={() => ReactGA.event({
         category: 'Share',
         action: 'Pocket Share',
-      })
-      }
+      })}
     >
       <FontAwesomeIcon icon={['fab', 'get-pocket']} />
     </a>
@@ -99,8 +95,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
       onClick={() => ReactGA.event({
         category: 'Share',
         action: 'Hatebu Share',
-      })
-      }
+      })}
     >
       <img
         src="//b.st-hatena.com/images/entry-button/button-only@2x.png"

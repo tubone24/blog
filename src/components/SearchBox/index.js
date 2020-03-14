@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 import './index.scss';
 import ReactGA from 'react-ga';
-import { gotoPage } from '../../api/url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { gotoPage } from '../../api/url';
 
 
 let algoliasearch; let autocomplete; let client; let

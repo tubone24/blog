@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Link from "gatsby-link";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Link from 'gatsby-link';
 
-import Mark from "../mark";
+import Mark from '../mark';
 
-import "./styles.scss";
+import './styles.scss';
 
 const Logo = ({ location }) => {
-  const Holder = location.pathname !== "/" ? Link : "span";
+  const Holder = location.pathname !== '/' ? Link : 'span';
   return (
     <Holder to="/" className="nav-logo">
       <span className="nav-logo-container">
@@ -18,7 +18,7 @@ const Logo = ({ location }) => {
 };
 
 Logo.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default Logo;

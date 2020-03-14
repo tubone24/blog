@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Header = props => (
+const Header = (props) => (
   // eslint-disable-next-line react/destructuring-assignment
   <header id="header" style={props.timeout ? { display: 'none' } : {}}>
     <div className="logo">

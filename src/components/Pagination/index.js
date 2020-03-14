@@ -15,7 +15,7 @@ const PageItem = ({ number, content }) => (
   </li>
 );
 
-const getPageNumber = pathname => pathname.split('/')[2];
+const getPageNumber = (pathname) => pathname.split('/')[2];
 
 const Pagination = ({ pathname, pageCount }) => {
   const currentPageNumber = getPageNumber(pathname);

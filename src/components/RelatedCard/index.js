@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { parseImgur } from '../../api/images';
 
 import './index.scss';
-import Tag from "../Tag";
+import Tag from '../Tag';
 
 const imageStyle = (headerImage, color) => ({
   backgroundColor: `#${color}`,
@@ -21,7 +21,7 @@ const CardHeader = ({ url, image, backgroundColor }) => (
 const RelatedCard = ({
   title,
   url,
-  tags=[],
+  tags = [],
   date,
   headerImage,
   headerBackgroundColor,
@@ -34,7 +34,7 @@ const RelatedCard = ({
           <div className="content">
             <div className="stats">
               <span className="date">{date.split('T')[0]}</span>
-              {tags.map(name => (
+              {tags.map((name) => (
                 <Tag name={name} key={name} />
               ))}
             </div>

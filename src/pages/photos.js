@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 import Header from '../components/Header';
 
 import { config } from '../../data';
-import ShareBox from "../components/ShareBox";
+import ShareBox from '../components/ShareBox';
 
 const {
   url, name, iconUrl,

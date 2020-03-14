@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import './styles.scss';
+
 if (typeof window !== 'undefined') {
   require('intersection-observer');
 }
-
-import './styles.scss';
 
 export default class ImageLoader extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
-      doneAnimating: false
+      doneAnimating: false,
     };
 
     this.loadImage = this.loadImage.bind(this);
@@ -25,12 +25,12 @@ export default class ImageLoader extends Component {
     image.onload = () => {
       this.setState({ loaded: true }, () => {
         this.img.addEventListener(
-          "animationend",
+          'animationend',
           () => {
             this.setState({ doneAnimating: true });
             this.props.loadingCallback();
           },
-          false
+          false,
         );
       });
     };
@@ -38,8 +38,8 @@ export default class ImageLoader extends Component {
 
   componentDidMount() {
     if (this.props.lazyload) {
-      this.observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
           const { isIntersecting, intersectionRatio } = entry;
           if (isIntersecting === true || intersectionRatio > 0) {
             this.loadImage();
@@ -62,17 +62,17 @@ export default class ImageLoader extends Component {
     const showPlaceholder = this.props.placeholder && !this.state.doneAnimating;
     return (
       <div
-        ref={node => (this.imageLoader = node)}
-        className={classNames("image-loader", {
+        ref={(node) => (this.imageLoader = node)}
+        className={classNames('image-loader', {
           [`${this.props.className}`]: this.props.className,
-          "image-loader--placeholder": this.props.aspectRatio
+          'image-loader--placeholder': this.props.aspectRatio,
         })}
         style={this.props.styles}
       >
         {showPlaceholder && (
           <img
-            className={classNames("placeholder", {
-              "fade-out": this.state.loaded
+            className={classNames('placeholder', {
+              'fade-out': this.state.loaded,
             })}
             src={this.props.placeholder}
             alt=""
@@ -83,7 +83,7 @@ export default class ImageLoader extends Component {
         )}
         {this.state.loaded && (
           <img
-            ref={node => (this.img = node)}
+            ref={(node) => (this.img = node)}
             className="img"
             src={this.props.img}
             {...this.props.imageProps}
@@ -96,7 +96,7 @@ export default class ImageLoader extends Component {
 
 ImageLoader.defaultProps = {
   lazyload: true,
-  loadingCallback: () => {}
+  loadingCallback: () => {},
 };
 
 ImageLoader.propTypes = {
@@ -107,5 +107,5 @@ ImageLoader.propTypes = {
   lazyload: PropTypes.bool,
   loadingCallback: PropTypes.func,
   styles: PropTypes.object,
-  imageProps: PropTypes.object
+  imageProps: PropTypes.object,
 };

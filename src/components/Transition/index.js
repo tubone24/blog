@@ -40,9 +40,10 @@ class Transition extends React.PureComponent {
           }
         >
           {// Styles depends on the status of page(entering, exiting, entered) in the DOM
-          status => (
+          (status) => (
             <div style={{ ...getTransitionStyles[status] }}>{children}</div>
-          )}
+          )
+}
         </ReactTransition>
       </TransitionGroup>
     );

@@ -1,13 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-import "./styles.scss";
+import './styles.scss';
 
-const DeviceFrame = ({ children, className, styles, bodyStyles, type }) => (
+const DeviceFrame = ({
+  children, className, styles, bodyStyles, type,
+}) => (
   <figure
-    className={classNames("device-frame", className, {
-      [`device-frame--${type}`]: type
+    className={classNames('device-frame', className, {
+      [`device-frame--${type}`]: type,
     })}
     style={styles}
   >
@@ -32,7 +34,7 @@ DeviceFrame.propTypes = {
   children: PropTypes.any,
   styles: PropTypes.object,
   bodyStyles: PropTypes.object,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 export default DeviceFrame;

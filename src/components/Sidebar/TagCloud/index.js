@@ -1,16 +1,16 @@
 import React from 'react';
-import {StaticQuery, graphql} from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Tag from '../../../components/Tag';
+import Tag from '../../Tag';
 
 // eslint-disable-next-line react/prop-types
-const TagCloud = ({data}) => {
-  const {allMarkdownRemark} = data;
+const TagCloud = ({ data }) => {
+  const { allMarkdownRemark } = data;
   const mapping = {};
 
-  allMarkdownRemark.edges.forEach(({node}) => {
-    const {tags} = node.frontmatter;
+  allMarkdownRemark.edges.forEach(({ node }) => {
+    const { tags } = node.frontmatter;
     tags.forEach((name) => {
       if (mapping[name]) {
         mapping[name] += 1;
@@ -27,14 +27,14 @@ const TagCloud = ({data}) => {
   return (
     <div className="d-none d-lg-block information my-2">
       <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;All {tags.length} Tags</p>
-      {tags.map(item => (
-        <Tag name={item} key={item} count={mapping[item]}/>
+      {tags.map((item) => (
+        <Tag name={item} key={item} count={mapping[item]} />
       ))}
     </div>
   );
 };
 
-export default props => (
+export default (props) => (
   <StaticQuery
     query={graphql`
       query {
@@ -49,6 +49,6 @@ export default props => (
         }
       }
     `}
-    render={data => <TagCloud data={data} {...props} />}
+    render={(data) => <TagCloud data={data} {...props} />}
   />
-)
+);

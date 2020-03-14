@@ -1,7 +1,9 @@
-import React from "react"
-import { Chart } from "react-google-charts"
+import React from 'react';
+import { Chart } from 'react-google-charts';
 
-export default ({ data, height, options, width }) =>
+export default ({
+  data, height, options, width,
+}) => (
   <div>
     <Chart
       chartType="PieChart"
@@ -11,3 +13,4 @@ export default ({ data, height, options, width }) =>
       width={width}
     />
   </div>
+);

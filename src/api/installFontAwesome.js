@@ -26,6 +26,7 @@ import {
   fa500px,
 } from '@fortawesome/free-brands-svg-icons';
 
+
 const installFontAwesome = () => {
   library.add(
     faCircle,

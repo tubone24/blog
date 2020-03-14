@@ -64,7 +64,7 @@ module.exports = ({ actions, graphql }) => {
 
       // tag
       if (tags) {
-        tags.forEach(item => tagSet.add(item));
+        tags.forEach((item) => tagSet.add(item));
       }
 
       // slug

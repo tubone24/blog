@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Footer = props => (
+const Footer = (props) => (
   // eslint-disable-next-line react/destructuring-assignment
   <footer id="footer" style={props.timeout ? { display: 'none' } : {}}>
     <p className="copyright">

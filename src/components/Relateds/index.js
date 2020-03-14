@@ -1,10 +1,10 @@
 import React from 'react';
-import { StaticQuery, graphql , Link } from "gatsby";
+import { StaticQuery, graphql, Link } from 'gatsby';
 
 import RelatedCard from '../RelatedCard';
 
 import './index.scss';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // eslint-disable-next-line react/prop-types
 const RelatedPosts = ({ post }) => (
@@ -48,7 +48,7 @@ const RelatedPosts = ({ post }) => (
       return (
         <div className="related-posts">
           <h2 className="related-posts-title"><FontAwesomeIcon icon={['fas', 'newspaper']} pull="left" />Related Posts</h2>
-          {relatedPosts.map(relatedPost => (
+          {relatedPosts.map((relatedPost) => (
             <div className="related-post">
               <RelatedCard title={relatedPost.node.frontmatter.title} tags={relatedPost.node.frontmatter.tags} date={relatedPost.node.frontmatter.date} headerImage={relatedPost.node.frontmatter.headerImage} url={relatedPost.node.fields.slug} />
             </div>

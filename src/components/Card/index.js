@@ -41,7 +41,7 @@ const Card = ({
         <div className="content">
           <div className="stats">
             <span className="date">{date.split('T')[0]}</span>
-            {tags.map(name => (
+            {tags.map((name) => (
               <Tag name={name} key={name} />
             ))}
           </div>

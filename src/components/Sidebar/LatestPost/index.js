@@ -12,10 +12,10 @@ import './index.scss';
 const LatestPost = ({ posts, totalCount }) => (
   <div className="latest-post">
     <p>
-<FontAwesomeIcon icon={['fas', 'newspaper']} />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
+      <FontAwesomeIcon icon={['fas', 'newspaper']} />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
       {totalCount}
     </p>
-      <Heatmap minify={true} />
+    <Heatmap minify />
     {posts.map(({ node }) => (
       <Link
         to={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}

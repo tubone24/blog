@@ -13,7 +13,7 @@ const schemaOrgJSONLD = ({
   image,
   description,
 }) => {
-  let returnJson = [];
+  const returnJson = [];
 
   returnJson.push(
     {
@@ -49,7 +49,7 @@ const schemaOrgJSONLD = ({
             },
           },
         ],
-      }
+      },
     );
 
     returnJson.push(
@@ -65,7 +65,7 @@ const schemaOrgJSONLD = ({
           url: image,
         },
         description,
-      }
+      },
     );
   }
   return returnJson;
@@ -74,47 +74,47 @@ const schemaOrgJSONLD = ({
 
 const SEO = ({
   url, title, description, image, siteTitleAlt, isPost,
-}) => {
-  return (
-    <Helmet>
-      <title>{title}</title>
+}) => (
+  <Helmet>
+    <title>{title}</title>
 
-      {/* General tags */}
-      <meta name="description" content={description} />
-      <meta name="image" content={image} />
+    {/* General tags */}
+    <meta name="description" content={description} />
+    <meta name="image" content={image} />
 
-      {/* Schema.org tags */}
-      <script type="application/ld+json">
-        {JSON.stringify(schemaOrgJSONLD({url, title, siteTitleAlt, isPost, image, description}))}
-      </script>
+    {/* Schema.org tags */}
+    <script type="application/ld+json">
+      {JSON.stringify(schemaOrgJSONLD({
+        url, title, siteTitleAlt, isPost, image, description,
+      }))}
+    </script>
 
-      {/* OpenGraph tags */}
-      <meta property="og:url" content={url} />
-      {isPost ? (
-        <meta property="og:type" content="article" />
-      ) : (
-        <meta property="og:type" content="website" />
-      )}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta
-        property="fb:app_id"
-        content={config.siteFBAppID ? config.siteFBAppID : ''}
-      />
+    {/* OpenGraph tags */}
+    <meta property="og:url" content={url} />
+    {isPost ? (
+      <meta property="og:type" content="article" />
+    ) : (
+      <meta property="og:type" content="website" />
+    )}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta
+      property="fb:app_id"
+      content={config.siteFBAppID ? config.siteFBAppID : ''}
+    />
 
-      {/* Twitter Card tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:creator"
-        content={config.twitter_username ? config.twitter_username : ''}
-      />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-    </Helmet>
-  )
-};
+    {/* Twitter Card tags */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:creator"
+      content={config.twitter_username ? config.twitter_username : ''}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+  </Helmet>
+);
 
 SEO.propTypes = {
   url: PropTypes.string.isRequired,

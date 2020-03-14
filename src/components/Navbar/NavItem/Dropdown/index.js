@@ -13,7 +13,7 @@ const Dropdown = ({ title, list }) => (
       {title}
     </button>
     <div className="dropdown-menu">
-      {list.map(item => (
+      {list.map((item) => (
         <a
           className="dropdown-item"
           href={item.href}

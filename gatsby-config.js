@@ -17,6 +17,12 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-minify-classnames',
+      options: {
+        develop: false,
+      },
+    },
     // 'gatsby-plugin-catch-links',
     // {
     //   resolve: 'gatsby-plugin-zopfli',
@@ -99,7 +105,8 @@ module.exports = {
         feeds: [
           {
             // eslint-disable-next-line max-len
-            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => Object.assign({}, edge.node.frontmatter, {
+            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
+              ...edge.node.frontmatter,
               description: edge.node.excerpt,
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
@@ -307,7 +314,7 @@ module.exports = {
         minifyCSS: true,
         minifyJS: true,
       },
-    },// put this after gatsby-plugin-manifest
+    }, // put this after gatsby-plugin-manifest
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
 };
