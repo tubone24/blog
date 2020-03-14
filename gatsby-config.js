@@ -280,7 +280,7 @@ module.exports = {
       options: {
         name: 'tubone BOYAKI',
         short_name: 'tuboneBOYAKI',
-        description: 'Japan Boyaki Ojisan',
+        description: 'Boyaki makes a new world',
         lang: 'ja',
         start_url: '/',
         background_color: '#ededed',
