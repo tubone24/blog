@@ -98,8 +98,8 @@ const ShareBox = ({ url, hasCommentBox }) => (
       })}
     >
       <img
-        src="//b.st-hatena.com/images/entry-button/button-only@2x.png"
-        alt=""
+        src="/assets/button-only@2x.png"
+        alt="hatena bookmark"
         width="25"
         height="25"
         style={{ position: 'absolute', top: 10 }}

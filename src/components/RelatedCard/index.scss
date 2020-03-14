@@ -1,6 +1,6 @@
 @import "../../styles/colors";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700); // Variables
-$open-sans: "Open Sans", sans-serif; // clear-fix mixin
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700); // Variables
+//$open-sans: "Open Sans", sans-serif; // clear-fix mixin
 
 @mixin cf {
   &::after,
