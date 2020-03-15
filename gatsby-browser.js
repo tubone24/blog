@@ -46,7 +46,7 @@ export const onRouteUpdate = (state) => {
 
 export const onServiceWorkerUpdateReady = () => {
   const answer = window.confirm(
-    'The application has been updated. Show latest version?',
+    'ブログ更新を検知しました. 更新しますか?',
   );
 
   if (answer === true) {
