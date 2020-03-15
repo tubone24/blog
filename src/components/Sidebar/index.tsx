@@ -15,6 +15,8 @@ import './index.scss';
 import ReactGA from 'react-ga';
 import TagCloud from './TagCloud';
 
+import { SiteData, SidebarQuery } from "../../../types/data";
+
 const {
   githubUsername,
   iconUrl,
@@ -33,7 +35,12 @@ const Icon = ({ href, icon }) => (
   </a>
 );
 
-const Sidebar = ({ latestPosts, totalCount }) => (
+type SidebarProps = {
+    latestPosts: any
+    totalCount: any
+};
+
+const Sidebar: React.FC<SidebarProps> = ({ latestPosts, totalCount }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
       <a href="https://portfolio.tubone-project24.xyz/"><img className="avatar" src={iconUrl} alt="tubone" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} /></a>
@@ -72,16 +79,6 @@ const Sidebar = ({ latestPosts, totalCount }) => (
 Icon.propTypes = {
   href: PropTypes.string.isRequired,
   icon: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
-Sidebar.propTypes = {
-  totalCount: PropTypes.number, //eslint-disable-line
-  latestPosts: PropTypes.array, //eslint-disable-line
-};
-
-Sidebar.defaultProps = {
-  totalCount: 0,
-  latestPosts: [],
 };
 
 export default () => (
