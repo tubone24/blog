@@ -16,10 +16,17 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-typescript',
+    // {
+    //   resolve: 'gatsby-plugin-graphql-codegen',
+    //   options: {
+    //     fileName: `types/graphql-types.d.ts`
+    //   }
+    // },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/utils/typography.js',
+        pathToConfigModule: 'src/utils/typography.ts',
       },
     },
     'gatsby-plugin-sass',
@@ -257,7 +264,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-layout',
       options: {
-        component: require.resolve('./src/components/Layout/layout.js'),
+        component: require.resolve('./src/components/Layout/layout.tsx'),
       },
     },
     {

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "strict": false,
+    "allowJs": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["dom", "esnext"]
+  },
+  "include": [
+    "./types/**/*",
+    "./gatsby/**/*",
+    "./src/**/*"
+  ]
+}

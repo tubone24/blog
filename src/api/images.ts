@@ -6,7 +6,7 @@
 // h = Huge Thumbnail (1024×1024)
 const defaultPicture = 'M795H8A.jpg';
 
-const parseImgur = (rawImage, size = 'large') => {
+const parseImgur = (rawImage: string, size: string = 'large') => {
   if (!rawImage) {
     return `https://i.imgur.com/${defaultPicture}`;
   }
