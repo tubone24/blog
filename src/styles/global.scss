@@ -1252,4 +1252,10 @@
   font-family: 'Merriweather', 'Noto Sans JP', sans-serif;
   font-size: inherit;
   line-height: inherit;
+  word-wrap: break-word;
+  font-kerning: normal;
+  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+  font-feature-settings: "kern", "liga", "clig", "calt";
 }
