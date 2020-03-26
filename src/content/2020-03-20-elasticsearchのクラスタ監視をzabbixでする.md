@@ -7,7 +7,7 @@ tags:
   - Zabbix
   - Elasticsearch
   - forecast
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/tE9cC6Q.png'
 templateKey: blog-post
 ---
 ZabbixでElasticsearchのクラスタを監視したい、したくない？
