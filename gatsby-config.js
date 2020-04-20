@@ -16,6 +16,13 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
+      options: {
+        siteUrl: NETLIFY_SITE_URL,
+        noQueryString: true,
+      },
+    },
     // {
     //   resolve: 'gatsby-plugin-typography',
     //   options: {
