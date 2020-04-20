@@ -6,7 +6,7 @@ description: 例のウイルスで外出できないので、Jetson Nanoで遊�
 tags:
   - 機械学習
   - Jetson Nano
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/TZupazY.jpg'
 templateKey: blog-post
 ---
 ただの報告なのですが、
