@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
 
 import { parseImgur } from '../../api/images';
 
@@ -57,14 +56,6 @@ const RelatedCard = ({
     </Link>
   </div>
 );
-
-RelatedCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  headerImage: PropTypes.string,
-  headerBackgroundColor: PropTypes.string,
-  description: PropTypes.string.isRequired,
-};
 
 RelatedCard.defaultProps = {
   headerImage: '',

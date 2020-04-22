@@ -37,7 +37,6 @@ const Card = ({
   date,
   url,
   headerImage,
-  headerBackgroundColor,
   description,
   tags = [],
   index,

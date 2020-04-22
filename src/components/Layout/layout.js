@@ -1,6 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
 import Transition from '../Transition';
 import Navbar from '../Navbar';
 import Head from './Head';
@@ -23,11 +22,5 @@ const Layout = ({ children, location }) => (
     <Footer />
   </div>
 );
-
-Layout.propTypes = {
-  children: PropTypes.object.isRequired,
-  // eslint-disable-next-line react/require-default-props
-  location: PropTypes.any,
-};
 
 export default Layout;

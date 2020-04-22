@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -27,10 +25,5 @@ const LatestPost = ({ posts, totalCount }) => (
     ))}
   </div>
 );
-
-LatestPost.propTypes = {
-  totalCount: PropTypes.number.isRequired,
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default LatestPost;

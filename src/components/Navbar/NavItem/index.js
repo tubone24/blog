@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import ReactGA from 'react-ga';
 
@@ -29,17 +28,6 @@ const NavItem = ({ url, name, list }) => {
   }
 
   return <Dropdown title={name} list={list} />;
-};
-
-NavItem.propTypes = {
-  url: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      href: PropTypes.string,
-    }),
-  ),
 };
 
 NavItem.defaultProps = {

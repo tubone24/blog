@@ -2,7 +2,7 @@ const path = require('path');
 
 const eslintrc = {
   extends: 'airbnb',
-  plugins: ['react', 'jsx-a11y', 'import'],
+  plugins: ['react', 'jsx-a11y', 'import', ],
   settings: {
     'import/core-modules': [
       'react',
@@ -16,8 +16,12 @@ const eslintrc = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/forbid-prop-types': 0,
+    'react/prop-types': 0,
+    'react/jsx-props-no-spreading': 0,
     'no-shadow': 'warn',
     'no-console': 0,
+    'no-plusplus': 0,
+    'max-len': ["error", 200, { "ignoreComments": true }],
     'linebreak-style': 0,
     'react/jsx-one-expression-per-line': 0,
     'import/extensions': [

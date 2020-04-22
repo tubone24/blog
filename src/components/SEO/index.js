@@ -1,8 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import PropTypes from 'prop-types';
-
 import config from '../../../data';
 
 const schemaOrgJSONLD = ({
@@ -124,16 +122,6 @@ const SEO = ({
     <meta name="twitter:image" content={image} />
   </Helmet>
 );
-
-SEO.propTypes = {
-  url: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  siteTitleAlt: PropTypes.string.isRequired,
-  isPost: PropTypes.bool.isRequired,
-  tag: PropTypes.string.isRequired,
-};
 
 SEO.defaultProps = {
   title: config.title,

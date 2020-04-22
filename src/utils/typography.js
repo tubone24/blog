@@ -23,7 +23,7 @@ const theme = {
   headerColor: 'hsl(0, 0%, 20%)',
   bodyColor: 'hsl(0, 0%, 30%)',
 
-  overrideStyles: ({ scale, rhythm }, options, styles) => ({
+  overrideStyles: () => ({
     html: {
       WebkitFontSmoothing: 'antialiased',
     },
@@ -35,12 +35,12 @@ const theme = {
       wordBreak: 'break-all',
     },
     a: {
-      color: "inherit",
+      color: 'inherit',
     },
     'a:hover': {
       color: '#3498DB',
     },
-    'li': {
+    li: {
       marginBottom: '0px',
     },
     blockquote: {
@@ -59,7 +59,7 @@ const theme = {
       content: '"\\201C"',
       color: gray(30),
     },
-    'pre': {
+    pre: {
       overflowX: 'auto',
       padding: '1rem',
       background: 'hsla(0,0%,0%,0.04)',

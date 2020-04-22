@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './styles.scss';
@@ -28,13 +27,5 @@ const DeviceFrame = ({
     </div>
   </figure>
 );
-
-DeviceFrame.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.any,
-  styles: PropTypes.object,
-  bodyStyles: PropTypes.object,
-  type: PropTypes.string,
-};
 
 export default DeviceFrame;

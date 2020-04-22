@@ -25,6 +25,7 @@ const getSlug = (value) => {
 
   const { slug } = value;
   gotoPage(slug);
+  return slug;
 };
 
 const getTitle = (value) => {

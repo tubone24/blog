@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 const Dropdown = ({ pages, text }) => (
@@ -24,10 +23,5 @@ const Dropdown = ({ pages, text }) => (
     </div>
   </div>
 );
-
-Dropdown.propTypes = {
-  pages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  text: PropTypes.string.isRequired,
-};
 
 export default Dropdown;

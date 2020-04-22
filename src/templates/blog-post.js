@@ -72,9 +72,9 @@ class BlogPost extends Component {
 
     const { minutes, words } = readingTime;
 
-    const { date, headerImage, title, tags } = frontmatter;
-
-    console.log(tags[0])
+    const {
+      date, headerImage, title, tags,
+    } = frontmatter;
 
     const shareURL = `${url}/${slug}`;
 
@@ -95,9 +95,8 @@ class BlogPost extends Component {
               padding: 5,
               background: '#1bd77f',
             }}
-          ><span className="fa-layers fa-fw fa-1x">
-            <FontAwesomeIcon icon={['fas', 'clock']} />
-          </span>この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます
+          ><span className="fa-layers fa-fw fa-1x"><FontAwesomeIcon icon={['fas', 'clock']} /></span>
+            この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます
           </div>
           <Content post={html} />
 

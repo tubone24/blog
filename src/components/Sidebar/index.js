@@ -1,7 +1,7 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactGA from 'react-ga';
 
 import { config } from '../../../data';
 
@@ -12,7 +12,6 @@ import SearchBox from '../SearchBox';
 import Subscription from './Subscription';
 
 import './index.scss';
-import ReactGA from 'react-ga';
 import TagCloud from './TagCloud';
 
 const {
@@ -36,6 +35,7 @@ const Icon = ({ href, icon }) => (
 const Sidebar = ({ latestPosts, totalCount }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
       <a href="https://portfolio.tubone-project24.xyz/"><img className="avatar" src={iconUrl} alt="tubone" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} /></a>
       <a href="https://portfolio.tubone-project24.xyz/" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar Str' })}><h4>tubone</h4></a>
       <p className="soliloquy"><b>Boyaki</b> makes a new world</p>
@@ -68,16 +68,6 @@ const Sidebar = ({ latestPosts, totalCount }) => (
     </div>
   </header>
 );
-
-Icon.propTypes = {
-  href: PropTypes.string.isRequired,
-  icon: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
-Sidebar.propTypes = {
-  totalCount: PropTypes.number, //eslint-disable-line
-  latestPosts: PropTypes.array, //eslint-disable-line
-};
 
 Sidebar.defaultProps = {
   totalCount: 0,

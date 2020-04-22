@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import Dropdown from './Dropdown';
@@ -36,16 +35,6 @@ const Pagination = ({ pathname, pageCount }) => {
       </ul>
     </nav>
   );
-};
-
-PageItem.propTypes = {
-  number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  content: PropTypes.string.isRequired,
-};
-
-Pagination.propTypes = {
-  pathname: PropTypes.string.isRequired,
-  pageCount: PropTypes.number.isRequired,
 };
 
 export default Pagination;

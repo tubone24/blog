@@ -2,13 +2,12 @@ import React from 'react';
 import FlickrLightbox from 'react-flickr-lightbox';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
-import Header from '../components/Header';
 
 import { config } from '../../data';
 import ShareBox from '../components/ShareBox';
 
 const {
-  url, name, iconUrl,
+  url,
 } = config;
 
 const shareURL = `${url}/photos`;

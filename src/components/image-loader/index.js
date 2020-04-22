@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './styles.scss';
@@ -97,15 +96,4 @@ export default class ImageLoader extends Component {
 ImageLoader.defaultProps = {
   lazyload: true,
   loadingCallback: () => {},
-};
-
-ImageLoader.propTypes = {
-  aspectRatio: PropTypes.number,
-  className: PropTypes.string,
-  img: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  lazyload: PropTypes.bool,
-  loadingCallback: PropTypes.func,
-  styles: PropTypes.object,
-  imageProps: PropTypes.object,
 };

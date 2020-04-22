@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './index.scss';
 
 import { parseImgur } from '../../api/images';
@@ -38,14 +37,6 @@ const Header = ({
     </div>
   </div>
 );
-
-Header.propTypes = {
-  img: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  authorName: PropTypes.string,
-  authorImage: PropTypes.string,
-};
 
 Header.defaultProps = {
   title: '',

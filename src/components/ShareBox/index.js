@@ -1,6 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -110,12 +109,6 @@ const ShareBox = ({ url, hasCommentBox }) => (
     {hasCommentBox && <GotoTopButton />}
   </div>
 );
-
-ShareBox.propTypes = {
-  url: PropTypes.string.isRequired,
-  hasCommentBox: PropTypes.bool,
-};
-
 ShareBox.defaultProps = {
   hasCommentBox: true,
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const HTML = ({
   htmlAttributes,
@@ -52,25 +51,6 @@ const HTML = ({
     </body>
   </html>
 );
-
-HTML.propTypes = {
-  htmlAttributes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  headComponents: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  bodyAttributes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  preBodyComponents: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  body: PropTypes.string,
-  postBodyComponents: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-};
-
 HTML.defaultProps = {
   body: '',
   htmlAttributes: {},

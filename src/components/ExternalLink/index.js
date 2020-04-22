@@ -1,7 +1,5 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 const ExternalLink = ({
   href, title, target, className, rel,
 }) => (
@@ -9,14 +7,6 @@ const ExternalLink = ({
     {title}
   </a>
 );
-
-ExternalLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  target: PropTypes.string,
-  className: PropTypes.string,
-  rel: PropTypes.string,
-};
 
 ExternalLink.defaultProps = {
   target: '_blank',

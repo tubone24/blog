@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import lozad from 'lozad';
 
 import { isBrowser } from '../../api';
@@ -46,9 +45,5 @@ class Content extends Component {
     );
   }
 }
-
-Content.propTypes = {
-  post: PropTypes.string.isRequired,
-};
 
 export default Content;
