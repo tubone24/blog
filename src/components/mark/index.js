@@ -28,7 +28,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="16.73"
           >
-              K
+            K
           </tspan>
           <tspan
             x="62.864"
@@ -37,7 +37,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="30.221"
           >
-              R
+            R
           </tspan>
           <tspan
             x="85.18"
@@ -46,7 +46,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="42.432"
           >
-              I
+            I
           </tspan>
           <tspan
             x="97.361"
@@ -55,7 +55,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="54.605"
           >
-              S
+            S
           </tspan>
           <tspan
             x="112.059"
@@ -64,7 +64,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="67.499"
           >
-              T
+            T
           </tspan>
           <tspan
             x="121.566"
@@ -73,7 +73,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="78.476"
           >
-              O
+            O
           </tspan>
           <tspan
             x="126.125"
@@ -82,7 +82,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="90.908"
           >
-              F
+            F
           </tspan>
           <tspan
             x="124.96"
@@ -91,7 +91,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="104.137"
           >
-              F
+            F
           </tspan>
           <tspan
             x="118.441"
@@ -100,7 +100,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="117.638"
           >
-              E
+            E
           </tspan>
           <tspan
             x="106.201"
@@ -109,7 +109,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="130.297"
           >
-              R
+            R
           </tspan>
         </text>
       </g>
@@ -248,7 +248,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-29.287"
           >
-              H
+            H
           </tspan>
           <tspan
             x="114.402"
@@ -257,7 +257,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-43.11"
           >
-              E
+            E
           </tspan>
           <tspan
             x="136.014"
@@ -266,7 +266,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-57.501"
           >
-              D
+            D
           </tspan>
           <tspan
             x="152.378"
@@ -275,7 +275,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-70.526"
           >
-              S
+            S
           </tspan>
           <tspan
             x="161.829"
@@ -284,7 +284,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-80.806"
           >
-              T
+            T
           </tspan>
           <tspan
             x="165.725"
@@ -293,7 +293,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-92.568"
           >
-              R
+            R
           </tspan>
           <tspan
             x="162.734"
@@ -302,7 +302,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-106.499"
           >
-              O
+            O
           </tspan>
           <tspan
             x="151.751"
@@ -311,7 +311,7 @@ const Mark = () => (
             fontSize="40.7028"
             rotate="-121.806"
           >
-              M
+            M
           </tspan>
         </text>
       </g>

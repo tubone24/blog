@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import { navigateTo } from 'gatsby-link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './contacts.scss';
 
@@ -16,21 +15,22 @@ export default class Contact extends React.Component {
 
   encode = (data) => {
     const formData = new FormData();
+    // eslint-disable-next-line no-restricted-syntax
     for (const key of Object.keys(data)) {
       formData.append(key, data[key]);
     }
     return formData;
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleAttachment = e => {
+  handleAttachment = (e) => {
     this.setState({ [e.target.name]: e.target.files[0] });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     ReactGA.event({
@@ -41,11 +41,11 @@ export default class Contact extends React.Component {
       method: 'POST',
       body: this.encode({
         'form-name': form.getAttribute('name'),
-        ...this.state
-      })
+        ...this.state,
+      }),
     })
       .then(() => navigateTo(form.getAttribute('action')))
-      .catch(error => alert(error));
+      .catch((error) => alert(error));
     console.log(this.state);
   };
 
@@ -58,12 +58,12 @@ export default class Contact extends React.Component {
             margin: 15,
           }}
         >
-          <Sidebar/>
+          <Sidebar />
           <div className="col order-2 contactForm">
-        <FontAwesomeIcon icon={['far', 'envelope']} size="2x" pull="left" />
+            <FontAwesomeIcon icon={['far', 'envelope']} size="2x" pull="left" />
             <h1>Contact Form</h1>
             <p><b>Please your Comment here.</b></p>
-            <br/>
+            <br />
 
             <form
               name="contact"
@@ -74,65 +74,93 @@ export default class Contact extends React.Component {
               onSubmit={this.handleSubmit}
             >
               {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-              <input type="hidden" name="form-name" value="contact"/>
+              <input type="hidden" name="form-name" value="contact" />
               <p hidden>
                 <label>
                   Don’t fill this out:{' '}
-                  <input name="bot-field" onChange={this.handleChange}/>
+                  <input name="bot-field" onChange={this.handleChange} />
                 </label>
               </p>
               <p>
                 <label>
-                  <FontAwesomeIcon icon={['fas', 'user']} pull="left" />Your name<br/>
-                  <input type="text" name="name" className="form-control" maxLength="30"
-                         minLength="2" required placeholder="Enter your name"
-                         onChange={this.handleChange}/>
+                  <FontAwesomeIcon icon={['fas', 'user']} pull="left" />Your name<br />
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    maxLength="30"
+                    minLength="2"
+                    required
+                    placeholder="Enter your name"
+                    onChange={this.handleChange}
+                  />
 
                 </label>
               </p>
               <p>
                 <label>
-                  <FontAwesomeIcon icon={['far', 'envelope']} pull="left" />Your email<br/>
-                  <input type="email" name="email" className="form-control"
-                         aria-describedby="emailHelp"
-                         pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-                         required placeholder="Enter your email" onChange={this.handleChange}/>
-                  <small id="emailHelp" className="form-text text-muted">We'll never share your
+                  <FontAwesomeIcon icon={['far', 'envelope']} pull="left" />Your email<br />
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                    pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                    required
+                    placeholder="Enter your email"
+                    onChange={this.handleChange}
+                  />
+                  <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your
                     email with anyone else.
                   </small>
                 </label>
               </p>
               <p>
                 <label>
-                  Subject<br/>
-                  <input type="text" name="subject" className="form-control" maxLength="30" cols="50"
-                         placeholder="Subject here..."
-                         onChange={this.handleChange}/>
+                  Subject<br />
+                  <input
+                    type="text"
+                    name="subject"
+                    className="form-control"
+                    maxLength="30"
+                    cols="50"
+                    placeholder="Subject here..."
+                    onChange={this.handleChange}
+                  />
 
                 </label>
               </p>
               <p>
                 <label>
-                  Message<br/>
-                  <textarea name="message" className="form-control"
-                            placeholder="Something writing..." rows="6" cols="50"
-                            onChange={this.handleChange}/>
+                  Message<br />
+                  <textarea
+                    name="message"
+                    className="form-control"
+                    placeholder="Something writing..."
+                    rows="6"
+                    cols="50"
+                    onChange={this.handleChange}
+                  />
                 </label>
               </p>
               <p>
-                File<br/>
+                File<br />
                 <label className="input-group-btn">
                   <span className="btn btn-info">
                     <FontAwesomeIcon icon={['fas', 'file']} pull="left" />
-                    Attachment File<input type="file" name="file" className="file-upload"
-                                          onChange={this.handleAttachment}/>
+                    Attachment File<input
+                      type="file"
+                      name="file"
+                      className="file-upload"
+                      onChange={this.handleAttachment}
+                    />
                     <small id="fileHelp" className="form-text">Please Attachment File Size less small as possible</small>
                   </span>
                 </label>
               </p>
               <p>
-                <br/>
-                <button type="submit" class="btn btn-primary">Send<FontAwesomeIcon icon={['fas', 'angle-right']} pull="right" /></button>
+                <br />
+                <button type="submit" className="btn btn-primary">Send<FontAwesomeIcon icon={['fas', 'angle-right']} pull="right" /></button>
               </p>
             </form>
           </div>

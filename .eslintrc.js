@@ -2,7 +2,8 @@ const path = require('path');
 
 const eslintrc = {
   extends: 'airbnb',
-  plugins: ['react', 'jsx-a11y', 'import', ],
+  parser: 'babel-eslint',
+  plugins: ['react', 'jsx-a11y', 'import'],
   settings: {
     'import/core-modules': [
       'react',
@@ -12,6 +13,9 @@ const eslintrc = {
       'react-helmet',
       // 'prop-types',
     ],
+    parserOptions: {
+      parser: 'babel-eslint'
+    }
   },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -24,6 +28,7 @@ const eslintrc = {
     'max-len': ["error", 200, { "ignoreComments": true }],
     'linebreak-style': 0,
     'react/jsx-one-expression-per-line': 0,
+    'jsx-a11y/label-has-associated-control': 0,
     'import/extensions': [
       2,
       'never',
