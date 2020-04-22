@@ -1,12 +1,12 @@
 ---
 slug: 2017/01/15/new-my-gear
 title: New my gear...
-date: 2020-04-22T15:44:46.720Z
+date: 2017-01-14T15:44:46.720Z
 description: New my gear...
 tags:
   - 音楽
   - ギター
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/WUQxt7v.jpg
 templateKey: blog-post
 ---
 どうも。
@@ -62,7 +62,7 @@ YouTube、ニコ動で「まくまく」さんって方が昔演奏していて�
 
 ギターサウンドも大好きでした
 
-`https://www.youtube.com/embed/6WtUMZwVq8o`
+`youtube:https://www.youtube.com/embed/6WtUMZwVq8o`
 
 この人です。かわいいでしょ。
 
