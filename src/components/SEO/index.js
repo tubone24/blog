@@ -11,6 +11,7 @@ const schemaOrgJSONLD = ({
   siteTitleAlt,
   isPost,
   image,
+  tag,
   description,
 }) => {
   const returnJson = [];
@@ -43,6 +44,14 @@ const schemaOrgJSONLD = ({
             '@type': 'ListItem',
             position: 2,
             item: {
+              '@id': `https://blog.tubone-project24.xyz/tag/${tag}`,
+              name: 'tubone BOYAKI',
+            },
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            item: {
               '@id': url,
               name: title,
               image,
@@ -73,7 +82,7 @@ const schemaOrgJSONLD = ({
 
 
 const SEO = ({
-  url, title, description, image, siteTitleAlt, isPost,
+  url, title, description, image, siteTitleAlt, isPost, tag,
 }) => (
   <Helmet>
     <title>{title}</title>
@@ -85,7 +94,7 @@ const SEO = ({
     {/* Schema.org tags */}
     <script type="application/ld+json">
       {JSON.stringify(schemaOrgJSONLD({
-        url, title, siteTitleAlt, isPost, image, description,
+        url, title, siteTitleAlt, isPost, image, description, tag,
       }))}
     </script>
 
@@ -123,6 +132,7 @@ SEO.propTypes = {
   image: PropTypes.string.isRequired,
   siteTitleAlt: PropTypes.string.isRequired,
   isPost: PropTypes.bool.isRequired,
+  tag: PropTypes.string.isRequired,
 };
 
 SEO.defaultProps = {

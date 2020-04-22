@@ -72,7 +72,9 @@ class BlogPost extends Component {
 
     const { minutes, words } = readingTime;
 
-    const { date, headerImage, title } = frontmatter;
+    const { date, headerImage, title, tags } = frontmatter;
+
+    console.log(tags[0])
 
     const shareURL = `${url}/${slug}`;
 
@@ -110,6 +112,7 @@ class BlogPost extends Component {
           url={shareURL}
           siteTitleAlt="tubone BOYAKI"
           isPost
+          tag={tags[0]}
           description={excerpt}
           image={headerImage || 'https://i.imgur.com/StLyXdu.png'}
         />

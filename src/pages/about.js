@@ -124,6 +124,7 @@ class About extends Component {
           siteTitleAlt="tubone BOYAKI Profile"
           isPost
           description="About tubone Profile"
+          tag="about"
           image="https://i.imgur.com/VUti8s3.png"
         />
       </div>

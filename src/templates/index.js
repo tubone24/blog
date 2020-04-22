@@ -90,6 +90,7 @@ const Page = ({ pageContext, location }) => {
         siteTitleAlt="tubone BOYAKI"
         isPost={false}
         description="tubone BLOG: Python, Docker, TS and other techs.."
+        tag=""
         image="https://i.imgur.com/StLyXdu.png"
       />
     </>

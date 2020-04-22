@@ -22,6 +22,7 @@ export default () => (
       siteTitleAlt="tubone BOYAKI"
       isPost={false}
       description="Contact Thanks Page"
+      tag=""
       image="https://i.imgur.com/M795H8A.jpg"
     />
   </div>

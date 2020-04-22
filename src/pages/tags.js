@@ -51,6 +51,7 @@ const TagPage = ({ data }) => {
         siteTitleAlt="tubone BOYAKI"
         isPost={false}
         description="Tags Page"
+        tag=""
         image="https://i.imgur.com/M795H8A.jpg"
       />
     </div>

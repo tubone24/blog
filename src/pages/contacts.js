@@ -143,6 +143,7 @@ export default class Contact extends React.Component {
           siteTitleAlt="tubone BOYAKI"
           isPost={false}
           description="Contact Form Page"
+          tag=""
           image="https://i.imgur.com/M795H8A.jpg"
         />
       </div>
