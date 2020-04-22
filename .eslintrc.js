@@ -29,6 +29,7 @@ const eslintrc = {
     'linebreak-style': 0,
     'react/jsx-one-expression-per-line': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'no-alert': 0,
     'import/extensions': [
       2,
       'never',

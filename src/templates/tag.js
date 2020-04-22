@@ -4,7 +4,6 @@ import Card from '../components/Card';
 import SEO from '../components/SEO';
 import Sidebar from '../components/Sidebar';
 
-// eslint-disable-next-line react/prop-types
 const TagPage = ({ data, pageContext }) => {
   const { edges } = data.allMarkdownRemark;
   const { tag } = pageContext;

@@ -1,5 +1,4 @@
 /* eslint-disable react/destructuring-assignment */
-/* eslint react/prop-types: 0 */
 
 // Components
 import React, { Component } from 'react';
