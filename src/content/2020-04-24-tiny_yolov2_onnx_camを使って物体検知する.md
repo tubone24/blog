@@ -6,7 +6,7 @@ description: tiny_yolov2_onnx_camを使って物体検知する
 tags:
   - 機械学習
   - 物体検知
-headerImage: 'https://i.imgur.com/QmIHfeR.jpg'
+headerImage: 'https://i.imgur.com/jzkNhR6.jpg'
 templateKey: blog-post
 ---
 こんにちは。
