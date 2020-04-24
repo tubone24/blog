@@ -103,6 +103,8 @@ Raspberry PIのカメラをぶっ刺したので**--camera -1**を引数にし�
 $ python3 tiny_yolov2_onnx_cam.py --camera -1
 ```
 
-カメラが起動し、物体検知が始まります。
+ONNX形式からTensorRTに変換するので初回起動は時間かかります。
+
+しばらくするとカメラが起動し、物体検知が始まります。
 
 ![img](https://i.imgur.com/jzkNhR6.jpg)
