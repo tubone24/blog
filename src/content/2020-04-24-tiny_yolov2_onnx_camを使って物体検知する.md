@@ -69,3 +69,40 @@ Traceback (most recent call last):
     raise RuntimeError("Running cythonize failed!")
 RuntimeError: Running cythonize failed!
 ```
+
+### tiny_yolov2_onnx_camをインストールする
+
+**git clone**でtiny_yolov2_onnx_camを落としてきます。
+
+また、Cudaにパスを通します。
+
+```
+$ git clone https://github.com/tsutof/tiny_yolov2_onnx_cam
+
+$ cd tiny_yolov2_onnx_cam
+
+$ export PATH=$PATH:/usr/local/cuda-10.0.0/bin
+
+$ python3 -m pip install -r requirements.txt
+```
+
+また、**Jetsonのクロックアップ**をします。
+
+```
+$ sudo nvpmodel -m 0
+$ sudo jetson_clocks
+```
+
+## 起動する
+
+Raspberry PIのカメラをぶっ刺したので**--camera -1**を引数にします。
+
+![img](https://i.imgur.com/gWqd2xb.jpg)
+
+```
+$ python3 tiny_yolov2_onnx_cam.py --camera -1
+```
+
+カメラが起動し、物体検知が始まります。
+
+![img](https://i.imgur.com/jzkNhR6.jpg)
