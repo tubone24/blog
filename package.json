@@ -41,7 +41,7 @@
     "gatsby-plugin-nprogress": "^2.2.3",
     "gatsby-plugin-offline": "^3.1.4",
     "gatsby-plugin-optimize-svgs": "^1.0.4",
-    "gatsby-plugin-purgecss": "^4.0.1",
+    "gatsby-plugin-purgecss": "^5.0.0",
     "gatsby-plugin-react-helmet": "^3.2.4",
     "gatsby-plugin-react-helmet-canonical-urls": "^1.4.0",
     "gatsby-plugin-robots-txt": "^1.5.0",
