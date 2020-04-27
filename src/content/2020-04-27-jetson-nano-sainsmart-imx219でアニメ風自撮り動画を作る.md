@@ -7,7 +7,7 @@ tags:
   - 機械学習
   - Jetson nano
   - SainSmart IMX219
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/lPOtTYa.png
 templateKey: blog-post
 ---
 [ディープラーニングで自撮り画像をアニメ画像に画風変換する方法](https://qiita.com/karaage0703/items/221f96436c32f6f405c7)を参考にJetson nanoでアニメ風自撮り画像を作ってみましたが、使っているカメラの互換性問題で少し躓いたので、修正してトライしたよ。というお話です。
@@ -72,3 +72,7 @@ $ python3 selfie2anime_movie.py --light=True -d='jetson_nano_raspi_cam'
 カメラで私の顔を認識してみたところ、私の顔が可愛くないキャラクターに変換されました。
 
 ![img](https://i.imgur.com/lPOtTYa.png)
+
+ちょっともたつきますが、ちゃんとリアルタイムに処理しているようです。
+
+![img](https://i.imgur.com/pFHv6zC.gifv)
