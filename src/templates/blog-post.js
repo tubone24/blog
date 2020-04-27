@@ -64,12 +64,12 @@ class BlogPost extends Component {
     const { node } = this.data.content.edges[0];
 
     const {
-      html, frontmatter, fields, excerpt,
+      html, frontmatter, fields, excerpt, wordCount, timeToRead,
     } = node;
 
-    const { slug, readingTime } = fields;
+    const { slug } = fields;
 
-    const { minutes, words } = readingTime;
+    const { words } = wordCount;
 
     const {
       date, headerImage, title, tags,
@@ -95,7 +95,7 @@ class BlogPost extends Component {
               background: '#1bd77f',
             }}
           ><span className="fa-layers fa-fw fa-1x"><FontAwesomeIcon icon={['fas', 'clock']} /></span>
-            この記事は<b>{words}文字</b>で<b>約{Math.round(minutes * 10) / 10}分</b>で読めます
+            この記事は<b>{words}文字</b>で<b>約{timeToRead}分</b>で読めます
           </div>
           <Content post={html} />
 
@@ -123,10 +123,6 @@ export const pageQuery = graphql`
   fragment post on MarkdownRemark {
     fields {
       slug
-      readingTime {
-          minutes
-          words
-      }
     }
     frontmatter {
       id
@@ -136,6 +132,11 @@ export const pageQuery = graphql`
       headerImage
       tags
     }
+    wordCount {
+      sentences
+      words
+    }
+    timeToRead
   }
 
   query BlogPostQuery($index: Int) {
