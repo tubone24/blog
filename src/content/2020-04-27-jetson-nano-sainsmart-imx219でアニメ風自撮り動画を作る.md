@@ -75,4 +75,4 @@ $ python3 selfie2anime_movie.py --light=True -d='jetson_nano_raspi_cam'
 
 ちょっともたつきますが、ちゃんとリアルタイムに処理しているようです。
 
-![img](https://i.imgur.com/pFHv6zC.gifv)
+![img](https://i.imgur.com/pFHv6zC.gif)
