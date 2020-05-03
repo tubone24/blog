@@ -363,7 +363,9 @@ RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check
 RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check compiler_bindir_search_path list in "E:\tubone\project\stylegan2\dnnlib\tflib\custom_ops.py".
 ```
 
-とのことです。何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に書いてありました。
+とのことです。MSVC/GCC/CLANGということはCのコンパイラが必要とのことです。
+
+何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に書いてありました。
 
 ```
 On Windows, the compilation requires Microsoft Visual Studio to be in PATH. We recommend installing Visual Studio Community Edition and adding into PATH using "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat".
@@ -408,6 +410,226 @@ compiler_bindir_search_path = [
 
 #----------------------------------------------------------------------------
 ```
+
+**compiler_bindir_search_path**が実環境とあっていませんでした。
+
+また、MSVCのチェックスクリプト**test_nvcc.cu**がGitHubのレポジトリに普通にありました...
+
+Visual Studio 2019のパスを正しく書き直してtest_nvcc.cuを実行してみたところ、
+
+```
+(tensorflow) E:\tubone\project\stylegan2>nvcc test_nvcc.cu -o test_nvcc -run
+test_nvcc.cu
+
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin/../include\cuda_runtime.h: warning C4819: ファイルは、現在 のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してくだ さい。
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include\crt/host_config.h(143): fatal error C1189: #error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2013 and 2017 (inclusive) are supported!
+```
+
+なんだかVisual Stadio 2019に対応してないとか出てきた...
+
+んー.... じゃあ2017いれますか...
+
+[こちら](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads)からVisual Studio 2017をダウンロードしインストールします。もちろんMSVCが必要なのでちゃんとインストーラーでC++の開発はインストールしましょう！
+
+インストール後は**compiler_bindir_search_path**にパスを設定します。パスは**cl.exe**が存在する箇所です。バージョン名以外は**custom_ops.py**の通りで大丈夫だと思います。
+
+うまくパスを設定してないとtest_nvcc.cuを実行すると
+
+```
+(tensorflow) E:\tubone\project\stylegan2>nvcc test_nvcc.cu -o test_nvcc -run
+nvcc fatal   : Cannot find compiler 'cl.exe' in PATH
+```
+
+とcl.exeがPATHに見つからないと怒られます。
+
+私の環境のcl.exeは
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
+```
+
+でした。
+
+うまくPATHを通すと
+
+```
+現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存して ください。
+   ライブラリ test_nvcc.lib とオブジェクト test_nvcc.exp を作成中
+CPU says hello.
+GPU says hello.
+```
+
+Unicode警告はでるものの、**CPU says hello. GPU says hello.**と表示されました。
+
+よし！時はきた！**generate_anime.py**を実行します。
+
+## まだうまく動かない
+
+エラーがでました...
+
+```
+RuntimeError: NVCC returned an error. See below for full command line and output log:
+
+nvcc "C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\_pywrap_tensorflow_internal.lib" --gpu-architecture=sm_75 --use_fast_math --disable-warnings --include-path "C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\include" --include-path "C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\include\external\protobuf_archive\src" --include-path "C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\include\external\com_google_absl" --include-path "C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\include\external\eigen_archive" --compiler-bindir "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64" 2>&1 "C:\Users\meita\Downloads\stylegan2\dnnlib\tflib\ops\fused_bias_act.cu" --shared -o "C:\Users\meita\AppData\Local\Temp\tmp3_sgpk48\fused_bias_act_tmp.dll" --keep --keep-dir "C:\Users\meita\AppData\Local\Temp\tmp3_sgpk48"
+
+_pywrap_tensorflow_internal.lib
+fused_bias_act.cu
+nvcc error   : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
+```
+
+```
+nvcc error   : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
+```
+
+とのことです。なんだこれ....
+
+## nvcc error : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
+
+ここまできて半分諦めてたのですが、ダメ元でエラーをググったらTensorflowに気になるIssueを発見しました。
+
+[nvcc error : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION) #27706](https://github.com/tensorflow/tensorflow/issues/27706)
+
+![img](https://i.imgur.com/zXCnrTq.png)
+
+```
+You need to Install Visual C++ Build Tools 2015 Please take a look at these instructions.
+```
+
+はぁ... 2015ですか...
+
+ということでVisual Studio 2015をインストールします...
+
+<https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o~msft~vscom~older-downloads>
+
+Visual Studio 2015は通常インストールするとVCインストールの項目がないのでインストール後、再度インストーラーを起動してVCをインストールするように修正します。
+
+## 3度目の正直
+
+よし**generate_anime.py**実行します！
+
+```
+(tensorflow) E:\tubone\project\stylegan2>python generate_anime.py
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\framework\dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\framework\dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\framework\dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\framework\dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\framework\dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorflow\python\framework\dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:541: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:542: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:543: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:544: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:545: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+C:\Users\meita\Anaconda3\envs\tensorflow\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:550: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+Setting up TensorFlow plugin "fused_bias_act.cu": Preprocessing... Loading... Done.
+Setting up TensorFlow plugin "upfirdn_2d.cu": Preprocessing... Loading... Done.
+
+Gs                            Params    OutputShape         WeightShape
+---                           ---       ---                 ---
+latents_in                    -         (?, 512)            -
+labels_in                     -         (?, 0)              -
+lod                           -         ()                  -
+dlatent_avg                   -         (512,)              -
+G_mapping/latents_in          -         (?, 512)            -
+G_mapping/labels_in           -         (?, 0)              -
+G_mapping/Normalize           -         (?, 512)            -
+G_mapping/Dense0              262656    (?, 512)            (512, 512)
+G_mapping/Dense1              262656    (?, 512)            (512, 512)
+G_mapping/Dense2              262656    (?, 512)            (512, 512)
+G_mapping/Dense3              262656    (?, 512)            (512, 512)
+G_mapping/Dense4              262656    (?, 512)            (512, 512)
+G_mapping/Dense5              262656    (?, 512)            (512, 512)
+G_mapping/Dense6              262656    (?, 512)            (512, 512)
+G_mapping/Dense7              262656    (?, 512)            (512, 512)
+G_mapping/Broadcast           -         (?, 16, 512)        -
+G_mapping/dlatents_out        -         (?, 16, 512)        -
+Truncation/Lerp               -         (?, 16, 512)        -
+G_synthesis/dlatents_in       -         (?, 16, 512)        -
+G_synthesis/4x4/Const         8192      (?, 512, 4, 4)      (1, 512, 4, 4)
+G_synthesis/4x4/Conv          2622465   (?, 512, 4, 4)      (3, 3, 512, 512)
+G_synthesis/4x4/ToRGB         264195    (?, 3, 4, 4)        (1, 1, 512, 3)
+G_synthesis/8x8/Conv0_up      2622465   (?, 512, 8, 8)      (3, 3, 512, 512)
+G_synthesis/8x8/Conv1         2622465   (?, 512, 8, 8)      (3, 3, 512, 512)
+G_synthesis/8x8/Upsample      -         (?, 3, 8, 8)        -
+G_synthesis/8x8/ToRGB         264195    (?, 3, 8, 8)        (1, 1, 512, 3)
+G_synthesis/16x16/Conv0_up    2622465   (?, 512, 16, 16)    (3, 3, 512, 512)
+G_synthesis/16x16/Conv1       2622465   (?, 512, 16, 16)    (3, 3, 512, 512)
+G_synthesis/16x16/Upsample    -         (?, 3, 16, 16)      -
+G_synthesis/16x16/ToRGB       264195    (?, 3, 16, 16)      (1, 1, 512, 3)
+G_synthesis/32x32/Conv0_up    2622465   (?, 512, 32, 32)    (3, 3, 512, 512)
+G_synthesis/32x32/Conv1       2622465   (?, 512, 32, 32)    (3, 3, 512, 512)
+G_synthesis/32x32/Upsample    -         (?, 3, 32, 32)      -
+G_synthesis/32x32/ToRGB       264195    (?, 3, 32, 32)      (1, 1, 512, 3)
+G_synthesis/64x64/Conv0_up    2622465   (?, 512, 64, 64)    (3, 3, 512, 512)
+G_synthesis/64x64/Conv1       2622465   (?, 512, 64, 64)    (3, 3, 512, 512)
+G_synthesis/64x64/Upsample    -         (?, 3, 64, 64)      -
+G_synthesis/64x64/ToRGB       264195    (?, 3, 64, 64)      (1, 1, 512, 3)
+G_synthesis/128x128/Conv0_up  1442561   (?, 256, 128, 128)  (3, 3, 512, 256)
+G_synthesis/128x128/Conv1     721409    (?, 256, 128, 128)  (3, 3, 256, 256)
+G_synthesis/128x128/Upsample  -         (?, 3, 128, 128)    -
+G_synthesis/128x128/ToRGB     132099    (?, 3, 128, 128)    (1, 1, 256, 3)
+G_synthesis/256x256/Conv0_up  426369    (?, 128, 256, 256)  (3, 3, 256, 128)
+G_synthesis/256x256/Conv1     213249    (?, 128, 256, 256)  (3, 3, 128, 128)
+G_synthesis/256x256/Upsample  -         (?, 3, 256, 256)    -
+G_synthesis/256x256/ToRGB     66051     (?, 3, 256, 256)    (1, 1, 128, 3)
+G_synthesis/512x512/Conv0_up  139457    (?, 64, 512, 512)   (3, 3, 128, 64)
+G_synthesis/512x512/Conv1     69761     (?, 64, 512, 512)   (3, 3, 64, 64)
+G_synthesis/512x512/Upsample  -         (?, 3, 512, 512)    -
+G_synthesis/512x512/ToRGB     33027     (?, 3, 512, 512)    (1, 1, 64, 3)
+G_synthesis/images_out        -         (?, 3, 512, 512)    -
+G_synthesis/noise0            -         (1, 1, 4, 4)        -
+G_synthesis/noise1            -         (1, 1, 8, 8)        -
+G_synthesis/noise2            -         (1, 1, 8, 8)        -
+G_synthesis/noise3            -         (1, 1, 16, 16)      -
+G_synthesis/noise4            -         (1, 1, 16, 16)      -
+G_synthesis/noise5            -         (1, 1, 32, 32)      -
+G_synthesis/noise6            -         (1, 1, 32, 32)      -
+G_synthesis/noise7            -         (1, 1, 64, 64)      -
+G_synthesis/noise8            -         (1, 1, 64, 64)      -
+G_synthesis/noise9            -         (1, 1, 128, 128)    -
+G_synthesis/noise10           -         (1, 1, 128, 128)    -
+G_synthesis/noise11           -         (1, 1, 256, 256)    -
+G_synthesis/noise12           -         (1, 1, 256, 256)    -
+G_synthesis/noise13           -         (1, 1, 512, 512)    -
+G_synthesis/noise14           -         (1, 1, 512, 512)    -
+images_out                    -         (?, 3, 512, 512)    -
+---                           ---       ---                 ---
+Total                         30276583
+
+2020-05-04 03:03:32.366467: W tensorflow/core/common_runtime/bfc_allocator.cc:237] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.14GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were availa
+ble.
+2020-05-04 03:03:32.377471: W tensorflow/core/common_runtime/bfc_allocator.cc:237] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.14GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were availa
+ble.
+2020-05-04 03:03:32.966211: W tensorflow/core/common_runtime/bfc_allocator.cc:237] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.25GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were availa
+ble.
+2020-05-04 03:03:32.976815: W tensorflow/core/common_runtime/bfc_allocator.cc:237] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.25GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were availa
+ble.
+```
+
+実行できた！！
+
+ちゃんとresultsに画像が出力されてます！
+
+![img](https://i.imgur.com/VfRjfpW.png)
+
+**かわいいいいいい！！**
+
+小早川紗枝はんに似てますなー！
+
+`youtube:https://www.youtube.com/embed/KpjWeNB5TUI`
+
 
 
 
