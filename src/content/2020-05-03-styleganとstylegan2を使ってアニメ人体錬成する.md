@@ -369,9 +369,45 @@ RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check
 On Windows, the compilation requires Microsoft Visual Studio to be in PATH. We recommend installing Visual Studio Community Edition and adding into PATH using "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat".
 ```
 
-VCが必要なんですね。でももともとVisual Studio 2019は入れているんだけどなぁ。
+VCでのコンパイルが必要なんですね。でももともとVisual Studio 2019は入れているんだけどなぁ。
 
-エラーメッセージ
+エラーメッセージを見返すと**custom_ops.py**を編集してねとのことなので確認します。
+
+```python
+# Copyright (c) 2019, NVIDIA Corporation. All rights reserved.
+#
+# This work is made available under the Nvidia Source Code License-NC.
+# To view a copy of this license, visit
+# https://nvlabs.github.io/stylegan2/license.html
+
+"""TensorFlow custom ops builder.
+"""
+
+import os
+import re
+import uuid
+import hashlib
+import tempfile
+import shutil
+import tensorflow as tf
+from tensorflow.python.client import device_lib # pylint: disable=no-name-in-module
+
+#----------------------------------------------------------------------------
+# Global options.
+
+cuda_cache_path = os.path.join(os.path.dirname(__file__), '_cudacache')
+cuda_cache_version_tag = 'v1'
+do_not_hash_included_headers = False # Speed up compilation by assuming that headers included by the CUDA code never change. Unsafe!
+verbose = True # Print status messages to stdout.
+
+compiler_bindir_search_path = [
+    'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.14.26428/bin/Hostx64/x64',
+    'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64',
+    'C:/Program Files (x86)/Microsoft Visual Studio 14.0/vc/bin',
+]
+
+#----------------------------------------------------------------------------
+```
 
 
 
