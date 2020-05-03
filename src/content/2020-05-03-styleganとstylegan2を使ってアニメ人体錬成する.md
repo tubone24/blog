@@ -165,7 +165,9 @@ pretrained_example.pyとは異なりあらかじめ潜在変数の作成する�
 
 こちらは[イラストで学習したStyleGANを試した](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)を参考にしました。
 
-```
+**generate_anime.py**とします。
+
+```python
 import os
 import pickle
 import numpy as np
@@ -239,6 +241,8 @@ StyleGAN2というStyleGANをさらに高精度にしたものがまたまたNVI
 StyleGAN2でも**gwern.net**さんがモデルを公開してくれてます！
 
 [StyleGAN 2](https://www.gwern.net/Faces#stylegan-2)
+
+基本的にはStyleGAN2もStyleGANっぽくコーディングできるだろうと思い、先ほどのコードを
 
 
 
