@@ -161,7 +161,9 @@ if __name__ == "__main__":
 
 生成した画像Aを少しずつ変化させて画像Bに変化させてみます。
 
-pretrained_example.pyとは異なりあらかじめ潜在変数の作成する画像枚数分ベクトルを生成してn => n+1の変化量をm分割する感じにしました。
+pretrained_example.pyとは異なりあらかじめ潜在変数の作成する画像枚数分ベクトルを生成してn => n+1の変化量をm分割する感じ。
+
+こちらは[イラストで学習したStyleGANを試した](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)を参考にしました。
 
 ```
 import os
@@ -224,7 +226,19 @@ if __name__ == "__main__":
 
 おおー！すごい！なかなかしっかりしてますね。
 
+StyleGANで美少女無限増殖は成功といってもいいのではないでしょうか！！
 
+## StyleGAN2でも美少女無限増殖
+
+StyleGAN2というStyleGANをさらに高精度にしたものがまたまたNVIDIAから出てます。
+
+どう変わったかというのはもう難しいので専門化に任せちゃいます。わかりやすいサイトがありました。
+
+[GANの基礎からStyleGAN2まで](https://medium.com/@akichan_f/gan%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89stylegan2%E3%81%BE%E3%81%A7-dfd2608410b3)
+
+StyleGAN2でも**gwern.net**さんがモデルを公開してくれてます！
+
+[StyleGAN 2](https://www.gwern.net/Faces#stylegan-2)
 
 
 
