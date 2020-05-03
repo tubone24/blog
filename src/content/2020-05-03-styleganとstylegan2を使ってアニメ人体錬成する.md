@@ -6,7 +6,7 @@ description: StyleGANとStyleGAN2を使って美少女キャラを無限増殖�
 tags:
   - 機械学習
   - StyleGAN
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/VfRjfpW.png
 templateKey: blog-post
 ---
 Jetson Nanoを買ってから機械学習熱が再来したので頑張ります。
@@ -68,7 +68,8 @@ GANは画像生成の際、ノイズを入力とするのですがStyleGANはノ
 そうすることにより生成画像の特徴をバランスよく適用することができるみたいです。
 
 ![img](https://i.imgur.com/7xOURgl.png)
-(引用: [A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/pdf/1812.04948.pdf))
+(引用: [A Style-Based Generator Architecture for Generative Adversarial Networks
+](https://arxiv.org/pdf/1812.04948.pdf))
 
 当然、演算量は増えるので莫大な時間とお金(GPU)が必要になります。
 
@@ -82,7 +83,8 @@ GANは画像生成の際、ノイズを入力とするのですがStyleGANはノ
 
 美少女キャラ生成用の学習済みモデルってないかなーと探してたら、ありました。
 
-[Making Anime Faces With StyleGAN](https://www.gwern.net/Faces)
+[Making Anime Faces With StyleGAN
+](https://www.gwern.net/Faces)
 
 **gwern.net**さんありがとうございます！！！！
 
@@ -92,7 +94,9 @@ GANは画像生成の際、ノイズを入力とするのですがStyleGANはノ
 
 ダウンロードしたら早速使ってみます。StyleGANのソース(ライブラリ)はNVIDIAのGitHubに公開されてます。
 
-[NVlabs/stylegan](https://github.com/NVlabs/stylegan)
+[NVlabs
+/
+stylegan](https://github.com/NVlabs/stylegan)
 
 推論のためにdnnlibを拝借します。
 
@@ -173,7 +177,8 @@ if __name__ == "__main__":
 
 pretrained_example.pyとは異なりあらかじめ潜在変数の作成する画像枚数分ベクトルを生成してn => n+1の変化量をm分割する感じ。
 
-こちらは[イラストで学習したStyleGANを試した](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)を参考にしました。
+こちらは[イラストで学習したStyleGANを試した
+](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)を参考にしました。
 
 ファイル名は、**generate_anime.py**とします。
 
@@ -255,7 +260,9 @@ StyleGAN2というStyleGANをさらに高精度にしたものがまたまたNVI
 
 また、ライブラリは同じくGitHubに公開されています。
 
-[NVlabs/stylegan2](https://github.com/NVlabs/stylegan2)
+[NVlabs
+/
+stylegan2](https://github.com/NVlabs/stylegan2)
 
 基本的にはStyleGAN2もStyleGANっぽくコーディングできるだろうと思い、先ほどの**generate_anime.py**を流用します。
 
@@ -459,9 +466,11 @@ CPU says hello.
 GPU says hello.
 ```
 
-Unicode警告はでるものの、**CPU says hello. GPU says hello.**と表示されました。
+Unicode警告はでるものの、**CPU says hello.
+ GPU says hello.**と表示されました。
 
-よし！時はきた！**generate_anime.py**を実行します。
+よし！時はきた！
+**generate_anime.py**を実行します。
 
 ## まだうまく動かない
 
@@ -505,7 +514,8 @@ Visual Studio 2015は通常インストールするとVCインストールの項
 
 ## 3度目の正直
 
-よし**generate_anime.py**実行します！
+よし
+**generate_anime.py**実行します！
 
 ```
 (tensorflow) E:\tubone\project\stylegan2>python generate_anime.py
@@ -630,30 +640,20 @@ ble.
 
 `youtube:https://www.youtube.com/embed/KpjWeNB5TUI`
 
+うまくできました！！
 
+## 結論
 
+ここまでのスクリプトはNVIDIAのStyleGAN, StyleGAN2をForkした形でGitHubにおいてます。
 
+<https://github.com/tubone24/stylegan>
 
+<https://github.com/tubone24/stylegan2>
 
+機械学習特有の環境構築とかで躓くあるあるはあるものの、何とかできました。
 
+また、GANの世界もここまで進化していると知りびっくりしました。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+次回はこちらをJetson nanoに移植していきたいと思います。
 
 
