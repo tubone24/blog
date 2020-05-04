@@ -58,7 +58,7 @@ DCGANについても詳細は専門家に任せます。[これ](https://arxiv.o
 まずは下記の画像を見てください。
 
 ![img](https://i.imgur.com/9mP8aH2.jpg)
-(引用: <https://en.wikipedia.org/wiki/StyleGAN>)
+(<https://en.wikipedia.org/wiki/StyleGAN>)
 
 この美女のポートレート、どこかの女優さんかと思いきやStyleGANで生成されたらしいです。
 
@@ -77,6 +77,7 @@ GANで1024x1024などの高解像度画像を生成するのは至難の業で�
 そこでStyleGANは高解像度の画像を生成するために**Progressive Growing**という手法を採用しました。
 
 ![img](https://i.imgur.com/bTE91Hx.png)
+([Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/abs/1710.10196))
 
 画像生成プロセスを**一気に高解像度の画像を生成するのではなく低解像度から漸近的(≒徐々に近づける)に高解像度の画像を成長させる**手法になります。
 
@@ -87,8 +88,9 @@ GANで1024x1024などの高解像度画像を生成するのは至難の業で�
 もう一つの特徴はスタイル変換([Style Transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))と呼ばれる技術を使っていることです。
 
 ![img](https://i.imgur.com/9EAE63P.png)
+([Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))
 
-上の画像は[Gatys_Image_Style_Transfer_CVPR_2016_paper](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pd)からの引用ですが特定の画像に画風(Style)情報を差し込むことで任意の画風に変換することができる、というものです。
+上の画像は[Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)からの引用ですが特定の画像に画風(Style)情報を差し込むことで任意の画風に変換することができる、というものです。
 
 [PRISMA](https://prisma-ai.com/)というサイトで遊んだことのある方も多いかと思いますが、まさにあれです。
 
@@ -99,7 +101,7 @@ StyleGANではStyle Transferに[**AdaIN(Adaptive Instance Normalization)**](http
 AdaINの手法ではStyleを適用画像、Style画像チャネルごとの平均と標準偏差から導きます。
 
 ![img](https://i.imgur.com/z7ZpFko.png)
-(引用: Xun Huang et al Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization)
+([Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868))
 
 ### 潜在変数から画像を作らずちゃんとStyleをn本加え入れろ～
 
@@ -108,7 +110,7 @@ AdaINの手法ではStyleを適用画像、Style画像チャネルごとの平�
 StyleGANではPGGANの成果物であるProgressive Growingを継承しつつも画像生成のプロセスが異なります。
 
 ![img](https://i.imgur.com/7xOURgl.png)
-(引用: [A Style-Based Generator Architecture for Generative Adversarial Networks
+([A Style-Based Generator Architecture for Generative Adversarial Networks
 ](https://arxiv.org/pdf/1812.04948.pdf))
 
 StyleGANでは、PGGANとは異なり入力に潜在変数を直接用いません。constのテンソルを用いています。
@@ -148,37 +150,44 @@ Styleの形で特徴を細かく分割し、Mixing Regularizationでそれぞれ
 
 **gwern.net**さんありがとうございます！！！！
 
-モデルは[StyleGAN model used for TWDNEv1 sample](https://www.gwern.net/Faces#anime-faces)からダウンロードできます。ありがたくダウンロードしましょう。
+モデルは[StyleGAN model used for TWDNEv1 sample](https://www.gwern.net/Faces#anime-faces)からダウンロードできます。
+
+**ありがたくダウンロードしましょう。**
+
+感謝の気持ちで肩たたきけんを進呈します。
+
+![img](https://i.imgur.com/0IEMnPa.png)
 
 ## StyleGANを使ってみる
 
 ダウンロードしたら早速使ってみます。StyleGANのソース(ライブラリ)はNVIDIAのGitHubに公開されてます。
 
-[NVlabs
-/
-stylegan](https://github.com/NVlabs/stylegan)
+[NVlabs/stylegan](https://github.com/NVlabs/stylegan)
 
-推論のためにdnnlibを拝借します。
+学習はしないですが、推論のためにdnnlibを拝借するためソースをローカルにcloneします。
 
-あらかじめ、CUDAとTensorflowGPUを設定しておきます。
+また、事前にCUDAとTensorflowGPUを設定しておきます。
 
-設定方法は各自ググってください...
+環境差分が大きい話なので設定方法は各自ググってください........
 
 結構バージョンとかで苦戦しますので[こちら](https://qiita.com/chin_self_driving_car/items/f00af2dbd022b65c9068)を参考に設定しましょう。
 
-私の環境は下記です。
+私の環境は下記で行いました。
 
 key | value
 --- | ---
+OS | Windows10
 GPU | NVIDIA GeForce RTX 2080
 CUDA | 10.0.0
 Python | 3.7.3
 tensorflow-gpu | 1.14.0
 numpy | 1.18.1
 
-**pretrained_example.py**を改造して画像生成用スクリプトは下記のように作りました。
+ソースに同梱されている**pretrained_example.py**はNVIDIAが作ったモデルを用いて推論をしてみるスクリプトですがとりあえず、こちらを改造して画像生成用スクリプトを作ります。
 
-pretrained_example.pyではGoogle Driveからモデルをダウンロードしますが、こちらを変更します。
+pretrained_example.pyではGoogle DriveからNVIDIA作成のモデルをダウンロードしますが、今回はAnimeFace用のモデルを使いたいので少しコードを変更します。
+
+ちなみにStyleGANのモデルはPickelファイル形式なので普通にPythonでバイナリオープンできます。
 
 ```python
 
@@ -224,21 +233,21 @@ if __name__ == "__main__":
 
 うまくいけばresultsディレクトリに画像が生成されるはずです。
 
-
 ![img](https://i.imgur.com/ET5Bn63.png)
 
 **あらかわ！**
 
-## AからBに画像を遷移させる
+## AからBに画像を遷移(Transition)させる
 
 さらにちょっと頑張ってみましょう。
 
 生成した画像Aを少しずつ変化させて画像Bに変化させてみます。
 
-pretrained_example.pyとは異なりあらかじめ潜在変数の作成する画像枚数分ベクトルを生成してn => n+1の変化量をm分割する感じ。
+StyleGANはこのAからBへの遷移(Transition)も比較的きれいにできることが知られています。
 
-こちらは[イラストで学習したStyleGANを試した
-](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)を参考にしました。
+pretrained_example.pyとは異なりあらかじめ潜在変数の作成する画像枚数分ベクトルを生成してn => n+1の変化量をm分割する感じにする必要があります。
+
+こちらは[イラストで学習したStyleGANを試した](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)を参考にしました。
 
 ファイル名は、**generate_anime.py**とします。
 
@@ -250,7 +259,6 @@ import PIL.Image
 import dnnlib.tflib as tflib
 import config
 from datetime import datetime
-import glob
 
 FILENAME_PREFIX = datetime.now().strftime("%Y%m%d%H%M%S")
 
@@ -280,7 +288,7 @@ def generate_image():
 
     # AからBに遷移する画像を生成
     for i in range(len(stacked_latents) - 1):
-        # before, afterをそれぞれ作る
+        # before(A), after(B)をそれぞれ作る
         latents_before = stacked_latents[i].reshape(1, -1)
         latents_after = stacked_latents[i + 1].reshape(1, -1)
         for j in range(19 + 1):
@@ -302,27 +310,36 @@ if __name__ == "__main__":
 
 `youtube:https://www.youtube.com/embed/VAAm-Ne3T6Y`
 
-おおー！すごい！なかなかしっかりしてますね。
+おおー！すごい！なかなかしっかりしてますね。512x512の高解像度美少女キャラが無限増殖してます！
 
 StyleGANで美少女無限増殖は成功といってもいいのではないでしょうか！！
 
 ## StyleGAN2でも美少女無限増殖
 
-StyleGAN2というStyleGANをさらに高精度にしたものがまたまたNVIDIAから出てます。
+StyleGANで成功をおさめたNVIDIAですがまだ歩みを止めません。StyleGANで出てきた課題を解決するべく、[StyleGAN2](https://arxiv.org/abs/1912.04958)を作りました。
 
-どう変わったかというのはもう難しいので専門の方に任せちゃいます。わかりやすいサイトがありました。
+StyleGANとどう変わったかというのはもう難しいので専門の方に任せちゃいますがちらっとだけ解説すると
 
-[GANの基礎からStyleGAN2まで](https://medium.com/@akichan_f/gan%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89stylegan2%E3%81%BE%E3%81%A7-dfd2608410b3)
+StyleGANで課題になった
+
+- 水滴ノイズ(droplet)
+- 歯や目などの小さい特徴が顔の向きと連動しない(不自然モード)
+
+という問題を解消しています。
+
+さて、**StyleGAN2でも美少女キャラ無限増殖したい！**と心の声が聞こえてきますね。
 
 なんとStyleGAN2でも**gwern.net**さんがモデルを公開してくれてます！
 
 [StyleGAN 2](https://www.gwern.net/Faces#stylegan-2)
 
-また、ライブラリは同じくGitHubに公開されています。
+ありがたくこちらも使わせていただきます。
 
-[NVlabs
-/
-stylegan2](https://github.com/NVlabs/stylegan2)
+また、StyleGAN2自体のソース(ライブラリ)はStyleGANと同じくGitHubに公開されています。
+
+[NVlabs/stylegan2](https://github.com/NVlabs/stylegan2)
+
+こちらをCloneして準備完了です。
 
 基本的にはStyleGAN2もStyleGANっぽくコーディングできるだろうと思い、先ほどの**generate_anime.py**を流用します。
 
@@ -333,9 +350,6 @@ import numpy as np
 import PIL.Image
 import dnnlib.tflib as tflib
 from datetime import datetime
-import cv2
-import glob
-import shutil
 
 # number of create StyleGAN image file
 IMAGE_NUM = 30
@@ -387,16 +401,16 @@ if __name__ == "__main__":
 
 ```
 
-1点コードを変更したところとしてはdnnlibにconfigがないのでresultsディレクトリの指定は文字列で行
-います。
+1点コードを変更したところとしてはStyleGAN2のdnnlibに**config**がないのでresultsディレクトリの指定は文字列で行います。
 
 さあ！実行しますわよー！
 
-## おや！？動かない。
+### おや！？動かない。
 
 まぁそう簡単にはいきませんね。エラーを吐いて落ちてしまいました。
 
 エラーメッセージ
+
 ```
 Setting up TensorFlow plugin "fused_bias_act.cu": Preprocessing... Failed!
 Traceback (most recent call last):
@@ -426,21 +440,26 @@ RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check
 ```
 
 エラーメッセージ抜粋
+
 ```
 RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check compiler_bindir_search_path list in "E:\tubone\project\stylegan2\dnnlib\tflib\custom_ops.py".
 ```
 
-とのことです。MSVC/GCC/CLANGということはCのコンパイラが必要とのことです。
+とのことです。**MSVC/GCC/CLANG**ということは**VCかGCCのコンパイラが必要**とのことです。
 
-何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に書いてありました。
+Windows10で実行しているのでVCが必要なんですね。
+
+エラーを見て何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に普通に書いてありました。見切り発車もいいところだ...
 
 ```
 On Windows, the compilation requires Microsoft Visual Studio to be in PATH. We recommend installing Visual Studio Community Edition and adding into PATH using "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat".
 ```
 
-VCでのコンパイルが必要なんですね。でももともとVisual Studio 2019は入れているんだけどなぁ。
+VCでのコンパイルが必要なんですねということはわかったのですが、釈然としません。
 
-エラーメッセージを見返すと**custom_ops.py**を編集してねとのことなので確認します。
+なぜならもともとVisual Studio 2019は入れているからです。パスも通してます。当然VCのコンパイラも含まれているわけで。
+
+もう一度エラーメッセージを見返すと**custom_ops.py**を編集してねとのことなので確認します。
 
 ```python
 # Copyright (c) 2019, NVIDIA Corporation. All rights reserved.
@@ -478,11 +497,13 @@ compiler_bindir_search_path = [
 #----------------------------------------------------------------------------
 ```
 
-**compiler_bindir_search_path**が実環境とあっていませんでした。
+なるほど、StyleGAN2で使うVCのコンパイラは**compiler_bindir_search_path**で設定しているんですね。確かにこちらが実環境とあっていませんでした。
 
-また、MSVCのチェックスクリプト**test_nvcc.cu**がGitHubのレポジトリに普通にありました...
+こちらを実環境に合わせて修正します。
 
-Visual Studio 2019のパスを正しく書き直してtest_nvcc.cuを実行してみたところ、
+また、もう少しStyleGAN2のレポジトリを眺めたら、MSVCのチェックスクリプト**test_nvcc.cu**がGitHubのレポジトリに普通にありました...。どんだけ見切り発車なんだよ..。
+
+さて気を取り直して、Visual Studio 2019のパスを正しく書き直しtest_nvcc.cuを実行してみたところ、
 
 ```
 (tensorflow) E:\tubone\project\stylegan2>nvcc test_nvcc.cu -o test_nvcc -run
@@ -492,11 +513,13 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin/../include\cuda_run
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include\crt/host_config.h(143): fatal error C1189: #error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2013 and 2017 (inclusive) are supported!
 ```
 
-なんだかVisual Stadio 2019に対応してないとか出てきた...
+Warinigは置いておいて、**fatal error**が出てますね。なんだかVisual Stadio 2019に対応してないとか出てきた...
 
 んー.... じゃあ2017いれますか...
 
-[こちら](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads)からVisual Studio 2017をダウンロードしインストールします。もちろんMSVCが必要なのでちゃんとインストーラーでC++の開発はインストールしましょう！
+[こちら](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads)からVisual Studio 2017をダウンロードしインストールします。
+
+もちろんMSVCが必要なのでちゃんとインストーラーでC++の開発はインストールしましょう！
 
 インストール後は**compiler_bindir_search_path**にパスを設定します。パスは**cl.exe**が存在する箇所です。バージョン名以外は**custom_ops.py**の通りで大丈夫だと思います。
 
@@ -517,7 +540,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 
 でした。
 
-うまくPATHを通すと
+うまくPATHを通してtest_nvcc.cuを実行すると....
 
 ```
 現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存して ください。
@@ -526,15 +549,29 @@ CPU says hello.
 GPU says hello.
 ```
 
-Unicode警告はでるものの、**CPU says hello.
- GPU says hello.**と表示されました。
+Unicode warinigはでるものの、
+
+**CPU says hello.**
+
+**GPU says hello.**
+
+と表示されました。「ハロー！」
+
+まったく関係ないですが、ハローといえば**Radio Happy**ですよね。好き。
+
+`youtube:https://www.youtube.com/embed/9pY9MrjeLD4`
 
 よし！時はきた！
+
 **generate_anime.py**を実行します。
+
+![img](https://i.imgur.com/k3KihLx.png)
 
 ## まだうまく動かない
 
 エラーがでました...
+
+![img](https://i.imgur.com/0KH7SgH.png)
 
 ```
 RuntimeError: NVCC returned an error. See below for full command line and output log:
@@ -566,16 +603,27 @@ You need to Install Visual C++ Build Tools 2015 Please take a look at these inst
 
 はぁ... 2015ですか...
 
-ということでVisual Studio 2015をインストールします...
+2017で動くって言ってたじゃないか！
+
+![img](https://i.imgur.com/1KUffz4.png)
+
+ということで**Visual Studio 2015**をインストールします...
 
 <https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o~msft~vscom~older-downloads>
 
 Visual Studio 2015は通常インストールするとVCインストールの項目がないのでインストール後、再度インストーラーを起動してVCをインストールするように修正します。
 
+何気に面倒だよねこれ、Stack overflow君が教えてくれなければ解決できなかったよぉ。
+
+[Visual Studio 2015 doesn't have cl.exe](https://stackoverflow.com/questions/31953769/visual-studio-2015-doesnt-have-cl-exe)
+
 ## 3度目の正直
 
-よし
+よし!(適当)
+
 **generate_anime.py**実行します！
+
+![img](https://i.imgur.com/YE8Pdyb.png)
 
 ```
 (tensorflow) E:\tubone\project\stylegan2>python generate_anime.py
@@ -690,6 +738,8 @@ ble.
 
 実行できた！！
 
+![img](https://i.imgur.com/daSYwz2.png)
+
 ちゃんとresultsに画像が出力されてます！
 
 ![img](https://i.imgur.com/VfRjfpW.png)
@@ -698,9 +748,15 @@ ble.
 
 小早川紗枝はんに似てますなー！
 
-`youtube:https://www.youtube.com/embed/KpjWeNB5TUI`
+紗枝はんといえばやっぱり**美に入り彩を穿つ **ですよね。
 
-うまくできました！！
+`youtube:https://www.youtube.com/embed/96rmz41v6QE`
+
+ごほん！
+
+ちゃんとTransitionもうまく出力されているようです！
+
+`youtube:https://www.youtube.com/embed/KpjWeNB5TUI`
 
 ## 結論
 
@@ -716,4 +772,8 @@ ble.
 
 次回はこちらをJetson nanoに移植していきたいと思います。
 
+## 参考
 
+- [GANの基礎からStyleGAN2まで](https://medium.com/@akichan_f/gan%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89stylegan2%E3%81%BE%E3%81%A7-dfd2608410b3)
+- [StyleGAN解説 CVPR2019読み会@DeNA](https://www.slideshare.net/KentoDoi/stylegan-cvpr2019dena)
+- [イラストで学習したStyleGANを試した](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)
