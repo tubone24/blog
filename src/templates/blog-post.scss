@@ -127,6 +127,31 @@
       color: #888;
       text-align: right;
     }
+
+    table th td {
+      line-height: 1.5;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+    }
+
+    table.type06 th {
+      width: 150px;
+      padding: 10px;
+      font-weight: bold;
+      color: #fff;
+      vertical-align: top;
+      background: #3f3f3f;
+    }
+
+    table.type06 td {
+      width: 350px;
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) {
+      background: #d9d9d9;
+    }
   }
 
   #gitalk-container {
