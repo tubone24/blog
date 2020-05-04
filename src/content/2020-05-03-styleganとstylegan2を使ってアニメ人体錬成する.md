@@ -103,6 +103,8 @@ AdaINの手法ではStyleを適用画像、Style画像チャネルごとの平�
 ![img](https://i.imgur.com/z7ZpFko.png)
 ([Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868))
 
+統計量を用いることで、学習していないStyleについてもそれなりに対応することができる、というのがメリットのようです。
+
 ### 潜在変数から画像を作らずちゃんとStyleをn本加え入れろ～
 
 さて、長くなってきましたがそろそろ解説終わりです。
@@ -113,17 +115,19 @@ StyleGANではPGGANの成果物であるProgressive Growingを継承しつつも
 ([A Style-Based Generator Architecture for Generative Adversarial Networks
 ](https://arxiv.org/pdf/1812.04948.pdf))
 
-StyleGANでは、PGGANとは異なり入力に潜在変数を直接用いません。constのテンソルを用いています。
+StyleGANでは、PGGANとは異なり入力に潜在変数を直接用いません。**const(固定値)のテンソル**を用いています。
 
-その代わり、ネットワークの各層にAdaINを用いStyleを適用することで画像を生み出しているのです。
+その代わり、**ネットワークの各層にAdaINを用いStyleを適用**することで画像に変化を生み出しているのです。
 
-また、単純に潜在変数をAdaINにぶち込んでいるわけでもなく、MappingNetwork(全結合ニューラルネット)で潜在変数を非線形化してから用いるなど細やかな気配りもされています。
+また、単純に潜在変数をAdaINにぶち込んでいるわけでもなく、**MappingNetwork(全結合ニューラルネット)で潜在変数を非線形化**してから用いるなど細やかな気配りもされています。
 
-なぜStyleを各層に適用する形をとるかというと、人やものが映った画像には特徴がいくつかあり、GANはそれらの特徴を学習することで画像生成を行っているのですが、実際人が映った画像には顔の向きや顔の輪郭など大きな特徴から目の色、肌の色のようなテクスチャ、肌荒れや髪の毛の巻き方などみみっちい特徴まで様々です。
+なぜStyleを各層に適用する形をとるかというと、人やものが映った画像には様々な特徴量があり、GANはそれらの特徴量を学習することで画像生成を行っているのですが、実際人が映った画像には顔の向きや顔の輪郭など大きな特徴から目の色、肌の色のようなテクスチャ、肌荒れや髪の毛の巻き方などみみっちい特徴まで様々です。
 
-実はStyleGANはここらへんも考えていて、Mixing Regularizationという複数の潜在変数(ここではStyleベクトル)を各種層で混ぜ込んで適用するという手法で解決してます。
+一様な特徴量で表すのは限界があるのです。
 
-Progressive Growingで申した通り、各層は低解像度から高解像度へと進むのですがStyleベクトルを低解像度の際に適用した場合と高解像度の際に適用した場合では低解像度の際に入れたStyleのほうが画像への寄与が大きくなります。
+実はStyleGANはここらへんをしっかり考えていて、Style適用に加え**Mixing Regularization**という複数の潜在変数(ここではStyleベクトル)を各種層で混ぜ込んで適用するという手法で解決してます。
+
+Progressive Growingで申した通り、各層は低解像度から高解像度へと進むのですがStyleベクトルを低解像度の際に適用した場合と高解像度の際に適用した場合では**低解像度の際に入れたStyleのほうが画像への寄与が大きく**なります。
 
 つまり、顔の向きや顔の輪郭などの大きな特徴は低解像度の際に、目の色など小さな特徴については高解像度の際にStyleとして適用されるのです。
 
@@ -331,7 +335,7 @@ StyleGANで課題になった
 
 なんとStyleGAN2でも**gwern.net**さんがモデルを公開してくれてます！
 
-[StyleGAN 2](https://www.gwern.net/Faces#stylegan-2)
+[Making Anime Faces With StyleGAN StyleGAN 2](https://www.gwern.net/Faces#stylegan-2)
 
 ありがたくこちらも使わせていただきます。
 
@@ -447,9 +451,11 @@ RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check
 
 とのことです。**MSVC/GCC/CLANG**ということは**VCかGCCのコンパイラが必要**とのことです。
 
-Windows10で実行しているのでVCが必要なんですね。
+**Windows10で実行しているのでVCが必要なんですね。**
 
-エラーを見て何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に普通に書いてありました。見切り発車もいいところだ...
+エラーを見て何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に普通に書いてありました。
+
+見切り発車もいいところだ...
 
 ```
 On Windows, the compilation requires Microsoft Visual Studio to be in PATH. We recommend installing Visual Studio Community Edition and adding into PATH using "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat".
@@ -457,7 +463,9 @@ On Windows, the compilation requires Microsoft Visual Studio to be in PATH. We r
 
 VCでのコンパイルが必要なんですねということはわかったのですが、釈然としません。
 
-なぜならもともとVisual Studio 2019は入れているからです。パスも通してます。当然VCのコンパイラも含まれているわけで。
+なぜならもともとVisual Studio 2019は入れているからです。
+
+パスも通してます。当然VCのコンパイラも含まれているわけで。
 
 もう一度エラーメッセージを見返すと**custom_ops.py**を編集してねとのことなので確認します。
 
@@ -497,11 +505,15 @@ compiler_bindir_search_path = [
 #----------------------------------------------------------------------------
 ```
 
-なるほど、StyleGAN2で使うVCのコンパイラは**compiler_bindir_search_path**で設定しているんですね。確かにこちらが実環境とあっていませんでした。
+なるほど、StyleGAN2で使うVCのコンパイラは**compiler_bindir_search_path**で設定しているんですね。
+
+確かにこちらが実環境とあっていませんでした。
 
 こちらを実環境に合わせて修正します。
 
-また、もう少しStyleGAN2のレポジトリを眺めたら、MSVCのチェックスクリプト**test_nvcc.cu**がGitHubのレポジトリに普通にありました...。どんだけ見切り発車なんだよ..。
+また、もう少しStyleGAN2のレポジトリを眺めたら、MSVCのチェックスクリプト**test_nvcc.cu**がGitHubのレポジトリに普通にありました...。
+
+どんだけ見切り発車なんだよ..。
 
 さて気を取り直して、Visual Studio 2019のパスを正しく書き直しtest_nvcc.cuを実行してみたところ、
 
@@ -567,7 +579,7 @@ Unicode warinigはでるものの、
 
 ![img](https://i.imgur.com/k3KihLx.png)
 
-## まだうまく動かない
+### まだうまく動かない
 
 エラーがでました...
 
@@ -589,7 +601,7 @@ nvcc error   : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
 
 とのことです。なんだこれ....
 
-## nvcc error : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
+### nvcc error : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
 
 ここまできて半分諦めてたのですが、ダメ元でエラーをググったらTensorflowに気になるIssueを発見しました。
 
@@ -617,7 +629,7 @@ Visual Studio 2015は通常インストールするとVCインストールの項
 
 [Visual Studio 2015 doesn't have cl.exe](https://stackoverflow.com/questions/31953769/visual-studio-2015-doesnt-have-cl-exe)
 
-## 3度目の正直
+### 3度目の正直
 
 よし!(適当)
 
@@ -748,7 +760,7 @@ ble.
 
 小早川紗枝はんに似てますなー！
 
-紗枝はんといえばやっぱり**美に入り彩を穿つ **ですよね。
+紗枝はんといえばやっぱり**美に入り彩を穿つ**ですよね。
 
 `youtube:https://www.youtube.com/embed/96rmz41v6QE`
 
@@ -777,3 +789,4 @@ ble.
 - [GANの基礎からStyleGAN2まで](https://medium.com/@akichan_f/gan%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89stylegan2%E3%81%BE%E3%81%A7-dfd2608410b3)
 - [StyleGAN解説 CVPR2019読み会@DeNA](https://www.slideshare.net/KentoDoi/stylegan-cvpr2019dena)
 - [イラストで学習したStyleGANを試した](https://blog.blacktanktop.me/?post=20191110_animation_stylegan)
+- [Tensorflow GPU, CUDA, CuDNNのバージョン早見表](https://qiita.com/chin_self_driving_car/items/f00af2dbd022b65c9068)
