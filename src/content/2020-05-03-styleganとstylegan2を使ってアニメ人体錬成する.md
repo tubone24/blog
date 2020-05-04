@@ -17,11 +17,11 @@ Jetson Nanoを買ってから機械学習熱が再来したので頑張ります
 
 ```
 
-## GANの革命児 StyleGANについて
+## GCGANで美少女キャラ無限増殖
 
-GAN(Generative Adversarial Networks)とは日本語では**敵対的生成ネットワーク**と呼ばれる機械学習フレームワークで、現実には存在しないそれっぽい画像を生成する方法などで注目されています。
+GAN(Generative Adversarial Networks)とは日本語では**敵対的生成ネットワーク**と呼ばれる機械学習フレームワークで、現実には存在しないそれっぽい画像を生成する方法などで採用されています。
 
-詳しい仕組みについては専門家にゆだねるとしてフェイク画像を生成する**Generator**とそれがフェイクかどうか判断する**Discriminator**の2種類が互いに勝負しあうことで画像生成の精度を高くしていく、という感じです。
+GANの詳しい仕組みについては専門家にゆだねるとしてフェイク画像を生成する**Generator**とそれがフェイクかどうか判断する**Discriminator**の2種類が互いに勝負しあうことで画像生成の精度を高くしていく、という感じです。
 
 いらすとやでイメージを作ってみました。
 
@@ -33,6 +33,8 @@ GANについては、実は昔(今から2年前)録画サーバで全アニメ�
 
 DCGANについても詳細は専門家に任せます。[これ](https://arxiv.org/pdf/1511.06434.pdf)が論文です。
 
+しっかり論文が読みこなせるマンになりたい...
+
 端的に言えばGANの学習の不安定さを**畳み込み層**や**Batch Normalization**、tanh、 Leaky ReLUなどのReLU以外の**活性化関数**を採用したりして学習の安定化を図ってます。
 
 当時はChainerの[Example](https://github.com/chainer/chainer/tree/master/examples/dcgan)を改造して学習から推論をやりましたがあまりうまくいきませんでした。
@@ -41,37 +43,95 @@ DCGANについても詳細は専門家に任せます。[これ](https://arxiv.o
 
 `youtube:https://www.youtube.com/embed/FhBeuX4cYoE`
 
-うーん大したことありませんね。
+解像度が64×64なので、うーん大したことありませんね。
 
 というより家のPC程度のGPUでは限界がありそうなことが分かったので美少女キャラを大量生成してハーレムを作る計画はかないませんでした。
 
-しかし、GANの基礎やアニメ顔の抜き出し方、OpenCVの使い方など学ぶことは多かったような気がします。
+しかし、GCGANで美少女無限増殖はGANの基礎やアニメ顔の抜き出し方、OpenCVの使い方など学ぶことは多かったような気がします。
 
-## Two years later...
+## GANの革命児 StyleGAN
 
-さて、あきらめていた美少女無限増殖ですが、最近Jetson Nanoを買ったのでせっかくなのでまたGANに挑戦しようと思いました。
+さて、あきらめていた美少女無限増殖ですが、最近[Jetson Nanoを買った](https://blog.tubone-project24.xyz/2020/04/21/jetson-nano)のでせっかくなのでまたGANに挑戦しようと思いました。
 
 さて、最近GANなんて触っていなかったので気が付かなかったのですが、[**StyleGAN**](https://arxiv.org/pdf/1812.04948.pdf)というのが盛り上がっている（いた？）と知ります。
 
+まずは下記の画像を見てください。
+
 ![img](https://i.imgur.com/9mP8aH2.jpg)
+(引用: <https://en.wikipedia.org/wiki/StyleGAN>)
 
-この美女のポートレート、どこかの女優さんかと思いきやStyleGANで生成されたらしいです。いわれてみれば後ろ髪が不自然な気もしますが、これはわかりませんね。すごい。
+この美女のポートレート、どこかの女優さんかと思いきやStyleGANで生成されたらしいです。
 
-StyleGANを作ったのはあの**NVIDIA**、つまりGPUお化けが作ったGANで、GPUのパワーをふんだんに使ったモデルです。
+いわれてみれば後ろ髪が不自然な気もしますが、これはわかりませんね。すごい。
 
-StyleGAN詳しいことは専門家に任せるとして、こいつがすごいのはそのGPUパワーを生かした画像生成にあります。
+StyleGANを作ったのはあの[**NVIDIA**](https://www.nvidia.com/ja-jp/)、つまりGPU作成お化けが作ったGANで、GPUのパワーをふんだんに使ったネットワークとして知られています。
 
-人やものが映った画像には特徴がいくつかありますが顔の向きや顔の輪郭など大きな特徴から目の色、肌の色のようなテクスチャ、髪の毛のなびき方などみみっちい特徴まで様々です。
+StyleGANの詳しいことは専門家に任せるとして、さらっとエクストリーム解説頑張ってみたいと思います。
 
-GANは画像生成の際、ノイズを入力とするのですがStyleGANはノイズから**Style**という画像の制御情報のようなものを作り、Styleを**AdaIN(Adaptive Instance Normalization)**という手法でネットワークの中間で適用していく感じです。
+### Progressive Growing
 
-そうすることにより生成画像の特徴をバランスよく適用することができるみたいです。
+GANで1024x1024などの高解像度画像を生成するのは至難の業です。
+
+高解像度の画像を学習させるとモデルの評価指数多すぎて、Generatorが生み出す画像が**これじゃない...** 感満載な画像ができることが知られてます。
+
+そこでStyleGANは高解像度の画像を生成するために**Progressive Growing**という手法を採用しました。
+
+![img](https://i.imgur.com/bTE91Hx.png)
+
+画像生成プロセスを**一気に高解像度の画像を生成するのではなく低解像度から漸近的(≒徐々に近づける)に高解像度の画像を成長させる**手法になります。
+
+この手法はStyleGANの前身研究の[PGGAN(Progressive Growing of GANs)](https://arxiv.org/abs/1710.10196)の成果物です。
+
+### スタイル変換 Style Transfer
+
+もう一つの特徴はスタイル変換([Style Transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))と呼ばれる技術を使っていることです。
+
+![img](https://i.imgur.com/9EAE63P.png)
+
+上の画像は[Gatys_Image_Style_Transfer_CVPR_2016_paper](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pd)からの引用ですが特定の画像に画風(Style)情報を差し込むことで任意の画風に変換することができる、というものです。
+
+[PRISMA](https://prisma-ai.com/)というサイトで遊んだことのある方も多いかと思いますが、まさにあれです。
+
+StyleGANではStyle Transferに[**AdaIN(Adaptive Instance Normalization)**](https://arxiv.org/pdf/1703.06868.pdf)という手法を使ってます。
+
+今までのStyle Transfer(Instance Normalization)は変換したいStyle画像をStyle用ベクトルとして学習し、指定したStyleごとに選択的にモデルに係数とバイアスを設定することで実現してました。
+
+AdaINの手法ではStyleを適用画像、Style画像チャネルごとの平均と標準偏差から導きます。
+
+![img](https://i.imgur.com/z7ZpFko.png)
+(引用: Xun Huang et al Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization)
+
+### 潜在変数から画像を作らずちゃんとStyleをn本加え入れろ～
+
+さて、長くなってきましたがそろそろ解説終わりです。
+
+StyleGANではPGGANの成果物であるProgressive Growingを継承しつつも画像生成のプロセスが異なります。
 
 ![img](https://i.imgur.com/7xOURgl.png)
 (引用: [A Style-Based Generator Architecture for Generative Adversarial Networks
 ](https://arxiv.org/pdf/1812.04948.pdf))
 
-当然、演算量は増えるので莫大な時間とお金(GPU)が必要になります。
+StyleGANでは、PGGANとは異なり入力に潜在変数を直接用いません。constのテンソルを用いています。
+
+その代わり、ネットワークの各層にAdaINを用いStyleを適用することで画像を生み出しているのです。
+
+また、単純に潜在変数をAdaINにぶち込んでいるわけでもなく、MappingNetwork(全結合ニューラルネット)で潜在変数を非線形化してから用いるなど細やかな気配りもされています。
+
+なぜStyleを各層に適用する形をとるかというと、人やものが映った画像には特徴がいくつかあり、GANはそれらの特徴を学習することで画像生成を行っているのですが、実際人が映った画像には顔の向きや顔の輪郭など大きな特徴から目の色、肌の色のようなテクスチャ、肌荒れや髪の毛の巻き方などみみっちい特徴まで様々です。
+
+実はStyleGANはここらへんも考えていて、Mixing Regularizationという複数の潜在変数(ここではStyleベクトル)を各種層で混ぜ込んで適用するという手法で解決してます。
+
+Progressive Growingで申した通り、各層は低解像度から高解像度へと進むのですがStyleベクトルを低解像度の際に適用した場合と高解像度の際に適用した場合では低解像度の際に入れたStyleのほうが画像への寄与が大きくなります。
+
+つまり、顔の向きや顔の輪郭などの大きな特徴は低解像度の際に、目の色など小さな特徴については高解像度の際にStyleとして適用されるのです。
+
+Styleの形で特徴を細かく分割し、Mixing Regularizationでそれぞれの特徴にあった変化を生み出すことができるようになったことがStyleGANのすばらしさと私は理解してます。
+
+## 慣れない解説はもうやらない、本題に戻ります
+
+ごほん！
+
+当然、高解像度のGANは演算量は増えるので莫大な時間とお金(GPU)が必要になります。
 
 「子どもに学習学習っていいたくないですよね...。NVIDIAだからできたこと。(激寒)」
 
