@@ -1,0 +1,158 @@
+$base-name: ".device-frame";
+
+#{$base-name} {
+  max-width: 1000px;
+  margin: auto;
+  box-shadow: 0 2px 30px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+
+  &-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 4vw;
+    max-height: 36px;
+    vertical-align: middle;
+    background: #e6e6e6;
+    border-radius: 2px 2px 0 0;
+  }
+
+  &-controls {
+    margin-left: 0.25vw;
+    line-height: 0;
+  }
+
+  &-control {
+    display: inline-block;
+    width: 1vw;
+    max-width: 10px;
+    height: 1vw;
+    max-height: 10px;
+    margin-left: 0.5vw;
+    background: #ddd;
+    border-radius: 50%;
+
+    &--close {
+      background: #ff7f50;
+    }
+
+    &--minimize {
+      background: #c6c02c;
+    }
+
+    &--fullscreen {
+      background: #48b79e;
+    }
+  }
+
+  &-body {
+    overflow: auto;
+  }
+
+  // Variations.
+  &--phone {
+    max-width: 320px;
+    padding: 0.5vw;
+    overflow: hidden;
+    background: #111;
+    border-radius: 3.4vw;
+
+    @media (min-width: 1200px) {
+      padding: 4px;
+      border-radius: 34px;
+    }
+
+    #{$base-name} {
+      &-header {
+        max-height: 40px;
+        background: inherit;
+
+        &::after {
+          position: absolute;
+          left: 50%;
+          width: 4vw;
+          max-width: 40px;
+          height: 0.4vw;
+          content: "";
+          background: #333;
+          border-radius: 0.2vw;
+          transform: translateX(-50%);
+        }
+      }
+
+      &-controls {
+        display: none;
+      }
+
+      &-body {
+        border-radius: 0 0 3vw 3vw;
+
+        @media (min-width: 1200px) {
+          border-radius: 0 0 30px 30px;
+        }
+      }
+    }
+  }
+
+  &--phone--light {
+    @extend #{$base-name}--phone;
+
+    background: #efefef;
+
+    #{$base-name}-header {
+      &::after {
+        background: #ddd;
+      }
+    }
+  }
+
+  // Variations.
+  &--tablet {
+    max-width: 768px;
+    padding: 5px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 34px;
+
+    #{$base-name} {
+      &-header {
+        height: 50px;
+        max-height: initial;
+        background: inherit;
+
+        &::after {
+          position: absolute;
+          left: 50%;
+          width: 40px;
+          height: 4px;
+          content: "";
+          background: #eee;
+          border-radius: 2px;
+          transform: translateX(-50%);
+        }
+      }
+
+      &-controls {
+        display: none;
+      }
+
+      &-footer {
+        position: relative;
+        height: 49px;
+
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          display: block;
+          width: 24px;
+          height: 24px;
+          content: "";
+          background: #eee;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+}

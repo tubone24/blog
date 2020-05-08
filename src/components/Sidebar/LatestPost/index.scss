@@ -1,0 +1,13 @@
+@import '../../../styles/colors';
+
+.latest-post {
+  a {
+    margin: 5px 0;
+    color: $light-blue;
+    text-align: left;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

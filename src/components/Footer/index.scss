@@ -1,0 +1,11 @@
+@import "../../styles/colors";
+
+.footer {
+  padding-bottom: 2rem;
+  font-size: 12px;
+
+  .copyright {
+    margin-top: -0.5rem;
+    color: $san-juan;
+  }
+}

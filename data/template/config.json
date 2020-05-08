@@ -1,0 +1,74 @@
+{
+  "url": "https://blog.tubone-project24.xyz",
+  "meta": {
+    "favicon": "/assets/usericon.jpeg",
+    "keyword": "blog, tubone, IT, Developer, Python, GitHub, Nuxt.js",
+    "description": "tubone's BOYAKI is the developer blog by tubone who is Japan IT Developer",
+    "theme_color": "#33b546",
+    "google_site_verification": "--LalgZ9bPi0TeRovPWh1jMxI1TuCs0dESPlyDtR_EQ"
+  },
+  "name": "tubone",
+  "email": "tubo.yyyuuu@gmail.com",
+  "stats": {
+    "image": "https://i.imgur.com/VUti8s3.png",
+    "title": "aaa",
+    "description": "aaaaaaa"
+  },
+  "title": "tubone BOYAKI",
+  "gitalk": {
+    "repo": "blog",
+    "admin": ["tubone24"],
+    "owner": "tubone24",
+    "pagerDirection": "first",
+    "distractionFreeMode": true
+  },
+  "License": "by",
+  "friends": [
+    {
+      "href": "https://note.tubone-project24.xyz",
+      "title": "personal note"
+    },
+    {
+      "href": "https://portfolio.tubone-project24.xyz",
+      "title": "portfolio"
+    }
+  ],
+  "iconUrl": "https://i.imgur.com/OR4cBWS.png",
+  "gaTrackId": "UA-146792080-1",
+  "navbarList": [
+    {
+      "href": "/tags/",
+      "title": "Tags"
+    },
+    {
+      "href": "/about/",
+      "title": "About"
+    },
+    {
+      "href": "/contacts/",
+      "title": "Contacts"
+    },
+    {
+      "href": "/photos/",
+      "title": "Photos"
+    }
+  ],
+  "redirectors": [
+    {
+      "toPath": "/about/",
+      "fromPath": "/profile/"
+    },
+    {
+      "toPath": "/2019/02/13/my-gear/",
+      "fromPath": "/gear/"
+    }
+  ],
+  "carouselItems": [
+    {
+      "src": "https://i.imgur.com/gw91CuI.jpg",
+      "target": "/stats/"
+    }
+  ],
+  "githubUsername": "tubone24",
+  "maxPostsInPage": 5
+}

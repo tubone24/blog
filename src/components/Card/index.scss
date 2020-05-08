@@ -1,0 +1,104 @@
+@import "../../styles/colors";
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700); // Variables
+//$open-sans: "Open Sans", sans-serif; // clear-fix mixin
+
+@mixin cf {
+  &::after,
+  &::before {
+    display: table;
+    content: "";
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+// Base styles
+
+.data {
+  transition: transform 0.3s;
+  transform: translateY(0);
+
+  .content {
+    position: relative;
+    z-index: 1;
+    padding: 1em;
+
+    // Tags, Date
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+}
+
+.custom-card {
+  transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  .lazyload {
+    opacity: 0;
+  }
+
+  .lazyloaded {
+    background-color: $bermuda;
+    background-image: url('/assets/m_e_others_500.png');
+    opacity: 1;
+    transition: opacity 3000ms;
+  }
+
+  &:hover {
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .wrapper {
+    position: relative;
+    min-height: 5.7rem;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease 0s;
+
+    @media (min-width: 576px) {
+      min-height: 15rem;
+    }
+
+    &:hover {
+      opacity: 0.9;
+
+      .data {
+        transition: transform 0.3s;
+        transform: translateY(-1em);
+      }
+    }
+  }
+
+  .title {
+    margin-top: 20px;
+  }
+
+  .date {
+    padding: 0.8em;
+    color: $white;
+    background-color: $bermuda;
+
+    span {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .content {
+    background-color: $white;
+
+    .title {
+      color: $light-blue;
+    }
+
+    p {
+      color: $black;
+    }
+  }
+}
