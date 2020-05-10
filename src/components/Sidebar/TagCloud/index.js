@@ -23,11 +23,12 @@ const TagCloud = ({ data }) => {
   const tags = Array.from(Object.keys(mapping)).sort(
     (b, a) => mapping[a] - mapping[b],
   );
+  const limitTags = tags.slice(0, 50);
 
   return (
     <div className="d-none d-lg-block information my-2">
-      <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;All {tags.length} Tags</p>
-      {tags.map((item) => (
+      <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;{limitTags.length} / {tags.length} Tags</p>
+      {limitTags.map((item) => (
         <Tag name={item} key={item} count={mapping[item]} />
       ))}
     </div>

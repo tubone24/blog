@@ -146,11 +146,11 @@
     "stylelint-scss": "^3.17.1"
   },
   "lint-staged": {
-      "**/*.js": [
-        "npm run format",
-        "git add"
-      ],
-      "**/*.css": "stylelint",
-      "**/*.scss": "stylelint --syntax=scss"
-    }
+    "**/*.js": [
+      "npm run format",
+      "git add"
+    ],
+    "**/*.css": "stylelint",
+    "**/*.scss": "stylelint --syntax=scss"
+  }
 }
