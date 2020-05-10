@@ -8,8 +8,8 @@ const Information = ({ totalCount, posts }) => (
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
-    <Friend />
-    <hr />
+    {/*<Friend />*/}
+    {/*<hr />*/}
 
   </div>
 );
