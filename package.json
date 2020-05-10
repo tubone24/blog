@@ -114,7 +114,7 @@
   },
   "scripts": {
     "start": "npm run develop",
-    "build": "gatsby clean && gatsby build --prefix-paths",
+    "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
     "develop:remote": "gatsby develop -p 8080 -H 0.0.0.0",
     "deploy": "npm run build && gh-pages -d public",
