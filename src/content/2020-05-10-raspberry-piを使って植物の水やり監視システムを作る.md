@@ -6,7 +6,7 @@ description: Raspberry PIを使って植物の水やり監視システムを作�
 tags:
   - 電子工作
   - Raspberry PI
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/amaoydT.jpg
 templateKey: blog-post
 ---
 Raspberry PIを使って家のガジュマルを枯らさないようにします。
