@@ -23,7 +23,7 @@ const TagCloud = ({ data }) => {
   const tags = Array.from(Object.keys(mapping)).sort(
     (b, a) => mapping[a] - mapping[b],
   );
-  const limitTags = tags.slice(0, 50);
+  const limitTags = tags.slice(0, 30);
 
   return (
     <div className="d-none d-lg-block information my-2">

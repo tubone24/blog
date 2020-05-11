@@ -13,7 +13,7 @@ const LatestPost = ({ posts, totalCount }) => (
       <FontAwesomeIcon icon={['fas', 'newspaper']} />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
       {totalCount}
     </p>
-    {/*<Heatmap minify />*/}
+    <Heatmap minify />
     {posts.map(({ node }) => (
       <Link
         to={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}

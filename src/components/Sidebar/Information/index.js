@@ -1,5 +1,5 @@
 import React from 'react';
-import Friend from '../Friend';
+// import Friend from '../Friend';
 import LatestPost from '../LatestPost';
 import './index.scss';
 
@@ -8,9 +8,8 @@ const Information = ({ totalCount, posts }) => (
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
-    {/*<Friend />*/}
-    {/*<hr />*/}
-
+    {/* <Friend /> */}
+    {/* <hr /> */}
   </div>
 );
 
