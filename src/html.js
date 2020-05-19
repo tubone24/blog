@@ -18,6 +18,7 @@ const HTML = ({
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
+      <meta name="p:domain_verify" content="2accdaac3153e1b438ab307ac5c4b855" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
