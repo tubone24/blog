@@ -6,6 +6,15 @@ import Sidebar from '../components/Sidebar';
 const PeriodSummary = ({ data, pageContext }) => {
   const { displayMonth, displayYear } = pageContext;
   const { edges, totalCount } = data.allMarkdownRemark;
+  let title;
+  let url;
+  if (displayMonth == null) {
+    title = `${displayYear}年の記事 (${totalCount}件)`;
+    url = `https://blog.tubone-project24.xyz/${displayYear}/`;
+  } else {
+    title = `${displayYear}年${displayMonth}月の記事 (${totalCount}件)`;
+    url = `https://blog.tubone-project24.xyz/${displayYear}/${displayMonth}`;
+  }
   return (
     <div className="container">
       <div
@@ -18,7 +27,7 @@ const PeriodSummary = ({ data, pageContext }) => {
 
         <div className="col-xl-10 col-lg-7 col-md-12 col-xs-12 order-2">
           <h2>
-            {displayYear}年{displayMonth}月の記事 ({totalCount})
+            {title}
           </h2>
           <ul>
             {edges.map(({ node }) => {
@@ -36,11 +45,11 @@ const PeriodSummary = ({ data, pageContext }) => {
       </div>
 
       <SEO
-        title={`${displayYear}年${displayMonth}月の記事`}
-        url={`https://blog.tubone-project24.xyz/${displayYear}/${displayMonth}`}
+        title={title}
+        url={url}
         siteTitleAlt="tubone BOYAKI"
         isPost={false}
-        description={`${displayYear}年${displayMonth}月の記事`}
+        description={title}
         tag=""
         image="https://i.imgur.com/StLyXdu.png"
       />
