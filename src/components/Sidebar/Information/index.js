@@ -18,4 +18,3 @@ Information.defaultProps = {
 };
 
 export default Information;
-

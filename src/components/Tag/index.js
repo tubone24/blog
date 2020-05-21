@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Tag = ({ name, count }) => (
-  <a href={`/tag/${name}`} className="header-tag">
+  <a href={`/tag/${name}/`} className="header-tag">
     {name}
     &nbsp;
     {count}
