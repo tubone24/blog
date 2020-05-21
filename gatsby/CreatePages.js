@@ -27,6 +27,8 @@ module.exports = ({ actions, graphql }) => {
               tags
               description
               headerImage
+              year: date(formatString: "YYYY")
+              month: date(formatString: "MM")
             }
           }
         }
@@ -40,6 +42,9 @@ module.exports = ({ actions, graphql }) => {
     const { edges = [] } = result.data.allMarkdownRemark;
 
     const tagSet = new Set();
+    const years = new Set();
+    const yearMonths = new Set();
+    const periodTemplate = path.resolve('src/templates/period-summary.js');
 
     createPaginatedPages({
       edges,
@@ -60,7 +65,7 @@ module.exports = ({ actions, graphql }) => {
 
     edges.forEach(({ node }, index) => {
       const { id, frontmatter, fields } = node;
-      const { slug, tags, templateKey } = frontmatter;
+      const { slug, tags, templateKey, year, month } = frontmatter;
 
       // tag
       if (tags) {
@@ -72,9 +77,10 @@ module.exports = ({ actions, graphql }) => {
       if (slug) {
         $path = slug;
       }
+      years.add(year);
+      yearMonths.add(`${year}/${month}`);
 
       const component = templateKey || 'blog-post';
-
       createPage({
         path: $path,
         tags,
@@ -83,6 +89,40 @@ module.exports = ({ actions, graphql }) => {
         context: {
           id,
           index,
+        },
+      });
+    });
+
+    // 年別ページ
+    years.forEach(year => {
+      createPage({
+        path: `/${year}/`,
+        component: periodTemplate,
+        context: {
+          displayYear: year,
+          periodStartDate: `${year}-01-01T00:00:00.000Z`,
+          periodEndDate: `${year}-12-31T23:59:59.999Z`,
+        },
+      });
+    });
+
+    // 月別ページ
+    yearMonths.forEach(yearMonth => {
+      const [year, month] = yearMonth.split('/');
+      const startDate = `${year}-${month}-01T00:00:00.000Z`;
+      const newStartDate = new Date(startDate);
+      // 月末日を取得
+      const endDate = new Date(
+        new Date(newStartDate.setMonth(newStartDate.getMonth() + 1)).getTime() - 1).toISOString();
+
+      createPage({
+        path: `/${year}/${month}/`,
+        component: periodTemplate,
+        context: {
+          displayYear: year,
+          displayMonth: month,
+          periodStartDate: startDate,
+          periodEndDate: endDate,
         },
       });
     });
