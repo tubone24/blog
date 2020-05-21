@@ -24,7 +24,8 @@ const TagCloud = ({ data }) => {
     (b, a) => mapping[a] - mapping[b],
   );
   const limitTags = tags.slice(0, 30);
-
+  console.log(limitTags[0]);
+  console.log(limitTags[0].charAt(0).toLowerCase() + limitTags[0].slice(1));
   return (
     <div className="d-none d-lg-block information my-2">
       <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;{limitTags.length} / {tags.length} Tags</p>
