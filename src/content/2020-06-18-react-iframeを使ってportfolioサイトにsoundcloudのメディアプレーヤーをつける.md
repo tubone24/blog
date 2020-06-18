@@ -22,3 +22,7 @@ PortfolioサイトにSoundCloudのメディアプレーヤーを載っけたく�
 拙作のPortfolioサイトはGatsuby.jsを使って作っており、Netlifyにてホスティングしてます。
 
 <https://portfolio.tubone-project24.xyz/>
+
+![img](https://i.imgur.com/YklaEFu.png)
+
+趣味の写真を基軸に、作ったゴミプロダクトや技術範囲を書いたりしてます。
