@@ -90,6 +90,9 @@ const html = `
   <li>ごろごろ</li>
   <li>牛丼</li>
   </ul>
+  <h2 id="aboutblog">わたしの頭の中の消しゴムはないです</h2>
+  <p>TwitterのつぶやきからWordCloudを作ってみました。</p>
+  <img src="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/src/word_cloud_tweet_face_profile_alpha.png" alt="wordcloud" title="wordcloud">
   <h2 id="aboutblog">このブログについて</h2>
   <p>このブログは・・・</p>
   <img src="/assets/logo3.svg" alt="logo" title="logo">
