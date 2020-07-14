@@ -26,3 +26,7 @@ WordCloudとはタグクラウドとも呼ばれており、出現単語を雲�
 ![img](https://i.imgur.com/laOMoYk.png)
 
 斬新なワードクラウドはもはやアートだと思います。
+
+## PythonでWordCloudを作るには？
+
+PythonでWordCloudを作るには[WordCloud](https://amueller.github.io/word_cloud/index.html)というライブラリが便利です。
