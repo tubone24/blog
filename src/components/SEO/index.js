@@ -108,14 +108,14 @@ const SEO = ({
     <meta property="og:image" content={image} />
     <meta
       property="fb:app_id"
-      content={config.siteFBAppID ? config.siteFBAppID : ''}
+      content="280941406476272"
     />
 
     {/* Twitter Card tags */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:creator"
-      content={config.twitter_username ? config.twitter_username : ''}
+      content="@meitante1conan"
     />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
