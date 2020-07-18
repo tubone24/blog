@@ -62,9 +62,40 @@ GitHub Actionsの話でいっぱいいっぱいだったのでそんなこと知
 
 プロジェクトの詳細は<https://archiveprogram.github.com/>に書いてありますが読み物として面白かったので少し皆さんと読んでいきたいと思います。
 
+冒頭の原文を引用します。
+
 > The world is powered by open source software.
 >
 > It is a hidden cornerstone of modern civilization, and the shared heritage of all humanity. The mission of the GitHub Archive Program is to preserve open source software for future generations.
 
+OSS、それは世界を支え、現代社会の隠れた礎らしいです。
 
+確かに、OSS文化が花咲いてから我々底辺にもなにかできるという希望が芽生えやすくなりましたし、実際世界の発展には欠かせないでしょう。
 
+そんなOSSをずっと残していきたい。たとえマッドマックスになっても。そんな意志を感じられる文章ですね。
+
+続いてのセクションでは
+
+> Why we use multiple forms of storage
+
+複数の形態のストレージを使用する理由について述べてます。
+
+GitHub Archive Programでは[piql](https://www.piql.com/)のマイクロフィルム技術を使って膨大なOSSデータを残してますが、同セクションではいかに現代文明のデータ保存方式が一時的で脆いかを訴えてます。
+
+それは現代文明に限らず、前 48～47年のアレクサンドリア戦争のとき，大量の蔵書とともに焼け落ちた[アレクサンドリア図書館](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%AC%E3%82%AF%E3%82%B5%E3%83%B3%E3%83%89%E3%83%AA%E3%82%A2%E5%9B%B3%E6%9B%B8%E9%A4%A8)や
+
+![img](https://i.imgur.com/J9J15Mo.jpg)
+
+[パンテオン](https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%B3%E3%83%86%E3%82%AA%E3%83%B3_(%E3%83%AD%E3%83%BC%E3%83%9E))などのローマ時代の重厚な建物に使われる[ローマン・コンクリート](https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%9E%E3%83%B3%E3%83%BB%E3%82%B3%E3%83%B3%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%88)もローマ帝国滅亡後に使われなくなり現代使われていコンクリートの耐久性がクソ雑魚ナメクジだったり、
+
+![img](https://i.imgur.com/GA1jclM.jpg)
+
+ナチスの敗戦とともに文字通り[DDT](https://ja.wikipedia.org/wiki/DDT)に駆逐されてしまった我がドイツの医学薬学は世界一ィィィィーーーーッ！な人体負荷の低い殺虫剤[DFDT](https://www.nytimes.com/2019/10/17/science/nazi-ddt-malaria.html)が忘れ去られてなければマラリアに苦しむ人々を救ったかもしれない話や
+
+![img](https://i.imgur.com/nVbHSj5.jpg)
+
+スペースシャトルチャレンジャー号事件をきっかけにあの月までも飛んでいくロケットサターンVに回顧したり...。
+
+![img](https://i.imgur.com/mqjfMUc.jpg)
+
+テクノロジーをロストしてはいけない(戒め)なお気持ちがひしひしと伝わってくる文章です。
