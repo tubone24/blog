@@ -12,6 +12,7 @@ import {
   faLink,
   faSearch,
   faTags,
+  faCloud,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faEnvelope, faComment, faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
@@ -52,6 +53,7 @@ const installFontAwesome = () => {
     faLink,
     faSearch,
     faTags,
+    faCloud,
   );
 };
 

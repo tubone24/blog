@@ -1,6 +1,7 @@
 import React from 'react';
 // import Friend from '../Friend';
 import Archive from '../Archive';
+import WordCloud from '../WordCloud'
 import LatestPost from '../LatestPost';
 import './index.scss';
 
@@ -11,6 +12,8 @@ const Information = ({ totalCount, posts }) => (
     <hr />
     <Archive />
     {/* <Friend /> */}
+    <hr />
+    <WordCloud />
     <hr />
   </div>
 );
