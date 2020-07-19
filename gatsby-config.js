@@ -120,11 +120,11 @@ module.exports = {
             // eslint-disable-next-line max-len
             serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
               ...edge.node.frontmatter,
-              description: edge.node.excerpt.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace('/#x.*;/', ''),
+              description: edge.node.excerpt.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, ''),
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-              custom_elements: [{ 'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace('/#x.*;/', '').substr(0, 150)}],
+              custom_elements: [{ 'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '').substr(0, 150)}],
             })),
             query: `
               {
