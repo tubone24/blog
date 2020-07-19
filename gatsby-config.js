@@ -124,7 +124,7 @@ module.exports = {
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-              custom_elements: [{ 'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').substr(0, 150).replaceAll(/@/g, '')}],
+              custom_elements: [{ 'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').substr(0, 150).replace(/@/g, '')}],
             })),
             query: `
               {
