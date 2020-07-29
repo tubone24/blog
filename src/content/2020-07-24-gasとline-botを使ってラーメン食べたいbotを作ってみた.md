@@ -201,8 +201,136 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 
 [ホットペッパーグルメサーチAPI](https://webservice.recruit.co.jp/doc/hotpepper/reference.html)を併用して、同名のお店がヒットしたらホットペッパー側の画像(こっちのほうが画像は充実している)を採用するように変更しました。
 
+ホットペッパーグルメサーチAPIのレスポンスはこんなかんじです。
+
+```
+{
+    "results": {
+        "api_version": "1.26",
+        "results_available": 4,
+        "results_returned": "4",
+        "results_start": 1,
+        "shop": [
+            {
+                "access": "山手線　大塚駅より徒歩5分",
+                "address": "東京都豊島区北大塚２－８－８　北大塚ビル１F",
+                "band": "不可",
+                "barrier_free": "なし",
+                "budget": {
+                    "average": "1000円",
+                    "code": "B001",
+                    "name": "1501～2000円"
+                },
+                "budget_memo": "お通し代なし",
+                "capacity": 20,
+                "card": "利用不可",
+                "catch": "太陽のラーメンとは？ ♪めがねの日♪",
+                "charter": "貸切不可",
+                "child": "お子様連れ歓迎",
+                "close": "月",
+                "coupon_urls": {
+                    "pc": "https://www.hotpepper.jp/strJ000732789/map/?vos=nhppalsa000016",
+                    "sp": "https://www.hotpepper.jp/strJ000732789/scoupon/?vos=nhppalsa000016"
+                },
+                "course": "なし",
+                "english": "なし",
+                "free_drink": "なし",
+                "free_food": "なし",
+                "genre": {
+                    "catch": "おいしくてヘルシー！フレッシュなラーメン",
+                    "code": "G013",
+                    "name": "ラーメン"
+                },
+                "horigotatsu": "なし",
+                "id": "J000732789",
+                "karaoke": "なし",
+                "ktai_coupon": 1,
+                "large_area": {
+                    "code": "Z011",
+                    "name": "東京"
+                },
+                "large_service_area": {
+                    "code": "SS10",
+                    "name": "関東"
+                },
+                "lat": 35.733611638,
+                "lng": 139.726689431,
+                "logo_image": "https://imgfp.hotp.jp/IMGH/30/84/P010113084/P010113084_69.jpg",
+                "lunch": "あり",
+                "middle_area": {
+                    "code": "Y057",
+                    "name": "巣鴨・大塚・駒込"
+                },
+                "midnight": "営業している",
+                "mobile_access": "山手線 大塚駅より徒歩5分",
+                "name": "太陽のトマト麺 大塚北口支店",
+                "name_kana": "たいようのとまとめん　おおつかきたぐちしてん",
+                "non_smoking": "全面禁煙",
+                "open": "火～土、祝前日: 11:00～翌1:00 （料理L.O. 翌0:30 ドリンクL.O. 翌0:30）日、祝日: 11:00～翌0:00 （料理L.O. 23:30 ドリンクL.O. 23:30）",
+                "other_memo": "",
+                "parking": "なし",
+                "party_capacity": "",
+                "pet": "不可",
+                "photo": {
+                    "mobile": {
+                        "l": "https://imgfp.hotp.jp/IMGH/67/80/P019506780/P019506780_168.jpg",
+                        "s": "https://imgfp.hotp.jp/IMGH/67/80/P019506780/P019506780_100.jpg"
+                    },
+                    "pc": {
+                        "l": "https://imgfp.hotp.jp/IMGH/67/80/P019506780/P019506780_238.jpg",
+                        "m": "https://imgfp.hotp.jp/IMGH/67/80/P019506780/P019506780_168.jpg",
+                        "s": "https://imgfp.hotp.jp/IMGH/67/80/P019506780/P019506780_58_s.jpg"
+                    }
+                },
+                "private_room": "なし",
+                "service_area": {
+                    "code": "SA11",
+                    "name": "東京"
+                },
+                "shop_detail_memo": "",
+                "show": "なし",
+                "small_area": {
+                    "code": "X142",
+                    "name": "大塚"
+                },
+                "station_name": "大塚",
+                "tatami": "なし",
+                "tv": "なし",
+                "urls": {
+                    "pc": "https://www.hotpepper.jp/strJ000732789/?vos=nhppalsa000016"
+                },
+                "wedding": "",
+                "wifi": "あり"
+            }
+        ]
+    }
+}
+```
+
+↑photoが写真です。
+
 ちなみに検索結果のマージも行うので、ぐるなびとホットペッパーのダブル検索ができるようにしてます。
 
 ### 一度に送れるカルーセルは10個×5メッセージまで
 
-という制約がMessaingAPIにあります。なので、テキストメッセージ含め40件以上お店がヒットした場合
+という制約がMessaingAPIにあります。なので、テキストメッセージ含め40件以上お店がヒットした場合、一度に送りきれないことがわかりました。
+
+なので切り詰めて送るようにしました。
+
+### Firebaseへのアクセス
+
+GASでFirebaseにアクセスする、これが一番苦戦しました。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
