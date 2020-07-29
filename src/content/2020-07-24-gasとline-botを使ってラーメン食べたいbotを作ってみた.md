@@ -321,7 +321,9 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 
 GASでFirebaseにアクセスする、これが一番苦戦しました。
 
+GASでFirebaseにアクセスするには[FirestoreApp](https://github.com/grahamearley/FirestoreGoogleAppsScript)をライブラリから使ってアクセスするのがいいみたいですが、こちらをClaspに乗っけるのに苦労しました。
 
+結論ですが、ts-ignoreを
 
 
 
