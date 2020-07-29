@@ -93,5 +93,104 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 
 <https://developers.line.biz/ja/reference/messaging-api/#wh-location>
 
+そこで、送られた緯度経度を使って、近くのラーメン屋情報を取得するのですが、取得に使ったAPIが
+
+[ぐるなびレストラン検索API](https://api.gnavi.co.jp/api/manual/restsearch/)でした。登録も簡単で、結構便利に使えそうだったので選びました。
+
+位置情報を緯度経度で指定し、ラーメン屋のカテゴリコード(RSFST08008,RSFST08009,RSFST08012,RSFST08013)を指定するだけでこんな結果が返ってきます。
+
+```
+{
+    "@attributes": {
+        "api_version": "v3"
+    },
+    "total_hit_count": 10,
+    "hit_per_page": 1,
+    "page_offset": 1,
+    "rest": [
+        {
+            "@attributes": {
+                "order": 0
+            },
+            "id": "gf8f400",
+            "update_date": "2020-03-31T14:49:10+09:00",
+            "name": "創作麺工房 鳴龍",
+            "name_kana": "ソウサクメンコウボウナキリュウ",
+            "latitude": "35.728676",
+            "longitude": "139.730343",
+            "category": "ラーメン、つけ麺",
+            "url": "https://r.gnavi.co.jp/akadann10000/?ak=UKutMOVrMfs3qHtpT1euv06MXqPjNZyGW51PnE3qUOk%3D",
+            "url_mobile": "http://mobile.gnavi.co.jp/shop/gf8f400/?ak=UKutMOVrMfs3qHtpT1euv06MXqPjNZyGW51PnE3qUOk%3D",
+            "coupon_url": {
+                "pc": "",
+                "mobile": ""
+            },
+            "image_url": {
+                "shop_image1": "https://rimage.gnst.jp/rest/img/akadann10000/t_0n6v.jpg",
+                "shop_image2": "",
+                "qrcode": "https://c-r.gnst.jp/tool/qr/?id=gf8f400&q=6"
+            },
+            "address": "〒170-0005 東京都豊島区南大塚2-34-4 SKY南大塚1F",
+            "tel": "050-3461-5239",
+            "tel_sub": "03-6304-1811",
+            "fax": "03-6304-1811",
+            "opentime": "月 ランチ：11:30～15:00\n水～日 ランチ：11:30～15:00\n水～日 ディナー：18:00～21:00",
+            "holiday": "毎週火曜日\n※※スープがなくなり次第終了することがございます。詳細はお電話でお問い合わせ下さい。",
+            "access": {
+                "line": "ＪＲ",
+                "station": "大塚駅",
+                "station_exit": "南口",
+                "walk": "4",
+                "note": ""
+            },
+            "parking_lots": "",
+            "pr": {
+                "pr_short": "丸鶏、牛骨、生牡蠣の旨みあふれるスープと小麦の風味ただよう自家製麺。店主のこだわりを一杯に昇華。",
+                "pr_long": "国内外の名店で腕を磨いた店主が、満を持して2012年に開店。「自分の食べたいものしか出さない」という店主渾身のスープと自家製麺から成る、担担麺、拉麺、つけ麺は、いずれもうまみ豊かでコク深い逸品ぞろい。タレや調味料も手作りにこだわっている。ボリュームたっぷりの自家製チャーシューや海老ワンタンなどのアラカルトも人気で、多くのファンを惹きつけている。ミシュランガイド東京2018 一つ星"
+            },
+            "code": {
+                "areacode": "AREA110",
+                "areaname": "関東",
+                "prefcode": "PREF13",
+                "prefname": "東京都",
+                "areacode_s": "AREAS2160",
+                "areaname_s": "大塚",
+                "category_code_l": [
+                    "RSFST08000",
+                    "RSFST08000"
+                ],
+                "category_name_l": [
+                    "ラーメン・麺料理",
+                    "ラーメン・麺料理"
+                ],
+                "category_code_s": [
+                    "RSFST08008",
+                    "RSFST08012"
+                ],
+                "category_name_s": [
+                    "ラーメン",
+                    "担々麺"
+                ]
+            },
+            "budget": 1000,
+            "party": "",
+            "lunch": 900,
+            "credit_card": "",
+            "e_money": "",
+            "flags": {
+                "mobile_site": 1,
+                "mobile_coupon": 0,
+                "pc_coupon": 0
+            }
+        }
+    ]
+}
+```
+
+今回必要なのはお店の場所情報と写真です。
+
+この例ではお店の写真が**shop_image1**に設定されているのですが、ほとんどの検索結果で画像がありませんでした。
+
+画像がないとカルーセルがしょぼくなってしまいます。
 
 
