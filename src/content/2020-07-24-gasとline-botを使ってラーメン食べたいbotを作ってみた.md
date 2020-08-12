@@ -19,11 +19,19 @@ templateKey: blog-post
 
 ## StayHomeとは？
 
-StayHomeとは、**COVID-19**の感染拡大を防止するために、「人に会うのを可能な限り避ける」取り組みの中で、みんなお家にいようね！という標語のようなものだ。
+StayHomeとは、**COVID-19**の感染拡大を防止するために、**「人に会うのを可能な限り避ける」**取り組みの中で、**みんなお家にいようね！**という標語のようなものです。
 
-残念ながら独身生活もこう長くなってくると、人と接しなくてもストレスなく生きられてしまうので、全然StayHome OKマンな私ですが、ただのんびりDアニメストアでアニメを見ながら、きのこの山を食べて、ゴロゴロしているのも4連休のお休みを作ってくださった神様(政府)に申し訳ないので、ためになることをしようと思いました。
+多くの芸能人が呼びかけていて、あの**星野源**さんが歌いながら様々なことにチャレンジする動画作成がミームになってましたね。
 
-「StayHomeでCOVではなくDEVしよう」
+個人的には
+
+youtube:https://www.youtube.com/embed/t54TNjoZ210
+
+がもはや星野源さん関係ないけど笑ってしまいました。天和上がったよって顔がまたなんとも...。
+
+さて、StayHomeですが残念ながら独身生活もこう長くなってくると、人と接しなくてもストレスなく生きられてしまうので、全然StayHome OKマンな私ですが、ただのんびりDアニメストアでアニメを見ながら、きのこの山を食べて、ゴロゴロしているのも4連休のお休みを作ってくださった神様(政府)に申し訳ないので、ためになることをしようと思いました。
+
+**「StayHomeでCOVではなくDEVしよう」**
 
 ## 縛りプレイ
 
@@ -64,7 +72,7 @@ GASとはGoogle Apps Scriptsのことで詳しくは過去ブログ[Google Apps 
 
 今回もTypeScript + Claspで開発していき、GitHub Actionsでデプロイまで完了するCI/CDを構築していきたいと思います。
 
-## 詰まったところ
+## GASで詰まったところ
 
 ### 近くのラーメン情報の取得方法
 
@@ -95,9 +103,11 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 
 そこで、送られた緯度経度を使って、近くのラーメン屋情報を取得するのですが、取得に使ったAPIが
 
-[ぐるなびレストラン検索API](https://api.gnavi.co.jp/api/manual/restsearch/)でした。登録も簡単で、結構便利に使えそうだったので選びました。
+[ぐるなびレストラン検索API](https://api.gnavi.co.jp/api/manual/restsearch/)でした。
 
-位置情報を緯度経度で指定し、ラーメン屋のカテゴリコード(RSFST08008,RSFST08009,RSFST08012,RSFST08013)を指定するだけでこんな結果が返ってきます。
+登録も簡単で、緯度経度をフィルタで使えるので、結構便利に使えそうだったので選びました。
+
+位置情報を緯度経度で指定し、ラーメン屋のカテゴリコード(RSFST08008,RSFST08009,RSFST08012,RSFST08013)を指定し、緯度経度を設定するだけでこんな結果が返ってきます。
 
 ```
 {
@@ -187,9 +197,9 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 }
 ```
 
-今回必要なのはお店の場所情報と写真です。
+色々返ってきますが、今回必要なのは**店名**、**場所情報**、**写真**、**電話番号**です。
 
-この例ではお店の写真が**shop_image1**に設定されているのですが、ほとんどの検索結果で画像がありませんでした。
+ただ、この例ではお店の写真が**shop_image1**に設定されているのですが、ほとんどの検索結果で画像がありませんでした。
 
 画像がないとカルーセルがしょぼくなってしまいます。
 
@@ -197,7 +207,7 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 
 ![img](https://i.imgur.com/DxiGaAr.jpg)
 
-で置き換えるようにしましたがそれにしても悲しいので、
+で置き換えるようにしましたがそれにしても悲しいので、少し工夫したいと思います。
 
 [ホットペッパーグルメサーチAPI](https://webservice.recruit.co.jp/doc/hotpepper/reference.html)を併用して、同名のお店がヒットしたらホットペッパー側の画像(こっちのほうが画像は充実している)を採用するように変更しました。
 
@@ -307,13 +317,19 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 }
 ```
 
-↑photoが写真です。
+↑**photo**が写真です。
 
-ちなみに検索結果のマージも行うので、ぐるなびとホットペッパーのダブル検索ができるようにしてます。
+ちなみに検索結果のマージも行うので、ホットペッパーのみ掲載店についても表示するようにしています。
 
 ### 一度に送れるカルーセルは10個×5メッセージまで
 
-という制約がMessaingAPIにあります。なので、テキストメッセージ含め40件以上お店がヒットした場合、一度に送りきれないことがわかりました。
+という制約がLINE MessaingAPIにあります。
+
+正確には、ReplyTokenで返信できる上限が5メッセージ、1メッセージに設定できるカルーセルが10個となってます。
+
+「xx件ヒットしました」というテキストで1メッセージ消費するので4メッセージカルーセルに設定できます。
+
+なので、40件以上お店がヒットした場合、一度に送りきれないことがわかりました。
 
 なので切り詰めて送るようにしました。
 
@@ -321,10 +337,28 @@ LINEのMessagingAPIではユーザが位置情報を送ると、設定したWebh
 
 GASでFirebaseにアクセスする、これが一番苦戦しました。
 
+そもそもGASでFirebaseにアクセスする必要があるんだっけ？という話ですが
+
 GASでFirebaseにアクセスするには[FirestoreApp](https://github.com/grahamearley/FirestoreGoogleAppsScript)をライブラリから使ってアクセスするのがいいみたいですが、こちらをClaspに乗っけるのに苦労しました。
 
-結論ですが、ts-ignoreを
+結論からですが、ts-ignoreを使ってliberaryからimportされている**FirestoreApp**の参照エラーを取り除くことでclaspと共存が可能でした。
 
+```typescript
+export class FirestoreService {
+  private firestore: any;
+  constructor(email: string, key: string, projectId: string) {
+    // @ts-ignore because of Add GoogleScripts Library
+    this.firestore = FirestoreApp.getFirestore(email, key, projectId);
+  }
+  updateData(collectionId: string, documentId: string, data) {
+    this.firestore.updateDocument(collectionId + '/' + documentId, data, true);
+  }
+}
+```
+
+また、GASからlibraryを使う方法は簡単で
+
+![img](https://i.imgur.com/pdgBiAu.png)
 
 
 
