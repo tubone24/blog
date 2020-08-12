@@ -6,10 +6,12 @@ description: GASとLINE BOTを使ってラーメン食べたいBOTを作って�
 tags:
   - GAS
   - LINEBOT
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/aFfsvoe.gif
 templateKey: blog-post
 ---
 4連休、StayHomeが叫ばれる中、ラーメンが食べたくなったので、LINEBOTを含めたラーメンソリューションを作ってみました。
+
+![img](https://i.imgur.com/aFfsvoe.gif)
 
 ## Table of Contents
 
@@ -365,11 +367,9 @@ export class FirestoreService {
 最新のバージョンはGASのV8エンジンに対応したため、旧版のGASでは動かなかったです。
 ﻿
 ﻿
-﻿
-﻿
-﻿
-﻿
-﻿
+﻿## 結論
+
+なんかめんどくさくなってきたので、フロント周りの記事は別機会に書きます...。
 
 
 
