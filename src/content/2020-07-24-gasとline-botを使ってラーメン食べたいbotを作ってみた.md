@@ -356,9 +356,21 @@ export class FirestoreService {
 }
 ```
 
-また、GASからlibraryを使う方法は簡単で
+また、GASからlibraryを使う方法は簡単でGAS画面で**リソース=>ライブラリ**から**1VUSl4b1r1eoNcRWotZM3e87ygkxvXltOgyDZhixqncz9lQ3MjfT1iKFw**をAdd a libraryします。
 
 ![img](https://i.imgur.com/pdgBiAu.png)
+
+ここで注意として指定するバージョンは最新にしないことです。
+
+最新のバージョンはGASのV8エンジンに対応したため、旧版のGASでは動かなかったです。
+﻿
+﻿
+﻿
+﻿
+﻿
+﻿
+﻿
+
 
 
 
