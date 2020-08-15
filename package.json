@@ -106,12 +106,6 @@
   ],
   "license": "MIT",
   "main": "n/a",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "lint-staged"
-    }
-  },
   "scripts": {
     "start": "npm run develop",
     "build": "gatsby build --prefix-paths",
@@ -144,13 +138,5 @@
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-config-standard": "^19.0.0",
     "stylelint-scss": "^3.17.1"
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "npm run format",
-      "git add"
-    ],
-    "**/*.css": "stylelint",
-    "**/*.scss": "stylelint --syntax=scss"
   }
 }

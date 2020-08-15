@@ -65,7 +65,9 @@ module.exports = ({ actions, graphql }) => {
 
     edges.forEach(({ node }, index) => {
       const { id, frontmatter, fields } = node;
-      const { slug, tags, templateKey, year, month } = frontmatter;
+      const {
+        slug, tags, templateKey, year, month,
+      } = frontmatter;
 
       // tag
       if (tags) {
@@ -94,7 +96,7 @@ module.exports = ({ actions, graphql }) => {
     });
 
     // 年別ページ
-    years.forEach(year => {
+    years.forEach((year) => {
       createPage({
         path: `/${year}/`,
         component: periodTemplate,
@@ -107,13 +109,14 @@ module.exports = ({ actions, graphql }) => {
     });
 
     // 月別ページ
-    yearMonths.forEach(yearMonth => {
+    yearMonths.forEach((yearMonth) => {
       const [year, month] = yearMonth.split('/');
       const startDate = `${year}-${month}-01T00:00:00.000Z`;
       const newStartDate = new Date(startDate);
       // 月末日を取得
       const endDate = new Date(
-        new Date(newStartDate.setMonth(newStartDate.getMonth() + 1)).getTime() - 1).toISOString();
+        new Date(newStartDate.setMonth(newStartDate.getMonth() + 1)).getTime() - 1,
+      ).toISOString();
 
       createPage({
         path: `/${year}/${month}/`,
