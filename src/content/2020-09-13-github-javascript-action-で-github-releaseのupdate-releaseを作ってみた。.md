@@ -84,4 +84,4 @@ Dockerコンテナで作る場合、GitHub ActionsのLinux上でコンテナを�
 
 JavaScriptでは、Node.js 12で動くJSコードを書くだけです。WindowsやMacのOS上でも問題なく動きます。JavaScriptに慣れていて、特定のライブラリや言語を使わないといけない状況でなければJavaScript一択だと思います。
 
-<https://github.com/actions/javascript-action>
+https://github.com/vercel/ncc<https://github.com/actions/javascript-action>
