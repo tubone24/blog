@@ -2,7 +2,7 @@
 slug: 2020/08/14/github-action
 title: GitHub JavaScript Action で GitHub ReleaseのUpdate Releaseを作ってみた。
 date: 2020-09-13T12:41:20.699Z
-description: GitHub JavaScript Action で GitHub ReleaseのUpdate Releaseを作ってみた。
+description: GitHub JavaScript Action で GitHub ReleaseのUpdate Releaseを作ってみた。.
 tags:
   - GitHub
   - GitHub Actions
