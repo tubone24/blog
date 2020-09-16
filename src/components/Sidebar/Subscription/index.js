@@ -6,7 +6,7 @@ import './index.scss';
 
 const Subscription = () => (
   <div className="subscription">
-    <a href="/rss.xml" className="btn btn-warning subrss" role="button" onClick={() => ReactGA.event({ category: 'User', action: 'push RSS Button' })}>
+    <a href="/rss.xml" className="btn subrss" role="button" onClick={() => ReactGA.event({ category: 'User', action: 'push RSS Button' })}>
 
 
       SUBSCRIBE RSS&nbsp;
