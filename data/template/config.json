@@ -47,10 +47,6 @@
     {
       "href": "/contacts/",
       "title": "Contacts"
-    },
-    {
-      "href": "/photos/",
-      "title": "Photos"
     }
   ],
   "redirectors": [
