@@ -3,7 +3,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-import './index.scss';
+// import './index.scss';
 
 
 const WordCloud = () => (
