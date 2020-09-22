@@ -20,7 +20,8 @@ NimのTwitterSDKを作ってOSS兄貴になろうと思ったら、結局なれ�
 
 ## Nimとは？
 
-詳しくは[docoptはNimでも使えたのお話](https://blog.tubone-project24.xyz/2019/11/20/docopt-nim#%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82nim%E3%81%A8%E3%81%AF%EF%BC%9F)をご覧いただければと思いますが、**静的型付なコンパイラ言語**でPython, Ada, modulaなどの成熟した言語のいいとこ取りをした**能率的**で、**表現力豊か**で、**エレガントな言語**です。
+詳しくは[docoptはNimでも使えたのお話
+](https://blog.tubone-project24.xyz/2019/11/20/docopt-nim#%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82nim%E3%81%A8%E3%81%AF%EF%BC%9F)をご覧いただければと思いますが、**静的型付なコンパイラ言語**でPython, Ada, modulaなどの成熟した言語のいいとこ取りをした**能率的**で、**表現力豊か**で、**エレガントな言語**です。
 
 ![img](https://i.imgur.com/BbHTNwQ.png)
 
@@ -49,7 +50,6 @@ V言語はGoを参考にした構文に対し、NimはPythonを明らかに参�
 ```nim
 proc hoge(n: int): int
 
-```nim
 proc fuga(n: int): int =
   result = hoge(n) + 1
 
@@ -64,3 +64,23 @@ Nimを書いているとちょこちょここんなことが起きます。
 型は型アノテーションもあったりするので慣れ親しんだ人もいると思いますが、C言語特有の話が出てくるとちょっと混乱したりします。
 
 こういうところがPythonとデラ相性が悪いのです。(と感じるのです)
+
+## NimでTwitterSDK作る
+
+とまぁいろいろ問題点は書きましたが、私はNimが好きなので、何か貢献しようと思いTwitterSDKを作っていこうと思います。
+
+マイナー言語は車輪の再開発の心配がなくものづくりができるのですばらしいですね。（涙）
+
+ということでまず、TwitterAPIへのアクセス方法について確認します。
+
+## oAuth1.0をNimで使うには？
+
+APIを使うにはHTTPリクエストができないといけないですが、Nimにはhttpclientというライブラリがあらかじめ用意されております。
+
+がしかしザンネンながら、NimのhttpclientはoAuthには対応してないので、処理系は自前で作らないといけません。
+
+oAuth2.0、つまりapplication keyとそのシークレットでアクセス可能なAPIであればさほど処理系は難しくなく、Basic認証としてheaderにそれぞれを設定してあげればBearer tokenが取得できます。
+
+コード
+
+しかしながらoAuth1.0となると異なります。
