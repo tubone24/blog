@@ -84,3 +84,7 @@ oAuth2.0、つまりapplication keyとそのシークレットでアクセス可
 コード
 
 しかしながらoAuth1.0となると異なります。
+
+https://openid-foundation-japan.github.io/rfc5849.ja.html
+
+上記サイトにもあるようにoAuth1.0によるクライアント認証には、
