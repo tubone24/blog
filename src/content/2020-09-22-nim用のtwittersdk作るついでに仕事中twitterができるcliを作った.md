@@ -25,9 +25,9 @@ NimのTwitterSDKを作ってOSS兄貴になろうと思ったら、結局なれ�
 
 ![img](https://i.imgur.com/BbHTNwQ.png)
 
-いわゆる別言語へのトランスパイルを通して、ビルドする言語となり、通常はCを使いますが、C++、JavaScript、Javaなんかへの変換が可能です。(フロントとバックエンドと両方の言語としての覇権を狙っている！？)
+いわゆる別言語への**トランスパイル**を通して、ビルドする言語となり、通常はCを使いますが、C++、JavaScript、Javaなんかへの変換が可能です。(フロントとバックエンドと両方の言語としての覇権を狙っている！？)
 
-言語の構文もPythonのそれに近く、さらに言えば実行速度も早く、GoのようにArtifactsが巨大になることもありません。
+言語の構文もPythonのそれに近く、さらに言えば実行速度も早く、Goのように**Artifactsが巨大**になることもありません。
 
 ここまで聞くと、いいこと尽くめで素晴らしいのですがNimには欠点があります。
 
@@ -65,6 +65,8 @@ Nimを書いているとちょこちょここんなことが起きます。
 
 こういうところがPythonとデラ相性が悪いのです。(と感じるのです)
 
+というより、もうCとして考えてくださいって感じです。
+
 ## NimでTwitterSDK作る
 
 とまぁいろいろ問題点は書きましたが、私はNimが好きなので、何か貢献しようと思いTwitterSDKを作っていこうと思います。
@@ -73,17 +75,41 @@ Nimを書いているとちょこちょここんなことが起きます。
 
 ということでまず、TwitterAPIへのアクセス方法について確認します。
 
+## TwitterAPI
+
+TwitterAPIにはv2とv1.1があるのですが今回はv1.1を使って実装します。
+
+<https://developer.twitter.com/en/docs/twitter-api/v1>
+
+v1.1のAPI認可方式はoAuth1.0です。
+
 ### oAuth1.0をNimで使うには？
 
-APIを使うにはHTTPリクエストができないといけないですが、Nimにはhttpclientというライブラリがあらかじめ用意されております。
+APIを使うには当然HTTPリクエストができないといけないですが、Nimにはhttpclientというライブラリがあらかじめ用意されております。
 
-がしかしザンネンながら、NimのhttpclientはoAuthには対応してないので、処理系は自前で作らないといけません。
+がしかしザンネンながら、Nimのhttpclientは**oAuthには対応してない**ので、処理系は自前で作らないといけません。
 
 oAuth2.0、つまりapplication keyとそのシークレットでアクセス可能なAPIであればさほど処理系は難しくなく、Basic認証としてheaderにそれぞれを設定してあげればBearer tokenが取得できます。
 
-コード
+```nim
+import httpclient
 
-しかしながらoAuth1.0となると異なります。
+const authEndpoint = "https://api.twitter.com/oauth2/token"
+
+proc getBearerToken(apiKey:string, apiSecret:string):string =
+  let client = newHttpClient()
+  let credentials = encode(apiKey & ":" & apiSecret)
+  client.headers = newHttpHeaders({
+    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+    "Authorization": "Basic " & credentials
+  })
+  let body = "grant_type=client_credentials"
+  let response = retryRequest(client, authEndpoint, httpMethod = HttpPost, body = body)
+  let bearerToken = parseJson(response.body)["access_token"].getStr()
+  return bearerToken
+```
+
+しかしながらTwitterAPI 1.1で使う、oAuth1.0となると話は異なります。
 
 <https://oauth.net/core/1.0/>
 
@@ -143,7 +169,7 @@ proc getAccessToken(apiKey:string, apiSecret:string):Table[string, string] =
 
 リトライ時のSleepは**Exponential BackOff**つまり**指数関数的バックオフ**の実装にしました。
 
-もともとはネットワークのコリジョンが発生したときの待ち時間採択で使われていたアルゴリズムらしいですが、今はもっぱらAPIのリトライ制御に使っています。
+もともとはネットワークの**コリジョン**が発生したときの待ち時間採択で使われていたアルゴリズムらしいですが、今はもっぱらAPIのリトライ制御に使っています。
 
 （今の子どもたちって、ネットワークのコリジョンとか知らないのでは？と思ってしまいますがそれだけ発達したということですね。）
 
@@ -177,7 +203,7 @@ proc retryoAuth1Request*(client: HttpClient, url: string, apiKey: string, apiSec
 
 上記のoauthで取得できたAccessTokenをうまく引き継ぎながら各APIが叩きたくなると、やはりクラスを作りたくなります。
 
-が、Nimにはクラスらしいクラスはありません。Type、Cでいう構造体にメソッドをprocedure(obj)の糖衣構文の形、第一引数にTypeを指定する形で代用します。(Goと同じ感じですね)
+が、Nimには**クラスらしいクラスはありません**。Type、Cでいう構造体にメソッドをprocedure(obj)の糖衣構文の形、第一引数にTypeを指定する形で代用します。(Goと同じ感じですね)
 
 さらにクラスの概念がないので当然コンストラクタもないので、自前コンストラクタを作ります。
 
@@ -233,12 +259,6 @@ proc getHomeTimeline*(tw:Twitter, sinceId: string = ""):JsonNode =
 
 Configをプログラムから切り離してもたせる方法はいくつかありますが、色々考えた結果今回はTextConfig形式を使うことにしました。
 
-Windowsでは.iniファイルとして馴染みのある形かと思いますが、name=hogeみたいなパラメータと[section]みたいなセクションから構成されるごくごく普通のコンフィグファイルの形式です。
-
-Nimではparsecfgというライブラリで読むことができ、更にうれしいのが書き込みもできるので今回はこちらを使います。
-
-自身で取得したAppKeyを使いたい場合や、AccessTokenの保存先としてsettings.cfgを指定します。
-
 ```ini
 [auth]
 appKey="xxxxxx"
@@ -247,19 +267,76 @@ accessToken="xxxxxxxxxxxxxx"
 accessTokenSecret="xxxxxxx"
 ```
 
+Windowsでは.iniファイルとして馴染みのある形かと思いますが、name=hogeみたいなパラメータと[section]みたいなセクションから構成されるごくごく普通のコンフィグファイルの形式です。
+
+Nimではparsecfgというライブラリで読むことができ、更にうれしいのが**書き込み**もできるので今回はこちらを使います。
+
+自身で取得したAppKeyを使いたい場合や、AccessTokenの保存先としてsettings.cfgを指定する形で実装しております。(セキュリティ的にはAccessToken晒し上げよろしくないですが)
+
+セクション内のパラメーターを読み込むときは**getSectionValue**を使います。書き込みの際はsetSectionKeyでセクション、パラメータを指定しwriteConfigします。
+
+```nim
+import parsecfg, os, secret
+
+type
+  TwitterConfig* = ref object of RootObj
+    appKey*: string
+    appKeySecret*: string
+    accessToken*: string
+    accessTokenSecret*: string
+
+proc getConfig*():TwitterConfig =
+ var cfg: Config
+ if os.existsFile("settings.cfg"):
+   cfg = loadConfig("settings.cfg")
+ elif os.existsFile(joinPath(getAppDir(),"settings.cfg")):
+   cfg = loadConfig(joinPath(getAppDir(),"settings.cfg"))
+ result = new TwitterConfig
+ if cfg.getSectionValue("auth", "appKey") == "" and cfg.getSectionValue("auth", "appKeySecret") == "":
+   result.appKey = getDefaultAppKey()
+   result.appKeySecret = getDefaultAppKeySecret()
+ else:
+   # sectionにあるパラメーターを取るときはgetSectionValueでとれる
+   result.appKey = cfg.getSectionValue("auth", "appKey")
+   result.appKeySecret = cfg.getSectionValue("auth", "appKeySecret")
+ result.accessToken = cfg.getSectionValue("auth", "accessToken")
+ result.accessTokenSecret = cfg.getSectionValue("auth", "accessTokenSecret")
+
+proc setConfig*(section: string, key: string, value: string):TwitterConfig =
+  var cfg: Config
+  if os.existsFile("settings.cfg"):
+    cfg = loadConfig("settings.cfg")
+  elif os.existsFile(joinPath(getAppDir(),"settings.cfg")):
+    cfg = loadConfig(joinPath(getAppDir(),"settings.cfg"))
+  # 書き出しをするときは、setSectionKeyをして
+  cfg.setSectionKey(section, key, value)
+  if os.existsFile("settings.cfg"):
+    cfg.writeConfig("settings.cfg")
+  elif os.existsFile(joinPath(getAppDir(),"settings.cfg")):
+    # writeconfigをする
+    cfg.writeConfig(joinPath(getAppDir(),"settings.cfg"))
+  return getConfig()
+```
+
 ## TwitterSDK作ったけど何しようか？
 
-ということで、作ったTwitterSDKを使って仕事中にCLIを開いていることが多いのでCLI上でTwitterができるようにして仕事中でもばれずにTwitterできるツールでも作ることにします。
+ということで、作ったTwitterSDKを使ってなにか作ろうかと思います。
 
-さっそくCLI化するたびに出ましょう！
+仕事中にCLIを開いていることが多いのでCLI上でTwitterができるようにして仕事中でもばれずにTwitterできるツールでも作ることにします。
+
+No Twitter、No Lifeです。
+
+![ing](https://i.imgur.com/h8XZ9d2.jpg)
+
+さっそくCLI化する旅に出ましょう！
 
 ### コマンドラインインターフェースで色付き文字を出したい！
 
 というときに便利なライブラリがNimにはあります。
 
-terminalのstyledWriteLineを使えば文字色、背景色を自在に変更できます。
+terminalの**styledWriteLine**を使えば文字色、背景色を自在に変更できます。
 
-使うときはBlock節に入れないといけないらしい。
+**使うときはBlock節に入れないといけないらしい。**
 
 ```nim
 import terminal
@@ -280,11 +357,21 @@ docoptは便利なので本当に愛用しているのですが、Nimでも使�
 
 ということでGitHub ActionsでCIに乗っけてGitHub Releaseの打ち込みでビルドすることにしました。
 
-GitHub Releaseで反応するworkflowにしたいので、onはrelease.types=createdにします。
+GitHub Releaseで反応するworkflowにしたいので、onは**release.types=created**にします。
 
-また、GitHub ActionsではOSの種類をそれぞれwindows-latest, macOS-latest, ubuntu-latestで指定できますのでmatrixで指定しちゃいます。
+また、GitHub ActionsではOSの種類をそれぞれ**windows-latest**, **macOS-latest**, **ubuntu-latest**で指定できますのでmatrixで指定しちゃいます。
 
-さらに！Release noteをGitHub Releaseに乗っけたいので、[前回作った](https://blog.tubone-project24.xyz/2020/08/14/github-action)[Update GitHub Release
+それぞれのOS対応は下記のとおりです。
+
+label | OS
+--- | ---
+ubuntu-latest | Ubuntu 18.04
+macos-latest | macOS 10.15	
+windows-latest | Windows Server 2019
+
+さらに！
+
+Release noteをGitHub Releaseに乗っけたいので、[前回作った](https://blog.tubone-project24.xyz/2020/08/14/github-action)[Update GitHub Release
 ](https://github.com/marketplace/actions/update-github-release)を使ってます。
 
 Release noteの作成は[git-chglog](https://github.com/git-chglog/git-chglog)を使って作成します。このツールめちゃスゴ..。
@@ -436,7 +523,21 @@ URLにアクセスすれば
 
 ![img](https://i.imgur.com/VASzn6U.png)
 
-これで仕事中でもばれずにTwitterできますね（遠い目）
+また、返信の確認は
+
+```
+post_twitter_on_work mention
+``
+
+投稿は
+
+```
+post_twitter_on_work post 投稿したい文言
+```
+
+でできます。シンプルですね。
+
+これで仕事中でもばれずにTwitterできますね（遠い目）。
 
 ![img](https://i.imgur.com/zAFRZJQ.gif)
 
