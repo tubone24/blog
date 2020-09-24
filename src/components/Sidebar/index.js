@@ -11,8 +11,8 @@ import SearchBox from '../SearchBox';
 
 import Subscription from './Subscription';
 
-import './index.scss';
 import TagCloud from './TagCloud';
+import './index.scss';
 
 const {
   githubUsername,

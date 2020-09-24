@@ -29,9 +29,9 @@ const Footer = () => (
             <b>{config.title}&nbsp;</b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            <ExternalLink href="https://portfolio.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />
-            ,&nbsp;&nbsp;&nbsp;&nbsp;Here is
-            <a href="/sitemap.xml">Sitemap</a>
+            <ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />
+            ,&nbsp;&nbsp;&nbsp;&nbsp;Here is &nbsp;
+            <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />
           </p>
         </div>
       </div>
