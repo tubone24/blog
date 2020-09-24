@@ -85,8 +85,15 @@ oAuth2.0、つまりapplication keyとそのシークレットでアクセス可
 
 しかしながらoAuth1.0となると異なります。
 
-<https://openid-foundation-japan.github.io/rfc5849.ja.html>
+<https://oauth.net/core/1.0/>
 
 上記サイトにもあるようにoAuth1.0によるクライアント認証には、RequestTokenのリクエストを投げ込み、レスポンスから認可エンドポイントへのRequestToken認可要求リダイレクト、受け取ったTokenを署名にしてAccessTokenリクエストからやっとAccessTokenが受け取れます。
 
 長い...。
+
+![img](https://i.imgur.com/KrG6jYE.png)
+(https://oauth.net/core/1.0/)
+
+めんどくさいなぁーと思っていたら、便利なライブラリありました。
+
+
