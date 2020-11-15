@@ -22,21 +22,35 @@ PCの入れ替えのたびにSSH Configとその鍵の扱いに困るので作�
 
 皆さんはサーバーへのSSH、どうしてますか？
 
-仕事柄管理しているサーバーへのSSHログインが多いため、SSH Configを使ってログインの手間を少なくしてます。
+仕事柄管理しているサーバーへのSSHログインが多いため、**SSH Config**を使ってログインの手間を少なくしてます。
 
 特にSSHログインに鍵ファイルを利用したり、DBアクセスのためのポートフォワードをしたり、多段SSHをしようとするとSSHコマンドの長さはおのずと長くなり、毎回打ち込むのはそれはそれは億劫になります。
 
-コマンド
+```
+ssh tubone24@10.0.0.1 -i ~./ssh/id_rsa -L 127.0.0.1:80:intra.example.com:80 ProxyCommand='ssh -p 22 -W %h:%p step.server.com'
+```
+
+めんどくさいですね。
 
 そこで例えば上記のようなコマンドをSSH Configに設定し、
 
-コード
+```
+Host serverA
+    HostName 10.0.0.1
+    User tubone24
+    Port 22
+    IdentityFile ~./ssh/id_rsa
+    LocalForward   127.0.0.1:80:intra.example.com:80
+    ProxyCommand ssh -p 22 -W %h:%p step.server.com
+```
 
 次のようにエイリアスでアクセスできるようにするわけです。
 
-コマンド
+```
+ssh serverA
+```
 
-ちなみに、ZSHではzsh-completionsという補完プラグインを設定することで、
+ちなみに、ZSHでは[zsh-completions](https://github.com/zsh-users/zsh-completions)という補完プラグインを設定することで、
 
 SSH Configのtab補完をしてくれるので上記との合わせ技でかなり効率的になります。
 
@@ -46,10 +60,9 @@ SSH Configのtab補完をしてくれるので上記との合わせ技でかな�
 
 ### 鍵とまとめて設定しなければならない
 
-まぁ当たり前と言えば当たり前なのですが、SSH Config上で設定した鍵ファイルも併せて管理しないと当然サーバーにアクセスできません
-。
+まぁ当たり前と言えば当たり前なのですが、SSH Config上で設定した鍵ファイルも併せて管理しないと当然サーバーにアクセスできません。
 
-私の働いている現場では、鍵ファイルをS3に配置し、アクセス権を持ってる鍵が必要な人が各々鍵をローカルにダウンロードする必要があります。
+私の働いている現場では、**鍵ファイルをS3に配置し**、アクセス権を持ってる鍵が必要な人が各々鍵をローカルにダウンロードする必要があります。
 
 せっかくSSH Configだけ別のPCに移行しても結局鍵のダウンロードが必要なわけです。
 
@@ -88,29 +101,39 @@ SSH ConfigをJSON形式で鍵ファイルとともに1ファイルにラッピ�
 
 主な使い方はRead the docsにドキュメントサイトを作りましたのでそちらをご参照ください。
 
+<https://ssh-config-json.readthedocs.io/en/latest/>
+
 一例を書きますとまずインストールはpipで行います。
 
-コード
+```
+pip install ssh-config-json
+```
 
-するとGlobalコマンドにscjというものができます。
+するとGlobalコマンドに**scj**というものができます。
 
-Ssh Config Jsonですね。
+**S**sh **C**onfig **J**sonですね。
 
 自らの~/.ssh/configをSSH鍵もセットでJSONにしたければ
 
-コード
+```
+scj dump dump_config.json -i
+```
 
 とするとdump.jsonとしてSSH ConfigをラッピングしたJSONができます。
 
 復元したければ
 
-コード
+```
+scj restore dump_config.json -i
+```
 
 とやることで、SSH鍵とともに展開されます。
 
 さらに暗号化オプションをつければ
 
-コード
+```
+scj dump dump_config.json -i -e
+```
 
 とJSONを暗号化したファイルが生成され、AESキーを使った複合もできます。
 
@@ -134,7 +157,19 @@ docoptの実装はどうやらsys.argvからコマンドライン引数を取り
 
 Pytestなどのテストランナーに書けた際、sys.argvはテストランナーに渡したものが入っているので
 
-コード
+```
+    def test_main_dump(self):
+        del sys.argv[1:]
+        sys.argv.append("dump")
+        sys.argv.append("tests/assets/test_config_xxx")
+        sys.argv.append("-c")
+        sys.argv.append("tests/assets/test_config")
+        with patch("builtins.open") as mock_open:
+            main()
+            mock_open.assert_any_call("tests/assets/test_config_xxx", "w")
+            mock_open.assert_any_call("tests/assets/test_config")
+        del sys.argv[1:]
+```
 
 のように無理矢理sys.argvを任意の値に変更することで、テスト対象にコマンドライン引数が渡せます。
 
