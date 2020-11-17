@@ -215,7 +215,7 @@ EAXモード[EAXモード（encrypt-then-authenticat-then-translate）](https://
 
 EAXモードでは完全性と秘匿性の担保を1つの暗号化フローの中で実現し、効率よく両方を担保しているとのこと。
 
-wiki図
+![img](https://i.imgur.com/bbXnZFo.png)
 
 とは言ってもPycryptodomeではmodeをEAXにするだけで簡単に使えるので細かく考える必要はなさそうです。
 
