@@ -313,8 +313,6 @@ module.exports = {
         ],
       },
     },
-    'gatsby-plugin-cdn-files',
-    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-plugin-minify',
       options: {
@@ -328,6 +326,8 @@ module.exports = {
         minifyJS: true,
       },
     }, // put this after gatsby-plugin-manifest
+    'gatsby-plugin-cdn-files',
+    'gatsby-plugin-offline',
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
 };
