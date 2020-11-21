@@ -269,13 +269,23 @@ key = hashlib.shake_128(key.encode("utf-8")).hexdigest(16)).encode("utf-8")
 
 こちらはランダム性が高いほどセキュリティーが向上するため、次のようにPycryptodomeのRandom.get_random_bytesから生成します。
 
-コード
+```
+initialization_vector = Random.get_random_bytes(AES.block_size)
+cipher = AES.new(self.key, AES.MODE_EAX, initialization_vector)
+```
 
 ### バイト列の書き込み
 
 Python書いたことある人なら当たり前とは思いますが、バイト列の書き込みをする際はopenモードをバイナリーにしないといけません。
 
-コード
+```
+    def encrypt_file(self, path, delete_raw_file=False):
+        with open(path, "r") as f1, open(path + ".enc", "wb") as f2:
+            f2.write(self.encrypt(f1.read()))
+        if delete_raw_file:
+            os.remove(path)
+        print(f"Encrypted file: {path}.enc")
+```
 
 ## Lint
 
