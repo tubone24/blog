@@ -71,7 +71,6 @@
     "gatsby-remark-video": "^1.2.5",
     "gatsby-source-filesystem": "^2.2.4",
     "gatsby-source-github": "0.0.2",
-    "gatsby-source-wordpress": "^3.2.5",
     "gatsby-transformer-remark": "^2.7.4",
     "gitalk": "^1.6.2",
     "gray-percentage": "^2.0.0",

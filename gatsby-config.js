@@ -23,19 +23,14 @@ module.exports = {
         noQueryString: true,
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-typography',
-    //   options: {
-    //     pathToConfigModule: 'src/utils/typography.js',
-    //   },
     // },
     'gatsby-plugin-sass',
-    {
-      resolve: 'gatsby-plugin-minify-classnames',
-      options: {
-        develop: false,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-minify-classnames',
+    //   options: {
+    //     develop: false,
+    //   },
+    // },
     // 'gatsby-plugin-catch-links',
     // {
     //   resolve: 'gatsby-plugin-zopfli',
@@ -46,20 +41,6 @@ module.exports = {
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
-    // {
-    //   resolve: 'gatsby-source-wordpress',
-    //   options: {
-    //     baseUrl: 'tubone-project24.xyz',
-    //     hostingWPCOM: false,
-    //     protocol: 'https',
-    //     useACF: false,
-    //     auth: {},
-    //     verboseOutput: false,
-    //     includedRoutes: [
-    //       '**/posts',
-    //     ],
-    //   },
-    // },
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: {
@@ -73,12 +54,6 @@ module.exports = {
         name: 'pages',
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-emotion',
-    //   options: {
-    //     // Accepts all options defined by `babel-plugin-emotion` plugin.
-    //   },
-    // },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
