@@ -1,5 +1,11 @@
-module.exports = ({ plugins, actions, stage }) => {
+module.exports = ({ plugins, actions, stage, getConfig }) => {
   if (stage === 'build-javascript') {
+    const config = getConfig()
+    const miniCssExtractPlugin = config.plugins.find(plugin => plugin.constructor.name === 'MiniCssExtractPlugin')
+    if (miniCssExtractPlugin) {
+      miniCssExtractPlugin.options.ignoreOrder = true
+    }
+    actions.replaceWebpackConfig(config)
     actions.setWebpackConfig({
       devtool: false,
     });
