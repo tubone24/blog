@@ -7,7 +7,7 @@ tags:
   - サーバー
   - Python
   - SSH
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/qBFYNb6.png
 templateKey: blog-post
 ---
 PCの入れ替えのたびにSSH Configとその鍵の扱いに困るので作ってみました。
@@ -20,7 +20,7 @@ PCの入れ替えのたびにSSH Configとその鍵の扱いに困るので作�
 
 ## はじめに
 
-皆さんはサーバーへのSSH、どうしてますか？
+皆さんはサーバーへの**SSH**、どうしてますか？
 
 仕事柄管理しているサーバーへのSSHログインが多いため、**SSH Config**を使ってログインの手間を少なくしてます。
 
@@ -143,7 +143,7 @@ scj dump dump_config.json -i -e
 
 ## コマンドパーサー
 
-コマンドパーサーはおなじみdocoptです。もう何回目でしょうか。お世話になっております。
+コマンドパーサーはおなじみ**docopt**です。もう何回目でしょうか。お世話になっております。
 
 やはり便利なのはusageを書いているとロジックもできあがるところで、なんというかまぁ本当にべんりです。
 
@@ -155,7 +155,7 @@ docoptを絡めたテストコードを今回は書いてみました。とは�
 
 本来的には、docoptをmock化するのが正義なんですけど、自前でパーサー作った場合とかに使えそうなのでまぁいいでしょう。
 
-docoptの実装はどうやらsys.argvからコマンドライン引数を取り出しているようです。当たり前といえば当たり前か。
+docoptの実装はどうやら**sys.argv**からコマンドライン引数を取り出しているようです。当たり前といえば当たり前か。
 
 Pytestなどのテストランナーに書けた際、sys.argvはテストランナーに渡したものが入っているので
 
@@ -175,7 +175,7 @@ Pytestなどのテストランナーに書けた際、sys.argvはテストラン
 
 のように無理矢理sys.argvを任意の値に変更することで、テスト対象にコマンドライン引数が渡せます。
 
-終わったらお片づけでdel文を忘れずに！
+**終わったらお片づけでdel文を忘れずに！**
 
 ## Pycryptodome
 
@@ -187,7 +187,7 @@ Pythonの暗号化ライブラリといえばpycryptoが有名ですが、こち
 
 ### AES暗号化 EAXモード
 
-今回は暗号利用モードは[公式ドキュメント](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes)通りEAXモードを使いました。
+今回は暗号利用モードは[公式ドキュメント](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes)通り**EAXモード**を使いました。
 
 そもそも暗号利用モードってなに？という人は下の画像を見てみてください。
 
@@ -301,7 +301,9 @@ Blackの公式Docには
 
 Blackはフォーマットチェックのほか、自動フォーマットにも対応してるのでautopep8と同じ用な使い方ができるわけです。
 
-コード
+```
+ black ssh_config_json
+```
 
 autopep8との違いはその規約の厳しさと柔軟性の欠如にあります。
 
@@ -311,13 +313,39 @@ pep8では強制されないような、改行の仕方や、シングルクォ�
 
 pep8では特定のルールの無効化を細かく設定できますが、Blackはフォーマット適用ソースと最大行文字数しか制御できません。
 
-コード
+```
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+```
 
 > Black化されたコードは、あなたが読んでいるプロジェクトに関係なく同じように見えます。しばらくすると書式設定が透明になり、代わりにコンテンツに集中することができます。
 
 まさにその通りで、「ロジックは問題ないけど、なんでこの書き方なんですか？見にくいですよ？」みたいな不毛な議論は「だってBlackが」と言えるわけです。
 
 SSH Config JSONではBlackフォーマットを採用してます。
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## CI/CDに載っける
 
@@ -331,7 +359,9 @@ PRのタイミングでテストとBlackのフォーマットチェックを走�
 
 --checkオプションをつければ、フォーマットがゴミだとエラーで落ちてCIがfailedするようになります。
 
-コード
+```
+ black ssh_config_json  --check
+```
 
 ## PyPIに自動デプロイする
 
@@ -343,13 +373,48 @@ PyPIへのパッケージ登録を行うには当然パッケージを作らな�
 
 下記のようにパッケージの情報を記載し
 
-コード
+```
+[metadata]
+name = ssh_config_json
+version = attr: ssh_config_json.__version__
+description = Dump JSON for your ssh config include IdentityFiles and restore those.
+long_description = file: README.rst, CHANGELOG.rst
+long_description_content_type = text/x-rst
+url = https://github.com/tubone24/ssh_config_json
+project-urls =
+    Documentation = https://ssh-config-json.readthedocs.io/en/latest/
+    ProjectBlog = https://blog.tubone-project24.xyz
+author = tubone24
+author_email = tubo.yyyuuu@gmail.com
+keywords = ssh-config, json, backup, AES
+license = MIT
+license-file = LICENSE
+platform = any
+classifiers =
+    Development Status :: 4 - Beta
+    Intended Audience :: Developers
+    License :: OSI Approved :: MIT License
+    Operating System :: OS Independent
+    Topic :: Documentation :: Sphinx
+    Topic :: System :: Archiving :: Backup
+    Programming Language :: Python
+    Programming Language :: Python :: 3.6
+    Programming Language :: Python :: 3.7
+    Programming Language :: Python :: 3.8
+
+```
 
 setup.pyでsetup.cfgを読み込むようにして
 
-コード
+```
+from setuptools import setup
 
-コード
+setup()
+```
+
+```
+python setup.py sdist bdist_wheel
+```
 
 でdist配下にパッケージ作成ができます。簡単ですね。
 
@@ -360,16 +425,27 @@ setup.pyでsetup.cfgを読み込むようにして
 PyPIでは同一バージョンのパッケージ登録ができません。
 
 次のようにsetup.pyもしくはsetup.cfgのいずれかにバージョンを指定すれば
-いいのですが、次のようにすることでPythonコード上に設定した変数を読み込むことができるので、
+いいのですが *attr* を使って次のようにすることでPythonコード上に設定した変数を読み込むことができるので、
 CLIのバージョン表示と平仄をとることができます。
 
-コード
+```
+IntelliJ IDEAPyCharm   
+[metadata]
+name = ssh_config_json
+version = attr: ssh_config_json.__version__
+description = Dump JSON for your ssh config include IdentityFiles and restore those.
+```
 
-さらに、パッケージ登録についても～を使えば簡単に実装することができます。
+さらに、パッケージ登録についても[pypa/gh-action-pypi-publish](https://github.com/marketplace/actions/pypi-publish)を使えば簡単に実装することができます。
 
-リンク
-
-コード
+```
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: tubone24
+          password: ${{ secrets.pypi_password }}
+          skip_existing: true
+```
 
 ## 結論
 
