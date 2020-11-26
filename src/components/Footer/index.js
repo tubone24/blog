@@ -30,7 +30,7 @@ const Footer = () => (
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
             <ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />
-            ,&nbsp;&nbsp;&nbsp;&nbsp;Here is &nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;Here is &nbsp;
             <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />
           </p>
         </div>

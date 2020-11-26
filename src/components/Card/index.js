@@ -62,7 +62,7 @@ const Card = ({
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>
-          <Link to={url} href={url}>....Read more....</Link>
+          <Link to={url} href={url} title="....Read more....">....Read more....</Link>
         </div>
       </div>
     </div>
