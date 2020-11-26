@@ -33,7 +33,6 @@ if (isLocalDevelopment() === false) {
   if (gaOptimizeId) {
     ReactGA.ga('require', gaOptimizeId);
   }
-  console.log('Welcome to online environment.');
 }
 
 export const onRouteUpdate = (state) => {

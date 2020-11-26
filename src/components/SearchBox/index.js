@@ -18,7 +18,6 @@ if (typeof window !== 'undefined') {
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_API_KEY,
   );
-  console.log(process.env.GATSBY_ALGOLIA_INDEX_NAME);
   index = client.initIndex(process.env.GATSBY_ALGOLIA_INDEX_NAME);
 }
 

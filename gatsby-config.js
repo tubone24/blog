@@ -142,13 +142,13 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers',
-          'gatsby-remark-graphviz',
+          //'gatsby-remark-graphviz',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
-          'gatsby-remark-mermaid',
+          //'gatsby-remark-mermaid',
           'gatsby-remark-reading-time',
           {
             resolve: 'gatsby-remark-table-of-contents',
