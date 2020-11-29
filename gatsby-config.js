@@ -303,9 +303,9 @@ module.exports = {
     'gatsby-plugin-cdn-files',
     {
       resolve: 'gatsby-plugin-offline',
-      options: {
-        precachePages: ['/about/', 'tags/*'],
-      },
+    //   options: {
+    //     precachePages: ['/about/', 'tags/*'],
+    //   },
     },
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
