@@ -23,14 +23,13 @@ module.exports = {
         noQueryString: true,
       },
     },
-    // },
     'gatsby-plugin-sass',
-    // {
-    //   resolve: 'gatsby-plugin-minify-classnames',
-    //   options: {
-    //     develop: false,
-    //   },
-    // },
+    {
+      resolve: 'gatsby-plugin-minify-classnames',
+      options: {
+        develop: false,
+      },
+    },
     // 'gatsby-plugin-catch-links',
     // {
     //   resolve: 'gatsby-plugin-zopfli',
@@ -301,7 +300,12 @@ module.exports = {
         minifyJS: true,
       },
     }, // put this after gatsby-plugin-manifest
-    'gatsby-plugin-cdn-files',
+    {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        precachePages: ['/pages/*', '/about/*', '/tags/*', '/20*/**'],
+      },
+    },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
