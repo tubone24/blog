@@ -99,10 +99,10 @@ module.exports = {
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-              custom_elements: [{
-                'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '')
-                  .substr(0, 150),
-              }],
+            //   custom_elements: [{
+            //     'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '')
+            //       .substr(0, 150),
+            //   }],
             })),
             query: `
               {
