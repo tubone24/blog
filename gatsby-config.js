@@ -302,9 +302,9 @@ module.exports = {
     }, // put this after gatsby-plugin-manifest
     {
       resolve: 'gatsby-plugin-offline',
-      options: {
-        precachePages: ['/about/*', '/tags/*'],
-      },
+      // options: {
+      //   precachePages: ['/about/*', '/tags/*'],
+      // },
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify', // make sure to put last in the array
