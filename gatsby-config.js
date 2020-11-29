@@ -30,7 +30,7 @@ module.exports = {
         develop: false,
       },
     },
-    // 'gatsby-plugin-catch-links',
+    'gatsby-plugin-catch-links',
     // {
     //   resolve: 'gatsby-plugin-zopfli',
     //   options: {
@@ -301,12 +301,7 @@ module.exports = {
       },
     }, // put this after gatsby-plugin-manifest
     'gatsby-plugin-cdn-files',
-    {
-      resolve: 'gatsby-plugin-offline',
-    //   options: {
-    //     precachePages: ['/about/', 'tags/*'],
-    //   },
-    },
+    'gatsby-plugin-offline',
     'gatsby-plugin-netlify', // make sure to put last in the array
   ],
 };
