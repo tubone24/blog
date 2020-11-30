@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link, withPrefix} from 'gatsby';
 import ExternalLink from '../ExternalLink';
 import { config } from '../../../data';
 
@@ -29,9 +30,11 @@ const Footer = () => (
             <b>{config.title}&nbsp;</b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            <ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />
-            &nbsp;&nbsp;&nbsp;&nbsp;Here is &nbsp;
-            <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />
+            {/*<ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />*/}
+            <Link to={withPrefix("/privacy-policies")} href={withPrefix("/privacy-policies")} title="Privacy Policies">Privacy Policies</Link>
+            &nbsp;&nbsp;Here is &nbsp;
+            {/*<ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />*/}
+            <Link to={withPrefix("/sitemap.xml")} href={withPrefix("/sitemap.xml")} title="Privacy Policies">Sitemap</Link>
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import {graphql, Link, withPrefix} from 'gatsby';
 import SEO from '../components/SEO';
 import Sidebar from '../components/Sidebar';
 
@@ -34,7 +34,7 @@ const PeriodSummary = ({ data, pageContext }) => {
               const { title, url, yyyymmdd } = node.frontmatter;
               return (
                 <li key={url}>
-                  {yyyymmdd}&nbsp;&nbsp;<a href={`/${url}`}>{title}</a>
+                  {yyyymmdd}&nbsp;&nbsp;<Link to={withPrefix(url)} href={withPrefix(url)} title={title}>{title}</Link>
                 </li>
               );
             })}
