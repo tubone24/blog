@@ -88,7 +88,7 @@
     "react-ga": "^2.7.0",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^5.2.1",
-    "react-tooltip": "^3.11.6",
+    "react-tooltip": "^4.2.11",
     "react-transition-group": "^4.4.1",
     "rimraf": "^3.0.2",
     "smooth-scroll": "^16.1.3",
