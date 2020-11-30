@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,9 +16,9 @@ const LatestPost = ({ posts, totalCount }) => (
     <Heatmap minify />
     {posts.map(({ node }) => (
       <Link
-        to={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
-        key={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
-        href={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
+        to={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
+        key={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
+        href={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
       >
         {node.frontmatter.title}
       </Link>

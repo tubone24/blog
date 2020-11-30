@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 // import PropTypes from 'prop-types';
 
 import Tag from '../Tag';
@@ -45,7 +45,7 @@ const Card = ({
     <div className="custom-card">
       {headerImage && (
         <CardHeader
-          url={url}
+          url={withPrefix(url)}
           image={headerImage}
           index={index}
         />
@@ -58,11 +58,11 @@ const Card = ({
               <Tag name={name} key={name} />
             ))}
           </div>
-          <Link to={url} href={url}>
+          <Link to={ withPrefix(url) } href={ withPrefix(url) }>
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>
-          <Link to={url} href={url} title="....Read more....">....Read more....</Link>
+          <Link to={withPrefix(url)} href={withPrefix(url)} title="....Read more....">....Read more....</Link>
         </div>
       </div>
     </div>

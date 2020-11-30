@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 
 import { parseImgur } from '../../api/images';
 
@@ -31,7 +31,7 @@ const RelatedCard = ({
   description,
 }) => (
   <div className="col-sm-12 pb-4">
-    <Link to={url} href={url}>
+    <Link to={withPrefix(url)} href={withPrefix(url)}>
       <div className="custom-card">
         <div className="data">
           <div className="content">
@@ -42,11 +42,11 @@ const RelatedCard = ({
               ))}
             </div>
             <CardHeader
-              url={url}
+              url={withPrefix(url)}
               image={headerImage}
               backgroundColor={headerBackgroundColor}
             />
-            <Link to={url} href={url}>
+            <Link to={withPrefix(url)} href={withPrefix(url)}>
               <h4 className="title">{title}</h4>
             </Link>
             <p>{description}</p>
