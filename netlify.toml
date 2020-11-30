@@ -1,3 +1,4 @@
 [build]
+  functions = "functions/src"
   publish = "public"
   command = "npm run build:nocache"
