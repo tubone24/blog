@@ -10,7 +10,7 @@ const gotoPage = async (url, show = false) => {
     await window.$('.collapse').collapse('hide');
   }
 
-  await navigate(withPrefix(url));
+  await navigate(url);
 };
 
 const parseMarkdownUrl = (date, rawUrl) => `/${date}/${rawUrl.match(/_posts[/](.*).md/)[1]}/`;
