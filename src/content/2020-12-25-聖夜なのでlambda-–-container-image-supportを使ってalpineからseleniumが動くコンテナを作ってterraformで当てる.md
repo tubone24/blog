@@ -261,7 +261,7 @@ ENTRYPOINT [ "/usr/local/bin/python", "-m", "awslambdaric" ]
 CMD [ "app.handler" ]
 ```
 
-## Seleniumを書いていく
+## Seleniumが動くようにする
 
 さてSeleniumのランナーに移っていきます。
 
@@ -269,7 +269,7 @@ CMD [ "app.handler" ]
 
 また、apkでインストールしたChrome(Chromium)、Chrome-driverはそれぞれ**/usr/bin/chromium-browser** **/usr/lib/chromium/chromedriver**に存在してます。
 
-まずはとりあえずSlackのログインページを開きます。次のように組んでいきます。
+まずはとりあえずSlackのログインページを開き、タイトルを表示します。次のように組んでいきます。
 
 ```
 from selenium import webdriver
@@ -289,6 +289,7 @@ def handler(event, context):
     
     d = webdriver.Chrome()
     d.get(SLACK_LOGIN_URL)
+    print(f"PageTitle {d.title}")
 ```
 
 Chromeの起動オプションに指定している--headless、--disable-gpu、--no-sandboxはいずれも画面のないLambdaでは必須のオプションで、それぞれ--headlessはヘッドレス起動(ディスプレイやキーボード、マウスなどの入出力機器を接続しない状態をヘッドレスと言います)、--disable-gpuはGPU無効(--headlessオプションと併用必須らしい)、--no-sandboxはサンドボックス起動無効化のことらしいです。
@@ -331,4 +332,118 @@ def handler(event, context):
 
     d = webdriver.Chrome()
     d.get(SLACK_LOGIN_URL)
+    print(f"PageTitle {d.title}")
 ```
+
+こちらでエラーは出なくなりましたが、5分でタイムアウトしてしまいました。
+
+## スピードアップはChrome DriverService
+
+と勝手に聞いてなんとなく納得してしまったのでChrome DriverServiceを使うように書き直したらちゃんとうごきました。なぜなんでしょうねぇー。
+
+```
+def handler(event, context):
+    o = Options()
+    o.binary_location = chrome_path
+    o.add_argument('--headless')
+    o.add_argument('--disable-gpu')
+    o.add_argument('--no-sandbox')
+    o.add_argument('--disable-dev-shm-usage')
+    o.add_argument('--window-size=1920x1080')
+
+    print("Start Chrome Session")
+    s = Service(executable_path=chromedriver_path)
+    s.start()
+    d = webdriver.Remote(
+        s.service_url,
+        desired_capabilities=o.to_capabilities()
+    )
+
+    d.get(SLACK_LOGIN_URL)
+
+    print(f"PageTitle {d.title}")
+```
+
+## Slackにログインして勤怠チャンネルのスクリーンショットを撮る
+
+さて、Seleniumも無事動いたので、Slackにログインして勤怠チャンネルをパシャっと撮りましょう。
+
+まずはログインページですが、これはhttps://slack-workspace-url.slack.comにアクセスしますと、Eメールとパスワードを聞かれるフォームが出てきます。
+
+![img](https://i.imgur.com/LaMP20t.png)
+
+こちら確認してみると、idがそれぞれ、email, passwordとなっております。また、Sign inボタンはid signin_btnとなっております。ありがたいですね。
+
+![img](https://i.imgur.com/S8orasB.png)
+
+ということで、idがemailの要素が描画されたらEメール、パスワードを入力し、ボチッとSign inボタンをクリックします。
+
+```
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+
+(中略)
+
+    wait = WebDriverWait(d, 10)
+
+    email = wait.until(expected_conditions.visibility_of_element_located((By.ID, "email")))
+
+    email.send_keys(tubone@email.com)
+
+    email = d.find_element(by=By.ID, value="password")
+    email.send_keys("hogehoge")
+
+    signin_btn = d.find_element(by=By.ID, value="signin_btn")
+    signin_btn.click()
+
+    d.implicitly_wait(10)
+    print(f"PageTitle {d.title}")
+```
+
+WebDriverWaitで最大待機秒数を設定後、expected_conditions.visibility_of_element_locatedで特定の要素が描画されるまで待つようにすることで明示的に要素の描画を待つことが実現できます。
+
+sleep(10)とかよりも効率的で安全ですね。
+
+また、implicitly_waitを使うことで何かしらの要素が描画されるまで待つ、みたいなもうちょっと曖昧なこともできます。
+
+ともあれ、これでログインが無事できました。
+
+ログインしたらチャンネルのURLにアクセスします。チャンネルのURLは
+
+https://app.slack.com/client/xxxxxxxxx/yyyyyyyyy
+
+みたいな感じでyyyyyyがチャンネルと対応してます。
+
+スクリーンショットはsave_screenshotを使えば画面のPNGが撮れます。
+
+ここで少し詰まったのは、Lambdaの場合、/tmpディレクトリしか書き込み権限がないということです。
+
+/app配下にスクリーンショット吐き出そうとしたらIO Errorになってうまく吐き出せませんでした。
+
+```
+print(d.save_screenshot("/tmp/screen.png"))
+```
+
+ちなみに、save_screenshotの戻り値はboolとなっており、Trueは成功、Falseは失敗です。
+
+## Slackにアップロードする
+
+アップロードはSlack APIの file.uploadを使いました。予めTOKENとPermissionを設定しておきましょう。
+
+```
+        url = "https://slack.com/api/files.upload"
+        data = {
+            "token": SLACK_TOKEN,
+            "channels": SLACK_CHANNEL_ID,
+            "title": "attend bot",
+            "initial_comment": f"({d.title})のattend状況です"
+        }
+        files = {"file": open(FILENAME, "rb")}
+        print(f"Upload To Slack")
+        resp = requests.post(url, data=data, files=files)
+```
+
+ほとんどモザイクで申し訳ないですが、きっちりSlackにスクリーンショットを投稿することができました。
+
+![img](https://i.imgur.com/oHtRLCO.png)
