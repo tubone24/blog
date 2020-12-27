@@ -502,4 +502,31 @@ Container Supportとはいえ、仕組みはLambdaなので簡単に実現でき
 
 ## Terraform化する
 
-さぁ、すべての
+さぁ、すべての舞台が整ったので、Terraform化していきます。
+
+[Resource: aws_lambda_function](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function)も対応しているため、そこまで大変さはありませんでした。ありがとうございます。
+
+Container supportの場合は[package_type](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#package_type)をImageにして[image_uri](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#image_uri)をECRにプッシュしたイメージURIにします。
+
+イメージURIはECRのコンソール画面からでも確認できますが、AWS CLI describe-imagesコマンドでimageDigestが確認できますので、Terraform実行時にShellで取得し、動的生成するようにします。
+
+```
+aws ecr describe-images --repository-name selenium --image-ids imageTag=latest | jq ".imageDetails[].imageDigest"
+
+"sha256:7ec3ea6afd616c09b291c22e8e7676a8855e05beb1d4ea19af1abc6865e6fe6d"
+```
+
+
+通常のLambdaで必要になる[handler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#handler)や[runtime](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#runtime)の設定は不要です。Terraformドキュメント上、handlerは必須となっておりますが、不要です。
+
+[IntellJ HashiCorp Terraform / HCL language support](https://plugins.jetbrains.com/plugin/7808-hashicorp-terraform--hcl-language-support)を使っているとhandlerとruntimeオプションが無いよ！と怒られてしまいますが、構わずapplyで大丈夫です。
+
+![img](https://i.imgur.com/cxxcBx0.png)
+
+## 完成
+
+ということで完成しました。
+
+<https://github.com/tubone24/lambda_container_support_with_selenium>
+
+いろんな技術でうまく行かないことが多かったですが、やりたかったことが無事できました。
