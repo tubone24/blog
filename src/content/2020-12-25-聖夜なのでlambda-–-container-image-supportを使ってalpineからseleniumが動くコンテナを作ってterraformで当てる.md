@@ -34,7 +34,7 @@ templateKey: blog-post
 - イメージは10GBまでデプロイできる
 - Lambda Runtime Interface Emulatorを使ってローカルで実行できる
 
-の2点だと思います。Seleniumでそんなに容量使うのか？問題はありますが、機会学習の推論をLambdaで実行させる、とかだとCライブラリ依存関係に苦しめられる煩わしいパッケージ導入もなくなるのでもしかしたら使えるのかもですね。
+の2点だと思います。**Seleniumでそんなに容量使うのか？**問題はありますが、機会学習の推論をLambdaで実行させる、とかだとCライブラリ依存関係に苦しめられる煩わしいパッケージ導入もなくなるのでもしかしたら使えるのかもですね。
 
 ## LambdaでSeleniumと言えばserverless-chromeですが
 
@@ -447,3 +447,59 @@ print(d.save_screenshot("/tmp/screen.png"))
 ほとんどモザイクで申し訳ないですが、きっちりSlackにスクリーンショットを投稿することができました。
 
 ![img](https://i.imgur.com/oHtRLCO.png)
+
+## 一部フォントが豆腐のままになる
+
+確かにうまく言ったのですが、Noto fontを入れているにも関わらず一部フォントが豆腐のままになってしまう事象が起きてしまいました。
+
+![img](https://i.imgur.com/QxSsfqy.png)
+
+~~12/24なにがあるんでしょうねぇ...~~
+
+色々調べて、[fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/)でNoto fontを強制適用したり色々しましたがどうにもうまく行かず、しょうがないので日本語フォントの大御所[IPAフォント](https://ipafont.ipa.go.jp/)を入れることにします。
+
+そう言えば、IPAフォントは一般社団法人文字情報技術促進協議会に移管されたようですね。
+
+AlpineでIPAフォントを使うには、
+
+```
+RUN apk add font-ipa
+```
+
+でいいはずなのですが、次のようにパッケージが見つからない警告が出てうまくいきませんでした。
+
+```
+ ---> Running in 1098a4580fb6
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
+ERROR: unsatisfiable constraints:
+  font-ipa (missing):
+    required by: world[font-ipa]
+```
+
+仕方がないので、[OSDN](https://ja.osdn.net/projects/ipafonts/)からダウンロードして、それをイメージにADDします。
+
+[IPA Fonts/IPAex Fonts 4書体パック_IPAフォント（Ver.003.03）](https://ja.osdn.net/projects/ipafonts/releases/51868)を使わせていただきます。
+
+```
+ADD ./font/*.ttf /usr/share/fonts/TTF/
+RUN fc-cache -fv
+```
+
+これでフォント豆腐問題は解消しました。やれやれ。
+
+## Slackサインイン警告がでる
+
+もう一つ問題になったのは、LambdaのグローバルIPを固定化していなかったため、変なIPアドレスからログインを実行したという警告がでてしまうことです。
+
+![img](https://i.imgur.com/dmGb7V6.png)
+
+こちらは解決法があり、要はLambda in VPCにしてNatGatewayにEIPを当てて、固定IPからインターネットアクセスをさせてあげればいいわけです。
+
+![img](https://i.imgur.com/GPamgYL.png)
+
+Container Supportとはいえ、仕組みはLambdaなので簡単に実現できました。
+
+## Terraform化する
+
+さぁ、すべての
