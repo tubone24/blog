@@ -32,7 +32,7 @@ module.exports = {
     },
     'gatsby-plugin-catch-links',
     {
-      resolve: 'gatsby-plugin-suscribers',
+      resolve: 'gatsby-plugin-subscribers',
       options: {
         id: 'cb199599-4466-4148-8ec2-441a4cf3a7b7',
       },

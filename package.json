@@ -49,7 +49,7 @@
     "gatsby-plugin-sass": "^2.6.0",
     "gatsby-plugin-sentry": "^1.0.1",
     "gatsby-plugin-sitemap": "^2.7.0",
-    "gatsby-plugin-suscribers": "0.0.1",
+    "gatsby-plugin-subscribers": "0.0.1",
     "gatsby-plugin-twitter": "^2.5.0",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
     "gatsby-plugin-zopfli": "^1.3.2",
