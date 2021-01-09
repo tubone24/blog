@@ -44,7 +44,7 @@ export const onRouteUpdate = (state) => {
 };
 
 export const onServiceWorkerUpdateReady = () => {
-  window.location.forceUpdate();
+  window.location.reload(true);
   // const answer = window.confirm(
   //   'ブログ更新を検知しました. 更新しますか?',
   // );
