@@ -44,6 +44,8 @@ const HTML = ({
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossOrigin="anonymous"
       />
+      <script type="text/javascript">var subscribersSiteId='cb199599-4466-4148-8ec2-441a4cf3a7b7';</script>
+      <script type="text/javascript" src="https://cdn.subscribers.com/assets/subscribers.js"></script>
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.1/jquery.fancybox.min.css"
