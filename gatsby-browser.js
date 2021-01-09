@@ -44,11 +44,12 @@ export const onRouteUpdate = (state) => {
 };
 
 export const onServiceWorkerUpdateReady = () => {
-  const answer = window.confirm(
-    'ブログ更新を検知しました. 更新しますか?',
-  );
-
-  if (answer === true) {
-    window.location.reload();
-  }
+  window.location.forceUpdate();
+  // const answer = window.confirm(
+  //   'ブログ更新を検知しました. 更新しますか?',
+  // );
+  //
+  // if (answer === true) {
+  //   window.location.reload();
+  // }
 };
