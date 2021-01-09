@@ -22,6 +22,7 @@
     "dayjs": "^1.9.6",
     "dotenv": "^8.2.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "faunadb": "^2.13.1",
     "flexboxgrid": "^6.3.1",
     "gatsby": "^2.27.4",
     "gatsby-link": "^2.6.1",
@@ -48,6 +49,7 @@
     "gatsby-plugin-sass": "^2.6.0",
     "gatsby-plugin-sentry": "^1.0.1",
     "gatsby-plugin-sitemap": "^2.7.0",
+    "gatsby-plugin-suscribers": "0.0.1",
     "gatsby-plugin-twitter": "^2.5.0",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
     "gatsby-plugin-zopfli": "^1.3.2",
@@ -92,8 +94,7 @@
     "react-transition-group": "^4.4.1",
     "rimraf": "^3.0.2",
     "smooth-scroll": "^16.1.3",
-    "webpack": "^4.44.2",
-    "faunadb": "^2.13.1"
+    "webpack": "^4.44.2"
   },
   "keywords": [
     "gatsby"
