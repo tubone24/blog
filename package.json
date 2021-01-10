@@ -10,6 +10,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
     "@sentry/browser": "^5.27.6",
+    "@sentry/react": "^5.29.2",
+    "@sentry/tracing": "^5.29.2",
     "@weknow/gatsby-remark-codepen": "^0.1.0",
     "algoliasearch": "^3.35.1",
     "autocomplete.js": "^0.37.1",
