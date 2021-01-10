@@ -54,6 +54,7 @@ export const onRouteUpdate = (state) => {
 export const onServiceWorkerUpdateReady = () => {
   if (reloadCount <= 1) {
     window.location.reload(true);
+    reloadCount++;
   }
   // const answer = window.confirm(
   //   'ブログ更新を検知しました. 更新しますか?',
