@@ -10,6 +10,8 @@ import 'prismjs/themes/prism-solarizedlight.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import './src/styles/global.scss';
 
+let reloadCount = 0;
+
 Sentry.init({
   dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
   release: "tubone-boyaki@" + process.env.COMMIT_REF,
@@ -50,7 +52,9 @@ export const onRouteUpdate = (state) => {
 };
 
 export const onServiceWorkerUpdateReady = () => {
-  window.location.reload(true);
+  if (reloadCount <= 1) {
+    window.location.reload(true);
+  }
   // const answer = window.confirm(
   //   'ブログ更新を検知しました. 更新しますか?',
   // );
