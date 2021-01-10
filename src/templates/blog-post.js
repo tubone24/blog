@@ -112,7 +112,7 @@ class BlogPost extends Component {
           isPost
           tag={tags[0]}
           description={excerpt}
-          image={headerImage || 'https://i.imgur.com/StLyXdu.png'}
+          image={headerImage || 'https://i.imgur.com/4r1DViT.png'}
         />
       </div>
     );

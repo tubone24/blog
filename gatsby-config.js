@@ -200,6 +200,8 @@ module.exports = {
             options: {
               dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
               environment: process.env.NODE_ENV,
+              release: "tubone-boyaki@" + process.env.COMMIT_REF,
+              tracesSampleRate: 1.0,
               enabled: (() => ['production', 'stage'].indexOf(process.env.NODE_ENV) !== -1)(),
             },
           },

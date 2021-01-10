@@ -89,7 +89,7 @@ const Page = ({ pageContext, location }) => {
         isPost={false}
         description="tubone BLOG: Python, Docker, TS and other techs.."
         tag=""
-        image="https://i.imgur.com/StLyXdu.png"
+        image="https://i.imgur.com/4r1DViT.png"
       />
     </>
   );
