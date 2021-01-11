@@ -19,3 +19,27 @@ templateKey: blog-post
 ```toc
 
 ```
+
+## AWSのステータス確認難しいよね
+
+AWSを使ったことのある人ならばわかると思いますが、公式がAWSの障害情報を掲載する[AWS Service Health Dashboard](https://status.aws.amazon.com/)があまり使いやすくないです。
+
+![img](https://i.imgur.com/XghDulZ.png)
+
+それぞれのリージョンの障害がRSSで配信される形式になっているのですが、わざわざRSSを登録するのもめんどくさいし、Slackとかの連携に乗っけるのもそれはそれで便利なのですが、そもそもSlackを見ていないほかの人でも障害情報を共有したいです。
+
+実は、AWS Service Health Dashboardの情報はJSONで取得することができます。
+
+<https://status.aws.amazon.com/data.json>
+
+こちらのJSONを活用して勉強がてら使いやすいダッシュボードを作っていきます。
+
+## クビになるぞ！
+
+最近、これといった新しい技術に触れておらず、このままだとクビになりそうなので、そろそろ重い腰を上げてNext.jsを勉強することにしました。
+
+また、Next.jsを使う場合はVercelが便利だよーとのことですので、こちらも使っていきます。
+
+## Next.js
+
+Next.jsではPages/api配下に格納したコードについては、
