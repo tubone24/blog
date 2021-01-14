@@ -27,7 +27,7 @@ const Footer = () => (
             Copyright&nbsp;
             <ExternalLink href="https://portfolio.tubone-project24.xyz/" title="&copy;tubone24" />
             &nbsp;
-            <b>{config.title}&nbsp;</b>
+            <b><Link to={withPrefix("/")} href={withPrefix("/")} title={config.title}>{config.title}</Link>&nbsp;</b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
             {/*<ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />*/}

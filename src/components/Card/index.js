@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, withPrefix } from 'gatsby';
-// import PropTypes from 'prop-types';
 
 import Tag from '../Tag';
 

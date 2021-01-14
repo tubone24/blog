@@ -315,15 +315,21 @@ module.exports = {
       options: {
         headers: {
           '/*.html': [
-            'cache-control: public, max-age=0, must-revalidate'
+            'cache-control: public, max-age=3600, must-revalidate'
           ],
           '/page-data/app-data.json': [
-            'cache-control: public, max-age=0, must-revalidate'
+            'cache-control: public, max-age=3600, must-revalidate'
           ],
           '/page-data/*': [
-            'cache-control: public, max-age=0, must-revalidate'
+            'cache-control: public, max-age=3600, must-revalidate'
           ],
           '/static/*': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+          '/assets/*': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+          '/favicons/*': [
             'cache-control: public, max-age=31536000, immutable'
           ],
           '/icons/*': [

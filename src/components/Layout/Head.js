@@ -36,14 +36,6 @@ const Head = () => (
       name="google-site-verification"
       content={config.meta.google_site_verification}
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"
-    />
   </Helmet>
 );
 
