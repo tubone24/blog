@@ -29,30 +29,9 @@ const HTML = ({
         dangerouslySetInnerHTML={{ __html: body }}
       />
       {postBodyComponents}
-      {/*<script*/}
-      {/*  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"*/}
-      {/*  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"*/}
-      {/*  crossOrigin="anonymous"*/}
-      {/*/>*/}
       <script src="/vendors/js/jquery.slim.min.js" />
       <script src="/vendors/js/popper.min.js" />
-      {/*<script*/}
-      {/*  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"*/}
-      {/*  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"*/}
-      {/*  crossOrigin="anonymous"*/}
-      {/*/>*/}
-      {/*<script*/}
-      {/*  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"*/}
-      {/*  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"*/}
-      {/*  crossOrigin="anonymous"*/}
-      {/*/>*/}
       <script src="/vendors/js/bootstrap.min.js" />
-      {/*<script type="text/javascript" dangerouslySetInnerHTML={{__html: "var subscribersSiteId='cb199599-4466-4148-8ec2-441a4cf3a7b7';"}} />*/}
-      {/*<script type="text/javascript" src="https://cdn.subscribers.com/assets/subscribers.js"/>*/}
-      {/*<link*/}
-      {/*  rel="stylesheet"*/}
-      {/*  href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.1/jquery.fancybox.min.css"*/}
-      {/*/>*/}
       <link
         rel="stylesheet"
         href="/vendors/css/jquery.fancybox.min.css"
@@ -65,7 +44,6 @@ const HTML = ({
         rel="stylesheet"
         href="/vendors/css/solarized-light.min.css"
       />
-      {/*<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.1/jquery.fancybox.min.js" />*/}
       <script src="/vendors/js/jquery.fancybox.min.js" />
       <script src="/vendors/js/lazysizes.min.js" async="" />
     </body>

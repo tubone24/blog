@@ -17,16 +17,9 @@ const imageStyleLazy = (headerImage) => (
 );
 
 const CardHeader = ({ url, image, index }) => {
-  if (index > 1) {
-    return (
-      <Link to={url} href={url}>
-        <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
-      </Link>
-    );
-  }
   return (
     <Link to={url} href={url}>
-      <div className="wrapper" style={imageStyle(image)} />
+      <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
     </Link>
   );
 };
