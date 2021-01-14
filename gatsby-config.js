@@ -310,6 +310,39 @@ module.exports = {
     }, // put this after gatsby-plugin-manifest
     'gatsby-plugin-cdn-files',
     'gatsby-plugin-offline',
-    'gatsby-plugin-netlify', // make sure to put last in the array
+    {
+      resolve: 'gatsby-plugin-netlify', // make sure to put last in the array
+      options: {
+        headers: {
+          '/*.html': [
+            'cache-control: public, max-age=0, must-revalidate'
+          ],
+          '/page-data/app-data.json': [
+            'cache-control: public, max-age=0, must-revalidate'
+          ],
+          '/page-data/*': [
+            'cache-control: public, max-age=0, must-revalidate'
+          ],
+          '/static/*': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+          '/icons/*': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+          '/media/*': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+          '/sw.js': [
+            'cache-control: public, max-age=0, must-revalidate'
+          ],
+          '/**/*.js': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+          '/**/*.css': [
+            'cache-control: public, max-age=31536000, immutable'
+          ],
+        },
+      },
+    },
   ],
 };
