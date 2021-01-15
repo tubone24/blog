@@ -32,7 +32,7 @@ const Icon = ({ href, icon }) => (
   </a>
 );
 
-const Sidebar = ({ latestPosts, totalCount }) => (
+const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
@@ -59,7 +59,7 @@ const Sidebar = ({ latestPosts, totalCount }) => (
         href="https://500px.com/tubone24"
         icon={['fab', '500px']}
       />
-      <Information posts={latestPosts} totalCount={totalCount} />
+      <Information posts={latestPosts} totalCount={totalCount} allPosts={allPosts}/>
       <SearchBox />
       <hr />
       <Subscription />
@@ -95,6 +95,11 @@ export default () => (
       query SidebarQuery {
         all: allMarkdownRemark {
           totalCount
+          allPosts: edges {
+            node {
+              ...cardData
+            }
+          }
         }
 
         limited: allMarkdownRemark(

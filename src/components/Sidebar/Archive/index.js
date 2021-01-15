@@ -1,20 +1,26 @@
 import React from 'react';
+import { Link, withPrefix } from 'gatsby';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 import './index.scss';
+import ReactGA from "react-ga";
+import dayjs from 'dayjs';
 
 
-const Archive = () => (
+const yearLink = ({year}) => (
+  <Link to={withPrefix(`/${year}/`)} href={withPrefix(`/${year}/`)} title={`Articles written in ${year}`} onClick={() => ReactGA.event({ category: 'Archive', action: `push Archive ${year}` })}>{year}</Link>
+);
+
+const Archive = ({allPosts}) => {
+  const yearList = Array.from(new Set(allPosts.map(data=> dayjs(data.node.frontmatter.date).format('YYYY')))).sort((a, b) => ((a < b ? 1 : -1)));
+  return (
   <div className="archive">
     <p><FontAwesomeIcon icon={['far', 'calendar-alt']} />&nbsp;Archives</p>
-    <a href="/2021/">2021</a>
-    <a href="/2020/">2020</a>
-    <a href="/2019/">2019</a>
-    <a href="/2018/">2018</a>
-    <a href="/2017/">2017</a>
+    {yearList.map(year => (yearLink({year})))}
   </div>
-);
+)
+};
 
 export default Archive;

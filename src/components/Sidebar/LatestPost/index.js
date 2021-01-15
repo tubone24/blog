@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Heatmap from '../../Heatmap';
 
 import './index.scss';
+import ReactGA from "react-ga";
 
 const LatestPost = ({ posts, totalCount }) => (
   <div className="latest-post">
@@ -19,6 +20,9 @@ const LatestPost = ({ posts, totalCount }) => (
         to={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
         key={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
         href={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
+        onClick={() => ReactGA.event({
+          category: 'User',
+          action: `Click latest-post item: ${node.fields.slug}`,})}
       >
         {node.frontmatter.title}
       </Link>

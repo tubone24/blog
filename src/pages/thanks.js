@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link, withPrefix} from 'gatsby';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
@@ -14,6 +15,7 @@ export default () => (
       <div className="col order-2">
         <h1>Thank you!</h1>
         <p>This is thank you page for form submissions</p>
+        <Link to={withPrefix('/')} href={withPrefix('/')} title="BackToIndex"> Back to Index</Link>
       </div>
     </div>
     <SEO

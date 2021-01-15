@@ -5,12 +5,12 @@ import WordCloud from '../WordCloud';
 import LatestPost from '../LatestPost';
 import './index.scss';
 
-const Information = ({ totalCount, posts }) => (
+const Information = ({ totalCount, posts, allPosts }) => (
   <div className="d-none d-lg-block information my-2">
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
-    <Archive />
+    <Archive allPosts={allPosts}/>
     {/* <Friend /> */}
     <hr />
     <WordCloud />

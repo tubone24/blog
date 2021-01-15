@@ -6,7 +6,6 @@ import { graphql } from 'gatsby';
 
 import 'gitalk/dist/gitalk.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { parseDate } from '../api';
 
 import Sidebar from '../components/Sidebar';
@@ -16,6 +15,7 @@ import SEO from '../components/SEO';
 import Header from '../components/Header';
 // import TableOfContent from '../components/TableOfContent';
 import ShareBox from '../components/ShareBox';
+import TimeToRead from '../components/TimeToRead';
 
 import { config } from '../../data';
 
@@ -29,17 +29,10 @@ const {
 } = config;
 
 // const bgWhite = { padding: '10px 30px', background: 'white' };
-const destrop = 'd203b64dc';
-const nestedaaP = '1288ab3';
 
 // Prevent webpack window problem
 const isBrowser = typeof window !== 'undefined';
 const Gitalk = isBrowser ? require('gitalk') : undefined;
-
-const jaaCli = 'cfb4c0c580';
-const thambAlP = '17f75e6692';
-const saAPoak = 'd335bca49f';
-const somethingAll = '2a392dae3406cb';
 
 class BlogPost extends Component {
   constructor(props) {
@@ -52,8 +45,8 @@ class BlogPost extends Component {
     const { title, id } = frontmatter;
     const GitTalkInstance = new Gitalk({
       ...gitalk,
-      clientID: saAPoak + jaaCli,
-      clientSecret: thambAlP + destrop + nestedaaP + somethingAll,
+      clientID: process.env.GATSBY_GITHUB_CLIENT_ID,
+      clientSecret: process.env.GATSBY_GITHUB_CLIENT_SECRET,
       title,
       id: id || graphqlId,
     });
@@ -64,12 +57,10 @@ class BlogPost extends Component {
     const { node } = this.data.content.edges[0];
 
     const {
-      html, frontmatter, fields, excerpt, wordCount, timeToRead,
+      html, frontmatter, fields, excerpt,
     } = node;
 
     const { slug } = fields;
-
-    const { words } = wordCount;
 
     const {
       date, headerImage, title, tags,
@@ -88,22 +79,13 @@ class BlogPost extends Component {
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
-          <div
-            className="countdown"
-            style={{
-              padding: 5,
-              background: '#1bd77f',
-            }}
-          ><span className="fa-layers fa-fw fa-1x"><FontAwesomeIcon icon={['fas', 'clock']} /></span>
-            この記事は<b>{words}文字</b>で<b>約{timeToRead}分</b>で読めます
-          </div>
+          <TimeToRead html={html} />
           <Content post={html} />
-
           <div id="gitalk-container" />
           <RelatedPosts post={node} />
         </div>
 
-        <ShareBox url={shareURL} />˚
+        <ShareBox url={shareURL} />
 
         <SEO
           title={title}

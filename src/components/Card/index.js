@@ -7,10 +7,6 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 
-const imageStyle = (headerImage) => ({
-  backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
-});
-
 const imageStyleLazy = (headerImage) => (
   `${parseImgur(headerImage, 'large')}`
 );
@@ -60,24 +56,5 @@ const Card = ({
     </div>
   </div>
 );
-
-// Card.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   date: PropTypes.string,
-//   url: PropTypes.string.isRequired,
-//   headerImage: PropTypes.string,
-//   headerBackgroundColor: PropTypes.string,
-//   description: PropTypes.string.isRequired,
-//   tags: PropTypes.arrayOf(PropTypes.string),
-// };
-//
-// CardHeader.propTypes = Card.propTypes;
-//
-// Card.defaultProps = {
-//   headerImage: '',
-//   tags: [],
-//   date: '',
-//   headerBackgroundColor: '',
-// };
 
 export default Card;

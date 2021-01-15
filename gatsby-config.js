@@ -3,6 +3,8 @@ const {
   URL: NETLIFY_SITE_URL = 'https://blog.tubone-project24.xyz',
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
+  GATSBY_GITHUB_CLIENT_ID,
+  GATSBY_GITHUB_CLIENT_SECRET,
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === 'production';
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
