@@ -43,10 +43,12 @@ class BlogPost extends Component {
   componentDidMount() {
     const { frontmatter, id: graphqlId } = this.data.content.edges[0].node;
     const { title, id } = frontmatter;
+    const clientId = process.env.GATSBY_GITHUB_CLIENT_ID;
+    const clientSecret = process.env.GATSBY_GITHUB_CLIENT_SECRET;
     const GitTalkInstance = new Gitalk({
       ...gitalk,
-      clientID: process.env.GATSBY_GITHUB_CLIENT_ID,
-      clientSecret: process.env.GATSBY_GITHUB_CLIENT_SECRET,
+      clientID: clientId,
+      clientSecret: clientSecret,
       title,
       id: id || graphqlId,
     });
