@@ -16,7 +16,6 @@ import './index.scss';
 
 const {
   githubUsername,
-  iconUrl,
 } = config;
 
 const Icon = ({ href, icon }) => (
@@ -36,7 +35,12 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-      <a href="https://portfolio.tubone-project24.xyz/"><img className="avatar" src={iconUrl} alt="tubone" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} /></a>
+      <a href="https://portfolio.tubone-project24.xyz/">
+        <picture>
+          <source className="avatar" srcSet="/assets/avater.webp" type="image/webp" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} />
+          <img className="avatar" src="/assets/avater.png" alt="tubone" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} />
+        </picture>
+      </a>
       <a href="https://portfolio.tubone-project24.xyz/" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar Str' })}><h4>tubone</h4></a>
       <p className="soliloquy"><b>Boyaki</b> makes a new world</p>
       <Icon
@@ -59,7 +63,7 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
         href="https://500px.com/tubone24"
         icon={['fab', '500px']}
       />
-      <Information posts={latestPosts} totalCount={totalCount} allPosts={allPosts}/>
+      <Information posts={latestPosts} totalCount={totalCount} allPosts={allPosts} />
       <SearchBox />
       <hr />
       <Subscription />

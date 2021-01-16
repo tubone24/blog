@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, withPrefix} from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 

@@ -4,7 +4,6 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Heatmap from '../components/Heatmap';
 
-
 const NotFoundPage = ({ data }) => (
   <div className="container">
     <div className="row">

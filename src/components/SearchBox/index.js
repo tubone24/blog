@@ -5,7 +5,6 @@ import ReactGA from 'react-ga';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { gotoPage } from '../../api/url';
 
-
 let algoliasearch; let autocomplete; let client; let
   index;
 

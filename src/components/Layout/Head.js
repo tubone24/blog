@@ -36,6 +36,9 @@ const Head = () => (
       name="google-site-verification"
       content={config.meta.google_site_verification}
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossOrigin />
+    <link rel="preconnect" href="https://i.imgur.com/" crossOrigin />
+    <link rel="preconnect" href="https://raw.githubusercontent.com/" crossOrigin />
     <link
       rel="stylesheet"
       href="/vendors/css/bootstrap.min.css"

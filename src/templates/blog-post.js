@@ -19,7 +19,6 @@ import TimeToRead from '../components/TimeToRead';
 
 import { config } from '../../data';
 
-
 // Styles
 import './blog-post.scss';
 import RelatedPosts from '../components/Relateds';
@@ -48,7 +47,7 @@ class BlogPost extends Component {
     const GitTalkInstance = new Gitalk({
       ...gitalk,
       clientID: clientId,
-      clientSecret: clientSecret,
+      clientSecret,
       title,
       id: id || graphqlId,
     });

@@ -5,7 +5,6 @@ import ExternalLink from '../../ExternalLink';
 
 import { config } from '../../../../data';
 
-
 import './index.scss';
 
 const { friends = [] } = config;

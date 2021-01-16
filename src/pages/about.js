@@ -41,6 +41,7 @@ const html = `
   </li>
   <li><a href="#like">2 好きなこと</a></li>
   <li><a href="#aboutblog">3 このブログについて</a></li>
+  <li><a href="#wordcloud">4 WordCloud</a></li>
 </ul>
 </div>
   <h2 id="cv">経歴</h2>
@@ -98,6 +99,9 @@ const html = `
   <img src="/assets/logo3.svg" alt="logo" title="logo">
   <p>ぼやきという言葉は常々マイナスに捉えられがちですが実はアイディアややる気の源泉だったりします。</p>
   <p>そんな源泉になるようなことを届けられるブログしていきます。</p>
+  <h2 id="wordcloud">WordCloud</h2>
+  <p><a href="https://github.com/tubone24/auto_tweet_wordcloud/actions?query=workflow%3A%22Generate+Word+Cloud%22">GitHub Actions</a>と<a href="https://amueller.github.io/word_cloud/">WordCloud for Python</a>作ったWordCloud</p>
+  <img src="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog_large.png" alt="wordcloud" title="wordcloud">
 `;
 
 // eslint-disable-next-line react/prefer-stateless-function

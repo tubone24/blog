@@ -10,7 +10,7 @@ const Information = ({ totalCount, posts, allPosts }) => (
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
-    <Archive allPosts={allPosts}/>
+    <Archive allPosts={allPosts} />
     {/* <Friend /> */}
     <hr />
     <WordCloud />

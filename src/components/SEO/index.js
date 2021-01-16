@@ -78,7 +78,6 @@ const schemaOrgJSONLD = ({
   return returnJson;
 };
 
-
 const SEO = ({
   url, title, description, image, siteTitleAlt, isPost, tag,
 }) => (

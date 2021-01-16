@@ -149,13 +149,13 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers',
-          //'gatsby-remark-graphviz',
+          // 'gatsby-remark-graphviz',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
-          //'gatsby-remark-mermaid',
+          // 'gatsby-remark-mermaid',
           'gatsby-remark-reading-time',
           {
             resolve: 'gatsby-remark-table-of-contents',
@@ -202,7 +202,7 @@ module.exports = {
             options: {
               dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
               environment: process.env.NODE_ENV,
-              release: "tubone-boyaki@" + process.env.COMMIT_REF,
+              release: `tubone-boyaki@${process.env.COMMIT_REF}`,
               tracesSampleRate: 1.0,
               enabled: (() => ['production', 'stage'].indexOf(process.env.NODE_ENV) !== -1)(),
             },
@@ -317,37 +317,37 @@ module.exports = {
       options: {
         headers: {
           '/*.html': [
-            'cache-control: public, max-age=3600, must-revalidate'
+            'cache-control: public, max-age=3600, must-revalidate',
           ],
           '/page-data/app-data.json': [
-            'cache-control: public, max-age=3600, must-revalidate'
+            'cache-control: public, max-age=3600, must-revalidate',
           ],
           '/page-data/*': [
-            'cache-control: public, max-age=3600, must-revalidate'
+            'cache-control: public, max-age=3600, must-revalidate',
           ],
           '/static/*': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
           '/assets/*': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
           '/favicons/*': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
           '/icons/*': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
           '/media/*': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
           '/sw.js': [
-            'cache-control: public, max-age=0, must-revalidate'
+            'cache-control: public, max-age=0, must-revalidate',
           ],
           '/**/*.js': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
           '/**/*.css': [
-            'cache-control: public, max-age=31536000, immutable'
+            'cache-control: public, max-age=31536000, immutable',
           ],
         },
       },

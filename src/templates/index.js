@@ -44,7 +44,7 @@ const Page = ({ pageContext, location }) => {
     group, index, first, last, pathPrefix, pageCount,
   } = pageContext;
 
-  const previousUrl = index - 1 === 1 ? `/` : `/${pathPrefix}/${index - 1}`;
+  const previousUrl = index - 1 === 1 ? '/' : `/${pathPrefix}/${index - 1}`;
   const nextUrl = `/${pathPrefix}/${index + 1}`;
 
   return (

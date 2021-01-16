@@ -11,14 +11,11 @@ const imageStyleLazy = (headerImage) => (
   `${parseImgur(headerImage, 'large')}`
 );
 
-const CardHeader = ({ url, image, index }) => {
-  return (
-    <Link to={url} href={url}>
-      <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
-    </Link>
-  );
-};
-
+const CardHeader = ({ url, image, index }) => (
+  <Link to={url} href={url}>
+    <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
+  </Link>
+);
 
 const Card = ({
   title,
@@ -46,7 +43,7 @@ const Card = ({
               <Tag name={name} key={name} />
             ))}
           </div>
-          <Link to={ withPrefix(url) } href={ withPrefix(url) }>
+          <Link to={withPrefix(url)} href={withPrefix(url)}>
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>

@@ -10,11 +10,9 @@ import 'prismjs/themes/prism-solarizedlight.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import './src/styles/global.scss';
 
-let reloadCount = 0;
-
 Sentry.init({
   dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
-  release: "tubone-boyaki@" + process.env.COMMIT_REF,
+  release: `tubone-boyaki@${process.env.COMMIT_REF}`,
   integrations: [new Integrations.BrowserTracing()],
   tracesSampleRate: 1.0,
 });

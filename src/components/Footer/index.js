@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, withPrefix} from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 import ExternalLink from '../ExternalLink';
 import { config } from '../../../data';
 
@@ -27,13 +27,13 @@ const Footer = () => (
             Copyright&nbsp;
             <ExternalLink href="https://portfolio.tubone-project24.xyz/" title="&copy;tubone24" />
             &nbsp;
-            <b><Link to={withPrefix("/")} href={withPrefix("/")} title={config.title}>{config.title}</Link>&nbsp;</b>
+            <b><Link to={withPrefix('/')} href={withPrefix('/')} title={config.title}>{config.title}</Link>&nbsp;</b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            {/*<ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" />*/}
-            <Link to={withPrefix("/privacy-policies")} href={withPrefix("/privacy-policies")} title="Privacy Policies">Privacy Policies</Link>
+            {/* <ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" /> */}
+            <Link to={withPrefix('/privacy-policies')} href={withPrefix('/privacy-policies')} title="Privacy Policies">Privacy Policies</Link>
             &nbsp;&nbsp;Here is &nbsp;
-            {/*<ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" />*/}
+            {/* <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" /> */}
             <a href="/sitemap.xml">Sitemap</a>
           </p>
         </div>

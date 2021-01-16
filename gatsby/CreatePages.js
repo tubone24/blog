@@ -62,7 +62,6 @@ module.exports = ({ actions, graphql }) => {
       },
     });
 
-
     edges.forEach(({ node }, index) => {
       const { id, frontmatter, fields } = node;
       const {
@@ -129,7 +128,6 @@ module.exports = ({ actions, graphql }) => {
         },
       });
     });
-
 
     return tagSet.forEach((tag) => {
       createPage({
