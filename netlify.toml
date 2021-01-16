@@ -1,4 +1,7 @@
 [build]
   functions = "functions/src"
   publish = "public"
-  command = "npm run build:nocache"
+  command = "npm run build"
+
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
