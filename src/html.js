@@ -35,10 +35,6 @@ const HTML = ({
       {postBodyComponents}
       <script src="/vendors/js/jquery-3.5.1.slim.min.js" />
       <script src="/vendors/js/bootstrap.min.js" />
-      <link
-        rel="stylesheet"
-        href="/vendors/css/solarized-light.min.css"
-      />
       <script src="/vendors/js/lazysizes.min.js" async="" />
     </body>
   </html>
