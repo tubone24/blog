@@ -18,10 +18,11 @@ const {
   githubUsername,
 } = config;
 
-const Icon = ({ href, icon }) => (
+const Icon = ({ href, icon, title }) => (
   <a
     target="_blank"
     href={href}
+    title={title}
     rel="external nofollow noopener noreferrer"
     className="custom-icon"
   >
@@ -46,22 +47,27 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
       <Icon
         href={`https://github.com/${githubUsername}`}
         icon={['fab', 'github']}
+        title='tubone24 github'
       />
       <Icon
         href="https://soundcloud.com/user-453736300"
         icon={['fab', 'soundcloud']}
+        title="tubone24 SoundCloud"
       />
       <Icon
         href="https://twitter.com/meitante1conan"
         icon={['fab', 'twitter']}
+        title="tubone24 twitter"
       />
       <Icon
         href="https://www.slideshare.net/tubone24"
         icon={['fab', 'slideshare']}
+        title="tubone24 SlideShare"
       />
       <Icon
         href="https://500px.com/tubone24"
         icon={['fab', '500px']}
+        title="tubone24 500px"
       />
       <Information posts={latestPosts} totalCount={totalCount} allPosts={allPosts} />
       <SearchBox />

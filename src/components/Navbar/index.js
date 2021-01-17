@@ -38,6 +38,7 @@ const Navbar = () => (
         className="navbar-toggler"
         type="button"
         data-toggle="collapse"
+        aria-label="navbar-toggler"
         data-target="#navbarSupportedContent"
       >
         <FontAwesomeIcon icon={faBars} />

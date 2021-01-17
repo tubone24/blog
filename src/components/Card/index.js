@@ -43,7 +43,7 @@ const Card = ({
               <Tag name={name} key={name} />
             ))}
           </div>
-          <Link to={withPrefix(url)} href={withPrefix(url)}>
+          <Link to={withPrefix(url)} href={withPrefix(url)} title={title}>
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>

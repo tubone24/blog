@@ -19,6 +19,10 @@ const HTML = ({
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       <meta name="p:domain_verify" content="2accdaac3153e1b438ab307ac5c4b855" />
+      <link
+        rel="stylesheet"
+        href="/vendors/css/bootstrap.min.css"
+      />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
@@ -29,22 +33,12 @@ const HTML = ({
         dangerouslySetInnerHTML={{ __html: body }}
       />
       {postBodyComponents}
-      <script src="/vendors/js/jquery.slim.min.js" />
-      {/*<script src="/vendors/js/popper.min.js" />*/}
+      <script src="/vendors/js/jquery-3.5.1.slim.min.js" />
       <script src="/vendors/js/bootstrap.min.js" />
-      {/*<link*/}
-      {/*  rel="stylesheet"*/}
-      {/*  href="/vendors/css/jquery.fancybox.min.css"*/}
-      {/*/>*/}
-      <link
-        rel="stylesheet"
-        href="/vendors/css/bootstrap.min.css"
-      />
       <link
         rel="stylesheet"
         href="/vendors/css/solarized-light.min.css"
       />
-      {/*<script src="/vendors/js/jquery.fancybox.min.js" />*/}
       <script src="/vendors/js/lazysizes.min.js" async="" />
     </body>
   </html>
