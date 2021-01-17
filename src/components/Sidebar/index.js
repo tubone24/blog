@@ -60,11 +60,6 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
         title="tubone24 twitter"
       />
       <Icon
-        href="https://www.slideshare.net/tubone24"
-        icon={['fab', 'slideshare']}
-        title="tubone24 SlideShare"
-      />
-      <Icon
         href="https://500px.com/tubone24"
         icon={['fab', '500px']}
         title="tubone24 500px"
