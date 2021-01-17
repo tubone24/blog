@@ -7,15 +7,29 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 
+const imageStyle = (headerImage) => ({
+  backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
+});
+
 const imageStyleLazy = (headerImage) => (
   `${parseImgur(headerImage, 'large')}`
 );
 
-const CardHeader = ({ url, image, index }) => (
-  <Link to={url} href={url}>
-    <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
-  </Link>
-);
+const CardHeader = ({ url, image, index }) => {
+  if (index > 1) {
+    return (
+      <Link to={url} href={url}>
+        <div className="wrapper lazyload" data-bg={imageStyleLazy(image)}/>
+      </Link>
+    );
+  } else {
+    return (
+      <Link to={url} href={url}>
+        <div className="wrapper" style={imageStyle(image)} />
+      </Link>
+    );
+  }
+};
 
 const Card = ({
   title,
