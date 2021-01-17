@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ExternalLink from '../../ExternalLink';
 
 import { config } from '../../../../data';
@@ -11,7 +10,7 @@ const { friends = [] } = config;
 
 const Friend = () => (
   <div className="friend">
-    <p><FontAwesomeIcon icon={['fas', 'link']} />&nbsp;Links</p>
+    <p><span className="icon-link" />&nbsp;Links</p>
     {friends.map((friend) => (
       <ExternalLink
         href={friend.href}

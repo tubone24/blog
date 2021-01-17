@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ReactGA from 'react-ga';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './index.scss';
 
@@ -19,7 +18,7 @@ const CommentButton = () => (
       action: 'Goto Comment Box',
     })}
   >
-    <FontAwesomeIcon icon={['far', 'comment']} />
+    <span className="icon-comment" />
   </a>
 );
 
@@ -38,7 +37,7 @@ const GotoTopButton = () => (
       paddingLeft: '0.1rem',
     }}
   >
-    <FontAwesomeIcon icon={['fas', 'chevron-up']} />
+    <span className="icon-chevron-up" />
   </a>
 );
 
@@ -55,7 +54,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
         action: 'Facebook Share',
       })}
     >
-      <FontAwesomeIcon icon={['fab', 'facebook-f']} />
+      <span className="icon-facebook" />
     </a>
     <a
       href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${url}`}
@@ -68,7 +67,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
         action: 'Twitter Share',
       })}
     >
-      <FontAwesomeIcon icon={['fab', 'twitter']} />
+      <span className="icon-twitter" />
     </a>
     <a
       href={`http://getpocket.com/edit?url=${url}`}
@@ -81,7 +80,7 @@ const ShareBox = ({ url, hasCommentBox }) => (
         action: 'Pocket Share',
       })}
     >
-      <FontAwesomeIcon icon={['fab', 'get-pocket']} />
+      <span className="icon-get-pocket" />
     </a>
     <a
       href={`http://b.hatena.ne.jp/add?mode=confirm&url=${url}`}

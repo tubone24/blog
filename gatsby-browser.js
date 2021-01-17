@@ -4,8 +4,6 @@ import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
 import { config } from './data';
 
-import installFontAwesome from './src/api/installFontAwesome';
-
 import 'prismjs/themes/prism-solarizedlight.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import './src/styles/global.scss';
@@ -20,8 +18,6 @@ Sentry.init({
 const {
   url, gaTrackId, gaOptimizeId,
 } = config;
-
-installFontAwesome();
 
 const isLocalDevelopment = () => window && window.location && window.location.origin !== url;
 

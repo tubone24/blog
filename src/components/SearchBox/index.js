@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 import './index.scss';
 import ReactGA from 'react-ga';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { gotoPage } from '../../api/url';
 
 let algoliasearch; let autocomplete; let client; let
@@ -62,7 +61,7 @@ class SearchBox extends Component {
   render() {
     return (
       <div style={{ marginBottom: '1rem' }}>
-        <p><FontAwesomeIcon icon={['fas', 'search']} />&nbsp;SearchBox</p>
+        <p><span className="icon-search" />&nbsp;SearchBox</p>
         <input
           type="search"
           id="algolia-search-input"

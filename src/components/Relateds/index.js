@@ -1,6 +1,5 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RelatedCard from '../RelatedCard';
 
 import './index.scss';
@@ -45,7 +44,7 @@ const RelatedPosts = ({ post }) => (
       if (!relatedPosts) { return null; }
       return (
         <div className="related-posts">
-          <h2 className="related-posts-title"><FontAwesomeIcon icon={['fas', 'newspaper']} pull="left" />Related Posts</h2>
+          <h2 className="related-posts-title"><span className="icon-newspaper-o" />&nbsp;Related Posts</h2>
           {relatedPosts.map((relatedPost) => (
             <div className="related-post">
               {/* eslint-disable-next-line max-len */}

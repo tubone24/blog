@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, withPrefix } from 'gatsby';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Heatmap from '../../Heatmap';
 
 import './index.scss';
@@ -11,7 +9,7 @@ import ReactGA from 'react-ga';
 const LatestPost = ({ posts, totalCount }) => (
   <div className="latest-post">
     <p>
-      <FontAwesomeIcon icon={['fas', 'newspaper']} />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
+      <span className="icon-newspaper-o" />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
       {totalCount}
     </p>
     <Heatmap minify />

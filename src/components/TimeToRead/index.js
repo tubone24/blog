@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 const TimeToRead = ({ html }) => {
@@ -13,7 +12,7 @@ const TimeToRead = ({ html }) => {
         padding: 5,
         background: '#1bd77f',
       }}
-    ><span className="fa-layers fa-fw fa-1x"><FontAwesomeIcon icon={['fas', 'clock']} /></span>
+    ><span className="fa-layers fa-fw fa-1x"><span className="icon-clock" /></span>
       この記事は<b>{words}文字</b>で<b>約{timeToRead}分</b>で読めます
     </div>
   );

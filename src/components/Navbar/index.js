@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import ReactGA from 'react-ga';
 
 import NavItem from './NavItem';
@@ -41,7 +39,7 @@ const Navbar = () => (
         aria-label="navbar-toggler"
         data-target="#navbarSupportedContent"
       >
-        <FontAwesomeIcon icon={faBars} />
+        <span className="icon-bars" />
       </button>
       <div
         className="collapse navbar-collapse flex-row-reverse"

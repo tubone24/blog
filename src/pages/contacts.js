@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import { navigateTo } from 'gatsby-link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
@@ -59,8 +58,7 @@ export default class Contact extends React.Component {
         >
           <Sidebar />
           <div className="col order-2 contactForm">
-            <FontAwesomeIcon icon={['far', 'envelope']} size="2x" pull="left" />
-            <h1>Contact Form</h1>
+            <h1><span className="icon-envelope" />&nbsp;Contact Form</h1>
             <p><b>Please your Comment here.</b></p>
             <br />
 
@@ -82,7 +80,7 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  <FontAwesomeIcon icon={['fas', 'user']} pull="left" />Your name<br />
+                  <span className="icon-user" />&nbsp;Your name<br />
                   <input
                     type="text"
                     name="name"
@@ -98,7 +96,7 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <label>
-                  <FontAwesomeIcon icon={['far', 'envelope']} pull="left" />Your email<br />
+                  <span className="icon-envelope" />&nbsp;Your email<br />
                   <input
                     type="email"
                     name="email"
@@ -146,8 +144,8 @@ export default class Contact extends React.Component {
                 File<br />
                 <label className="input-group-btn">
                   <span className="btn btn-info">
-                    <FontAwesomeIcon icon={['fas', 'file']} pull="left" />
-                    Attachment File<input
+                    <span className="icon-file" />
+                    &nbsp;Attachment File<input
                       type="file"
                       name="file"
                       className="file-upload"
@@ -159,7 +157,7 @@ export default class Contact extends React.Component {
               </p>
               <p>
                 <br />
-                <button type="submit" className="btn btn-primary">Send<FontAwesomeIcon icon={['fas', 'angle-right']} pull="right" /></button>
+                <button type="submit" className="btn btn-primary">Send&nbsp;<span className="icon-angle-right" /></button>
               </p>
             </form>
           </div>

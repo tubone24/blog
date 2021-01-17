@@ -1,5 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactGA from 'react-ga';
 
 import './index.scss';
@@ -10,7 +9,7 @@ const Subscription = () => (
 
       SUBSCRIBE RSS&nbsp;
       <span className="fa-layers fa-fw fa-1x">
-        <FontAwesomeIcon icon={['fas', 'rss']} />
+        <span className="icon-rss" />
       </span>
     </a>
   </div>

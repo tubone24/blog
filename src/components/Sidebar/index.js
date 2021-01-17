@@ -1,6 +1,5 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactGA from 'react-ga';
 
 import { config } from '../../../data';
@@ -27,7 +26,7 @@ const Icon = ({ href, icon, title }) => (
     className="custom-icon"
   >
     <span className="fa-layers fa-fw fa-2x">
-      <FontAwesomeIcon icon={icon} />
+      <span className={icon} style={{'font-size': '200%'}}/>&nbsp;
     </span>
   </a>
 );
@@ -46,22 +45,22 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
       <p className="soliloquy"><b>Boyaki</b> makes a new world</p>
       <Icon
         href={`https://github.com/${githubUsername}`}
-        icon={['fab', 'github']}
+        icon='icon-github'
         title='tubone24 github'
       />
       <Icon
         href="https://soundcloud.com/user-453736300"
-        icon={['fab', 'soundcloud']}
+        icon='icon-soundcloud'
         title="tubone24 SoundCloud"
       />
       <Icon
         href="https://twitter.com/meitante1conan"
-        icon={['fab', 'twitter']}
+        icon='icon-twitter'
         title="tubone24 twitter"
       />
       <Icon
         href="https://500px.com/tubone24"
-        icon={['fab', '500px']}
+        icon='icon-500px'
         title="tubone24 500px"
       />
       <Information posts={latestPosts} totalCount={totalCount} allPosts={allPosts} />
