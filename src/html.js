@@ -30,12 +30,12 @@ const HTML = ({
       />
       {postBodyComponents}
       <script src="/vendors/js/jquery.slim.min.js" />
-      <script src="/vendors/js/popper.min.js" />
+      {/*<script src="/vendors/js/popper.min.js" />*/}
       <script src="/vendors/js/bootstrap.min.js" />
-      <link
-        rel="stylesheet"
-        href="/vendors/css/jquery.fancybox.min.css"
-      />
+      {/*<link*/}
+      {/*  rel="stylesheet"*/}
+      {/*  href="/vendors/css/jquery.fancybox.min.css"*/}
+      {/*/>*/}
       <link
         rel="stylesheet"
         href="/vendors/css/bootstrap.min.css"
@@ -44,7 +44,7 @@ const HTML = ({
         rel="stylesheet"
         href="/vendors/css/solarized-light.min.css"
       />
-      <script src="/vendors/js/jquery.fancybox.min.js" />
+      {/*<script src="/vendors/js/jquery.fancybox.min.js" />*/}
       <script src="/vendors/js/lazysizes.min.js" async="" />
     </body>
   </html>

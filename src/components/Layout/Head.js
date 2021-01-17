@@ -44,6 +44,9 @@ const Head = () => (
     <link rel="dns-prefetch" href="https://fonts.gstatic.com/" />
     <link rel="dns-prefetch" href="https://i.imgur.com/" />
     <link rel="dns-prefetch" href="https://raw.githubusercontent.com/" />
+    <link rel="dns-prefetch" href="https://sentry.io/" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com/" />
+    <link rel="dns-prefetch" href="https://cdn.subscribers.com/" />
   </Helmet>
 );
 
