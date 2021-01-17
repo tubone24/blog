@@ -1,5 +1,5 @@
 import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link, withPrefix } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Tag from '../../Tag';
@@ -23,10 +23,10 @@ const TagCloud = ({ data }) => {
   const tags = Array.from(Object.keys(mapping)).sort(
     (b, a) => mapping[a] - mapping[b],
   );
-  const limitTags = tags.slice(0, 30);
+  const limitTags = tags.slice(0, 20);
   return (
     <div className="d-none d-lg-block information my-2">
-      <p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;{limitTags.length} / {tags.length} Tags</p>
+      <Link to={withPrefix('tags')} href={withPrefix('tags')} title="Tags"><p><FontAwesomeIcon icon={['fas', 'tags']} />&nbsp;{limitTags.length} / {tags.length} Tags</p></Link>
       {limitTags.map((item) => (
         <Tag name={item} key={item} count={mapping[item]} />
       ))}

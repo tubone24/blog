@@ -2,7 +2,6 @@ import React from 'react';
 import './index.scss';
 
 import ReactGA from 'react-ga';
-import { parseImgur } from '../../api/images';
 
 const Header = ({
   img,

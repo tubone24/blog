@@ -34,7 +34,7 @@ const Footer = () => (
             <Link to={withPrefix('/privacy-policies')} href={withPrefix('/privacy-policies')} title="Privacy Policies">Privacy Policies</Link>
             &nbsp;&nbsp;Here is &nbsp;
             {/* <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" /> */}
-            <a href="/sitemap.xml">Sitemap</a>
+            <a href="/sitemap.xml" title="sitemap">Sitemap</a>
           </p>
         </div>
       </div>
