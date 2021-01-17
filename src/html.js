@@ -26,7 +26,7 @@ const HTML = ({
       {/*/>*/}
       <link
         rel="stylesheet"
-        href="/vendors/css/bootstrap.min.css"
+        href="/vendors/css/bootstrap.min.custom.css"
       />
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossOrigin />
       <link rel="dns-prefetch" href="https://fonts.gstatic.com/" />
