@@ -20,11 +20,11 @@ const getCurrentPage = () => {
   return 0;
 };
 
-const getPath = () => (isBrowser() ? window.location.pathname : '');
+// const getPath = () => (isBrowser() ? window.location.pathname : '');
 
 const getMaxPages = (amount) => Math.ceil(amount / maxPostsInPage);
 
-const getPages = (amount) => new Array(amount).fill().map((_, index) => `/page/${index + 1}`);
+// const getPages = (amount) => new Array(amount).fill().map((_, index) => `/page/${index + 1}`);
 
 const overflow = () => getCurrentPage() === getMaxPages();
 
@@ -34,9 +34,9 @@ export {
   isBrowser,
   getCurrentPage,
   getMaxPages,
-  getPages,
+  // getPages,
   overflow,
   parseDate,
-  getPath,
+  // getPath,
   getPageNumber,
 };

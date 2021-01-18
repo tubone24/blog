@@ -11,7 +11,7 @@ const imageStyleLazy = (headerImage) => (
   `${parseImgur(headerImage, 'large')}`
 );
 
-const CardHeader = ({ url, image, index }) => (
+const CardHeader = ({ url, image }) => (
   <Link to={url} href={url}>
     <div className="wrapper lazyload" data-bg={imageStyleLazy(image)} />
   </Link>

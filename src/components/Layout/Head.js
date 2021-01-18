@@ -23,7 +23,6 @@ const Head = () => (
       rel="shortcut icon"
       href={
         config.meta.favicon
-        || 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png'
       }
     />
     <link

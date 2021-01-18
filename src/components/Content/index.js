@@ -34,6 +34,7 @@ class Content extends Component {
   render() {
     const { post } = this.props;
     return (
+      <>
       <div
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: post }}
@@ -42,6 +43,16 @@ class Content extends Component {
           background: 'white',
         }}
       />
+      <div style={{
+        padding: 30,
+        background: 'white',}}>
+        <h2>tubone24にラーメンを食べさせよう！</h2>
+        <p>ぽちっとな↓</p>
+        <a href="https://www.buymeacoffee.com/tubone24">
+          <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a ramen&emoji=🍜&slug=tubone24&button_colour=40DCA5&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" alt="Buy me a ramen" />
+        </a>
+      </div>
+      </>
     );
   }
 }

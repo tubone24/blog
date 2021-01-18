@@ -1,16 +1,14 @@
 import React from 'react';
-import { StaticQuery, graphql, Link, withPrefix } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 
 import Tag from '../../Tag';
 
 // eslint-disable-next-line react/prop-types
-const TagCloud = ({ data }) => {
-  const { allMarkdownRemark } = data;
+const TagCloud = ({ allPosts }) => {
   const mapping = {};
 
-  allMarkdownRemark.edges.forEach(({ node }) => {
-    const { tags } = node.frontmatter;
-    tags.forEach((name) => {
+  allPosts.forEach(({ node }) => {
+    node.frontmatter.tags.forEach((name) => {
       if (mapping[name]) {
         mapping[name] += 1;
       } else {
@@ -33,21 +31,4 @@ const TagCloud = ({ data }) => {
   );
 };
 
-export default (props) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allMarkdownRemark {
-          edges {
-            node {
-              frontmatter {
-                tags
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => <TagCloud data={data} {...props} />}
-  />
-);
+export default TagCloud

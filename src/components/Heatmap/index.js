@@ -32,7 +32,6 @@ const getTitle = (value) => {
   if (!value || !value.date) {
     return null;
   }
-
   return value.title;
 };
 
@@ -52,7 +51,6 @@ const getTooltipDataAttrs = (value) => {
 };
 
 const Heatmap = ({ data, minify = false }) => {
-  const { allMarkdownRemark } = data;
   const mapping = {};
   const slugs = {};
   const titles = {};
@@ -66,7 +64,7 @@ const Heatmap = ({ data, minify = false }) => {
     startDate = getLastYearDate();
   }
 
-  allMarkdownRemark.edges.forEach(({ node }) => {
+  data.forEach(({ node }) => {
     const { date, slug, title } = node.frontmatter;
     if (mapping[date]) {
       mapping[date] += 1;
@@ -105,7 +103,7 @@ export default (props) => (
     query={graphql`
     query {
       allMarkdownRemark {
-        edges {
+        allPosts: edges {
           node {
             frontmatter {
               date(formatString: "YYYY-MM-DD")
@@ -117,6 +115,6 @@ export default (props) => (
       }
     }
     `}
-    render={(data) => <Heatmap data={data} {...props} />}
+    render={(data) => <Heatmap data={data.allMarkdownRemark.allPosts} {...props} />}
   />
 );

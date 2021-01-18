@@ -30,10 +30,8 @@ const Footer = () => (
             <b><Link to={withPrefix('/')} href={withPrefix('/')} title={config.title}>{config.title}</Link>&nbsp;</b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            {/* <ExternalLink href="https://blog.tubone-project24.xyz/privacy-policies" title="Privacy Policies" /> */}
             <Link to={withPrefix('/privacy-policies')} href={withPrefix('/privacy-policies')} title="Privacy Policies">Privacy Policies</Link>
             &nbsp;&nbsp;Here is &nbsp;
-            {/* <ExternalLink href="https://blog.tubone-project24.xyz/sitemap.xml" title="Sitemap" /> */}
             <a href="/sitemap.xml" title="sitemap">Sitemap</a>
           </p>
         </div>

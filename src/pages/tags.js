@@ -8,13 +8,10 @@ import Heatmap from '../components/Heatmap';
 
 // eslint-disable-next-line react/prop-types
 const TagPage = ({ data }) => {
-  const { allMarkdownRemark } = data;
 
   const mapping = {};
-
-  allMarkdownRemark.edges.forEach(({ node }) => {
-    const { tags } = node.frontmatter;
-    tags.forEach((name) => {
+  data.allMarkdownRemark.edges.forEach(({ node }) => {
+    node.frontmatter.tags.forEach((name) => {
       if (mapping[name]) {
         mapping[name] += 1;
       } else {

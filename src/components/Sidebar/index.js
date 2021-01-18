@@ -68,7 +68,7 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
       <hr />
       <Subscription />
       <hr />
-      <TagCloud />
+      <TagCloud allPosts={allPosts} />
     </div>
   </header>
 );
@@ -101,7 +101,11 @@ export default () => (
           totalCount
           allPosts: edges {
             node {
-              ...cardData
+              frontmatter {
+              id
+              date
+              tags
+              }
             }
           }
         }
