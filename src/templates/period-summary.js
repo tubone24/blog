@@ -3,6 +3,8 @@ import { graphql, Link, withPrefix } from 'gatsby';
 import SEO from '../components/SEO';
 import Sidebar from '../components/Sidebar';
 
+import './period-summary.scss'
+
 const PeriodSummary = ({ data, pageContext }) => {
   const { displayMonth, displayYear } = pageContext;
   const { edges, totalCount } = data.allMarkdownRemark;
@@ -25,7 +27,7 @@ const PeriodSummary = ({ data, pageContext }) => {
       >
         <Sidebar />
 
-        <div className="col-xl-10 col-lg-7 col-md-12 col-xs-12 order-2">
+        <div className="col-xl-10 col-lg-7 col-md-12 col-xs-12 order-2 period">
           <h2>
             {title}
           </h2>

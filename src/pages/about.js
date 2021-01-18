@@ -119,8 +119,13 @@ class About extends Component {
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
           <Content post={html} />
-          <h3>更新頻度</h3>
-          <Heatmap />
+          <div style={{
+            padding: 30,
+            background: 'white',
+          }}>
+            <h3>更新頻度</h3>
+            <Heatmap />
+          </div>
         </div>
 
         <ShareBox url={shareURL} />

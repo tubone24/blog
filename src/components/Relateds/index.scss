@@ -2,14 +2,7 @@
 
 .related-posts {
   padding: 10px;
-  background:
-    linear-gradient(rgba(27, 215, 127, 0.3), $bg),
-    url("https://raw.githubusercontent.com/tubone24/blog/master/static/assets/bg.jpg");
-  background:
-    -moz-linear-gradient(rgba(27, 215, 127, 0.3), $bg),
-    url("https://raw.githubusercontent.com/tubone24/blog/master/static/assets/bg.jpg");
-  background:
-    -webkit-linear-gradient(rgba(27, 215, 127, 0.3), $bg),
-    url("https://raw.githubusercontent.com/tubone24/blog/master/static/assets/bg.jpg");
+  background-color: $bg;
+  background-image: $bg-backGround-pic;
   background-size: cover;
 }

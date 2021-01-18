@@ -1,3 +1,5 @@
+@import "../styles/colors";
+
 .contactForm {
   padding: 60px;
   margin: 0 auto;
@@ -7,6 +9,9 @@
   -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.5);
   -moz-box-shadow: 0 1px rgba(255, 255, 255, 0.5);
   box-shadow: 0 1px rgba(255, 255, 255, 0.5);
+  background-color: $bg;
+  background-image: $bg-backGround-pic;
+  background-size: cover;
 
   input {
     width: 400px;
