@@ -319,7 +319,7 @@ module.exports = {
           '/*.html': [
             'cache-control: public, max-age=3600, must-revalidate',
           ],
-          '/page-data/app-data.json': [
+          '/*.json': [
             'cache-control: public, max-age=3600, must-revalidate',
           ],
           '/page-data/*': [

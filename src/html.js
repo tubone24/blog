@@ -28,13 +28,12 @@ const HTML = ({
         rel="stylesheet"
         href="/vendors/css/bootstrap.min.custom.css"
       />
-      <link rel="preconnect" href="https://fonts.gstatic.com/" crossOrigin />
-      <link rel="dns-prefetch" href="https://fonts.gstatic.com/" />
-      <link rel="dns-prefetch" href="https://i.imgur.com/" />
-      <link rel="dns-prefetch" href="https://raw.githubusercontent.com/" />
-      <link rel="dns-prefetch" href="https://sentry.io/" />
-      <link rel="dns-prefetch" href="https://www.google-analytics.com/" />
-      <link rel="dns-prefetch" href="https://cdn.subscribers.com/" />
+      <link rel="preconnect dns-prefetch" href="//fonts.gstatic.com/" crossOrigin />
+      <link rel="dns-prefetch" href="//i.imgur.com/" />
+      <link rel="dns-prefetch" href="//raw.githubusercontent.com/" />
+      <link rel="dns-prefetch" href="//sentry.io/" />
+      <link rel="dns-prefetch" href="//www.google-analytics.com/" />
+      <link rel="dns-prefetch" href="//cdn.subscribers.com/" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
