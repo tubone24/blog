@@ -39,12 +39,9 @@ const HTML = ({
         dangerouslySetInnerHTML={{ __html: body }}
       />
       {postBodyComponents}
-      {/*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossOrigin="anonymous" />*/}
-      {/*<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.5.2/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossOrigin="anonymous" />*/}
       <script src="/vendors/js/jquery-3.5.1.slim.min.js" />
       <script src="/vendors/js/bootstrap.min.js" />
       <script src="/vendors/js/lazysizes.min.js" async="" />
-      {/*<link href="https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans+JP&display=swap" rel="stylesheet" />*/}
     </body>
   </html>
 );

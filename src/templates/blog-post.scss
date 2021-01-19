@@ -159,6 +159,15 @@
     tr:nth-child(even) {
       background: #d9d9d9;
     }
+
+    code, pre {
+        font-family: SFMono-Regular, Consolas, 'Roboto Mono', 'Courier New', 'BIZ UDGothic', Meiryo, monospace;
+                        /* SFMono, monospace (macOS10.11+, iOS9+) */
+                        /* Consolas, BIZ UDゴシック (Windows10 October 2018 Update+) */
+                        /* Consolas, Meiryo (Windows7+) */
+                        /* Courier New, monospace (macOS10.3+?, iOS4+, WindowsXP+?) */
+                        /* Robot Mono, monospace (Android4+) */
+    }
   }
 
   #gitalk-container {
