@@ -1,0 +1,15 @@
+@import "../../../styles/colors";
+
+.wordcloud {
+  .lazyload,
+  .lazyloading {
+    opacity: 0;
+  }
+
+  .lazyloaded {
+    background-color: $white;
+    background-image: $no-image-pic;
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+}

@@ -36,15 +36,16 @@
 .custom-card {
   transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  .lazyload {
+  .lazyload,
+  .lazyloading {
     opacity: 0;
   }
 
   .lazyloaded {
     background-color: $bermuda;
-    background-image: url('/assets/m_e_others_500.png');
+    background-image: $no-image-pic;
     opacity: 1;
-    transition: opacity 3000ms;
+    transition: opacity 300ms;
   }
 
   &:hover {

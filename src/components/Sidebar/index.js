@@ -42,7 +42,7 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
         </picture>
       </a>
       <a href="https://portfolio.tubone-project24.xyz/" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar Str' })}><h4>tubone</h4></a>
-      <p className="soliloquy"><b>Boyaki</b> makes a new world</p>
+      <p className="soliloquy">It's my life</p>
       <Icon
         href={`https://github.com/${githubUsername}`}
         icon='icon-github'
