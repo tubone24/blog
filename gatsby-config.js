@@ -40,6 +40,14 @@ module.exports = {
         id: 'GTM-WK693R6',
       },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Noto Sans JP:400']
+        }
+      }
+    },
     // {
     //   resolve: 'gatsby-plugin-zopfli',
     //   options: {
