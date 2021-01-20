@@ -41,14 +41,6 @@ module.exports = {
       },
     },
     // {
-    //   resolve: 'gatsby-plugin-web-font-loader',
-    //   options: {
-    //     google: {
-    //       families: ['Noto Sans JP:400']
-    //     }
-    //   }
-    // },
-    // {
     //   resolve: 'gatsby-plugin-zopfli',
     //   options: {
     //     extensions: ['css', 'html', 'js', 'svg'],
@@ -163,7 +155,6 @@ module.exports = {
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
-          'gatsby-remark-reading-time',
           {
             resolve: 'gatsby-remark-table-of-contents',
             options: {
