@@ -158,13 +158,11 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers',
-          // 'gatsby-remark-graphviz',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
-          // 'gatsby-remark-mermaid',
           'gatsby-remark-reading-time',
           {
             resolve: 'gatsby-remark-table-of-contents',
@@ -239,7 +237,6 @@ module.exports = {
           //     includeDefaultCss: true,
           //   },
           // },
-          'gatsby-remark-embed-spotify',
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
@@ -267,12 +264,6 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-sitemap',
-    },
-    {
-      resolve: 'gatsby-plugin-lodash',
-      options: {
-        disabledFeatures: ['shorthands', 'cloning'],
-      },
     },
     {
       resolve: 'gatsby-plugin-nprogress',

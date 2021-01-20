@@ -14,9 +14,9 @@ const PAGE_SPEED_INSIGHTS_URL =
 
 const saveJsonFile = (obj, client) => {
   const dateString = dayjs().format('yyyymmddhhMMss')
-  const path = `./tmp/raw/${client}-raw-${dateString}-${VERSION}.json`
+  const path = `./benchmark/raw/${client}-raw-${dateString}-${VERSION}.json`
   fs.writeFileSync(path, JSON.stringify(obj))
-  const lhPath = `./tmp/${client}-lh-${dateString}-${VERSION}.json`
+  const lhPath = `./benchmark/${client}-lh-${dateString}-${VERSION}.json`
   fs.writeFileSync(lhPath, JSON.stringify(obj.lighthouseResult))
 }
 
