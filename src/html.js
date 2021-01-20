@@ -23,6 +23,7 @@ const HTML = ({
         rel="stylesheet"
         href="/vendors/css/bootstrap.min.custom.css"
       />
+      <link rel="prefetch" href="/fonts/icomoon.woff2" />
       <link rel="dns-prefetch" href="//sentry.io/" />
       {headComponents}
     </head>

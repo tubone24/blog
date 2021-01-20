@@ -39,7 +39,7 @@ class Content extends Component {
       <>
       <div
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: post }}
+        dangerouslySetInnerHTML={{ __html: post.replace(/<img[\s|\S]src=/g, '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=') }}
         style={{
           padding: 30,
           background: 'white',

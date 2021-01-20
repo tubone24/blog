@@ -12,6 +12,9 @@ const RelatedPosts = ({ post }) => {
   React.useEffect(() => {
     if (isBrowser()) {
       const observer = lozad('.lozad', {
+        rootMargin: '10px 0px',
+        threshold: 0.1,
+        enableAutoReload: true,
         loaded(el) {
           el.classList.add('loaded');
         }

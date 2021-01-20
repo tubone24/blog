@@ -11,7 +11,7 @@ import Tag from '../Tag';
 // });
 
 const imageStyle = (headerImage) => (
-  `${parseImgur(headerImage, 'large')}`
+  `${parseImgur(headerImage, 'medium')}`
 );
 
 const CardHeader = ({ url, image }) => (

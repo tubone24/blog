@@ -28,7 +28,7 @@
   }
 }
 
-.related-posts {
+.related-post {
   .custom-card {
     transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
@@ -76,6 +76,7 @@
 
     .content {
       background-image: $bg-backGround-pic;
+
       .lozad {
         opacity: 0;
       }
@@ -83,7 +84,6 @@
       .lozad.loaded {
         //background-color: $bermuda;
         opacity: 1;
-        transition: opacity 300ms;
       }
 
       .title {
