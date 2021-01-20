@@ -36,17 +36,15 @@
 .custom-card {
   transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  .lazyload,
-  .lazyloading {
+  .lozad {
     opacity: 0;
   }
 
-  .lazyloaded {
-    background-color: $bermuda;
+  .lozad.loaded {
+    //background-color: $bermuda;
     opacity: 1;
     transition: opacity 300ms;
   }
-
   &:hover {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
   }

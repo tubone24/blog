@@ -3,9 +3,24 @@ import { StaticQuery, graphql } from 'gatsby';
 import RelatedCard from '../RelatedCard';
 
 import './index.scss';
+import {isBrowser} from "../../api";
+import lozad from "lozad";
 
 // eslint-disable-next-line react/prop-types
-const RelatedPosts = ({ post }) => (
+const RelatedPosts = ({ post }) => {
+
+  React.useEffect(() => {
+    if (isBrowser()) {
+      const observer = lozad('.lozad', {
+        loaded(el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  }, []);
+
+  return (
   <StaticQuery
     query={graphql`
       query {
@@ -55,6 +70,6 @@ const RelatedPosts = ({ post }) => (
       );
     }}
   />
-);
+)};
 
 export default RelatedPosts;

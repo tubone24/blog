@@ -12,11 +12,12 @@ const Header = ({
 }) => (
   <div className="col-12 header" style={{ padding: 0 }} id="header">
     <div
-      className="img-container"
+      className="img-container lozad"
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`,
         marginTop: -58,
       }}
+      data-background-image={`linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`}
     >
       {title && <h1 className="u-title">{title}</h1>}
       {subTitle && (

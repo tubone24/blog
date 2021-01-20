@@ -19,11 +19,6 @@ const HTML = ({
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       <meta name="p:domain_verify" content="2accdaac3153e1b438ab307ac5c4b855" />
-      {/*<link rel="preconnect" href="https://ajax.aspnetcdn.com/" crossOrigin />*/}
-      {/*<link*/}
-      {/*  rel="stylesheet"*/}
-      {/*  href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous"*/}
-      {/*/>*/}
       <link
         rel="stylesheet"
         href="/vendors/css/bootstrap.min.custom.css"
@@ -39,9 +34,8 @@ const HTML = ({
         dangerouslySetInnerHTML={{ __html: body }}
       />
       {postBodyComponents}
-      <script src="/vendors/js/jquery-3.5.1.slim.min.js" />
-      <script src="/vendors/js/bootstrap.min.js" />
-      <script src="/vendors/js/lazysizes.min.js" async="" />
+      <script src="/vendors/js/jquery-3.5.1.slim.min.js" defer />
+      <script src="/vendors/js/bootstrap.min.js" defer />
     </body>
   </html>
 );

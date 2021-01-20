@@ -328,7 +328,7 @@ module.exports = {
           '/icons/*': [
             'cache-control: public, max-age=31536000, immutable',
           ],
-          '/media/*': [
+          '/fonts/*': [
             'cache-control: public, max-age=31536000, immutable',
           ],
           '/sw.js': [

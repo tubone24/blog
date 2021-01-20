@@ -18,8 +18,10 @@ class Content extends Component {
       const observer = lozad('.lozad', {
         load(el) {
           /* eslint-disable no-param-reassign */
-
           el.src = el.dataset.src;
+          if (el.getAttribute('data-background-image')) {
+            el.style.backgroundImage = el.getAttribute('data-background-image')
+          }
           el.onload = () => {
             el.classList.add('animated');
             el.classList.add('fadeIn');

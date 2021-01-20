@@ -1,5 +1,8 @@
 import React from 'react';
 import Link from 'gatsby-link';
+import lozad from 'lozad';
+
+import { isBrowser } from '../api';
 
 import Card from '../components/Card';
 import Sidebar from '../components/Sidebar';
@@ -43,6 +46,17 @@ const Page = ({ pageContext, location }) => {
   const {
     group, index, first, last, pathPrefix, pageCount,
   } = pageContext;
+
+  React.useEffect(() => {
+    if (isBrowser()) {
+      const observer = lozad('.lozad', {
+        loaded(el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  }, []);
 
   const previousUrl = index - 1 === 1 ? '/' : `/${pathPrefix}/${index - 1}`;
   const nextUrl = `/${pathPrefix}/${index + 1}`;

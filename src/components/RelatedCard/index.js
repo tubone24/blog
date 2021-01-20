@@ -5,7 +5,6 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 import Tag from '../Tag';
-
 // const imageStyle = (headerImage, color) => ({
 //   backgroundColor: `#${color}`,
 //   backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
@@ -17,7 +16,7 @@ const imageStyle = (headerImage) => (
 
 const CardHeader = ({ url, image }) => (
   <Link to={url} href={url}>
-    <div className="wrapper lazyload" data-bg={imageStyle(image)} />
+    <div className="wrapper lozad" data-background-image={imageStyle(image)} />
   </Link>
 );
 

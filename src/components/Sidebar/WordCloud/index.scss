@@ -1,13 +1,11 @@
 @import "../../../styles/colors";
 
 .wordcloud {
-  .lazyload,
-  .lazyloading {
+  .lozad {
     opacity: 0;
   }
 
-  .lazyloaded {
-    background-color: $white;
+  .lozad.loaded {
     // background-image: $no-image-pic;
     opacity: 1;
     transition: opacity 300ms;

@@ -75,7 +75,16 @@
     }
 
     .content {
-      background-color: $white;
+      background-image: $bg-backGround-pic;
+      .lozad {
+        opacity: 0;
+      }
+
+      .lozad.loaded {
+        //background-color: $bermuda;
+        opacity: 1;
+        transition: opacity 300ms;
+      }
 
       .title {
         color: $light-blue;

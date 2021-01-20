@@ -12,6 +12,8 @@ import Subscription from './Subscription';
 
 import TagCloud from './TagCloud';
 import './index.scss';
+import {isBrowser} from "../../api";
+import lozad from "lozad";
 
 const {
   githubUsername,
@@ -31,7 +33,18 @@ const Icon = ({ href, icon, title }) => (
   </a>
 );
 
-const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
+const Sidebar = ({ latestPosts, totalCount, allPosts }) => {
+  React.useEffect(() => {
+    if (isBrowser()) {
+      const observer = lozad('.lozad', {
+        loaded(el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  }, []);
+  return (
   <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
     <div className="about-me">
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
@@ -71,7 +84,7 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => (
       <TagCloud allPosts={allPosts} />
     </div>
   </header>
-);
+)};
 
 Sidebar.defaultProps = {
   totalCount: 0,
@@ -102,7 +115,6 @@ export default () => (
           allPosts: edges {
             node {
               frontmatter {
-              id
               date
               tags
               }
