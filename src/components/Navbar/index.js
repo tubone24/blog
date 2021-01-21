@@ -3,9 +3,10 @@ import ReactGA from 'react-ga';
 
 import NavItem from './NavItem';
 import ExternalLink from '../ExternalLink';
-import { gotoPage } from '../../api/url';
+// import { gotoPage } from '../../api/url';
 import './index.scss';
 import { config } from '../../../data';
+import { navigate, withPrefix } from 'gatsby';
 
 const { navbarList = [] } = config;
 
@@ -27,7 +28,8 @@ const Navbar = () => (
             category: 'User',
             action: 'Click navbar logo',
           });
-          gotoPage('/');
+          // gotoPage('/');
+          navigate(withPrefix('/'));
         }}
       >
         <img src="/assets/logo3.svg" alt="Japanese IT Developer Blog tubone BOYAKI" />

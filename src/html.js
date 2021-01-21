@@ -35,8 +35,9 @@ const HTML = ({
         dangerouslySetInnerHTML={{ __html: body }}
       />
       {postBodyComponents}
-      <script src="/vendors/js/jquery-3.5.1.slim.min.js" defer />
+      <script src="/vendors/js/jquery-3.5.1.slim.min.js" defer /> */}
       <script src="/vendors/js/bootstrap.min.js" defer />
+      {/* <script src="/vendors/js/bootstrap-native.min.js" defer /> */}
     </body>
   </html>
 );

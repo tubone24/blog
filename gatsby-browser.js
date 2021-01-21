@@ -21,12 +21,12 @@ const {
 
 const isLocalDevelopment = () => window && window.location && window.location.origin !== url;
 
-window.addEventListener('lazybeforeunveil', (e) => {
-  const bg = e.target.getAttribute('data-bg');
-  if (bg) {
-    e.target.style.backgroundImage = `url(${bg})`;
-  }
-});
+// window.addEventListener('lazybeforeunveil', (e) => {
+//   const bg = e.target.getAttribute('data-bg');
+//   if (bg) {
+//     e.target.style.backgroundImage = `url(${bg})`;
+//   }
+// });
 
 if (isLocalDevelopment() === false) {
   ReactGA.initialize(gaTrackId);

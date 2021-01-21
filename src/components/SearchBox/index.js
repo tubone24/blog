@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { navigate } from 'gatsby';
+import { navigate, withPrefix } from 'gatsby';
 import './index.scss';
 import ReactGA from 'react-ga';
-import { gotoPage } from '../../api/url';
+// import { gotoPage } from '../../api/url';
 
 let algoliasearch; let autocomplete; let client; let
   index;
@@ -54,7 +54,8 @@ class SearchBox extends Component {
         action: `Click Searchbox item: ${event._args[0].path}`,
       });
       // eslint-disable-next-line no-underscore-dangle
-      gotoPage(event._args[0].path);
+      // gotoPage(event._args[0].path);
+      navigate(withPrefix(event._args[0].path));
     });
   }
 

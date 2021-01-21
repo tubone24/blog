@@ -2,9 +2,9 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, navigate, withPrefix } from 'gatsby';
 
-import { gotoPage } from '../../api/url';
+// import { gotoPage } from '../../api/url';
 
 const getLastYearDate = () => {
   const today = new Date();
@@ -24,7 +24,8 @@ const getSlug = (value) => {
   }
 
   const { slug } = value;
-  gotoPage(slug);
+  // gotoPage(slug);
+  navigate(withPrefix(slug))
   return slug;
 };
 

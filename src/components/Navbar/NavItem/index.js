@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate, withPrefix } from 'gatsby';
 import ReactGA from 'react-ga';
 
 import Dropdown from './Dropdown';
-import { gotoPage } from '../../../api/url';
+// import { gotoPage } from '../../../api/url';
 
 import './index.scss';
 
@@ -19,7 +19,8 @@ const NavItem = ({ url, name, list }) => {
             category: 'User',
             action: `Click nav-menu: ${name}`,
           });
-          gotoPage(url);
+          // gotoPage(url);
+          navigate(withPrefix(url));
         }}
       >
         {name}
