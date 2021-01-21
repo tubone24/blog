@@ -36,7 +36,7 @@ export default class Contact extends React.Component {
       category: 'User',
       action: 'Submit Contact Form',
     });
-    fetch('/', {
+    fetch('https://getform.io/f/897f187e-876d-42a7-b300-7c235af72e6d', {
       method: 'POST',
       body: this.encode({
         'form-name': form.getAttribute('name'),
@@ -66,8 +66,6 @@ export default class Contact extends React.Component {
               name="contact"
               method="post"
               action="/thanks/"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
               onSubmit={this.handleSubmit}
             >
               {/* The `form-name` hidden field is required to support form submissions without JavaScript */}

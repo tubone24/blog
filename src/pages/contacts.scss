@@ -11,7 +11,7 @@
   box-shadow: 0 1px rgba(255, 255, 255, 0.5);
   background-color: $bg;
   background-image: $bg-backGround-pic;
-  background-size: cover;
+  background-size: contain;
 
   input {
     width: 400px;
