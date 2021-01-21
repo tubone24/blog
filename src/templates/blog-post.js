@@ -115,11 +115,6 @@ export const pageQuery = graphql`
       headerImage
       tags
     }
-    wordCount {
-      sentences
-      words
-    }
-    timeToRead
   }
 
   query BlogPostQuery($index: Int) {

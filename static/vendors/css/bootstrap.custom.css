@@ -68,12 +68,6 @@ abbr[data-original-title] {
   text-decoration-skip-ink: none;
 }
 
-address {
-  margin-bottom: 1rem;
-  font-style: normal;
-  line-height: inherit;
-}
-
 ol,
 ul,
 dl {
@@ -311,17 +305,9 @@ progress {
   -webkit-appearance: button;
 }
 
-output {
-  display: inline-block;
-}
-
 summary {
   display: list-item;
   cursor: pointer;
-}
-
-template {
-  display: none;
 }
 
 [hidden] {
@@ -391,20 +377,6 @@ mark,
 
 .blockquote-footer::before {
   content: "\2014\00A0";
-}
-
-.figure {
-  display: inline-block;
-}
-
-.figure-img {
-  margin-bottom: 0.5rem;
-  line-height: 1;
-}
-
-.figure-caption {
-  font-size: 90%;
-  color: #6c757d;
 }
 
 code {
@@ -513,6 +485,14 @@ pre code {
   flex-grow: 1;
   max-width: 100%;
 }
+
+.col-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+
 
 .col-12 {
   -ms-flex: 0 0 100%;
@@ -810,6 +790,10 @@ textarea.form-control {
   height: auto;
 }
 
+.form-group {
+  margin-bottom: 1rem;
+}
+
 .form-text {
   display: block;
   margin-top: 0.25rem;
@@ -893,6 +877,14 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #0062cc;
   border-color: #005cbf;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,

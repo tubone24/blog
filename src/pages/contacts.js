@@ -57,7 +57,7 @@ export default class Contact extends React.Component {
           }}
         >
           <Sidebar />
-          <div className="col order-2 contactForm">
+          <div className="col-auto order-2 form-group contactForm">
             <h1><span className="icon-envelope" />&nbsp;Contact Form</h1>
             <p><b>Please your Comment here.</b></p>
             <br />
@@ -133,7 +133,7 @@ export default class Contact extends React.Component {
                     className="form-control"
                     placeholder="Something writing..."
                     rows="6"
-                    cols="50"
+                    cols="40"
                     onChange={this.handleChange}
                   />
                 </label>
@@ -141,7 +141,7 @@ export default class Contact extends React.Component {
               <p>
                 File<br />
                 <label className="input-group-btn">
-                  <span className="btn btn-info">
+                  <span className="btn btn-info btn-sm">
                     <span className="icon-file" />
                     &nbsp;Attachment File<input
                       type="file"

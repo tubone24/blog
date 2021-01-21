@@ -24,7 +24,7 @@ const HTML = ({
         href="/vendors/css/bootstrap.min.custom.css"
       />
       <link rel="prefetch" href="/fonts/icomoon.woff2" />
-      <link rel="dns-prefetch" href="//sentry.io/" />
+      <link rel="dns-prefetch" href="//sentry.io" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
@@ -35,7 +35,7 @@ const HTML = ({
         dangerouslySetInnerHTML={{ __html: body }}
       />
       {postBodyComponents}
-      <script src="/vendors/js/jquery-3.5.1.slim.min.js" defer /> */}
+      <script src="/vendors/js/jquery-3.5.1.slim.min.js" defer />
       <script src="/vendors/js/bootstrap.min.js" defer />
       {/* <script src="/vendors/js/bootstrap-native.min.js" defer /> */}
     </body>
