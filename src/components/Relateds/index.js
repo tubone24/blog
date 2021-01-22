@@ -65,8 +65,12 @@ const RelatedPosts = ({ post }) => {
           <h2 className="related-posts-title"><span className="icon-newspaper-o" />&nbsp;Related Posts</h2>
           {relatedPosts.map((relatedPost) => (
             <div className="related-post">
-              {/* eslint-disable-next-line max-len */}
-              <RelatedCard title={relatedPost.node.frontmatter.title} tags={relatedPost.node.frontmatter.tags} date={relatedPost.node.frontmatter.date} headerImage={relatedPost.node.frontmatter.headerImage} url={relatedPost.node.fields.slug} />
+              <RelatedCard
+                title={relatedPost.node.frontmatter.title}
+                tags={relatedPost.node.frontmatter.tags}
+                date={relatedPost.node.frontmatter.date}
+                headerImage={relatedPost.node.frontmatter.headerImage}
+                url={relatedPost.node.fields.slug} />
             </div>
           ))}
         </div>

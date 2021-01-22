@@ -22,18 +22,6 @@
     "pagerDirection": "first",
     "distractionFreeMode": true
   },
-  "License": "by",
-  "friends": [
-    {
-      "href": "https://note.tubone-project24.xyz",
-      "title": "personal note"
-    },
-    {
-      "href": "https://portfolio.tubone-project24.xyz",
-      "title": "portfolio"
-    }
-  ],
-  "iconUrl": "https://i.imgur.com/OR4cBWS.png",
   "gaTrackId": "UA-146792080-1",
   "navbarList": [
     {
@@ -47,22 +35,6 @@
     {
       "href": "/contacts/",
       "title": "Contacts"
-    }
-  ],
-  "redirectors": [
-    {
-      "toPath": "/about/",
-      "fromPath": "/profile/"
-    },
-    {
-      "toPath": "/2019/02/13/my-gear/",
-      "fromPath": "/gear/"
-    }
-  ],
-  "carouselItems": [
-    {
-      "src": "https://i.imgur.com/gw91CuI.jpg",
-      "target": "/stats/"
     }
   ],
   "githubUsername": "tubone24",

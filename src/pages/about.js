@@ -9,7 +9,7 @@ import Heatmap from '../components/Heatmap';
 import { config } from '../../data';
 
 const {
-  url, name, iconUrl,
+  url, name,
 } = config;
 
 const shareURL = `${url}/about`;
@@ -110,10 +110,10 @@ class About extends Component {
     return (
       <div className="row post order-2">
         <Header
-          img="https://i.imgur.com/M795H8A.jpg"
+          img="https://i.imgur.com/6B7WC7D.jpg"
           title="Who is tubone?"
           authorName={name}
-          authorImage={iconUrl}
+          authorImage={true}
           subTitle="20xx/xx/xx"
         />
         <Sidebar />

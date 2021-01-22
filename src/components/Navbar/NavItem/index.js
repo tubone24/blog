@@ -2,14 +2,9 @@ import React from 'react';
 import { Link, navigate, withPrefix } from 'gatsby';
 import ReactGA from 'react-ga';
 
-import Dropdown from './Dropdown';
-// import { gotoPage } from '../../../api/url';
-
 import './index.scss';
 
-const NavItem = ({ url, name, list }) => {
-  if (list.length === 0) {
-    return (
+const NavItem = ({ url, name }) => (
       <Link
         className="nav-btn btn btn-link"
         href={url}
@@ -19,20 +14,11 @@ const NavItem = ({ url, name, list }) => {
             category: 'User',
             action: `Click nav-menu: ${name}`,
           });
-          // gotoPage(url);
           navigate(withPrefix(url));
         }}
       >
         {name}
       </Link>
     );
-  }
-
-  return <Dropdown title={name} list={list} />;
-};
-
-NavItem.defaultProps = {
-  list: [],
-};
 
 export default NavItem;

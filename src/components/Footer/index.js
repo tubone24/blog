@@ -16,7 +16,7 @@ const Footer = () => (
             &nbsp;and&nbsp;
             <ExternalLink
               href="https://reactjs.org/"
-              title={`React ${React.version}`}
+              title="React with PReact"
             />
             .&nbsp;Hosted on&nbsp;
             <ExternalLink href="https://www.netlify.com/" title="Netlify" />

@@ -1,17 +1,6 @@
-import { navigate, withPrefix } from 'gatsby';
 import dayjs from 'dayjs';
 
 const getUrl = ({ createdDate, url }) => `/${dayjs(createdDate).format('YYYY/MM/DD')}/${url}`;
-
-// const gotoPage = async (url, show = false) => {
-//   if (show === true) {
-//     await window.$('.collapse').collapse('show');
-//   } else {
-//     await window.$('.collapse').collapse('hide');
-//   }
-
-//   await navigate(withPrefix(url));
-// };
 
 const parseMarkdownUrl = (date, rawUrl) => `/${date}/${rawUrl.match(/_posts[/](.*).md/)[1]}/`;
 
@@ -65,5 +54,4 @@ export {
   parseUrl,
   handlePreviousPage,
   handleNextPage,
-  // gotoPage,
 };

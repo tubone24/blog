@@ -52,7 +52,6 @@ const Navbar = () => (
             <NavItem
               url={item.href}
               name={item.title}
-              list={item.list}
               key={item.href}
             />
           ))}

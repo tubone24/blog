@@ -42,10 +42,8 @@ class SearchBox extends Component {
     ]).on('autocomplete:selected', (
       event,
       suggestion,
-      // eslint-disable-next-line no-unused-vars
-      dataset,
-      // eslint-disable-next-line no-unused-vars
-      context,
+      _dataset,
+      _context,
     ) => {
       navigate(suggestion.url);
       ReactGA.event({
@@ -71,7 +69,7 @@ class SearchBox extends Component {
             border: 'none',
           }}
         />
-        <small id="searchboxHelp" className="form-text text-muted">Search your interesting by Algolia in this blog.</small>
+        <small id="searchboxHelp" className="form-text text-muted">Search my blog.</small>
       </div>
     );
   }

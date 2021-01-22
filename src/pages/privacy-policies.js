@@ -48,37 +48,32 @@ const html = `
   <p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
 `;
 
-// eslint-disable-next-line react/prefer-stateless-function
-class About extends Component {
-  render() {
-    return (
-      <div className="row post order-2">
-        <Header
-          img="https://i.imgur.com/FyHE8bb.png"
-          title="プライバシーポリシー"
-          authorName={name}
-          authorImage={iconUrl}
-          subTitle="20xx/xx/xx"
-        />
-        <Sidebar />
-        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
-          <Content post={html} />
-        </div>
+const About = () => (
+  <div className="row post order-2">
+    <Header
+      img="https://i.imgur.com/FyHE8bb.png"
+      title="プライバシーポリシー"
+      authorName={name}
+      authorImage={iconUrl}
+      subTitle="20xx/xx/xx"
+    />
+    <Sidebar />
+    <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
+      <Content post={html} />
+    </div>
 
-        <ShareBox url={shareURL} />
+    <ShareBox url={shareURL} />
 
-        <SEO
-          title="プライバシーポリシー"
-          url={shareURL}
-          siteTitleAlt="プライバシーポリシー"
-          isPost
-          description="プライバシーポリシー"
-          tag="privacy policies"
-          image="https://i.imgur.com/FyHE8bb.png"
-        />
-      </div>
-    );
-  }
-}
+    <SEO
+      title="プライバシーポリシー"
+      url={shareURL}
+      siteTitleAlt="プライバシーポリシー"
+      isPost
+      description="プライバシーポリシー"
+      tag="privacy policies"
+      image="https://i.imgur.com/FyHE8bb.png"
+    />
+  </div>
+);
 
 export default About;
