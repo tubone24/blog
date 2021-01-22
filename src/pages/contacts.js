@@ -12,7 +12,7 @@ export default class Contact extends React.Component {
     this.state = {};
   }
 
-  encode = (data) => {
+  static encode(data) {
     const formData = new FormData();
     // eslint-disable-next-line no-restricted-syntax
     for (const key of Object.keys(data)) {
@@ -21,15 +21,15 @@ export default class Contact extends React.Component {
     return formData;
   };
 
-  handleChange = (e) => {
+  handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleAttachment = (e) => {
+  handleAttachment(e) {
     this.setState({ [e.target.name]: e.target.files[0] });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     ReactGA.event({
@@ -38,7 +38,7 @@ export default class Contact extends React.Component {
     });
     fetch('https://getform.io/f/897f187e-876d-42a7-b300-7c235af72e6d', {
       method: 'POST',
-      body: this.encode({
+      body: Contact.encode({
         'form-name': form.getAttribute('name'),
         ...this.state,
       }),

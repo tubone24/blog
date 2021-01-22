@@ -1,7 +1,6 @@
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
 import { graphql, StaticQuery, navigate, withPrefix } from 'gatsby';
 
 // import { gotoPage } from '../../api/url';
@@ -34,21 +33,6 @@ const getTitle = (value) => {
     return null;
   }
   return value.title;
-};
-
-const getTooltipDataAttrs = (value) => {
-  if (!value || !value.date) {
-    return null;
-  }
-
-  if (value.count === 1) {
-    return {
-      'data-tip': `${value.date} has ${value.count} post`,
-    };
-  }
-  return {
-    'data-tip': `${value.date} has ${value.count} posts`,
-  };
 };
 
 const Heatmap = ({ data, minify = false }) => {
