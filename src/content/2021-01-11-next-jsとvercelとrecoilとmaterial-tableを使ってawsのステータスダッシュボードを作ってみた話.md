@@ -236,7 +236,22 @@ import tableIcons from '../components/tableIcons'
 
 いい感じですが後述するRecoilとの相性問題とDatetimeの扱いが微妙なのがツラミでした。
 
-あと、
+あと、微妙に型もおかしく例えば、actionsはactionを複数指定することができるはずですが、型チェックで怒られるので、仕方なくts-ignoreしてます。
+
+あなたが直せばいいじゃんアゼルバイジャンって言われそうですが、めんどくさくなってしまいIssueだけあげてしまいました。申し訳ねぇ...。
+
+<https://github.com/mbrn/material-table/issues/2762>
+
+
+
+
+
+
+
+
+
+
+
 
 ## Recoil
 
