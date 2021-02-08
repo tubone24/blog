@@ -244,15 +244,120 @@ import tableIcons from '../components/tableIcons'
 
 
 
-
-
-
-
-
-
-
-
-
 ## Recoil
 
-Recoilとは
+RecoilとはReactの新しい状態管理ライブラリで、いわゆるReact HooksでGlobal Storeを作ろうというものです。
+
+基本的な使い方はまず、storeとしてatomという共有ステートを作成します。
+
+atomのkeyはプロジェクトで一意にする必要がありますが、今回はそこまで大規模なプロジェクトではないのでawsとかいうクソ名をつけてます。
+
+storeなので、store/aws.ts として格納します。
+
+```typescript
+import { atom } from 'recoil'
+
+const awsState = atom({
+  key: 'aws',
+  default: [
+    {
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      service_name: 'Auto Scaling (N. Virginia)',
+      summary: '[RESOLVED] Example Error',
+      date: '1542849575',
+      status: '1',
+      details: '',
+      description:
+        'The issue has been resolved and the service is operating normally.',
+      service: 'autoscaling',
+      region: 'us-east-1',
+    },
+  ],
+  dangerouslyAllowMutability: true,
+})
+
+export default awsState
+```
+
+次にステートを共有したいコンポーネントのルートにRecoilRootを設置します。
+
+Next.jsの場合、_app.tsxが全ページのルートにあたるのでここに置けばいいですね。
+
+```typescript
+import { AppProps } from 'next/app'
+import Head from 'next/head'
+import { RecoilRoot } from 'recoil'
+import React from 'react'
+
+const App = ({ Component, pageProps }: AppProps) => (
+  <>
+    <RecoilRoot>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>AWS Health Dashboard</title>
+      </Head>
+      <Component {...pageProps} />
+    </RecoilRoot>
+  </>
+)
+
+export default App
+```
+
+そして、利用するときはuseRecoilStateをReact Hooksのように利用するだけです。簡単ですね。
+
+```typescript
+import React, { useState, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
+import awsState from '../store/aws'
+import showGraph from '../store/showGraph'
+import axios from 'axios'
+import dayjs from 'dayjs'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+const Alert = (props: AlertProps) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
+export const Table = (): JSX.Element => {
+  // 20200112: dangerouslyAllowMutabilityでできた
+  const [aws, setAws] = useRecoilState(awsState)
+  const [showG, setShowGraph] = useRecoilState(showGraph)
+  const [loading, setLoading] = useState(true)
+  const [slackBarOpen, setSlackBarOpen] = React.useState(false)
+  const [apiErrorMsg, setApiErrorMsg] = React.useState('')
+  useEffect(() => {
+    getAwsStatus()
+    setLoading(false)
+  }, [])
+  const getAwsStatus = () => {
+    axios
+      .get('/api/aws')
+      .then((resp) => {
+        setAws(resp.data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error(error.response)
+        setSlackBarOpen(true)
+        setApiErrorMsg(error.response.statusText || 'Error')
+        setAws([])
+        setLoading(false)
+      })
+  }
+```
+
+## 思わぬ落とし穴 Material TablesでRecoilが使えない
+
+Recoilのatomは基本値の書き換えはset stateを使うことが求められます。ですが、material tablesはテーブルを作るときにdataにIDの書き込みが発生するようでそのままだと怒られてしまいます。
+
+```
+Cannot add property tableData, object is not extensible
+```
+
+これの解決策はRecoilにstateへの直接的な書き換えを許可することです。こちらはatomのoptionでdangerouslyAllowMutabilityを有効にすることで解決できます。

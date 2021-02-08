@@ -34,12 +34,12 @@ module.exports = {
       },
     },
     'gatsby-plugin-catch-links',
-    {
-      resolve: 'gatsby-plugin-google-tagmanager',
-      options: {
-        id: 'GTM-WK693R6',
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-google-tagmanager',
+    //   options: {
+    //     id: 'GTM-WK693R6',
+    //   },
+    // },
     // {
     //   resolve: 'gatsby-plugin-zopfli',
     //   options: {
