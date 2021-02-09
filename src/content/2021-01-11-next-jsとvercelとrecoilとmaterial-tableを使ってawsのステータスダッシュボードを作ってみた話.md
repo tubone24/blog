@@ -41,7 +41,7 @@ AWSを使ったことのある人ならばわかると思いますが、公式�
 
 ## Next.js
 
-Next.jsでは/api配下に格納したコードについては、サーバーサイドとして振る舞います。
+Next.jsではpages/api配下に格納したコードについては、サーバーサイドとして振る舞います。
 
 クライアントから直接status情報がかかれたJSONを読みとってもよかったのですが、HTMLの面倒なサニタイジング処理やら、値の補完など面倒なことはサーバーサイドに持ってこようということで、
 statusJSONを取得して、フロントに返却するサーバーコードを書いていきます。
@@ -236,12 +236,13 @@ import tableIcons from '../components/tableIcons'
 
 いい感じですが後述するRecoilとの相性問題とDatetimeの扱いが微妙なのがツラミでした。
 
+本当はDate型を渡してあげるとSearchableの際、カレンダーでの絞り込みができるのかなと思ったのですが、こちらがうまくいきませんでした。
+
 あと、微妙に型もおかしく例えば、actionsはactionを複数指定することができるはずですが、型チェックで怒られるので、仕方なくts-ignoreしてます。
 
 あなたが直せばいいじゃんアゼルバイジャンって言われそうですが、めんどくさくなってしまいIssueだけあげてしまいました。申し訳ねぇ...。
 
 <https://github.com/mbrn/material-table/issues/2762>
-
 
 
 ## Recoil
@@ -352,6 +353,10 @@ export const Table = (): JSX.Element => {
   }
 ```
 
+stateの読み込みはgetterから、書き込みはsetterから行います。
+
+React Hooksに慣れていれば簡単ですね。
+
 ## 思わぬ落とし穴 Material TablesでRecoilが使えない
 
 Recoilのatomは基本値の書き換えはset stateを使うことが求められます。ですが、material tablesはテーブルを作るときにdataにIDの書き込みが発生するようでそのままだと怒られてしまいます。
@@ -363,10 +368,9 @@ Cannot add property tableData, object is not extensible
 これの解決策はRecoilにstateへの直接的な書き換えを許可することです。こちらはatomのoptionでdangerouslyAllowMutabilityを有効にすることで解決できます。
 
 
-
 コード
 
-これがわかるのに4時間くらい使っちまいました。
+これがわかるのに半日くらい使っちまいました。
 
 ## Chart.js
 
@@ -380,11 +384,17 @@ Cannot add property tableData, object is not extensible
 
 コード
 
+どうでもいい実装ですが、各グラフを一覧で見れる画面を用意し、実際のグラフは遷移先で表示するようにしてます。
+
+画像
+
 ## Vercelにデプロイ
 
-もうここはほとんど書くことがないのですが、Next.jsで作ったアプリケーションはVercelで二三設定するだけで
+さて、実装ができたので後はVercelにあげるだけです。
 
-簡単にデプロイ出来てしまいます。これはすごい。
+もうここはほとんど書くことがないのですが、Next.jsで作ったアプリケーションはVercelでレポジトリと使っているフレームワークを設定するだけで簡単にデプロイ出来てしまいます。
+
+これはすごい。
 
 ## 完成
 
@@ -396,9 +406,13 @@ Cannot add property tableData, object is not extensible
 
 また右上のグラフボタンを押すことで色々な切り口の可視化を行うことができます。
 
-リンク
+<https://aws-health-dashboard.vercel.app/>
 
+できれば使う場面にならないことを祈りつつ、ご活用いただければとおもいます。
 
+## まとめ
+
+食わず嫌いでやらなかったNext.js+Recoilをやってみましたが、楽しく実装ができました。
 
 
 
