@@ -357,6 +357,7 @@ stateの読み込みはgetterから、書き込みはsetterから行います。
 
 React Hooksに慣れていれば簡単ですね。
 
+
 ## 思わぬ落とし穴 Material TablesでRecoilが使えない
 
 Recoilのatomは基本値の書き換えはset stateを使うことが求められます。ですが、material tablesはテーブルを作るときにdataにIDの書き込みが発生するようでそのままだと怒られてしまいます。
@@ -368,7 +369,20 @@ Cannot add property tableData, object is not extensible
 これの解決策はRecoilにstateへの直接的な書き換えを許可することです。こちらはatomのoptionでdangerouslyAllowMutabilityを有効にすることで解決できます。
 
 
-コード
+
+```
+import { atom } from 'recoil'
+
+const awsState = atom({
+  key: 'aws',
+  default: [
+    {
+    },
+  ],
+  dangerouslyAllowMutability: true,
+})
+```
+
 
 これがわかるのに半日くらい使っちまいました。
 
@@ -382,11 +396,50 @@ Cannot add property tableData, object is not extensible
 
 次のようにデータを渡すだけできれいめなグラフを書いてくれます。
 
-コード
+
+```
+import { useRecoilValue } from 'recoil'
+import awsState from '../store/aws'
+import React from 'react'
+import {
+  regionNameMapping,
+} from './const'
+import BarGraph from './barGraph'
+
+export const AlertPerRegion = (): JSX.Element => {
+  const aws = useRecoilValue(awsState)
+  const labels = Array.from(
+    new Set(aws.map((data) => regionNameMapping[data.region]))
+  )
+  const data = []
+  for (const r of labels) {
+    data.push(
+      aws
+        .map((data) => regionNameMapping[data.region])
+        .reduce((total, x) => {
+          return x === r ? total + 1 : total
+        }, 0)
+    )
+  }
+  return (
+    <div className="container">
+      <BarGraph labels={labels} data={data} title="Alert per region" />
+    </div>
+  )
+}
+```
+
+
 
 どうでもいい実装ですが、各グラフを一覧で見れる画面を用意し、実際のグラフは遷移先で表示するようにしてます。
 
-画像
+
+
+![img](https://i.imgur.com/tfnpq4w.png)
+
+![img](https://i.imgur.com/hpJ70fR.png)
+
+
 
 ## Vercelにデプロイ
 
@@ -395,6 +448,7 @@ Cannot add property tableData, object is not extensible
 もうここはほとんど書くことがないのですが、Next.jsで作ったアプリケーションはVercelでレポジトリと使っているフレームワークを設定するだけで簡単にデプロイ出来てしまいます。
 
 これはすごい。
+
 
 ## 完成
 
@@ -409,6 +463,7 @@ Cannot add property tableData, object is not extensible
 <https://aws-health-dashboard.vercel.app/>
 
 できれば使う場面にならないことを祈りつつ、ご活用いただければとおもいます。
+
 
 ## まとめ
 
