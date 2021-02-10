@@ -370,7 +370,7 @@ Cannot add property tableData, object is not extensible
 
 
 
-```
+```typescript
 import { atom } from 'recoil'
 
 const awsState = atom({
@@ -397,7 +397,7 @@ const awsState = atom({
 次のようにデータを渡すだけできれいめなグラフを書いてくれます。
 
 
-```
+```typescript
 import { useRecoilValue } from 'recoil'
 import awsState from '../store/aws'
 import React from 'react'
