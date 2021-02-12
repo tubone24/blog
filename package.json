@@ -13,7 +13,7 @@
     "@sentry/react": "^6.1.0",
     "@sentry/tracing": "^5.29.2",
     "@weknow/gatsby-remark-codepen": "^0.1.0",
-    "algoliasearch": "^4.8.5",
+    "algoliasearch": "^3.35.1",
     "autocomplete.js": "^0.37.1",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
