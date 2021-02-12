@@ -1,6 +1,6 @@
-name: DeployToNetlifyPRD
+name: DeployToNetlifyPreview
 on:
-  push:
+  pull_request:
     branches:
       - master
 
@@ -28,7 +28,20 @@ jobs:
           npm install
           npm run build
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --prod --dir=./public
+        run: npx netlify-cli deploy --dir=./public > cli.txt
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Cat cli.txt
+        run: |
+          cat cli.txt
+          sed -i -z 's/\n/\\n/g' cli.txt
+      - name: Post Netlify CLI Comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.comments_url }}
+        run: |
+          curl -X POST \
+               -H "Authorization: token ${GITHUB_TOKEN}" \
+               -d "{\"body\": \"$(cat cli.txt)\"}" \
+               ${URL}
