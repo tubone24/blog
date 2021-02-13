@@ -31,8 +31,8 @@ class BlogPost extends Component {
   constructor(props) {
     super(props);
     this.data = this.props.data;
-    this.repHtml = this.props.repHtml;
-    this.words = this.props.words;
+    this.repHtml = this.props.pageContext.repHtml;
+    this.words = this.props.pageContext.words;
   }
 
   componentDidMount() {

@@ -85,9 +85,6 @@ module.exports = ({ actions, graphql }) => {
       const repHtml = html.replace(/<img[\s|\S]src=/g, '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=')
       const words = repHtml.replace(/<code[\s, \S]*?<\/code>/g, '').replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '')
         .replace(/&/, '').length
-      console.log("aaaaaa!!!!!")
-      console.log(repHtml)
-      console.log(words)
 
       const component = templateKey || 'blog-post';
       createPage({
