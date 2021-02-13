@@ -31,6 +31,8 @@ class BlogPost extends Component {
   constructor(props) {
     super(props);
     this.data = this.props.data;
+    this.repHtml = this.props.pageContext.repHtml;
+    this.words = this.props.pageContext.words;
   }
 
   componentDidMount() {
@@ -56,7 +58,7 @@ class BlogPost extends Component {
     const { node } = this.data.content.edges[0];
 
     const {
-      html, frontmatter, fields, excerpt,
+      frontmatter, fields, excerpt,
     } = node;
 
     const { slug } = fields;
@@ -66,7 +68,6 @@ class BlogPost extends Component {
     } = frontmatter;
 
     const shareURL = `https://blog.tubone-project24.xyz/${slug}`;
-
     return (
       <div className="row post order-2">
         <Header
@@ -78,8 +79,8 @@ class BlogPost extends Component {
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
-          <TimeToRead html={html} />
-          <Content post={html} />
+          <TimeToRead words={this.words} />
+          <Content post={this.repHtml} />
           <div id="gitalk-container" />
           <RelatedPosts post={node} />
         </div>

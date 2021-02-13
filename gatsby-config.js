@@ -171,29 +171,29 @@ module.exports = {
           //     quality: 80,
           //   },
           // },
-          {
-            resolve: 'gatsby-remark-audio',
-            options: {
-              preload: 'auto',
-              loop: false,
-              controls: true,
-              muted: false,
-              autoplay: false,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-video',
-            options: {
-              width: 'auto',
-              height: 'auto',
-              preload: 'auto',
-              muted: true,
-              autoplay: true,
-              playsinline: true,
-              controls: true,
-              loop: true,
-            },
-          },
+          // {
+          //   resolve: 'gatsby-remark-audio',
+          //   options: {
+          //     preload: 'auto',
+          //     loop: false,
+          //     controls: true,
+          //     muted: false,
+          //     autoplay: false,
+          //   },
+          // },
+          // {
+          //   resolve: 'gatsby-remark-video',
+          //   options: {
+          //     width: 'auto',
+          //     height: 'auto',
+          //     preload: 'auto',
+          //     muted: true,
+          //     autoplay: true,
+          //     playsinline: true,
+          //     controls: true,
+          //     loop: true,
+          //   },
+          // },
           'gatsby-remark-numbered-footnotes',
           {
             resolve: 'gatsby-plugin-sentry',
