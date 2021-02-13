@@ -2,7 +2,6 @@
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
-import { config } from './data';
 
 import 'prismjs/themes/prism-solarizedlight.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
@@ -15,11 +14,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-const {
-  url, gaTrackId, gaOptimizeId,
-} = config;
-
-const isLocalDevelopment = () => window && window.location && window.location.origin !== url;
+const isLocalDevelopment = () => window && window.location && window.location.origin !== 'https://blog.tubone-project24.xyz';
 
 // window.addEventListener('lazybeforeunveil', (e) => {
 //   const bg = e.target.getAttribute('data-bg');
@@ -29,23 +24,22 @@ const isLocalDevelopment = () => window && window.location && window.location.or
 // });
 
 if (isLocalDevelopment() === false) {
-  ReactGA.initialize(gaTrackId);
+  ReactGA.initialize('UA-146792080-1');
 
   // Google Optimizer
-  if (gaOptimizeId) {
-    ReactGA.ga('require', gaOptimizeId);
-  }
+  // if (gaOptimizeId) {
+  //   ReactGA.ga('require', gaOptimizeId);
+  // }
 }
 
 export const onRouteUpdate = (state) => {
   if (isLocalDevelopment() !== true) {
     ReactGA.pageview(state.location.pathname);
-  } else {
-    console.log('isLocalDevelopment is true, so ReactGA is not activated');
   }
 };
 
 export const onServiceWorkerUpdateReady = () => {
+  window.location.reload();
   // if (reloadCount <= 1) {
   //   window.location.reload(true);
   //   reloadCount++;

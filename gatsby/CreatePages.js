@@ -63,7 +63,7 @@ module.exports = ({ actions, graphql }) => {
     });
 
     edges.forEach(({ node }, index) => {
-      const { id, frontmatter, fields } = node;
+      const { id, frontmatter, fields, html } = node;
       const {
         slug, tags, templateKey, year, month,
       } = frontmatter;
@@ -81,6 +81,8 @@ module.exports = ({ actions, graphql }) => {
       years.add(year);
       yearMonths.add(`${year}/${month}`);
 
+      const repHtml = html.replace(/<img[\s|\S]src=/g, '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=')
+
       const component = templateKey || 'blog-post';
       createPage({
         path: $path,
@@ -90,6 +92,7 @@ module.exports = ({ actions, graphql }) => {
         context: {
           id,
           index,
+          repHtml,
         },
       });
     });

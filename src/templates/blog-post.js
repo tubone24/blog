@@ -31,6 +31,7 @@ class BlogPost extends Component {
   constructor(props) {
     super(props);
     this.data = this.props.data;
+    this.repHtml = this.props.repHtml
   }
 
   componentDidMount() {
@@ -66,7 +67,7 @@ class BlogPost extends Component {
     } = frontmatter;
 
     const shareURL = `https://blog.tubone-project24.xyz/${slug}`;
-
+    console.log(this.repHtml)
     return (
       <div className="row post order-2">
         <Header
