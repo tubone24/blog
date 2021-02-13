@@ -13,6 +13,7 @@ module.exports = ({ actions, graphql }) => {
         edges {
           node {
             id
+            html
             fields {
               slug
             }
