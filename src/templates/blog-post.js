@@ -31,7 +31,8 @@ class BlogPost extends Component {
   constructor(props) {
     super(props);
     this.data = this.props.data;
-    this.repHtml = this.props.repHtml
+    this.repHtml = this.props.repHtml;
+    this.words = this.props.words;
   }
 
   componentDidMount() {
@@ -78,7 +79,7 @@ class BlogPost extends Component {
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
-          <TimeToRead html={this.repHtml} />
+          <TimeToRead words={this.words} />
           <Content post={this.repHtml} />
           <div id="gitalk-container" />
           <RelatedPosts post={node} />

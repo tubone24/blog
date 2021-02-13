@@ -83,6 +83,8 @@ module.exports = ({ actions, graphql }) => {
       yearMonths.add(`${year}/${month}`);
 
       const repHtml = html.toString().replace(/<img[\s|\S]src=/g, '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=')
+      const words = html.toString().replace(/<code[\s, \S]*?<\/code>/g, '').replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '')
+        .replace(/&/, '').length
 
       const component = templateKey || 'blog-post';
       createPage({
@@ -94,6 +96,7 @@ module.exports = ({ actions, graphql }) => {
           id,
           index,
           repHtml,
+          words,
         },
       });
     });
