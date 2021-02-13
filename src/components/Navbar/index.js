@@ -3,12 +3,8 @@ import ReactGA from 'react-ga';
 
 import NavItem from './NavItem';
 import ExternalLink from '../ExternalLink';
-// import { gotoPage } from '../../api/url';
 import './index.scss';
-import { config } from '../../../data';
 import { navigate, withPrefix } from 'gatsby';
-
-const { navbarList = [] } = config;
 
 const NavbarClass = [
   'navbar',
@@ -48,13 +44,21 @@ const Navbar = () => (
         id="navbarSupportedContent"
       >
         <ul className="navbar-nav mr-2">
-          {navbarList.map((item) => (
-            <NavItem
-              url={item.href}
-              name={item.title}
-              key={item.href}
-            />
-          ))}
+          <NavItem
+            url="/tags/"
+            name="Tags"
+            key="/tags/"
+          />
+          <NavItem
+            url="/about/"
+            name="About"
+            key="/about/"
+          />
+          <NavItem
+            url="/contacts/"
+            name="Contacts"
+            key="/contacts/"
+          />
           <ExternalLink className="nav-btn btn btn-link" title="Portfolio" href="https://portfolio.tubone-project24.xyz" />
           <ExternalLink className="nav-btn btn btn-link" title="Note" href="https://note.tubone-project24.xyz" />
           <ExternalLink className="nav-btn btn btn-link" title="FM" href="https://tubone24.github.io/boyakifm/" />

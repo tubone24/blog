@@ -1,7 +1,4 @@
 import dayjs from 'dayjs';
-import { config } from '../../data';
-
-const { maxPostsInPage } = config;
 
 // Prevent webpack window problem
 const isBrowser = () => typeof window !== 'undefined';
@@ -22,7 +19,7 @@ const getCurrentPage = () => {
 
 // const getPath = () => (isBrowser() ? window.location.pathname : '');
 
-const getMaxPages = (amount) => Math.ceil(amount / maxPostsInPage);
+const getMaxPages = (amount) => Math.ceil(amount / 10);
 
 // const getPages = (amount) => new Array(amount).fill().map((_, index) => `/page/${index + 1}`);
 

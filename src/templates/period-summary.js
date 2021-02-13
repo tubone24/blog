@@ -3,7 +3,7 @@ import { graphql, Link, withPrefix } from 'gatsby';
 import SEO from '../components/SEO';
 import Sidebar from '../components/Sidebar';
 
-import './period-summary.scss'
+import './period-summary.scss';
 
 const PeriodSummary = ({ data, pageContext }) => {
   const { displayMonth, displayYear } = pageContext;
@@ -33,10 +33,10 @@ const PeriodSummary = ({ data, pageContext }) => {
           </h2>
           <ul>
             {edges.map(({ node }) => {
-              const { title, url, yyyymmdd } = node.frontmatter;
+              const { title: nodeTitle, url: nodeUrl, yyyymmdd } = node.frontmatter;
               return (
-                <li key={url}>
-                  {yyyymmdd}&nbsp;&nbsp;<Link to={withPrefix(url)} href={withPrefix(url)} title={title}>{title}</Link>
+                <li key={nodeUrl}>
+                  {yyyymmdd}&nbsp;&nbsp;<Link to={withPrefix(nodeUrl)} href={withPrefix(nodeUrl)} title={nodeTitle}>{nodeTitle}</Link>
                 </li>
               );
             })}

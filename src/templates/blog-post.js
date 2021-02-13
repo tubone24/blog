@@ -17,15 +17,9 @@ import Header from '../components/Header';
 import ShareBox from '../components/ShareBox';
 import TimeToRead from '../components/TimeToRead';
 
-import { config } from '../../data';
-
 // Styles
 import './blog-post.scss';
 import RelatedPosts from '../components/Relateds';
-
-const {
-  url, name, iconUrl, gitalk,
-} = config;
 
 // const bgWhite = { padding: '10px 30px', background: 'white' };
 
@@ -45,7 +39,11 @@ class BlogPost extends Component {
     const clientId = process.env.GATSBY_GITHUB_CLIENT_ID;
     const clientSecret = process.env.GATSBY_GITHUB_CLIENT_SECRET;
     const GitTalkInstance = new Gitalk({
-      ...gitalk,
+      repo: 'blog',
+      admin: ['tubone24'],
+      owner: 'tubone24',
+      pagerDirection: 'first',
+      distractionFreeMode: true,
       clientID: clientId,
       clientSecret,
       title,
@@ -67,15 +65,15 @@ class BlogPost extends Component {
       date, headerImage, title, tags,
     } = frontmatter;
 
-    const shareURL = `${url}/${slug}`;
+    const shareURL = `https://blog.tubone-project24.xyz/${slug}`;
 
     return (
       <div className="row post order-2">
         <Header
           img={headerImage || 'https://i.imgur.com/M795H8A.jpg'}
           title={title}
-          authorName={name}
-          authorImage={iconUrl}
+          authorName="tubone"
+          authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
           subTitle={parseDate(date)}
         />
         <Sidebar />

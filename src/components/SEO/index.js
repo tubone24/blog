@@ -1,8 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import config from '../../../data';
-
 const schemaOrgJSONLD = ({
   url,
   title,
@@ -123,7 +121,7 @@ const SEO = ({
 );
 
 SEO.defaultProps = {
-  title: config.title,
+  title: 'tubone BOYAKI',
 };
 
 export default SEO;

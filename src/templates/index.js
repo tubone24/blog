@@ -52,7 +52,7 @@ const Page = ({ pageContext, location }) => {
       const observer = lozad('.lozad', {
         loaded(el) {
           el.classList.add('loaded');
-        }
+        },
       });
       observer.observe();
     }

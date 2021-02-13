@@ -1,17 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Content from '../components/Content';
 import ShareBox from '../components/ShareBox';
 import SEO from '../components/SEO';
-
-import { config } from '../../data';
-
-const {
-  url, name, iconUrl,
-} = config;
-
-const shareURL = `${url}/privacy-policies`;
 
 const html = `
   <h1>プライバシーポリシー</h1>
@@ -53,8 +45,8 @@ const About = () => (
     <Header
       img="https://i.imgur.com/FyHE8bb.png"
       title="プライバシーポリシー"
-      authorName={name}
-      authorImage={iconUrl}
+      authorName="tubone"
+      authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
       subTitle="20xx/xx/xx"
     />
     <Sidebar />
@@ -62,11 +54,11 @@ const About = () => (
       <Content post={html} />
     </div>
 
-    <ShareBox url={shareURL} />
+    <ShareBox url="https://blog.tubone-project24.xyz/privacy-policies" />
 
     <SEO
       title="プライバシーポリシー"
-      url={shareURL}
+      url="https://blog.tubone-project24.xyz/privacy-policies"
       siteTitleAlt="プライバシーポリシー"
       isPost
       description="プライバシーポリシー"

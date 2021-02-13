@@ -1,3 +1,4 @@
 static/vendors/*
+static/firebase-messaging-sw.js
 public/*
 node_modules/*

@@ -6,14 +6,6 @@ import ShareBox from '../components/ShareBox';
 import SEO from '../components/SEO';
 import Heatmap from '../components/Heatmap';
 
-import { config } from '../../data';
-
-const {
-  url, name,
-} = config;
-
-const shareURL = `${url}/about`;
-
 const html = `
   <h1>Who am I?</h1>
   <img src="https://i.imgur.com/VUti8s3m.png" alt="tubone" title="tubone">
@@ -112,8 +104,8 @@ class About extends Component {
         <Header
           img="https://i.imgur.com/6B7WC7D.jpg"
           title="Who is tubone?"
-          authorName={name}
-          authorImage={true}
+          authorName="tubone"
+          authorImage
           subTitle="20xx/xx/xx"
         />
         <Sidebar />
@@ -122,17 +114,18 @@ class About extends Component {
           <div style={{
             padding: 30,
             background: 'white',
-          }}>
+          }}
+          >
             <h3>更新頻度</h3>
             <Heatmap />
           </div>
         </div>
 
-        <ShareBox url={shareURL} />
+        <ShareBox url="https://blog.tubone-project24.xyz/about" />
 
         <SEO
           title="Who is tubone?"
-          url={shareURL}
+          url="https://blog.tubone-project24.xyz/about"
           siteTitleAlt="tubone BOYAKI Profile"
           isPost
           description="About tubone Profile"
