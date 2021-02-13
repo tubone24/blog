@@ -65,7 +65,6 @@ module.exports = ({ actions, graphql }) => {
 
     edges.forEach(({ node }, index) => {
       const { id, frontmatter, fields, html } = node;
-      console.log(node)
       const {
         slug, tags, templateKey, year, month,
       } = frontmatter;
