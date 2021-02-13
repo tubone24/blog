@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withPrefix } from 'gatsby';
 import ExternalLink from '../ExternalLink';
-import { config } from '../../../data';
 
 import './index.scss';
 
@@ -15,8 +14,8 @@ const Footer = () => (
             <ExternalLink href="https://www.gatsbyjs.org/" title="GatsbyJS" />
             &nbsp;and&nbsp;
             <ExternalLink
-              href="https://reactjs.org/"
-              title="React with PReact"
+              href="https://preactjs.com/"
+              title="PReact"
             />
             .&nbsp;Hosted on&nbsp;
             <ExternalLink href="https://www.netlify.com/" title="Netlify" />
@@ -27,7 +26,7 @@ const Footer = () => (
             Copyright&nbsp;
             <ExternalLink href="https://portfolio.tubone-project24.xyz/" title="&copy;tubone24" />
             &nbsp;
-            <b><Link to={withPrefix('/')} href={withPrefix('/')} title={config.title}>{config.title}</Link>&nbsp;</b>
+            <b><Link to={withPrefix('/')} href={withPrefix('/')} title="tubone BOYAKI">tubone BOYAKI</Link>&nbsp;</b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
             <Link to={withPrefix('/privacy-policies')} href={withPrefix('/privacy-policies')} title="Privacy Policies">Privacy Policies</Link>

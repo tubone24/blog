@@ -9,7 +9,6 @@ import './tags.scss';
 
 // eslint-disable-next-line react/prop-types
 const TagPage = ({ data }) => {
-
   const mapping = {};
   data.allMarkdownRemark.edges.forEach(({ node }) => {
     node.frontmatter.tags.forEach((name) => {

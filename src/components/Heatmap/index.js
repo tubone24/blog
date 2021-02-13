@@ -1,7 +1,9 @@
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import React from 'react';
-import { graphql, StaticQuery, navigate, withPrefix } from 'gatsby';
+import {
+  graphql, StaticQuery, navigate, withPrefix,
+} from 'gatsby';
 
 // import { gotoPage } from '../../api/url';
 
@@ -24,7 +26,7 @@ const getSlug = (value) => {
 
   const { slug } = value;
   // gotoPage(slug);
-  navigate(withPrefix(slug))
+  navigate(withPrefix(slug));
   return slug;
 };
 

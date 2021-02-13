@@ -42,8 +42,6 @@ class SearchBox extends Component {
     ]).on('autocomplete:selected', (
       event,
       suggestion,
-      _dataset,
-      _context,
     ) => {
       navigate(suggestion.url);
       ReactGA.event({
@@ -52,7 +50,6 @@ class SearchBox extends Component {
         action: `Click Searchbox item: ${event._args[0].path}`,
       });
       // eslint-disable-next-line no-underscore-dangle
-      // gotoPage(event._args[0].path);
       navigate(withPrefix(event._args[0].path));
     });
   }

@@ -19,15 +19,15 @@ export default class Contact extends React.Component {
       formData.append(key, data[key]);
     }
     return formData;
-  };
+  }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  };
+  }
 
   handleAttachment(e) {
     this.setState({ [e.target.name]: e.target.files[0] });
-  };
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -45,7 +45,7 @@ export default class Contact extends React.Component {
     })
       .then(() => navigateTo(form.getAttribute('action')))
       .catch((error) => alert(error));
-  };
+  }
 
   render() {
     return (

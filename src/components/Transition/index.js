@@ -5,9 +5,7 @@ import {
   Transition as ReactTransition,
 } from 'react-transition-group';
 
-import { config } from '../../../data';
 // This variable will be responsible for our animation duration
-const { transitionDelay = 100 } = config;
 
 const getTransitionStyles = {
   entering: {
@@ -15,11 +13,11 @@ const getTransitionStyles = {
     opacity: 0,
   },
   entered: {
-    transition: `opacity ${transitionDelay}ms ease-in-out`,
+    transition: 'opacity 100ms ease-in-out',
     opacity: 1,
   },
   exiting: {
-    transition: `all ${transitionDelay}ms ease-in-out`,
+    transition: 'all 100ms ease-in-out',
     opacity: 0,
   },
 };

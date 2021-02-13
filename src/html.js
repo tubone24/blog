@@ -36,12 +36,12 @@ const HTML = ({
       />
       {postBodyComponents}
       <script src="/vendors/js/jquery-3.5.1.slim.custom.min.js" defer />
-      {/*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"*/}
-      {/*        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"*/}
-      {/*        crossOrigin="anonymous"*/}
-      {/*        defer />*/}
+      {/* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" */}
+      {/*        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" */}
+      {/*        crossOrigin="anonymous" */}
+      {/*        defer /> */}
       <script src="/vendors/js/bootstrap.custom.min.js" defer />
-      {/* <script src="/vendors/js/bootstrap-native.js" />*/}
+      {/* <script src="/vendors/js/bootstrap-native.js" /> */}
     </body>
   </html>
 );

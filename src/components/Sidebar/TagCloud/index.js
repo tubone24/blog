@@ -31,4 +31,4 @@ const TagCloud = ({ allPosts }) => {
   );
 };
 
-export default TagCloud
+export default TagCloud;
