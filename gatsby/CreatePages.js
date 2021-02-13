@@ -64,6 +64,7 @@ module.exports = ({ actions, graphql }) => {
 
     edges.forEach(({ node }, index) => {
       const { id, frontmatter, fields, html } = node;
+      console.log(node)
       const {
         slug, tags, templateKey, year, month,
       } = frontmatter;
@@ -81,7 +82,7 @@ module.exports = ({ actions, graphql }) => {
       years.add(year);
       yearMonths.add(`${year}/${month}`);
 
-      const repHtml = html.toString().replace(/<img[\s|\S]src=/g, '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=')
+      const repHtml = html.replace(/<img[\s|\S]src=/g, '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=')
 
       const component = templateKey || 'blog-post';
       createPage({
