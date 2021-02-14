@@ -53,9 +53,6 @@ const RelatedPosts = ({ post }) => {
             if (edge.node.frontmatter.title === post.frontmatter.title) {
               return false;
             }
-            if (edge.node.frontmatter.tags === null) {
-                return false;
-            }
             for (let i = 0; i < edge.node.frontmatter.tags.length; i++) {
               return edge.node.frontmatter.tags[i] === post.frontmatter.tags[i];
             }

@@ -8,15 +8,13 @@ const TagCloud = ({ allPosts }) => {
   const mapping = {};
 
   allPosts.forEach(({ node }) => {
-    if (node.frontmatter.tags !== null) {
-      node.frontmatter.tags.forEach((name) => {
+    node.frontmatter.tags.forEach((name) => {
       if (mapping[name]) {
         mapping[name] += 1;
       } else {
         mapping[name] = 1;
       }
     });
-    }
   });
 
   const tags = Array.from(Object.keys(mapping)).sort(
