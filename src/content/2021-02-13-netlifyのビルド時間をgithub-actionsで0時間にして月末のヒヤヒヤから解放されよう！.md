@@ -26,7 +26,7 @@ templateKey: blog-post
 
 *今月のビルド時間は残り○○分*
 
-画像
+![img](https://i.imgur.com/TSm24w0.png)
 
 NetlifyはGitHubのレポジトリと連携して、フロントのビルドを実行した上で、デプロイするという超便利機能があるのですが、このビルドを回すのに時間の制約があり、
 
@@ -34,6 +34,8 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 300分あれば大丈夫そう、とそう思う気もしなくなくなくなくなくもないですが、複数レポジトリにわたってNetlifyを使っていたり、Gatsby.jsで画像をたくさん使っていてsharpのリサイズに時間がかかったり、dependabotで定期的にPRが出てpreview deployが発生したりすると
 案外ぎりぎりだったりします。
+
+![img](https://i.imgur.com/y7ixbEG.png)
 
 なので、私のような貧民は月末になると、Netlifyのビルド時間が気になってこのブログの記事を書かなくなったり、サイトリファクターのペースが落ちてしまいます。
 
@@ -46,17 +48,17 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 なんか工務店のCMみたいな表現になってしまいました。
 
-中川家のYouTube
+`youtube:https://www.youtube.com/embed/DHH1Fhi9qcs`
 
 ## Netlifyのビルド時やっていることを洗い出して代替する
 
 基本的にNetlifyがビルド時やってることは、例えばGatsby.jsであれば、gatsby buildコマンドを実行し、特定のディレクトリーに配置されたビルド済みJSをデプロイする動きなので、
 それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理を実行してるパターンもあります。
 
+私の場合、JSやイメージを最適化してくれるAsset optimizationとFormタグに属性をつければ勝手にFormを作ってくれるForm detectionの二つが設定されていましたのでそれぞれまず無効化します。
 
+![img](https://i.imgur.com/ytjbJQA.png)
 
-
-
-
+![img](https://i.imgur.com/LfL70Br.png)
 
 
