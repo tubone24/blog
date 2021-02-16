@@ -61,4 +61,32 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 ![img](https://i.imgur.com/LfL70Br.png)
 
+こちら、Netlifyで実施してくれなくなりますので、こちらで実装し直す必要があります。
+
+html miniferの話
+
+imugrの話
+
+lozadの話
+
+## getform.io
+
+Getform.ioはフォームのバックエンドを提供するすばらしいサービスです。便利なインテグレーションを使うには有料版が必要ですが、
+フォームに投稿されたらメール飛ばす、くらいのことであれば無料でできます。
+
+これで、NetlifyのForm detectionを置き換えていきます。
+
+まず、新しいフォームを作ると、FormのAction先URLが発行できます。
+
+作り方はこちらを参照のこと
+
+そのまま、FormタグのactionにこちらのURLを設定してもいいのですが、GetFormは無料版だと、Form投稿後のThanksページが設定できません。
+
+なので、せっかくReactを使ってるので、裏側で上記URLをfetchしながら、actionsでは自分の指定したThanks URLに飛ばすように指定しましょう。
+
+コード
+
+ReactではFormで、actionのほか、onSubmitを別に指定することができます。
+
+ただし、onSubmitが押されたタイミングで、Formの入力項目をPostで渡さないといけないので、formのchangeEventごとに、stateとして結果を保存するようにします。
 
