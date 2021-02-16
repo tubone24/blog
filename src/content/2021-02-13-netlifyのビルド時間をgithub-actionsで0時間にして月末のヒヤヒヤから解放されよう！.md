@@ -90,3 +90,8 @@ ReactではFormで、actionのほか、onSubmitを別に指定することがで
 
 ただし、onSubmitが押されたタイミングで、Formの入力項目をPostで渡さないといけないので、formのchangeEventごとに、stateとして結果を保存するようにします。
 
+コード
+
+また、onSubmitを使ってしまうと、Form規定のactionでは飛ばなくなるので自前でnavigateを使ってPost処理が終わったら飛ぶようにします。
+
+
