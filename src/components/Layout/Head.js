@@ -24,9 +24,9 @@ const Head = () => (
     />
     <link
       rel="alternate"
-      type="application/rdf+xml"
+      type="application/atom+xml"
       title="tubone BOYAKI"
-      href="https://blog.tubone-project24.xyz/rss.xml"
+      href="/atom.xml"
     />
     <meta
       name="google-site-verification"
