@@ -22,12 +22,6 @@ const Head = () => (
       rel="shortcut icon"
       href="/assets/usericon.jpeg"
     />
-    <link
-      rel="alternate"
-      type="application/atom+xml"
-      title="tubone BOYAKI"
-      href="/atom.xml"
-    />
     <meta
       name="google-site-verification"
       content="--LalgZ9bPi0TeRovPWh1jMxI1TuCs0dESPlyDtR_EQ"
