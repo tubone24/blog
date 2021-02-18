@@ -25,12 +25,6 @@ const HTML = ({
       />
       <link rel="prefetch" href="/fonts/icomoon.woff2" />
       <link rel="dns-prefetch" href="//sentry.io" />
-//       <link
-//         rel="alternate"
-//         type="application/rdf+xml"
-//         title="tubone BOYAKI"
-//         href="https://blog.tubone-project24.xyz/rss.xml"
-//       />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
