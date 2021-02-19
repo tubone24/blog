@@ -108,7 +108,6 @@ module.exports = {
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
-              author: 'tubone24 <tubo.yyyuuu@gmail.com>',
             //   custom_elements: [{
             //     'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '')
             //       .substr(0, 150),
@@ -139,12 +138,8 @@ module.exports = {
             title: 'tubone BOYAKI',
             feed_url: 'https://blog.tubone-project24.xyz/rss.xml',
             site_url: 'https://blog.tubone-project24.xyz',
-            image_url: 'https://blog.tubone-project24.xyz/assets/avater.png',
             docs: 'http://github.com/dylang/node-rss',
-            managingEditor: 'tubone24 <tubo.yyyuuu@gmail.com>',
-            webMaster: 'tubone24 <tubo.yyyuuu@gmail.com>',
             language: 'ja',
-            copyright: `tubone BOYAKI 2017-${new Date().getFullYear()}`
           },
         ],
       },
