@@ -139,7 +139,6 @@ module.exports = {
             feed_url: 'https://blog.tubone-project24.xyz/rss.xml',
             site_url: 'https://blog.tubone-project24.xyz',
             docs: 'http://github.com/dylang/node-rss',
-            language: 'ja',
           },
         ],
       },
