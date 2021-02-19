@@ -102,9 +102,9 @@ module.exports = {
           {
             // eslint-disable-next-line max-len
             serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
-              // ...edge.node.frontmatter,
+               ...edge.node.frontmatter,
               title: edge.node.frontmatter.title,
-              description: edge.node.excerpt.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, ''),
+              description: edge.node.excerpt,
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
@@ -127,7 +127,7 @@ module.exports = {
                       fields { slug }
                       frontmatter {
                         title
-                        date
+                        date(formatString: "ddd, DD MMM YYYY, h:mm:ss +0900")
                       }
                     }
                   }
@@ -136,9 +136,9 @@ module.exports = {
             `,
             output: '/rss.xml',
             title: 'tubone BOYAKI',
-            feed_url: "https://blog.tubone-project24.xyz/rss.xml",
-            site_url: "https://blog.tubone-project24.xyz",
-            docs: "http://github.com/dylang/node-rss",
+            feed_url: 'https://blog.tubone-project24.xyz/rss.xml',
+            site_url: 'https://blog.tubone-project24.xyz',
+            docs: 'http://github.com/dylang/node-rss',
           },
         ],
       },
