@@ -102,7 +102,17 @@ imgurというサービスがあります。主にRedditとかGifをあげるた
 
 画像URLの後ろに画像サイズに合わせたキーワードを入れることで実現できます。
 
-URLの例。
+例えばこちらのURLの画像を
+
+```
+https://i.imgur.com/Wfz9G0B.png
+```
+
+160x160にリサイズするには後ろにbをくっつけます。
+
+```
+https://i.imgur.com/Wfz9G0Bb.png
+```
 
 これで、画像最適化も完了です。
 
@@ -121,13 +131,223 @@ Formの作り方はこちらを参照のこと
 
 なので、せっかくReactを使ってるので、裏側で上記URLをfetchしながら、actionsでは自分の指定したThanks URLに飛ばすように指定しましょう。
 
-コード
+まずは、formにonSubmitを設定します。
+
+```typescript
+        <form
+              name="contact"
+              method="post"
+              action="/thanks/"
+              onSubmit={this.handleSubmit}
+            >
+                <label>
+                  <span className="icon-user" />&nbsp;Your name<br />
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    maxLength="30"
+                    minLength="2"
+                    required
+                    placeholder="Enter your name"
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </p>
+```
+
+そして、別途にonSubmitで発火する関数を定義します。
+
+```typescript
+  handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch('https://getform.io/f/xxxxxxxxxxxxxxxxxxxxxxxxx', {
+      method: 'POST',
+      body: Contact.encode({
+        'form-name': form.getAttribute('name'),
+        ...this.state,
+      }),
+    })
+  }
+```
 
 ReactではFormで、actionのほか、onSubmitを別に指定することができます。こちらにSubmitが押された際の挙動を記載する形となります。
 
 ただし、onSubmitが押されたタイミングで、Formの入力項目をPostで渡さないといけないので、formのchangeEventごとに、stateとして結果を保存するようにします。
 
-コード
+```typescript
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleAttachment(e) {
+    this.setState({ [e.target.name]: e.target.files[0] });
+  }
+
+....
+
+                <label>
+                  <span className="icon-user" />&nbsp;Your name<br />
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    maxLength="30"
+                    minLength="2"
+                    required
+                    placeholder="Enter your name"
+                    onChange={this.handleChange}
+                  />
+
+                </label>
+              </p>
+```
 
 また、onSubmitを使ってしまうと、Form規定のactionでは飛ばなくなるので自前でGatsbyのnavigateを使ってPost処理が終わったらThanksページに飛ぶようにします。
 
+```
+  handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch('https://getform.io/f/897f187e-876d-42a7-b300-7c235af72e6d', {
+      method: 'POST',
+      body: Contact.encode({
+        'form-name': form.getAttribute('name'),
+        ...this.state,
+      }),
+    })
+      .then(() => navigateTo(form.getAttribute('action')))
+      .catch((error) => alert(error));
+  }
+```
+
+これでGetForm無料版でも自前のThanksページを作ることができます。
+
+## GitHub Actionsでビルドとデプロイ
+
+ここまで来たらあとはGitHub Actionsでビルドとデプロイを行います。
+
+masterブランチへのPRでPreviewデプロイ、masterへのコミットで本番デプロイをするように2つactionsを作ります。
+
+まずはPreviewデプロイ
+
+```yaml
+name: DeployToNetlifyPreview
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install and build
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+        run: |
+          npm install
+          npm run build
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --dir=./public > cli.txt
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Cat cli.txt
+        run: |
+          cat cli.txt
+          sed -i -z 's/\n/\\n/g' cli.txt
+      - name: Post Netlify CLI Comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.comments_url }}
+        run: |
+          curl -X POST \
+               -H "Authorization: token ${GITHUB_TOKEN}" \
+               -d "{\"body\": \"$(cat cli.txt)\"}" \
+               ${URL}
+```
+
+node setupやnpm install, buildはいつも通りです。デプロイにはnetlify-cliを使います。
+
+ちょっと特徴として、netlify-cliでデプロイが成功すると、デプロイURLが標準出力に出ますので、それをいったんtextに書き出し、
+PRコメントにも送るようにしています。
+
+次に本番へのデプロイです。
+
+```yaml
+name: DeployToNetlifyPRD
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install and build
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+        run: |
+          npm install
+          npm run build
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --prod --dir=./public
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+```
+
+ほとんど同じですが、netlify-cliでdeployコマンドに --prodオプションを入れるだけです。
+
+## 結論
+
+これで、Netlifyのビルド時間は0になり、精神的に安心できるようになりました。
+
+![img](https://i.imgur.com/ugdUr9l.png)
+
+リファクタや記事の執筆もはかどっていいですね！！
