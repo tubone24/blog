@@ -102,8 +102,8 @@ module.exports = {
           {
             // eslint-disable-next-line max-len
             serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
-              // ...edge.node.frontmatter,
-              title: edge.node.frontmatter.title,
+               ...edge.node.frontmatter,
+              title: edge.node.frontmatter.title.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, ''),
               description: edge.node.excerpt.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, ''),
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
@@ -127,7 +127,7 @@ module.exports = {
                       fields { slug }
                       frontmatter {
                         title
-                        date
+                        date(formatString: "ddd, DD MMM YYYY, h:mm:ss +0900")
                       }
                     }
                   }
