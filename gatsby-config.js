@@ -101,23 +101,23 @@ module.exports = {
         feeds: [
           {
             // eslint-disable-next-line max-len
-            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
-               ...edge.node.frontmatter,
-              title: edge.node.frontmatter.title.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, ''),
-              description: edge.node.excerpt.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, ''),
-              date: edge.node.frontmatter.date,
-              url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
-              guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
-            //   custom_elements: [{
-            //     'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '')
-            //       .substr(0, 150),
-            //   }],
-            })),
+            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => {
+                return Object.assign({}, edge.node.frontmatter, {
+                    title: edge.node.frontmatter.title,
+                    description: edge.node.excerpt,
+                    date: edge.node.frontmatter.date,
+                    url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
+                    guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
+                    //   custom_elements: [{
+                    //     'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '')
+                    //       .substr(0, 150),
+                    //   }],
+                })}),
             query: `
               {
                 allMarkdownRemark(
                   sort: { order: DESC, fields: [frontmatter___date] },
-                  limit: 5,
+                  limit: 20,
                 ) {
                   edges {
                     node {
