@@ -3,7 +3,7 @@ import { Link, withPrefix } from 'gatsby';
 import Sidebar from '../components/Sidebar';
 import SEO from '../components/SEO';
 
-export default () => (
+const Thanks = () => (
   <div className="container">
     <div
       className="row"
@@ -29,3 +29,5 @@ export default () => (
     />
   </div>
 );
+
+export default Thanks
