@@ -300,7 +300,7 @@ module.exports = {
         useShortDoctype: false,
         removeEmptyElements: false,
         removeComments: true,
-        removeAttributeQuotes: true,
+        removeAttributeQuotes: false,
         minifyCSS: true,
         minifyJS: true,
       },
