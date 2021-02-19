@@ -131,4 +131,3 @@ ReactではFormで、actionのほか、onSubmitを別に指定することがで
 
 また、onSubmitを使ってしまうと、Form規定のactionでは飛ばなくなるので自前でGatsbyのnavigateを使ってPost処理が終わったらThanksページに飛ぶようにします。
 
-
