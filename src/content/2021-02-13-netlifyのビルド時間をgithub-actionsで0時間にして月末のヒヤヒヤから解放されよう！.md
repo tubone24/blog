@@ -63,7 +63,31 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 こちら、Netlifyで実施してくれなくなりますので、こちらで実装し直す必要があります。
 
-html miniferの話
+## gatsby-plugin-minify
+
+Asset optimizationのうち、JSやCSSのminiferはgatsby-plugin-minifyを使うことでhtmlやJS、CSSをminifyできます。
+
+```
+npm install gatsby-plugin-minify
+```
+
+使い方はgatsby-config.jsに次のように設定すればできます。
+
+```
+    {
+      resolve: 'gatsby-plugin-minify',
+      options: {
+        caseSensitive: false,
+        collapseBooleanAttributes: true,
+        useShortDoctype: false,
+        removeEmptyElements: false,
+        removeComments: true,
+        removeAttributeQuotes: false,
+        minifyCSS: true,
+        minifyJS: true,
+      },
+    },
+```
 
 imugrの話
 
