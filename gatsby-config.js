@@ -103,7 +103,7 @@ module.exports = {
             // eslint-disable-next-line max-len
             serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
                ...edge.node.frontmatter,
-              title: edge.node.frontmatter.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\s/g, '&nbsp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'),
+              title: edge.node.frontmatter.title,
               description: edge.node.excerpt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\s/g, '&nbsp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'),
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
