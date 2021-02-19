@@ -89,7 +89,15 @@ npm install gatsby-plugin-minify
     },
 ```
 
-imugrの話
+minifyCSSとminifyJSをtrueにすることにより、html以外もminifyされます。また、裏側は[html-minifier](https://github.com/kangax/html-minifier)をgatsby-node.jsでpostbuildで全掛けしているだけなので、細かいオプションはhtml-minifierで設定できる感じです。
+
+ちなみに、気を付けないといけないのがremoveAttributeQuotesのオプションをfalseにすること。これをtrueにすると、HTMLタグ内のアトリビュートにダブルクオートが入らなくなりちょっとファイルが軽くなるのですが、[berss.com](https://berss.com/feed/Find.aspx)のようにサイトのRSSリンクを取得するようなシステムでうまく読み込めなくなってしまい、サイト更新が最悪通知できなくなってしまう現象が発生しました。
+
+RSSのリンクとしてalternateなLinkを仕込んでいる人は要注意です。
+
+## imgurを使うことで、画像ホスティングとリサイズを同時にやっちゃう
+
+
 
 lozadの話
 
