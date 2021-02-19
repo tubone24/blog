@@ -97,9 +97,14 @@ RSSのリンクとしてalternateなLinkを仕込んでいる人は要注意で�
 
 ## imgurを使うことで、画像ホスティングとリサイズを同時にやっちゃう
 
+imgurというサービスがあります。主にRedditとかGifをあげるための画像ホスティングサービスなのですが、
+こちらを使うことで簡単に画像のリサイズとホスティングを実現できるため、このブログではimgurを使ってます。
 
+画像URLの後ろに画像サイズに合わせたキーワードを入れることで実現できます。
 
-lozadの話
+URLの例。
+
+これで、画像最適化も完了です。
 
 ## getform.io
 
@@ -110,7 +115,7 @@ Getform.ioはフォームのバックエンドを提供するすばらしいサ�
 
 まず、新しいフォームを作ると、FormのAction先URLが発行できます。
 
-作り方はこちらを参照のこと
+Formの作り方はこちらを参照のこと
 
 そのまま、FormタグのactionにこちらのURLを設定してもいいのですが、GetFormは無料版だと、Form投稿後のThanksページが設定できません。
 
@@ -118,12 +123,12 @@ Getform.ioはフォームのバックエンドを提供するすばらしいサ�
 
 コード
 
-ReactではFormで、actionのほか、onSubmitを別に指定することができます。
+ReactではFormで、actionのほか、onSubmitを別に指定することができます。こちらにSubmitが押された際の挙動を記載する形となります。
 
 ただし、onSubmitが押されたタイミングで、Formの入力項目をPostで渡さないといけないので、formのchangeEventごとに、stateとして結果を保存するようにします。
 
 コード
 
-また、onSubmitを使ってしまうと、Form規定のactionでは飛ばなくなるので自前でnavigateを使ってPost処理が終わったら飛ぶようにします。
+また、onSubmitを使ってしまうと、Form規定のactionでは飛ばなくなるので自前でGatsbyのnavigateを使ってPost処理が終わったらThanksページに飛ぶようにします。
 
 
