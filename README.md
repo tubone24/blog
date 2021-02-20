@@ -36,6 +36,12 @@ Use the button below to code with the blog system:
 
 [![Edit blog](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/tubone24/blog/tree/master/)
 
+## Lighthouse
+
+Every 0:00UTC, Run and report Lighthouse.
+
+<https://tubone24.github.io/blog/report.html>
+
 
 ## Deploy at Netlify
 
