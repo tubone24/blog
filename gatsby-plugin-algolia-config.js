@@ -33,7 +33,7 @@ const queries = [
       }) => ({
         title,
         description: excerpt,
-        allBody: html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+        allText: html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
         path: slug,
       }),
     ),
