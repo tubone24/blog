@@ -8,7 +8,7 @@ tags:
   - JavaScript
   - Netligy
   - Gatsby.js
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/fJTJeKD.png
 templateKey: blog-post
 ---
 
