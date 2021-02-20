@@ -13,6 +13,7 @@ const queries = [
               html
               frontmatter {
                 title
+                tags
               }
               fields {
                 slug
@@ -27,13 +28,14 @@ const queries = [
         node: {
           excerpt,
           html,
-          frontmatter: { title },
+          frontmatter: { title, tags },
           fields: { slug },
         },
       }) => ({
         title,
         description: excerpt,
-        allText: html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').slice(0, 5000),
+        allText: html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').slice(0, 3000),
+        tags: tags.join(),
         path: slug,
       }),
     ),
