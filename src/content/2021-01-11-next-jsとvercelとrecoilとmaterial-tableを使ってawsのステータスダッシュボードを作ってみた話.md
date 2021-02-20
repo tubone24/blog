@@ -376,7 +376,8 @@ import { atom } from 'recoil'
 const awsState = atom({
   key: 'aws',
   default: [
-    {
+    {
+
     },
   ],
   dangerouslyAllowMutability: true,
@@ -406,7 +407,8 @@ import {
 } from './const'
 import BarGraph from './barGraph'
 
-export const AlertPerRegion = (): JSX.Element => {
+export const AlertPerRegion = (): JSX.Element => {
+
   const aws = useRecoilValue(awsState)
   const labels = Array.from(
     new Set(aws.map((data) => regionNameMapping[data.region]))
@@ -470,8 +472,13 @@ export const AlertPerRegion = (): JSX.Element => {
 食わず嫌いでやらなかったNext.js+Recoilをやってみましたが、楽しく実装ができました。
 
 
+## 2021/02/20追記
 
+2021/02/19～20にかけて起きた[AWS EC2障害](https://status.aws.amazon.com/rss/ec2-ap-northeast-1.rss)ですが、本ダッシュボードでは更新がされませんでした。
 
+どうやら、data.jsonはRSSとは違い、同期的に更新されないようです。
+
+大変ご迷惑をおかけしました。改めて、改修しRSS更新にも対応できるように頑張ります。
 
 
 
