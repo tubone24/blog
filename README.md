@@ -14,15 +14,21 @@ This is tubone BOYAKI, I mean tubone's Blog by Gatsby and Netlify.
 
 [https://blog.tubone-project24.xyz/](https://blog.tubone-project24.xyz/)
 
-![Home Page](https://raw.githubusercontent.com/tubone24/blog/master/docs/images/boyaki.png)
+![Home Page](https://i.imgur.com/o4itWu0.png)
 
 ## How deploy?
 
 Run at local, execute commands below, and access [http://localhost:8000](http://localhost:8000)
+
 ```
 $ npm install
 $ npm start
 ```
+
+## CI/CD
+
+[![DeployToNetlifyPreview](https://github.com/tubone24/blog/workflows/DeployToNetlifyPreview/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPreview)
+[![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
 
 ## Code with Codesandbox
 
