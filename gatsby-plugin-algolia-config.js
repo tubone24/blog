@@ -10,6 +10,7 @@ const queries = [
           edges {
             node {
               excerpt
+              html
               frontmatter {
                 title
               }
@@ -25,12 +26,14 @@ const queries = [
       ({
         node: {
           excerpt,
+          html,
           frontmatter: { title },
           fields: { slug },
         },
       }) => ({
         title,
         description: excerpt,
+        allBody: html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
         path: slug,
       }),
     ),
