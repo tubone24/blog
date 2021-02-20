@@ -39,7 +39,7 @@ export const onRouteUpdate = (state) => {
 };
 
 export const onServiceWorkerUpdateReady = () => {
-  window.location.reload();
+  window.location.reload(true);
   // if (reloadCount <= 1) {
   //   window.location.reload(true);
   //   reloadCount++;
