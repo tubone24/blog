@@ -22,7 +22,7 @@ templateKey: blog-post
 
 ## Netlify
 
-みなさんもご存じ超便利ありがたサービスNetlifyですが、無料で使ってる貧民には毎月とある悩みがでてきます。
+みなさんもご存じ超便利ありがたサービスNetlifyですが、**無料で使ってる貧民**には毎月とある悩みがでてきます。
 
 *今月のビルド時間は残り○○分*
 
@@ -30,17 +30,23 @@ templateKey: blog-post
 
 NetlifyはGitHubのレポジトリと連携して、フロントのビルドを実行した上で、デプロイするという超便利機能があるのですが、このビルドを回すのに時間の制約があり、
 
-無料民だと月300分となっております。(それ以上は月xドル課金すれば問題なく使えます。課金も経験済み)
+無料民だと月300分となっております。(それ以上はPro版月19ドル課金すれば問題なく使えます。課金も経験済み)
 
-300分あれば大丈夫そう、とそう思う気もしなくなくなくなくなくもないですが、複数レポジトリにわたってNetlifyを使っていたり、Gatsby.jsで画像をたくさん使っていてsharpのリサイズに時間がかかったり、dependabotで定期的にPRが出てpreview deployが発生したりすると
+300分あれば大丈夫そう、とそう思う気もしなくなくもないですが、
+
+![img](https://i.imgur.com/7gtZWX5.jpg)
+
+複数レポジトリにわたってNetlifyを使っていたり、Gatsby.jsで画像をたくさん使っていて**Sharp**の画像リサイズに時間がかかったり、**Dependabot**で定期的にPRが出てPreview deployが発生したりすると
 案外ぎりぎりだったりします。
 
 ![img](https://i.imgur.com/y7ixbEG.png)
 
-なので、私のような貧民は月末になると、Netlifyのビルド時間が気になってこのブログの記事を書かなくなったり、サイトリファクターのペースが落ちてしまいます。
+なので、私のような貧民は月末になると、Netlifyのビルド時間が気になって**このブログの記事を書かなくなったり**、**サイトリファクターのペースが落ちて**しまいます。
 
 特にブログ更新は顕著で、例えば今書いている記事も通勤の電車の中でスマホから書いているわけなので、細かくコミットを打って保存したいのですが、コミットを打ってプッシュしてしまうと、ビルドが走ることになるので、WIPでのコミットが億劫になり、結果的に家のようなまとめてプッシュできるような作業スペースがある場所でないと、
 ブログを書かなくなってしまいました。
+
+せっかく[Netlify CMS化](https://blog.tubone-project24.xyz/2019-09-01-netlify-and-gatsby#cms%E3%81%AE%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)した意味がないですね。
 
 ## この悩みGitHub Actionsにお任せください
 
@@ -48,14 +54,16 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 なんか工務店のCMみたいな表現になってしまいました。
 
-`youtube:https://www.youtube.com/embed/DHH1Fhi9qcs`
+![ojisan](https://i.imgur.com/JlvUJ4zl.png)
 
-## Netlifyのビルド時やっていることを洗い出して代替する
+## Netlifyのビルド時やっていることを洗い出して自前でやってみる
 
-基本的にNetlifyがビルド時やってることは、例えばGatsby.jsであれば、gatsby buildコマンドを実行し、特定のディレクトリーに配置されたビルド済みJSをデプロイする動きなので、
-それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理を実行してるパターンもあります。
+基本的にNetlifyがビルド時やってることは、例えばGatsby.jsであれば、gatsby buildコマンドを実行し、特定のディレクトリー(大概は./public)に配置されたビルド済みJSをデプロイする動きなので、
+それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理(PostProcess)を実行してるパターンもあります。
 
-私の場合、JSやイメージを最適化してくれるAsset optimizationとFormタグに属性をつければ勝手にFormを作ってくれるForm detectionの二つが設定されていましたのでそれぞれまず無効化します。
+私の場合、JSやイメージを最適化してくれる**Asset optimization**とFormタグに属性をつければ勝手にFormを作ってくれる**Form detection**の二つが設定されていましたのでそれぞれまず無効化します。
+
+Form detectionの解説は[こちら](https://blog.tubone-project24.xyz/2019/09/30/netlify-form)を参照ください。
 
 ![img](https://i.imgur.com/ytjbJQA.png)
 
@@ -65,13 +73,15 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 ## gatsby-plugin-minify
 
-Asset optimizationのうち、JSやCSSのminiferはgatsby-plugin-minifyを使うことでhtmlやJS、CSSをminifyできます。
+Asset optimizationのうち、JSやCSSのminiferは[gatsby-plugin-minify](https://www.gatsbyjs.com/plugins/gatsby-plugin-minify/)を使うことでhtmlやJS、CSSをminifyできます。
+
+インストールはいつも通りNPM(yarn)から
 
 ```
 npm install gatsby-plugin-minify
 ```
 
-使い方はgatsby-config.jsに次のように設定すればできます。
+使い方はgatsby-config.jsのpluginsに次のように設定すればできます。
 
 ```
     {
@@ -89,16 +99,21 @@ npm install gatsby-plugin-minify
     },
 ```
 
-minifyCSSとminifyJSをtrueにすることにより、html以外もminifyされます。また、裏側は[html-minifier](https://github.com/kangax/html-minifier)をgatsby-node.jsでpostbuildで全掛けしているだけなので、細かいオプションはhtml-minifierで設定できる感じです。
+minifyCSSとminifyJSをtrueにすることにより、CSSについては[clean-css](https://github.com/jakubpawlowicz/clean-css)、JSについては[UglifyJS](https://github.com/mishoo/UglifyJS)を使って一緒にminifyされます。また、gatsby-plugin-minifyの裏側は[html-minifier](https://github.com/kangax/html-minifier)をgatsby-node.jsでpostbuildで全掛けしているだけなので、細かいオプションは[html-minifier](https://github.com/kangax/html-minifier#options-quick-reference)で設定できる感じです。
 
-ちなみに、気を付けないといけないのがremoveAttributeQuotesのオプションをfalseにすること。これをtrueにすると、HTMLタグ内のアトリビュートにダブルクオートが入らなくなりちょっとファイルが軽くなるのですが、[berss.com](https://berss.com/feed/Find.aspx)のようにサイトのRSSリンクを取得するようなシステムでうまく読み込めなくなってしまい、サイト更新が最悪通知できなくなってしまう現象が発生しました。
+ちなみに、気を付けないといけないのが**removeAttributeQuotes**のオプションをfalseにすること。
 
-RSSのリンクとしてalternateなLinkを仕込んでいる人は要注意です。
+これをtrueにすると、HTMLタグ内のアトリビュートにダブルクオートが入らなくなりちょっとファイルが軽くなるのですが、[berss.com](https://berss.com/feed/Find.aspx)のようにサイトのRSSリンクを取得するようなシステムでうまく読み込めなくなってしまい、サイト更新が最悪通知できなくなってしまう現象が発生しました。
+
+これで1日使ってしまった...。
+
+RSSのリンクをページのLinkとして仕込んでいる人は要注意です。
 
 ## imgurを使うことで、画像ホスティングとリサイズを同時にやっちゃう
 
-imgurというサービスがあります。主にRedditとかGifをあげるための画像ホスティングサービスなのですが、
-こちらを使うことで簡単に画像のリサイズとホスティングを実現できるため、このブログではimgurを使ってます。
+[imgur](https://imgur.com/)というサービスがあります。
+
+主にRedditとかGifをあげるための画像ホスティングサービスとして有名なのですが、こちらを使うことで簡単に画像のリサイズとホスティングを実現できるため、このブログではimgurを使ってます。
 
 画像URLの後ろに画像サイズに合わせたキーワードを入れることで実現できます。
 
@@ -108,7 +123,7 @@ imgurというサービスがあります。主にRedditとかGifをあげるた
 https://i.imgur.com/Wfz9G0B.png
 ```
 
-160x160にリサイズするには後ろにbをくっつけます。
+160x160にリサイズするには後ろに**b**をくっつけます。
 
 ```
 https://i.imgur.com/Wfz9G0Bb.png
@@ -118,22 +133,42 @@ https://i.imgur.com/Wfz9G0Bb.png
 
 ## getform.io
 
-Getform.ioはフォームのバックエンドを提供するすばらしいサービスです。便利なインテグレーションを使うには有料版が必要ですが、
-フォームに投稿されたらメール飛ばす、くらいのことであれば無料でできます。
+[Getform.io](https://getform.io/)はフォームのバックエンドを提供するすばらしいサービスです。
+
+便利なインテグレーションを使うには有料版が必要ですが、フォームに投稿されたら指定したメールアドレスに通知メール飛ばす、くらいのことであれば無料でできます。
 
 これで、NetlifyのForm detectionを置き換えていきます。
 
 まず、新しいフォームを作ると、FormのAction先URLが発行できます。
 
-Formの作り方はこちらを参照のこと
+Formの作り方は下記のブログにわかりやすく纏めてあったので参照いただければと思います。
 
-そのまま、FormタグのactionにこちらのURLを設定してもいいのですが、GetFormは無料版だと、Form投稿後のThanksページが設定できません。
+<https://blog.nakamu.life/posts/getform-io>
 
-なので、せっかくReactを使ってるので、裏側で上記URLをfetchしながら、actionsでは自分の指定したThanks URLに飛ばすように指定しましょう。
+さて、Formができたらチュートリアルに沿ってそのまま、FormタグのactionにこちらのURLを設定してもいいのですが、GetFormは無料版だと、**Form投稿後のThanksページが設定**できません。
 
-まずは、formにonSubmitを設定します。
+```html
+<!--
+* Add your getform endpoint into "action" attribute
+* Set a unique "name" field
+* Start accepting submissions
+-->
+<form action="{getform-endpoint}" method="POST">
 
-```typescript
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <button type="submit">Send</button>
+
+</form>
+```
+
+![img](https://i.imgur.com/sT5vhFE.png)
+
+まぁこれでも十分なのですが、せっかく**React**を使ってるので、裏側でgetform.ioのURLをPOST fetchしながら、actionsで定義した自分のThanks URLに飛ばすように指定しましょう。
+
+まずは、Formに**onSubmit**を設定します。
+
+```typescript{numberLines: 5}
         <form
               name="contact"
               method="post"
