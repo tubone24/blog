@@ -28,7 +28,7 @@ const Navbar = () => (
           navigate(withPrefix('/'));
         }}
       >
-        <img src="/assets/logo3.svg" alt="Japanese IT Developer Blog tubone BOYAKI" />
+        <img src="/assets/logo3.svg" alt="Japanese IT Developer Blog tubone BOYAKI" width=135 height=45 />
       </button>
       <button
         className="navbar-toggler"
