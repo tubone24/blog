@@ -168,7 +168,7 @@ Formの作り方は下記のブログにわかりやすく纏めてあったの�
 
 まずは、Formに**onSubmit**を設定します。
 
-```typescript{numberLines: 5}
+```typescript{numberLines: 1}{5}
         <form
               name="contact"
               method="post"
@@ -207,11 +207,24 @@ Formの作り方は下記のブログにわかりやすく纏めてあったの�
   }
 ```
 
-ReactではFormで、actionのほか、onSubmitを別に指定することができます。こちらにSubmitが押された際の挙動を記載する形となります。
+Formの送信なので、fetchでは[FormData](https://developer.mozilla.org/ja/docs/Web/API/FormData)に要素をappendしたものを送信しないといけません。
 
-ただし、onSubmitが押されたタイミングで、Formの入力項目をPostで渡さないといけないので、formのchangeEventごとに、stateとして結果を保存するようにします。
+```
+  static encode(data) {
+    const formData = new FormData();
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key of Object.keys(data)) {
+      formData.append(key, data[key]);
+    }
+    return formData;
+  }
+```
 
-```typescript
+繰り返しになりますがReactではFormで、actionのほか、onSubmitを関数としてすることができます。
+
+ただし、onSubmitが押されたタイミングで、Formの入力項目をPOST Fetchで渡さないといけないので、Formの入力で発生するchangeEventごとに、Formの値をstateとして保存しておくようにします。
+
+```typescript{numberLines: 1}{1-7,21}
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -219,8 +232,8 @@ ReactではFormで、actionのほか、onSubmitを別に指定することがで
   handleAttachment(e) {
     this.setState({ [e.target.name]: e.target.files[0] });
   }
-
-....
+  
+  (中略)
 
                 <label>
                   <span className="icon-user" />&nbsp;Your name<br />
@@ -241,7 +254,7 @@ ReactではFormで、actionのほか、onSubmitを別に指定することがで
 
 また、onSubmitを使ってしまうと、Form規定のactionでは飛ばなくなるので自前でGatsbyのnavigateを使ってPost処理が終わったらThanksページに飛ぶようにします。
 
-```
+```typescript{numberLines: 1}{11-12}
   handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -259,9 +272,11 @@ ReactではFormで、actionのほか、onSubmitを別に指定することがで
 
 これでGetForm無料版でも自前のThanksページを作ることができます。
 
+![img](https://i.imgur.com/gumRkbF.png)
+
 ## GitHub Actionsでビルドとデプロイ
 
-ここまで来たらあとはGitHub Actionsでビルドとデプロイを行います。
+ここまで来たらあとはGitHub Actionsでビルドとデプロイを行うだけです。
 
 masterブランチへのPRでPreviewデプロイ、masterへのコミットで本番デプロイをするように2つactionsを作ります。
 
@@ -325,10 +340,42 @@ jobs:
                ${URL}
 ```
 
-node setupやnpm install, buildはいつも通りです。デプロイにはnetlify-cliを使います。
+node setupやnpm install, buildはいつも通りです。
 
-ちょっと特徴として、netlify-cliでデプロイが成功すると、デプロイURLが標準出力に出ますので、それをいったんtextに書き出し、
-PRコメントにも送るようにしています。
+GitHub ActionsではSecretを指定することができますので、Algolia searchやFaunaDBのAPIキーはシークレットとしてビルド時の環境変数で渡してます。
+
+ちなみに、環境変数で**GATSBY_XXXX**としておくと、ビルドされたJSにも環境変数が入る形になります。（JSから環境変数を使う場合はこれを忘れないこと。）これ結構詰まるポイント。
+
+デプロイには[netlify-cli](https://docs.netlify.com/cli/get-started/)を使います。
+
+必要な環境変数はサイトIDとAUTH TOKENです。
+
+ちょっと特徴として、netlify-cliでデプロイが成功すると、**デプロイURLが標準出力**に出ますので、それをいったん適当なtextファイルに書き出し、
+
+PRコメントにもURLを送るようにしています。
+
+GitHub Actionsの素晴らしいところは、GITHUB TOKENについては、特に設定しなくてもsecrets.GITHUB_TOKENで取り出すことができますので簡単にPRコメントに送信できます。
+
+```yaml
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --dir=./public > cli.txt
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Cat cli.txt
+        run: |
+          cat cli.txt
+          sed -i -z 's/\n/\\n/g' cli.txt
+      - name: Post Netlify CLI Comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.comments_url }}
+        run: |
+          curl -X POST \
+               -H "Authorization: token ${GITHUB_TOKEN}" \
+               -d "{\"body\": \"$(cat cli.txt)\"}" \
+               ${URL}
+```
 
 次に本番へのデプロイです。
 
@@ -377,7 +424,15 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 ```
 
-ほとんど同じですが、netlify-cliでdeployコマンドに --prodオプションを入れるだけです。
+ほとんど同じですが、netlify-cliでdeployコマンドに --prodオプションを入れることで、本番環境へデプロイされます。
+
+```yaml
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --prod --dir=./public
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+```
 
 ## 結論
 
