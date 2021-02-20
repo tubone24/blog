@@ -1,11 +1,8 @@
 name: lighthouse
 
 on:
-  push:
-    branches:
-      - master
-#   schedule:
-#     - cron: '23 23 * * *'
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   test:
