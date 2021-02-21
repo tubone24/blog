@@ -5,7 +5,7 @@ exports.handler = (event, context) => {
   const headers = {
     accept: 'application/json',
   };
-  axios.post('https://github.com/login/oauth/access_token', body, {headers: headers}).then((response) => {
+  return axios.post('https://github.com/login/oauth/access_token', body, {headers: headers}).then((response) => {
     console.log(response.data)
     return {
       statusCode: 200,
