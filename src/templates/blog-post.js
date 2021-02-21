@@ -40,7 +40,6 @@ class BlogPost extends Component {
     const clientSecret = process.env.GATSBY_GITHUB_CLIENT_SECRET;
     const GitTalkInstance = new Gitalk({
       repo: 'blog',
-      admin: ['tubone24'],
       owner: 'tubone24',
       pagerDirection: 'first',
       distractionFreeMode: true,
