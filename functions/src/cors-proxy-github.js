@@ -9,7 +9,7 @@ exports.handler = (event, context) => {
     console.log(response.data)
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data),
+      body: JSON.stringify({access_token: response.data.access_token, token_type: response.data.token_type, scope: response.data.scope}),
     };
   }).catch((error) => {
     return {
