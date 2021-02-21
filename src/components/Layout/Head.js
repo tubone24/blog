@@ -3,9 +3,6 @@ import { Helmet } from 'react-helmet';
 
 const Head = () => (
   <Helmet defaultTitle="tubone BOYAKI" titleTemplate="%s | tubone BOYAKI">
-    <meta charSet="utf-8" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="tubone's BOYAKI is the developer blog by tubone who is Japanese IT Developer" />
     <meta name="keyword" content="blog, tubone, IT, Developer, Python, GitHub, Nuxt.js" />
     <meta name="theme-color" content="#33b546" />
