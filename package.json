@@ -36,7 +36,7 @@
     "gatsby-plugin-layout": "^1.5.0",
     "gatsby-plugin-lodash": "^3.9.0",
     "gatsby-plugin-manifest": "^2.7.0",
-    "gatsby-plugin-minify": "^0.2.0",
+    "gatsby-plugin-minify": "^0.3.0",
     "gatsby-plugin-minify-classnames": "^0.2.0",
     "gatsby-plugin-netlify": "^2.6.0",
     "gatsby-plugin-nprogress": "^2.5.0",
