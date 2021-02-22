@@ -40,12 +40,12 @@ module.exports = {
     //     id: 'GTM-WK693R6',
     //   },
     // },
-    // {
-    //   resolve: 'gatsby-plugin-zopfli',
-    //   options: {
-    //     extensions: ['css', 'html', 'js', 'svg'],
-    //   },
-    // },
+    {
+      resolve: 'gatsby-plugin-zopfli',
+      options: {
+        extensions: ['css', 'html', 'js', 'svg'],
+      },
+    },
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
