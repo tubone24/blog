@@ -297,7 +297,7 @@ module.exports = {
       options: {
         caseSensitive: false,
         collapseBooleanAttributes: true,
-        useShortDoctype: false,
+        useShortDoctype: true,
         removeEmptyElements: false,
         removeComments: true,
         removeAttributeQuotes: false,
