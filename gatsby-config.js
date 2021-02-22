@@ -30,7 +30,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-minify-classnames',
       options: {
-        develop: false,
+        enable: isNetlifyProduction,
       },
     },
     'gatsby-plugin-catch-links',
