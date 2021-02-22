@@ -7,13 +7,9 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 
-const imageStyleLazy = (headerImage) => (
-  `${parseImgur(headerImage, 'large')}`
-);
-
 const CardHeader = ({ url, image }) => (
   <Link to={url} href={url}>
-    <div className="wrapper lozad" data-background-image={imageStyleLazy(image)} />
+    <div className="wrapper lozad" data-background-image={parseImgur(image, 'large')} />
   </Link>
 );
 
