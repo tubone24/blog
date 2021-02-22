@@ -40,12 +40,12 @@ module.exports = {
     //     id: 'GTM-WK693R6',
     //   },
     // },
-    // {
-    //   resolve: 'gatsby-plugin-zopfli',
-    //   options: {
-    //     extensions: ['css', 'html', 'js', 'svg'],
-    //   },
-    // },
+//     {
+//       resolve: 'gatsby-plugin-zopfli',
+//       options: {
+//         extensions: ['css', 'html', 'js', 'svg'],
+//       },
+//     },
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
@@ -154,9 +154,9 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers',
-          'gatsby-remark-copy-linked-files',
+//           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
-          'gatsby-remark-responsive-iframe',
+//           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
           {
@@ -312,13 +312,13 @@ module.exports = {
       options: {
         headers: {
           '/*.html': [
-            'cache-control: public, max-age=3600, must-revalidate',
+            'cache-control: public, max-age=0, must-revalidate',
           ],
           '/*.json': [
-            'cache-control: public, max-age=3600, must-revalidate',
+            'cache-control: public, max-age=0, must-revalidate',
           ],
           '/page-data/*': [
-            'cache-control: public, max-age=3600, must-revalidate',
+            'cache-control: public, max-age=0, must-revalidate',
           ],
           '/static/*': [
             'cache-control: public, max-age=31536000, immutable',
