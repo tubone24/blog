@@ -12,7 +12,7 @@ module.exports = {
   pathPrefix: '/',
   siteMetadata: {
     title: 'tubone BOYAKI',
-    description: 'tubone BOYAKI',
+    description: 'tubone BOYAKI is a tubone blog',
     siteUrl,
     author: 'tubone',
   },
@@ -272,7 +272,7 @@ module.exports = {
       options: {
         name: 'tubone BOYAKI',
         short_name: 'tuboneBOYAKI',
-        description: 'Boyaki makes a new world',
+        description: 'tubone Blog',
         lang: 'ja',
         start_url: '/',
         background_color: '#ededed',
@@ -283,11 +283,13 @@ module.exports = {
             src: '/favicons/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any maskable',
           },
           {
             src: '/favicons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any maskable',
           },
         ],
       },
