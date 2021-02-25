@@ -7,24 +7,23 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 
-const imageStyle = (headerImage) => ({
-  backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
-});
-
 const CardHeader = ({ url, image, index }) => {
   if (index > 1) {
     return (
       <Link to={url} href={url}>
-        <div className="wrapper lozad" data-background-image={parseImgur(image, 'large')}/>
+        <div className="wrapper lozad" data-background-image={parseImgur(image, 'large')} />
       </Link>
-    )
-  } else {
-    return (
-      <Link to={url} href={url}>
-        <div className="wrapper" style={imageStyle(image)} />
-      </Link>
-    )
+    );
   }
+  return (
+    <Link to={url} href={url}>
+      <div
+        className="wrapper lozad"
+        style={{ backgroundImage: ` url(${parseImgur(image, 'small-square')})` }}
+        data-background-image={parseImgur(image, 'large')}
+      />
+    </Link>
+  );
 };
 
 const Card = ({

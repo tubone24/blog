@@ -40,12 +40,12 @@ module.exports = {
     //     id: 'GTM-WK693R6',
     //   },
     // },
-//     {
-//       resolve: 'gatsby-plugin-zopfli',
-//       options: {
-//         extensions: ['css', 'html', 'js', 'svg'],
-//       },
-//     },
+    //     {
+    //       resolve: 'gatsby-plugin-zopfli',
+    //       options: {
+    //         extensions: ['css', 'html', 'js', 'svg'],
+    //       },
+    //     },
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
@@ -102,9 +102,11 @@ module.exports = {
           {
             // eslint-disable-next-line max-len
             serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
-               ...edge.node.frontmatter,
+              ...edge.node.frontmatter,
               title: edge.node.frontmatter.title,
-              description: edge.node.excerpt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\s/g, '&nbsp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'),
+              description: edge.node.excerpt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\s/g, '&nbsp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;'),
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
@@ -154,9 +156,9 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-autolink-headers',
-//           'gatsby-remark-copy-linked-files',
+          //           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
-//           'gatsby-remark-responsive-iframe',
+          //           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
           'gatsby-remark-slideshare',
           {

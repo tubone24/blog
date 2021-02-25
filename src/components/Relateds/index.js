@@ -1,10 +1,10 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
+import lozad from 'lozad';
 import RelatedCard from '../RelatedCard';
 
 import './index.scss';
 import { isBrowser } from '../../api';
-import lozad from 'lozad';
 
 // eslint-disable-next-line react/prop-types
 const RelatedPosts = ({ post }) => {

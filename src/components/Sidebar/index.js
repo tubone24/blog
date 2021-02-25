@@ -1,17 +1,14 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import ReactGA from 'react-ga';
+import lozad from 'lozad';
 
 import Information from './Information';
-
 import SearchBox from '../SearchBox';
-
 import Subscription from './Subscription';
-
 import TagCloud from './TagCloud';
 import './index.scss';
 import { isBrowser } from '../../api';
-import lozad from 'lozad';
 
 const Icon = ({ href, icon, title }) => (
   <a
@@ -44,8 +41,19 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => {
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
         <a href="https://portfolio.tubone-project24.xyz/">
           <picture>
-            <source className="avatar" srcSet="/assets/avater.webp" type="image/webp" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} />
-            <img className="avatar" src="/assets/avater.png" alt="tubone" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })} />
+            <source
+              className="avatar"
+              srcSet="/assets/avater.webp"
+              type="image/webp"
+              onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })}
+            />
+            <img
+              className="avatar"
+              src="/assets/avater.png"
+              alt="tubone"
+              decoding="async"
+              onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })}
+            />
           </picture>
         </a>
         <a href="https://portfolio.tubone-project24.xyz/" onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar Str' })}><h4>tubone</h4></a>

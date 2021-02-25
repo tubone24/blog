@@ -30,4 +30,4 @@ const Thanks = () => (
   </div>
 );
 
-export default Thanks
+export default Thanks;

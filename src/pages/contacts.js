@@ -12,6 +12,7 @@ export default class Contact extends React.Component {
     this.state = {};
   }
 
+  // eslint-disable-next-line react/sort-comp
   static encode(data) {
     const formData = new FormData();
     // eslint-disable-next-line no-restricted-syntax

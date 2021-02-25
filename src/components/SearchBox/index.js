@@ -36,7 +36,7 @@ class SearchBox extends Component {
                 `;
           },
           footer:
-            '<div class="branding"><img src="https://i.imgur.com/HXG1uHY.png"  alt="Powered by Algolia"/></div>',
+            '<div class="branding"><img src="https://i.imgur.com/HXG1uHY.png" alt="Powered by Algolia" decoding="async" /></div>',
         },
       },
     ]).on('autocomplete:selected', (

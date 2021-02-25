@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, withPrefix } from 'gatsby';
+import ReactGA from 'react-ga';
 
 import Heatmap from '../../Heatmap';
-
 import './index.scss';
-import ReactGA from 'react-ga';
 
 const LatestPost = ({ posts, totalCount }) => (
   <div className="latest-post">

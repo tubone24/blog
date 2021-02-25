@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactGA from 'react-ga';
+import { navigate, withPrefix } from 'gatsby';
 
 import NavItem from './NavItem';
 import ExternalLink from '../ExternalLink';
 import './index.scss';
-import { navigate, withPrefix } from 'gatsby';
 
 const NavbarClass = [
   'navbar',
