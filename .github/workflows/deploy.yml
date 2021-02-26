@@ -38,6 +38,8 @@ jobs:
         run: |
           npm install
           npm run build
+      - name: Percy test
+        run: npx percy snapshot ./public/
       - name: Deploy to netlify
         run: npx netlify-cli deploy --prod --dir=./public
         env:
