@@ -1,0 +1,17 @@
+module.exports = {
+  'version': 1,
+  'snapshot': {
+    'widths': [375, 1280, 1920, 4096],
+    'min-height': 1024, // px
+    'percy-css': `
+      iframe {
+        display: none;
+      }`
+  },
+  'static-snapshots': {
+    'path': './public/',
+    'base-url': '/',
+    'snapshot-files': '**/*.html',
+    'ignore-files': '**/*.htm'
+  },
+};
