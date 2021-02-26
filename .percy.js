@@ -6,7 +6,8 @@ module.exports = {
     'percy-css': `
       iframe {
         display: none;
-      }`
+      }`,
+    'enable-javascript': true,
   },
   'static-snapshots': {
     'path': './public/',
