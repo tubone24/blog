@@ -18,9 +18,8 @@ const CardHeader = ({ url, image, index }) => {
   return (
     <Link to={url} href={url}>
       <div
-        className="wrapper lozad"
-        style={{ backgroundImage: ` url(${parseImgur(image, 'small-square')})` }}
-        data-background-image={parseImgur(image, 'large')}
+        className="wrapper"
+        style={{ backgroundImage: ` url(${parseImgur(image, 'large')})` }}
       />
     </Link>
   );
