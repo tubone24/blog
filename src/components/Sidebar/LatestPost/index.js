@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withPrefix } from 'gatsby';
 import ReactGA from 'react-ga';
 
-import Heatmap from '../../Heatmap';
+// import Heatmap from '../../Heatmap';
 import './index.scss';
 
 const LatestPost = ({ posts, totalCount }) => (
@@ -11,7 +11,7 @@ const LatestPost = ({ posts, totalCount }) => (
       <span className="icon-newspaper-o" />&nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
       {totalCount}
     </p>
-    <Heatmap minify />
+    {/* <Heatmap minify /> */}
     {posts.map(({ node }) => (
       <Link
         to={withPrefix(node.frontmatter.url || node.frontmatter.slug || node.fields.slug)}
