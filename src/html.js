@@ -24,8 +24,8 @@ const HTML = ({
         href="/vendors/css/bootstrap.min.custom.css"
       />
       <link rel="prefetch" href="/fonts/icomoon.woff2" />
-      <link rel="preconnect dns-prefetch" href="//res.cloudinary.com" />
-      <link rel="dns-prefetch" href="//sentry.io" />
+      <link rel="preconnect dns-prefetch" href="//sentry.io" />
+      <link rel="preconnect dns-prefetch" href="//i.imgur.com" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
