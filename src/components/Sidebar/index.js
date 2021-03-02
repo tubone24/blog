@@ -43,13 +43,13 @@ const Sidebar = ({ latestPosts, totalCount, allPosts }) => {
           <picture>
             <source
               className="avatar"
-              srcSet="/assets/avater.webp"
+              srcSet="https://res.cloudinary.com/dejx5flnw/image/upload/v1614703666/avater_hsdbuo.webp"
               type="image/webp"
               onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })}
             />
             <img
               className="avatar"
-              src="/assets/avater.png"
+              src="https://res.cloudinary.com/dejx5flnw/image/upload/f_auto/v1614703233/avater_hplfbr.png"
               alt="tubone"
               decoding="async"
               onClick={() => ReactGA.event({ category: 'User', action: 'push tubone Avatar' })}
