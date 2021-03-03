@@ -160,7 +160,7 @@ module.exports = {
           'gatsby-remark-embed-youtube',
           //           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
-          'gatsby-remark-slideshare',
+        //   'gatsby-remark-slideshare',
           {
             resolve: 'gatsby-remark-table-of-contents',
             options: {
