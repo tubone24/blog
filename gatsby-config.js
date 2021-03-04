@@ -33,7 +33,7 @@ module.exports = {
         enable: isNetlifyProduction,
       },
     },
-    'gatsby-plugin-catch-links',
+//     'gatsby-plugin-catch-links',
     // {
     //   resolve: 'gatsby-plugin-google-tagmanager',
     //   options: {
