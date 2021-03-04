@@ -155,7 +155,6 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          'gatsby-remark-autolink-headers',
           //           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
           //           'gatsby-remark-responsive-iframe',
@@ -244,6 +243,7 @@ module.exports = {
               noInlineHighlight: false,
             },
           },
+          'gatsby-remark-autolink-headers',
           {
             resolve: 'gatsby-remark-external-links',
             options: {
