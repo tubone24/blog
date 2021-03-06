@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withPrefix } from 'gatsby';
 
-import './index.scss';
+// import './index.scss';
 
 const placeHolder = 'data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7';
 
