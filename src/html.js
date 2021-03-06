@@ -23,7 +23,7 @@ const HTML = ({
         rel="stylesheet"
         href="/vendors/css/bootstrap.min.custom.css"
       />
-      <link rel="prefetch" href="/fonts/icomoon.woff2" />
+      <link rel="prefetch" href="/fonts/icomoon.woff2?s0mo8f" />
       <link rel="preconnect dns-prefetch" href="//i.imgur.com" />
       {headComponents}
     </head>
