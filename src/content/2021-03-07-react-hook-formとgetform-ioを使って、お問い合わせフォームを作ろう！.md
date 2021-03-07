@@ -168,6 +168,8 @@ const { register, handleSubmit, errors } = useForm<Inputs>();
 
 いいだけですが一つ注意として、渡す際にhandleSubmitにコールバック関数として仕込む、ということです。
 
+またGetform.ioへのPOSTはJSONではなくurlencodeで渡さないと行けないので、FormDataにappendする形でFormのデータを差し込みます。
+
 コード
 
 さて、あとは普通のFormを作るようにJSXを書いていきます。
