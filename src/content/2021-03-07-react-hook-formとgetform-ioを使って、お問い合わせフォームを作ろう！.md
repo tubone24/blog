@@ -49,6 +49,8 @@ templateKey: blog-post
 
 ## 実コード
 
+こんな感じのコンポーネントができました。
+
 ```typescript
 import React, {useState} from "react";
 import { useForm } from "react-hook-form";
@@ -72,7 +74,7 @@ const ContactForm = () => {
     formData.append("email", data.email)
     formData.append("subject", data.subject)
     formData.append("message", data.message)
-    fetch('https://getform.io/f/897f187e-876d-42a7-b300-7c235af72e6d', {
+    fetch('https://getform.io/f/8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', {
       method: 'POST',
       body: formData
     })
@@ -138,3 +140,26 @@ const ContactForm = () => {
 
 export default ContactForm
 ```
+
+まず、フォームの項目に該当するTypeを作ります。
+
+```typescript
+type Inputs = {
+  name: string,
+  email: string,
+  subject: string,
+  message: string,
+};
+```
+
+今回は名前、email、題名、メッセージを設定します。
+
+次にReact Hook FormのuseFormを使ってレジスターなどを作っていきます。正直これができれば基本的な機能は8割くらい完成です。
+
+```typescript
+const { register, handleSubmit, errors } = useForm<Inputs>();
+```
+
+とりあえず用意するのは、formのrefに設定するregister、submitをコントロールできるhandleSubmit、requireを判定できるerrorsです。
+
+ほかにも、formState.isValidなども使うことができます。
