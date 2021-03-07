@@ -164,9 +164,17 @@ const { register, handleSubmit, errors } = useForm<Inputs>();
 
 ほかにも、formState.isValidなども使うことができます。
 
+そして肝心な送信部分ですがこちらは前記事とほぼ同じようにonSubmitの関数を用意して、formのonsubmitに渡してあげればいいだけです。
+
+いいだけですが一つ注意として、渡す際にhandleSubmitにコールバック関数として仕込む、ということです。
+
+コード
+
 さて、あとは普通のFormを作るようにJSXを書いていきます。
 
-formのonSubmitにはhandleSubmitを指定し、さらにコールバック関数を用意します。
+inputやtextareaのref属性にregisterをつければ大丈夫です。
+
+ちなみに、registerのパラメーターで、必須項目やパターンの検査もできます。
 
 ```typescript
   <form onSubmit={handleSubmit(onSubmit)}>
