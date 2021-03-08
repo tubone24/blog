@@ -178,6 +178,8 @@ inputやtextareaのref属性にregisterをつければ大丈夫です。
 
 ちなみに、registerのパラメーターで、必須項目やパターンの検査もできます。
 
+また、検査が通っていないときに警告メッセージを出すのはerrorsをつかうことで実現できます。
+
 ```typescript
   <form onSubmit={handleSubmit(onSubmit)}>
     <p>
@@ -225,3 +227,13 @@ inputやtextareaのref属性にregisterをつければ大丈夫です。
       </Button>
   </form>
 ```
+
+もう完成です。実に簡単ですね。
+
+react hook formを使わないと、form onchangeのたびに、setStateしなきゃいけなかったですが、すっきり実装できました。
+
+画像
+
+## 結論
+
+楽に実装できたので余った時間は担当ウマ娘に捧げます。
