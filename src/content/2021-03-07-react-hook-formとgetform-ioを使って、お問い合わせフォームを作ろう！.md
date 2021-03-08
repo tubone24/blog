@@ -23,7 +23,7 @@ templateKey: blog-post
 
 皆さん、[React Hook Form](https://react-hook-form.com/jp/)を知ってますか？
 
-最近トレンドに乗っかってきた、FormをReact Hooksで簡単に作ることのできる代物です。
+最近トレンドに乗っかってきた、**Form**を**React Hooks**で簡単に作ることのできる代物です。
 
 ![img](https://i.imgur.com/2dqEW7L.png)
 
@@ -37,7 +37,7 @@ templateKey: blog-post
 
 ## React Hook Form + Getform.io
 
-合体！
+**合体！**
 
 ![img](https://i.imgur.com/FzX8di6.jpg)
 
@@ -45,7 +45,7 @@ templateKey: blog-post
 
 ![img](https://i.imgur.com/yYJBK98.jpg)
 
-今回はお問い合わせフォームを作っていきます。
+今回はこちらの2技術を使って、お問い合わせフォームを作っていきます。
 
 ## 実コード
 
@@ -141,6 +141,10 @@ const ContactForm = (): JSX.Element => {
 export default ContactForm
 ```
 
+## 解説
+
+### 準備
+
 まず、フォームの項目に該当するTypeを作ります。
 
 ```typescript
@@ -154,31 +158,88 @@ type Inputs = {
 
 今回は名前、email、題名、メッセージを設定します。
 
-次にReact Hook FormのuseFormを使ってレジスターなどを作っていきます。正直これができれば基本的な機能は8割くらい完成です。
+次に**React Hook Form**のuseFormを使って**register**などを作っていきます。正直これができれば基本的な機能は8割くらい完成です。
 
 ```typescript
 const { register, handleSubmit, errors } = useForm<Inputs>();
 ```
 
-とりあえず用意するのは、formのrefに設定するregister、submitをコントロールできるhandleSubmit、requireを判定できるerrorsです。
+とりあえず用意するのは、formのrefに設定する**register**、onSubmitをコントロールできる**handleSubmit**、requireを検査できる**errors**です。
 
-ほかにも、formState.isValidなども使うことができます。
+ほかにも、form全体の項目検査のformState.isValidなども使うことができます。
 
-そして肝心な送信部分ですがこちらは前記事とほぼ同じようにonSubmitの関数を用意して、formのonsubmitに渡してあげればいいだけです。
+### Submit
 
-いいだけですが一つ注意として、渡す際にhandleSubmitにコールバック関数として仕込む、ということです。
+そして肝心な送信(Submit)部分ですがこちらは[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)とほぼ同じように**onSubmit**に合わせて処理する関数を用意して、formの**onsubmit属性**に渡してあげればいいだけです。
 
-またGetform.ioへのPOSTはJSONではなくurlencodeで渡さないと行けないので、FormDataにappendする形でFormのデータを差し込みます。
+........いいだけですが一つ注意として、渡す際に**handleSubmit**で関数をラップしないと、form情報がうまく取れない、ということです。
 
-コード
+またGetform.ioへのPOSTはJSONではなく**mulitpart/form-data**で渡さないと行けないので、FormDataにappendする形でFormのデータを差し込みます。
+
+```typescript
+  const onSubmit = (data: Inputs, e: any) => {
+    const formData = new FormData();
+    formData.append("name", data.name)
+    formData.append("email", data.email)
+    formData.append("subject", data.subject)
+    formData.append("message", data.message)
+    fetch('https://getform.io/f/8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', {
+      method: 'POST',
+      body: formData
+    })
+      .then(() => {
+        e.target.reset();
+        handleServerResponse(true, "Submitted!");
+      })
+      .catch((error) => {
+        alert(error)
+        console.error(error)
+        handleServerResponse(false, error.toString());
+      });
+  }
+```
+
+また、第二引数として、formのeventが取得できます。おそらくEventは**React.BaseSyntheticEvent**だとは思うのですがうまく型が通せなくて悩みだしてしまいましたのでとりあえずanyにしてしまいました。
+
+一応、[こちら](https://github.com/react-hook-form/react-hook-form/discussions/4376)で質問は投げてますが英語がへたくそで誰も答えてくれそうにありませんね。
+
+特にeventでデータを取る必要はなさそうですが、たとえば送信時にFormの内容をリセットするなどの処理を書きたいときは
+
+```typescript
+        e.target.reset();
+        handleServerResponse(true, "Submitted!");
+```
+
+とやってあげればOKです。
+
+### Formを書く
 
 さて、あとは普通のFormを作るようにJSXを書いていきます。
 
-inputやtextareaのref属性にregisterをつければ大丈夫です。
+唯一違うところはinputやtextareaのref属性にregisterをつけなければいけないですが、それだけで大丈夫です。
+
+```typescript
+      <textarea
+        name="message" placeholder="Something writing..." rows={6} cols={25} ref={register({required: true })}/>
+```
 
 ちなみに、registerのパラメーターで、必須項目やパターンの検査もできます。
 
+```typescript
+    <input
+      name="email"
+      type="email"
+      placeholder="Enter your email"
+      ref={register({ pattern: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i, required: true })} />
+```
+
 また、検査が通っていないときに警告メッセージを出すのはerrorsをつかうことで実現できます。
+
+```typescript
+ {errors.subject && <span>This field is required</span>}
+```
+
+Form部分をすべて実装するとこんな感じです。
 
 ```typescript
   <form onSubmit={handleSubmit(onSubmit)}>
@@ -230,10 +291,34 @@ inputやtextareaのref属性にregisterをつければ大丈夫です。
 
 もう完成です。実に簡単ですね。
 
-react hook formを使わないと、form onchangeのたびに、setStateしなきゃいけなかったですが、すっきり実装できました。
+React Hook Formを使わないと、[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
 
-画像
+React Hook Formを使わないと
+
+```typescript
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+  
+(中略)
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    maxLength="30"
+                    minLength="2"
+                    required
+                    placeholder="Enter your name"
+                    onChange={this.handleChange}
+                  />
+```
+
+となります。
+
+出来上がりはただのFormですのでかっこいいCSSを当ててくださいね。
+
+![img](https://i.imgur.com/DsrFLOE.png)
 
 ## 結論
 
-楽に実装できたので余った時間は担当ウマ娘に捧げます。
+楽に実装できたので余った時間は担当**ウマ娘**に捧げます。
