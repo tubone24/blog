@@ -9,7 +9,7 @@ import './src/styles/global.scss';
 
 Sentry.init({
   dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
-  release: `tubone-boyaki@${process.env.GITHUB_SHA}`,
+  release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
   integrations: [new Integrations.BrowserTracing()],
   tracesSampleRate: 1.0,
 });
