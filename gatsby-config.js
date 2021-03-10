@@ -5,6 +5,7 @@ const {
   CONTEXT: NETLIFY_ENV = NODE_ENV,
   GATSBY_GITHUB_CLIENT_ID,
   GATSBY_GITHUB_CLIENT_SECRET,
+  GATSBY_GITHUB_SHA,
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === 'production';
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
@@ -205,7 +206,7 @@ module.exports = {
             options: {
               dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
               environment: process.env.NODE_ENV,
-              release: `tubone-boyaki@${process.env.COMMIT_REF}`,
+              release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
               tracesSampleRate: 1.0,
               enabled: (() => ['production', 'stage'].indexOf(process.env.NODE_ENV) !== -1)(),
             },
