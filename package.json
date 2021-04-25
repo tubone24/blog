@@ -131,7 +131,7 @@
     "cypress-visual-regression": "^1.5.7",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-import-resolver-webpack": "^0.12.2",
+    "eslint-import-resolver-webpack": "^0.13.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.5",
     "gh-pages": "^2.2.0",
