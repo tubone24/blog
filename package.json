@@ -22,7 +22,7 @@
     "dayjs": "^1.9.6",
     "dotenv": "^8.2.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "faunadb": "^2.13.1",
+    "faunadb": "^4.2.0",
     "flexboxgrid": "^6.3.1",
     "gatsby": "^2.31.1",
     "gatsby-link": "^2.6.1",
