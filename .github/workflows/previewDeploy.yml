@@ -36,7 +36,7 @@ jobs:
           NETLIFY_ENV: deploy-preview
         run: |
           npm install
-          npm run build:nocache
+          npm run build
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public > cli.txt
         env:
