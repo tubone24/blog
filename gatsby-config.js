@@ -1,5 +1,3 @@
-import { Integrations as TracingIntegrations } from "@sentry/tracing";
-
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = 'https://blog.tubone-project24.xyz',
@@ -203,17 +201,6 @@ module.exports = {
           //   },
           // },
           'gatsby-remark-numbered-footnotes',
-          {
-            resolve: 'gatsby-plugin-sentry',
-            options: {
-              dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
-              environment: process.env.NODE_ENV,
-              release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
-              tracesSampleRate: 1.0,
-              integrations: [new TracingIntegrations.BrowserTracing()],
-              enabled: (() => ['production', 'stage'].indexOf(process.env.NODE_ENV) !== -1)(),
-            },
-          },
           {
             resolve: 'gatsby-remark-embed-soundcloud',
             options: {
