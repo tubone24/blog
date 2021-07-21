@@ -29,8 +29,6 @@ const HTML = ({
     </head>
     <body {...bodyAttributes}>
       {preBodyComponents}
-      <script src="/adstir.js" />
-      <script src="https://js.ad-stir.com/js/adstir.js" />
       <div
         key="body"
         id="___gatsby"
@@ -39,6 +37,8 @@ const HTML = ({
       {postBodyComponents}
       <script src="/vendors/js/jquery-3.5.1.slim.custom.min.js" defer />
       <script src="/vendors/js/bootstrap.custom.min.js" defer />
+      <script src="/adstir.js" />
+      <script src="https://js.ad-stir.com/js/adstir.js" />
     </body>
   </html>
 );
