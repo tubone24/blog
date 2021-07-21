@@ -24,6 +24,12 @@ if (isLocalDevelopment() === false) {
     integrations: [new Integrations.BrowserTracing()],
     tracesSampleRate: 1.0,
   });
+  global.adstir_vars = {
+    ver: "4.0",
+    app_id: "MEDIA-b223d6ca",
+    ad_spot: 1,
+    center: false
+  };
 
   // Google Optimizer
   // if (gaOptimizeId) {
