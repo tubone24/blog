@@ -25,11 +25,12 @@ const HTML = ({
       />
       <link rel="prefetch" href="/fonts/icomoon.woff2?s0mo8f" />
       <link rel="preconnect dns-prefetch" href="//i.imgur.com" />
-      <script src="/adstir.js" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
       {preBodyComponents}
+      <script src="/adstir.js" />
+      <script src="https://js.ad-stir.com/js/adstir.js" />
       <div
         key="body"
         id="___gatsby"

@@ -5,6 +5,6 @@ var adstir_vars = {
   center: false
 };
 
-var script = document.createElement('script');
-script.src = "https://js.ad-stir.com/js/adstir.js";
-document.body.appendChild(script);
+// var script = document.createElement('script');
+// script.src = "https://js.ad-stir.com/js/adstir.js";
+// document.body.appendChild(script);
