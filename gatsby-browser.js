@@ -24,15 +24,15 @@ if (isLocalDevelopment() === false) {
     integrations: [new Integrations.BrowserTracing()],
     tracesSampleRate: 1.0,
   });
-  global.adstir_vars = {
-    ver: "4.0",
-    app_id: "MEDIA-b223d6ca",
-    ad_spot: 1,
-    center: false
-  };
-  let script = document.createElement('script');
-  script.src = "https://js.ad-stir.com/js/adstir.js";
-  document.body.appendChild(script);
+  // global.adstir_vars = {
+  //   ver: "4.0",
+  //   app_id: "MEDIA-b223d6ca",
+  //   ad_spot: 1,
+  //   center: false
+  // };
+  // let script = document.createElement('script');
+  // script.src = "https://js.ad-stir.com/js/adstir.js";
+  // document.body.appendChild(script);
 
   // Google Optimizer
   // if (gaOptimizeId) {

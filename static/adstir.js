@@ -4,3 +4,7 @@ var adstir_vars = {
   ad_spot: 1,
   center: false
 };
+
+var script = document.createElement('script');
+script.src = "https://js.ad-stir.com/js/adstir.js";
+document.body.appendChild(script);
