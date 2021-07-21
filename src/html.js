@@ -37,14 +37,6 @@ const HTML = ({
       {postBodyComponents}
       <script src="/vendors/js/jquery-3.5.1.slim.custom.min.js" defer />
       <script src="/vendors/js/bootstrap.custom.min.js" defer />
-      <script type="text/javascript">
-        var adstir_vars = {
-          ver: "4.0",
-          app_id: "MEDIA-b223d6ca",
-          ad_spot: 1,
-          center: false};
-      </script>
-      <script type="text/javascript" src="https://js.ad-stir.com/js/adstir.js" defer />
     </body>
   </html>
 );
