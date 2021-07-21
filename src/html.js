@@ -37,7 +37,7 @@ const HTML = ({
       {postBodyComponents}
       <script src="/vendors/js/jquery-3.5.1.slim.custom.min.js" defer />
       <script src="/vendors/js/bootstrap.custom.min.js" defer />
-      <script src="/adstir.js" defer />
+      <script src="/adstir.js" />
     </body>
   </html>
 );
