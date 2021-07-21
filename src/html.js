@@ -28,7 +28,6 @@ const HTML = ({
       {headComponents}
     </head>
     <body {...bodyAttributes}>
-      <script src="https://js.ad-stir.com/js/adstir.js" />
       {preBodyComponents}
       <div
         key="body"

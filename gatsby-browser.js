@@ -30,6 +30,9 @@ if (isLocalDevelopment() === false) {
     ad_spot: 1,
     center: false
   };
+  let script = document.createElement('script');
+  script.src = "https://js.ad-stir.com/js/adstir.js";
+  document.body.appendChild(script);
 
   // Google Optimizer
   // if (gaOptimizeId) {
