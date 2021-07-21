@@ -28,6 +28,7 @@ const HTML = ({
       {headComponents}
     </head>
     <body {...bodyAttributes}>
+      <script src="https://js.ad-stir.com/js/adstir.js" />
       {preBodyComponents}
       <div
         key="body"
@@ -37,7 +38,6 @@ const HTML = ({
       {postBodyComponents}
       <script src="/vendors/js/jquery-3.5.1.slim.custom.min.js" defer />
       <script src="/vendors/js/bootstrap.custom.min.js" defer />
-      <script src="https://js.ad-stir.com/js/adstir.js" defer />
     </body>
   </html>
 );
