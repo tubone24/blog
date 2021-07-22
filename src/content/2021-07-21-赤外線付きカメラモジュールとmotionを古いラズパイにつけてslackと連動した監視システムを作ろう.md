@@ -224,9 +224,82 @@ motion.confで**stream_localhost off**とすることで、他の端末からス
 
 ![img](https://i.imgur.com/MbyFzmel.png)
 
+## 動画をSlackに投稿
 
+さて、ここからが本番のSlackへの画像投稿です。
 
+Slackへのファイル投稿はAPPSを使います。何番煎じかわからないくらいたくさん記事が転がっているのでここでは解説しませんが、Botトークンを入手する必要があります。
 
+[ご参考: 超簡単PythonでSlackにファイルアップロード＆メッセージ投稿（Slack API利用）新方式](https://note.com/10mohi6/n/n0fd906a5f980)
+
+動画が作成完了されたら動くスクリプトは**on_movie_end**で設定できますが今回はshellを呼び出して、shellの中でSlack投稿用のPythonに連携します。
+
+特に理由はないですが、Slackアップロード以外に何かやることがある場合にこうしておくと便利かな、というのとアップロード済みの動画をラズパイから削除することを実施するためです。
+
+```shell
+#!/bin/bash
+FILE=$1
+python3 /home/pi/motion/upload_slack.py $FILE "MP4 File"
+rm -f $FILE
+```
+
+upload_slack.pyはこんな感じ
+
+SlackのChannelIDはSlackウェブ版を使うとURLの最後のパスがそれにあたります。公式は[APIを叩いて調べる](https://api.slack.com/methods/channels.list)のを進めてますが、Web版が一番簡単に見つけられます。
+
+```python
+import sys
+import datetime
+import json
+import requests
+
+FILENAME = sys.argv[1]
+FILEFORMAT = sys.argv[2]
+TOKEN = "xoxb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # Slackトークン
+CHANNEL = "C0xxxxxxxxxxxx" # ChannelID
+
+print(FILENAME)
+with open("{}".format(FILENAME), "rb") as f:
+    dt_now = datetime.datetime.now()
+    files = {"file": f.read()}
+    param = {
+        "token": TOKEN, 
+        "channels" :CHANNEL,
+        "filename" :FILENAME,
+        "title": FILEFORMAT
+        }
+    resp = requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
+    print(resp.text)
+```
+
+何のことはないですね。ファイルをバイナリで読み込んで送るだけです。
+
+ちなみに、動画の投稿は検知から**1分**ほどかかります。古いラズパイの性能がかなり低いということもありますが、画像ファイル作成にはffmpegでのエンコードが発生するので時間がかかる、というわけです。
+
+それでは、監視カメラとしてはアウトな気がするので追加で**on_movie_start**を設定します。こちらは動画ファイルが作成されるタイミングでトリガーされるスクリプトなのでほぼ動体検知タイミングで通知を飛ばすことができます。
+
+投稿はただのincoming webhookです。画像や動画は置いておいてとりあえず何か起きたよ！って通知だけSlackにあげることにしました。
+
+```
+import datetime
+import json
+import requests
+
+WEB_HOOK_URL = "https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+dt_now = datetime.datetime.now()
+requests.post(WEB_HOOK_URL, data = json.dumps({
+    "text": "Alarm triggered. Check out the attached video! {}".format(dt_now.strftime("%Y/%m/%d %H:%M:%S")),
+    'username': "motion_detect",
+    'icon_emoji': ":robot_face:",
+    'link_names': 1,
+}))
+```
+
+## Slackに画像を投稿
+
+モバイル版のSlackでもプレビュー見たい問題のため、画像も投稿します。ただ、こちらもほぼ上記と同じなのでスクリプトは割愛します。
+
+ちなみに、**output_pictures best**にすると、動画の作成完了まで画像は保存されませんので、投稿スピードは遅いです。
 
 
 
