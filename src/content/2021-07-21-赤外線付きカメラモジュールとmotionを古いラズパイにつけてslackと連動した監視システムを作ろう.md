@@ -303,7 +303,7 @@ requests.post(WEB_HOOK_URL, data = json.dumps({
 
 ## できた！
 
-写真
+![img](https://i.imgur.com/m5HEdzHl.png)
 
 このように監視カメラで動体検知をするとSlackに通知が飛び、画像と動画が確認できるようになりました。
 
@@ -315,9 +315,13 @@ requests.post(WEB_HOOK_URL, data = json.dumps({
 
 motion起動から3～4時間すると、カメラモジュールがハングってしまい釣られてmotion自体もdefunctして完全にOS再起動以外直す手段がなくなってしまう事象が発生しました。
 
-とりあえず、カメラモジュールがハングった場合最低でも検知できないとまずいので**on_camera_lost**を設定します。
+とりあえず、カメラモジュールがハングった場合最低でも検知できないとまずいので**on\_camera\_lost**を設定します。
 
 こちらもスクリプトは割愛しますが、incoming webhookでカメラモジュールのハングを通知する仕組みです。
+
+![img](https://i.imgur.com/tpdlfLfl.png)
+
+うまく検知できてますね。
 
 Slackで通知を受け取ることでますます再現性が高いことがわかったので、何か根本的な原因があると思いとりあえず思い当たる2つを修正しました。
 
