@@ -25,9 +25,6 @@ templateKey: blog-post
 
 ラズパイって結構直近の進化がすごくて、性能が上がったから買ってみよう！とか、液晶モジュール付けてしまったから特に使ってないけど外すのめんどくさいしそのままにしておこうとか、そういった感じで眠ったラズパイが何種類かあります。
 
-
-写真
-
 で、こいつらを眠らせておいても仕方がないので、早速こちらを使って何かHomeIoTチックなことをやってみたいと想います。
 
 ## 監視カメラ
@@ -42,7 +39,8 @@ templateKey: blog-post
 
 そこで、ラズパイのカメラモジュールに挿すことのできる赤外線カメラを探したところありました。
 
-リンク
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=tubone2403-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B07T5DZY73&linkId=f8faa703fc20d70f581fd9dc824117ff&bc1=000000&amp;lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+    </iframe>
 
 値段もお手頃でこいつはいいですね。
 
