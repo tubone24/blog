@@ -136,8 +136,121 @@ query MyQuery {
 
 めちゃくちゃ簡単ですね。
 
+## Pythonで定期的にGraphQLのmutationをする
+
+PythonのGraphQLクライアントといえば、gqlが有名です。
+
+基本的にドキュメント通りなのですが、ポイントになるところはヘッダーにx-hasura-admin-secretを設定してあげると特に制限なくmutationできますので、Clientで設定してます。本当はちゃんとロール作ったほうがいいですが、JWT認証がめんどくさかったのでadmin使ってしまいました。
+
+また、mutationでDBにinsertするときはinsert\_{{table名}}\_oneでできます。また、下記の通りvariablesを渡すこともできます。
+
+```python
+from gql import gql, Client
+from gql.transport.requests import RequestsHTTPTransport
+
+HASURA_URL = "https://xxxxx"
+HASURA_SECRET = "xxxxxxx"
 
 
+def upload_metric_to_hasura(moisture, light):
+    client = Client(
+        transport=RequestsHTTPTransport(
+            url=HASURA_URL,
+            use_json=True,
+            headers={
+                "Content-type": "application/json",
+                "x-hasura-admin-secret": HASURA_SECRET
+            },
+            retries=3,
+        ),
+        fetch_schema_from_transport=True,
+    )
+    query = gql(
+        """
+        mutation MyMutation ($light: numeric!, $moisture: numeric!){
+            insert_raspi_plant_checker_one(object: {light: $light, moisture: $moisture}) {
+                id
+                light
+                moisture
+                timestamp
+            }
+        }
+        """
+    )
+    params = {"light": light, "moisture": moisture}
+    result = client.execute(query, variable_values=params)
+    print(result)
+    
+upload_metric_to_hasura(2, 3)
+```
 
+GraphQLだけ切り出すとこんな感じ。
 
+```graphql
+        mutation MyMutation ($light: numeric!, $moisture: numeric!){
+            insert_raspi_plant_checker_one(object: {light: $light, moisture: $moisture}) {
+                id
+                light
+                moisture
+                timestamp
+            }
+        }
+```
+
+また、今回はHeroku PostgreSQLのレコード制限があるので古いデータは消すことにします。
+
+なので、同じくmutationでdeleteを実現する必要があります。
+
+```python
+def delete_old_metrics_to_hasura(days_before=7):
+    dt_now = datetime.now(timezone.utc)
+    before_day = dt_now - timedelta(days=days_before)
+    dt = before_day.astimezone().isoformat(timespec='microseconds')
+    client = Client(
+        transport=RequestsHTTPTransport(
+            url=HASURA_URL,
+            use_json=True,
+            headers={
+                "Content-type": "application/json",
+                "x-hasura-admin-secret": HASURA_SECRET
+            },
+            retries=3,
+        ),
+        fetch_schema_from_transport=True,
+    )
+    query = gql(
+        """
+        mutation MyMutation ($dt: timestamptz){
+            delete_raspi_plant_checker(where: {timestamp: {_lt: $dt}}) {
+                returning {
+                    id
+                    light
+                    moisture
+                    timestamp
+                }
+            }
+        }
+        """
+    )
+    params = {"dt": dt}
+    result = client.execute(query, variable_values=params)
+    print(result)
+
+delete_old_metrics_to_hasura()
+```
+
+\_ltをwhere句で使えるので簡単ですね。↓がGraphQLです。
+
+```graphql
+        mutation MyMutation ($dt: timestamptz){
+            delete_raspi_plant_checker(where: {timestamp: {_lt: $dt}}) {
+                returning {
+                    id
+                    light
+                    moisture
+                    timestamp
+                }
+            }
+        }
+```
 
