@@ -11,13 +11,33 @@ tags:
 headerImage: https://i.imgur.com/QmIHfeR.jpg
 templateKey: blog-post
 ---
-体重がaaa落ちてきました！
+体重が落ちてきました！
 
 ## Table of Contents
 
 ```toc
 
 ```
+
+### スクリプトのTypeScript化
+
+前回～の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
+
+がしかし、あろうことかスクリプトはTypeScriptじゃなく、JavaScript(ES module)でした。
+
+どうして、TypeScriptにしなかったかというと、
+
+- Projectで設定しているtsconfigをいじりたくなかった(Next.jsと単なるNode.jsスクリプトを共存させたくなかった)
+- Buildしたdistの取り回しがめんどくさい
+- ならばとDenoを使おうと思ったが色々失敗した
+
+という理由で、まぁただの付加機能でしかないのでmjsでぱぱっと作ってしまった、というわけです。
+
+今回はロジックは特に変えずにランタイムをDenoに変更し、ついでにTypeScript化させちゃいましょう。
+
+## Denoとは？
+
+
 
 ```
 import {encode} from 'https://deno.land/std/encoding/base64.ts';
