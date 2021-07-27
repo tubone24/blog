@@ -51,12 +51,16 @@ https://hashrock.hatenablog.com/entry/2019/02/04/040505
 
 を参照しよう！直接作者と会話できるのはいいですね。
 
+## 書いたコード
 
+実際、Denoで動かそうがNodeで動かそうがあまり違いがないと思ってたのですが細かい違いがありました。(初心者)
 
-```
+まず、基本的なことですがビルトインの機能がすべてDenoにくるまってます。
+
+```typescript
 import {encode} from 'https://deno.land/std/encoding/base64.ts';
 
-const URI_ENDPOINT = 'https://crisp-muskox-39.hasura.app/v1/graphql';
+const URI_ENDPOINT = 'https://xxxxx.hasura.app/v1/graphql';
 
 const filePath = './cypress/screenshots/screenshot.spec.js/screenShot.png';
 const dashBoardUrl = 'https://plant-check-graph.vercel.app/'
