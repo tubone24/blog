@@ -37,6 +37,20 @@ templateKey: blog-post
 
 ## Denoとは？
 
+Denoとは、Node.jsの作者であるRyan Dahlによって作られた、新しいJavaScript/TypeScriptランタイムです。
+
+Node.jsに関する10の反省点という講演の中で氏がNode.jsのここがまずかった！ということをあげて、Denoのプロトタイプ版を出したのが始まりとか。
+
+ちなみに、Nodeを並べ替えるとDeno。
+
+ちなみにアイコンは恐竜らしい。ダイナソーでDeno。
+
+アイコンについてのおもしろ話は
+
+https://hashrock.hatenablog.com/entry/2019/02/04/040505
+
+を参照しよう！直接作者と会話できるのはいいですね。
+
 
 
 ```
