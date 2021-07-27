@@ -75,7 +75,7 @@ Hasura CloudとPostgreSQLを接続するために先ほど作成したHeroku Pos
 
 テーブルを作ってみましょう。create tableから簡単に作れます。
 
-![img](https://i.imgur.com/JdOrlnf.png)
+![img](https://i.imgur.com/dm0FJPU.png)
 
 default valueにnow()などの関数が入れられますのでtimestampはこちらで作っちゃうことにしました。便利ですね。
 
