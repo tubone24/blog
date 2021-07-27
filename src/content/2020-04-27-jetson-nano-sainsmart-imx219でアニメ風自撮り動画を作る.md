@@ -30,7 +30,7 @@ Jetson nanoには**Raspberry pi**互換のカメラモジュール V2(MIPI CSI-2
 
 私のJetson nanoもケースに入れちゃってよく見えませんですみませんが、カメラモジュールにMIPI CSI-2互換のカメラが刺さってます。
 
-ラズパイ公式のカメラモジュール[Raspberry Pi Camera Module V2 カメラモジュール (Daylight - element14)](https://www.amazon.co.jp/Raspberry-Pi-Camera-%E3%82%AB%E3%83%A1%E3%83%A9%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB-Daylight/dp/B01ER2SKFS/ref=pd_sim_147_3/356-1113330-6319342?_encoding=UTF8&pd_rd_i=B01ER2SKFS&pd_rd_r=d5c8a63a-264f-4f17-84ad-08b936850946&pd_rd_w=9daOj&pd_rd_wg=c8Sw3&pf_rd_p=eb211d4f-9ce6-46da-bef2-e4b11fe6bb87&pf_rd_r=X2W92DGEJ73ZDBBYKEDF&psc=1&refRID=X2W92DGEJ73ZDBBYKEDF)を使うのが無難かな？と思いましたが、今回はちょっとだけ安かった[SainSmart IMX219 AIカメラモジュールNVIDIA Jetson Nanoボード用8MPセンサー77度FoV](https://www.amazon.co.jp/gp/product/B07SL9P729/ref=ppx_yo_dt_b_asin_title_o06_s01?ie=UTF8&psc=1)を使ってみました。
+ラズパイ公式のカメラモジュール[Raspberry Pi Camera Module V2 カメラモジュール (Daylight - element14)](https://amzn.to/3l0rQNC)を使うのが無難かな？と思いましたが、今回はちょっとだけ安かった[SainSmart IMX219 AIカメラモジュールNVIDIA Jetson Nanoボード用8MPセンサー77度FoV](https://amzn.to/3y9fBlB)を使ってみました。
 
 ![img](https://i.imgur.com/gWqd2xb.jpg)
 

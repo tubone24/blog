@@ -50,9 +50,10 @@ Raspberry PIを使って家のガジュマルを枯らさないようにしま�
 
 土壌センサーはAmazonで購入しました。
 
-<https://www.amazon.co.jp/gp/product/B0116IYDES/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1>
+[HiLetgo 5個セット LM393 3.3V-5V土壌水分検出センサー土壌水分センサーArduino自動散水システムロボット用の湿度計検出ロボットスマートカー [並行輸入品]](https://amzn.to/2URR8D5)
 
-5個入りで￥550でした。安い。
+5個入りで￥550
+でした。安い。
 
 ![img](https://i.imgur.com/amaoydT.jpg)
 
