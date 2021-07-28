@@ -57,6 +57,18 @@ https://hashrock.hatenablog.com/entry/2019/02/04/040505
 
 まず、基本的なことですがビルトインの機能がすべてDenoにくるまってます。
 
+なので環境変数は
+
+const imgurClientId = Deno.env.get('IMGUR_CLIENT_ID') as string;
+
+のように取得します。process.envではないんですね。
+あとas stringという記述がありますがこれはこのあとのfetch部分で効いてきます。
+
+Denoにはnpmやらpackage.jsonのようなモジュール管理がランタイムに内蔵されているため、importはURLで参照します。
+
+もちろんCommonJSのrequireなんてありません。
+
+
 ```typescript
 import {encode} from 'https://deno.land/std/encoding/base64.ts';
 
