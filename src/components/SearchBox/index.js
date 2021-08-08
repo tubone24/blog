@@ -19,6 +19,9 @@ if (typeof window !== 'undefined') {
   index = client.initIndex(process.env.GATSBY_ALGOLIA_INDEX_NAME);
 }
 
+// https://github.com/algolia/algoliasearch-client-javascript/issues/1152
+const source = (index, parameters) => (query, cb) => index.search(query, parameters).then(res => cb(res.hits, res)).catch(err => cb([], err));
+
 class SearchBox extends Component {
   componentDidMount() {
     if (typeof window === 'undefined') {
@@ -26,7 +29,7 @@ class SearchBox extends Component {
     }
     autocomplete('#algolia-search-input', { hint: false }, [
       {
-        source: autocomplete.sources.hits(index, { hitsPerPage: 3 }),
+        source: source(index, {hitsPerPage: 3}),
         displayKey: 'title',
         templates: {
           suggestion({ _highlightResult: { title, description } }) {
