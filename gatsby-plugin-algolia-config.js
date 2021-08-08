@@ -9,6 +9,7 @@ const queries = [
         allMarkdownRemark {
           edges {
             node {
+              objectID: id
               excerpt
               html
               frontmatter {
@@ -26,12 +27,14 @@ const queries = [
     transformer: ({ data }) => data.allMarkdownRemark.edges.map(
       ({
         node: {
+          objectID,
           excerpt,
           html,
           frontmatter: { title, tags },
           fields: { slug },
         },
       }) => ({
+        objectID,
         title,
         description: excerpt,
         allText: html.replace(/<code[\s, \S]*?<\/code>/g, '').replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').slice(0, 3000),
