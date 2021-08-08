@@ -34,19 +34,6 @@ module.exports = {
         enable: isNetlifyProduction,
       },
     },
-//     'gatsby-plugin-catch-links',
-    // {
-    //   resolve: 'gatsby-plugin-google-tagmanager',
-    //   options: {
-    //     id: 'GTM-WK693R6',
-    //   },
-    // },
-    //     {
-    //       resolve: 'gatsby-plugin-zopfli',
-    //       options: {
-    //         extensions: ['css', 'html', 'js', 'svg'],
-    //       },
-    //     },
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
@@ -105,16 +92,9 @@ module.exports = {
             serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
               ...edge.node.frontmatter,
               title: edge.node.frontmatter.title,
-              // description: edge.node.excerpt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\s/g, '&nbsp;')
-              //   .replace(/"/g, '&quot;')
-              //   .replace(/'/g, '&#39;'),
               date: edge.node.frontmatter.date,
               url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
               guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
-            //   custom_elements: [{
-            //     'content:encoded': edge.node.html.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').replace(/\s+/g, '').replace(/#x.*;/, '').replace(/&/, '')
-            //       .substr(0, 150),
-            //   }],
             })),
             query: `
               {
@@ -151,16 +131,12 @@ module.exports = {
       // eslint-disable-next-line global-require
       options: require('./gatsby-plugin-algolia-config.js'),
     },
-    // 'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          //           'gatsby-remark-copy-linked-files',
           'gatsby-remark-embed-youtube',
-          //           'gatsby-remark-responsive-iframe',
           'gatsby-plugin-twitter',
-        //   'gatsby-remark-slideshare',
           {
             resolve: 'gatsby-remark-table-of-contents',
             options: {
@@ -170,36 +146,6 @@ module.exports = {
               toHeading: 4,
             },
           },
-          // {
-          //   resolve: 'gatsby-remark-images',
-          //   options: {
-          //     withWebp: true,
-          //     quality: 80,
-          //   },
-          // },
-          // {
-          //   resolve: 'gatsby-remark-audio',
-          //   options: {
-          //     preload: 'auto',
-          //     loop: false,
-          //     controls: true,
-          //     muted: false,
-          //     autoplay: false,
-          //   },
-          // },
-          // {
-          //   resolve: 'gatsby-remark-video',
-          //   options: {
-          //     width: 'auto',
-          //     height: 'auto',
-          //     preload: 'auto',
-          //     muted: true,
-          //     autoplay: true,
-          //     playsinline: true,
-          //     controls: true,
-          //     loop: true,
-          //   },
-          // },
           'gatsby-remark-numbered-footnotes',
           {
             resolve: 'gatsby-remark-embed-soundcloud',
@@ -210,20 +156,6 @@ module.exports = {
               autoplay: false, // default is false
             },
           },
-          // {
-          //   resolve: '@weknow/gatsby-remark-codepen',
-          //   options: {
-          //     theme: 'dark',
-          //     height: 400,
-          //   },
-          // },
-          // {
-          //   resolve: 'gatsby-remark-embed-gist',
-          //   options: {
-          //     username: 'tubone24',
-          //     includeDefaultCss: true,
-          //   },
-          // },
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
