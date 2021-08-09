@@ -9,7 +9,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
-    "@sentry/browser": "^5.30.0",
+    "@sentry/browser": "^6.11.0",
     "@sentry/react": "^6.11.0",
     "@sentry/tracing": "^5.30.0",
     "algoliasearch": "^4.10.3",
