@@ -13,7 +13,7 @@
     "@sentry/react": "^6.11.0",
     "@sentry/tracing": "^6.11.0",
     "algoliasearch": "^4.10.3",
-    "autocomplete.js": "^0.37.1",
+    "autocomplete.js": "^0.38.0",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "babel-polyfill": "^6.26.0",
