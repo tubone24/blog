@@ -8,7 +8,7 @@ tags:
   - Deno
   - GraphQL
   - Slack
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/8Ee3svy.png
 templateKey: blog-post
 ---
 体重が落ちてきました！
@@ -21,9 +21,9 @@ templateKey: blog-post
 
 ### スクリプトのTypeScript化
 
-前回～の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
+前回[Hasura CloudのGraphQLが便利すぎた話](https://blog.tubone-project24.xyz/2021/07/27/hasura-graphql#%E5%8F%8D%E7%9C%81)の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
 
-がしかし、あろうことかスクリプトはTypeScriptじゃなく、JavaScript(ES module)でした。
+がしかし、あろうことかスクリプトは**TypeScript**じゃなく、**JavaScript(ES module)**でした。
 
 どうして、TypeScriptにしなかったかというと、
 
@@ -55,13 +55,15 @@ https://hashrock.hatenablog.com/entry/2019/02/04/040505
 
 実際、Denoで動かそうがNodeで動かそうがあまり違いがないと思ってたのですが細かい違いがありました。(初心者)
 
-まず、基本的なことですがビルトインの機能がすべてDenoにくるまってます。
+まず、基本的なことですがビルトインの機能がすべて**Deno**に内包されてます。
 
 なので環境変数は
 
+```
 const imgurClientId = Deno.env.get('IMGUR_CLIENT_ID') as string;
+```
 
-のように取得します。process.envではないんですね。
+のように取得します。**process.env**ではないんですね。
 あとas stringという記述がありますがas stringしておかないと、fetch関数に渡すときTypeErrorとなってしまいます。
 
 Denoにはnpmやらpackage.jsonのようなモジュール管理がランタイムに内蔵されているため、importはURLで参照します。
@@ -72,7 +74,7 @@ Denoにはnpmやらpackage.jsonのようなモジュール管理がランタイ�
 
 (でもaxios使いたいマンなので、喜び半分くらいですね。)
 
-あと便利だなと思ったのはtop levelのコードでawaitって書いていいことですね。これはありがたい。
+あと便利だなと思ったのはtop levelのコードで**await**って書いていいことですね。これはありがたい。
 
 
 ```typescript
