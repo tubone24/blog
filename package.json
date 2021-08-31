@@ -64,7 +64,7 @@
     "gray-percentage": "^2.0.0",
     "highlight.js": "^11.2.0",
     "html-minifier": "^4.0.0",
-    "intersection-observer": "^0.7.0",
+    "intersection-observer": "^0.12.0",
     "lozad": "^1.16.0",
     "md5": "^2.3.0",
     "node-sass": "^4.14.1",
