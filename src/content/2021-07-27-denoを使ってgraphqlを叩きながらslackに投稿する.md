@@ -62,11 +62,17 @@ https://hashrock.hatenablog.com/entry/2019/02/04/040505
 const imgurClientId = Deno.env.get('IMGUR_CLIENT_ID') as string;
 
 のように取得します。process.envではないんですね。
-あとas stringという記述がありますがこれはこのあとのfetch部分で効いてきます。
+あとas stringという記述がありますがas stringしておかないと、fetch関数に渡すときTypeErrorとなってしまいます。
 
 Denoにはnpmやらpackage.jsonのようなモジュール管理がランタイムに内蔵されているため、importはURLで参照します。
 
-もちろんCommonJSのrequireなんてありません。
+もちろんCommonJSのrequireなんてありません。なので、requireしていた部分も書き直しです。
+
+やはり便利だなと思ったのは**サーバーでfetchが使える**ことでしょうか？cross-fetchとか入れないでいいんですよ！
+
+(でもaxios使いたいマンなので、喜び半分くらいですね。)
+
+あと便利だなと思ったのはtop levelのコードでawaitって書いていいことですね。これはありがたい。
 
 
 ```typescript
@@ -141,3 +147,9 @@ const slackHeaders = {
 
 await fetch(slackWebhookUrl, {method: 'POST', headers: slackHeaders, body: JSON.stringify(slackPayload)})
 ```
+
+## 結論
+
+使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います！！！！
+
+
