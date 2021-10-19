@@ -34,14 +34,14 @@ module.exports = {
         enable: isNetlifyProduction,
       },
     },
-    {
-      resolve: 'gatsby-plugin-purgecss',
-      options: {
-        printRejected: true,
-        ignore: ['static/']
+    // {
+    //   resolve: 'gatsby-plugin-purgecss',
+    //   options: {
+    //     printRejected: true,
+    //     ignore: ['static/']
 
-      },
-    },
+    //   },
+    // },
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },

@@ -4,7 +4,6 @@ import Sidebar from '../components/Sidebar';
 import Content from '../components/Content';
 import ShareBox from '../components/ShareBox';
 import SEO from '../components/SEO';
-import Heatmap from '../components/Heatmap';
 
 const html = `
   <h1>Who am I?</h1>
@@ -112,14 +111,6 @@ class About extends Component {
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
           <Content post={html} />
-          <div style={{
-            padding: 30,
-            background: 'white',
-          }}
-          >
-            <h3>更新頻度</h3>
-            <Heatmap />
-          </div>
         </div>
 
         <ShareBox url="https://blog.tubone-project24.xyz/about" />
