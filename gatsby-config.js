@@ -35,6 +35,14 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-purgecss',
+      options: {
+        printRejected: true,
+        ignore: ['static/']
+
+      },
+    },
+    {
       resolve: 'gatsby-remark-copy-linked-files',
     },
     {
