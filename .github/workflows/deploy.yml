@@ -15,7 +15,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.OS }}-14-build-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.OS }}-node14-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-node14-build-
             ${{ runner.OS }}
