@@ -15,9 +15,9 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.OS }}-14-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-14-build-
             ${{ runner.OS }}
       - name: Setup Node
         uses: actions/setup-node@v1
