@@ -11,7 +11,6 @@ const eslintrc = {
       'react-router-dom',
       'config',
       'react-helmet',
-      // 'prop-types',
     ],
     parserOptions: {
       parser: 'babel-eslint'

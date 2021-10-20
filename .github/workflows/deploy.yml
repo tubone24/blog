@@ -15,18 +15,19 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.OS }}-node14-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-node14-build-
             ${{ runner.OS }}
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: npm install
         run: |
           npm install
           npx cypress install
+          npm rebuild node-sass
       - name: Test E2E
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
