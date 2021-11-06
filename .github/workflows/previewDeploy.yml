@@ -20,7 +20,7 @@ jobs:
             ${{ runner.OS }}-node14-build-
             ${{ runner.OS }}
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 14.x
       - name: npm install
@@ -56,7 +56,7 @@ jobs:
             ${{ runner.OS }}-build-
             ${{ runner.OS }}
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 12.x
       - name: npm install and build
