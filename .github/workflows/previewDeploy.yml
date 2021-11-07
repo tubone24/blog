@@ -40,6 +40,10 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
         run: npm run test:e2e:ci
+      - uses: actions/upload-artifact@v2
+        with:
+          name: main.spec.js.mp4
+          path: ./cypress/videos/e2e/main.spec.js.mp4
 
   build:
     runs-on: ubuntu-latest
