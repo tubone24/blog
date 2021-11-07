@@ -24,7 +24,6 @@ const Navbar = () => (
             category: 'User',
             action: 'Click navbar logo',
           });
-          // gotoPage('/');
           navigate(withPrefix('/'));
         }}
       >
