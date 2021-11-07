@@ -21,7 +21,7 @@
     "gatsby": "^2.32.13",
     "gatsby-link": "^2.11.0",
     "gatsby-paginate": "^1.1.1",
-    "gatsby-plugin-algolia": "^0.22.0",
+    "gatsby-plugin-algolia": "^0.23.0",
     "gatsby-plugin-cdn-files": "0.0.3",
     "gatsby-plugin-feed": "^2.13.1",
     "gatsby-plugin-flexsearch": "^1.0.3",
