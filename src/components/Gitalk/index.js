@@ -1,18 +1,27 @@
-import React, {useEffect} from 'react'
+import React, {Component} from 'react'
 const isBrowser = typeof window !== 'undefined';
 const Gitalk = isBrowser ? require('gitalk') : undefined;
 
-const GitalkFC = (id, title, clientId, clientSecret) => {
-  useEffect(() => {
+class GitalkFC extends Component {
+  constructor(props) {
+    super(props);
+    this.id = this.props.id;
+    this.title = this.props.title;
+    this.clientId = this.props.clientId;
+    this.clientSecret = this.props.clientSecret;
+  }
+  componentDidMount() {
     const GitTalkInstance = new Gitalk({
-      clientID: clientId,
-      clientSecret,
-      title,
-      id,
+      clientID: this.clientId,
+      clientSecret: this.clientSecret,
+      title: this.title,
+      id: this.id,
     });
     GitTalkInstance.render('gitalk-container');
-  }, []);
-  return (<div id="gitalk-container" />);
+  }
+  render() {
+    return (<div id="gitalk-container" />);
+  }
 }
 
 export default GitalkFC

@@ -1,7 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
 
 // Components
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
+import loadable from '@loadable/component'
 import { graphql } from 'gatsby';
 
 import 'gitalk/dist/gitalk.css';
@@ -16,7 +17,7 @@ import Header from '../components/Header';
 // import TableOfContent from '../components/TableOfContent';
 import ShareBox from '../components/ShareBox';
 import TimeToRead from '../components/TimeToRead';
-const Gitalk = React.lazy(() => import('../components/Gitalk'));
+const Gitalk = loadable(() => import('../components/Gitalk'));
 
 // Styles
 import './blog-post.scss';
@@ -55,9 +56,7 @@ class BlogPost extends Component {
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
           <TimeToRead words={this.props.pageContext.words} minutes={this.props.pageContext.minutes} />
           <Content post={this.props.pageContext.repHtml} />
-          <Suspense fallback={<div>Loading...</div>}>
-            <Gitalk id={id || graphqlId} title={title} clientId={process.env.GATSBY_GITHUB_CLIENT_ID} clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET}/>
-          </Suspense>
+          <Gitalk id={id || graphqlId} title={title} clientId={process.env.GATSBY_GITHUB_CLIENT_ID} clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET}/>
           <RelatedPosts post={node} />
         </div>
 
