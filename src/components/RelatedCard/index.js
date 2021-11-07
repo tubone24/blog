@@ -5,10 +5,6 @@ import { parseImgur } from '../../api/images';
 
 import './index.scss';
 import Tag from '../Tag';
-// const imageStyle = (headerImage, color) => ({
-//   backgroundColor: `#${color}`,
-//   backgroundImage: ` url(${parseImgur(headerImage, 'large')})`,
-// });
 
 const imageStyle = (headerImage) => (
   `${parseImgur(headerImage, 'large')}`

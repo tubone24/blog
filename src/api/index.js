@@ -17,11 +17,7 @@ const getCurrentPage = () => {
   return 0;
 };
 
-// const getPath = () => (isBrowser() ? window.location.pathname : '');
-
 const getMaxPages = (amount) => Math.ceil(amount / 10);
-
-// const getPages = (amount) => new Array(amount).fill().map((_, index) => `/page/${index + 1}`);
 
 const overflow = () => getCurrentPage() === getMaxPages();
 
@@ -31,9 +27,7 @@ export {
   isBrowser,
   getCurrentPage,
   getMaxPages,
-  // getPages,
   overflow,
   parseDate,
-  // getPath,
   getPageNumber,
 };
