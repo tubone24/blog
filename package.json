@@ -4,6 +4,7 @@
   "version": "1.0.1",
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
+    "@loadable/component": "^5.15.0",
     "@sentry/browser": "^6.11.0",
     "@sentry/react": "^6.11.0",
     "@sentry/tracing": "^6.11.0",
