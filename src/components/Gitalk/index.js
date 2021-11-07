@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import 'gitalk/dist/gitalk.css';
 const isBrowser = typeof window !== 'undefined';
 const Gitalk = isBrowser ? require('gitalk') : undefined;
 

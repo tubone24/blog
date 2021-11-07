@@ -5,8 +5,6 @@ import React, { Component } from 'react';
 import loadable from '@loadable/component'
 import { graphql } from 'gatsby';
 
-import 'gitalk/dist/gitalk.css';
-
 import { parseDate } from '../api';
 
 import Sidebar from '../components/Sidebar';
