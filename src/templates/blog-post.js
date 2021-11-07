@@ -17,7 +17,7 @@ import Header from '../components/Header';
 // import TableOfContent from '../components/TableOfContent';
 import ShareBox from '../components/ShareBox';
 import TimeToRead from '../components/TimeToRead';
-const Gitalk = loadable(() => import('../components/Gitalk'));
+const Gitalk = loadable(() => import(/* webpackPrefetch: true */ '../components/Gitalk'));
 
 // Styles
 import './blog-post.scss';
