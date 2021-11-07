@@ -42,6 +42,7 @@ jobs:
         run: npm run test:e2e:ci
   build:
     runs-on: ubuntu-latest
+    needs: ['test']
 
     steps:
       - name: Checkout source code
@@ -82,6 +83,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
   lighthouse:
     runs-on: macos-latest
+    needs: ['build']
     steps:
       - uses: actions/checkout@v2
 
