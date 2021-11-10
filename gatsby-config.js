@@ -34,22 +34,16 @@ module.exports = {
         enable: isNetlifyProduction,
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-purgecss',
-    //   options: {
-    //     printRejected: true,
-    //     ignore: ['static/']
-
-    //   },
-    // },
     {
       resolve: 'gatsby-remark-copy-linked-files',
     },
     {
-      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
-        openAnalyzer: false,
-        production: true,
+        analyzerMode: 'static',
+        reportFilename: 'bundle-report.html',
+        generateStatsFile: true,
+        statsFilename: 'bundle-stats.json',
       },
     },
     {
