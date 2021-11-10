@@ -91,14 +91,14 @@ jobs:
           NETLIFY_ENV: production
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
         run: npm run build
-     - name: Push Bundle Analyze
-       uses: peaceiris/actions-gh-pages@v3
-       with:
-         github_token: ${{ secrets.GITHUB_TOKEN }}
-         publish_dir: ./public/bundle-report.html
-         keep_files: true
-     - name: Remove Bundle Analyze
-       run: rm ./public/bundle-report.html
+      - name: Push Bundle Analyze
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public/bundle-report.html
+          keep_files: true
+      - name: Remove Bundle Analyze
+        run: rm ./public/bundle-report.html
       - name: Deploy to netlify
         run: npx netlify-cli deploy --prod --dir=./public
         env:
