@@ -47,7 +47,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: bundle_analyzer.png
-          path: ./cypress/snapshots/actual/e2e/bundle_analyzer.png
+          path: ./cypress/snapshots/actual/e2e/main.spec.js/bundle_analyzer.png
 
   build:
     runs-on: ubuntu-latest
