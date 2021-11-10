@@ -44,6 +44,10 @@ jobs:
         with:
           name: main.spec.js.mp4
           path: ./cypress/videos/e2e/main.spec.js.mp4
+      - uses: actions/upload-artifact@v2
+        with:
+          name: bundle_analyzer.png
+          path: ./cypress/snapshots/actual/e2e/bundle_analyzer.png
 
   build:
     runs-on: ubuntu-latest
@@ -63,7 +67,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: npm install and build
+      - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
           GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
@@ -74,9 +78,19 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
-        run: |
-          npm install
-          npm run build
+        run: npm install
+      - name: npm build
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          GATSBY_GITHUB_SHA: ${{ github.sha }}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          NETLIFY_ENV: deploy-preview
+        run: npm run build
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public > cli.txt
         env:
