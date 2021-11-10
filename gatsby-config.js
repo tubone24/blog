@@ -42,8 +42,6 @@ module.exports = {
       options: {
         analyzerMode: 'static',
         reportFilename: 'bundle-report.html',
-        generateStatsFile: true,
-        statsFilename: 'bundle-stats.json',
       },
     },
     {
