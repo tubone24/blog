@@ -105,7 +105,7 @@
     "browserslist": "npx browserslist"
   },
   "devDependencies": {
-    "@babel/core": "7.15.0",
+    "@babel/core": "7.16.0",
     "babel-eslint": "10.1.0",
     "babel-plugin-transform-runtime": "6.23.0",
     "cross-env": "7.0.3",
