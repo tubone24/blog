@@ -111,7 +111,7 @@ jobs:
                ${URL}
       - name: "depcheck"
         uses: tubone24/depcheck_action@v.0.0.1
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.comments_url }}
 
