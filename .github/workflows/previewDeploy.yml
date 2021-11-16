@@ -110,7 +110,7 @@ jobs:
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                ${URL}
       - name: "depcheck"
-        uses: tubone24/depcheck_action@v0.0.1
+        uses: tubone24/depcheck_action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.comments_url }}
