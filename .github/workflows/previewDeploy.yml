@@ -79,6 +79,11 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
         run: npm install
+      - name: "depcheck"
+        uses: tubone24/depcheck_action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.comments_url }}
       - name: npm build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -109,9 +114,4 @@ jobs:
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                ${URL}
-      - name: "depcheck"
-        uses: tubone24/depcheck_action@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          URL: ${{ github.event.pull_request.comments_url }}
 
