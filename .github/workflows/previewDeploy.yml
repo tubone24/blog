@@ -69,9 +69,9 @@ jobs:
           node-version: 14.x
       - name: "depcheck"
         uses: tubone24/depcheck_action@main
-        env:
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          URL: ${{ github.event.pull_request.comments_url }}
+          PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
       - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
