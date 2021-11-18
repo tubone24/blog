@@ -18,7 +18,7 @@
     "dotenv": "10.0.0",
     "faunadb": "4.3.0",
     "flexboxgrid": "6.3.1",
-    "gatsby": "2.32.13",
+    "gatsby": "3.0.0",
     "gatsby-link": "2.11.0",
     "gatsby-paginate": "1.1.1",
     "gatsby-plugin-algolia": "0.23.1",
