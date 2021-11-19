@@ -67,6 +67,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - name: "depcheck"
+        uses: tubone24/depcheck_action@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
       - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -109,3 +114,4 @@ jobs:
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                ${URL}
+
