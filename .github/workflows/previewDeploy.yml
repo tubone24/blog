@@ -11,18 +11,15 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-node14-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-node14-build-
-            ${{ runner.OS }}
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
+        run: |
+          npm install -g rimraf
+          npm run clean-all
+          rimraf package-lock.json
       - name: npm install
         run: |
           npm install
@@ -44,10 +41,6 @@ jobs:
         with:
           name: main.spec.js.mp4
           path: ./cypress/videos/e2e/main.spec.js.mp4
-      - uses: actions/upload-artifact@v2
-        with:
-          name: bundle_analyzer.png
-          path: ./cypress/snapshots/actual/e2e/main.spec.js/bundle_analyzer.png
 
   build:
     runs-on: ubuntu-latest
@@ -55,18 +48,15 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
+        run: |
+          npm install -g rimraf
+          npm run clean-all
+          rimraf package-lock.json
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.0.0
         with:
@@ -95,7 +85,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
-        run: npm run build
+        run: npm run build:nocache
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public > cli.txt
         env:

@@ -11,14 +11,11 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-node14-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-node14-build-
-            ${{ runner.OS }}
+      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
+        run: |
+          npm install -g rimraf
+          npm run clean-all
+          rimraf package-lock.json
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -51,14 +48,11 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}
+      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
+        run: |
+          npm install -g rimraf
+          npm run clean-all
+          rimraf package-lock.json
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
