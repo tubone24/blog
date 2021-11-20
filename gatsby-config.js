@@ -127,11 +127,11 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: 'gatsby-plugin-algolia',
-      // eslint-disable-next-line global-require
-      options: require('./gatsby-plugin-algolia-config.js'),
-    },
+    // { // comment out because reach free request
+    //   resolve: 'gatsby-plugin-algolia',
+    //   // eslint-disable-next-line global-require
+    //   options: require('./gatsby-plugin-algolia-config.js'),
+    // },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
