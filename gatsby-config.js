@@ -185,6 +185,9 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-sitemap',
+      options: {
+        output: '/public'
+      },
     },
     {
       resolve: 'gatsby-plugin-nprogress',
