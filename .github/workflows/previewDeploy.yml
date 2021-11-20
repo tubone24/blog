@@ -15,10 +15,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: cache clear because of mejor update
+      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
         run: |
           npm install -g rimraf
           npm run clean-all
+          rimraf package-lock.json
       - name: npm install
         run: |
           npm install
@@ -50,11 +51,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 14.17.3
-      - name: cache clear because of mejor update
+          node-version: 14.x
+      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
         run: |
           npm install -g rimraf
           npm run clean-all
+          rimraf package-lock.json
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.0.0
         with:
