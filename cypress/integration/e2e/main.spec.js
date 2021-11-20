@@ -19,10 +19,3 @@ describe("UI Test", () => {
     cy.window().its('scrollY').should('be.lt', 100);
   });
 });
-
-describe("Capture Bundle Analyzer", () => {
-  it('Bundle Report', ()=>{
-    cy.visit("/bundle-report.html");
-    cy.screenshot('bundle_analyzer')
-  })
-});
