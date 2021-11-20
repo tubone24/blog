@@ -96,6 +96,7 @@
     "test:e2e:base": "start-server-and-test develop http://localhost:8000 cypress:base",
     "functions": "netlify-lambda serve functions",
     "clean": "rimraf public/ .cache/",
+    "clean-all": "rimraf public/ .cache/ node_modules/",
     "revert": "node ./scripts/revertConfig.js",
     "bootstrap": "netlify dev:exec node ./scripts/bootstrap-fauna-database.js",
     "build:functions": "netlify-lambda build functions -c ./webpack.config.js",

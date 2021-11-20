@@ -15,6 +15,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - name: cache clear because of mejor update
+        run: npm run clean-all
       - name: npm install
         run: |
           npm install
@@ -47,6 +49,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - name: cache clear because of mejor update
+        run: npm run clean-all
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.0.0
         with:
@@ -75,7 +79,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
-        run: npm run build
+        run: npm run build:nocache
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public > cli.txt
         env:
