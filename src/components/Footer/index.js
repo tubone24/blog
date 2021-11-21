@@ -31,7 +31,7 @@ const Footer = () => (
             &nbsp;&nbsp;
             <Link to={withPrefix('/privacy-policies')} href={withPrefix('/privacy-policies')} title="Privacy Policies">Privacy Policies</Link>
             &nbsp;&nbsp;Here is &nbsp;
-            <a href="/sitemap.xml" title="sitemap">Sitemap</a>
+            <a href="/sitemap-index.xml" title="sitemap">Sitemap</a>
           </p>
         </div>
       </div>
