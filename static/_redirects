@@ -1,3 +1,5 @@
 /feed/ /rss.xml 301
 /rss/ /rss.xml 301
 /index.xml/ /rss.xml 301
+/sitemap/ /sitemap-index.xml 301
+/sitemap.xml /sitemap-index.xml 301
