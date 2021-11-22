@@ -58,7 +58,7 @@ jobs:
           npm run clean-all
           rimraf package-lock.json
       - name: "depcheck"
-        uses: tubone24/depcheck_action@v1.0.0
+        uses: tubone24/depcheck_action@v1.1.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
