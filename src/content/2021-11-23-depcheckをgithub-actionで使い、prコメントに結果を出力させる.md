@@ -100,40 +100,61 @@ Missing dependencies
 
 そしてその結果を通知してくれたらさらにうれしいですよね。
 
-作りました。
+そこで、GitHub Actionsを作りました。
 
-使い方は簡単でお手元のGitHub Actionsで
+<https://github.com/marketplace/actions/depcheck-action-with-pr>
 
-コード
+使い方は簡単でお手元のGitHub Actionsでまず、Pull RequestをトリガーにしたYAMLを作ります。
+
+このとき、入力としてGitHub TokenとPRコメントのURLが必要になりますが、これらはGitHub Actionsの環境変数として取得できます。
+
+どちらもGitHub Actionsの環境変数として取得できます。
+
+
+- GITHUB_TOKEN
+  - これはsecrets.GITHUB_TOKENとして取得できます。
+- PR_COMMENT_URL
+  - PRイベントの際に、github.event.pull_request.comments_urlから取得できます。
+
+
+```yaml
+on:
+  pull_request:
+    branches:
+      - master
+      
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: "depcheck"
+        uses: tubone24/depcheck_action@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
+```
 
 のようにuseすればいいだけ。
 
 そうすれば、PRコメントとして結果が出力されます。
 
+![img](https://i.imgur.com/x0HzZEF.png)
+
+- Unused dependenciesセクションは、package.jsonのdependenciesで定義されたライブラリが、.js、.ts、.jsx、.tsx、.coffee、.sass、.scss、.vueの各ファイルで使用されていないことを示しています。
+- Unused devDpendenciesセクションは、package.jsonのdevDependenciesで定義されたライブラリが各ファイルに存在しないことを示しています。
+- Missingセクションは、コードで使用されているライブラリがpackage.jsonに存在していないことを示しています。CDNからインポートされたライブラリや、グローバルに宣言されたライブラリを使用している可能性があります。
+
 ## まとめ
 
-自分が欲してたものなのでサクッと作ってみたが、めんどくさかったのでGitHub ActionsはDockerで作ってしまったので、もっと丁寧に作ってもよかったと大後悔。
+自分が欲してたものなのでサクッと作ってみたが、めんどくさかったので[GitHub ActionsはDockerで作ってしまった](https://docs.github.com/ja/actions/creating-actions/creating-a-docker-container-action)ので、主にスピード面で課題があります。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+一応、base imageを作って高速化はしてますが、Full JavaScriptで作って、もっと丁寧に作ってもよかったと大後悔。
 
 
 
