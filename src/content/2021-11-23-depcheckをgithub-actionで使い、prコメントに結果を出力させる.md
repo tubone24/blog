@@ -92,6 +92,27 @@ Missing dependencies
 * babel-plugin-remove-graphql-queries: .\.storybook\main.js
 ```
 
+このようにpackage.jsonで定義されているにも関わらずコード上で使われてないライブラリ、もしくはコード上で見つかったけどpackage.jsonに定義されてないライブラリを一覧化することができます。
+
+## これをGitHub Actionsに組み込みたい
+
+やはり、PRを出したときに自動でdepcheckが走るといいですよね。
+
+そしてその結果を通知してくれたらさらにうれしいですよね。
+
+作りました。
+
+使い方は簡単でお手元のGitHub Actionsで
+
+コード
+
+のようにuseすればいいだけ。
+
+そうすれば、PRコメントとして結果が出力されます。
+
+## まとめ
+
+自分が欲してたものなのでサクッと作ってみたが、めんどくさかったのでGitHub ActionsはDockerで作ってしまったので、もっと丁寧に作ってもよかったと大後悔。
 
 
 
