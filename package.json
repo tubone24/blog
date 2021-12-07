@@ -5,9 +5,9 @@
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
     "@loadable/component": "5.15.0",
-    "@sentry/browser": "6.15.0",
-    "@sentry/react": "6.15.0",
-    "@sentry/tracing": "6.15.0",
+    "@sentry/browser": "6.16.0",
+    "@sentry/react": "6.16.0",
+    "@sentry/tracing": "6.16.0",
     "algoliasearch": "4.11.0",
     "autocomplete.js": "0.38.0",
     "axios": "0.24.0",
