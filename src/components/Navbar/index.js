@@ -32,9 +32,9 @@ const Navbar = () => (
       <button
         className="navbar-toggler"
         type="button"
-        data-toggle="collapse"
+        data-bs-toggle="collapse"
         aria-label="navbar-toggler"
-        data-target="#navbarSupportedContent"
+        data-bs-target="#navbarSupportedContent"
       >
         <span className="icon-bars" />
       </button>

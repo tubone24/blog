@@ -170,3 +170,11 @@
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
+
+a {
+  text-decoration: none;
+}
+
+:root {
+  scroll-behavior: auto;
+}
