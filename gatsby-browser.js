@@ -5,6 +5,11 @@ import { Integrations } from '@sentry/tracing';
 import 'prismjs/themes/prism-solarizedlight.css';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 import './src/styles/global.scss';
+import { Dropdown } from 'bootstrap/dist/js/bootstrap';
+
+// import('bootstrap/dist/js/bootstrap').then(_ => {
+//   console.log("lazy");
+// });
 
 const isLocalDevelopment = () => window && window.location && window.location.origin !== 'https://blog.tubone-project24.xyz';
 
