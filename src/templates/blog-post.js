@@ -51,7 +51,7 @@ class BlogPost extends Component {
           subTitle={parseDate(date)}
         />
         <Sidebar />
-        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
+        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
           <TimeToRead words={this.props.pageContext.words} minutes={this.props.pageContext.minutes} />
           <Content post={this.props.pageContext.repHtml} />
           <Gitalk id={id || graphqlId} title={title} clientId={process.env.GATSBY_GITHUB_CLIENT_ID} clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET}/>

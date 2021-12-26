@@ -17,7 +17,7 @@ const TagPage = ({ data, pageContext }) => {
       >
         <Sidebar />
 
-        <div className="col-xl-10 col-lg-7 col-md-12 col-xs-12 order-2">
+        <div className="col order-2">
           <div
             className="col-12"
             style={{

@@ -27,7 +27,7 @@ const PeriodSummary = ({ data, pageContext }) => {
       >
         <Sidebar />
 
-        <div className="col-xl-10 col-lg-7 col-md-12 col-xs-12 order-2 period">
+        <div className="col order-2 period">
           <h2>
             {title}
           </h2>

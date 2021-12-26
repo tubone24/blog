@@ -109,7 +109,7 @@ class About extends Component {
           subTitle="20xx/xx/xx"
         />
         <Sidebar />
-        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-10 content">
+        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
           <Content post={html} />
         </div>
 

@@ -76,7 +76,7 @@ const Page = ({ pageContext, location }) => {
           ))}
 
           <div
-            className="row"
+            className="row pager"
             style={{
               justifyContent: 'space-around',
               marginBottom: '20px',
