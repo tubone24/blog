@@ -49,5 +49,6 @@ module.exports = {
   appId: process.env.GATSBY_ALGOLIA_APP_ID,
   apiKey: process.env.GATSBY_ALGOLIA_ADMIN_API_KEY,
   indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+  skipIndexing: process.env.NETLIFY_ENV !== 'production',
   queries,
 };
