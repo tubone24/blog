@@ -27,14 +27,16 @@ templateKey: blog-post
 さすがに[2019年にサポート対象外](https://blog.getbootstrap.com/2019/07/24/lts-plan/)となっているフレームワークを使い続けるのはどうかと思っておりましたが、別に動いているしいいかと思い放置していました。
 
 が、しかしさすがに今年の汚れ今年のうちにと思い立ち、思い切って脱Bootstrapを考え、[Tailwind](https://tailwindcss.com/)とか[daisyUI](https://daisyui.com/)とか、[tailwind-bootstrap-grid
-](https://tailwind-bootstrap-grid.netlify.app/)とか色々試した結果、めんどくさくなってBootstrap v5に移行することにしました。
+](https://tailwind-bootstrap-grid.netlify.app/)とか色々試した結果、めんどくさくなって**Bootstrap v5**に移行することにしました。
 
 ## 問題点
 
 BootStrap v3で動いていたこのブログのソースを見てもらえばわかるのですが、Gatsby.jsで動いているブログなのに、Bootstrapは **&lt;script&gt;** タグを使ってCDNライクに使ってました。(CDN配信ではありません。ここらへんも闇です。)
   
-Gatsby.jsでは**html.(j|t)sx**というファイルを作ることでHTMLファイルのビルド時に任意のタグを埋め込むことができます。それを**悪用**して次のようにBootstrapのCSSをlinkタグで、jQueryとBootstrapのJSをscriptタグでそれぞれ配信して使っている形となっておりました。
-  
+Gatsby.jsでは**html.js**というファイルを作ることでHTMLファイルのビルド時に任意のタグを埋め込むことができます。
+
+それを**悪用**して次のようにBootstrapのCSSを **&lt;link&gt;** タグで、jQueryとBootstrapのJSを **&lt;script&gt;** タグでそれぞれ配信されたものを使っている形となっておりました。
+
 
 ```javascript
 import React from 'react';
@@ -85,7 +87,7 @@ export default HTML;
 
 ## いざ直す旅へ
 
-ということで早速直していきましょう。冒頭でもお話しましたが、やはり最近のトレンド的にTailwindで行きたいですよね!!!!!! (行きたいです〜)
+ということで早速直していきましょう。冒頭でもお話しましたが、やはり最近のトレンド的に[Tailwind](https://tailwindcss.com/)で行きたいですよね!!!!!! (行きたいです〜)
 
 というわけで[Tailwind](https://tailwindcss.com/)を利用する決断をするのですがやってみて次のような悩みが出てきました。
   
@@ -95,7 +97,7 @@ export default HTML;
 
 探していたら、[daisyUI](https://daisyui.com/)というBootstrapライクなUtility classがあったので使ってみましたが、自分の環境だとほぼ置き換えなしでできそうなのがボタンくらいでした。
 
-加えてめんどくさいのはこのブログのGridです。ある意味Bootstrapから抜けることのできない一番の理由がGridかもしれません。いや...ちゃんと作り直せばいいだけなんですけどね。
+加えてめんどくさいのはこのブログの**Gridシステム**です。ある意味Bootstrapから抜けることのできない一番の理由がGridかもしれません。いや...ちゃんと作り直せばいいだけなんですけどね。
   
 困り果てていると[tailwind-bootstrap-grid](https://tailwind-bootstrap-grid.netlify.app/)というまたもや便利そうなものが出てくるじゃあありませんか。しかしこれも導入を断念しました。
   
@@ -115,9 +117,9 @@ node-sassやめてPostCSSにすれば直りそうですが、年末にCSSをい�
 
 ## やったこと
 
-まず、html.jsでの**<script>**タグ利用でのBootstrapをやめました。
+まず、html.jsでの **&lt;script&gt;** タグでのBootstrap利用をやめました。
 
-Gatsby.jsではgatsby-browser.jsを使って、ブラウザー側で利用したいモジュールを設定することができますのでこちらにCSSとJSをimportするようにします。
+Gatsby.jsでは**gatsby-browser.js**を使って、ブラウザー側で利用したいモジュールを設定することができますのでこちらにCSSとJSをimportするようにします。
 
 ```javascript
 import './src/styles/global.scss';
@@ -131,6 +133,7 @@ import { Dropdown } from 'bootstrap/dist/js/bootstrap';
 ### Dropdown menuの変更
 
 Dropdown menuのtoggle buttonの実装方法がちょっとだけ変わってました。 **data-toggle**と**data-target**がそれぞれ**data-bs-toggle**、**data-bs-target**に変わっただけです。
+
 ```javascript
 // before
   <button
@@ -171,7 +174,7 @@ Columnの順番を制御できるOrderですが今までは無邪気にorder-10�
 
 ### デフォルトでaタグにtext-decoration: underlineがつく
 
-といういらない変更が入っていたので、こちらはglobal.scssでnoneを上書きします。
+といういらない変更が入っていたので、こちらは**global.scss**でnoneを上書きします。
     
 ![underlineがつく](https://i.imgur.com/RRvEIHy.png)
 
@@ -184,7 +187,7 @@ a {
   
 ### デフォルトでscroll-behavior smoothがつく
 
-というおせっかいが入っているのでこちらもglobal.scssで無効化します。別にあってもいいかなとも思ったのですが、画像のLazy loadingとの相性が最悪で遷移先のページでうまく画像を読み込んでくれなかったので無効化します。
+というおせっかいが入っているのでこちらもglobal.scssで無効化します。別にあってもいいかなとも思ったのですが、画像の**Lazy loading**との相性が最悪で遷移先のページでうまく画像を読み込んでくれなかったので無効化します。
  
 ```css
 :root {
@@ -198,7 +201,7 @@ a {
 
 さてこれでBootstrap v5化はできました。Tailwindを使おうと思った理由はPurgeだったので、Purgeしてしまいます。
 
-Gatsby.jsではCSSのPurgeに**gatsby-plugin-purgecss**が利用できます。今回はglobal.scssにBootstrapのCSSをimportしているのでgatsby-config.jsに次のように設定してあげることで利用してないCSS RuleをPurgeしてくれます。
+Gatsby.jsではCSSのPurgeに**gatsby-plugin-purgecss**が利用できます。今回はglobal.scssにBootstrapのCSSをimportしているので**gatsby-config.js**に次のように設定してあげることで利用してないCSS RuleをPurgeしてくれます。
 
 ```javascript
     {
@@ -220,6 +223,8 @@ Gatsby.jsではCSSのPurgeに**gatsby-plugin-purgecss**が利用できます。�
 ちなみに、Purgeの効果あってかわかりませんが、Lighthouseのパフォーマンススコアは次のとおりでした。
 
 ![lighthouse](https://i.imgur.com/FX0kdBo.png)
+
+ちなみに、このブログはなんでTypeScriptでリライトしないのか？という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。
  
 ## 最後に
 
