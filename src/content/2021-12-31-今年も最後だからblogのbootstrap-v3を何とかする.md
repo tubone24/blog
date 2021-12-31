@@ -123,7 +123,7 @@ Gatsby.jsでは**gatsby-browser.js**を使って、ブラウザー側で利用�
 
 ```javascript
 import './src/styles/global.scss';
-import { Dropdown } from 'bootstrap/dist/js/bootstrap';
+import { Dropdown } from 'bootstrap/dist/js/bootstrap'; //　必要なJSモジュールはDropdownなので
 
 // global.scssには @import "~bootstrap/scss/bootstrap.scss"; という形でBootstrapのCSSをimportする
 ```
