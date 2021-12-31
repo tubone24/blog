@@ -20,9 +20,9 @@ templateKey: blog-post
 
 ## 今年の汚れ今年のうちに。
 
-ということで、長らく超技術負債となってしまっていたこのブログをなんとかします。
+ということで、長らく超技術負債となってしまっていた**このブログ**をなんとかします。
 
-このブログは、Gatsby.jsをGitHub ActionsでビルドしてNetlifyにデプロイして作られているのですが、CSSフレームワークはBootstrap v3.5.1を使って作られていました。
+このブログは、Gatsby.jsをGitHub ActionsでビルドしてNetlifyにデプロイして作られているのですが、CSSフレームワークは**Bootstrap v3.5.1**を使って作られていました。
 
 さすがに[2019年にサポート対象外](https://blog.getbootstrap.com/2019/07/24/lts-plan/)となっているフレームワークを使い続けるのはどうかと思っておりましたが、別に動いているしいいかと思い放置していました。
 
@@ -31,7 +31,7 @@ templateKey: blog-post
 
 ## 問題点
 
-BootStrap v3で動いていたこのブログのソースを見てもらえばわかるのですが、Gatsby.jsで動いているブログなのに、Bootstrapは**<script>**タグを使ってCDNライクに使ってました。(CDN配信ではありません。ここらへんも闇です。)
+BootStrap v3で動いていたこのブログのソースを見てもらえばわかるのですが、Gatsby.jsで動いているブログなのに、Bootstrapは **&lt;script&gt;** タグを使ってCDNライクに使ってました。(CDN配信ではありません。ここらへんも闇です。)
   
 Gatsby.jsでは**html.(j|t)sx**というファイルを作ることでHTMLファイルのビルド時に任意のタグを埋め込むことができます。それを**悪用**して次のようにBootstrapのCSSをlinkタグで、jQueryとBootstrapのJSをscriptタグでそれぞれ配信して使っている形となっておりました。
   
