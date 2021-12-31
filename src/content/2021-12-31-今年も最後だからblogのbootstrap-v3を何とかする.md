@@ -179,7 +179,6 @@ Columnの順番を制御できるOrderですが今までは無邪気にorder-10�
 ![underlineがつく](https://i.imgur.com/RRvEIHy.png)
 
 ```css
-
 a {
   text-decoration: none;
 }
@@ -201,7 +200,7 @@ a {
 
 さてこれでBootstrap v5化はできました。Tailwindを使おうと思った理由はPurgeだったので、Purgeしてしまいます。
 
-Gatsby.jsではCSSのPurgeに**gatsby-plugin-purgecss**が利用できます。今回はglobal.scssにBootstrapのCSSをimportしているので**gatsby-config.js**に次のように設定してあげることで利用してないCSS RuleをPurgeしてくれます。
+Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgecss](https://www.gatsbyjs.com/plugins/gatsby-plugin-purgecss/)が利用できます。今回はglobal.scssにBootstrapのCSSをimportしているので**gatsby-config.js**に次のように設定してあげることで利用してないCSS RuleをPurgeしてくれます。
 
 ```javascript
     {
@@ -218,13 +217,13 @@ Gatsby.jsではCSSのPurgeに**gatsby-plugin-purgecss**が利用できます。�
 
 というわけで完成しました。
 
-今あなたが見ているブログがまさにBootstrap v5で動いているブログなわけです。
+今あなたが見ているブログがまさに**Bootstrap v5で動いているブログ**なわけです。
 
 ちなみに、Purgeの効果あってかわかりませんが、Lighthouseのパフォーマンススコアは次のとおりでした。
 
 ![lighthouse](https://i.imgur.com/FX0kdBo.png)
 
-ちなみに、このブログはなんでTypeScriptでリライトしないのか？という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。
+ちなみに、このブログは**なんでTypeScriptでリライトしないのか？**という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。
  
 ## 最後に
 
