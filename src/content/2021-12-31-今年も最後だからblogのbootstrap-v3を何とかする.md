@@ -223,7 +223,7 @@ Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgecss](https://www.gatsbyjs.com/p
 
 ![lighthouse](https://i.imgur.com/FX0kdBo.png)
 
-ちなみに、このブログは**なんでTypeScriptでリライトしないのか？**という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。
+ちなみに、このブログは **なんでTypeScriptでリライトしないのか？** という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。
  
 ## 最後に
 
