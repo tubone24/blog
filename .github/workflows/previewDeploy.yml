@@ -15,10 +15,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
+          cache: npm
+      - name: clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
         run: |
           npm install -g rimraf
-          npm run clean-all
           rimraf package-lock.json
       - name: npm install
         run: |
@@ -52,10 +52,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+          cache: npm
       - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
         run: |
           npm install -g rimraf
-          npm run clean-all
           rimraf package-lock.json
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.1.0
@@ -95,6 +95,7 @@ jobs:
         run: |
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
+          cat cli.txt
       - name: Post Netlify CLI Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

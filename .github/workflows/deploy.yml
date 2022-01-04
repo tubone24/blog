@@ -14,12 +14,12 @@ jobs:
       - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
         run: |
           npm install -g rimraf
-          npm run clean-all
           rimraf package-lock.json
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+          cache: npm
       - name: npm install
         run: |
           npm install
@@ -51,12 +51,12 @@ jobs:
       - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
         run: |
           npm install -g rimraf
-          npm run clean-all
           rimraf package-lock.json
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+          cache: npm
       - name: upgrade gitalk
         run: npm upgrade gitalk
       - name: npm install
