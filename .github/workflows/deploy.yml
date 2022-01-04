@@ -10,11 +10,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
-        run: |
-          npm install -g rimraf
-          rimraf package-lock.json
+ 
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
