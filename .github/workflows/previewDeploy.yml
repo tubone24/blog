@@ -16,10 +16,6 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
-      - name: clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
-        run: |
-          npm install -g rimraf
-          rimraf package-lock.json
       - name: npm install
         run: |
           npm install
@@ -53,10 +49,6 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
-      - name: cache clear workaround # https://github.com/gatsbyjs/gatsby/issues/31853#issuecomment-858517772
-        run: |
-          npm install -g rimraf
-          rimraf package-lock.json
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.1.0
         with:
