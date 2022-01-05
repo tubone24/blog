@@ -20,10 +20,7 @@ jobs:
       - name: npm install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
-          npm install
-          npx cypress install
-          npm rebuild node-sass
+        run: npm install
       - name: Test E2E
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
