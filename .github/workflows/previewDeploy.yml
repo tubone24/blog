@@ -89,9 +89,8 @@ jobs:
       - name: Cat cli.txt
         run: |
           cat cli.txt
-          sed -i -z 's/\n/\\n/g' cli.txt
-          sed -i -z 's/\t/    /g' cli.txt
-          cat cli.txt
+          cat cli.txt | tr '\n' '\\n' > cli2.txt
+          cat cli2.txt
       - name: Post Netlify CLI Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
