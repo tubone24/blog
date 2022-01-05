@@ -89,7 +89,7 @@ jobs:
       - name: Cat cli.txt
         run: |
           cat cli.txt
-          cat cli.txt | tr '\\n' '\\n' > cli2.txt
+          cat cli.txt | tr \\n \\\\n > cli2.txt
           cat cli2.txt
       - name: Post Netlify CLI Comment
         env:
