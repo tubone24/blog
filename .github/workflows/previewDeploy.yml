@@ -7,7 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -16,7 +15,11 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
       - name: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           npm install
           npx cypress install
@@ -49,6 +52,8 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.1.0
         with:
@@ -65,6 +70,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: npm install
       - name: npm build
         env:
