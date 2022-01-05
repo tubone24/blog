@@ -90,7 +90,7 @@ jobs:
         run: |
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
-          sed -i -z 's/ .+/\ /g' cli.txt
+          sed -i -z 's/\s/\ /g' cli.txt
           cat cli.txt
       - name: Post Netlify CLI Comment
         env:
