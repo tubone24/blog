@@ -47,8 +47,6 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
-      - name: upgrade gitalk
-        run: npm upgrade gitalk
       - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
