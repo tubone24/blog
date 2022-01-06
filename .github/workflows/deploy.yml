@@ -98,6 +98,8 @@ jobs:
 
       - name: Install lighthouse
         run: sudo npm i -g lighthouse
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Run lighthouse
         run: |
