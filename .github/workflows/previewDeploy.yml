@@ -7,7 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -16,11 +15,12 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
       - name: npm install
-        run: |
-          npm install
-          npx cypress install
-          npm rebuild node-sass
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm install
       - name: Test E2E
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -49,6 +49,8 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.1.0
         with:
@@ -65,6 +67,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: npm install
       - name: npm build
         env:
@@ -87,7 +90,7 @@ jobs:
         run: |
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
-          sed -i -z 's/\t/\    /g' cli.txt
+          sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
           cat cli.txt
       - name: Post Netlify CLI Comment
         env:
