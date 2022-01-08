@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 // import Friend from '../Friend';
-import Archive from '../Archive';
-import WordCloud from '../WordCloud';
-import LatestPost from '../LatestPost';
-import './index.scss';
+import Archive from "../Archive";
+import WordCloud from "../WordCloud";
+import LatestPost from "../LatestPost";
+import "./index.scss";
 
-const Information = ({ totalCount, posts, allPosts }) => (
+const Information = ({ totalCount, posts, allPosts }: {totalCount: number, posts: any, allPosts: any}) => (
   <div className="d-none d-lg-block information my-2">
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />

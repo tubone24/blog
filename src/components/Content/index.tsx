@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
-import lozad from 'lozad';
+import React, { Component } from "react";
+import lozad from "lozad";
 
-import { isBrowser } from '../../api';
+import { isBrowser } from "../../api";
 
-class Content extends Component {
-  constructor(props) {
+type Props = {
+  post: string;
+};
+
+class Content extends Component<Props> {
+  private post: string;
+  constructor(props: Props) {
     super(props);
     const { post } = this.props;
     this.post = post;
@@ -15,18 +20,22 @@ class Content extends Component {
     // Prevent WebPack build fail
     if (isBrowser()) {
       // Initialize library
-      const observer = lozad('.lozad', {
+      const observer = lozad(".lozad", {
         load(el) {
-          /* eslint-disable no-param-reassign */
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           el.src = el.dataset.src;
-          if (el.getAttribute('data-background-image')) {
-            el.style.backgroundImage = el.getAttribute('data-background-image');
+          if (el.getAttribute("data-background-image")) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            el.style.backgroundImage = el.getAttribute("data-background-image");
           }
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           el.onload = () => {
-            el.classList.add('animated');
-            el.classList.add('fadeIn');
+            el.classList.add("animated");
+            el.classList.add("fadeIn");
           };
-          /* eslint-enable */
         },
       });
       observer.observe();
@@ -38,24 +47,25 @@ class Content extends Component {
     return (
       <>
         <div
-        // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: post }}
           style={{
             padding: 30,
-            background: 'white',
+            background: "white",
           }}
         />
-        <div style={{
-          padding: 30,
-          background: 'white',
-        }}
+        <div
+          style={{
+            padding: 30,
+            background: "white",
+          }}
         >
           <h2>tubone24にラーメンを食べさせよう！</h2>
           <p>ぽちっとな↓</p>
           <a href="https://www.buymeacoffee.com/tubone24">
             <img
               src="https://img.buymeacoffee.com/button-api/?text=Buy me a ramen&emoji=🍜&slug=tubone24&button_colour=40DCA5&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-              alt="Buy me a ramen" />
+              alt="Buy me a ramen"
+            />
           </a>
         </div>
       </>

@@ -1,10 +1,16 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import Card from '../components/Card';
-import SEO from '../components/SEO';
-import Sidebar from '../components/Sidebar';
+import React from "react";
+import { graphql } from "gatsby";
+import Card from "../components/Card";
+import SEO from "../components/SEO";
+import Sidebar from "../components/Sidebar";
 
-const TagPage = ({ data, pageContext }) => {
+const TagPage = ({
+  data,
+  pageContext,
+}: {
+  data: GatsbyTypes.tagQueryQuery;
+  pageContext: { tag: string };
+}) => {
   const { edges } = data.allMarkdownRemark;
   const { tag } = pageContext;
   return (
@@ -26,7 +32,6 @@ const TagPage = ({ data, pageContext }) => {
             }}
           >
             {edges.length}
-
             &nbsp;Articles in&nbsp;
             {tag}
           </div>

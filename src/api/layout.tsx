@@ -1,9 +1,9 @@
-import React from 'react';
-import Layout from '../components/Layout/layout';
+import React from "react";
+import Layout from "../components/Layout/layout";
 
-function wrapLayout(WrappedComponent) {
+function wrapLayout(WrappedComponent: any) {
   return class PP extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
       super(props);
       this.state = {
         isWrapped: true,

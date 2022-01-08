@@ -45,12 +45,12 @@ module.exports = ({ actions, graphql }) => {
     const tagSet = new Set();
     const years = new Set();
     const yearMonths = new Set();
-    const periodTemplate = path.resolve('src/templates/period-summary.js');
+    const periodTemplate = path.resolve('src/templates/period-summary.tsx');
 
     createPaginatedPages({
       edges,
       createPage,
-      pageTemplate: 'src/templates/index.js',
+      pageTemplate: 'src/templates/index.tsx',
       context: {
         totalCount: edges.length,
       },
@@ -98,7 +98,7 @@ module.exports = ({ actions, graphql }) => {
       createPage({
         path: $path,
         tags,
-        component: path.resolve(`src/templates/${String(component)}.js`),
+        component: path.resolve(`src/templates/${String(component)}.tsx`),
         // additional data can be passed via context
         context: {
           id,
@@ -148,7 +148,7 @@ module.exports = ({ actions, graphql }) => {
     return tagSet.forEach((tag) => {
       createPage({
         path: `/tag/${tag}`,
-        component: path.resolve('src/templates/tag.js'),
+        component: path.resolve('src/templates/tag.tsx'),
         context: {
           tag,
         },

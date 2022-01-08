@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React from "react";
 
 const HTML = ({
   htmlAttributes,
@@ -37,7 +37,7 @@ const HTML = ({
   </html>
 );
 HTML.defaultProps = {
-  body: '',
+  body: "",
   htmlAttributes: {},
   headComponents: null,
   bodyAttributes: {},

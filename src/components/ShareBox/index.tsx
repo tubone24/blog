@@ -1,22 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
-import './index.scss';
+import "./index.scss";
 
 const CommentButton = () => (
   <a
     className="share-button"
     style={{
-      lineHeight: '1.7rem',
-      color: '#337ab7',
-      paddingLeft: '0.15rem',
+      lineHeight: "1.7rem",
+      color: "#337ab7",
+      paddingLeft: "0.15rem",
     }}
     href="#gitalk-container"
-    onClick={() => ReactGA.event({
-      category: 'User',
-      action: 'Goto Comment Box',
-    })}
+    onClick={() =>
+      ReactGA.event({
+        category: "User",
+        action: "Goto Comment Box",
+      })
+    }
   >
     <span className="icon-comment" />
   </a>
@@ -28,20 +30,26 @@ const GotoTopButton = () => (
     href="#header"
     onClick={() => {
       ReactGA.event({
-        category: 'User',
-        action: 'Scroll to Top',
+        category: "User",
+        action: "Scroll to Top",
       });
     }}
     style={{
-      lineHeight: '1.7rem',
-      paddingLeft: '0.1rem',
+      lineHeight: "1.7rem",
+      paddingLeft: "0.1rem",
     }}
   >
     <span className="icon-chevron-up" />
   </a>
 );
 
-const ShareBox = ({ url, hasCommentBox }) => (
+const ShareBox = ({
+  url,
+  hasCommentBox = true,
+}: {
+  url: string;
+  hasCommentBox: boolean;
+}) => (
   <div className="m-share-box">
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
@@ -49,10 +57,12 @@ const ShareBox = ({ url, hasCommentBox }) => (
       target="_blank"
       rel="noopener noreferrer"
       className="share-button"
-      onClick={() => ReactGA.event({
-        category: 'Share',
-        action: 'Facebook Share',
-      })}
+      onClick={() =>
+        ReactGA.event({
+          category: "Share",
+          action: "Facebook Share",
+        })
+      }
     >
       <span className="icon-facebook" />
     </a>
@@ -62,10 +72,12 @@ const ShareBox = ({ url, hasCommentBox }) => (
       target="_blank"
       rel="noopener noreferrer"
       className="share-button"
-      onClick={() => ReactGA.event({
-        category: 'Share',
-        action: 'Twitter Share',
-      })}
+      onClick={() =>
+        ReactGA.event({
+          category: "Share",
+          action: "Twitter Share",
+        })
+      }
     >
       <span className="icon-twitter" />
     </a>
@@ -75,10 +87,12 @@ const ShareBox = ({ url, hasCommentBox }) => (
       target="_blank"
       rel="noopener noreferrer"
       className="share-button"
-      onClick={() => ReactGA.event({
-        category: 'Share',
-        action: 'Pocket Share',
-      })}
+      onClick={() =>
+        ReactGA.event({
+          category: "Share",
+          action: "Pocket Share",
+        })
+      }
     >
       <span className="icon-get-pocket" />
     </a>
@@ -90,17 +104,19 @@ const ShareBox = ({ url, hasCommentBox }) => (
       title="このエントリーをはてなブックマークに追加"
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => ReactGA.event({
-        category: 'Share',
-        action: 'Hatebu Share',
-      })}
+      onClick={() =>
+        ReactGA.event({
+          category: "Share",
+          action: "Hatebu Share",
+        })
+      }
     >
       <img
         src="/assets/button-only@2x.png"
         alt="hatena bookmark"
         width="25"
         height="25"
-        style={{ position: 'absolute', top: 10 }}
+        style={{ position: "absolute", top: 10 }}
       />
     </a>
     {hasCommentBox && <CommentButton />}
@@ -108,8 +124,5 @@ const ShareBox = ({ url, hasCommentBox }) => (
     {hasCommentBox && <GotoTopButton />}
   </div>
 );
-ShareBox.defaultProps = {
-  hasCommentBox: true,
-};
 
 export default ShareBox;

@@ -1,35 +1,36 @@
 const {
   NODE_ENV,
-  URL: NETLIFY_SITE_URL = 'https://blog.tubone-project24.xyz',
+  URL: NETLIFY_SITE_URL = "https://blog.tubone-project24.xyz",
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
   GATSBY_GITHUB_CLIENT_ID,
   GATSBY_GITHUB_CLIENT_SECRET,
   GATSBY_GITHUB_SHA,
 } = process.env;
-const isNetlifyProduction = NETLIFY_ENV === 'production';
+const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 module.exports = {
-  pathPrefix: '/',
+  pathPrefix: "/",
   siteMetadata: {
-    title: 'tubone BOYAKI',
-    description: 'tubone BOYAKI is a tubone blog',
+    title: "tubone BOYAKI",
+    description: "tubone BOYAKI is a tubone blog",
     siteUrl,
-    author: 'tubone',
+    author: "tubone",
   },
   plugins: [
-    'gatsby-plugin-preact',
-    'gatsby-plugin-react-helmet',
+    "gatsby-plugin-preact",
+    "gatsby-plugin-typegen",
+    "gatsby-plugin-react-helmet",
     {
-      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
+      resolve: "gatsby-plugin-react-helmet-canonical-urls",
       options: {
         siteUrl: NETLIFY_SITE_URL,
         noQueryString: true,
       },
     },
-    'gatsby-plugin-sass',
+    "gatsby-plugin-sass",
     {
-      resolve: 'gatsby-plugin-minify-classnames',
+      resolve: "gatsby-plugin-minify-classnames",
       options: {
         enable: isNetlifyProduction,
       },
@@ -41,7 +42,7 @@ module.exports = {
         develop: true, // Enable while using `gatsby develop`
         // tailwind: true, // Enable tailwindcss support
         // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-        purgeOnly : ['src/styles/global.scss'], // Purge only these files/folders
+        purgeOnly: ["src/styles/global.scss"], // Purge only these files/folders
         purgeCSSOptions: {
           // https://purgecss.com/configuration.html#options
           // safelist: ['safelist'], // Don't remove this selector
@@ -50,37 +51,38 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-remark-copy-linked-files',
+      resolve: "gatsby-remark-copy-linked-files",
     },
     {
-      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
       options: {
-        analyzerMode: 'static',
-        reportFilename: 'bundle-report.html',
+        analyzerMode: "static",
+        reportFilename: "bundle-report.html",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/src/content`,
-        name: 'pages',
+        name: "pages",
+        ignore: [`${__dirname}/src/__generated__/*.ts`],
       },
     },
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
         resolveEnv: () => NETLIFY_ENV,
         env: {
           production: {
-            policy: [{ userAgent: '*' }],
+            policy: [{ userAgent: "*" }],
           },
-          'branch-deploy': {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
+          "branch-deploy": {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
             sitemap: null,
             host: null,
           },
-          'deploy-preview': {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
+          "deploy-preview": {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
             sitemap: null,
             host: null,
           },
@@ -88,7 +90,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-feed',
+      resolve: "gatsby-plugin-feed",
       options: {
         query: `
           {
@@ -105,13 +107,14 @@ module.exports = {
         feeds: [
           {
             // eslint-disable-next-line max-len
-            serialize: ({ query: { site, allMarkdownRemark } }) => allMarkdownRemark.edges.map((edge) => ({
-              ...edge.node.frontmatter,
-              title: edge.node.frontmatter.title,
-              date: edge.node.frontmatter.date,
-              url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
-              guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
-            })),
+            serialize: ({ query: { site, allMarkdownRemark } }) =>
+              allMarkdownRemark.edges.map((edge) => ({
+                ...edge.node.frontmatter,
+                title: edge.node.frontmatter.title,
+                date: edge.node.frontmatter.date,
+                url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
+                guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
+              })),
             query: `
               {
                 allMarkdownRemark(
@@ -133,113 +136,113 @@ module.exports = {
                 }
               }
             `,
-            output: '/rss.xml',
-            title: 'tubone BOYAKI',
-            feed_url: 'https://blog.tubone-project24.xyz/rss.xml',
-            site_url: 'https://blog.tubone-project24.xyz',
-            docs: 'http://github.com/dylang/node-rss',
+            output: "/rss.xml",
+            title: "tubone BOYAKI",
+            feed_url: "https://blog.tubone-project24.xyz/rss.xml",
+            site_url: "https://blog.tubone-project24.xyz",
+            docs: "http://github.com/dylang/node-rss",
           },
         ],
       },
     },
     {
-      resolve: 'gatsby-plugin-algolia',
+      resolve: "gatsby-plugin-algolia",
       // eslint-disable-next-line global-require
-      options: require('./gatsby-plugin-algolia-config.js'),
+      options: require("./gatsby-plugin-algolia-config.js"),
     },
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          'gatsby-remark-embed-youtube',
-          'gatsby-plugin-twitter',
+          "gatsby-remark-embed-youtube",
+          "gatsby-plugin-twitter",
           {
-            resolve: 'gatsby-remark-table-of-contents',
+            resolve: "gatsby-remark-table-of-contents",
             options: {
-              exclude: 'Table of Contents',
+              exclude: "Table of Contents",
               tight: false,
               fromHeading: 2,
               toHeading: 4,
             },
           },
-          'gatsby-remark-numbered-footnotes',
+          "gatsby-remark-numbered-footnotes",
           {
-            resolve: 'gatsby-remark-embed-soundcloud',
+            resolve: "gatsby-remark-embed-soundcloud",
             options: {
-              width: '80%', // default is "100%"
+              width: "80%", // default is "100%"
               height: 200, // default is 300
-              color: '#6cff8c', // default is #ff5500
+              color: "#6cff8c", // default is #ff5500
               autoplay: false, // default is false
             },
           },
           {
-            resolve: 'gatsby-remark-prismjs',
+            resolve: "gatsby-remark-prismjs",
             options: {
-              classPrefix: 'language-',
+              classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {},
               showLineNumbers: false,
               noInlineHighlight: false,
             },
           },
-          'gatsby-remark-autolink-headers',
+          "gatsby-remark-autolink-headers",
           {
-            resolve: 'gatsby-remark-external-links',
+            resolve: "gatsby-remark-external-links",
             options: {
-              rel: 'noopener noreferrer',
+              rel: "noopener noreferrer",
             },
           },
         ],
       },
     },
     {
-      resolve: 'gatsby-plugin-layout',
+      resolve: "gatsby-plugin-layout",
       options: {
-        component: require.resolve('./src/components/Layout/layout.js'),
+        component: require.resolve("./src/components/Layout/layout.tsx"),
       },
     },
     {
-      resolve: 'gatsby-plugin-sitemap',
+      resolve: "gatsby-plugin-sitemap",
       options: {
-        output: '/'
+        output: "/",
       },
     },
     {
-      resolve: 'gatsby-plugin-nprogress',
+      resolve: "gatsby-plugin-nprogress",
       options: {
-        color: '#1bd77f',
+        color: "#1bd77f",
       },
     },
-    'gatsby-plugin-optimize-svgs',
+    "gatsby-plugin-optimize-svgs",
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        name: 'tubone BOYAKI',
-        short_name: 'tuboneBOYAKI',
-        description: 'tubone Blog',
-        lang: 'ja',
-        start_url: '/',
-        background_color: '#ededed',
-        theme_color: '#33b546',
-        display: 'minimal-ui',
+        name: "tubone BOYAKI",
+        short_name: "tuboneBOYAKI",
+        description: "tubone Blog",
+        lang: "ja",
+        start_url: "/",
+        background_color: "#ededed",
+        theme_color: "#33b546",
+        display: "minimal-ui",
         icons: [
           {
-            src: '/favicons/android-chrome-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any maskable',
+            src: "/favicons/android-chrome-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any maskable",
           },
           {
-            src: '/favicons/android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
+            src: "/favicons/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
           },
         ],
       },
     },
     {
-      resolve: 'gatsby-plugin-minify',
+      resolve: "gatsby-plugin-minify",
       options: {
         caseSensitive: false,
         collapseBooleanAttributes: true,
@@ -251,45 +254,23 @@ module.exports = {
         minifyJS: true,
       },
     }, // put this after gatsby-plugin-manifest
-    'gatsby-plugin-cdn-files',
-    'gatsby-plugin-offline',
+    "gatsby-plugin-cdn-files",
+    "gatsby-plugin-offline",
     {
-      resolve: 'gatsby-plugin-netlify', // make sure to put last in the array
+      resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
         headers: {
-          '/*.html': [
-            'cache-control: public, max-age=0, must-revalidate',
-          ],
-          '/*.json': [
-            'cache-control: public, max-age=0, must-revalidate',
-          ],
-          '/page-data/*': [
-            'cache-control: public, max-age=0, must-revalidate',
-          ],
-          '/static/*': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
-          '/assets/*': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
-          '/favicons/*': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
-          '/icons/*': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
-          '/fonts/*': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
-          '/sw.js': [
-            'cache-control: public, max-age=0, must-revalidate',
-          ],
-          '/**/*.js': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
-          '/**/*.css': [
-            'cache-control: public, max-age=31536000, immutable',
-          ],
+          "/*.html": ["cache-control: public, max-age=0, must-revalidate"],
+          "/*.json": ["cache-control: public, max-age=0, must-revalidate"],
+          "/page-data/*": ["cache-control: public, max-age=0, must-revalidate"],
+          "/static/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/assets/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/favicons/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/icons/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/fonts/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/sw.js": ["cache-control: public, max-age=0, must-revalidate"],
+          "/**/*.js": ["cache-control: public, max-age=31536000, immutable"],
+          "/**/*.css": ["cache-control: public, max-age=31536000, immutable"],
         },
       },
     },
