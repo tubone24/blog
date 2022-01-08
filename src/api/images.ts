@@ -66,7 +66,7 @@ export const parseImgur = (
 
 const parseTitle = (title: string, text: string) => `title="${title || text}"`;
 
-const parseImageTag = ({
+export const parseImageTag = ({
   href,
   title,
   text,
@@ -96,9 +96,3 @@ const getGalleryImage = ({
     href,
     SizeMapping.huge
   )}">${parseImageTag({ href, title, text })}</a>`;
-
-module.exports = {
-  parseImgur,
-  parseImageTag,
-  getGalleryImage,
-};
