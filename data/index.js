@@ -1,3 +1,3 @@
-const template = require('./template');
+import template from "./template";
 
 module.exports = template;

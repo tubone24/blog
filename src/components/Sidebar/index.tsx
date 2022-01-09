@@ -5,7 +5,7 @@ import lozad from "lozad";
 
 import Information from "./Information";
 import { Post as LatestPostProps } from "./LatestPost";
-import { AllPost } from "./Archive";
+import { AllPost } from "./entity";
 import SearchBox from "../SearchBox";
 import Subscription from "./Subscription";
 import TagCloud from "./TagCloud";
@@ -153,7 +153,7 @@ const Sidebar = ({
         <hr />
         <Subscription />
         <hr />
-        <TagCloud allPosts={allPosts} />
+        <TagCloud allPosts={ap} />
       </div>
     </header>
   );

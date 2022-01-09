@@ -17,7 +17,7 @@
     padding: 0;
     margin-right: auto;
     color: $content-black;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -66,7 +66,7 @@
       display: block;
       width: 60px;
       height: 3px;
-      content: '';
+      content: "";
       background-color: $main-green;
     }
 
@@ -108,8 +108,8 @@
       line-height: 1;
       color: #fff;
       content: ">";
-      -ms-transform: translateY(-50%);
-      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      transform: translateY(-50%);
       transform: translateY(-50%);
     }
 
@@ -160,13 +160,19 @@
       background: #d9d9d9;
     }
 
-    code, pre {
-        font-family: SFMono-Regular, Consolas, 'Roboto Mono', 'Courier New', 'BIZ UDGothic', Meiryo, monospace;
-                        /* SFMono, monospace (macOS10.11+, iOS9+) */
-                        /* Consolas, BIZ UDゴシック (Windows10 October 2018 Update+) */
-                        /* Consolas, Meiryo (Windows7+) */
-                        /* Courier New, monospace (macOS10.3+?, iOS4+, WindowsXP+?) */
-                        /* Robot Mono, monospace (Android4+) */
+    code,
+    pre {
+      font-family: SFMono-Regular, Consolas, "Roboto Mono", "Courier New", "BIZ UDGothic", Meiryo, monospace;
+
+      /* SFMono, monospace (macOS10.11+, iOS9+) */
+
+      /* Consolas, BIZ UDゴシック (Windows10 October 2018 Update+) */
+
+      /* Consolas, Meiryo (Windows7+) */
+
+      /* Courier New, monospace (macOS10.3+?, iOS4+, WindowsXP+?) */
+
+      /* Robot Mono, monospace (Android4+) */
     }
   }
 
@@ -189,7 +195,7 @@
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(22 22 22);
   border-radius: 0.3em;
 }
 

@@ -24,7 +24,7 @@
 }
 
 .pager {
-  max-width: 100%;
-  grid-auto-flow: column;
   display: grid;
+  grid-auto-flow: column;
+  max-width: 100%;
 }
