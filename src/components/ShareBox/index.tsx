@@ -13,6 +13,7 @@ const CommentButton = () => (
       paddingLeft: "0.15rem",
     }}
     href="#gitalk-container"
+    title="コメントする"
     onClick={() =>
       ReactGA.event({
         category: "User",
@@ -28,6 +29,7 @@ const GotoTopButton = () => (
   <a
     className="share-button"
     href="#header"
+    title="トップに戻る"
     onClick={() => {
       ReactGA.event({
         category: "User",
