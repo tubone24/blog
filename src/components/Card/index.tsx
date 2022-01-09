@@ -10,10 +10,12 @@ import "./index.scss";
 const CardHeader = ({
   url,
   image,
+  title,
   index,
 }: {
   url: string;
   image: string;
+  title: string;
   index: number;
 }) => {
   if (index > 1) {
@@ -22,6 +24,7 @@ const CardHeader = ({
         <div
           className="wrapper lozad"
           data-background-image={parseImgur(image, SizeMapping.large)}
+          title={title}
         />
       </Link>
     );
@@ -33,6 +36,7 @@ const CardHeader = ({
         style={{
           backgroundImage: ` url(${parseImgur(image, SizeMapping.large)})`,
         }}
+        title={title}
       />
     </Link>
   );
@@ -58,7 +62,12 @@ const Card = ({
   <div className="col-sm-12 pb-4">
     <div className="custom-card">
       {headerImage && (
-        <CardHeader url={withPrefix(url)} image={headerImage} index={index} />
+        <CardHeader
+          url={withPrefix(url)}
+          image={headerImage}
+          title={title}
+          index={index}
+        />
       )}
       <div className="data">
         <div className="content">
