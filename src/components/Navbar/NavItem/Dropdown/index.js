@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Dropdown = ({ title, list }) => (
   <li className="nav-item dropdown">
@@ -13,11 +13,7 @@ const Dropdown = ({ title, list }) => (
     </button>
     <div className="dropdown-menu">
       {list.map((item) => (
-        <a
-          className="dropdown-item"
-          href={item.href}
-          key={item.title}
-        >
+        <a className="dropdown-item" href={item.href} key={item.title}>
           {item.title}
         </a>
       ))}
