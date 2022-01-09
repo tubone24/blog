@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import Content from '../components/Content';
-import ShareBox from '../components/ShareBox';
-import SEO from '../components/SEO';
+import React, { Component } from "react";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import Content from "../components/Content";
+import ShareBox from "../components/ShareBox";
+import SEO from "../components/SEO";
 
 const html = `
   <h1>Who am I?</h1>
@@ -50,7 +50,6 @@ const html = `
   <p><b>サーバの保守運用業務</b>になる</p>
   <p>自宅に<b>サーバを買う</b></p>
   <h3 id="secondCareer">開発</h3>
-  <p>開発を希望して<b>保守運用業務脱出成功</b></p>
   <p>社内データ基盤の開発業務で<b>Hadoop</b>に触れる。<b>開発マネジメント業務</b>をする</p>
   <p>開発マネジメントに未来を感じられなくなり<b>AWS</b>での開発案件に移りデベロッパーになる</p>
   <p>今に至る</p>
@@ -96,7 +95,6 @@ const html = `
   <img src="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog_large.png" alt="wordcloud" title="wordcloud">
 `;
 
-// eslint-disable-next-line react/prefer-stateless-function
 class About extends Component {
   render() {
     return (
@@ -105,8 +103,8 @@ class About extends Component {
           img="https://i.imgur.com/6B7WC7D.jpg"
           title="Who is tubone?"
           authorName="tubone"
-          authorImage
-          subTitle="20xx/xx/xx"
+          authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
+          subTitle="Why do I write this blog?"
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">

@@ -3,7 +3,7 @@ import { Link, withPrefix } from "gatsby";
 
 import Tag from "../Tag";
 
-import { parseImgur } from "../../api/images";
+import { parseImgur, SizeMapping } from "../../utils/images";
 
 import "./index.scss";
 
@@ -18,10 +18,10 @@ const CardHeader = ({
 }) => {
   if (index > 1) {
     return (
-      <Link to={url} href={url}>
+      <Link to={url}>
         <div
           className="wrapper lozad"
-          data-background-image={parseImgur(image, "large")}
+          data-background-image={parseImgur(image, SizeMapping.large)}
         />
       </Link>
     );
@@ -30,7 +30,9 @@ const CardHeader = ({
     <Link to={url}>
       <div
         className="wrapper"
-        style={{ backgroundImage: ` url(${parseImgur(image, "large")})` }}
+        style={{
+          backgroundImage: ` url(${parseImgur(image, SizeMapping.large)})`,
+        }}
       />
     </Link>
   );
@@ -50,7 +52,7 @@ const Card = ({
   url: string;
   headerImage: string;
   description: string;
-  tags: string[];
+  tags: readonly (string | undefined)[];
   index: number;
 }) => (
   <div className="col-sm-12 pb-4">
@@ -61,20 +63,16 @@ const Card = ({
       <div className="data">
         <div className="content">
           <div className="stats">
-            <span className="date">{date.split("T")[0]}</span>
+            <span className="date">{date?.split("T")[0]}</span>
             {tags.map((name) => (
-              <Tag name={name} key={name} />
+              <Tag name={name || ""} key={name} />
             ))}
           </div>
-          <Link to={withPrefix(url)} href={withPrefix(url)} title={title}>
+          <Link to={withPrefix(url)} title={title}>
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>
-          <Link
-            to={withPrefix(url)}
-            href={withPrefix(url)}
-            title="....Read more...."
-          >
+          <Link to={withPrefix(url)} title="....Read more....">
             ....Read more....
           </Link>
         </div>

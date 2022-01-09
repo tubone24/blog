@@ -1,27 +1,28 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+import React from "react";
+import { graphql } from "gatsby";
 
-import Sidebar from '../components/Sidebar';
-import Tag from '../components/Tag';
-import SEO from '../components/SEO';
+import Sidebar from "../components/Sidebar";
+import Tag from "../components/Tag";
+import SEO from "../components/SEO";
 
-import './tags.scss';
+import "./tags.scss";
 
-// eslint-disable-next-line react/prop-types
-const TagPage = ({ data }) => {
-  const mapping = {};
+const TagPage = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
+  const mapping: { [key: string]: number } = {};
   data.allMarkdownRemark.edges.forEach(({ node }) => {
-    node.frontmatter.tags.forEach((name) => {
-      if (mapping[name]) {
-        mapping[name] += 1;
-      } else {
-        mapping[name] = 1;
+    node.frontmatter?.tags?.forEach((name) => {
+      if (name) {
+        if (mapping[name]) {
+          mapping[name] += 1;
+        } else {
+          mapping[name] = 1;
+        }
       }
     });
   });
 
   const tags = Array.from(Object.keys(mapping)).sort(
-    (b, a) => mapping[a] - mapping[b],
+    (b, a) => mapping[a] - mapping[b]
   );
 
   return (
@@ -39,7 +40,6 @@ const TagPage = ({ data }) => {
             <Tag name={item} key={item} count={mapping[item]} />
           ))}
         </div>
-
       </div>
       <SEO
         title="Tags"

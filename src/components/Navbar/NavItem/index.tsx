@@ -1,17 +1,16 @@
-import React from 'react';
-import { Link, navigate, withPrefix } from 'gatsby';
-import ReactGA from 'react-ga';
+import React from "react";
+import { Link, navigate, withPrefix } from "gatsby";
+import ReactGA from "react-ga";
 
-import './index.scss';
+import "./index.scss";
 
-const NavItem = ({ url, name }) => (
+const NavItem = ({ url, name }: { url: string; name: string }) => (
   <Link
     className="nav-btn btn btn-link"
-    href={url}
     to={url}
     onClick={() => {
       ReactGA.event({
-        category: 'User',
+        category: "User",
         action: `Click nav-menu: ${name}`,
       });
       navigate(withPrefix(url));

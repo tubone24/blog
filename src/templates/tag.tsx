@@ -35,8 +35,18 @@ const TagPage = ({
             &nbsp;Articles in&nbsp;
             {tag}
           </div>
-          {edges.map(({ node }) => (
-            <Card {...node.frontmatter} key={node.id} />
+          {edges.map(({ node }, index) => (
+            <Card
+              {...node.frontmatter}
+              key={node.id}
+              title={node.frontmatter?.title || ""}
+              date={node.frontmatter?.date || ""}
+              url={node.frontmatter?.url || ""}
+              headerImage={node.frontmatter?.headerImage || ""}
+              description={node.frontmatter?.description || ""}
+              tags={node.frontmatter?.tags || []}
+              index={index}
+            />
           ))}
         </div>
 

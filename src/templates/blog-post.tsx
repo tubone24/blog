@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import loadable from "@loadable/component";
 import { graphql } from "gatsby";
 
-import { parseDate } from "../api";
+import { parseDate } from "../utils";
 
 import Sidebar from "../components/Sidebar";
 import Content from "../components/Content";
@@ -15,12 +15,21 @@ const Gitalk = loadable(
   () => import(/* webpackPrefetch: true */ "../components/Gitalk")
 );
 
-// Styles
 import "./blog-post.scss";
 import RelatedPosts from "../components/Relateds";
 
-class BlogPost extends Component {
-  constructor(props) {
+type Props = {
+  data: GatsbyTypes.BlogPostQueryQuery;
+  pageContext: {
+    words: number;
+    minutes: number;
+    repHtml: string;
+  };
+};
+
+class BlogPost extends Component<Props> {
+  private data: GatsbyTypes.BlogPostQueryQuery;
+  constructor(props: Props) {
     super(props);
     this.data = this.props.data;
   }
@@ -30,19 +39,15 @@ class BlogPost extends Component {
 
     const { frontmatter, fields, excerpt, id: graphqlId } = node;
 
-    const { slug } = fields;
-
-    const { date, headerImage, title, tags, id } = frontmatter;
-
-    const shareURL = `https://blog.tubone-project24.xyz/${slug}`;
+    const shareURL = `https://blog.tubone-project24.xyz/${fields?.slug}`;
     return (
       <div className="row post order-2">
         <Header
-          img={headerImage || "https://i.imgur.com/M795H8A.jpg"}
-          title={title}
+          img={frontmatter?.headerImage || "https://i.imgur.com/M795H8A.jpg"}
+          title={frontmatter?.title}
           authorName="tubone"
           authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
-          subTitle={parseDate(date)}
+          subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />
         <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
@@ -52,24 +57,27 @@ class BlogPost extends Component {
           />
           <Content post={this.props.pageContext.repHtml} />
           <Gitalk
-            id={id || graphqlId}
-            title={title}
-            clientId={process.env.GATSBY_GITHUB_CLIENT_ID}
-            clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET}
+            id={frontmatter?.id || graphqlId}
+            title={frontmatter?.title || ""}
+            clientId={process.env.GATSBY_GITHUB_CLIENT_ID || ""}
+            clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET || ""}
           />
-          <RelatedPosts post={node} />
+          <RelatedPosts
+            title={frontmatter?.title || ""}
+            tags={frontmatter?.tags || []}
+          />
         </div>
 
         <ShareBox url={shareURL} />
 
         <SEO
-          title={title}
+          title={frontmatter?.title}
           url={shareURL}
           siteTitleAlt="tubone BOYAKI"
           isPost
-          tag={tags[0]}
-          description={excerpt}
-          image={headerImage || "https://i.imgur.com/4r1DViT.png"}
+          tag={frontmatter?.tags ? frontmatter.tags[0] || "" : ""}
+          description={excerpt || ""}
+          image={frontmatter?.headerImage || "https://i.imgur.com/4r1DViT.png"}
         />
       </div>
     );

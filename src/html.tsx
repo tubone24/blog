@@ -1,13 +1,19 @@
-/* eslint-disable react/no-danger */
 import React from "react";
 
 const HTML = ({
-  htmlAttributes,
-  headComponents,
-  bodyAttributes,
-  preBodyComponents,
-  body,
-  postBodyComponents,
+  htmlAttributes = {},
+  headComponents = null,
+  bodyAttributes = {},
+  preBodyComponents = null,
+  body = "",
+  postBodyComponents = null,
+}: {
+  htmlAttributes?: React.HTMLAttributes<HTMLHtmlElement>;
+  headComponents?: JSX.Element | null;
+  bodyAttributes?: React.HTMLAttributes<HTMLBodyElement>;
+  preBodyComponents?: JSX.Element | null;
+  body?: string;
+  postBodyComponents?: JSX.Element | null;
 }) => (
   <html {...htmlAttributes} lang="ja">
     <head>
@@ -36,13 +42,5 @@ const HTML = ({
     </body>
   </html>
 );
-HTML.defaultProps = {
-  body: "",
-  htmlAttributes: {},
-  headComponents: null,
-  bodyAttributes: {},
-  preBodyComponents: null,
-  postBodyComponents: null,
-};
 
 export default HTML;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import lozad from "lozad";
 
-import { isBrowser } from "../../api";
+import { isBrowser } from "../../utils";
 
 type Props = {
   post: string;

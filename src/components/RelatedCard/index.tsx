@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 
-import { parseImgur, SizeMapping } from "../../api/images";
+import { parseImgur, SizeMapping } from "../../utils/images";
 
 import "./index.scss";
 import Tag from "../Tag";
@@ -21,16 +21,15 @@ const RelatedCard = ({
   tags = [],
   date,
   headerImage = "",
-  headerBackgroundColor = "",
   description,
 }: {
   title: string;
   url: string;
-  tags: string[];
+  tags: readonly (string | undefined)[];
   date: string;
   headerImage?: string;
   headerBackgroundColor?: string;
-  description: string;
+  description?: string;
 }) => (
   <div className="col-sm-12 pb-4">
     <Link to={withPrefix(url)}>
@@ -40,7 +39,7 @@ const RelatedCard = ({
             <div className="stats">
               <span className="date">{date.split("T")[0]}</span>
               {tags.map((name) => (
-                <Tag name={name} key={name} />
+                <Tag name={name || ""} key={name} />
               ))}
             </div>
             <CardHeader url={withPrefix(url)} image={headerImage} />

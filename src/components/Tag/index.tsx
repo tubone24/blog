@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactGA from 'react-ga';
-import { Link, withPrefix } from 'gatsby';
+import React from "react";
+import ReactGA from "react-ga";
+import { Link, withPrefix } from "gatsby";
 
-const Tag = ({ name, count }) => (
+const Tag = ({ name, count }: { name: string; count: number }) => (
   <Link
     to={withPrefix(`/tag/${name}`)}
-    href={withPrefix(`/tag/${name}`)}
     className="header-tag"
     title={name}
-    onClick={() => ReactGA.event({ category: 'Tag', action: `push Tag ${name}` })}
+    onClick={() =>
+      ReactGA.event({ category: "Tag", action: `push Tag ${name}` })
+    }
   >
     {name}
     &nbsp;
@@ -17,7 +18,7 @@ const Tag = ({ name, count }) => (
 );
 
 Tag.defaultProps = {
-  count: '',
+  count: "",
 };
 
 export default Tag;

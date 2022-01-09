@@ -4,6 +4,7 @@ import { Link, withPrefix } from "gatsby";
 import "./index.scss";
 import ReactGA from "react-ga";
 import dayjs from "dayjs";
+import { AllPost } from "../entity";
 
 const yearLink = ({ year }: { year: string }) => (
   <Link
@@ -16,8 +17,7 @@ const yearLink = ({ year }: { year: string }) => (
     {year}
   </Link>
 );
-
-const Archive = ({ allPosts }) => {
+const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   const yearList = Array.from(
     new Set(
       allPosts.map((data) => dayjs(data.node.frontmatter.date).format("YYYY"))

@@ -82,17 +82,3 @@ export const parseImageTag = ({
     title,
     text
   )} loading="lazy" />`;
-
-const getGalleryImage = ({
-  href,
-  title,
-  text,
-}: {
-  href: string;
-  title: string;
-  text: string;
-}) =>
-  `<a data-fancybox="gallery" href="${parseImgur(
-    href,
-    SizeMapping.huge
-  )}">${parseImageTag({ href, title, text })}</a>`;

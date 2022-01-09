@@ -4,16 +4,15 @@ import lozad from "lozad";
 import RelatedCard from "../RelatedCard";
 
 import "./index.scss";
-import { isBrowser } from "../../api";
+import { isBrowser } from "../../utils";
 
-type Post = {
-  frontmatter: {
-    title: string;
-    tags: string[];
-  };
-};
-
-const RelatedPosts = ({ post }: { post: Post }) => {
+const RelatedPosts = ({
+  title,
+  tags,
+}: {
+  title: string;
+  tags: readonly (string | undefined)[];
+}) => {
   React.useEffect(() => {
     if (isBrowser()) {
       const observer = lozad(".lozad", {
@@ -54,14 +53,12 @@ const RelatedPosts = ({ post }: { post: Post }) => {
         const relatedPosts = data.allMarkdownRemark.edges.filter(
           // eslint-disable-next-line array-callback-return,consistent-return
           (edge) => {
-            if (edge.node.frontmatter?.title === post.frontmatter.title) {
+            if (edge.node.frontmatter?.title === title) {
               return false;
             }
             if (edge.node.frontmatter?.tags) {
               for (let i = 0; i < edge.node.frontmatter.tags.length; i++) {
-                return (
-                  edge.node.frontmatter.tags[i] === post.frontmatter.tags[i]
-                );
+                return edge.node.frontmatter.tags[i] === tags[i];
               }
             }
           }
@@ -79,7 +76,7 @@ const RelatedPosts = ({ post }: { post: Post }) => {
               <div className="related-post">
                 <RelatedCard
                   title={relatedPost.node.frontmatter?.title || ""}
-                  tags={relatedPost.node.frontmatter?.tags}
+                  tags={relatedPost.node.frontmatter?.tags || []}
                   date={relatedPost.node.frontmatter?.date || ""}
                   headerImage={relatedPost.node.frontmatter?.headerImage}
                   url={relatedPost.node.fields?.slug || ""}

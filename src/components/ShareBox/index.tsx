@@ -48,7 +48,7 @@ const ShareBox = ({
   hasCommentBox = true,
 }: {
   url: string;
-  hasCommentBox: boolean;
+  hasCommentBox?: boolean;
 }) => (
   <div className="m-share-box">
     <a

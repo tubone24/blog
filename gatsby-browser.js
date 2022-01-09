@@ -1,22 +1,21 @@
-import ReactGA from 'react-ga';
-import * as Sentry from '@sentry/browser';
-import { Integrations } from '@sentry/tracing';
+import ReactGA from "react-ga";
+import * as Sentry from "@sentry/browser";
+import { Integrations } from "@sentry/tracing";
 
-import 'prismjs/themes/prism-solarizedlight.css';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
-import './src/styles/global.scss';
-import { Dropdown } from 'bootstrap/dist/js/bootstrap';
+import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "./src/styles/global.scss";
+import { Dropdown } from "bootstrap/dist/js/bootstrap";
 
-// import('bootstrap/dist/js/bootstrap').then(_ => {
-//   console.log("lazy");
-// });
-
-const isLocalDevelopment = () => window && window.location && window.location.origin !== 'https://blog.tubone-project24.xyz';
+const isLocalDevelopment = () =>
+  window &&
+  window.location &&
+  window.location.origin !== "https://blog.tubone-project24.xyz";
 
 if (isLocalDevelopment() === false) {
-  ReactGA.initialize('UA-146792080-1');
+  ReactGA.initialize("UA-146792080-1");
   Sentry.init({
-    dsn: 'https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608',
+    dsn: "https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608",
     release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
     integrations: [new Integrations.BrowserTracing()],
     tracesSampleRate: 1.0,

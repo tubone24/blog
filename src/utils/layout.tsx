@@ -1,7 +1,9 @@
 import React from "react";
 import Layout from "../components/Layout/layout";
 
-function wrapLayout(WrappedComponent: any) {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+function wrapLayout(WrappedComponent) {
   return class PP extends React.Component {
     constructor(props: any) {
       super(props);

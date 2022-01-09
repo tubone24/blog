@@ -2,7 +2,7 @@ import React from "react";
 import Link from "gatsby-link";
 import lozad from "lozad";
 
-import { isBrowser } from "../api";
+import { isBrowser } from "../utils";
 
 import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
@@ -11,7 +11,7 @@ import ShareBox from "../components/ShareBox";
 import "./index.scss";
 import SEO from "../components/SEO";
 
-const NavLinkText = ({ color, text }) => (
+const NavLinkText = ({ color, text }: { color: string; text: string }) => (
   <div
     className="navlink"
     style={{
@@ -22,7 +22,15 @@ const NavLinkText = ({ color, text }) => (
   </div>
 );
 
-const NavLink = ({ test, url, text }) => {
+const NavLink = ({
+  test,
+  url,
+  text,
+}: {
+  test: boolean;
+  url: string;
+  text: string;
+}) => {
   if (!test) {
     return <NavLinkText color="#7d7d7d" text={text} />;
   }
@@ -34,13 +42,28 @@ const NavLink = ({ test, url, text }) => {
   );
 };
 
-const PageNum = ({ page, all }) => (
+const PageNum = ({ page, all }: { page: number; all: number }) => (
   <div className="pagenum">
     {page}/{all}
   </div>
 );
 
-const Page = ({ pageContext, location }) => {
+type PageContext = {
+  group: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>;
+  index: number;
+  first: boolean;
+  last: boolean;
+  pathPrefix: string;
+  pageCount: number;
+};
+
+const Page = ({
+  pageContext,
+  location,
+}: {
+  pageContext: PageContext;
+  location: { href: string };
+}) => {
   const { group, index, first, last, pathPrefix, pageCount } = pageContext;
 
   React.useEffect(() => {
@@ -70,10 +93,17 @@ const Page = ({ pageContext, location }) => {
           {group.map(({ node }, num) => (
             <Card
               {...node.frontmatter}
+              title={node.frontmatter?.title || ""}
+              date={node.frontmatter?.date || ""}
+              headerImage={node.frontmatter?.headerImage || ""}
+              description={node.frontmatter?.description || ""}
+              tags={node.frontmatter?.tags || []}
               url={
-                node.frontmatter.slug ? node.frontmatter.slug : node.fields.slug
+                node.frontmatter?.slug
+                  ? node.frontmatter.slug
+                  : node.fields?.slug || ""
               }
-              key={node.fields.slug}
+              key={node.fields?.slug}
               index={num}
             />
           ))}
