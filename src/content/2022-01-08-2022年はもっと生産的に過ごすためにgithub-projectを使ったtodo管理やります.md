@@ -47,7 +47,7 @@ templateKey: blog-post
 まとめると
 
 1. パソコンでもスマホでも使える
-2. 入力欄がシンプル
+2. 入力欄がシンプル(わかりきっていることは自動で入力してほしい)
 3. リマインダーがある(Slack)
 
 となります。
@@ -67,6 +67,8 @@ templateKey: blog-post
 まず、GitHub Projectはパソコンでもスマホでも利用可能なので、 **1. パソコンでもスマホでも使える** はクリアとなります。
 
 今回はGitHub Issueを基軸に運用したいのでProjectのテンプレートはAutomated Kanbanを選択しました。これで、Issueがクローズされた際にProject側でも勝手にDoneにしてくれます。
+
+![img](https://i.imgur.com/fWMy7hV.png)
 
 ## カスタマイズ1 IssueとProjectを自動で紐付ける
 
@@ -101,25 +103,286 @@ jobs:
 
 ## カスタマイズ2 ラベルを活用する
 
-GitHub Issues, Projectにはラベルという概念があります。
+GitHub Issues, ProjectにはLabelという概念があります。
 
 よく、BugとかFeatureとかついているあれです。
 
-## カスタマイズ2 期日を管理したい
+![label](https://i.imgur.com/zeWmlIk.png)
 
-ある意味GitHub Project最大の欠点だとおもいますが期日の管理がやりにくいです。一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐付けることでプロジェクト管理ができるようになっておりますが、Milestoneを毎回作るのも大変です。
+これをToDoに活用することでToDo管理をやりやすくします。
+
+![img](https://i.imgur.com/RsOQAlV.png)
+
+このようにLabel管理することで、タスクの優先度や作業場所のカテゴライズを行いやすくできました！
+
+## カスタマイズ3 期日を管理したい
+
+ある意味GitHub Project最大の欠点だとおもいますが期日の管理がやりにくいです。一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐付けることでプロジェクト管理ができるようになっておりますが、Milestoneを毎回作って紐付けるのはとても大変です。(やはりGitHub ActionsでToDo管理は無理があったと感じざるを得ません。)
+
+![img](https://i.imgur.com/ZXzTyx3.png)
+
+Milestoneを設定さえすれば、期日表示ができますし後々実施しようと思っているリマインダーにも活用できそうです。
+
+今回はカスタマイズ2で専用の期限Labelを作ったのでこちらを活用していきます。
+
+次のようなワークフローを考えます。
+
+1. 期限Labelをつける
+2. Labelをつけた時刻からラベルの対象期限を算出し、Milestoneを作る
+3. 作ったMilestoneをIssueにつける
+
+で、これもGitHub Actionsで作ることができます。
+
+今回はちょっと勉強のために[actions/github-script](https://github.com/marketplace/actions/github-script)を使って実装しました。
+
+GitHub ScriptはデフォルトでGitHubのContextやEventを取得、更新できる[Octokit](https://octokit.github.io/rest.js/v18)がimport不要でそのまま使えるので便利ですがYAML上ではGitHub Script(JavaScript)のエディターの補完が効かず開発体験が悪すぎて発狂仕掛けたので込み入った実装をするときはまじでおすすめしません！！！普通にスクリプト書いてcheckoutしたほうがマシです。
+
+あと、ドキュメントが少なすぎです。なんのAPIがあるのかまるでわかりません。[Octokit](https://octokit.github.io/rest.js/v18)のAPIと同じだろうと思って使おうとするとそんなメソッドありませんエラー出るしいちいちインスタンスをconsole.logして実装されているメソッドを確認する作業で時間を浪費しました...。
+
+```yaml
+name: Create Milestone For Labeled
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  create_milestone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create milestone
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const label = context.payload.label.name
+            const date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
+            const nextDayOffset = 7 - date.getDay()
+            let due_on
+            let endDate
+            if(label.indexOf('Today') !== -1) {
+              due_on = date.toISOString()
+              endDate = (date.getFullYear()) + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+            } else if(label.indexOf('Tommorrow') !== -1) {
+              date.setDate(date.getDate() + 1)
+              due_on = date.toISOString()
+              endDate = (date.getFullYear()) + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+            } else if(label.indexOf('NextWeekend') !== -1) {
+              date.setDate(date.getDate() + 7 + nextDayOffset)
+              due_on = date.toISOString()
+              endDate = (date.getFullYear()) + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+            } else if(label.indexOf('Weekend') !== -1) {
+                date.setDate(date.getDate() + nextDayOffset)
+                due_on = date.toISOString()
+                endDate = (date.getFullYear()) + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+            } else if(label.indexOf('NextMonth') !== -1) {
+              date.setDate(date.getDate() + 30)
+              due_on = date.toISOString()
+              endDate = (date.getFullYear()) + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+            } else {
+              // nothing to do
+              return
+            }
+            let milestoneNumber
+            try {
+              const result = await github.issues.createMilestone({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: endDate,
+              due_on: due_on,
+              description: endDate + 'までに片付ける'
+              })
+              milestoneNumber = result.data.number
+            } catch(e) {
+              console.log(e)
+              if (e && e.errors && e.errors[0].resource === 'Milestone' && e.errors[0].code === 'already_exists') {
+                console.log('skip create milestone')
+                const resp = await github.issues.listMilestones({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  sort: 'due_on',
+                  direction: 'desc',
+                  per_page: 100,
+                })
+                if (resp.data.filter(m => m.title === endDate).length !== 0) {
+                  milestoneNumber = resp.data.filter(m => m.title === endDate)[0].number
+                } else {
+                  console.log(resp)
+                }
+              } else {
+                console.log(e)
+                throw(e)
+              }
+            }
+            await github.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              milestone: milestoneNumber,
+            })
+```
+
+かなり愚直ですが、on句でIssueがlabeledの際にLabel名を取得し、ToDayとかNextWeekendとかキーワードを拾い上げ現在時刻からMilestone期限を算出します。
+
+その後作成したMilestoneをIssueに紐付けるわけですが、すでに同名のMilestoneを作成しているとき、つまり同一日の期限タスクをすでに作っている場合もあるのでそこらへんのハンドリングがややこしい感じになっています。
+
+繰り返しになりますが、10行以上の処理を記載するときはGitHub Script使わず、きっちり実装したほうが色々幸せになれます。
+
+ともかく、このGitHub Actionsのおかげで期限ラベルを設定するだけで、Milestoneも設定されるようになりました！
+
+余談ですが、上記のコード、elseに何もしないってコメントしているのにreturnしてますね。
+
+```
+} else {
+  // nothing to do
+  return
+}
+```
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">なんだこれ <a href="https://t.co/SyHgBW3VAp">pic.twitter.com/SyHgBW3VAp</a></p>&mdash; K.Saito (@SightSeekerTw) <a href="https://twitter.com/SightSeekerTw/status/1479362069422292992?ref_src=twsrc%5Etfw">January 7, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+という記事も話題になりましたが、結構自分何もしないelse書いたりします。私の実装はreturnしているのでコメントからしてだめですけどね..。
+
+## カスタマイズ4 溜まってしまったMilestoneを定期的にCloseする
+
+カスタマイズ3で期限タスクが発生するたびにMilestoneを作る運用にしてしまったことで、Milestoneに過去の不要な日付のものがOpenし続ける状態になってしまいました。
+
+視認性も悪く精神衛生上も悪いので、期日を過ぎていて且つ、紐づくタスクすべてDoneになっているMilestoneは自動的にCloseするようにします。
+
+こちらもGitHub Actionsで実装します。ただし、今回は前回の反省を活かし[actions/github-script](https://github.com/marketplace/actions/github-script)は使いません。Pythonで作りました。
+
+まずはPythonのコードですが、GitHubへのアクセスは[PyGithub](https://github.com/PyGithub/PyGithub)を使いました。
+
+```python
+import os
+from datetime import datetime, timedelta
+from github import Github
+
+ACCESS_TOKEN = os.getenv("GITHUB_TOKEN")
+REPO = os.getenv("GITHUB_REPOSITORY")
+g = Github(ACCESS_TOKEN)
+
+repo = g.get_repo(REPO)
+open_milestones = repo.get_milestones(state="open")
+yesterday = datetime.now() - timedelta(days=1)
+
+should_close_milestone = []
+for milestone in open_milestones:
+    print(milestone)
+    if milestone.due_on < yesterday and milestone.open_issues == 0:
+        should_close_milestone.append(milestone)
+        milestone.edit(title=milestone.title, state="closed")
+
+print(should_close_milestone)
+```
+
+といった感じでopenしているmilestoneを取得して、昨日までの期日のMilestoneでopenしているIssueが0件のものをclosedにしていくシンプルスクリプトです。
+
+GitHub Scriptに比べて、IDEで型アノテーションが効いており、開発体験よかったです。
+
+次にGitHub Actionsですがただon scheduleでこちらのPythonを実行しているだけなので貼り付けは割愛します。
+
+## カスタマイズ5 日報&リマインダー機能の作成
+
+さて、ラストになりましたがリマインダー機能を作っていきます。
+
+こちらちょっと趣向を凝らして日報&リマインダーにすることにしました。
+
+一日一回、Markdown形式で日報を作りレポジトリにpushすると同時にSlack通知し日報の中に明日期限のタスクも合わせて記載する、という方法を採用しました。
 
 
+```python
+import os
+from datetime import datetime, timedelta
+import string
+from github import Github
+import requests
+import json
 
+TEMPLATE = """# ${date} の日報
+## やったこと
+${today_closed_issues_string}
+## 今日やろうと思ったこと
+${today_open_issues_string}
+## 明日までにやらないといけないこと
+${tommorrow_due_to_issues_string}
+"""
 
+TEMPLATE_SLACK = """*${date} の日報*
+*やったこと*
+${today_closed_issues_mrkdwn_string}
+*今日やろうと思ったこと*
+${today_open_issues__mrkdwn_string}
+*明日までにやらないといけないこと*
+${tommorrow_due_to_issues__mrkdwn_string}
+"""
 
+ACCESS_TOKEN = os.getenv("GITHUB_TOKEN")
+REPO = os.getenv("GITHUB_REPOSITORY")
+SLACK_WEB_HOOK = os.environ.get("SLACK_WEB_HOOK")
+g = Github(ACCESS_TOKEN)
 
+repo = g.get_repo(REPO)
+open_issues = repo.get_issues(state="open")
+closed_issues = repo.get_issues(state="closed")
+today = datetime.now()
+tommorrow = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=2)
 
+today_closed_issues = []
+today_open_issues = []
+due_to_issues = []
+today_closed_mrkdwn_issues = []
+today_open_mrkdwn_issues = []
+due_to_mrkdwn_issues = []
+for issue in closed_issues:
+    if issue.closed_at.strftime("%Y-%m-%d") == today.strftime("%Y-%m-%d"):
+        today_closed_issues.append(f"[{issue.title}]({issue.html_url})")
+        today_closed_mrkdwn_issues.append(f"<{issue.html_url}|{issue.title}>")
+for issue in open_issues:
+    print(issue)
+    if issue.created_at.strftime("%Y-%m-%d") == today.strftime("%Y-%m-%d"):
+        today_open_issues.append(f"[{issue.title}]({issue.html_url})")
+        today_open_mrkdwn_issues.append(f"<{issue.html_url}|{issue.title}>")
+    if issue.milestone is not None:
+        if issue.milestone.due_on < tommorrow:
+            due_to_issues.append(f"[{issue.title}]({issue.html_url})")
+            due_to_mrkdwn_issues.append(f"<{issue.html_url}|{issue.title}>")
+template_text = string.Template(TEMPLATE)
+result = template_text.safe_substitute(
+    {"date": today.strftime("%Y-%m-%d"),
+     "today_closed_issues_string": "- " + "\n- ".join(today_closed_issues),
+     "today_open_issues_string": "- " + "\n- ".join(today_open_issues),
+     "tommorrow_due_to_issues_string": "- " + "\n- ".join(due_to_issues),
+     }
+)
 
+template_slack_text = string.Template(TEMPLATE_SLACK)
+result_slack = template_slack_text.safe_substitute(
+    {"date": today.strftime("%Y-%m-%d"),
+     "today_closed_issues_mrkdwn_string": "* " + "\n* ".join(today_closed_mrkdwn_issues),
+     "today_open_issues__mrkdwn_string": "* " + "\n* ".join(today_open_mrkdwn_issues),
+     "tommorrow_due_to_issues__mrkdwn_string": "* " + "\n* ".join(due_to_mrkdwn_issues),
+     }
+)
 
+os.makedirs(f"daily_report/{today.strftime('%Y')}/{today.strftime('%m')}", exist_ok=True)
+with open(f"daily_report/{today.strftime('%Y')}/{today.strftime('%m')}/{today.strftime('%d')}.md", "w") as f:
+    f.write(result)
 
+payload = {"text": result_slack}
+requests.post(SLACK_WEB_HOOK, json.dumps(payload))
+```
 
+大したことをやっていないスクリプトなのですが、GitHubのMarkdownと[SlackのMarkdown](https://slack.com/intl/ja-jp/help/articles/202288908-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AE%E6%9B%B8%E5%BC%8F%E8%A8%AD%E5%AE%9A)が異なっており、妙な分岐を入れる必要がありました。
 
+GitHubにpushすることでMarkdownとして日報を管理します。
 
+![img](https://i.imgur.com/KXALJYW.png)
+
+また、Slackへのリマインダーも実施します。
+
+![img](https://i.imgur.com/4petOz9.png)
+
+これで日報&リマインダー機能もできました。
 
 
