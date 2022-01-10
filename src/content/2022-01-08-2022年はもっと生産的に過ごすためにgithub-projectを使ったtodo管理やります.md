@@ -30,11 +30,11 @@ templateKey: blog-post
 
 そんな筆者がなぜToDoリストが続かないのかを分析し自分にぴったりのToDoアプリを作り、運用します。
 
-このままだと胡散臭いビジネス書みたいな宣伝文句になってしまってますが、安心してください。そんなに胡散臭い内容は出てこないはずです。(ほぼGitHub ActionsのTipsみたいな記事です。)
+このままだと**胡散臭いビジネス書みたいな**宣伝文句になってしまってますが、安心してください。そんなに胡散臭い内容は出てこないはずです。(ほぼGitHub ActionsのTipsみたいな記事です。)
 
 ## 最強のToDoリストとは？
 
-まずは、世の中のToDoリスト(アプリ)について分析していきましょう。
+まずは、世の中のToDoリストアプリについて分析していきましょう。
 
 世の中には玉石混交のToDoリストアプリで溢れかえってますが、筆者が思うに**ネイティブアプリ専用のToDoリスト**はまず開かなくなります。
 
@@ -54,27 +54,27 @@ templateKey: blog-post
 
 ## 選ばれたのはGitHub Projectでした。
 
-ということで今回私に選ばれたのは**GitHub Project**でした。
+ということで今回私に選ばれたのは[GitHub Project](https://docs.github.com/ja/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)でした。
 
-え？ それってカンバンでプロジェクト管理するソフトウェア開発のタスク管理ツールでしょ？コードを書かないような個人のToDoに使えるの？と思ったあなた。
+え？ それって**カンバンでプロジェクト管理するソフトウェア開発のタスク管理ツール**でしょ？コードを書かないような個人のToDoに使えるの？と思ったあなた。
 
 **その通りです。使えません。**
 
-そのままでは使い勝手が悪すぎます。
+**そのままでは使い勝手が悪すぎます。**
 
-が、GitHub ProjectにはGitHub Actionsという最強のCIがついてますのでこちらを使うことで劇的に使いやすいToDoアプリになります。
+が、GitHub Projectには**GitHub Actions**という最強のCIがついてますのでこちらを使うことで劇的に使いやすいToDoアプリになります。
 
-まず、GitHub Projectはパソコンでもスマホでも利用可能なので、 **1. パソコンでもスマホでも使える** はクリアとなります。
+まず、GitHub Projectはパソコンでもスマホでも利用可能なので、何も実装しなくても **1. パソコンでもスマホでも使える** はクリアとなります。ありがたい。
 
-今回はGitHub Issueを基軸に運用したいのでProjectのテンプレートはAutomated Kanbanを選択しました。これで、Issueがクローズされた際にProject側でも勝手にDoneにしてくれます。
+今回はGitHub Issueを基軸に運用したいのでProjectのテンプレートは[Automated Kanban](https://docs.github.com/ja/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards#templates-for-project-boards)を選択しました。これで、**Issueがクローズされた際にProject側でもタスクを勝手にDone**にしてくれます。
 
 ![img](https://i.imgur.com/fWMy7hV.png)
 
 ## カスタマイズ1 IssueとProjectを自動で紐付ける
 
-Github ProjectはGitHub IssueおよびPull Requestと紐付けして運用することができるのですが、**Issueを切った際にProjectのToDoに自動紐付けされません。** (Automated KanbanでIssue CloseでDoneにしてくれるのに...)
+Github ProjectはGitHub IssueおよびPull Requestと紐付けして運用することができるのですが、**Issueを切った際にProjectのToDoに自動紐付けされません。** (Automated KanbanではIssue CloseでDoneにしてくれるのに逆のことはしてくれないんだ...)
 
-手動で、指定したProjectに紐付けを行う必要があります。一つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐付けるのはつらすぎます。
+Issueを切った際**手動**で、指定したProjectに紐付けを行う必要があります。一つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐付けるのはつらすぎます。
 
 そこで僕はGitHub Actions。 (もこみち風)
 
@@ -97,13 +97,15 @@ jobs:
           repo-token: ${{ secrets.GH_TOKEN }}
 ```
 
-使い方は公式のREADMEを見てもらえればと思いますが、ポイントとしては、on句にはIssueのOpenを指定することとrepo-tokenはGitHub Actionsでデフォルトで使える**secrets.GITHUB_TOKEN**だとProjectの操作権限がないのでadmin:orgのR/W権限をつける必要があります。(専用に[PAT](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)を再発行してsecretsに設定する必要があります。)
+使い方は公式のREADMEを見てもらえればと思いますが、ポイントとしては、on句にはIssueのOpenを指定することとrepo-tokenはGitHub Actionsでデフォルトで使える**secrets.GITHUB_TOKEN**だとProjectの操作権限がないので**admin:orgのR/W権限**をつける必要があります。
+
+(専用に[PAT](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)を再発行してsecretsに設定する必要があります。)
 
 これで、New IssueからIssueを切るだけで、Project管理ができるようになりました！
 
 ## カスタマイズ2 ラベルを活用する
 
-GitHub Issues, ProjectにはLabelという概念があります。
+GitHub Issues, Projectには[Label](https://docs.github.com/ja/issues/using-labels-and-milestones-to-track-work/managing-labels)という概念があります。
 
 よく、BugとかFeatureとかついているあれです。
 
@@ -117,7 +119,9 @@ GitHub Issues, ProjectにはLabelという概念があります。
 
 ## カスタマイズ3 期日を管理したい
 
-ある意味GitHub Project最大の欠点だとおもいますが期日の管理がやりにくいです。一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐付けることでプロジェクト管理ができるようになっておりますが、Milestoneを毎回作って紐付けるのはとても大変です。(やはりGitHub ActionsでToDo管理は無理があったと感じざるを得ません。)
+ある意味GitHub Project ToDoアプリ利用最大の欠点だとおもいますが、**期日の管理**がやりにくいです。
+
+一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐付けることでプロジェクト管理ができるようになっておりますが、**Milestoneを毎回作って紐付ける**のはとても大変です。(やはりGitHub ActionsでToDo管理は無理があったと感じざるを得ません。)
 
 ![img](https://i.imgur.com/ZXzTyx3.png)
 
@@ -135,9 +139,11 @@ Milestoneを設定さえすれば、期日表示ができますし後々実施�
 
 今回はちょっと勉強のために[actions/github-script](https://github.com/marketplace/actions/github-script)を使って実装しました。
 
-GitHub ScriptはデフォルトでGitHubのContextやEventを取得、更新できる[Octokit](https://octokit.github.io/rest.js/v18)がimport不要でそのまま使えるので便利ですがYAML上ではGitHub Script(JavaScript)のエディターの補完が効かず開発体験が悪すぎて発狂仕掛けたので込み入った実装をするときはまじでおすすめしません！！！普通にスクリプト書いてcheckoutしたほうがマシです。
+GitHub ScriptはデフォルトでGitHubのContextやEventを取得、IssueやMilestoneを更新できる[Octokit](https://octokit.github.io/rest.js/v18)がimport不要でそのまま使えるのでかなり便利なのですが、GitHub ActionsのYAML上でコードを書くことになり、YAML上ではGitHub Script(JavaScript)の**エディターの補完**が効かず開発体験が悪すぎて発狂仕掛けたので複雑な実装をするときはまじで利用をおすすめしません！！！普通にスクリプト書いてcheckoutしたほうがマシです。
 
-あと、ドキュメントが少なすぎです。なんのAPIがあるのかまるでわかりません。[Octokit](https://octokit.github.io/rest.js/v18)のAPIと同じだろうと思って使おうとするとそんなメソッドありませんエラー出るしいちいちインスタンスをconsole.logして実装されているメソッドを確認する作業で時間を浪費しました...。
+あと、GitHub Scriptのドキュメントが少なすぎです。
+
+なんのAPIがあるのかまるでわかりません。[Octokit](https://octokit.github.io/rest.js/v18)のAPIと同じだろうと思って使おうとするとそんなメソッドありませんエラー出るしいちいちインスタンスをconsole.logして実装されているメソッドを確認する作業で時間を浪費しました...。
 
 ```yaml
 name: Create Milestone For Labeled
@@ -226,13 +232,15 @@ jobs:
 
 その後作成したMilestoneをIssueに紐付けるわけですが、すでに同名のMilestoneを作成しているとき、つまり同一日の期限タスクをすでに作っている場合もあるのでそこらへんのハンドリングがややこしい感じになっています。
 
-繰り返しになりますが、10行以上の処理を記載するときはGitHub Script使わず、きっちり実装したほうが色々幸せになれます。
+繰り返しになりますが、**10行以上の処理を記載するときはGitHub Script使わず、きっちり実装したほうが色々幸せになれます。**
 
 ともかく、このGitHub Actionsのおかげで期限ラベルを設定するだけで、Milestoneも設定されるようになりました！
 
-余談ですが、上記のコード、elseに何もしないってコメントしているのにreturnしてますね。
+### 余談
 
-```
+余談ですが、上記のコード、elseに何もしないってコメントしているのにreturnしてますね。💦💦💦💦
+
+```javascript
 } else {
   // nothing to do
   return
@@ -241,7 +249,9 @@ jobs:
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">なんだこれ <a href="https://t.co/SyHgBW3VAp">pic.twitter.com/SyHgBW3VAp</a></p>&mdash; K.Saito (@SightSeekerTw) <a href="https://twitter.com/SightSeekerTw/status/1479362069422292992?ref_src=twsrc%5Etfw">January 7, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-という記事も話題になりましたが、結構自分何もしないelse書いたりします。私の実装はreturnしているのでコメントからしてだめですけどね..。
+というTweetも話題になりましたが、結構自分は何もしないelse書いたりします。がそこらへんの議論は宗教戦争なのでなんとも穏やかにいきたいものです。
+
+今回の私の実装はreturnしているのでコメントからしてだめですけどね..。
 
 ## カスタマイズ4 溜まってしまったMilestoneを定期的にCloseする
 
@@ -286,7 +296,7 @@ GitHub Scriptに比べて、IDEで型アノテーションが効いており、�
 
 さて、ラストになりましたがリマインダー機能を作っていきます。
 
-こちらちょっと趣向を凝らして日報&リマインダーにすることにしました。
+こちらちょっと趣向を凝らして**日報&リマインダー**にすることにしました。
 
 一日一回、Markdown形式で日報を作りレポジトリにpushすると同時にSlack通知し日報の中に明日期限のタスクも合わせて記載する、という方法を採用しました。
 
@@ -385,4 +395,8 @@ GitHubにpushすることでMarkdownとして日報を管理します。
 
 これで日報&リマインダー機能もできました。
 
+## まとめ
 
+![img](https://i.imgur.com/LnpjYNN.png)
+
+これで快適にToDoを記載することができるようになったのですが、肝心なToDoがあまりないのでこの仕組みをいつまで使い続けるのか不安になってきました。
