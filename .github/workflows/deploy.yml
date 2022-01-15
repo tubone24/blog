@@ -60,6 +60,12 @@ jobs:
           cache: npm
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
+      - name: Cache gatsby
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache
+          key: gastby-${{ hashFiles('package.json') }}
+          restore-keys: gastby-
       - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
