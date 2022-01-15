@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "@tubone24/gitalk/dist/gitalk.css";
+import "gitalk/dist/gitalk.css";
 const isBrowser = typeof window !== "undefined";
-const Gitalk = isBrowser ? require("@tubone24/gitalk") : undefined;
+const Gitalk = isBrowser ? require("gitalk") : undefined;
 
 type Props = {
   id: string;
