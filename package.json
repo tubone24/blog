@@ -114,9 +114,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
-    "@types/loadable__component": "^5.13.4",
-    "@types/lozad": "^1.16.1",
-    "@types/react-transition-group": "^4.4.4",
+    "@types/loadable__component": "5.13.4",
+    "@types/lozad": "1.16.1",
+    "@types/react-transition-group": "4.4.4",
     "babel-eslint": "10.1.0",
     "babel-plugin-transform-runtime": "6.23.0",
     "cross-env": "7.0.3",
