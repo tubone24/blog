@@ -56,6 +56,7 @@
     "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-numbered-footnotes": "1.0.1",
     "gatsby-remark-prismjs": "6.3.0",
+    "gatsby-remark-prismjs-title": "^1.0.0",
     "gatsby-remark-table-of-contents": "1.0.0",
     "gatsby-source-filesystem": "4.3.0",
     "gatsby-transformer-remark": "5.5.2",
