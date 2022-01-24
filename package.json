@@ -113,7 +113,7 @@
     "browserslist": "npx browserslist"
   },
   "devDependencies": {
-    "@babel/core": "7.16.10",
+    "@babel/core": "7.16.12",
     "@types/loadable__component": "5.13.4",
     "@types/lozad": "1.16.1",
     "@types/react-transition-group": "4.4.4",
