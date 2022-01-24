@@ -121,7 +121,7 @@
     "babel-plugin-transform-runtime": "6.23.0",
     "cross-env": "7.0.3",
     "css-loader": "6.5.1",
-    "cypress": "9.2.0",
+    "cypress": "9.3.1",
     "cypress-visual-regression": "1.6.2",
     "eslint": "8.2.0",
     "eslint-config-airbnb": "19.0.0",
