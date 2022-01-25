@@ -183,6 +183,10 @@ a {
 
 .line-numbers .line-numbers-rows {
   padding: 1rem 0;
+
+  span {
+    padding-bottom: 0.057rem;
+  }
 }
 
 .gatsby-code-title {
