@@ -135,7 +135,7 @@
     "gh-pages": "3.2.3",
     "husky": "7.0.4",
     "lint-staged": "12.0.3",
-    "netlify-cli": "8.9.5",
+    "netlify-cli": "8.14.1",
     "netlify-lambda": "2.0.15",
     "prettier": "2.4.1",
     "sass-loader": "12.4.0",
