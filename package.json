@@ -6,9 +6,9 @@
   "dependencies": {
     "@loadable/component": "5.15.2",
     "@popperjs/core": "^2.11.0",
-    "@sentry/browser": "6.17.1",
-    "@sentry/react": "6.16.1",
-    "@sentry/tracing": "6.16.1",
+    "@sentry/browser": "6.17.2",
+    "@sentry/react": "6.17.2",
+    "@sentry/tracing": "6.17.2",
     "@types/react-helmet": "^6.1.5",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
