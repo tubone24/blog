@@ -19,6 +19,8 @@ const Header = ({
   <div className="col-12 header" style={{ padding: 0 }} id="header">
     <div
       className="img-container lozad"
+      role="img"
+      aria-label={title}
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`,
         marginTop: -58,
