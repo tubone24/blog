@@ -46,30 +46,43 @@ const Navbar = () => (
       <div
         className="collapse navbar-collapse flex-row-reverse"
         id="navbarSupportedContent"
+        role="navigation"
       >
         <ul className="navbar-nav mr-2">
-          <NavItem url="/tags/" name="Tags" key="/tags/" />
-          <NavItem url="/about/" name="About" key="/about/" />
-          <ExternalLink
-            className="nav-btn btn btn-link"
-            title="Contact"
-            href="https://portfolio.tubone-project24.xyz/#contact"
-          />
-          <ExternalLink
-            className="nav-btn btn btn-link"
-            title="Portfolio"
-            href="https://portfolio.tubone-project24.xyz"
-          />
-          <ExternalLink
-            className="nav-btn btn btn-link"
-            title="Note"
-            href="https://note.tubone-project24.xyz"
-          />
-          <ExternalLink
-            className="nav-btn btn btn-link"
-            title="FM"
-            href="https://tubone24.github.io/boyakifm/"
-          />
+          <li>
+            <NavItem url="/tags/" name="Tags" key="/tags/" />
+          </li>
+          <li>
+            <NavItem url="/about/" name="About" key="/about/" />
+          </li>
+          <li>
+            <ExternalLink
+              className="nav-btn btn btn-link"
+              title="Contact"
+              href="https://portfolio.tubone-project24.xyz/#contact"
+            />
+          </li>
+          <li>
+            <ExternalLink
+              className="nav-btn btn btn-link"
+              title="Portfolio"
+              href="https://portfolio.tubone-project24.xyz"
+            />
+          </li>
+          <li>
+            <ExternalLink
+              className="nav-btn btn btn-link"
+              title="Note"
+              href="https://note.tubone-project24.xyz"
+            />
+          </li>
+          <li>
+            <ExternalLink
+              className="nav-btn btn btn-link"
+              title="FM"
+              href="https://tubone24.github.io/boyakifm/"
+            />
+          </li>
         </ul>
       </div>
     </div>
