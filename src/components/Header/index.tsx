@@ -20,7 +20,7 @@ const Header = ({
     <div
       className="img-container lozad"
       role="img"
-      aria-label={title}
+      aria-label=""
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`,
         marginTop: -58,
