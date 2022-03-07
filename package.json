@@ -36,7 +36,7 @@
     "gatsby-plugin-minify": "0.4.0",
     "gatsby-plugin-minify-classnames": "0.3.1",
     "gatsby-plugin-netlify": "3.14.0",
-    "gatsby-plugin-nprogress": "4.3.0",
+    "gatsby-plugin-nprogress": "4.9.0",
     "gatsby-plugin-offline": "5.3.0",
     "gatsby-plugin-optimize-svgs": "1.0.5",
     "gatsby-plugin-preact": "6.3.0",
