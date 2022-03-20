@@ -125,7 +125,7 @@ networks:
 
 これで、<https://localhost:3000>にアクセスすることで**実行結果を可視化**できるようになりました。
 
-![grafana](https://i.imgur.com/tTffyvw.png)
+![grafana](https://i.imgur.com/sX5HtCG.png)
 
 ### TypeScriptでテストシナリオを書けるようにする
 
