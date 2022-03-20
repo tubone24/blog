@@ -22,7 +22,7 @@ templateKey: blog-post
 
 ## k6とは？
 
-[k6](https://k6.io/) は[Go製](https://go.dev/)のOSS負荷テストツールで普通のHTTPの他、HTTP/2, gRPC, WebSocketなどにも対応した高機能なテストシナリオ作成がJavaScriptで実施できる手軽さとGrafanaを使ったパフォーマンスレポートが魅力の製品です。
+[k6](https://k6.io/) は[Go製](https://go.dev/)のOSS負荷テストツールで普通のHTTPの他、HTTP/2, gRPC, WebSocketなどにも対応した高機能なテストシナリオ作成がJavaScriptで実施できる手軽さと[Grafana](https://grafana.com/)を使ったパフォーマンスレポートが魅力の製品です。
 
 以前はloadimpactと呼ばれていました。こちらのほうが馴染みある人が多いのではないでしょうか？また、K6のクラウド版を使ったことありますー！という方もいらっしゃるのではないでしょうか？
 
@@ -30,7 +30,7 @@ templateKey: blog-post
 
 ## 使い心地
 
-K6をMacやEC2などで作ったLinux上に構築する方法はググればたくさん出てくるのでここでは割愛しますが、まず非常に簡単に環境が構築できる。この点はしっかり強調しておきたいです。
+K6をMacやEC2などで作ったLinux上に構築する方法はググればたくさん出てくるのでここでは割愛しますが、まず**非常に簡単に環境が構築できる。** この点はしっかり強調しておきたいです。
 
 MacならHomebrew入っていれば
 
@@ -40,7 +40,7 @@ brew install k6
 
 で完了ですからね。環境構築は超簡単です。
 
-シナリオファイルの作成もJavaScript ES6対応&[公式ドキュメント](https://k6.io/docs/)比較的している充実しているので、ある程度JavaScript触ったことのある人であればノーストレスで実装できそうです。
+シナリオファイルの作成もJavaScript ES6対応&[公式ドキュメント](https://k6.io/docs/)比較的充実しているので、ある程度JavaScript触ったことのある人であればノーストレスで実装できそうです。
 
 また、細かいニーズのシナリオ作成については[GitHubレポジトリのサンプルコード](https://github.com/grafana/k6/tree/master/samples)がかなり参考になります。
 
@@ -58,13 +58,13 @@ brew install k6
 
 また、負荷テストはしばしばネットワークの安定したサーバー上で実行することもしばしばでMacで動くのに負荷テスト用サーバーで動きません！みたいになるのも悲しいです。そもそも専用のサーバーを立てるのもめんどくさいのでDocker Image化してDockerコンテナ管理サービスでサクッと実行させるのが賢そうです。なんならCIに組み込んで、パイプライン上で実行させるとかも面白そうです。
 
-もちろんK6公式もぬかりなく[Docker Image](https://github.com/grafana/k6#docker)を用意してます。ただ、あくまでもこちらのImageはk6単体のImageなのでパフォーマンス可視化をするには別途InfluxDBとGrafanaを立ち上げる必要があります。
+もちろんK6公式もぬかりなく[Docker Image](https://github.com/grafana/k6#docker)を用意してます。ただ、あくまでもこちらのImageはk6単体のImageなのでパフォーマンス可視化をするには別途[InfluxDB](https://www.influxdata.com/)と[Grafana](https://grafana.com/)を立ち上げる必要があります。
 
 なので、まとめて環境をDocker composeしてしまいましょう。
 
-もちろん、本来は結果をきちんと残しておくためにInfluxDBとGrafanaを永続化する必要がありますが、~~今回はテスト実行なのでInfluxDB永続化は行いません。~~ 永続化することにしました。代わりにInfluxDBのcleanコマンドを実装する形にしました。本格的に負荷テスト環境を作るならAWS ECSであればデータボリュームを[Amazon EFS ボリューム](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/efs-volumes.html)とかで管理すると幸せになれる気がします。
+~~もちろん、本来は結果をきちんと残しておくためにInfluxDBとGrafanaを永続化する必要がありますが、今回はテスト実行なのでInfluxDB永続化は行いません。~~ 永続化することにしました。代わりにInfluxDBのcleanコマンドを実装する形にしました。本格的に負荷テスト環境を作るならAWS ECSであればデータボリュームを[Amazon EFS ボリューム](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/efs-volumes.html)とかで管理すると幸せになれる気がします。
 
-次のようなdocker-compose.ymlを作るだけで完成です。楽でいいですねdocker-compose。
+次のような**docker-compose.yml**を作るだけで完成です。楽でいいですねdocker compose。
 
 ```yml
 version: '3.8'
@@ -119,21 +119,25 @@ networks:
       - K6_OUT=influxdb=http://influxdb:8086/k6
 ```
 
-とやってあげることで実行結果をInfluxDBに出力します。[公式ドキュメント](https://k6.io/docs/results-visualization/influxdb-+-grafana/#run-the-test-and-upload-the-results-to-influxdb)のように環境変数でなく実行時の引数で設定することもできます。
+とやってあげることで実行結果をInfluxDBに出力します。
 
-これで、<https://localhost:3000>にアクセスすることで実行結果を可視化できるようになりました。
+[公式ドキュメント](https://k6.io/docs/results-visualization/influxdb-+-grafana/#run-the-test-and-upload-the-results-to-influxdb)のように環境変数でなく実行時の引数で設定することもできます。
+
+これで、<https://localhost:3000>にアクセスすることで**実行結果を可視化**できるようになりました。
 
 ![grafana](https://i.imgur.com/tTffyvw.png)
 
 ### TypeScriptでテストシナリオを書けるようにする
 
-加えて、シナリオファイルのTypeScript化を実施します。
+加えて、シナリオファイルの**TypeScript化**を実施します。
 
-[公式ドキュメント](https://k6.io/docs/using-k6/javascript-compatibility-mode/)によるとGo純正のJavaScript VMがES5にしか対応してないのでES6で書いたテストシナリオはどうやらK6の中でES5に変換してから実行しているらしいです。
+[公式ドキュメント](https://k6.io/docs/using-k6/javascript-compatibility-mode/)によるとGoのJavaScript VMが**ES5にしか対応してない**のでES6で書いたテストシナリオはどうやらK6の中でES5に変換してから実行しているらしいです。
 
-逆にいえば、compatibility-mode=baseというオプションを使ってES5のテストファイルを渡してあげた場合、変換の手間がなくなるので実行時間とメモリの使用量が改善され、パフォーマンスが改善されるとのことです。
+K6の[go.mod](https://github.com/grafana/k6/blob/master/go.mod)を見てみると使っているJavaScript VMは[goja](https://github.com/dop251/goja)みたいですね。
 
-じゃあせっかくならTypeScript=>ES5のトランスパイルを実施して実行時はcompatibility-mode=baseオプションを指定すれば、テストシナリオをTypeScriptで実装しつつパフォーマンス面でも有利に働きそうです。
+逆に、**compatibility-mode=base**というオプションを使ってES5のテストファイルを渡してあげた場合、ES6への変換の手間がなくなるので実行時間とメモリの使用量が改善され、**パフォーマンスが改善**されるとのことです。
+
+じゃあせっかくなら**TypeScript=>ES5のトランスパイル**を実施して実行時はcompatibility-mode=baseオプションを指定すれば、テストシナリオをTypeScriptで実装しつつパフォーマンス面でも有利に働きそうです。
 
 とりあえず[公式に載っている例](https://github.com/grafana/k6-hardware-benchmark)を参考にwebpack.config.jsをゴリっと書くことにしました。
 
@@ -145,8 +149,7 @@ babelってトランスパイルしてしまったのでこれ型チェックと
 
 と思って色々試行錯誤していたら公式に実装例があり、ほぼやりたいことがそれでできていたので結局それをパクることにしました... 
 
-<https://github.com/grafana/k6-template-typescript>
-
+[Template to use TypeScript with k6](https://github.com/grafana/k6-template-typescript)
 
 ```
 const path = require('path');
@@ -207,11 +210,11 @@ tsconfig.jsonも特に特徴はないですが、targetはes5にしてます。
 }
 ```
 
-これでwebpackコマンドを実行することできちんとES5に変換されたテストシナリオのJavaScriptファイルがdist配下に出力されるようになりました。
+これで**webpackコマンド**を実行することできちんとES5に変換されたテストシナリオのJavaScriptファイルがdist配下に出力されるようになりました。
 
 ### 実行してみる
 
-Docker composeにしてますので、必要なコンテナをupで立ち上げたのち、k6だけ個別にrunします。runするときにdist配下のテストファイルを指定すればOKです。
+Docker composeにしてますので、必要なコンテナをupで立ち上げたのち、k6だけ個別にrunします。runするときにdist配下のテストファイルを標準入力として指定すればOKです。
 
 ```
 ddocker compose up -f
@@ -268,7 +271,7 @@ default ✓ [ 100% ] 1 VUs  00m00.9s/10m0s  1/1 iters, 1 per VU
 Done in 6.27s.
 ```
 
-Locustに勝るとも劣らないかなりしっかりとしたレポートが出ますね。
+Locustに勝るとも劣らないかなりしっかりとしたレポートが出ますね！
 
 ## yarn scriptに何とかして取り込む
 
@@ -278,7 +281,7 @@ Locustに勝るとも劣らないかなりしっかりとしたレポートが�
 
 今回実装するまで知らなかったのですが、yarn scriptに引数を渡すときコマンドの途中に引数の文字列を入れたいとき、ちょっと難しかったです。サクッとできるかなと思ったのですが。
 
-結局、次のようにshellから0番目の引数を取って実行するという無茶苦茶実装にしました。こうすれば、 yarn start testFile で実行できます。
+結局、次のようにshellから0番目の引数を取って実行するという無茶苦茶実装にしました。こうすれば、 **yarn start testFile** で実行できます。
 
 ```
 start": "sh -c \"webpack && docker compose run k6 run --compatibility-mode=base - < ./dist/${0}.js\"",
@@ -292,7 +295,7 @@ start": "sh -c \"webpack && docker compose run k6 run --compatibility-mode=base 
 
 強いて言えば、docker compose runする際に-Tオプションをつけないと、コンソールが戻ってこないので無限に動いてしまいます。ちょっとだけ詰まりました。
 
-```
+```yaml
 name: Test Scenario
 on:
   push:
