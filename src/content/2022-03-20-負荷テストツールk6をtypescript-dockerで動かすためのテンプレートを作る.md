@@ -151,7 +151,7 @@ babelってトランスパイルしてしまったのでこれ型チェックと
 
 [Template to use TypeScript with k6](https://github.com/grafana/k6-template-typescript)
 
-```
+```javascript
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
