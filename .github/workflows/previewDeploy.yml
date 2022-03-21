@@ -67,6 +67,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
+            ~/blog/.cache
           key: gastby-${{ hashFiles('package-lock.json') }}
           restore-keys: gastby-${{ hashFiles('package-lock.json') }}
       - name: "depcheck"
@@ -98,7 +99,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
-        run: npm run build:nocache
+        run: npm run build
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public > cli.txt
         env:
@@ -106,6 +107,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Cat cli.txt
         run: |
+          pwd
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt

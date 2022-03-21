@@ -260,6 +260,7 @@ type Site = Node & {
   readonly pathPrefix: Maybe<Scalars['String']>;
   readonly polyfill: Maybe<Scalars['Boolean']>;
   readonly jsxRuntime: Maybe<Scalars['String']>;
+  readonly trailingSlash: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -562,6 +563,7 @@ type Query_siteArgs = {
   pathPrefix: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
   jsxRuntime: Maybe<StringQueryOperatorInput>;
+  trailingSlash: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1532,6 +1534,7 @@ type SiteFieldsEnum =
   | 'pathPrefix'
   | 'polyfill'
   | 'jsxRuntime'
+  | 'trailingSlash'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1668,6 +1671,7 @@ type SiteFilterInput = {
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly polyfill: Maybe<BooleanQueryOperatorInput>;
   readonly jsxRuntime: Maybe<StringQueryOperatorInput>;
+  readonly trailingSlash: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -2777,6 +2781,14 @@ type getAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 type getAllTagsQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'tags'>> } }> } };
 
+type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_1_Query = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'excerpt'>
+        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'headerImage' | 'date' | 'tags'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
+      ) }> } };
+
 type cardDataFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<(
     Pick<MarkdownRemarkFrontmatter, 'title' | 'date'>
     & { url: MarkdownRemarkFrontmatter['slug'] }
@@ -2789,13 +2801,5 @@ type SidebarQueryQuery = { readonly all: (
     Pick<MarkdownRemarkConnection, 'totalCount'>
     & { readonly allPosts: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'tags'>> } }> }
   ), readonly limited: { readonly latestPosts: ReadonlyArray<{ readonly node: cardDataFragment }> } };
-
-type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_1_Query = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'excerpt'>
-        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'headerImage' | 'date' | 'tags'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
-      ) }> } };
 
 }
