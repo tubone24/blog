@@ -96,6 +96,31 @@ jobs:
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: npm install
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.7"
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install Dependencies
+        working-directory: ./scripts/wordcloud
+        run:
+          pip install -r requirements.txt
+      - name: Download Neologd Dictionary
+        working-directory: ./scripts/wordcloud
+        run:
+          sh scripts/download_neologd_dict.sh
+      - name: Generate Word Cloud
+        working-directory: ./scripts/wordcloud
+        run: python3 src/main.py
+      - name: copy wordcloud
+        working-directory: ./scripts/wordcloud
+        run: mv word_cloud_blog_large.png word_cloud_blog.webp word_cloud_blog.png ../../static/assets
       - name: npm build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
