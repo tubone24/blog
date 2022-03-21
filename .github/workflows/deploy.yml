@@ -108,7 +108,7 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: production
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
-        run: npm run build
+        run: npm run build:nocache
       - name: Push Bundle Analyze
         uses: peaceiris/actions-gh-pages@v3
         with:
