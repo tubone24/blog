@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+env:
+  cache-version: v1
 
 jobs:
   test:
@@ -14,15 +16,22 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-          cache: npm
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
-      - name: Cache gatsby
+      - name: Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache
-          key: gastby-${{ hashFiles('package.json') }}
-          restore-keys: gastby-
+          path: |
+            ~/.cache
+            ~/.npm
+            node_modules
+            .cache
+            public
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+            ${{ runner.os }}-
       - name: npm install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -57,15 +66,22 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-          cache: npm
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
-      - name: Cache gatsby
+      - name: Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache
-          key: gastby-${{ hashFiles('package.json') }}
-          restore-keys: gastby-
+          path: |
+            ~/.cache
+            ~/.npm
+            node_modules
+            .cache
+            public
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -115,14 +131,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-          cache: npm
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Install lighthouse
         run: sudo npm i -g lighthouse
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
       - name: Run lighthouse
         run: |
           lighthouse \
@@ -131,7 +145,6 @@ jobs:
             'https://blog.tubone-project24.xyz'
           mkdir ./public
           cp /tmp/report.html ./public/report.html
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
