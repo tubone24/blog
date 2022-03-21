@@ -255,7 +255,19 @@ module.exports = {
       },
     }, // put this after gatsby-plugin-manifest
     "gatsby-plugin-cdn-files",
-    "gatsby-plugin-offline",
+    {
+      resolve: "gatsby-plugin-offline",
+      options: {
+        workboxConfig: {
+          runtimeCaching: [
+            {
+              urlPattern: /^https?:.*\/page-data\/.*\.json/,
+              handler: "NetworkFirst",
+            },
+          ],
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
