@@ -16,12 +16,19 @@ jobs:
           node-version: 14.x
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
-      - name: Cache gatsby
+      - name: Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache
-          key: gastby-${{ hashFiles('package-lock.json') }}
-          restore-keys: gastby-${{ hashFiles('package-lock.json') }}
+          path: |
+            ~/.cache
+            ~/.npm
+            .cache
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: npm install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -65,9 +72,13 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
-            ~/blog/.cache
-          key: gastby-${{ hashFiles('package-lock.json') }}
-          restore-keys: gastby-${{ hashFiles('package-lock.json') }}
+            .cache
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: "depcheck"
         uses: tubone24/depcheck_action@v1.1.0
         with:
@@ -105,7 +116,6 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Cat cli.txt
         run: |
-          pwd
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
