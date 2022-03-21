@@ -61,10 +61,12 @@ jobs:
           cache: npm
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
-      - name: Cache gatsby
+      - name: Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache
+          path: |
+            ~/.cache
+            ~/.npm
           key: gastby-${{ hashFiles('package-lock.json') }}
           restore-keys: gastby-${{ hashFiles('package-lock.json') }}
       - name: "depcheck"
