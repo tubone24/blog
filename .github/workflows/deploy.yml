@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache
-          key: gastby-${{ hashFiles('package.json') }}
+          key: gastby-${{ hashFiles('package-lock.json') }}
           restore-keys: gastby-
       - name: npm install
         env:
@@ -64,7 +64,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache
-          key: gastby-${{ hashFiles('package.json') }}
+          key: gastby-${{ hashFiles('package-lock.json') }}
           restore-keys: gastby-
       - name: npm install
         env:
