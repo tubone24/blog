@@ -22,7 +22,7 @@ jobs:
         with:
           path: ~/.cache
           key: gastby-${{ hashFiles('package-lock.json') }}
-          restore-keys: gastby-
+          restore-keys: gastby-${{ hashFiles('package-lock.json') }}
       - name: npm install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -65,7 +65,7 @@ jobs:
         with:
           path: ~/.cache
           key: gastby-${{ hashFiles('package-lock.json') }}
-          restore-keys: gastby-
+          restore-keys: gastby-${{ hashFiles('package-lock.json') }}
       - name: npm install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
