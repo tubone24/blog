@@ -25,7 +25,6 @@ jobs:
             ~/.cache
             ~/.npm
             .cache
-            node_modules
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -74,7 +73,6 @@ jobs:
             ~/.cache
             ~/.npm
             .cache
-            node_modules
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
