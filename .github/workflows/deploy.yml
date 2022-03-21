@@ -24,7 +24,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
-            ~/.node-gyp
+            node_modules
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -35,7 +35,7 @@ jobs:
       - name: npm install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm ci
+        run: npm install
       - name: Typecheck
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -74,7 +74,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
-            ~/.node-gyp
+            node_modules
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -95,7 +95,7 @@ jobs:
           NETLIFY_ENV: production
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm ci
+        run: npm install
       - name: npm build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}

@@ -24,7 +24,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
-            ~/.node-gyp
+            node_modules
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -35,7 +35,7 @@ jobs:
       - name: npm install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm ci
+        run: npm install
       - name: Typecheck
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -74,7 +74,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
-            ~/.node-gyp
+            node_modules
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -94,7 +94,7 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm ci
+        run: npm install
       - name: npm build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -114,8 +114,6 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Cat cli.txt
         run: |
-          ls -la ~/.npm
-          ls -la ~/.cache
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
