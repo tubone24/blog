@@ -110,7 +110,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Cat cli.txt
         run: |
-          npm config get cache
+          ls ~
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
