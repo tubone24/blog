@@ -24,6 +24,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
+            ~/.node-gyp
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -73,6 +74,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
+            ~/.node-gyp
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
@@ -112,6 +114,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Cat cli.txt
         run: |
+          ls -la ~
           cat cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt

@@ -24,12 +24,13 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
+            ~/.node-gyp
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
-            ${{ runner.os }}-build-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
             ${{ runner.os }}-
       - name: npm install
         env:
@@ -73,6 +74,7 @@ jobs:
           path: |
             ~/.cache
             ~/.npm
+            ~/.node-gyp
             .cache
             public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
