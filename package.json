@@ -108,7 +108,6 @@
     "functions": "netlify-lambda serve functions",
     "clean": "rimraf public/ .cache/",
     "clean-all": "rimraf public/ .cache/ node_modules/",
-    "revert": "node ./scripts/revertConfig.js",
     "bootstrap": "netlify dev:exec node ./scripts/bootstrap-fauna-database.js",
     "build:functions": "netlify-lambda build functions -c ./webpack.config.js",
     "benchmark": "node scripts/benchmark.js https://blog.tubone-project24.xyz $(git rev-parse HEAD)",

@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+env:
+  cache-version: v1
 
 jobs:
   test:
@@ -23,10 +25,9 @@ jobs:
             ~/.cache
             ~/.npm
             .cache
-            node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: npm install
@@ -72,10 +73,9 @@ jobs:
             ~/.cache
             ~/.npm
             .cache
-            node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: npm install
