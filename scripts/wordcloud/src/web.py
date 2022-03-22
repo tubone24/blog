@@ -17,6 +17,7 @@ class Web:
             return ["Crawling this site is not allowed by robots.txt"]
         text_list = []
         for slug in self.__get_links_by_url_depth():
+            print(slug)
             sleep(0.5)
             text_list.append(remove_emoji(remove_url(self.__get_text_by_url(self.base_url + slug))).strip())
         return text_list
@@ -32,7 +33,7 @@ class Web:
         print("get {} links".format(len(links)))
         return links
 
-    def __get_links_by_url_depth(self, depth=5):
+    def __get_links_by_url_depth(self, depth=8):
         all_links = set()
         done_crawl = set()
         for i in range(depth):
@@ -44,7 +45,6 @@ class Web:
                 all_links |= set(self.__get_links_by_url(self.base_url + link))
                 sleep(0.5)
             done_crawl |= diff_links
-            # print(all_links)
         return all_links
 
     def __get_text_by_url(self, url):

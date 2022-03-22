@@ -137,14 +137,8 @@ jobs:
         run: sudo npm i -g lighthouse
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Run lighthouse
-        run: |
-          lighthouse \
-            --chrome-flags="--headless" \
-            --output html --output-path /tmp/report.html \
-            'https://blog.tubone-project24.xyz'
-          mkdir ./public
-          cp /tmp/report.html ./public/report.html
+      - name: make public dir
+        run: mkdir ./public
       - name: Set up Python 3.x
         uses: actions/setup-python@v1
         with:
@@ -169,6 +163,13 @@ jobs:
       - name: copy wordcloud
         working-directory: ./scripts/wordcloud
         run: mv word_cloud_blog_large.png word_cloud_blog.webp word_cloud_blog.png ../../public
+      - name: Run lighthouse
+        run: |
+          lighthouse \
+            --chrome-flags="--headless" \
+            --output html --output-path /tmp/report.html \
+            'https://blog.tubone-project24.xyz'
+          cp /tmp/report.html ./public/report.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

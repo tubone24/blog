@@ -6,7 +6,7 @@ from convert_webp import conv_webp
 
 FONT_PATH = "fonts/keifont.ttf"
 BASE_URL = "https://blog.tubone-project24.xyz"
-WEB_EXCLUDE_LIST = ["tag", "contact", "about", "sitemap", "pages", "rss", "photos", "privacy-policies", "header", "#"]
+WEB_EXCLUDE_LIST = ["tag", "contact", "about", "sitemap", "pages", "rss", "photos", "privacy-policies", "header", "#", "mailto:"]
 
 
 def main():
