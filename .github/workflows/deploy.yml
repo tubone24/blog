@@ -85,20 +85,20 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: word_cloud_blog_large
-          path: ./scripts/wordcloudword_cloud_blog_large.png
+          path: ./scripts/wordcloud/word_cloud_blog_large.png
       - name: Upload word_cloud_blog_webp
         uses: actions/upload-artifact@v3
         with:
           name: word_cloud_blog_webp
-          path: ./scripts/word_cloud_blog.webp
+          path: ./scripts/wordcloud/word_cloud_blog.webp
       - name: Upload word_cloud_blog_png
         uses: actions/upload-artifact@v3
         with:
           name: word_cloud_blog_png
-          path: ./scripts/word_cloud_blog.png
+          path: ./scripts/wordcloud/word_cloud_blog.png
   build:
     runs-on: ubuntu-latest
-    needs: ['test']
+    needs: ['test', 'wordcloud']
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
