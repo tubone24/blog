@@ -139,7 +139,9 @@ jobs:
       - name: Download wordcloud
         uses: actions/download-artifact@v3
       - name: move wordcloud
-        run: mv word_cloud_blog_large.png word_cloud_blog.webp word_cloud_blog.png static/assets
+        run: mv -f word_cloud_blog_large.png word_cloud_blog.webp word_cloud_blog.png static/assets/.
+      - name: test
+        run: ls -la static/assets
       - name: npm build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
