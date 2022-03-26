@@ -56,8 +56,75 @@ jobs:
         with:
           name: main.spec.js.mp4
           path: ./cypress/videos/e2e/main.spec.js.mp4
+  build:
+    runs-on: ubuntu-latest
+    needs: ['test']
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache
+            ~/.npm
+            node_modules
+            .cache
+            public
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: npm install
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          GATSBY_GITHUB_SHA: ${{ github.sha }}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          NETLIFY_ENV: production
+          PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm install
+      - name: npm build
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          GATSBY_GITHUB_SHA: ${{ github.sha }}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          NETLIFY_ENV: production
+          PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
+        run: npm run build:nocache
+      - name: Push Bundle Analyze
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public/bundle-report.html
+          keep_files: true
+      - name: Remove Bundle Analyze
+        run: rm ./public/bundle-report.html
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --prod --dir=./public
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
   wordcloud:
     runs-on: ubuntu-latest
+    needs: ['build']
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
@@ -96,81 +163,9 @@ jobs:
         with:
           name: word-cloud-blog.png
           path: ./scripts/wordcloud/word-cloud-blog.png
-  build:
-    runs-on: ubuntu-latest
-    needs: ['test', 'wordcloud']
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
-          registry-url: https://npm.pkg.github.com/
-          scope: '@tubone24'
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cache
-            ~/.npm
-            node_modules
-            .cache
-            public
-          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/package-lock.json') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: npm install
-        env:
-          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
-          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
-          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
-          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
-          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
-          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
-          GATSBY_GITHUB_SHA: ${{ github.sha }}
-          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
-          NETLIFY_ENV: production
-          PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm install
-      - name: Download wordcloud
-        uses: actions/download-artifact@v3
-      - name: move wordcloud
-        run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png static/assets/.
-      - name: test
-        run: ls -la static/assets
-      - name: npm build
-        env:
-          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
-          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
-          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
-          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
-          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
-          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
-          GATSBY_GITHUB_SHA: ${{ github.sha }}
-          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
-          NETLIFY_ENV: production
-          PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
-        run: npm run build:nocache
-      - name: Push Bundle Analyze
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public/bundle-report.html
-          keep_files: true
-      - name: Remove Bundle Analyze
-        run: rm ./public/bundle-report.html
-      - name: Deploy to netlify
-        run: npx netlify-cli deploy --prod --dir=./public
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
   lighthouse:
     runs-on: macos-latest
-    needs: ['build']
+    needs: ['build', 'wordcloud']
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node
@@ -192,6 +187,10 @@ jobs:
             --output html --output-path /tmp/report.html \
             'https://blog.tubone-project24.xyz'
           cp /tmp/report.html ./public/report.html
+      - name: Download wordcloud
+        uses: actions/download-artifact@v3
+      - name: move wordcloud
+        run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png public/.
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
