@@ -27,16 +27,14 @@ const Footer = () => (
             />
             &nbsp;
             <b>
-              <Link to={withPrefix("/")} title="tubone BOYAKI">
+              <Link to={withPrefix("/")}>
                 tubone BOYAKI
               </Link>
               &nbsp;
             </b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            <Link to={withPrefix("/privacy-policies")} title="Privacy Policies">
-              Privacy Policies
-            </Link>
+            <Link to={withPrefix("/privacy-policies")}>Privacy Policies</Link>
             &nbsp;&nbsp;Here is &nbsp;
             <a href="/sitemap-index.xml" title="sitemap">
               Sitemap

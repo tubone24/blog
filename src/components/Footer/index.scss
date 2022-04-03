@@ -3,15 +3,12 @@
 .footer {
   padding-bottom: 2rem;
   font-size: 12px;
+  a {
+    color: $link-blue;
+  }
 
   .copyright {
     margin-top: -0.5rem;
     color: $san-juan;
-  }
-
-  b {
-    a {
-      color: $light-black;
-    }
   }
 }
