@@ -92,6 +92,7 @@ class SearchBox extends Component {
           type="search"
           id="algolia-search-input"
           placeholder="Search"
+          title="search box"
           style={{
             border: "none",
           }}
