@@ -77,13 +77,11 @@ const Card = ({
               <Tag name={name || ""} key={name} />
             ))}
           </div>
-          <Link to={withPrefix(url)} title={title}>
+          <Link to={withPrefix(url)}>
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>
-          <Link to={withPrefix(url)} title="....Read more....">
-            ....Read more....
-          </Link>
+          <Link to={withPrefix(url)}>....Read more....</Link>
         </div>
       </div>
     </div>

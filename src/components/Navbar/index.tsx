@@ -30,6 +30,8 @@ const Navbar = () => (
         <img
           src="/assets/logo3.svg"
           alt="Japanese IT Developer Blog tubone BOYAKI"
+          role="heading"
+          aria-level={1}
           width="135"
           height="45"
         />
