@@ -1,4 +1,16 @@
-const axios = require("axios");
+import axios from "axios";
+import * as Sentry from "@sentry/node";
+import "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://a01a46773c8342dfa4d199c36a30fc28@o302352.ingest.sentry.io/6347154",
+  tracesSampleRate: 1.0,
+});
+
+const transaction = Sentry.startTransaction({
+  op: "blog",
+  name: "github cors transaction",
+});
 
 exports.handler = (event, context) => {
   console.log(context);
@@ -17,6 +29,7 @@ exports.handler = (event, context) => {
         token_type: response.data.token_type,
         scope: response.data.scope,
       });
+      transaction.finish();
       return {
         statusCode: 200,
         body: JSON.stringify({
@@ -26,8 +39,12 @@ exports.handler = (event, context) => {
         }),
       };
     })
-    .catch((error) => ({
-      statusCode: 500,
-      body: JSON.stringify({ error }),
-    }));
+    .catch((error) => {
+      Sentry.captureException(error);
+      transaction.finish();
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error }),
+      };
+    });
 };
