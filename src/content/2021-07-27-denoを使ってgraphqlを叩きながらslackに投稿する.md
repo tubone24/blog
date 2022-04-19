@@ -39,7 +39,7 @@ templateKey: blog-post
 
 Denoとは、Node.jsの作者であるRyan Dahlによって作られた、新しいJavaScript/TypeScriptランタイムです。
 
-Node.jsに関する10の反省点という講演の中で氏がNode.jsのここがまずかった！ということをあげて、Denoのプロトタイプ版を出したのが始まりとか。
+Node.jsに関する10の反省点という講演のなかで氏がNode.jsのここがまずかった！ということをあげて、Denoのプロトタイプ版を出したのが始まりとか。
 
 ちなみに、Nodeを並べ替えるとDeno。
 
@@ -152,6 +152,6 @@ await fetch(slackWebhookUrl, {method: 'POST', headers: slackHeaders, body: JSON.
 
 ## 結論
 
-使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います！！！！
+使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います!!!！
 
 

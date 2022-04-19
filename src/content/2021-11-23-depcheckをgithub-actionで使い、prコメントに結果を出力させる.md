@@ -24,7 +24,7 @@ JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode Package
 
 ![img](https://i.imgur.com/yxDDBOX.jpg)
 
-もちろんこちらの問題は様々な議論が尽くされているわけですし、今更どうこう言うつもりはないです。
+もちろんこちらの問題はさまざまな議論が尽くされているわけですし、今更どうこう言うつもりはないです。
 
 `youtube:https://www.youtube.com/embed/SHIci8-6_gs`
 
@@ -92,7 +92,7 @@ Missing dependencies
 * babel-plugin-remove-graphql-queries: .\.storybook\main.js
 ```
 
-このようにpackage.jsonで定義されているにも関わらずコード上で使われてないライブラリ、もしくはコード上で見つかったけどpackage.jsonに定義されてないライブラリを一覧化することができます。
+このようにpackage.jsonで定義されているにも関わらずコード上で使われてないライブラリ、もしくはコード上で見つかったけどpackage.jsonに定義されてないライブラリを一覧化できます。
 
 ## これをGitHub Actionsに組み込みたい
 

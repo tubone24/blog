@@ -239,7 +239,7 @@ JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが�
 - basics
   - 名前や連絡先など基本情報。
   - 電話番号や詳細な住所載せていない海外兄貴は多かった。記載しない項目は空文字""にしている海外兄貴が多い。(nullにしている兄貴はほとんどいなかった)
-  - 海外兄貴のJSON Resumeを見るとSummeryには経験年数の他、大学の専攻や経験した言語、関わったプロジェクトなど様々書いている
+  - 海外兄貴のJSON Resumeを見るとSummeryには経験年数の他、大学の専攻や経験した言語、関わったプロジェクトなどさまざま書いている
 - profiles
   - いわゆるSNSのリンク
 - work
@@ -295,7 +295,7 @@ JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが�
 
 ## APIができたら実際アクセスしてみる
 
-上記の項目を無事に記載出来たら
+上記の項目を無事に記載できたら
 
 ![Img](https://i.imgur.com/PSokx4v.png)
 
@@ -316,7 +316,7 @@ JSON ResumeにはHTMLのテンプレートで記載内容をきれいなResume�
 
 ![Img](https://i.imgur.com/IIzgYrK.png)
 
-かっこいい！！！感じでResumeがサクサク作れてしまいます。
+かっこいい!!!感じでResumeがサクサク作れてしまいます。
 
 ## 結論
 

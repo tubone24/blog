@@ -42,7 +42,7 @@ AWSのTracingサービスのX-Rayを使って、LambdaのService MapやTraceを�
 
 実は、X-Rayをお勉強する前に、この手のサービス(Tracing)の基本を押さえる必要があると思い、お正月に[GoのEchoでJaegerを使ってボトルネックを調査する](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)という記事を書いてました。
 
-X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な情報を知りたい方は上記も読んでみてくださいませ。
+X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な情報を知りたいほうは上記も読んでみてくださいませ。
 
 さて、話をX-Rayに戻すと、X-Rayを使うと**Tracing**と
 
@@ -91,7 +91,7 @@ PythonでX-RayのTracingを使うには大きく2種類の方法があります�
 - xray_recorder
 - patch
 
-xray_recorderはPython関数に**デコレータ**として設定することで、関数のIn/Outをキャプチャすることができます。
+xray_recorderはPython関数に**デコレータ**として設定することで、関数のIn/Outをキャプチャできます。
 
 patchは**Requests**や**Boto3**などいくつかライブラリをPatchして、リクエストをTracingします。
 今回はめんどくさいのでpatch対応しているライブラリに全部Patchする**patch_all**を使います。
@@ -167,7 +167,7 @@ DatadogがあなたのアカウントにIntegrationするRoleに**X-Rayの読み
 
 ### DatadogのAWS Integrationを確認
 
-DatadogのWebコンソールから、X-Rayを取得する設定が入っているか確認します。入っていなければチェックして下さい。
+DatadogのWebコンソールから、X-Rayを取得する設定が入っているか確認します。入っていなければチェックしてください。
 
 ![img](https://i.imgur.com/XWhfj7x.png)
 

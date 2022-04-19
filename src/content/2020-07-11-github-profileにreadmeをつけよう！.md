@@ -17,7 +17,7 @@ GitHubのfeatureであるGitHub ProfileにREADMEをつける機能を使って�
 
 ```
 
-## なんだこれ！？
+## なんだこれ!?
 
 <https://dev.to/>を見ると面白い記事がありました。
 

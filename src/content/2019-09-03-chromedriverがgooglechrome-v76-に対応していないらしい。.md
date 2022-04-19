@@ -145,7 +145,7 @@ $ docker tag circle-node:10.16.3-stretch-browsers-fix tubone24/circleci:10.16.3-
 $ docker push tubone24/circleci:10.16.3-stretch-browsers-fix
 ```
 
-無事pushまで出来たらCircleCIのconfig.ymlのImageを変更します。
+無事pushまでできたらCircleCIのconfig.ymlのImageを変更します。
 
 ```yaml{numberLines: 1}
 version: 2

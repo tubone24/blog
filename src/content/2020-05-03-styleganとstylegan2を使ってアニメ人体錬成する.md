@@ -29,11 +29,11 @@ GANの詳しい仕組みについては専門家にゆだねるとしてフェ�
 
 必死に偽物の言動を本物っぽく言う不審者と、嘘を見破る警察官（探偵）という構図が比喩としては一般的です。
 
-GANについては、実は昔(今から2年前)録画サーバで全アニメを録画していた頃、その動画ファイルから64×64のアニメ顔画像データ58000件を抽出し、それを使ってGAN(正確には**DCGAN**)でアニメ顔を生成する活動に取り組んだことがあります。
+GANについては、実は昔(今から2年前)録画サーバーで全アニメを録画していた頃、その動画ファイルから64×64のアニメ顔画像データ58000件を抽出し、それを使ってGAN(正確には**DCGAN**)でアニメ顔を生成する活動に取り組んだことがあります。
 
 DCGANについても詳細は専門家に任せます。[これ](https://arxiv.org/pdf/1511.06434.pdf)が論文です。
 
-しっかり論文が読みこなせるマンになりたい...
+しっかり論文が読みこなせるマンになりたい..。
 
 端的に言えばGANの学習の不安定さを**畳み込み層**や**Batch Normalization**、tanh、 Leaky ReLUなどのReLU以外の**活性化関数**を採用したりして学習の安定化を図ってます。
 
@@ -90,9 +90,9 @@ GANで1024x1024などの高解像度画像を生成するのは至難の業で�
 ![img](https://i.imgur.com/9EAE63P.png)
 ([Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))
 
-上の画像は[Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)からの引用ですが特定の画像に画風(Style)情報を差し込むことで任意の画風に変換することができる、というものです。
+上の画像は[Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)からの引用ですが特定の画像に画風(Style)情報を差し込むことで任意の画風に変換できる、というものです。
 
-[PRISMA](https://prisma-ai.com/)というサイトで遊んだことのある方も多いかと思いますが、まさにあれです。
+[PRISMA](https://prisma-ai.com/)というサイトで遊んだことのあるほうも多いかと思いますが、まさにあれです。
 
 StyleGANではStyle Transferに[**AdaIN(Adaptive Instance Normalization)**](https://arxiv.org/pdf/1703.06868.pdf)という手法を使ってます。
 
@@ -103,7 +103,7 @@ AdaINの手法ではStyleを適用画像、Style画像チャネルごとの平�
 ![img](https://i.imgur.com/z7ZpFko.png)
 ([Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868))
 
-統計量を用いることで、学習していないStyleについてもそれなりに対応することができる、というのがメリットのようです。
+統計量を用いることで、学習していないStyleについてもそれなりに対応できる、というのがメリットのようです。
 
 ### 潜在変数から画像を作らずちゃんとStyleをn本加え入れろ～
 
@@ -121,13 +121,13 @@ StyleGANでは、PGGANとは異なり入力に潜在変数を直接用いませ�
 
 また、単純に潜在変数をAdaINにぶち込んでいるわけでもなく、**MappingNetwork(全結合ニューラルネット)で潜在変数を非線形化**してから用いるなど細やかな気配りもされています。
 
-なぜStyleを各層に適用する形をとるかというと、人やものが映った画像には様々な特徴量があり、GANはそれらの特徴量を学習することで画像生成を行っているのですが、実際人が映った画像には顔の向きや顔の輪郭など大きな特徴から目の色、肌の色のようなテクスチャ、肌荒れや髪の毛の巻き方などみみっちい特徴まで様々です。
+なぜStyleを各層に適用する形をとるかというと、人やものが映った画像にはさまざまな特徴量があり、GANはそれらの特徴量を学習することで画像生成を行っているのですが、実際人が映った画像には顔の向きや顔の輪郭など大きな特徴から目の色、肌の色のようなテクスチャ、肌荒れや髪の毛の巻き方などみみっちい特徴までさまざまです。
 
 一様な特徴量で表すのは限界があるのです。
 
 実はStyleGANはここらへんをしっかり考えていて、Style適用に加え**Mixing Regularization**という複数の潜在変数(ここではStyleベクトル)を各種層で混ぜ込んで適用するという手法で解決してます。
 
-Progressive Growingで申した通り、各層は低解像度から高解像度へと進むのですがStyleベクトルを低解像度の際に適用した場合と高解像度の際に適用した場合では**低解像度の際に入れたStyleのほうが画像への寄与が大きく**なります。
+Progressive Growingで申したとおり、各層は低解像度から高解像度へと進むのですがStyleベクトルを低解像度の際に適用した場合と高解像度の際に適用した場合では**低解像度の際に入れたStyleのほうが画像への寄与が大きく**なります。
 
 つまり、顔の向きや顔の輪郭などの大きな特徴は低解像度の際に、目の色など小さな特徴については高解像度の際にStyleとして適用されるのです。
 
@@ -152,7 +152,7 @@ Styleの形で特徴を細かく分割し、Mixing Regularizationでそれぞれ
 [Making Anime Faces With StyleGAN
 ](https://www.gwern.net/Faces)
 
-**gwern.net**さんありがとうございます！！！！
+**gwern.net**さんありがとうございます!!!！
 
 モデルは[StyleGAN model used for TWDNEv1 sample](https://www.gwern.net/Faces#anime-faces)からダウンロードできます。
 
@@ -172,7 +172,7 @@ Styleの形で特徴を細かく分割し、Mixing Regularizationでそれぞれ
 
 また、事前にCUDAとTensorflowGPUを設定しておきます。
 
-環境差分が大きい話なので設定方法は各自ググってください........
+環境差分が大きい話なので設定方法は各自ググってください.......。
 
 結構バージョンとかで苦戦しますので[こちら](https://qiita.com/chin_self_driving_car/items/f00af2dbd022b65c9068)を参考に設定しましょう。
 
@@ -316,7 +316,7 @@ if __name__ == "__main__":
 
 おおー！すごい！なかなかしっかりしてますね。512x512の高解像度美少女キャラが無限増殖してます！
 
-StyleGANで美少女無限増殖は成功といってもいいのではないでしょうか！！
+StyleGANで美少女無限増殖は成功といってもいいのではないでしょうか!!
 
 ## StyleGAN2でも美少女無限増殖
 
@@ -409,7 +409,7 @@ if __name__ == "__main__":
 
 さあ！実行しますわよー！
 
-### おや！？動かない。
+### おや!?動かない。
 
 まぁそう簡単にはいきませんね。エラーを吐いて落ちてしまいました。
 
@@ -455,7 +455,7 @@ RuntimeError: Could not find MSVC/GCC/CLANG installation on this computer. Check
 
 エラーを見て何のことかと思いましたが、StyleGAN2の[Requirements](https://github.com/NVlabs/stylegan2#requirements)に普通に書いてありました。
 
-見切り発車もいいところだ...
+見切り発車もいいところだ..。
 
 ```
 On Windows, the compilation requires Microsoft Visual Studio to be in PATH. We recommend installing Visual Studio Community Edition and adding into PATH using "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat".
@@ -525,9 +525,9 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin/../include\cuda_run
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\include\crt/host_config.h(143): fatal error C1189: #error:  -- unsupported Microsoft Visual Studio version! Only the versions between 2013 and 2017 (inclusive) are supported!
 ```
 
-Warinigは置いておいて、**fatal error**が出てますね。なんだかVisual Stadio 2019に対応してないとか出てきた...
+Warinigは置いておいて、**fatal error**が出てますね。なんだかVisual Stadio 2019に対応してないとか出てきた..。
 
-んー.... じゃあ2017いれますか...
+んー.... じゃあ2017いれますか..。
 
 [こちら](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads)からVisual Studio 2017をダウンロードしインストールします。
 
@@ -552,7 +552,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 
 でした。
 
-うまくPATHを通してtest_nvcc.cuを実行すると....
+うまくPATHを通してtest_nvcc.cuを実行すると...。
 
 ```
 現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存して ください。
@@ -581,7 +581,7 @@ Unicode warinigはでるものの、
 
 ### まだうまく動かない
 
-エラーがでました...
+エラーがでました..。
 
 ![img](https://i.imgur.com/0KH7SgH.png)
 
@@ -599,7 +599,7 @@ nvcc error   : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
 nvcc error   : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
 ```
 
-とのことです。なんだこれ....
+とのことです。なんだこれ...。
 
 ### nvcc error : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
 
@@ -613,13 +613,13 @@ nvcc error   : 'cudafe++' died with status 0xC0000005 (ACCESS_VIOLATION)
 You need to Install Visual C++ Build Tools 2015 Please take a look at these instructions.
 ```
 
-はぁ... 2015ですか...
+はぁ... 2015ですか..。
 
 2017で動くって言ってたじゃないか！
 
 ![img](https://i.imgur.com/1KUffz4.png)
 
-ということで**Visual Studio 2015**をインストールします...
+ということで**Visual Studio 2015**をインストールします..。
 
 <https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o~msft~vscom~older-downloads>
 
@@ -631,7 +631,7 @@ Visual Studio 2015は通常インストールするとVCインストールの項
 
 ### 3度目の正直
 
-よし!(適当)
+よし！適当)
 
 **generate_anime.py**実行します！
 
@@ -748,7 +748,7 @@ ble.
 ble.
 ```
 
-実行できた！！
+実行できた!!
 
 ![img](https://i.imgur.com/daSYwz2.png)
 
@@ -756,7 +756,7 @@ ble.
 
 ![img](https://i.imgur.com/VfRjfpW.png)
 
-**かわいいいいいい！！**
+**かわいいいいいい!!**
 
 小早川紗枝はんに似てますなー！
 

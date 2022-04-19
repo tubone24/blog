@@ -29,9 +29,9 @@ templateKey: blog-post
 
 Ansibleとは**Python**製の**OSS構成管理ツール**です。
 
-便利なモジュールが多数用意されており、パッケージのインストール、コンフィグの書き換え、サービスの立ち上げ、有効化etc.. 様々な構成を**Yaml形式**でパパっとかけることがポイントです。
+便利なモジュールが多数用意されており、パッケージのインストール、コンフィグの書き換え、サービスの立ち上げ、有効化etc.. さまざまな構成を**Yaml形式**でパパっとかけることがポイントです。
 
-また、**冪等（べきとう）性**、つまり何回実行しても結果が変わらないことを保証したり、**エージェントレス**で構成管理対象のサーバに事前インストールが必要ないことが評価されている点です。
+また、**冪等（べきとう）性**、つまり何回実行しても結果が変わらないことを保証したり、**エージェントレス**で構成管理対象のサーバーに事前インストールが必要ないことが評価されている点です。
 
 ### MacでAnsibleを使う
 
@@ -82,7 +82,7 @@ Ansibleのplaybookを作るにはざっくり3つの手順を取ります。
 
 ### Inventoryを設定する
 
-Inventoryは複数のサーバをグルーピングして、同時にプロビジョンするためにサーバの接続情報をまとめておくコンフィグです。
+Inventoryは複数のサーバーをグルーピングして、同時にプロビジョンするためにサーバーの接続情報をまとめておくコンフィグです。
 
 今回はMacに適用するため、接続先情報はlocalとなります。
 
@@ -97,7 +97,7 @@ localhost
 
 これで、特にInventoryを指定しない場合は`localhost`として接続がされます。また、InventoryGroupとして`local`を指定しているため、`group_vars/local`にlocalとして共通の変数を定義することもできます。
 
-今回は複数サーバで共有させる変数が見当たらないので特に設定しません。
+今回は複数サーバーで共有させる変数が見当たらないので特に設定しません。
 
 [inventory/group_vars/local/ansible.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/group_vars/local/ansible.yml) に
 
@@ -133,9 +133,9 @@ dev-toolsだけ用意します。
 
 例えば、Pythonを入れるTask、Node.jsを入れるTaskという具合です。
 
-AnsibleではTaskｓディレクトリのmain.ymlが読み込まれるため、**各Taskごとに分けたYaml**を**main.ymlでInclude**して上げればいいわけです。
+AnsibleではTasksディレクトリのmain.ymlが読み込まれるため、**各Taskごとに分けたYaml**を**main.ymlでInclude**して上げればいいわけです。
 
-roles/dev-tools/tasks/main.yml に
+roles/dev-tools/tasks/main.ymlに
 
 ```yaml
 - include: 'tools.yml'
@@ -170,7 +170,7 @@ roles/dev-tools/tasks/main.yml に
 
 #### PATHの通し方
 
-構成の中でいくつかPATHを通す必要があり、bash_profileに環境変数のexportを記載する必要がでてきました。
+構成のなかでいくつかPATHを通す必要があり、bash_profileに環境変数のexportを記載する必要がでてきました。
 
 ```bash
 # bash_profileに書きたい
@@ -261,7 +261,7 @@ git:
 
 Ansible最後はplaybookです。
 
-とはいったものの、roleとinventoryを紐付ければいいだけですので、
+とはいったものの、roleとinventoryを紐づければいいだけですので、
 
 [playbooks/my-mac.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/playbooks/my-mac.yml)
 

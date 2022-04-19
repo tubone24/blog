@@ -131,7 +131,7 @@ networks:
 
 加えて、シナリオファイルの**TypeScript化**を実施します。
 
-[公式ドキュメント](https://k6.io/docs/using-k6/javascript-compatibility-mode/)によるとGoのJavaScript VMが**ES5にしか対応してない**のでES6で書いたテストシナリオはどうやらK6の中でES5に変換してから実行しているらしいです。
+[公式ドキュメント](https://k6.io/docs/using-k6/javascript-compatibility-mode/)によるとGoのJavaScript VMが**ES5にしか対応してない**のでES6で書いたテストシナリオはどうやらK6のなかでES5に変換してから実行しているらしいです。
 
 K6の[go.mod](https://github.com/grafana/k6/blob/master/go.mod)を見てみると使っているJavaScript VMは[goja](https://github.com/dop251/goja)みたいですね。
 
@@ -147,7 +147,7 @@ babelってトランスパイルしてしまったのでこれ型チェックと
 
 さらに、今回はおそらく使わないと思いましたが[copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin/)を使ってテスト用のassetをdistディレクトリにコピーする形にしてます。こうしておくことで、ファイルのアップロードみたいなテストケースも書けるようになりそうです。多分。
 
-と思って色々試行錯誤していたら公式に実装例があり、ほぼやりたいことがそれでできていたので結局それをパクることにしました... 
+と思って色々試行錯誤していたら公式に実装例があり、ほぼやりたいことがそれでできていたので結局それをパクることにしました..。 
 
 [Template to use TypeScript with k6](https://github.com/grafana/k6-template-typescript)
 

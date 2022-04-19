@@ -20,11 +20,11 @@ templateKey: blog-post
 
 ## AWS Lambda Function URLs
 
-[AWS Lambda Function URLs](https://aws.amazon.com/jp/about-aws/whats-new/2022/04/aws-lambda-function-urls-built-in-https-endpoints/)がリリースされました！！
+[AWS Lambda Function URLs](https://aws.amazon.com/jp/about-aws/whats-new/2022/04/aws-lambda-function-urls-built-in-https-endpoints/)がリリースされました!!
 
 今まではLambdaを使ってHTTPのエンドポイントを作る際は[Amazon API Gateway](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/services-apigateway.html)と組み合わせて作るか[アプリケーションロードバランサー(ALB)のターゲットにAWS Lambdaを選ぶ](https://aws.amazon.com/jp/blogs/news/lambda-functions-as-targets-for-application-load-balancers/)かいずれかが必要でした。
 
-今回のアップデートでAWS Lambdaサービスの組み込み機能として、HTTPSエンドポイントをLambda単体で作成することができるのでLambdaでAPIを作ったりWebhookの連携先として機能させる際にAPI Gatewayなどをかませる必要がなくなり便利かと思います。
+今回のアップデートでAWS Lambdaサービスの組み込み機能として、HTTPSエンドポイントをLambda単体で作成できるのでLambdaでAPIを作ったりWebhookの連携先として機能させる際にAPI Gatewayなどをかませる必要がなくなり便利かと思います。
 
 ## 使ってみる
 
@@ -60,7 +60,7 @@ exports.handler = async (event) => {
 
 デプロイできると関数URLが発行されます。
 
-https://{url-id}.lambda-url-region.on.aws という不思議なTLDのURLができました。
+https://{url-id}.lambda-url-region.on.awsという不思議なTLDのURLができました。
 
 こちらにアクセスしてみると
 
@@ -131,7 +131,7 @@ https://{url-id}.lambda-url-region.on.aws という不思議なTLDのURLがで�
 
 認証的な設定は[今のところAWS IAM認証](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)がまずサポートされてます。
 
-クレデンシャルとかから署名バージョン 4を作成してアクセス時にして認証させる方法です。
+クレデンシャルとかから署名バージョン4を作成してアクセス時にして認証させる方法です。
 
 独自のオーソライザーが挟めないので、あくまでも同じアカウントにアクセスできる開発者向けのAPIとして使うのがよさそうです。もっと込み入ったことがやりたいならAPI Gatewayをおとなしく使いましょう...。(もうちょっと色々試してみます。)
 
@@ -154,7 +154,7 @@ Lambdaのタイムアウトは15分まで拡張されてますが、API Gateway�
 
 この記事を見たとき私はLambdaにURLエンドポイントがビルトインされるならタイムアウトはLambdanのそれになるのでは？と思いました。実験してみます。
 
-先程デプロイしたコードをもう一度見てみましょう。
+さきほどデプロイしたコードをもう一度見てみましょう。
 
 ```javascript
 async function sleep(time) {
@@ -180,7 +180,7 @@ exports.handler = async (event) => {
 
 returnの手前でsleep(setTimeout)を入れてます。そしてクエリパラメーターでsleepのミリ秒を指定できるようにしてます。
 
-まず、何も設定しない時はsleepはしないのですぐレスポンスが返ってきます。
+まず、何も設定しないときはsleepはしないのですぐレスポンスが返ってきます。
 
 sleepを1000にすれば1秒待ってレスポンスが返ってきます。
 
@@ -190,7 +190,7 @@ sleepを1000にすれば1秒待ってレスポンスが返ってきます。
 
 ![30秒](https://i.imgur.com/Jh9cixG.png)
 
-タイムアウトしませんでした！！ではLambdaのタイムアウトまで引き延ばしてみましょう！
+タイムアウトしませんでした!!ではLambdaのタイムアウトまで引き延ばしてみましょう！
 
 ![タイムアウト](https://i.imgur.com/UCbN8Df.png)
 

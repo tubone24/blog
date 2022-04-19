@@ -40,4 +40,4 @@ LaMetricのデベロッパーサイトは[こちら](https://developer.lametric.
 ![img](https://i.imgur.com/e4yqppL.jpg)
 
 
-アプリ自体は非公開なので、（Zabbixのアイコンは公開しました）自分で作ってみて下さい。
+アプリ自体は非公開なので、（Zabbixのアイコンは公開しました）自分で作ってみてください。

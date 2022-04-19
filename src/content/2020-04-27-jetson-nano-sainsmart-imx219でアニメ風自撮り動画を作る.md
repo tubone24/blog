@@ -20,7 +20,7 @@ templateKey: blog-post
 
 ## SainSmart IMX219
 
-Jetson nanoには**Raspberry pi**互換のカメラモジュール V2(MIPI CSI-2)が使えます。
+Jetson nanoには**Raspberry pi**互換のカメラモジュールV2(MIPI CSI-2)が使えます。
 
 ![img](https://i.imgur.com/xrDd4y5.png)
 
@@ -55,7 +55,7 @@ $ git checkout -b movie origin/movie
 $ ./get_haarlike.sh
 ```
 
-本家で紹介されているUGATIT selfie2anime [pre-trained]のリンクがきれていたので下記Kaggleからダウンロードくださいませ。
+本家で紹介されているUGATIT selfie2anime[pre-trained]のリンクがきれていたので下記Kaggleからダウンロードくださいませ。
 
 [UGATIT selfie2anime [pre-trained]](https://www.kaggle.com/t04glovern/ugatit-selfie2anime-pretrained)
 

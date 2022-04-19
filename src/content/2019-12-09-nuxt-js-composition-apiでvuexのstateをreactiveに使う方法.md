@@ -15,7 +15,7 @@ headerImage: 'https://i.imgur.com/BWyjwja.png'
 templateKey: blog-post
 ---
 
-フロントエンド初学者の私が、Vue.jsの新しいAPIである[Composition API](https://vue-composition-api-rfc.netlify.com/#summary)を使って**Nuxt.js**の実装を行う機会があり、**Vuexを使ったストアで非常につらい思いをした**のでまとめます。
+フロントエンド初学者の私が、Vue.jsの新しいAPIである[Composition API](https://vue-composition-api-rfc.netlify.com/#summary)を使って**Nuxt.js**の実装を行なう機会があり、**Vuexを使ったストアで非常につらい思いをした**のでまとめます。
 
 多分、もっとちゃんとしたやり方があるとは思いますがひとまず動いたので記事にしていきます。
 
@@ -54,7 +54,7 @@ templateKey: blog-post
 
 今回はバックエンドAPIとして拙作の下記APIを使います。
 
-本APIからサーバの**ステータス**と**バージョン**を取得し、**リアクティブに画面**に表現することを目標にします。
+本APIからサーバーの**ステータス**と**バージョン**を取得し、**リアクティブに画面**に表現することを目標にします。
 
 APIのリソースはstatusという名前です。詳しくは下記OpenAPIをご参照↓
 
@@ -79,7 +79,7 @@ Nuxt.jsではVuexのストアを使いたい場合比較的簡単に実装でき
 
 端的に言えばストアがReactiveじゃないので値更新がされません。
 
-詳しくは後で解説しますが、いたって普通のVuexストアを書いています。
+詳しくはあとで解説しますが、いたって普通のVuexストアを書いています。
 
 ```typescript
 import axios from 'axios';
@@ -220,13 +220,13 @@ Composition APIでは**Vuexストアはsetup内でしか取り出せません**�
 
 なぜならComposition APIはsetupしたタイミングでVueインスタンスが利用できるため、いままでのVue.jsでいうところの**this.$store**で取り出すことがsetup内でしか使えないからです。
 
-なので、setupの中で**root.$store**を取り出して(※1)、Vuexストアを使う別の関数(※2)やtemplateで利用するためsetupのreturnに渡しています。(※3)
+なので、setupのなかで**root.$store**を取り出して(※1)、Vuexストアを使う別の関数(※2)やtemplateで利用するためsetupのreturnに渡しています。(※3)
 
 ### Actionの呼び出し
 
 上記Componentsでは、Vue.jsライフサイクルの**onBeforeMount**と、template内の**get-status**ボタンの押下で**fetchStatus**という関数が呼び出され、同関数でActionがdispatchされる作りです。(※4)(※5)
 
-**fetchStatus**はsetup外に作られた関数なので、**seutupの中でfetshStatusの引数にstoreを渡して**あげます。
+**fetchStatus**はsetup外に作られた関数なので、**seutupのなかでfetshStatusの引数にstoreを渡して**あげます。
 
 
 ### Getterの呼び出し

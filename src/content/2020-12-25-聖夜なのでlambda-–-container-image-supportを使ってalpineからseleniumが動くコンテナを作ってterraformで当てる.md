@@ -60,7 +60,7 @@ LambdaでSeleniumを動かすと言えばつい最近まで[serverless-chrome](h
 
 (以前はSlackのほかTeamsやらメールやら電話やらあらゆる媒体で一斉勤怠連絡しないといけなくてこれでも楽になりました。)
 
-じゃあ、Slack APIとか使って、相互投稿とかして解決すればいいじゃんとなりそうですが、一部のWorkSpaceはセキュリティーの観点から外部連携が禁止とのこと。なんじゃそりゃ...。
+じゃあ、Slack APIとか使って、相互投稿とかして解決すればいいじゃんとなりそうですが、一部のWorkSpaceはセキュリティの観点から外部連携が禁止とのこと。なんじゃそりゃ...。
 
 ![img](https://i.imgur.com/odKSxHU.png)
 
@@ -76,7 +76,7 @@ LambdaでSeleniumを動かすと言えばつい最近まで[serverless-chrome](h
 
 ### Container Image Supportを使うにはRICが必要
 
-Lambdaは起動する際にAWS基板側からAWS Lambda ランタイム APIでランタイムをキックすることで実現してます。
+Lambdaは起動する際にAWS基板側からAWS LambdaランタイムAPIでランタイムをキックすることで実現してます。
 
 そうです。Container Image SupportといいつつもLambdaで実現する以上、こいつを受け取らないといけないのです。
 
@@ -168,7 +168,7 @@ Successfully built awslambdaric simplejson
 
 また、肝心のChromeとChrome-driverはapkでそのまま入れればいいので実にこちらは簡単です。
 
-apkからインストールすることで常に、stableでインストールするので、chromedriverとのバージョンを意識することもありません!これはありがたい。
+apkからインストールすることで常に、stableでインストールするので、chromedriverとのバージョンを意識することもありません！れはありがたい。
 
 ## Docker Imageを少しでも軽くする
 
@@ -222,7 +222,7 @@ RUN apk add --update \
 
 ```
 
-ややこしいですが、こうすることで（後述する日本語フォントも入れながら）846MBまで削減することができました。同一レイヤーでいらないものは消す。これ、偉い人とのお約束。
+ややこしいですが、こうすることで（後述する日本語フォントも入れながら）846MBまで削減できました。同一レイヤーでいらないものは消す。これ、偉い人とのお約束。
 
 ```
 selenium   latest           04304fcd4549   18 minutes ago   846MB
@@ -286,7 +286,7 @@ CMD [ "app.handler" ]
 
 さてSeleniumのランナーに移っていきます。
 
-先程コマンドでapp.handlerを指定したので、モジュール名はapp.py、関数名はhandlerでいきます。
+さきほどコマンドでapp.handlerを指定したので、モジュール名はapp.py、関数名はhandlerでいきます。
 
 また、apkでインストールしたChrome(Chromium)、Chrome-driverはそれぞれ**/usr/bin/chromium-browser** **/usr/lib/chromium/chromedriver**に存在してます。
 
@@ -337,7 +337,7 @@ Chromeがクラッシュしてしまった、という意味合いとはわか�
 
 さらに調べていくと次のようなことがわかりました。**--disable-dev-shm-usage**というオプションが必要だったようです。
 
-Chromeではキャッシュ用にtmpfs(/dev/shm ファイルシステムレベルの共有メモリ)を利用しているのですがLambdaがこちら64MBしかないので落ちてしまうそうです。なので、キャッシュは/tmp(ディスク)を利用してもらうべく**--disable-dev-shm-usage**も追加する必要があります。
+Chromeではキャッシュ用にtmpfs(/dev/shmファイルシステムレベルの共有メモリ)を利用しているのですがLambdaがこちら64MBしかないので落ちてしまうそうです。なので、キャッシュは/tmp(ディスク)を利用してもらうべく**--disable-dev-shm-usage**も追加する必要があります。
 
 ちなみに、Lambdaの/tmpは最近調べたのですが512MBくらいありました。
 
@@ -434,7 +434,7 @@ sleep(10)とかよりも効率的で安全ですね。
 
 https://app.slack.com/client/xxxxxxxxx/yyyyyyyyy
 
-みたいな感じでyyyyyyがチャンネルと対応してます。予めひかえておきます。
+みたいな感じでyyyyyyがチャンネルと対応してます。あらかじめひかえておきます。
 
 スクリーンショットは[save_screenshot](https://selenium-python.readthedocs.io/api.html#selenium.webdriver.remote.webdriver.WebDriver.save_screenshot)を使えば画面のPNGが撮れます。
 
@@ -450,9 +450,9 @@ print(d.save_screenshot("/tmp/screen.png"))
 
 ## Slackにアップロードする
 
-アップロードはSlack APIの file.uploadを使いました。
+アップロードはSlack APIのfile.uploadを使いました。
 
-予めTOKENとPermissionを設定しておきましょう。
+あらかじめTOKENとPermissionを設定しておきましょう。
 
 Slack Appを作ったらSlackAPIのOAuth&Permissionsから確認できます。
 
@@ -475,7 +475,7 @@ Permissionsは[channels:join](https://api.slack.com/scopes/channels:join)、[cha
         resp = requests.post(url, data=data, files=files)
 ```
 
-ほとんどモザイクで申し訳ないですが、きっちりSlackにスクリーンショットを投稿することができました。
+ほとんどモザイクで申し訳ないですが、きっちりSlackにスクリーンショットを投稿できました。
 
 ![img](https://i.imgur.com/oHtRLCO.png)
 
@@ -539,7 +539,7 @@ Container Image Supportとはいえ、ここらへんの仕組みはいつも使
 
 Container supportの場合は[package_type](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#package_type)をImageにして[image_uri](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#image_uri)をECRにプッシュしたイメージURIにします。
 
-イメージURIはECRのコンソール画面からでも確認できますが、CIに乗っけるなど考えた場合ちょっと取り回し悪いので、AWS CLI describe-imagesコマンドでimageDigestが確認できますので、Terraform実行時にShellで取得し、動的生成し、terraform apply -var=hoge の形式で変数として渡してやります。
+イメージURIはECRのコンソール画面からでも確認できますが、CIに乗っけるなど考えた場合ちょっと取り回し悪いので、AWS CLI describe-imagesコマンドでimageDigestが確認できますので、Terraform実行時にShellで取得し、動的生成し、terraform apply -var=hogeの形式で変数として渡してやります。
 
 ```
 aws ecr describe-images --repository-name selenium --image-ids imageTag=latest | jq ".imageDetails[].imageDigest"

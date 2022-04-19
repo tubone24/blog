@@ -54,7 +54,7 @@ templateKey: blog-post
 
 ここら辺はだんだん使っていけば何となく良いところが見えてきますが、そちらのまとめはまた今度。
 
-CompositionAPIを使おうと思ったのは、Vue3.xで採用されるというのと、もはや**TypeScript**で書かないと現場で**いじめられてしまう**この世の中で、VueもTypeScriptで書くことが急務になりつつある状況の中、Vue + TypeScriptで一定のデファクトスタンダードを勝ち得た[ClassAPI](https://github.com/vuejs/vue-class-component)という使い方が、色々問題になっているようだったのでそのツラミを取り除いたらしいCompositionAPIを採用しました。
+CompositionAPIを使おうと思ったのは、Vue3.xで採用されるというのと、もはや**TypeScript**で書かないと現場で**いじめられてしまう**この世のなかで、VueもTypeScriptで書くことが急務になりつつある状況の中、Vue + TypeScriptで一定のデファクトスタンダードを勝ち得た[ClassAPI](https://github.com/vuejs/vue-class-component)という使い方が、色々問題になっているようだったのでそのツラミを取り除いたらしいCompositionAPIを採用しました。
 
 上記のツラミ・スゴミについて詳しくは下記のプレゼンがすごくわかりやすかったです。
 
@@ -181,7 +181,7 @@ CompositionAPIで書くパターン
 
 ぱっと見**ClassAPI**のデコレーターの方が**コード量少なくて**見通しはいい気がしますが、ロジック、ステート、レンダリングを好きなように（究極別ファイルに切り出しも可）宣言して、setupでまとめ上げるのは確かに見通しよいかもしれませんね。
 
-まだ、ここらへんは自分の中でのベストプラクティスができあがってないので今後考察します。
+まだ、ここらへんは自分のなかでのベストプラクティスができあがってないので今後考察します。
 
 あと、**テストコード**はまだ書いてないのですが、毎回Vueインスタンスを**shallowMount**して頑張って書く感じから解放されそうでテストコード的なメリットはありそうです。
 
@@ -193,7 +193,7 @@ CompositionAPIとNuxt.jsの**相性**は今のところ**よくない**と思い
 
 ## Nuxt.jsのmodulesがCompositionAPIで使いたいんだが
 
-ここからが本題なのですが、よくあるNuxt.jsのmodulesを使う実装例の中で全くといっていいほどCompositionAPIでやってるものがないので、Nuxt.jsの動き方を逐次確認しながらmodulesを使ってみます。
+ここからが本題なのですが、よくあるNuxt.jsのmodulesを使う実装例のなかで全くといっていいほどCompositionAPIでやってるものがないので、Nuxt.jsの動き方を逐次確認しながらmodulesを使ってみます。
 
 例えば、ClassAPI（またはOptionsAPI）の場合よくあるNuxt.jsモジュールの例はaxiosです。
 
@@ -252,7 +252,7 @@ export default {
 
 ## CompositionAPIだとVueインスタンスにアクセスできるのはsetup内のみ
 
-ということは先ほど話した通りなのですがそうするとmodulesの利用側はsetup内でのみ使えることになります。
+ということは先ほど話したとおりなのですがそうするとmodulesの利用側はsetup内でのみ使えることになります。
 
 ということを頭に入れながら`@nuxtjs/toast`を実装していきます。
 

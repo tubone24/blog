@@ -31,7 +31,7 @@ templateKey: blog-post
 
 particles.js以上にかっちょいいparticleをVueで使うためのOSSぽいです。少しコードを読んでみましたが、[Proton](https://github.com/a-jie/Proton)という軽量particleライブラリがあり、そちらを背景にセットするComponentのようです。
 
-仕上がりはこんな感じ！ (READMEから引用)
+仕上がりはこんな感じ！　(READMEから引用)
 
 ![img](https://raw.githubusercontent.com/lindelof/particles-bg-vue/master/images/01.jpg)
 
@@ -99,7 +99,7 @@ export default {
 
 ### layoutsで共通的にparticleを当てる
 
-Nuxt.js共通的にレイアウトを当てる時は、[layouts](https://ja.nuxtjs.org/api/pages-layout/)に宣言し、各ページで利用します。
+Nuxt.js共通的にレイアウトを当てるときは、[layouts](https://ja.nuxtjs.org/api/pages-layout/)に宣言し、各ページで利用します。
 
 ```javascript{numberLines: 1}{4}
 //layouts/default.vue
@@ -154,7 +154,7 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 
 ![img](https://i.imgur.com/IAstOlF.png)
 
-簡単ですね！！
+簡単ですね!!
 
 ## 結論
 

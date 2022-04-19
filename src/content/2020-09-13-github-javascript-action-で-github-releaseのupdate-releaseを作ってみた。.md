@@ -55,7 +55,7 @@ GitHub Actionsを使うときには何かと便利なやつですが、公式に
 <https://github.com/actions>
 
 今回は、[
-post_twitter_on_work](https://github.com/tubone24/post_twitter_on_work)の開発の中で、**GitHub ReleasesにGitHub ActionsでBuildしたArtifactsをアップデートしたい**欲求が出てきました。
+post_twitter_on_work](https://github.com/tubone24/post_twitter_on_work)の開発のなかで、**GitHub ReleasesにGitHub ActionsでBuildしたArtifactsをアップデートしたい**欲求が出てきました。
 
 通常、GitHub ReleasesをGitHub Actionsで使うには、[actions
 /
@@ -105,7 +105,7 @@ JavaScript　Actionは、公式にテンプレートがありますので、か�
 
 GitHub Actionのメタデータとして、**action.yml**を作ります。
 
-名前や説明のほかwithで定義するinputやoutputで使える変数や、ランタイムを定義することができます。
+名前や説明のほかwithで定義するinputやoutputで使える変数や、ランタイムを定義できます。
 
 inputやoutputは変数名の他、説明とrequiredを定義できます。
 
@@ -209,7 +209,7 @@ packages.jsonで、
   },
 ```
 
-npm run packageとすることで、先程tscでつくったJavaScriptをバンドルすることができます。
+npm run packageとすることで、さきほどtscでつくったJavaScriptをバンドルできます。
 
 ## ソース
 

@@ -61,11 +61,11 @@ Hasuraを使うためにPostgreSQLを作らなければいけません。もち�
 
 ## DBとの接続
 
-Hasura CloudとPostgreSQLを接続するために先ほど作成したHeroku PostgreSQLの接続情報を確認します。DB自体はHerokuダッシュボードのDatabaseから確認することができますのでそちらからSetting=>View Crendencialsを選択します。
+Hasura CloudとPostgreSQLを接続するために先ほど作成したHeroku PostgreSQLの接続情報を確認します。DB自体はHerokuダッシュボードのDatabaseから確認できますのでそちらからSetting=>View Crendencialsを選択します。
 
 ![ima](https://i.imgur.com/TR9WSti.png)
 
-こちらの情報を控え、Hasura CloudのコンソールからDataを選択し、新しいDababaseの情報を入れ込みます。執筆しながら気が付いたのですがよく見たらHeroku PostgreSQLが作れるメニューがありますね...
+こちらの情報を控え、Hasura CloudのコンソールからDataを選択し、新しいDababaseの情報を入れ込みます。執筆しながら気が付いたのですがよく見たらHeroku PostgreSQLが作れるメニューがありますね..。
 
 ![ima](https://i.imgur.com/vzpBanB.png)
 
@@ -334,7 +334,7 @@ export const Table = (): JSX.Element => {
 
 ## おまけ Slackに毎日状況をグラフ付きで投稿する
 
-ここからは完全に余談なのですがせっかくダッシュボード作っても自分で毎日見に行くことはまずありません！！(なぜ作った)
+ここからは完全に余談なのですがせっかくダッシュボード作っても自分で毎日見に行くことはまずありません!!(なぜ作った)
 
 なので、せっかくなので、こちらのダッシュボードを毎日画面キャプチャし、Slackに投稿する機能も作ってみたいと思います。お勉強がてらキャプチャ機能はCypressで作ることにしました。
 
@@ -359,7 +359,7 @@ describe('ScreenShotNetatmoDashboard', () => {
 
 変な要素指定がありますが、こちらはMaterial Tableにあるアクションボタンを押している動作です。そうしないとChart.jsで作ったグラフが開かない作りにしてしまったので。
 
-また、こんな変な要素、よく見つけられたと思った方に朗報でCypressにはChrome拡張がありまして、[Cypress Scenario Recorder](https://chrome.google.com/webstore/detail/cypress-scenario-recorder/fmpgoobcionmfneadjapdabmjfkmfekb?hl=ja)というものがあります。こちらを使えばツールが自動生成するようなボタンでも要素を取得することが簡単です。
+また、こんな変な要素、よく見つけられたと思ったほうに朗報でCypressにはChrome拡張がありまして、[Cypress Scenario Recorder](https://chrome.google.com/webstore/detail/cypress-scenario-recorder/fmpgoobcionmfneadjapdabmjfkmfekb?hl=ja)というものがあります。こちらを使えばツールが自動生成するようなボタンでも要素を取得することが簡単です。
 
 ~~本当はスクラッチで作ってtest-idをつけるべきというのは知ってますよ..!!!!~~
 
@@ -375,7 +375,7 @@ describe('ScreenShotNetatmoDashboard', () => {
 
 これで画面キャプチャが取れるようになったので次はSlackへのアップロードスクリプトです。
 
-例によってTypeScript化してません！！変換もめんどくさかったのでES modules JSファイルです。恥ずかしい！！~~本当はDenoで作るつもりだったの！！うまく動かなかったの！！~~
+例によってTypeScript化してません!!変換もめんどくさかったのでES modules JSファイルです。恥ずかしい!!~~本当はDenoで作るつもりだったの!!うまく動かなかったの!!~~
 
 ``` javascript
 import { ApolloClient, gql, HttpLink, InMemoryCache  } from '@apollo/client'
@@ -457,9 +457,9 @@ axios.post('https://api.imgur.com/3/image', data, config).then((resp) => {
 
 - 画像の投稿にSlackのfileAPIを使わないでimgurのAPIを使っている(ただ使ってみたかっただけ)
 - Appolo clientをnodeで使うとfetchが存在しないので個別にcross-fetchをインストールして **link: new HttpLink({ uri: URI_ENDPOINT, fetch })** という具合で設定してやる必要がある
-- cypressのscreenshotは./cypress/screenshots/spec名/ファイル名 で出力されるのでbase64で読み込んでいる
+- cypressのscreenshotは./cypress/screenshots/spec名/ファイル名で出力されるのでbase64で読み込んでいる
 
-さらにCypressやらSlackアップロードスクリプトを定期的に実行するRunnerを作ります。もうお分かりですね？ GitHub Actionsです。
+さらにCypressやらSlackアップロードスクリプトを定期的に実行するRunnerを作ります。もうお分かりですね？　GitHub Actionsです。
 
 ```yaml
   

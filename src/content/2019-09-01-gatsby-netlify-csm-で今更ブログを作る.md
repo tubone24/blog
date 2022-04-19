@@ -117,7 +117,7 @@ Deployできるとデプロイ先のURLが発行されます。
 
 ![Imgur](https://i.imgur.com/kOuCJAo.png)
 
-General => Site Members から、アカウントを作成し登録します。
+General => Site Membersから、アカウントを作成し登録します。
 
 できたら、作ったサイトの管理画面 `/admin` にアクセスします。
 

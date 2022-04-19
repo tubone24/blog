@@ -13,7 +13,7 @@ templateKey: blog-post
 ---
 Goの勉強をしておかないと社内でニートになってしまうので、お勉強を兼ねてGoのWebフレームワークのEchoを使ったアプリケーションを作成中です。
 
-その中でボトルネック調査をする必要があったので、Opentracing形式のトレースアプリケーションであるJaegerをローカル環境で使ってみたいと思います。
+そのなかでボトルネック調査をする必要があったので、Opentracing形式のトレースアプリケーションであるJaegerをローカル環境で使ってみたいと思います。
 
 ## Table of Contents
 
@@ -33,7 +33,7 @@ EchoとはGoのWAF(Web Framework)です。
 
 ### はやい
 
-Goの中でもパフォーマンスがいいと言われている[Gin](https://gin-gonic.com/)に比べても**十分な速度がでている**ことが公式のGitHubにのってました。
+Goのなかでもパフォーマンスがいいと言われている[Gin](https://gin-gonic.com/)に比べても**十分な速度がでている**ことが公式のGitHubにのってました。
 
 ![img](https://camo.githubusercontent.com/d8800e2ee37115207efc1f3e937a28fb49d90e22/68747470733a2f2f692e696d6775722e636f6d2f49333256644d4a2e706e67)
 
@@ -99,7 +99,7 @@ func main() {
 
 echo.New()したあとに、[echo-contrib](https://github.com/labstack/echo-contrib)で提供されている**jaegerteacing**を呼びます。
 
-これだけで、各APIの呼び出しをrouterごとに記録することができるようになっています。
+これだけで、各APIの呼び出しをrouterごとに記録できるようになっています。
 簡単ですね！便利ですね！
 
 ## child spanを記録する
@@ -160,7 +160,7 @@ docker run -d --name jaeger \
 
 起動すると、jaegerUIが<http://localhost:16686/>で立ち上がります。
 
-先程作ったEchoサーバも立ち上げます。
+さきほど作ったEchoサーバーも立ち上げます。
 
 ```bash
 go run main.go
@@ -174,7 +174,7 @@ APIをコールしてみるとTracingされているのがわかります。
 
 ![img](https://i.imgur.com/1uQdmdX.png)
 
-こまかく見ていきますと、:username はpath parameterなのですが、APIコール時に**tubone24**というユーザ名を設定しコールしたことがわかります。
+こまかく見ていきますと、:usernameはpath parameterなのですが、APIコール時に**tubone24**というユーザー名を設定しコールしたことがわかります。
 
 **1.04sかかってますね・・・。**
 
