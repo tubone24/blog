@@ -76,7 +76,7 @@ dotfileのように、GitHubのレポジトリー管理にするのもはばか�
 
 ## 課題への解
 
-さて、こちらの課題を整理すると
+さて、こちらの課題を整理すると、
 
 1. SSH鍵も一元的に管理したい
 2. SSH Config自体も安全に管理したい
@@ -113,7 +113,7 @@ pip install ssh-config-json
 
 **S**sh **C**onfig **J**sonですね。
 
-自らの~/.ssh/configをSSH鍵もセットでJSONにしたければ
+自らの~/.ssh/configをSSH鍵もセットでJSONにしたければ、
 
 ```
 scj dump dump_config.json -i
@@ -121,7 +121,7 @@ scj dump dump_config.json -i
 
 とするとdump.jsonとしてSSH ConfigをラッピングしたJSONができます。
 
-復元したければ
+復元したければ、
 
 ```
 scj restore dump_config.json -i
@@ -129,7 +129,7 @@ scj restore dump_config.json -i
 
 とやることで、SSH鍵とともに展開されます。
 
-さらに暗号化オプションをつければ
+さらに暗号化オプションをつければ、
 
 ```
 scj dump dump_config.json -i -e
@@ -157,7 +157,7 @@ docoptを絡めたテストコードを今回は書いてみました。とは�
 
 docoptの実装はどうやら**sys.argv**からコマンドライン引数を取り出しているようです。当たり前といえば当たり前か。
 
-Pytestなどのテストランナーに書けた際、sys.argvはテストランナーに渡したものが入っているので
+Pytestなどのテストランナーに書けた際、sys.argvはテストランナーに渡したものが入っているので、
 
 ```
     def test_main_dump(self):
@@ -199,7 +199,7 @@ Pythonの暗号化ライブラリといえばpycryptoが有名ですが、こち
 
 そうすることにより、同じ平文、同じ鍵を用いた場合一つ前のブロックと次のブロックとの間で出現する文字列が異なってくるので暗号文から推測される可能性を少なくできます。
 
-ちょっと古いですがエニグマ暗号もブロック暗号ではないですが、出現する文字のパターンから平文への頻度分析から判断されないように単純な換字式暗号ではなく、入力ごとに換字表が入れ替わるローターを仕込んでいた形で、ちょっと仕組みはCBCと比べるとあっさりしてますが、まぁやりたいことは似たような感じですね。
+ちょっと古い内容かつ厳密にはブロック暗号ではないですが、エニグマ暗号も出現する文字のパターンから平文への頻度分析から判断されないように単純な換字式暗号を用いず、入力ごとに換字表が入れ替わるローターを仕込んで対策してました。ちょっと仕組みはCBCと比べるとあっさりしてますが、まぁやりたいことは似たような感じですね。
 
 ![img](https://i.imgur.com/LNR7N4P.jpg)
 
@@ -251,7 +251,7 @@ import hashlib
 key = hashlib.md5(key.encode("utf-8")).hexdigest()).encode("utf-8")
 ```
 
-ぶっちゃけあとで調べたら[StackOverFlow](https://stackoverflow.com/questions/47002578/algorithm-to-generate-12-byte-hash-from-web-urls)にもあるとおり、暗号化に使う鍵のハッシュ関数はもっとそこまで安全性を考慮する必要はないので
+ぶっちゃけあとで調べたら[StackOverFlow](https://stackoverflow.com/questions/47002578/algorithm-to-generate-12-byte-hash-from-web-urls)にもあるとおり、暗号化に使う鍵のハッシュ関数はもっとそこまで安全性を考慮する必要はないので、
 
 md5が正解だったようですが、何となく前時代的なハッシュ化アルゴリズムが嫌だったのでSHA-3世代のShake128を使うことにしました。
 
@@ -293,7 +293,7 @@ Pythonのコード規約チェックはpep8からflake8など多岐にわたり�
 
 Blackはpep8と比べかなり制約の強い（柔軟性の低い）Pythonコードフォーマッタです。
 
-Blackの公式Docには
+Blackの公式Docには、
 
 > Blackを使用することで、あなたは手作業でのフォーマットの細かい部分のコントロールを譲ることに同意したことになります。その見返りとして、Blackはあなたにスピード、決定論、そしてフォーマットに関するpycodestyleの口煩いからの自由を与えてくれます。時間と精神的エネルギーを節約して、より重要なことに充てることができるようになります。
 
@@ -371,7 +371,7 @@ PyPIへのパッケージ登録を行なうには当然パッケージを作ら�
 
 さらに、setup.pyはただのPythonコードでしかないので、それをコンフィグに起こしたsetup.cfgという方法もあります。
 
-下記のようにパッケージの情報を記載し
+下記のようにパッケージの情報を記載し、
 
 ```
 [metadata]
@@ -404,7 +404,7 @@ classifiers =
 
 ```
 
-setup.pyでsetup.cfgを読み込むようにして
+setup.pyでsetup.cfgを読み込むようにして、
 
 ```
 from setuptools import setup

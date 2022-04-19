@@ -76,7 +76,7 @@ Google Chrome 76.0.3809.132
 
 ## CircleCIのDockerfileを確認してみる
 
-[CircleCIのDockerfile](https://github.com/tubone24/circleci-dockerfiles/blob/master/node/images/10.16.3-stretch/browsers/Dockerfile)をみると
+[CircleCIのDockerfile](https://github.com/tubone24/circleci-dockerfiles/blob/master/node/images/10.16.3-stretch/browsers/Dockerfile)をみると、
 
 ```dockerfile{numberLines: 41}
 # install chrome

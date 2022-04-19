@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/eQ7uBsO.png'
 templateKey: blog-post
 ---
-JSON Resumeを使ってさくさくっとそれっぽい職務経歴書を作ってみます
+JSON Resumeを使ってさくさくっとそれっぽい職務経歴書を作ってみます。
 
 [JSON resume](https://jsonresume.org/)というものがあるようです。
 
@@ -66,7 +66,7 @@ resume.jsonを作ったばかりだと空のオブジェクトしかないので
 
 JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが載っていますが、完全なスキーマはGitHubにある[Examples](https://github.com/jsonresume/resume-schema/blob/v1.0.0/examples/valid/complete.json)を見たほうがよいです。
 
-こんな感じのお手本
+こんな感じのお手本↓
 
 ```json
 {
@@ -234,7 +234,7 @@ JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが�
 
 なんとなく生きているマンにはきついキツい。
 
-軽く項目を解説すると
+軽く項目を解説すると、
 
 - basics
   - 名前や連絡先など基本情報。
@@ -320,4 +320,4 @@ JSON ResumeにはHTMLのテンプレートで記載内容をきれいなResume�
 
 ## 結論
 
-よく考えたら、海外向けのResumeを作るほど海外志向ないのでただの海外就活サイトの読み漁りになりました
+よく考えたら、海外向けのResumeを作るほど海外志向ないのでただの海外就活サイトの読み漁りになりました。

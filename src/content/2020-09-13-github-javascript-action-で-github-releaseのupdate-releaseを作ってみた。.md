@@ -63,11 +63,11 @@ create-release](https://github.com/actions/create-release)を使うことが多�
 
 こちらの使い方としては、
 
-1. Git Tagを打ってPushする
+1. Git Tagを打ってPushする.
 2. Pushに反応して、actions
 /
-create-releaseが動く
-3. 出来上がったReleasesに[actions/upload-release-asset](https://github.com/actions/upload-release-asset)でArtifactsを上げる
+create-releaseが動く.
+3. 出来上がったReleasesに[actions/upload-release-asset](https://github.com/actions/upload-release-asset)でArtifactsを上げる.
 
 という感じの使い方になるかと思います。
 
@@ -363,7 +363,7 @@ pushが終わったらGitHub ReleaseからReleaseを切ってあげることで�
 
 ## 結論
 
-今回のソースコード一式は<https://github.com/tubone24/update_release>に
+今回のソースコード一式は<https://github.com/tubone24/update_release>に、
 
 マーケットプレイスは<https://github.com/marketplace/actions/update-github-release>で公開してます。
 

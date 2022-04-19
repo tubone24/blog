@@ -35,7 +35,7 @@ Lambda作成画面にもContainer Imageが出てきております。
 
 Container Image SupportとはLambdaでDocker ImageからContainerが使えますよーということなのですが、使い所はあるのでしょうか？
 
-色々メリットあると思いますが、私が思うに
+色々メリットあると思いますが、私が思うに、
 
 - イメージは10GBまでデプロイできる
 - Lambda Runtime Interface Emulatorを使ってローカルで実行できる
@@ -269,7 +269,7 @@ RUN apk add --update \
         fc-cache -fv
 ```
 
-これでフォント問題は解決...のはずですが、後半でだめですが出るので、さらに改良していくことになります。
+これでフォント問題は解決...のはずですが、後半で「だめです」が出るので、さらに改良していくことになります。
 
 ## Entrypoint他設定
 
@@ -430,7 +430,7 @@ sleep(10)とかよりも効率的で安全ですね。
 
 ともあれ、これでログインが無事できました。
 
-ログインしたらチャンネルのURLにアクセスします。チャンネルのURLは
+ログインしたらチャンネルのURLにアクセスします。チャンネルのURLは、
 
 https://app.slack.com/client/xxxxxxxxx/yyyyyyyyy
 

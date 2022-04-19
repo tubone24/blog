@@ -11,7 +11,7 @@ tags:
 headerImage: https://i.imgur.com/XblRysI.png
 templateKey: blog-post
 ---
-腰が痛い
+腰が痛い.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ AWSを使ったことのある人ならばわかると思いますが、公式�
 
 ![img](https://i.imgur.com/XghDulZ.png)
 
-それぞれのリージョンの障害がRSSで配信される形式になっているのですが、わざわざRSSを登録するのもめんどくさいし、Slackとかの連携に乗っけるのもそれはそれで便利なのですが、そもそもSlackを見ていないほかの人でも障害情報を共有したいです。
+それぞれのリージョンの障害がRSSで配信される形式になっているのですが、わざわざRSSを登録するのもめんどくさい。Slackとかの連携に乗っけるのもそれはそれで便利なのですが、そもそもSlackを見ていないほかの人でも障害情報を共有したいです。
 
 実は、AWS Service Health Dashboardの情報はJSONで取得できます。
 

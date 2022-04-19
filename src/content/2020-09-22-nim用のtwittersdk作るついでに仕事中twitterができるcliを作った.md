@@ -37,11 +37,11 @@ NimのTwitterSDKを作ってOSS兄貴になろうと思ったら、結局なれ�
 
 ## どうして流行らないのか？
 
-これはあくまでも私の主観なのですが、おそらく
+これはあくまでも私の主観なのですが、おそらく、
 
 **Pythonの皮を被ったC言語というのはしょせんC言語でしかない**というところでしょうか？
 
-例えば新しい言語でV言語というのがありますが、あちらは**Go**の構文を色濃く採用しながら、Goのイケてないところ、ジェネリクス(Go2では採用されるらしいですが)やアクセス修飾子、ワンバイナリからlibの切り出しRustに代表されるGCを使わないメモリ管理などを組み込んでいます。
+例えば新しい言語でV言語というのがありますが、あちらは**Go**の構文を色濃く採用しながら、Goのイケてないところを修正してます。例えばジェネリクス(Go2では採用されるらしいですが)やアクセス修飾子、ワンバイナリからlibの切り出しRustに代表されるGCを使わないメモリ管理などを組み込んでいます。
 
 V言語も流行っているわけではないが、Nimよりは周りで聞くような**気**もします。あくまでも気もするだけだが...。
 
@@ -128,7 +128,7 @@ proc getBearerToken(apiKey:string, apiSecret:string):string =
 
 <https://github.com/CORDEA/oauth>
 
-ありがたいです。使い方もとってもかんたんで、インストール後例えばAccessTokenが取りたいときは
+ありがたいです。使い方もとってもかんたんで、インストール後例えばAccessTokenが取りたいときは、
 
 ```nim
 import oauth1
@@ -464,7 +464,7 @@ jobs:
 
 できたできたかも!!
 
-ダウンロードはこちらから
+ダウンロードはこちらから!!!
 
 <https://github.com/tubone24/post_twitter_on_work/releases>
 
@@ -501,7 +501,7 @@ Options:
   -r, --resetToken            Reset accessToken when change user account
 ```
 
-というのは冗談で、例えば自分のタイムラインが見たいときは
+というのは冗談で、例えば自分のタイムラインが見たいときは、
 
 ```
 $ post_twitter_on_work home
@@ -509,7 +509,7 @@ $ post_twitter_on_work home
 
 とやってあげればいいです。これだけです。
 
-初回アクセス、またはリセットトークンのときだけ
+初回アクセス、またはリセットトークンのときだけ、
 
 ```
 $ ./post_witter_on_work home
@@ -521,7 +521,7 @@ Please enter a verifier key (PIN code).
 
 とアクセストークンのリクエストのためPINの要求が入ります。
 
-URLにアクセスすれば
+URLにアクセスすれば、
 
 ![img](https://i.imgur.com/3GwsdvT.png)
 
@@ -529,13 +529,13 @@ URLにアクセスすれば
 
 ![img](https://i.imgur.com/VASzn6U.png)
 
-また、返信の確認は
+また、返信の確認は、
 
 ```
 post_twitter_on_work mention
 ```
 
-投稿は
+投稿は、
 
 ```
 post_twitter_on_work post 投稿したい文言

@@ -453,7 +453,7 @@ axios.post('https://api.imgur.com/3/image', data, config).then((resp) => {
 )
 ```
 
-ポイントとしては
+ポイントとしては、
 
 - 画像の投稿にSlackのfileAPIを使わないでimgurのAPIを使っている(ただ使ってみたかっただけ)
 - Appolo clientをnodeで使うとfetchが存在しないので個別にcross-fetchをインストールして **link: new HttpLink({ uri: URI_ENDPOINT, fetch })** という具合で設定してやる必要がある
@@ -501,7 +501,7 @@ jobs:
 
 ## 反省
 
-Denoを使ってSlackアップロードスクリプトは改修します。絶対に
+Denoを使ってSlackアップロードスクリプトは改修します。絶対に。
 
 
 

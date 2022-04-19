@@ -156,7 +156,7 @@ Dropdown menuのtoggle buttonの実装方法がちょっとだけ変わってま
 
 ### Column orderの制限
 
-Columnの順番を制御できるOrderですが今までは無邪気にorder-10とかできたのですが、order-5までの制限となっておりました。なのでこちらも修正します。
+Columnの順番を制御できるOrderについて今までは無邪気にorder-10とかできたのですが、order-5までの制限となっておりました。なのでこちらも修正します。
 
 ```javascript
 // before

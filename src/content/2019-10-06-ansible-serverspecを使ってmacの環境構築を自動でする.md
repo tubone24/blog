@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
-毎回Macの環境構築めんどくさい
+毎回Macの環境構築めんどくさい。
 
 開発用MacBookの構成管理がしたくなり、AnsibleとServerspecを使って作りました。
 
@@ -88,18 +88,18 @@ Inventoryは複数のサーバーをグルーピングして、同時にプロ�
 
 inventoryをコマンドで指定しない場合にdefalutで設定される`defalut`ファイルに下記を設定します。
 
-[inventory/defalut](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/default) に
+[inventory/defalut](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/default) に、
 
 ```ini
 [local]
 localhost
 ```
 
-これで、特にInventoryを指定しない場合は`localhost`として接続がされます。また、InventoryGroupとして`local`を指定しているため、`group_vars/local`にlocalとして共通の変数を定義することもできます。
+これで、特にInventoryを指定しない場合は`localhost`として接続がされます。また、InventoryGroupとして`local`を指定しているため、`group_vars/local`にlocalとして共通の変数を定義できます。
 
 今回は複数サーバーで共有させる変数が見当たらないので特に設定しません。
 
-[inventory/group_vars/local/ansible.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/group_vars/local/ansible.yml) に
+[inventory/group_vars/local/ansible.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/inventory/group_vars/local/ansible.yml) に、
 
 ```yaml
 ansible_connection: 'local'
@@ -111,13 +111,13 @@ ansible_connection: 'local'
 
 次にRoleを設定していきます。
 
-今回は特にRoleを分ける必要もないのですが、たとえば
+今回は特にRoleを分ける必要もないのですが、たとえば、
 
 - 開発者のMac
 - デザイナーのMac
 - 運用者のMac
 
-とそれぞれインストールするアプリが異なる場合、全員に共通して入れたい設定やAさんは開発者兼デザイナーで両方のアプリが入れたいなどの要求もある場合はそれぞれ
+とそれぞれインストールするアプリが異なる場合、全員に共通して入れたい設定やAさんは開発者兼デザイナーで両方のアプリが入れたいなどの要求もある場合はそれぞれ、
 
 - dev-tools
 - design-tools
@@ -135,7 +135,7 @@ dev-toolsだけ用意します。
 
 AnsibleではTasksディレクトリのmain.ymlが読み込まれるため、**各Taskごとに分けたYaml**を**main.ymlでInclude**して上げればいいわけです。
 
-roles/dev-tools/tasks/main.ymlに
+roles/dev-tools/tasks/main.ymlに、
 
 ```yaml
 - include: 'tools.yml'
@@ -164,7 +164,7 @@ roles/dev-tools/tasks/main.ymlに
 
 と記載すればインストールが実現できます。
 
-また、用意されているモジュールを使うことで、すでにインストール、設定済みでも
+また、用意されているモジュールを使うことで、すでにインストール、設定済みでも、
 
 エラーにならずプロビジョニングが終了しますのでなるべく使えるモジュールがないか探しましょう。
 
@@ -237,7 +237,7 @@ blockinlineで複数行を記載するとblockの中身の順番が**担保**さ
 
 変数を管理したくなったらvarsに記載することでtask側でも呼び出すことができます。
 
-[vars/main.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/vars/main.yml) に
+[vars/main.yml](https://github.com/tubone24/mac-auto-setup/blob/master/ansible/mac/roles/dev-tools/vars/main.yml) に、
 
 ```yaml
 git:
@@ -273,7 +273,7 @@ Ansible最後はplaybookです。
 
 とすれば出来上がりです。
 
-これで
+これで、
 
 ```bash
 ansible-playbook playbooks/my-mac.yml
@@ -285,7 +285,7 @@ ansible-playbook playbooks/my-mac.yml
 
 仕上げにMakefileをディレクトリルートに作り、煩わしいコマンドから解放されましょう。
 
-[Makefile](https://github.com/tubone24/mac-auto-setup/blob/master/Makefile)に
+[Makefile](https://github.com/tubone24/mac-auto-setup/blob/master/Makefile)に、
 
 ```
 TARGET = $1

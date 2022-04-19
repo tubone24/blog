@@ -243,7 +243,7 @@ python3 /home/pi/motion/upload_slack.py $FILE "MP4 File"
 rm -f $FILE
 ```
 
-upload_slack.pyはこんな感じ
+upload_slack.pyはこんな感じ.
 
 SlackのChannelIDはSlackWeb版を使うとURLの最後のパスがそれにあたります。公式は[APIを叩いて調べる](https://api.slack.com/methods/channels.list)のを進めてますが、Web版が一番簡単に見つけられます。
 

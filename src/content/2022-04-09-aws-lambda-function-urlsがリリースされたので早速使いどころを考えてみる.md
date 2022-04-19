@@ -10,7 +10,7 @@ tags:
 headerImage: https://i.imgur.com/alxzd7y.png
 templateKey: blog-post
 ---
-花粉
+花粉.
 
 ## Table of Contents
 
@@ -62,13 +62,13 @@ exports.handler = async (event) => {
 
 https://{url-id}.lambda-url-region.on.awsという不思議なTLDのURLができました。
 
-こちらにアクセスしてみると
+こちらにアクセスしてみると、
 
 ![ブラウザアクセス](https://i.imgur.com/OaIFZxx.png)
 
 確かにちゃんと関数が実行されてレスポンスが返ってきました！
 
-また、handlerの引数で取得するeventの中身も
+また、handlerの引数で取得するeventの中身も、
 
 ```javascript
 {
@@ -135,7 +135,7 @@ https://{url-id}.lambda-url-region.on.awsという不思議なTLDのURLができ
 
 独自のオーソライザーが挟めないので、あくまでも同じアカウントにアクセスできる開発者向けのAPIとして使うのがよさそうです。もっと込み入ったことがやりたいならAPI Gatewayをおとなしく使いましょう...。(もうちょっと色々試してみます。)
 
-IAM認証を設定したうえで、署名を付けず未認証の状態でアクセスすると
+IAM認証を設定したうえで、署名を付けず未認証の状態でアクセスすると、
 
 ```
 {"Message":"Forbidden"}

@@ -32,7 +32,7 @@ templateKey: blog-post
 
 K6をMacやEC2などで作ったLinux上に構築する方法はググればたくさん出てくるのでここでは割愛しますが、まず**非常に簡単に環境が構築できる。** この点はしっかり強調しておきたいです。
 
-MacならHomebrew入っていれば
+MacならHomebrew入っていれば、
 
 ```
 brew install k6
@@ -112,7 +112,7 @@ networks:
     driver: bridge
 ```
 
-やっていることは超基本的なこととしてnetworkを切ってサービス名でInfluxDBにアクセスできるようにする点くらいなのですが、k6のenvironmentで
+やっていることは超基本的なこととしてnetworkを切ってサービス名でInfluxDBにアクセスできるようにする点くらいなのですが、k6のenvironmentで、
 
 ```
     environment:
@@ -121,7 +121,7 @@ networks:
 
 とやってあげることで実行結果をInfluxDBに出力します。
 
-[公式ドキュメント](https://k6.io/docs/results-visualization/influxdb-+-grafana/#run-the-test-and-upload-the-results-to-influxdb)のように環境変数でなく実行時の引数で設定することもできます。
+[公式ドキュメント](https://k6.io/docs/results-visualization/influxdb-+-grafana/#run-the-test-and-upload-the-results-to-influxdb)のように環境変数でなく実行時の引数で設定できます。
 
 これで、<https://localhost:3000>にアクセスすることで**実行結果を可視化**できるようになりました。
 

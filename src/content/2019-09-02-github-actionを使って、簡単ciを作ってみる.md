@@ -86,7 +86,7 @@ jobs:
 
 ### Trigger設定
 
-今回はpush時に動くようにしますので
+今回はpush時に動くようにしますので、
 
 ```yaml{numberLines: 1}{3}
 name: Python package

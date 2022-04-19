@@ -59,7 +59,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 ## Netlifyのビルド時やっていることを洗い出して自前でやってみる
 
 基本的にNetlifyがビルド時やってることは、例えばGatsby.jsであれば、gatsby buildコマンドを実行し、特定のディレクトリー(大概は./public)に配置されたビルド済みJSをデプロイする動きなので、
-それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理(PostProcess)を実行してるパターンもあります。
+それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理(PostProcess)してるパターンもあります。
 
 私の場合、JSやイメージを最適化してくれる**Asset optimization**とFormタグに属性をつければ勝手にFormを作ってくれる**Form detection**の二つが設定されていましたのでそれぞれまず無効化します。
 
@@ -75,7 +75,7 @@ Form detectionの解説は[こちら](https://blog.tubone-project24.xyz/2019/09/
 
 Asset optimizationのうち、JSやCSSのminiferは[gatsby-plugin-minify](https://www.gatsbyjs.com/plugins/gatsby-plugin-minify/)を使うことでhtmlやJS、CSSをminifyできます。
 
-インストールはいつも通りNPM(yarn)から
+インストールはいつも通りNPM(yarn)から、
 
 ```
 npm install gatsby-plugin-minify
@@ -117,7 +117,7 @@ RSSのリンクをページのLinkとして仕込んでいる人は要注意で�
 
 画像URLの後ろに画像サイズに合わせたキーワードを入れることで実現できます。
 
-例えばこちらのURLの画像を
+例えばこちらのURLの画像を、
 
 ```
 https://i.imgur.com/Wfz9G0B.png
@@ -280,7 +280,7 @@ Formの送信なので、fetchでは[FormData](https://developer.mozilla.org/ja/
 
 masterブランチへのPRでPreviewデプロイ、masterへのコミットで本番デプロイをするように2つactionsを作ります。
 
-まずはPreviewデプロイ
+まずはPreviewデプロイ.
 
 ```yaml
 name: DeployToNetlifyPreview

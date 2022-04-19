@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/oV13syg.png'
 templateKey: blog-post
 ---
-Hyper-vでも仮想マシンしたい
+Hyper-vでも仮想マシンしたい!
 
 セキュリティのテストやトレーニング用に意図的に脆弱性を作った仮想マシン **Metasploitable** はVirtualBox用のVMですが、Hyper-vに入れてみます。
 

@@ -13,7 +13,7 @@ tags:
 headerImage: 'https://i.imgur.com/uWmwQRq.png'
 templateKey: blog-post
 ---
-くっそかんたんにFormできた
+くっそかんたんにFormできた。
 
 Netlifyに簡単にFormを作る機能が用意されているので利用用途ないですが、Gatsby.jsで作ったBlogにFormを作ってみようかと思います。
 
@@ -132,7 +132,7 @@ export default class Contact extends React.Component {
 <button type="submit" class="btn btn-primary">Send</button> <!-- btn classの設定 -->
 ```
 
-のような形や
+のような形や、
 
 ```html
 <label>Your email:<br/>
@@ -147,9 +147,7 @@ export default class Contact extends React.Component {
 
 ## Bot除け
 
-Netlify FormではいわゆるスパムBot除けとして2種類のオプションが
-
-用意されてます。
+Netlify FormではいわゆるスパムBot除けとして2種類のオプションが用意されてます。
 
 1. いわゆる人間だったらこのフォームに何も入れるなという隠れフォームを作る（data-netlify-honeypot）
 2. reCaptureを設定する
@@ -158,9 +156,7 @@ Netlify FormではいわゆるスパムBot除けとして2種類のオプショ�
 
 ### data-netlify-honeypot
 
-data-netlify-honeypotの設定はFormのattributeに
-
-data-netlify-honeypot=隠れフォームのnameを設定します。
+data-netlify-honeypotの設定はFormのattributeに、data-netlify-honeypot=隠れフォームのnameを設定します。
 
 ```html
 <form

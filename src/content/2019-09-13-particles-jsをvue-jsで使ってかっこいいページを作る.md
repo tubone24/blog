@@ -10,7 +10,7 @@ tags:
 headerImage: 'https://i.imgur.com/CafEJCU.png'
 templateKey: blog-post
 ---
-とりあえずかっこよくしたい
+とりあえずかっこよくしたい。
 
 とりあえず作ったWebページをかっこよくしたいと思い手軽に使えるparticles.jsをVue.jsで使ってみます。
 

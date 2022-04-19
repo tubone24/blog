@@ -67,7 +67,7 @@ bundle install --path=vendor/bundle
 
 ServerspecがインストールできたらServerspecの初期化をしていきます。
 
-bundleで
+bundleで、
 
 ```bash
 bundle exec serverspec-init
@@ -105,7 +105,7 @@ Select number: 2
 
 Serverspecは上述したとおり、Ruby(RSpec)でできてるので、テスト用のヘルパーを作成し、テストに使う変数をspecファイル（テストコード）で利用できるようにしておきます。
 
-今回は `spec/spec_helper.rb` に
+今回は `spec/spec_helper.rb` に、
 
 ```ruby
 require 'serverspec'
@@ -161,7 +161,7 @@ helperでYamlに記載した変数をSpecで利用できるようになりまし
 
 ### アプリがインストールされているかの確認
 
-Homebrewで正しくアプリがインストールされているかの確認は
+Homebrewで正しくアプリがインストールされているかの確認は、
 
 ```ruby
 describe package(hoge) do
@@ -175,7 +175,7 @@ HomebrewでインストールしていればAssert OKとなるはずです。
 
 ### コマンドの結果を確認する
 
-コマンドの結果、例えばインストールしたアプリのバージョン確認は
+コマンドの結果、例えばインストールしたアプリのバージョン確認は、
 
 ```ruby
 describe command('pyenv versions') do
@@ -185,7 +185,7 @@ end
 
 とすることで実現できます。 上記では`pyenv versions` のコマンドの実行結果を比較してます。
 
-正規表現でマッチさせるため、例えば否定系は先読み否定を使い
+正規表現でマッチさせるため、例えば否定系は先読み否定を使い、
 
 ```ruby
 describe command('git --version') do
@@ -236,4 +236,4 @@ Macの構成管理をAnsibleで行い確認をServerspecで行なうところま
 
 次回はもうすることないかと思いきや、こいつをCIにのっけてみようかと思います!!
 
-もうめちゃくちゃだよ
+もうめちゃくちゃだよ。

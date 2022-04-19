@@ -34,13 +34,13 @@ JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode Package
 
 [depcheck](https://github.com/depcheck/depcheck)とはnpmでパッケージ管理されたプロジェクトについて、各ライブラリの依存関係がどのように使用されているか、どの依存関係が使われていないか、package.jsonからどの依存関係が欠落しているかを確認するためのツールです。
 
-プロジェクトルートでnpxを使って
+プロジェクトルートでnpxを使って、
 
 ```
 npx depcheck
 ```
 
-で実行することで簡単に結果を得ることができます。例えば[こちらのレポジトリ](https://github.com/tubone24/portfolio)で実行すると
+で実行することで簡単に結果を得ることができます。例えば[こちらのレポジトリ](https://github.com/tubone24/portfolio)で実行すると、
 
 ```
 > npx depcheck
