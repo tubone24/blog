@@ -138,7 +138,7 @@
     "gatsby-plugin-webpack-bundle-analyser-v2": "1.1.26",
     "gh-pages": "3.2.3",
     "husky": "7.0.4",
-    "lint-staged": "12.0.3",
+    "lint-staged": "12.3.8",
     "netlify-cli": "10.0.0",
     "netlify-lambda": "2.0.15",
     "prettier": "2.4.1",
