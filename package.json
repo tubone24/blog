@@ -7,6 +7,7 @@
     "@loadable/component": "5.15.2",
     "@popperjs/core": "^2.11.0",
     "@sentry/browser": "6.17.2",
+    "@sentry/node": "^6.19.6",
     "@sentry/react": "6.19.3",
     "@sentry/tracing": "6.17.2",
     "@types/react-helmet": "^6.1.5",
