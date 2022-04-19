@@ -39,13 +39,13 @@ templateKey: blog-post
 
 Denoとは、Node.jsの作者であるRyan Dahlによって作られた、新しいJavaScript/TypeScriptランタイムです。
 
-Node.jsに関する10の反省点という講演の中で氏がNode.jsのここがまずかった！ということをあげて、Denoのプロトタイプ版を出したのが始まりとか。
+Node.jsに関する10の反省点という講演のなかで氏がNode.jsのここがまずかった！ということをあげて、Denoのプロトタイプ版を出したのが始まりとか。
 
 ちなみに、Nodeを並べ替えるとDeno。
 
 ちなみにアイコンは恐竜らしい。ダイナソーでDeno。
 
-アイコンについてのおもしろ話は
+アイコンについてのおもしろ話は、
 
 https://hashrock.hatenablog.com/entry/2019/02/04/040505
 
@@ -53,11 +53,11 @@ https://hashrock.hatenablog.com/entry/2019/02/04/040505
 
 ## 書いたコード
 
-実際、Denoで動かそうがNodeで動かそうがあまり違いがないと思ってたのですが細かい違いがありました。(初心者)
+実際、Denoで動かそうとNodeで動かそうとあまり違いがないと思ってたのですが細かい違いがありました。(初心者)
 
 まず、基本的なことですがビルトインの機能がすべて**Deno**に内包されてます。
 
-なので環境変数は
+なので環境変数は、
 
 ```
 const imgurClientId = Deno.env.get('IMGUR_CLIENT_ID') as string;
@@ -152,6 +152,6 @@ await fetch(slackWebhookUrl, {method: 'POST', headers: slackHeaders, body: JSON.
 
 ## 結論
 
-使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います！！！！
+使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います!!!！
 
 

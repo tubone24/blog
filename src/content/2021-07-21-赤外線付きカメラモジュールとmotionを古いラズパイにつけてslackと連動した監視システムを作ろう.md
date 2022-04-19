@@ -29,7 +29,7 @@ templateKey: blog-post
 
 ## 監視カメラ
 
-そこまで我が家は大したセキュリティー意識はないですが、せっかくなら玄関に監視カメラでもつけたいなと思い始めました。
+そこまで我が家は大したセキュリティ意識はないですが、せっかくなら玄関に監視カメラでもつけたいなと思い始めました。
 
 とりあえず、人がきたらSlackに検知状況とそのときの画像や動画を投稿します。
 
@@ -77,7 +77,7 @@ sudo apt install motion
 sudo motion
 ```
 
-先程写真の撮影には成功したので起動するかなーと思ったのですがダメです！motionが起動しません！！エラーが出ます。
+さきほど写真の撮影には成功したので起動するかなーと思ったのですがダメです！motionが起動しません!!エラーが出ます。
 
 ```
 [1:ml1] [NTC] [VID] [Jul 21 21:00:03] vid_start: Opening V4L2 device
@@ -100,7 +100,7 @@ sudo motion
 [Motion -> v4l2_start: Failed to open video device /dev/video0: No such file or directory](https://www.raspberrypi.org/forums/viewtopic.php?t=255442)
 
 
-どうやらラズパイカメラモジュール用のV4L2ドライバは標準ではロードされず、video0 デバイスを取得するには **modprobe bcm2835-v4l2**を実行する必要があったとのこと。
+どうやらラズパイカメラモジュール用のV4L2ドライバは標準ではロードされず、video0デバイスを取得するには **modprobe bcm2835-v4l2**を実行する必要があったとのこと。
 
 ```
 sudo modprobe bcm2835-v4l2
@@ -208,7 +208,7 @@ on_camera_found "/usr/bin/python3 /home/pi/motion/notify_camera_found.py" # カ�
 on_camera_lost "/usr/bin/python3 /home/pi/motion/notify_camera_lost.py" # カメラモジュールとの疎通が取れなくなったら起動するスクリプト
 ```
 
-ここでポイントになるのは動体検知実行時に画像や動画を保存できるだけでなく、それを追加起動スクリプトで通知することができるということです。
+ここでポイントになるのは動体検知実行時に画像や動画を保存できるだけでなく、それを追加起動スクリプトで通知できるということです。
 
 動画や画像をSlackに送信すれば監視カメラシステム的に十分ですね。
 
@@ -218,7 +218,7 @@ on_camera_lost "/usr/bin/python3 /home/pi/motion/notify_camera_lost.py" # カメ
 
 ## Stream配信
 
-motion.confで**stream_localhost off**とすることで、他の端末からストリーム配信を視聴することができるようになります。例えばVPNとかを自宅に構築済みの場合は気になったら外出先からカメラを確認する、という使い方ができます。
+motion.confで**stream_localhost off**とすることで、他の端末からストリーム配信を視聴できるようになります。例えばVPNとかを自宅に構築済みの場合は気になったら外出先からカメラを確認する、という使い方ができます。
 
 我が家はOpenVPNでイントラ接続が可能になってます。
 
@@ -232,7 +232,7 @@ Slackへのファイル投稿はAPPSを使います。何番煎じかわから�
 
 [ご参考: 超簡単PythonでSlackにファイルアップロード＆メッセージ投稿（Slack API利用）新方式](https://note.com/10mohi6/n/n0fd906a5f980)
 
-動画が作成完了されたら動くスクリプトは**on\_movie\_end**で設定できますが今回はshellを呼び出して、shellの中でSlack投稿用のPythonに連携します。
+動画が作成完了されたら動くスクリプトは**on\_movie\_end**で設定できますが今回はshellを呼び出して、shellのなかでSlack投稿用のPythonに連携します。
 
 特に理由はないですが、Slackアップロード以外に何かやることがある場合にこうしておくと便利かな、というのとアップロード済みの動画をラズパイから削除することを実施するためです。
 
@@ -243,9 +243,9 @@ python3 /home/pi/motion/upload_slack.py $FILE "MP4 File"
 rm -f $FILE
 ```
 
-upload_slack.pyはこんな感じ
+upload_slack.pyはこんな感じ.
 
-SlackのChannelIDはSlackウェブ版を使うとURLの最後のパスがそれにあたります。公式は[APIを叩いて調べる](https://api.slack.com/methods/channels.list)のを進めてますが、Web版が一番簡単に見つけられます。
+SlackのChannelIDはSlackWeb版を使うとURLの最後のパスがそれにあたります。公式は[APIを叩いて調べる](https://api.slack.com/methods/channels.list)のを進めてますが、Web版が一番簡単に見つけられます。
 
 ```python
 import sys
@@ -325,7 +325,7 @@ motion起動から3～4時間すると、カメラモジュールがハングっ
 
 Slackで通知を受け取ることでますます再現性が高いことがわかったので、何か根本的な原因があると思いとりあえず思い当たる2つを修正しました。
 
-- osのdist-upgrade 不具合が解消されてるかもしれない
+- osのdist-upgrade不具合が解消されてるかもしれない
 - オーバークロックの無効化
 
 こちら二つを実施したところ直りました。何だったんでしょうか。。

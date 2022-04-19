@@ -1,0 +1,20 @@
+{
+    "rules": {
+        "preset-smarthr":{
+            "sentence-length": false,
+            "ja-no-mixed-period": {
+                 "periodMark": "。",
+                 "allowPeriodMarks": ["、", ".", ",", "↓", "？","・", "`", "…"],
+                 "allowEmojiAtEnd": true
+            }
+        },
+        "prh": {
+            "rulePaths": [
+                "dict/prh_tubone_blog.yml"
+            ]
+        }
+    },
+     "filters": {
+         "comments": true
+     }
+}

@@ -17,3 +17,5 @@ yarn-error.log
 
 # benchmark
 benchmark
+
+.textlint.log

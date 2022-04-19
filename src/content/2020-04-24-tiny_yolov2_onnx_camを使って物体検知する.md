@@ -43,7 +43,7 @@ $ sudo apt install python3-pip protobuf-compiler libprotoc-dev libjpeg-dev cmake
 $ pip3 install --user cython
 ```
 
-Cythonを入れます。入れないと、 pipで**requirements.txt**を使ってPyCudaを入れる時、下記のような **Running cythonize failed!**が起きちゃいます。
+Cythonを入れます。入れないと、 pipで**requirements.txt**を使ってPyCudaを入れるとき、下記のような **Running cythonize failed!**が起きちゃいます。
 
 ```
 Processing scipy/cluster/_vq_rewrite.pyx

@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/9iGRHft.png'
 templateKey: blog-post
 ---
-Serverspecで構築した環境を確認したい！！
+Serverspecで構築した環境を確認したい!!
 
 前回、Ansibleを使って、Macの環境を構築しました。一部べきとう性が保てない箇所があったりしたので、正しく設定値が入っているかServerspecを使ってMacの状態を確認していきます。
 
@@ -25,9 +25,9 @@ Serverspecで構築した環境を確認したい！！
 
 ![Img](https://i.imgur.com/E3tw8J2.png)
 
-Serverspecとはサーバの自動テストツールです。
+Serverspecとはサーバーの自動テストツールです。
 
-せっかくAnsibleとかで自動でたくさんのサーバをプロビジョニングしたのに、確認はテスト項目書片手に目で見て確認…みたいな頭の悪いことをしないために作られたツールです。
+せっかくAnsibleとかで自動でたくさんのサーバーをプロビジョニングしたのに、確認はテスト項目書片手に目で見て確認…みたいな頭の悪いことをしないために作られたツールです。
 
 RubyのRSpecベースでできているツールなのでRubyでテストを書いたことある人なら取っつきやすいのも特徴です。
 
@@ -35,7 +35,7 @@ RubyのRSpecベースでできているツールなのでRubyでテストを書�
 
 まずServerspecを入れるディレクトリにServerspecをインストールします。
 
-あらかじめRubyが動く環境を作った上でbundle installしていきます。
+あらかじめRubyが動く環境を作ったうえでbundle installしていきます。
 
 まずbundleのベースファイルを作っていきます。
 
@@ -67,7 +67,7 @@ bundle install --path=vendor/bundle
 
 ServerspecがインストールできたらServerspecの初期化をしていきます。
 
-bundleで
+bundleで、
 
 ```bash
 bundle exec serverspec-init
@@ -105,7 +105,7 @@ Select number: 2
 
 Serverspecは上述したとおり、Ruby(RSpec)でできてるので、テスト用のヘルパーを作成し、テストに使う変数をspecファイル（テストコード）で利用できるようにしておきます。
 
-今回は `spec/spec_helper.rb` に
+今回は `spec/spec_helper.rb` に、
 
 ```ruby
 require 'serverspec'
@@ -161,7 +161,7 @@ helperでYamlに記載した変数をSpecで利用できるようになりまし
 
 ### アプリがインストールされているかの確認
 
-Homebrewで正しくアプリがインストールされているかの確認は
+Homebrewで正しくアプリがインストールされているかの確認は、
 
 ```ruby
 describe package(hoge) do
@@ -175,7 +175,7 @@ HomebrewでインストールしていればAssert OKとなるはずです。
 
 ### コマンドの結果を確認する
 
-コマンドの結果、例えばインストールしたアプリのバージョン確認は
+コマンドの結果、例えばインストールしたアプリのバージョン確認は、
 
 ```ruby
 describe command('pyenv versions') do
@@ -185,7 +185,7 @@ end
 
 とすることで実現できます。 上記では`pyenv versions` のコマンドの実行結果を比較してます。
 
-正規表現でマッチさせるため、例えば否定系は先読み否定を使い
+正規表現でマッチさせるため、例えば否定系は先読み否定を使い、
 
 ```ruby
 describe command('git --version') do
@@ -232,8 +232,8 @@ check:
 
 ## 結論
 
-Macの構成管理をAnsibleで行い確認をServerspecで行うところまで無事できました！
+Macの構成管理をAnsibleで行い確認をServerspecで行なうところまで無事できました！
 
-次回はもうすることないかと思いきや、こいつをCIにのっけてみようかと思います！！
+次回はもうすることないかと思いきや、こいつをCIにのっけてみようかと思います!!
 
-もうめちゃくちゃだよ
+もうめちゃくちゃだよ。

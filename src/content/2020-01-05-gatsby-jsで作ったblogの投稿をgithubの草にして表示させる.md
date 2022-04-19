@@ -21,19 +21,19 @@ templateKey: blog-post
 
 ## 中国兄貴たちの技術ブログがかっこいい！
 
-と思った**正月**でした。多くのエンジニアが使っていたBlog技術要素が[**Hexo**](https://hexo.io/)だったのですが、その中でもひときわかっこいいデザインのThemeを使っている兄貴が多数おりました。
+と思った**正月**でした。多くのエンジニアが使っていたBlog技術要素が[**Hexo**](https://hexo.io/)だったのですが、そのなかでもひときわかっこいいデザインのThemeを使っている兄貴が多数おりました。
 
 そのThemeこそ、[hexo-theme-matery](https://github.com/blinkfox/hexo-theme-matery)です。
 
 Theme Demoページは[こちら](https://blinkfox.github.io/)
 
-Themeの中で特にかっこいいなぁと思ったのは、Blogの投稿日、投稿数に応じてGitHubの草(Heatmap)を表現するところです。
+Themeのなかで特にかっこいいなぁと思ったのは、Blogの投稿日、投稿数に応じてGitHubの草(Heatmap)を表現するところです。
 
 ![img](https://i.imgur.com/X2ehG18.png)
 
 ~~Demoページは全然草生えてませんが・・・。~~
 
-自分のブログにも導入したい！！ということで早速作ってみることにします。
+自分のブログにも導入したい!!ということで早速作ってみることにします。
 
 ## ReactでGitHub Heat mapを作る
 
@@ -47,13 +47,13 @@ Themeの中で特にかっこいいなぁと思ったのは、Blogの投稿日�
 
 ### Component作成
 
-まずは何はともあれインストール
+まずは何はともあれインストール。
 
 ```bash
 npm install --save react-calendar-heatmap
 ```
 
-使い方はとっても簡単で[react-calendar-heatmap#usage](https://github.com/kevinsqi/react-calendar-heatmap#usage)に載っている通り、
+使い方はとっても簡単で[react-calendar-heatmap#usage](https://github.com/kevinsqi/react-calendar-heatmap#usage)に載っているとおり、
 
 ```javascript
 import CalendarHeatmap from 'react-calendar-heatmap';

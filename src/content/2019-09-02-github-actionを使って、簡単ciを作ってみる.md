@@ -86,7 +86,7 @@ jobs:
 
 ### Trigger設定
 
-今回はpush時に動くようにしますので
+今回はpush時に動くようにしますので、
 
 ```yaml{numberLines: 1}{3}
 name: Python package
@@ -163,5 +163,5 @@ StepはほかのCIと同じような感じで設定します。
 
 ## 結論
 
-Github Actionを使えば、めんどっちいCIサーバ連携も不要で楽々です。
+Github Actionを使えば、めんどっちいCIサーバー連携も不要で楽々です。
 

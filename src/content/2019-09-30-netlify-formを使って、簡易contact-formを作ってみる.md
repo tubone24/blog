@@ -13,7 +13,7 @@ tags:
 headerImage: 'https://i.imgur.com/uWmwQRq.png'
 templateKey: blog-post
 ---
-くっそかんたんにFormできた
+くっそかんたんにFormできた。
 
 Netlifyに簡単にFormを作る機能が用意されているので利用用途ないですが、Gatsby.jsで作ったBlogにFormを作ってみようかと思います。
 
@@ -43,7 +43,7 @@ Netlifyに簡単にFormを作る機能が用意されているので利用用途
 
 Gatsby.jsではpagesに入れたJavaScriptは固定ページとして動作しますので、ここではcontact.jsという名前でFormページを作ります。（お問い合わせページですね）
 
-公式Docを読むとFormタグを打つ際にattributeに data-netlify=true とするだけらしいですね。こりりゃ簡単。
+公式Docを読むとFormタグを打つ際にattributeにdata-netlify=trueとするだけらしいですね。こりりゃ簡単。
 
 早速作ってみます。
 
@@ -132,7 +132,7 @@ export default class Contact extends React.Component {
 <button type="submit" class="btn btn-primary">Send</button> <!-- btn classの設定 -->
 ```
 
-のような形や
+のような形や、
 
 ```html
 <label>Your email:<br/>
@@ -147,9 +147,7 @@ export default class Contact extends React.Component {
 
 ## Bot除け
 
-Netlify FormではいわゆるスパムBot除けとして2種類のオプションが
-
-用意されてます。
+Netlify FormではいわゆるスパムBot除けとして2種類のオプションが用意されてます。
 
 1. いわゆる人間だったらこのフォームに何も入れるなという隠れフォームを作る（data-netlify-honeypot）
 2. reCaptureを設定する
@@ -158,9 +156,7 @@ Netlify FormではいわゆるスパムBot除けとして2種類のオプショ�
 
 ### data-netlify-honeypot
 
-data-netlify-honeypotの設定はFormのattributeに
-
-data-netlify-honeypot=隠れフォームのname を設定します。
+data-netlify-honeypotの設定はFormのattributeに、data-netlify-honeypot=隠れフォームのnameを設定します。
 
 ```html
 <form
@@ -192,7 +188,7 @@ hiddenにしてるため、ふつう人間が入力することはないです�
 
 ![Img](https://i.imgur.com/uWmwQRq.png)
 
-また、Formが送信された時にメール or Slack or Webhookを流す機能もあります。
+また、Formが送信されたときにメールor Slack or Webhookを流す機能もあります。
 
 ![Img](https://i.imgur.com/BnS7iSC.png)
 

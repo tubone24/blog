@@ -11,7 +11,7 @@ tags:
 headerImage: https://i.imgur.com/XblRysI.png
 templateKey: blog-post
 ---
-腰が痛い
+腰が痛い.
 
 ## Table of Contents
 
@@ -25,9 +25,9 @@ AWSを使ったことのある人ならばわかると思いますが、公式�
 
 ![img](https://i.imgur.com/XghDulZ.png)
 
-それぞれのリージョンの障害がRSSで配信される形式になっているのですが、わざわざRSSを登録するのもめんどくさいし、Slackとかの連携に乗っけるのもそれはそれで便利なのですが、そもそもSlackを見ていないほかの人でも障害情報を共有したいです。
+それぞれのリージョンの障害がRSSで配信される形式になっているのですが、わざわざRSSを登録するのもめんどくさい。Slackとかの連携に乗っけるのもそれはそれで便利なのですが、そもそもSlackを見ていないほかの人でも障害情報を共有したいです。
 
-実は、AWS Service Health Dashboardの情報はJSONで取得することができます。
+実は、AWS Service Health Dashboardの情報はJSONで取得できます。
 
 <https://status.aws.amazon.com/data.json>
 
@@ -238,7 +238,7 @@ import tableIcons from '../components/tableIcons'
 
 本当はDate型を渡してあげるとSearchableの際、カレンダーでの絞り込みができるのかなと思ったのですが、こちらがうまくいきませんでした。
 
-あと、微妙に型もおかしく例えば、actionsはactionを複数指定することができるはずですが、型チェックで怒られるので、仕方なくts-ignoreしてます。
+あと、微妙に型もおかしく例えば、actionsはactionを複数指定できるはずですが、型チェックで怒られるので、仕方なくts-ignoreしてます。
 
 あなたが直せばいいじゃんアゼルバイジャンって言われそうですが、めんどくさくなってしまいIssueだけあげてしまいました。申し訳ねぇ...。
 
@@ -253,7 +253,7 @@ RecoilとはReactの新しい状態管理ライブラリで、いわゆるReact 
 
 atomのkeyはプロジェクトで一意にする必要がありますが、今回はそこまで大規模なプロジェクトではないのでawsとかいうクソ名をつけてます。
 
-storeなので、store/aws.ts として格納します。
+storeなので、store/aws.tsとして格納します。
 
 ```typescript
 import { atom } from 'recoil'
@@ -447,7 +447,7 @@ export const AlertPerRegion = (): JSX.Element => {
 
 さて、実装ができたので後はVercelにあげるだけです。
 
-もうここはほとんど書くことがないのですが、Next.jsで作ったアプリケーションはVercelでレポジトリと使っているフレームワークを設定するだけで簡単にデプロイ出来てしまいます。
+もうここはほとんど書くことがないのですが、Next.jsで作ったアプリケーションはVercelでレポジトリと使っているフレームワークを設定するだけで簡単にデプロイできてしまいます。
 
 これはすごい。
 
@@ -460,7 +460,7 @@ export const AlertPerRegion = (): JSX.Element => {
 
 フロントでは受け取ったデータをRecoilのatomに格納しつつ、material tableで表として描画します。
 
-また右上のグラフボタンを押すことで色々な切り口の可視化を行うことができます。
+また右上のグラフボタンを押すことで色々な切り口の可視化を行なうことができます。
 
 <https://aws-health-dashboard.vercel.app/>
 
@@ -478,7 +478,7 @@ export const AlertPerRegion = (): JSX.Element => {
 
 どうやら、data.jsonはRSSとは違い、同期的に更新されないようです。
 
-大変ご迷惑をおかけしました。改めて、改修しRSS更新にも対応できるように頑張ります。
+大変ご迷惑をおかけしました。あらためて、改修しRSS更新にも対応できるように頑張ります。
 
 
 

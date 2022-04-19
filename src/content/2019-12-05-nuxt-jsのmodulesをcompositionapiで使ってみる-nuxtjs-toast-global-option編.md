@@ -152,7 +152,7 @@ const doDownload = async (filePath: string): Promise<void> => {
 
 ```
 
-とtoastのインスタンスに対して**global.name**と宣言するだけで使えちゃいます！！
+とtoastのインスタンスに対して**global.name**と宣言するだけで使えちゃいます!!
 
 ![img](https://i.imgur.com/29nafu5.png)
 

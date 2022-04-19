@@ -32,7 +32,7 @@ templateKey: blog-post
 
 K6をMacやEC2などで作ったLinux上に構築する方法はググればたくさん出てくるのでここでは割愛しますが、まず**非常に簡単に環境が構築できる。** この点はしっかり強調しておきたいです。
 
-MacならHomebrew入っていれば
+MacならHomebrew入っていれば、
 
 ```
 brew install k6
@@ -112,7 +112,7 @@ networks:
     driver: bridge
 ```
 
-やっていることは超基本的なこととしてnetworkを切ってサービス名でInfluxDBにアクセスできるようにする点くらいなのですが、k6のenvironmentで
+やっていることは超基本的なこととしてnetworkを切ってサービス名でInfluxDBにアクセスできるようにする点くらいなのですが、k6のenvironmentで、
 
 ```
     environment:
@@ -121,7 +121,7 @@ networks:
 
 とやってあげることで実行結果をInfluxDBに出力します。
 
-[公式ドキュメント](https://k6.io/docs/results-visualization/influxdb-+-grafana/#run-the-test-and-upload-the-results-to-influxdb)のように環境変数でなく実行時の引数で設定することもできます。
+[公式ドキュメント](https://k6.io/docs/results-visualization/influxdb-+-grafana/#run-the-test-and-upload-the-results-to-influxdb)のように環境変数でなく実行時の引数で設定できます。
 
 これで、<https://localhost:3000>にアクセスすることで**実行結果を可視化**できるようになりました。
 
@@ -131,7 +131,7 @@ networks:
 
 加えて、シナリオファイルの**TypeScript化**を実施します。
 
-[公式ドキュメント](https://k6.io/docs/using-k6/javascript-compatibility-mode/)によるとGoのJavaScript VMが**ES5にしか対応してない**のでES6で書いたテストシナリオはどうやらK6の中でES5に変換してから実行しているらしいです。
+[公式ドキュメント](https://k6.io/docs/using-k6/javascript-compatibility-mode/)によるとGoのJavaScript VMが**ES5にしか対応してない**のでES6で書いたテストシナリオはどうやらK6のなかでES5に変換してから実行しているらしいです。
 
 K6の[go.mod](https://github.com/grafana/k6/blob/master/go.mod)を見てみると使っているJavaScript VMは[goja](https://github.com/dop251/goja)みたいですね。
 
@@ -147,7 +147,7 @@ babelってトランスパイルしてしまったのでこれ型チェックと
 
 さらに、今回はおそらく使わないと思いましたが[copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin/)を使ってテスト用のassetをdistディレクトリにコピーする形にしてます。こうしておくことで、ファイルのアップロードみたいなテストケースも書けるようになりそうです。多分。
 
-と思って色々試行錯誤していたら公式に実装例があり、ほぼやりたいことがそれでできていたので結局それをパクることにしました... 
+と思って色々試行錯誤していたら公式に実装例があり、ほぼやりたいことがそれでできていたので結局それをパクることにしました..。 
 
 [Template to use TypeScript with k6](https://github.com/grafana/k6-template-typescript)
 

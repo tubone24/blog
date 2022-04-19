@@ -24,7 +24,7 @@ JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode Package
 
 ![img](https://i.imgur.com/yxDDBOX.jpg)
 
-もちろんこちらの問題は様々な議論が尽くされているわけですし、今更どうこう言うつもりはないです。
+もちろんこちらの問題はさまざまな議論が尽くされているわけですし、今更どうこう言うつもりはないです。
 
 `youtube:https://www.youtube.com/embed/SHIci8-6_gs`
 
@@ -34,13 +34,13 @@ JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode Package
 
 [depcheck](https://github.com/depcheck/depcheck)とはnpmでパッケージ管理されたプロジェクトについて、各ライブラリの依存関係がどのように使用されているか、どの依存関係が使われていないか、package.jsonからどの依存関係が欠落しているかを確認するためのツールです。
 
-プロジェクトルートでnpxを使って
+プロジェクトルートでnpxを使って、
 
 ```
 npx depcheck
 ```
 
-で実行することで簡単に結果を得ることができます。例えば[こちらのレポジトリ](https://github.com/tubone24/portfolio)で実行すると
+で実行することで簡単に結果を得ることができます。例えば[こちらのレポジトリ](https://github.com/tubone24/portfolio)で実行すると、
 
 ```
 > npx depcheck
@@ -92,7 +92,7 @@ Missing dependencies
 * babel-plugin-remove-graphql-queries: .\.storybook\main.js
 ```
 
-このようにpackage.jsonで定義されているにも関わらずコード上で使われてないライブラリ、もしくはコード上で見つかったけどpackage.jsonに定義されてないライブラリを一覧化することができます。
+このようにpackage.jsonで定義されているにも関わらずコード上で使われてないライブラリ、もしくはコード上で見つかったけどpackage.jsonに定義されてないライブラリを一覧化できます。
 
 ## これをGitHub Actionsに組み込みたい
 

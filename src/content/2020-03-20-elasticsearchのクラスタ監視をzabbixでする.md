@@ -24,7 +24,7 @@ Elasticsearchのノードを先日1つ追加しましたので、ちょい傾向
 
 ## 使い方
 
-Elastic_zabに同梱しているelastic.shをZabbixサーバのexternalscriptsディレクトリに配置します。実行権限もZabbixユーザにします。
+Elastic_zabに同梱しているelastic.shをZabbixサーバーのexternalscriptsディレクトリに配置します。実行権限もZabbixユーザーにします。
 
 ```
 $ git clone https://github.com/tubone24/Elastic_zab

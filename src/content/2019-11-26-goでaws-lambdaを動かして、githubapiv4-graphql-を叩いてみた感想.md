@@ -26,7 +26,7 @@ templateKey: blog-post
 
 ![img](https://i.imgur.com/h1EK5QS.png)
 
-知っている人も多いと思いますが、2017年のre:Invent 2017(AWSのカンファレンスイベント)でLambdaに関するアップデートの中でGoで動くようになったよ～というのがありました。[［速報］AWS Lambdaが機能強化。.NETとGo言語をサポート、サーバレスアプリケーションのリポジトリも登場。AWS re:Invent 2017
+知っている人も多いと思いますが、2017年のre:Invent 2017(AWSのカンファレンスイベント)でLambdaに関するアップデートのなかでGoで動くようになったよ～というのがありました。[［速報］AWS Lambdaが機能強化。.NETとGo言語をサポート、サーバレスアプリケーションのリポジトリも登場。AWS re:Invent 2017
 ](https://www.publickey1.jp/blog/17/aws_lambdanetgoaws_reinvent_2017.html)
 
 ![img](https://www.publickey1.jp/2017/lambda01.gif)
@@ -137,7 +137,7 @@ func main() {
 
 ## GraphQLをGoで叩く
 
-Goはまぎれもなくサーバーサイドな言語なのでどちらかというと関心事がGraphQLのサーバサイド実装でBFFたくさん作るのめんどくさいからまとめてGraphQLで返したい！という感じのモチベーションの記事が多めではありますが、ちゃんと**GraphQLクライアント**みつけました。
+Goはまぎれもなくサーバーサイドな言語なのでどちらかというと関心事がGraphQLのサーバーサイド実装でBFFたくさん作るのめんどくさいからまとめてGraphQLで返したい！という感じのモチベーションの記事が多めではありますが、ちゃんと**GraphQLクライアント**みつけました。
 
 [shurcooL/graphql](shurcooL/graphql)
 
@@ -311,12 +311,12 @@ var query struct {
 
 [取りたい項目](https://developer.github.com/v4/object/languageedge/)
 
-今回は趣旨から反するので一旦塩漬け。。
+今回は趣旨から反するのでいったん塩漬け。。
 
 
 ## LambdaでGoを使うとき
 
-main関数には AWSが用意している `github.com/aws/aws-lambda-go/lambda` からロジックを
+main関数にはAWSが用意している `github.com/aws/aws-lambda-go/lambda` からロジックを
 Invokeさせないと問答無用でLambdaでエラーになってしまいます。
 
 そこで `github.com/aws/aws-lambda-go/lambda` の `lambda.Start` を使って動かします。

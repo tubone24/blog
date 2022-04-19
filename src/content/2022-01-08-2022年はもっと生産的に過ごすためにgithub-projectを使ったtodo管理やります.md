@@ -44,7 +44,7 @@ templateKey: blog-post
 
 またタスクの期日に応じたリマインダー機能があると続ける気になりそうです。ただ、リマインドはSlackに送らないと意味がありません。Gmailはまず見ません。
 
-まとめると
+まとめると、
 
 1. パソコンでもスマホでも使える
 2. 入力欄がシンプル(わかりきっていることは自動で入力してほしい)
@@ -56,7 +56,7 @@ templateKey: blog-post
 
 ということで今回私に選ばれたのは[GitHub Project](https://docs.github.com/ja/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)でした。
 
-え？ それって**カンバンでプロジェクト管理するソフトウェア開発のタスク管理ツール**でしょ？コードを書かないような個人のToDoに使えるの？と思ったあなた。
+え？　それって**カンバンでプロジェクト管理するソフトウェア開発のタスク管理ツール**でしょ？コードを書かないような個人のToDoに使えるの？と思ったあなた。
 
 **その通りです。使えません。**
 
@@ -70,11 +70,11 @@ templateKey: blog-post
 
 ![img](https://i.imgur.com/fWMy7hV.png)
 
-## カスタマイズ1 IssueとProjectを自動で紐付ける
+## カスタマイズ1 IssueとProjectを自動で紐づける
 
-Github ProjectはGitHub IssueおよびPull Requestと紐付けして運用することができるのですが、**Issueを切った際にProjectのToDoに自動紐付けされません。** (Automated KanbanではIssue CloseでDoneにしてくれるのに逆のことはしてくれないんだ...)
+Github ProjectはGitHub IssueおよびPull Requestと紐づけして運用できるのですが、**Issueを切った際にProjectのToDoに自動紐づけされません。** (Automated KanbanではIssue CloseでDoneにしてくれるのに逆のことはしてくれないんだ...)
 
-Issueを切った際**手動**で、指定したProjectに紐付けを行う必要があります。一つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐付けるのはつらすぎます。
+Issueを切った際**手動**で、指定したProjectに紐づけを行なう必要があります。一つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐づけるのはつらすぎます。
 
 そこで僕はGitHub Actions。 (もこみち風)
 
@@ -121,7 +121,7 @@ GitHub Issues, Projectには[Label](https://docs.github.com/ja/issues/using-labe
 
 ある意味GitHub Project ToDoアプリ利用最大の欠点だとおもいますが、**期日の管理**がやりにくいです。
 
-一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐付けることでプロジェクト管理ができるようになっておりますが、**Milestoneを毎回作って紐付ける**のはとても大変です。(やはりGitHub ActionsでToDo管理は無理があったと感じざるを得ません。)
+一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐づけることでプロジェクト管理ができるようになっておりますが、**Milestoneを毎回作って紐づける**のはとても大変です。(やはりGitHub ActionsでToDo管理は無理があったと感じざるを得ません。)
 
 ![img](https://i.imgur.com/ZXzTyx3.png)
 
@@ -139,7 +139,7 @@ Milestoneを設定さえすれば、期日表示ができますし後々実施�
 
 今回はちょっと勉強のために[actions/github-script](https://github.com/marketplace/actions/github-script)を使って実装しました。
 
-GitHub ScriptはデフォルトでGitHubのContextやEventを取得、IssueやMilestoneを更新できる[Octokit](https://octokit.github.io/rest.js/v18)がimport不要でそのまま使えるのでかなり便利なのですが、GitHub ActionsのYAML上でコードを書くことになり、YAML上ではGitHub Script(JavaScript)の**エディターの補完**が効かず開発体験が悪すぎて発狂仕掛けたので複雑な実装をするときはまじで利用をおすすめしません！！！普通にスクリプト書いてcheckoutしたほうがマシです。
+GitHub ScriptはデフォルトでGitHubのContextやEventを取得、IssueやMilestoneを更新できる[Octokit](https://octokit.github.io/rest.js/v18)がimport不要でそのまま使えるのでかなり便利なのですが、GitHub ActionsのYAML上でコードを書くことになり、YAML上ではGitHub Script(JavaScript)の**エディターの補完**が効かず開発体験が悪すぎて発狂仕掛けたので複雑な実装をするときはまじで利用をおすすめしません!!!普通にスクリプト書いてcheckoutしたほうがマシです。
 
 あと、GitHub Scriptのドキュメントが少なすぎです。
 
@@ -230,7 +230,7 @@ jobs:
 
 かなり愚直ですが、on句でIssueがlabeledの際にLabel名を取得し、ToDayとかNextWeekendとかキーワードを拾い上げ現在時刻からMilestone期限を算出します。
 
-その後作成したMilestoneをIssueに紐付けるわけですが、すでに同名のMilestoneを作成しているとき、つまり同一日の期限タスクをすでに作っている場合もあるのでそこらへんのハンドリングがややこしい感じになっています。
+その後作成したMilestoneをIssueに紐づけるわけですが、すでに同名のMilestoneを作成しているとき、つまり同一日の期限タスクをすでに作っている場合もあるのでそこらへんのハンドリングがややこしい感じになっています。
 
 繰り返しになりますが、**10行以上の処理を記載するときはGitHub Script使わず、きっちり実装したほうが色々幸せになれます。**
 
@@ -257,7 +257,7 @@ jobs:
 
 カスタマイズ3で期限タスクが発生するたびにMilestoneを作る運用にしてしまったことで、Milestoneに過去の不要な日付のものがOpenし続ける状態になってしまいました。
 
-視認性も悪く精神衛生上も悪いので、期日を過ぎていて且つ、紐づくタスクすべてDoneになっているMilestoneは自動的にCloseするようにします。
+視認性も悪く精神衛生上も悪いので、期日を過ぎていてかつ、紐づくタスクすべてDoneになっているMilestoneは自動的にCloseするようにします。
 
 こちらもGitHub Actionsで実装します。ただし、今回は前回の反省を活かし[actions/github-script](https://github.com/marketplace/actions/github-script)は使いません。Pythonで作りました。
 
@@ -399,4 +399,4 @@ GitHubにpushすることでMarkdownとして日報を管理します。
 
 ![img](https://i.imgur.com/LnpjYNN.png)
 
-これで快適にToDoを記載することができるようになったのですが、肝心なToDoがあまりないのでこの仕組みをいつまで使い続けるのか不安になってきました。
+これで快適にToDoを記載できるようになったのですが、肝心なToDoがあまりないのでこの仕組みをいつまで使い続けるのか不安になってきました。

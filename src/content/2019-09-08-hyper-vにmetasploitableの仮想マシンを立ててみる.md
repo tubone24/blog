@@ -11,7 +11,7 @@ tags:
 headerImage: 'https://i.imgur.com/oV13syg.png'
 templateKey: blog-post
 ---
-Hyper-vでも仮想マシンしたい
+Hyper-vでも仮想マシンしたい!
 
 セキュリティのテストやトレーニング用に意図的に脆弱性を作った仮想マシン **Metasploitable** はVirtualBox用のVMですが、Hyper-vに入れてみます。
 
@@ -25,13 +25,13 @@ Hyper-vでも仮想マシンしたい
 
 [sourceforge](https://sourceforge.net/projects/metasploitable/)からMetasploitableをダウンロードします。
 
-ダウンロードしたzipファイルを展開すると**VMDK**ファイルがありますので、これをHyper-vのディスクフォーマット**VHDX**にしていきます。
+ダウンロードしたZIPファイルを展開すると**VMDK**ファイルがありますので、これをHyper-vのディスクフォーマット**VHDX**にしていきます。
 
 ![Img](https://i.imgur.com/Hx7m0bS.png)
 
 ## Microsoft Virtual Machine Converterをダウンロードする
 
-Microsoft Virtual Machine Converterを使えば、VirtualboxのディスクフォーマットファイルをHyper-vのフォーマットに変換することができます。
+Microsoft Virtual Machine Converterを使えば、VirtualboxのディスクフォーマットファイルをHyper-vのフォーマットに変換できます。
 
 [MVMC](https://www.microsoft.com/en-us/download/details.aspx?id=42497)
 

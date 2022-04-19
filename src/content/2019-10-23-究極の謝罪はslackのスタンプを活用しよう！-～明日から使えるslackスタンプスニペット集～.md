@@ -86,7 +86,7 @@ Slackのスタンプになぜ顔のパーツがあるか、考えた結果思い
 
 # 最後に
 
-これからも思いつき次第下記noteに記載していきます！！
+これからも思いつき次第下記noteに記載していきます!!
 
 https://note.tubone-project24.xyz/loose/slack-stamp-snipet.html#%E8%AC%9D%E7%BD%AA%E3%83%94%E3%83%A9%E3%83%9F%E3%83%83%E3%83%89
 

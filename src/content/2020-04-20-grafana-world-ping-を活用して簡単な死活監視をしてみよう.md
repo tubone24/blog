@@ -30,9 +30,9 @@ templateKey: blog-post
 
 ## GrafanaのWorld Pingを使ってみよう
 
-Grafanaの優秀な点はPlugin機能で簡単にデータソースやパネルを追加することができる点です。
+Grafanaの優秀な点はPlugin機能で簡単にデータソースやパネルを追加できる点です。
 
-元々、GrafanaはInfluxDBの可視化用みたいな位置づけっぽいですが、データソースプラグインを追加することで、例えばElasticsearch・Graphiteや、CloudWatch、さらにはkubernetesやDatadogなどのコンテナの監視までできるという優れものです。
+もともと、GrafanaはInfluxDBの可視化用みたいな位置づけっぽいですが、データソースプラグインを追加することで、例えばElasticsearch・Graphiteや、CloudWatch、さらにはkubernetesやDatadogなどのコンテナの監視までできるという優れものです。
 
 また、データソースではないですが、World Pingという世界中のエンドポイントからPing・DNS・HTTPなどの死活監視を提供するサービスと連携させることで、簡単にかっちょいい画面を作ることができます。
 
@@ -42,7 +42,7 @@ Grafanaの優秀な点はPlugin機能で簡単にデータソースやパネル�
 
 ## インストールしてみる
 
-まず、Grafanaの入ったサーバでrootユーザで
+まず、Grafanaの入ったサーバーでrootユーザーで、
 
 ```
 grafana-cli plugins install raintank-worldping-app
@@ -55,13 +55,13 @@ grafana-cli plugins install raintank-worldping-app
 
 ![img](https://i.imgur.com/3jpOIzC.png)
 
-Grafana Web画面の左側のメニューに「World Ping」が表示されていると思いますのでPlugin Configから、Grafana.net のAPIを発行しましょう。
+Grafana Web画面の左側のメニューに「World Ping」が表示されていると思いますのでPlugin Configから、Grafana.netのAPIを発行しましょう。
 
 こうすることでWorld Pingが利用できます。無茶な監視をしない限り、無料版で事足りると思います。
 
 ## エンドポイントを追加する
 
-監視対象のＩＰまたはドメイン名をエンドポイントと呼んでますが、エンドポイントを設定していきます。
+監視対象のIPまたはドメイン名をエンドポイントと呼んでますが、エンドポイントを設定していきます。
 
 同じく、Grafana Web画面の左側のメニューに「World Ping」⇒「Endpoints」と進みます。
 
@@ -77,7 +77,7 @@ Grafana Web画面の左側のメニューに「World Ping」が表示されて�
 
 監視間隔、死活監視を投げるインスタンスの国、ポート、HTTPメソッドなど細かく設定できます。
 
-また、閾値を超えた場合に決められたメールに通知することもできます。(あらかじめメールサーバの設定をGrafana.iniでしておきます。)
+また、閾値を超えた場合に決められたメールに通知できます。(あらかじめメールサーバーの設定をGrafana.iniでしておきます。)
 
 一応、無料版だと600万回/月しか監視できないようなので無茶な設定はやめましょう。
 
@@ -87,7 +87,7 @@ Grafana Web画面の左側のメニューに「World Ping」が表示されて�
 
 World Pingがすごいのは、あらかじめGrafana画面を提供している点で、設定さえすればすぐ可視化できることです。
 
-同じく、Grafana Web画面の左側のメニューに「World Ping」⇒「World Ping Home」と進むと、設定したエンドポイントが表示されますので
+同じく、Grafana Web画面の左側のメニューに「World Ping」⇒「World Ping Home」と進むと、設定したエンドポイントが表示されますので、
 
 エンドポイント名もしくはハートマークのサービス名をクリックすると画面が表示されます。
 

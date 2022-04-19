@@ -55,7 +55,7 @@ GitHub Actionsを使うときには何かと便利なやつですが、公式に
 <https://github.com/actions>
 
 今回は、[
-post_twitter_on_work](https://github.com/tubone24/post_twitter_on_work)の開発の中で、**GitHub ReleasesにGitHub ActionsでBuildしたArtifactsをアップデートしたい**欲求が出てきました。
+post_twitter_on_work](https://github.com/tubone24/post_twitter_on_work)の開発のなかで、**GitHub ReleasesにGitHub ActionsでBuildしたArtifactsをアップデートしたい**欲求が出てきました。
 
 通常、GitHub ReleasesをGitHub Actionsで使うには、[actions
 /
@@ -63,11 +63,11 @@ create-release](https://github.com/actions/create-release)を使うことが多�
 
 こちらの使い方としては、
 
-1. Git Tagを打ってPushする
+1. Git Tagを打ってPushする.
 2. Pushに反応して、actions
 /
-create-releaseが動く
-3. 出来上がったReleasesに[actions/upload-release-asset](https://github.com/actions/upload-release-asset)でArtifactsを上げる
+create-releaseが動く.
+3. 出来上がったReleasesに[actions/upload-release-asset](https://github.com/actions/upload-release-asset)でArtifactsを上げる.
 
 という感じの使い方になるかと思います。
 
@@ -105,7 +105,7 @@ JavaScript　Actionは、公式にテンプレートがありますので、か�
 
 GitHub Actionのメタデータとして、**action.yml**を作ります。
 
-名前や説明のほかwithで定義するinputやoutputで使える変数や、ランタイムを定義することができます。
+名前や説明のほかwithで定義するinputやoutputで使える変数や、ランタイムを定義できます。
 
 inputやoutputは変数名の他、説明とrequiredを定義できます。
 
@@ -209,7 +209,7 @@ packages.jsonで、
   },
 ```
 
-npm run packageとすることで、先程tscでつくったJavaScriptをバンドルすることができます。
+npm run packageとすることで、さきほどtscでつくったJavaScriptをバンドルできます。
 
 ## ソース
 
@@ -363,7 +363,7 @@ pushが終わったらGitHub ReleaseからReleaseを切ってあげることで�
 
 ## 結論
 
-今回のソースコード一式は<https://github.com/tubone24/update_release>に
+今回のソースコード一式は<https://github.com/tubone24/update_release>に、
 
 マーケットプレイスは<https://github.com/marketplace/actions/update-github-release>で公開してます。
 

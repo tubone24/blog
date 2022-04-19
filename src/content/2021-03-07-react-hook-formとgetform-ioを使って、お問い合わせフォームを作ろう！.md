@@ -208,7 +208,7 @@ const { register, handleSubmit, errors } = useForm<Inputs>();
 
 一応、[こちら](https://github.com/react-hook-form/react-hook-form/discussions/4376)で質問は投げてますが英語がへたくそで誰も答えてくれそうにありませんね。
 
-特にeventでデータを取る必要はなさそうですが、たとえば送信時にFormの内容をリセットするなどの処理を書きたいときは
+特にeventでデータを取る必要はなさそうですが、たとえば送信時にFormの内容をリセットするなどの処理を書きたいときは、
 
 ```typescript
         e.target.reset();
@@ -298,7 +298,7 @@ Form部分をすべて実装するとこんな感じです。
 
 React Hook Formを使わないと、[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
 
-React Hook Formを使わないと
+React Hook Formを使わないと、
 
 ```typescript
   handleChange(e) {

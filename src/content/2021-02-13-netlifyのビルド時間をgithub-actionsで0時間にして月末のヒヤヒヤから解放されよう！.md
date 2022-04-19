@@ -28,7 +28,7 @@ templateKey: blog-post
 
 ![img](https://i.imgur.com/TSm24w0.png)
 
-NetlifyはGitHubのレポジトリと連携して、フロントのビルドを実行した上で、デプロイするという超便利機能があるのですが、このビルドを回すのに時間の制約があり、
+NetlifyはGitHubのレポジトリと連携して、フロントのビルドを実行したうえで、デプロイするという超便利機能があるのですが、このビルドを回すのに時間の制約があり、
 
 無料民だと月300分となっております。(それ以上はPro版月19ドル課金すれば問題なく使えます。課金も経験済み)
 
@@ -43,7 +43,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 なので、私のような貧民は月末になると、Netlifyのビルド時間が気になって**このブログの記事を書かなくなったり**、**サイトリファクターのペースが落ちて**しまいます。
 
-特にブログ更新は顕著で、例えば今書いている記事も通勤の電車の中でスマホから書いているわけなので、細かくコミットを打って保存したいのですが、コミットを打ってプッシュしてしまうと、ビルドが走ることになるので、WIPでのコミットが億劫になり、結果的に家のようなまとめてプッシュできるような作業スペースがある場所でないと、
+特にブログ更新は顕著で、例えば今書いている記事も通勤の電車のなかでスマホから書いているわけなので、細かくコミットを打って保存したいのですが、コミットを打ってプッシュしてしまうと、ビルドが走ることになるので、WIPでのコミットが億劫になり、結果的に家のようなまとめてプッシュできるような作業スペースがある場所でないと、
 ブログを書かなくなってしまいました。
 
 せっかく[Netlify CMS化](https://blog.tubone-project24.xyz/2019-09-01-netlify-and-gatsby#cms%E3%81%AE%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)した意味がないですね。
@@ -59,7 +59,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 ## Netlifyのビルド時やっていることを洗い出して自前でやってみる
 
 基本的にNetlifyがビルド時やってることは、例えばGatsby.jsであれば、gatsby buildコマンドを実行し、特定のディレクトリー(大概は./public)に配置されたビルド済みJSをデプロイする動きなので、
-それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理(PostProcess)を実行してるパターンもあります。
+それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理(PostProcess)してるパターンもあります。
 
 私の場合、JSやイメージを最適化してくれる**Asset optimization**とFormタグに属性をつければ勝手にFormを作ってくれる**Form detection**の二つが設定されていましたのでそれぞれまず無効化します。
 
@@ -75,7 +75,7 @@ Form detectionの解説は[こちら](https://blog.tubone-project24.xyz/2019/09/
 
 Asset optimizationのうち、JSやCSSのminiferは[gatsby-plugin-minify](https://www.gatsbyjs.com/plugins/gatsby-plugin-minify/)を使うことでhtmlやJS、CSSをminifyできます。
 
-インストールはいつも通りNPM(yarn)から
+インストールはいつも通りNPM(yarn)から、
 
 ```
 npm install gatsby-plugin-minify
@@ -117,7 +117,7 @@ RSSのリンクをページのLinkとして仕込んでいる人は要注意で�
 
 画像URLの後ろに画像サイズに合わせたキーワードを入れることで実現できます。
 
-例えばこちらのURLの画像を
+例えばこちらのURLの画像を、
 
 ```
 https://i.imgur.com/Wfz9G0B.png
@@ -220,7 +220,7 @@ Formの送信なので、fetchでは[FormData](https://developer.mozilla.org/ja/
   }
 ```
 
-繰り返しになりますがReactではFormで、actionのほか、onSubmitを関数としてすることができます。
+繰り返しになりますがReactではFormで、actionのほか、onSubmitを関数としてできます。
 
 ただし、onSubmitが押されたタイミングで、Formの入力項目をPOST Fetchで渡さないといけないので、Formの入力で発生するchangeEventごとに、Formの値をstateとして保存しておくようにします。
 
@@ -276,11 +276,11 @@ Formの送信なので、fetchでは[FormData](https://developer.mozilla.org/ja/
 
 ## GitHub Actionsでビルドとデプロイ
 
-ここまで来たらあとはGitHub Actionsでビルドとデプロイを行うだけです。
+ここまで来たらあとはGitHub Actionsでビルドとデプロイを行なうだけです。
 
 masterブランチへのPRでPreviewデプロイ、masterへのコミットで本番デプロイをするように2つactionsを作ります。
 
-まずはPreviewデプロイ
+まずはPreviewデプロイ.
 
 ```yaml
 name: DeployToNetlifyPreview
@@ -342,7 +342,7 @@ jobs:
 
 node setupやnpm install, buildはいつも通りです。
 
-GitHub ActionsではSecretを指定することができますので、Algolia searchやFaunaDBのAPIキーはシークレットとしてビルド時の環境変数で渡してます。
+GitHub ActionsではSecretを指定できますので、Algolia searchやFaunaDBのAPIキーはシークレットとしてビルド時の環境変数で渡してます。
 
 ちなみに、環境変数で**GATSBY_XXXX**としておくと、ビルドされたJSにも環境変数が入る形になります。（JSから環境変数を使う場合はこれを忘れないこと。）これ結構詰まるポイント。
 
@@ -440,4 +440,4 @@ jobs:
 
 ![img](https://i.imgur.com/ugdUr9l.png)
 
-リファクタや記事の執筆もはかどっていいですね！！
+リファクタや記事の執筆もはかどっていいですね!!

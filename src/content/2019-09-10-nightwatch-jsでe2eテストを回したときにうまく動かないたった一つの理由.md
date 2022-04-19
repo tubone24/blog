@@ -110,9 +110,9 @@ Fixing file permissions
 Done. ChromeDriver binary available at /home/circleci/workspace/node_modules/chromedriver/lib/chromedriver/chromedriver
 ```
 
-node_module内にChromeDriverをダウンロードしている？？
+node_module内にChromeDriverをダウンロードしている??
 
-**まさか、Nightwatch.jsはこれを使っているのでは？？ バージョンもあっているし**
+**まさか、Nightwatch.jsはこれを使っているのでは?? バージョンもあっているし**
 
 ## 試しにnode_moduleの中に入っているChromeDriverを最新のものと置き換える
 

@@ -119,7 +119,7 @@ node-sassやめてPostCSSにすれば直りそうですが、年末にCSSをい�
 
 まず、html.jsでの **&lt;script&gt;** タグでのBootstrap利用をやめました。
 
-Gatsby.jsでは**gatsby-browser.js**を使って、ブラウザー側で利用したいモジュールを設定することができますのでこちらにCSSとJSをimportするようにします。
+Gatsby.jsでは**gatsby-browser.js**を使って、ブラウザ側で利用したいモジュールを設定できますのでこちらにCSSとJSをimportするようにします。
 
 ```javascript
 import './src/styles/global.scss';
@@ -156,7 +156,7 @@ Dropdown menuのtoggle buttonの実装方法がちょっとだけ変わってま
 
 ### Column orderの制限
 
-Columnの順番を制御できるOrderですが今までは無邪気にorder-10とかできたのですが、order-5までの制限となっておりました。なのでこちらも修正します。
+Columnの順番を制御できるOrderについて今までは無邪気にorder-10とかできたのですが、order-5までの制限となっておりました。なのでこちらも修正します。
 
 ```javascript
 // before
@@ -227,7 +227,7 @@ Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgecss](https://www.gatsbyjs.com/p
  
 ## 最後に
 
-本年もお世話になりました。来年もよろしくおねがいします！！！
+本年もお世話になりました。来年もよろしくおねがいします!!!
 
 ![tora](https://i.imgur.com/mwxtvWim.png)
 
