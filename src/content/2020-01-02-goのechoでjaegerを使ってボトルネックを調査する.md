@@ -73,7 +73,7 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 **Jaegerの実装と関係ないコードは省いてます。**
 
-まずは、**main.go** エントリーポイントから
+まずは、**main.go** エントリーポイントから、
 
 ```go
 // main.go

@@ -47,7 +47,7 @@ Themeのなかで特にかっこいいなぁと思ったのは、Blogの投稿�
 
 ### Component作成
 
-まずは何はともあれインストール
+まずは何はともあれインストール。
 
 ```bash
 npm install --save react-calendar-heatmap
