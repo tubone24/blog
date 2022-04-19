@@ -1,0 +1,12 @@
+{
+    "rules": {
+        "preset-smarthr":{
+            "sentence-length": false
+        },
+        "prh": {
+            "rulePaths": [
+                "dict/prh_tubone_blog.yml"
+            ]
+        }
+    }
+}
