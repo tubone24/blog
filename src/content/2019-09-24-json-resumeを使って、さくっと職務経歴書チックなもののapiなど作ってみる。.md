@@ -295,11 +295,11 @@ JSON Resumeの[公式Doc](https://jsonresume.org/schema/)にもスキーマが�
 
 ## APIができたら実際アクセスしてみる
 
-上記の項目を無事に記載できたら
+上記の項目を無事に記載できたら...
 
 ![Img](https://i.imgur.com/PSokx4v.png)
 
-LinkからAPIにアクセスしてみましょう
+LinkからAPIにアクセスしてみましょう!!!
 
 ![Img](https://i.imgur.com/wF82uti.png)
 
