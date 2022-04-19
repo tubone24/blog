@@ -111,7 +111,9 @@
     "bootstrap": "netlify dev:exec node ./scripts/bootstrap-fauna-database.js",
     "build:functions": "netlify-lambda build functions -c ./webpack.config.js",
     "benchmark": "node scripts/benchmark.js https://blog.tubone-project24.xyz $(git rev-parse HEAD)",
-    "browserslist": "npx browserslist"
+    "browserslist": "npx browserslist",
+    "textlint": "npx textlint \"src/content/*.md\"",
+    "textlint:fix": "npx textlint --fix \"src/content/*.md\""
   },
   "devDependencies": {
     "@babel/core": "7.16.12",
