@@ -26,6 +26,7 @@ const CardHeader = ({
           className="wrapper lozad"
           data-background-image={parseImgur(image, SizeMapping.large)}
           title={title}
+          aria-hidden="true"
         />
       </Link>
     );
@@ -39,6 +40,7 @@ const CardHeader = ({
           backgroundImage: ` url(${parseImgur(image, SizeMapping.large)})`,
         }}
         title={title}
+        aria-hidden="true"
       />
     </Link>
   );
