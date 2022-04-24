@@ -31,7 +31,8 @@
     "terminology": {
       "defaultTerms": true,
       "skip": ["Blockquote"]
-    }
+    },
+    "@textlint-rule/no-duplicate-abbr": true
   },
   "filters": {
     "comments": true,

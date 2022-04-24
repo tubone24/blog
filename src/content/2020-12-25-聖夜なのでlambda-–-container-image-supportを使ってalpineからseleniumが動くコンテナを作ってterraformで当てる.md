@@ -508,7 +508,7 @@ ERROR: unsatisfiable constraints:
     required by: world[font-ipa]
 ```
 
-仕方がないので、[OSDN](https://ja.osdn.net/projects/ipafonts/)からTTFフォントをダウンロードして、それをImageにADDします。
+仕方がないので、[OSDN](https://ja.osdn.net/projects/ipafonts/)からTrueType Fontをダウンロードして、それをImageにADDします。
 
 [IPA Fonts/IPAex Fonts 4書体パック_IPAフォント（Ver.003.03）](https://ja.osdn.net/projects/ipafonts/releases/51868)を使わせていただきました。ADDコマンドで/usr/share/fonts/TTF/配下にTTFファイルを展開して、fc-cache -fvです。
 

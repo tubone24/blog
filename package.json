@@ -118,6 +118,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.12",
+    "@textlint-rule/textlint-rule-no-duplicate-abbr": "^1.0.2",
     "@types/loadable__component": "5.13.4",
     "@types/lozad": "1.16.1",
     "@types/react-transition-group": "4.4.4",
