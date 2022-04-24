@@ -2,7 +2,7 @@ import ReactGA from "react-ga";
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
 
-import "prismjs/themes/prism-solarizedlight.css";
+import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import "./src/styles/global.scss";
 import { Dropdown } from "bootstrap/dist/js/bootstrap";
