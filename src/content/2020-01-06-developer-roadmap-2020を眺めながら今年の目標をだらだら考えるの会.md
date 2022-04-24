@@ -51,7 +51,7 @@ VueやAngularもオプションとしてはあるみたいですが、初学者�
 
 しかしながらNuxt.js人気は世界を見通したらNext.jsと比べるとでもないというのが下記リンクから読みとれます。
 
-[Back End Frameworks JavaScript on the server.](https://2019.stateofjs.com/back-end/)
+[Backend Frameworks JavaScript on the server.](https://2019.stateofjs.com/back-end/)
 
 小規模案件はVue、大規模案件はReact、なんて分け方はもはや古いのかもしれませんね。
 
@@ -77,7 +77,7 @@ FlowなんてFacebookさん以外使ってるのみたことないので非推�
 
 Reactで型チェックといえばProptypesと田舎のおばあちゃんが言ってた時代もありましたが、そんなもの使ってると都会っ子に笑われるぞ！
 
-ちなみにこのブログはJS＆Proptypesです。ゴミカスです。
+ちなみにこのブログはJS＆Proptypesです。ゴミです。
 
 
 ## Web Security Knowledge
@@ -98,7 +98,7 @@ Reactで型チェックといえばProptypesと田舎のおばあちゃんが言
 
 こちらも流行っていますねー。
 
-**Styled Components**が個人的にはおすすめだと思ってますが、ちゃんと触っていないのでここはほとんど未知の領域です。
+**Styled-components**が個人的にはおすすめだと思ってますが、ちゃんと触っていないのでここはほとんど未知の領域です。
 
 BEMでSassがスタイルの王道だと思っているおじさんはいまでもSassです。このブログもそうです。
 

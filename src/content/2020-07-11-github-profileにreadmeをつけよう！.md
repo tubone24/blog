@@ -21,7 +21,7 @@ GitHubのfeatureであるGitHub ProfileにREADMEをつける機能を使って�
 
 <https://dev.to/>を見ると面白い記事がありました。
 
-[Design Github profile using README.md](https://dev.to/web/design-github-profile-using-readme-md-8al)
+[Design GitHub profile using README.md](https://dev.to/web/design-github-profile-using-readme-md-8al)
 
 ![img](https://res.cloudinary.com/practicaldev/image/fetch/s--FhpF6q0t--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--BWQmzCli--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://dev-to-uploads.s3.amazonaws.com/i/c5hjkmvrl9rgss5gt27h.jpeg)
 

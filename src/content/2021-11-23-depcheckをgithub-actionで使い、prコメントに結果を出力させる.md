@@ -20,7 +20,7 @@ package.jsonはNodeのつらいところ。
 
 ## はじめに
 
-JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode Package Manager、いわゆるnpmはしばしばライブラリサイズが大きくなりがちなことが問題になります。
+JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode.js Package Manager、いわゆるnpmはしばしばライブラリサイズが大きくなりがちなことが問題になります。
 
 ![img](https://i.imgur.com/yxDDBOX.jpg)
 

@@ -268,7 +268,7 @@ Reactではcomponentが複数要素を返すことが基本的にはできない
 
 またComponentのpropsを使ってstartDateはサイドバー用は5ヶ月前、ページに埋め込む用は1年と変更できるようにしています。
 
-残念ながらクソコードです。
+残念ながらゴミコードです。
 
 ```javascript
     let startDate;

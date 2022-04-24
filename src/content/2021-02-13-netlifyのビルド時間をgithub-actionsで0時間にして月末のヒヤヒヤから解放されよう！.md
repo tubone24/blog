@@ -340,7 +340,7 @@ jobs:
                ${URL}
 ```
 
-node setupやnpm install, buildはいつも通りです。
+Node.js setupやnpm install, buildはいつも通りです。
 
 GitHub ActionsではSecretを指定できますので、Algolia searchやFaunaDBのAPIキーはシークレットとしてビルド時の環境変数で渡してます。
 
@@ -354,7 +354,7 @@ GitHub ActionsではSecretを指定できますので、Algolia searchやFaunaDB
 
 PRコメントにもURLを送るようにしています。
 
-GitHub Actionsの素晴らしいところは、GITHUB TOKENについては、特に設定しなくてもsecrets.GITHUB_TOKENで取り出すことができますので簡単にPRコメントに送信できます。
+GitHub Actionsの素晴らしいところは、GitHub TOKENについては、特に設定しなくてもsecrets.GITHUB_TOKENで取り出すことができますので簡単にPRコメントに送信できます。
 
 ```yaml
       - name: Deploy to netlify
