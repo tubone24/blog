@@ -175,6 +175,7 @@ module.exports = {
               autoplay: false, // default is false
             },
           },
+          "gatsby-remark-prismjs-title",
           {
             resolve: "gatsby-remark-prismjs",
             options: {
