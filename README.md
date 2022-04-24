@@ -43,9 +43,16 @@ Every 0:00UTC, Run and report Lighthouse.
 
 <https://tubone24.github.io/blog/report.html>
 
-
 ## Deploy at Netlify
 
 Push the button below.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/tubone24/blog)
+
+## textlint
+
+I use texlint to proofread my blog text.
+
+```
+npm run textlint
+```
