@@ -33,7 +33,7 @@ GitHub Arctic Code Vaultのバッジが自分のProfileについたので何事�
 
 ![img](https://i.imgur.com/15J19mw.png)
 
-或いは化け狸型ロボットと友達になって映画のときだけ優しくなるデブがいる世の中か、
+或いは化け狸型ロボットと友達になって映画のときだけ優しくなる太っちょがいる世の中か、
 
 ![img](https://i.imgur.com/eDqGxfR.png)
 
@@ -145,7 +145,7 @@ GitHub以外にも実績があるようで、ノルウェー国立博物館向�
 [Rembrandt in de permafrost
 ](https://www.groene.nl/artikel/rembrandt-in-de-permafrost)
 
-## 私のクソコードはどんな形で後世に残るのだろうか
+## 私のダメコードはどんな形で後世に残るのだろうか
 
 GitHub Arctic Code Vaultでは、すべてのアクティブなGitHub公開リポジトリが含まれています。
 
@@ -161,7 +161,7 @@ GitHub Arctic Code Vaultでは、すべてのアクティブなGitHub公開リ�
 
 ## 結論
 
-どうやら1000年後までクソコードが残されてしまうことになってしまいました。
+どうやら1000年後までダメコードが残されてしまうことになってしまいました。
 
 縄文土器でもよく**失敗した土器**が発掘されることがあります。後世の人に笑われると思うとなんか微妙な気分にもなりますが、ちょっと感慨深い気もします。
 

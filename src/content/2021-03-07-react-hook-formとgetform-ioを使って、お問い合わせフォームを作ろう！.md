@@ -298,7 +298,7 @@ Form部分をすべて実装するとこんな感じです。
 
 React Hook Formを使わないと、[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
 
-React Hook Formを使わないと、
+React Hook Formを使わない場合、
 
 ```typescript
   handleChange(e) {

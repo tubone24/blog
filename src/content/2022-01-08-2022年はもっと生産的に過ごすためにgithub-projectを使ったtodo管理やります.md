@@ -72,7 +72,7 @@ templateKey: blog-post
 
 ## カスタマイズ1 IssueとProjectを自動で紐づける
 
-Github ProjectはGitHub IssueおよびPull Requestと紐づけして運用できるのですが、**Issueを切った際にProjectのToDoに自動紐づけされません。** (Automated KanbanではIssue CloseでDoneにしてくれるのに逆のことはしてくれないんだ...)
+GitHub ProjectはGitHub IssueおよびPull Requestと紐づけして運用できるのですが、**Issueを切った際にProjectのToDoに自動紐づけされません。** (Automated KanbanではIssue CloseでDoneにしてくれるのに逆のことはしてくれないんだ...)
 
 Issueを切った際**手動**で、指定したProjectに紐づけを行なう必要があります。一つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐づけるのはつらすぎます。
 

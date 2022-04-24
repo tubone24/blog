@@ -251,7 +251,7 @@ import hashlib
 key = hashlib.md5(key.encode("utf-8")).hexdigest()).encode("utf-8")
 ```
 
-ぶっちゃけあとで調べたら[StackOverFlow](https://stackoverflow.com/questions/47002578/algorithm-to-generate-12-byte-hash-from-web-urls)にもあるとおり、暗号化に使う鍵のハッシュ関数はもっとそこまで安全性を考慮する必要はないので、
+ぶっちゃけあとで調べたら[Stack Overflow](https://stackoverflow.com/questions/47002578/algorithm-to-generate-12-byte-hash-from-web-urls)にもあるとおり、暗号化に使う鍵のハッシュ関数はもっとそこまで安全性を考慮する必要はないので、
 
 md5が正解だったようですが、何となく前時代的なハッシュ化アルゴリズムが嫌だったのでSHA-3世代のShake128を使うことにしました。
 

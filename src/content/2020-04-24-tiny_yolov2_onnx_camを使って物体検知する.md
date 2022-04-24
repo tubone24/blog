@@ -86,7 +86,7 @@ $ export PATH=$PATH:/usr/local/cuda-10.0.0/bin
 $ python3 -m pip install -r requirements.txt
 ```
 
-また、**Jetsonのクロックアップ**をします。
+合わせて、**Jetsonのクロックアップ**をします。
 
 ```
 $ sudo nvpmodel -m 0

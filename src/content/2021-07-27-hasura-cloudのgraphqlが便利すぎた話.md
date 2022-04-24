@@ -147,7 +147,7 @@ PythonのGraphQLクライアントといえば、[gql](https://github.com/graphq
 
 基本的にドキュメント通りなのですが、ポイントになるところはヘッダーに**x-hasura-admin-secret**を設定してあげると特に制限なくmutationできますので、Clientで設定してます。本当はちゃんとロール作ったほうがいいですが、JWT認証がめんどくさかったのでadmin使ってしまいました。
 
-また、mutationでDBにinsertするときは**insert\_{{table名}}\_one**でできます。また、下記の通りvariablesを渡すこともできます。
+また、mutationでDBにinsertするときは**insert\_{{table名}}\_one**でできます。さらに、下記の通りvariablesを渡すこともできます。
 
 ```python
 from gql import gql, Client

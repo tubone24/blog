@@ -393,7 +393,7 @@ def handler(event, context):
 
 ![img](https://i.imgur.com/LaMP20t.png)
 
-こちら確認してみると、Elementのidがそれぞれ、email, passwordとなっております。また、Sign inボタンはid signin_btnとなっております。ありがたいですね。
+こちら確認してみると、Elementのidがそれぞれ、email, passwordとなっております。また、Sign inボタンはID signin_btnとなっております。ありがたいですね。
 
 ![img](https://i.imgur.com/S8orasB.png)
 
