@@ -21,6 +21,7 @@ const CardHeader = ({
   if (index > 1) {
     return (
       <Link to={url}>
+        <span className="visually-hidden">{title}</span>
         <div
           className="wrapper lozad"
           data-background-image={parseImgur(image, SizeMapping.large)}
@@ -31,6 +32,7 @@ const CardHeader = ({
   }
   return (
     <Link to={url}>
+      <span className="visually-hidden">{title}</span>
       <div
         className="wrapper"
         style={{
