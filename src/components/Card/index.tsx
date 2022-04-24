@@ -85,7 +85,9 @@ const Card = ({
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>
-          <Link to={withPrefix(url)}>....Read more....</Link>
+          <Link to={withPrefix(url)} aria-hidden="true">
+            ....Read more....
+          </Link>
         </div>
       </div>
     </div>
