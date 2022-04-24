@@ -36,8 +36,8 @@ const NavLink = ({
   }
 
   return (
-    <Link to={`${url}`} title={text}>
-      <NavLinkText color="#66ccff" text={text} />
+    <Link to={`${url}`}>
+      <NavLinkText color="#5252FF" text={text} />
     </Link>
   );
 };

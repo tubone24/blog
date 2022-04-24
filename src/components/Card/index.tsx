@@ -21,22 +21,26 @@ const CardHeader = ({
   if (index > 1) {
     return (
       <Link to={url}>
+        <span className="visually-hidden">{title}</span>
         <div
           className="wrapper lozad"
           data-background-image={parseImgur(image, SizeMapping.large)}
           title={title}
+          aria-hidden="true"
         />
       </Link>
     );
   }
   return (
     <Link to={url}>
+      <span className="visually-hidden">{title}</span>
       <div
         className="wrapper"
         style={{
           backgroundImage: ` url(${parseImgur(image, SizeMapping.large)})`,
         }}
         title={title}
+        aria-hidden="true"
       />
     </Link>
   );
@@ -81,7 +85,9 @@ const Card = ({
             <h4 className="title">{title}</h4>
           </Link>
           <p>{description}</p>
-          <Link to={withPrefix(url)}>....Read more....</Link>
+          <Link to={withPrefix(url)} aria-hidden="true">
+            ....Read more....
+          </Link>
         </div>
       </div>
     </div>
