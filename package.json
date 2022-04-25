@@ -30,7 +30,7 @@
     "gatsby-paginate": "1.1.1",
     "gatsby-plugin-algolia": "0.26.0",
     "gatsby-plugin-cdn-files": "0.0.3",
-    "gatsby-plugin-feed": "4.3.0",
+    "gatsby-plugin-feed": "4.12.1",
     "gatsby-plugin-flexsearch": "1.0.3",
     "gatsby-plugin-layout": "3.5.0",
     "gatsby-plugin-manifest": "4.3.0",
