@@ -254,8 +254,7 @@ module.exports = {
         minifyCSS: true,
         minifyJS: true,
       },
-    }, // put this after gatsby-plugin-manifest
-    "gatsby-plugin-cdn-files",
+    },
     {
       resolve: "gatsby-plugin-offline",
       options: {
