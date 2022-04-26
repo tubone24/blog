@@ -36,7 +36,7 @@ Renovate artifactと呼ばれるcheckが失敗していてPRコメントには�
 
 ![renovate error](https://i.imgur.com/61v14dU.png)
 
-```bash:titile=renovateコメント
+```bash:title=renovateコメント
 
 Renovate failed to update an artifact related to this branch. You probably do not want to merge this PR as-is.
 
