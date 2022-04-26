@@ -9,7 +9,7 @@
     "@sentry/browser": "6.17.2",
     "@sentry/node": "6.19.6",
     "@sentry/react": "6.19.3",
-    "@sentry/tracing": "6.17.2",
+    "@sentry/tracing": "6.19.7",
     "@types/react-helmet": "6.1.5",
     "@typescript-eslint/eslint-plugin": "5.10.0",
     "@typescript-eslint/parser": "5.10.0",
