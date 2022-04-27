@@ -189,6 +189,8 @@ jobs:
           cp /tmp/report.html ./public/report.html
       - name: Download wordcloud
         uses: actions/download-artifact@v3
+      - name: create index.html
+        run: touch ./public/index.html
       - name: move wordcloud
         run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png ./public
       - name: Deploy
