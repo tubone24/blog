@@ -193,6 +193,8 @@ jobs:
         run: touch ./public/index.html
       - name: move wordcloud
         run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png ./public
+      - name: ls
+        run: ls -ls ./public/
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
