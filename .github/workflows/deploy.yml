@@ -179,7 +179,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: make public dir
-        run: mkdir ./public
+        run: mkdir ./public/img
       - name: Run lighthouse
         run: |
           lighthouse \
@@ -192,7 +192,7 @@ jobs:
       - name: create index.html
         run: touch ./public/index.html
       - name: move wordcloud
-        run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png ./public
+        run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png ./public/img
       - name: ls
         run: ls -ls ./public/
       - name: Deploy
