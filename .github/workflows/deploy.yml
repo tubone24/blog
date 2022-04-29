@@ -151,17 +151,17 @@ jobs:
       - name: Upload word-cloud-blog-large
         uses: actions/upload-artifact@v3
         with:
-          name: word-cloud-blog-large.png
+          name: 1.png
           path: ./scripts/wordcloud/word-cloud-blog-large.png
       - name: Upload word-cloud-blog_webp
         uses: actions/upload-artifact@v3
         with:
-          name: word-cloud-blog.webp
+          name: 2.webp
           path: ./scripts/wordcloud/word-cloud-blog.webp
       - name: Upload word-cloud-blog_png
         uses: actions/upload-artifact@v3
         with:
-          name: word-cloud-blog.png
+          name: 3.png
           path: ./scripts/wordcloud/word-cloud-blog.png
   lighthouse:
     runs-on: macos-latest
@@ -192,7 +192,7 @@ jobs:
       - name: create index.html
         run: touch ./public/index.html
       - name: move wordcloud
-        run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png ./public/img
+        run: mv -f 1.png 2.webp 3.png ./public/img
       - name: ls
         run: ls -ls ./public/
       - name: Deploy
