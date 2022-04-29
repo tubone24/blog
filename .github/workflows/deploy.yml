@@ -138,7 +138,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: make public dir
-        run: mkdir ./public
+        run: mkdir -p ./public
       - name: Run lighthouse
         run: |
           lighthouse \
