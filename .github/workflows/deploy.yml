@@ -122,50 +122,9 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-  wordcloud:
-    runs-on: ubuntu-latest
-    needs: ['build']
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v1
-        with:
-          python-version: "3.7"
-      - uses: actions/cache@v1
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Install Dependencies
-        working-directory: ./scripts/wordcloud
-        run:
-          pip install -r requirements.txt
-      - name: Download Neologd Dictionary
-        working-directory: ./scripts/wordcloud
-        run:
-          sh scripts/download_neologd_dict.sh
-      - name: Generate Word Cloud
-        working-directory: ./scripts/wordcloud
-        run: python3 src/main.py
-      - name: Upload word-cloud-blog-large
-        uses: actions/upload-artifact@v3
-        with:
-          name: word-cloud-blog-large.png
-          path: ./scripts/wordcloud/word-cloud-blog-large.png
-      - name: Upload word-cloud-blog_webp
-        uses: actions/upload-artifact@v3
-        with:
-          name: word-cloud-blog.webp
-          path: ./scripts/wordcloud/word-cloud-blog.webp
-      - name: Upload word-cloud-blog_png
-        uses: actions/upload-artifact@v3
-        with:
-          name: word-cloud-blog.png
-          path: ./scripts/wordcloud/word-cloud-blog.png
   lighthouse:
     runs-on: macos-latest
-    needs: ['build', 'wordcloud']
+    needs: ['build']
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node
@@ -187,10 +146,6 @@ jobs:
             --output html --output-path /tmp/report.html \
             'https://blog.tubone-project24.xyz'
           cp /tmp/report.html ./public/report.html
-      - name: Download wordcloud
-        uses: actions/download-artifact@v3
-      - name: move wordcloud
-        run: mv -f word-cloud-blog-large.png word-cloud-blog.webp word-cloud-blog.png ./public
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
