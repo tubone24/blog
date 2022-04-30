@@ -103,7 +103,7 @@ class About extends Component {
           img="https://i.imgur.com/6B7WC7D.jpg"
           title="Who is tubone?"
           authorName="tubone"
-          authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
+          authorImage={true}
           subTitle="Why do I write this blog?"
         />
         <Sidebar />

@@ -14,7 +14,11 @@ const NavbarClass = [
 ];
 
 const Navbar = () => (
-  <nav id="m-navbar" className={`${NavbarClass.join(" ")} navbar-night`}>
+  <nav
+    id="m-navbar"
+    className={`${NavbarClass.join(" ")} navbar-night`}
+    title="navbar"
+  >
     <div className="container">
       <button
         type="button"
@@ -27,14 +31,10 @@ const Navbar = () => (
           navigate(withPrefix("/"));
         }}
       >
-        <img
-          src="/assets/logo3.svg"
-          alt=""
-          role="heading"
-          width="135"
-          height="45"
-        />
-        <h1 className="visually-hidden">Japanese IT Developer's Blog tubone BOYAKI</h1>
+        <img src="/assets/logo3.svg" alt="" width="135" height="45" />
+        <h1 className="visually-hidden">
+          Japanese IT Developer's Blog tubone BOYAKI
+        </h1>
       </button>
       <button
         className="navbar-toggler"
