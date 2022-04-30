@@ -1,13 +1,8 @@
 import React from "react";
+import "./index.scss";
 
 const TimeToRead = ({ words, minutes }: { words: number; minutes: number }) => (
-  <div
-    className="countdown"
-    style={{
-      padding: 5,
-      background: "#1bd77f",
-    }}
-  >
+  <div className="countdown">
     <span className="fa-layers fa-fw fa-1x">
       <span className="icon-clock" />
     </span>
