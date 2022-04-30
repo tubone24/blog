@@ -11,16 +11,23 @@ import ShareBox from "../components/ShareBox";
 import "./index.scss";
 import SEO from "../components/SEO";
 
-const NavLinkText = ({ color, text }: { color: string; text: string }) => (
-  <div
-    className="navlink"
-    style={{
-      color,
-    }}
-  >
-    {text}
-  </div>
-);
+const NavLinkText = ({
+  text,
+  disabled = false,
+}: {
+  text: string;
+  disabled?: boolean;
+}) => {
+  if (disabled) {
+    return (
+      <div className="navlink disable-link" aria-disabled={true}>
+        {text}
+      </div>
+    );
+  } else {
+    return <div className="navlink active-link">{text}</div>;
+  }
+};
 
 const NavLink = ({
   test,
@@ -32,12 +39,12 @@ const NavLink = ({
   text: string;
 }) => {
   if (!test) {
-    return <NavLinkText color="#7d7d7d" text={text} />;
+    return <NavLinkText text={text} disabled={true} />;
   }
 
   return (
     <Link to={`${url}`}>
-      <NavLinkText color="#5252FF" text={text} />
+      <NavLinkText text={text} disabled={false} />
     </Link>
   );
 };

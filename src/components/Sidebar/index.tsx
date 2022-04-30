@@ -29,9 +29,7 @@ const Icon = ({
     className="custom-icon"
   >
     <span className="fa-layers fa-fw fa-2x">
-      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-      {/*@ts-ignore*/}
-      <span className={icon} style={{ "font-size": "200%" }} />
+      <span className={icon} />
       &nbsp;
     </span>
   </a>
@@ -125,7 +123,7 @@ const Sidebar = ({
             })
           }
         >
-          <h4>tubone</h4>
+          <h2>tubone</h2>
         </a>
         <p className="soliloquy">It&apos;s my life</p>
         <Icon
