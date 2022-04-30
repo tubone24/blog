@@ -1,5 +1,4 @@
 import React from "react";
-// import Friend from '../Friend';
 import Archive from "../Archive";
 import { AllPost as AllPostProps } from "../entity";
 import WordCloud from "../WordCloud";
@@ -8,7 +7,7 @@ import "./index.scss";
 
 const Information = ({
   totalCount,
-  posts,
+  posts = [],
   allPosts,
 }: {
   totalCount: number;
@@ -20,15 +19,10 @@ const Information = ({
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />
     <Archive allPosts={allPosts} />
-    {/* <Friend /> */}
     <hr />
     <WordCloud />
     <hr />
   </div>
 );
-
-Information.defaultProps = {
-  posts: [],
-};
 
 export default Information;
