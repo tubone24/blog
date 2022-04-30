@@ -41,7 +41,7 @@ Use the button below to code with the blog system:
 
 Every 0:00UTC, Run and report Lighthouse.
 
-<https://tubone24.github.io/blog/report.html>
+<https://tubone24.github.io/blog/lh/report.html>
 
 ## Deploy at Netlify
 
