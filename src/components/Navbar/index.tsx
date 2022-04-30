@@ -29,12 +29,12 @@ const Navbar = () => (
       >
         <img
           src="/assets/logo3.svg"
-          alt="Japanese IT Developer Blog tubone BOYAKI"
+          alt=""
           role="heading"
-          aria-level={1}
           width="135"
           height="45"
         />
+        <h1 className="visually-hidden">Japanese IT Developer's Blog tubone BOYAKI</h1>
       </button>
       <button
         className="navbar-toggler"

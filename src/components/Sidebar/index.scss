@@ -25,6 +25,9 @@
         transform: scale(1.2);
       }
     }
+    h2 {
+      font-size: 1.5rem;
+    }
 
     .name {
       color: $regal-blue;
@@ -47,12 +50,19 @@
       transition: background 1s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
+    .fa-layers {
+      span {
+        font-size: 200%;
+      }
+    }
+
     &:hover {
       border-radius: 50%;
 
       i {
         background: $light-blue;
       }
+
     }
   }
 

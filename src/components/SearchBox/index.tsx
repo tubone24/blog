@@ -85,14 +85,15 @@ class SearchBox extends Component {
     return (
       <div style={{ marginBottom: "1rem" }}>
         <p>
-          <span className="icon-search" />
-          &nbsp;SearchBox
+          <label className="search-box-label" htmlFor="algolia-search-input">
+            <span className="icon-search" />
+            &nbsp;SearchBox
+          </label>
         </p>
         <input
           type="search"
           id="algolia-search-input"
-          placeholder="Search"
-          title="search box"
+          placeholder="Enter the keyword..."
           style={{
             border: "none",
           }}

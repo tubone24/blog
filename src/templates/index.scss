@@ -9,6 +9,12 @@
   background: white;
   border: solid 1px #d7d7d7;
   border-radius: 0.2rem;
+  &.active-link {
+    color: #5252FF;
+  }
+  &.disable-link {
+    color: #737373;
+  }
 }
 
 .pagenum {
