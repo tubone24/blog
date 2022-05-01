@@ -2,16 +2,11 @@ import React from "react";
 
 import ReactGA from "react-ga";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const CommentButton = () => (
   <a
-    className="share-button"
-    style={{
-      lineHeight: "1.7rem",
-      color: "#337ab7",
-      paddingLeft: "0.15rem",
-    }}
+    className={style.shareButton + " " + style.comment}
     href="#gitalk-container"
     title="コメントする"
     onClick={() =>
@@ -27,7 +22,7 @@ const CommentButton = () => (
 
 const GotoTopButton = () => (
   <a
-    className="share-button"
+    className={style.shareButton + " " + style.top}
     href="#header"
     title="トップに戻る"
     onClick={() => {
@@ -35,10 +30,6 @@ const GotoTopButton = () => (
         category: "User",
         action: "Scroll to Top",
       });
-    }}
-    style={{
-      lineHeight: "1.7rem",
-      paddingLeft: "0.1rem",
     }}
   >
     <span className="icon-chevron-up" />
@@ -52,13 +43,13 @@ const ShareBox = ({
   url: string;
   hasCommentBox?: boolean;
 }) => (
-  <div className="m-share-box">
+  <div className={style.mShareBox}>
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
       title="FacebookでShareする"
       target="_blank"
       rel="noopener noreferrer"
-      className="share-button"
+      className={style.shareButton}
       onClick={() =>
         ReactGA.event({
           category: "Share",
@@ -73,7 +64,7 @@ const ShareBox = ({
       title="TwitterでShareする"
       target="_blank"
       rel="noopener noreferrer"
-      className="share-button"
+      className={style.shareButton}
       onClick={() =>
         ReactGA.event({
           category: "Share",
@@ -88,7 +79,7 @@ const ShareBox = ({
       title="Pocketに追加する"
       target="_blank"
       rel="noopener noreferrer"
-      className="share-button"
+      className={style.shareButton}
       onClick={() =>
         ReactGA.event({
           category: "Share",
@@ -100,7 +91,7 @@ const ShareBox = ({
     </a>
     <a
       href={`http://b.hatena.ne.jp/add?mode=confirm&url=${url}`}
-      className="hatena-bookmark-button"
+      className={style.shareButtonNoBorder}
       data-hatena-bookmark-layout="vertical-normal"
       data-hatena-bookmark-lang="ja"
       title="このエントリーをはてなブックマークに追加"
@@ -116,9 +107,8 @@ const ShareBox = ({
       <img
         src="/assets/button-only@2x.png"
         alt="hatena bookmark"
-        width="25"
-        height="25"
-        style={{ marginTop: 10 }}
+        width="30"
+        height="30"
       />
     </a>
     {hasCommentBox && <CommentButton />}

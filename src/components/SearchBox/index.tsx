@@ -88,9 +88,9 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <div style={{ marginBottom: "1rem" }}>
+      <div>
         <p>
-          <label className="search-box-label" htmlFor="algolia-search-input">
+          <label htmlFor="algolia-search-input">
             <span className="icon-search" />
             &nbsp;SearchBox
           </label>
