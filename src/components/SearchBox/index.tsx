@@ -20,10 +20,15 @@ if (typeof window !== "undefined") {
   // eslint-disable-next-line global-require
   autocomplete = require("autocomplete.js");
   client = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY
+    process.env.GATSBY_ALGOLIA_APP_ID || process.env.STORYBOOK_ALGOLIA_APP_ID,
+    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY ||
+      process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY
   );
-  index = client.initIndex(process.env.GATSBY_ALGOLIA_INDEX_NAME || "posts");
+  index = client.initIndex(
+    process.env.GATSBY_ALGOLIA_INDEX_NAME ||
+      process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
+      "posts"
+  );
 }
 
 // https://github.com/algolia/algoliasearch-client-javascript/issues/1152
