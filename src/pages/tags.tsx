@@ -27,12 +27,7 @@ const TagPage = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
 
   return (
     <div className="container">
-      <div
-        className="row"
-        style={{
-          margin: 15,
-        }}
-      >
+      <div className="row tags-row">
         <Sidebar />
 
         <div className="col order-2 tags-page">

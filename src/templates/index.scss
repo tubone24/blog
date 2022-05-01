@@ -1,5 +1,15 @@
 @import "../styles/colors";
 
+.row {
+  &.homepage {
+    margin-top: 20px;
+  }
+  &.pager {
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+}
+
 .navlink {
   display: inline-block;
   padding: 0.5rem 0.9rem;

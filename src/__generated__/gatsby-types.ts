@@ -2716,6 +2716,19 @@ type MarkdownRemarkSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type cardDataFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<(
+    Pick<MarkdownRemarkFrontmatter, 'title' | 'date'>
+    & { url: MarkdownRemarkFrontmatter['slug'] }
+  )> };
+
+type SidebarQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SidebarQueryQuery = { readonly all: (
+    Pick<MarkdownRemarkConnection, 'totalCount'>
+    & { readonly allPosts: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'tags'>> } }> }
+  ), readonly limited: { readonly latestPosts: ReadonlyArray<{ readonly node: cardDataFragment }> } };
+
 type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2751,27 +2764,6 @@ type tagQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArr
         )> }
       ) }> } };
 
-type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_1_Query = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'excerpt'>
-        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'headerImage' | 'date' | 'tags'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
-      ) }> } };
-
-type cardDataFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<(
-    Pick<MarkdownRemarkFrontmatter, 'title' | 'date'>
-    & { url: MarkdownRemarkFrontmatter['slug'] }
-  )> };
-
-type SidebarQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SidebarQueryQuery = { readonly all: (
-    Pick<MarkdownRemarkConnection, 'totalCount'>
-    & { readonly allPosts: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'tags'>> } }> }
-  ), readonly limited: { readonly latestPosts: ReadonlyArray<{ readonly node: cardDataFragment }> } };
-
 type PeriodQueryQueryVariables = Exact<{
   periodStartDate: Maybe<Scalars['Date']>;
   periodEndDate: Maybe<Scalars['Date']>;
@@ -2788,5 +2780,13 @@ type PeriodQueryQuery = { readonly allMarkdownRemark: (
         )> }
       ) }> }
   ) };
+
+type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_1_Query = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'excerpt'>
+        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'headerImage' | 'date' | 'tags'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
+      ) }> } };
 
 }

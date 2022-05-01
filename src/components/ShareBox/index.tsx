@@ -118,7 +118,7 @@ const ShareBox = ({
         alt="hatena bookmark"
         width="25"
         height="25"
-        style={{ position: "absolute", top: 10 }}
+        style={{ marginTop: 10 }}
       />
     </a>
     {hasCommentBox && <CommentButton />}

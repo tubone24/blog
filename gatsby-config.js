@@ -37,7 +37,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-minify-classnames",
       options: {
-        enable: isNetlifyProduction,
+        enable: true,
+        prefix: "aaa",
       },
     },
     {

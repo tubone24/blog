@@ -89,12 +89,7 @@ const Page = ({
 
   return (
     <>
-      <div
-        className="row homepage"
-        style={{
-          marginTop: 20,
-        }}
-      >
+      <div className="row homepage">
         <Sidebar />
         <div className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
           {group.map(({ node }, num) => (
@@ -115,13 +110,7 @@ const Page = ({
             />
           ))}
 
-          <div
-            className="row pager"
-            style={{
-              justifyContent: "space-around",
-              marginBottom: "20px",
-            }}
-          >
+          <div className="row pager">
             <div className="previousLink">
               <NavLink test={!first} url={previousUrl} text="Previous" />
             </div>

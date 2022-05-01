@@ -37,11 +37,23 @@ Use the button below to code with the blog system:
 
 [![Edit blog](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/tubone24/blog/tree/master/)
 
+## Storybook
+
+The components used in my blog are managed using Storybook.
+
+<https://blog-storybook.netlify.app/>
+
 ## Lighthouse
 
-Every 0:00UTC, Run and report Lighthouse.
+After production deploy, Run and report Lighthouse.
 
 <https://tubone24.github.io/blog/lh/report.html>
+
+## Bundle Analyzer
+
+After production deploy, Run and report Bundle Analyzer.
+
+<https://tubone24.github.io/blog/ba/index.html>
 
 ## Deploy at Netlify
 

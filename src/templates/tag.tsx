@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import Card from "../components/Card";
 import SEO from "../components/SEO";
 import Sidebar from "../components/Sidebar";
+import "./tag.scss";
 
 const TagPage = ({
   data,
@@ -15,22 +16,11 @@ const TagPage = ({
   const { tag } = pageContext;
   return (
     <div className="container">
-      <div
-        className="row"
-        style={{
-          margin: 15,
-        }}
-      >
+      <div className="row tag-row">
         <Sidebar />
 
         <div className="col order-2">
-          <div
-            className="col-12"
-            style={{
-              fontSize: 20,
-              margin: 15,
-            }}
-          >
+          <div className="col-12 tag-title">
             {edges.length}
             &nbsp;Articles in&nbsp;
             {tag}
