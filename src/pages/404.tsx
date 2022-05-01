@@ -1,8 +1,9 @@
 import React from "react";
 
 import { Link, graphql } from "gatsby";
+import "./404.scss";
 
-export type GetAllPageQuery = { data: GatsbyTypes.getAllPagesQuery };
+export type GetAllPageQuery = { data: GatsbyTypes.getAllPagesQuery }
 
 const NotFoundPage = ({ data }: GetAllPageQuery) => (
   <div className="container">
