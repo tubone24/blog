@@ -154,7 +154,7 @@ const sampleText =
   "<p>すなわちその作物になるたても、私のがたをかつてお注意があっですます、彼の衰弱もこれが出ですのは使うでます。こう今日を憂しずて私を個人が受けだ。</p>";
 
 export default {
-  title: "Content",
+  title: "Components/Content",
   component: Content,
   parameters: {
     backgrounds: {
@@ -165,8 +165,13 @@ export default {
 } as ComponentMeta<typeof Content>;
 
 const Template: ComponentStory<typeof Content> = (args) => (
-  <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
-    <Content {...args} />
+  <div className="row post order-2">
+    <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
+      test Side Bar
+    </header>
+    <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
+      <Content {...args} />
+    </div>
   </div>
 );
 

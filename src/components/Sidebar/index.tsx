@@ -35,20 +35,26 @@ const Icon = ({
   </a>
 );
 
-const Sidebar = ({
+export type StaticQueryAllPost = {
+  readonly node: {
+    readonly frontmatter: GatsbyTypes.Maybe<
+      Pick<GatsbyTypes.MarkdownRemarkFrontmatter, "date" | "tags">
+    >;
+  };
+};
+
+export type StaticQueryLatestPost = {
+  readonly node: GatsbyTypes.cardDataFragment;
+};
+
+export const Sidebar = ({
   latestPosts,
   totalCount,
   allPosts,
 }: {
-  allPosts: ReadonlyArray<{
-    readonly node: {
-      readonly frontmatter: GatsbyTypes.Maybe<
-        Pick<GatsbyTypes.MarkdownRemarkFrontmatter, "date" | "tags">
-      >;
-    };
-  }>;
+  allPosts: ReadonlyArray<StaticQueryAllPost>;
   totalCount: number;
-  latestPosts: ReadonlyArray<{ readonly node: GatsbyTypes.cardDataFragment }>;
+  latestPosts: ReadonlyArray<StaticQueryLatestPost>;
 }) => {
   React.useEffect(() => {
     if (isBrowser()) {

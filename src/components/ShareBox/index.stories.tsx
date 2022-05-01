@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ShareBox from "./index";
 
 export default {
-  title: "ShareBox",
+  title: "Components/ShareBox",
   component: ShareBox,
   parameters: {
     backgrounds: {

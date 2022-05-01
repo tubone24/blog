@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Footer from "./index";
 
 export default {
-  title: "Footer",
+  title: "Components/Footer",
   component: Footer,
   parameters: {
     backgrounds: {

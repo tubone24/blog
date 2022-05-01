@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import TimeToRead from "./index";
 
 export default {
-  title: "TimeToRead",
+  title: "Components/TimeToRead",
   component: TimeToRead,
   parameters: {
     backgrounds: {

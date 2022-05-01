@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Tag from "./index";
 
 export default {
-  title: "Tag",
+  title: "Components/Tag",
   component: Tag,
   parameters: {
     backgrounds: {

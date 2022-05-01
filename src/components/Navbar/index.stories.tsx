@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Navbar from "./index";
 
 export default {
-  title: "Navbar",
+  title: "Components/Navbar",
   component: Navbar,
   parameters: {
     backgrounds: {

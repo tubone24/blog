@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Header from "./index";
 
 export default {
-  title: "Header",
+  title: "Components/Header",
   component: Header,
   parameters: {
     backgrounds: {

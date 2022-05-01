@@ -6,7 +6,7 @@ import { expect } from "@storybook/jest";
 import SearchBox from "./index";
 
 export default {
-  title: "SearchBox",
+  title: "Components/SearchBox",
   component: SearchBox,
   parameters: {
     backgrounds: {

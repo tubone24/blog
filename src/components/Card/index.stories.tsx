@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Card from "./index";
 
 export default {
-  title: "Card",
+  title: "Components/Card",
   component: Card,
   parameters: {
     backgrounds: {
