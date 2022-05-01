@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 import ReactGA from "react-ga";
 
@@ -18,20 +18,20 @@ const Header = ({
 }) => (
   <div className="col-12 header" style={{ padding: 0 }} id="header">
     <div
-      className="img-container lozad"
+      className={style.imgContainer + " lozad"}
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`,
       }}
       data-background-image={`linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`}
     >
-      {title && <h1 className="u-title">{title}</h1>}
+      {title && <h1 className={style.uTitle}>{title}</h1>}
       {subTitle && (
-        <div className="u-subtitle">
-          <div className="m-left">
+        <div className={style.uSubtitle}>
+          <div className={style.mLeft}>
             {authorImage && (
               <picture>
                 <source
-                  className="author-image"
+                  className={style.authorImage}
                   srcSet="/assets/avater.webp"
                   type="image/webp"
                   onClick={() =>
@@ -42,7 +42,7 @@ const Header = ({
                   }
                 />
                 <img
-                  className="author-image"
+                  className={style.authorImage}
                   src="/assets/avater.png"
                   alt={authorName}
                   onClick={() =>
@@ -54,9 +54,9 @@ const Header = ({
                 />
               </picture>
             )}
-            <span className="author-name">{authorName}</span>
+            <span className={style.authorName}>{authorName}</span>
           </div>
-          <span className="text">{subTitle}</span>
+          <span className={style.text}>{subTitle}</span>
         </div>
       )}
     </div>
