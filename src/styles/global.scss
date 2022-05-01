@@ -189,3 +189,13 @@ a {
   clip-path: inset(50%);
   clip: rect(1px, 1px, 1px, 1px);
 }
+
+.lozad {
+  opacity: 0;
+}
+
+.lozad.loaded {
+  //background-color: $bermuda;
+  opacity: 1;
+  transition: opacity 30ms;
+}

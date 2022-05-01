@@ -18,11 +18,10 @@ const Header = ({
 }) => (
   <div className="col-12 header" style={{ padding: 0 }} id="header">
     <div
-      className={style.imgContainer + " lozad"}
+      className={style.imgContainer}
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`,
       }}
-      data-background-image={`linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`}
     >
       {title && <h1 className={style.uTitle}>{title}</h1>}
       {subTitle && (
