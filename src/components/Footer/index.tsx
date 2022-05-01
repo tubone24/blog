@@ -2,10 +2,10 @@ import React from "react";
 import { Link, withPrefix } from "gatsby";
 import ExternalLink from "../ExternalLink";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const Footer = () => (
-  <footer className="footer">
+  <footer className={"footer " + style.footer}>
     <div className="container">
       <div className="row">
         <div className="col-sm-12 text-center">
@@ -19,7 +19,7 @@ const Footer = () => (
             .&nbsp;Also indexed posts with&nbsp;
             <ExternalLink href="https://www.algolia.com/" title="Algolia" />
           </p>
-          <p className="copyright">
+          <p className={style.copyright}>
             Copyright&nbsp;
             <ExternalLink
               href="https://portfolio.tubone-project24.xyz/"
@@ -27,9 +27,7 @@ const Footer = () => (
             />
             &nbsp;
             <b>
-              <Link to={withPrefix("/")}>
-                tubone BOYAKI
-              </Link>
+              <Link to={withPrefix("/")}>tubone BOYAKI</Link>
               &nbsp;
             </b>
             2017-{new Date().getFullYear()}
