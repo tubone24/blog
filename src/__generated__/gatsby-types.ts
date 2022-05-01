@@ -2729,15 +2729,22 @@ type SidebarQueryQuery = { readonly all: (
     & { readonly allPosts: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'tags'>> } }> }
   ), readonly limited: { readonly latestPosts: ReadonlyArray<{ readonly node: cardDataFragment }> } };
 
-type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type getAllPagesQuery = { readonly allSitePage: { readonly edges: ReadonlyArray<{ readonly node: Pick<SitePage, 'path'> }> } };
-
 type getAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type getAllTagsQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'tags'>> } }> } };
+
+type postFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'id' | 'title' | 'slug' | 'date' | 'headerImage' | 'tags'>> };
+
+type BlogPostQueryQueryVariables = Exact<{
+  index: Maybe<Scalars['Int']>;
+}>;
+
+
+type BlogPostQueryQuery = { readonly content: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'id' | 'excerpt'>
+        & postFragment
+      ) }> } };
 
 type PeriodQueryQueryVariables = Exact<{
   periodStartDate: Maybe<Scalars['Date']>;
@@ -2756,18 +2763,6 @@ type PeriodQueryQuery = { readonly allMarkdownRemark: (
       ) }> }
   ) };
 
-type postFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'id' | 'title' | 'slug' | 'date' | 'headerImage' | 'tags'>> };
-
-type BlogPostQueryQueryVariables = Exact<{
-  index: Maybe<Scalars['Int']>;
-}>;
-
-
-type BlogPostQueryQuery = { readonly content: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'id' | 'excerpt'>
-        & postFragment
-      ) }> } };
-
 type tagQueryQueryVariables = Exact<{
   tag: Maybe<ReadonlyArray<Scalars['String']> | Scalars['String']>;
 }>;
@@ -2780,6 +2775,11 @@ type tagQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArr
           & { url: MarkdownRemarkFrontmatter['slug'] }
         )> }
       ) }> } };
+
+type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type getAllPagesQuery = { readonly allSitePage: { readonly edges: ReadonlyArray<{ readonly node: Pick<SitePage, 'path'> }> } };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
