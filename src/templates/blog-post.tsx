@@ -46,7 +46,7 @@ class BlogPost extends Component<Props> {
           img={frontmatter?.headerImage || "https://i.imgur.com/M795H8A.jpg"}
           title={frontmatter?.title}
           authorName="tubone"
-          authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
+          authorImage={true}
           subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />

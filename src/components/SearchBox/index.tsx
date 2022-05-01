@@ -94,13 +94,8 @@ class SearchBox extends Component {
           type="search"
           id="algolia-search-input"
           placeholder="Enter the keyword..."
-          style={{
-            border: "none",
-          }}
+          data-testid="algolia-search-input"
         />
-        <small id="searchboxHelp" className="form-text text-muted">
-          Search my blog.
-        </small>
       </div>
     );
   }

@@ -20,6 +20,11 @@ module.exports = {
   plugins: [
     "gatsby-plugin-preact",
     "gatsby-plugin-typegen",
+    // Pages Storybook don't create pages-json
+    {
+      resolve: "gatsby-plugin-exclude",
+      options: { paths: ["/*.stories/"] },
+    },
     "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-plugin-react-helmet-canonical-urls",

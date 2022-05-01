@@ -1,6 +1,7 @@
 import React from "react";
 import ReactGA from "react-ga";
 import { Link, withPrefix } from "gatsby";
+import "./index.scss";
 
 const Tag = ({ name, count }: { name: string; count: number }) => (
   <Link

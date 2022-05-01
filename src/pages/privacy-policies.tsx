@@ -46,7 +46,7 @@ const About = () => (
       img="https://i.imgur.com/FyHE8bb.png"
       title="プライバシーポリシー"
       authorName="tubone"
-      authorImage="https://blog.tubone-project24.xyz/assets/avater.png"
+      authorImage={true}
       subTitle="20xx/xx/xx"
     />
     <Sidebar />

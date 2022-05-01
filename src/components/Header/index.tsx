@@ -7,13 +7,13 @@ const Header = ({
   img = "",
   title = "",
   subTitle = "",
-  authorImage = "",
+  authorImage = true,
   authorName = "",
 }: {
   img?: string;
   title?: string;
   subTitle?: string;
-  authorImage?: string;
+  authorImage?: boolean;
   authorName?: string;
 }) => (
   <div className="col-12 header" style={{ padding: 0 }} id="header">
@@ -21,7 +21,6 @@ const Header = ({
       className="img-container lozad"
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`,
-        marginTop: -58,
       }}
       data-background-image={`linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(${img})`}
     >

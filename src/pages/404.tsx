@@ -1,18 +1,25 @@
 import React from "react";
 
 import { Link, graphql } from "gatsby";
+import "./404.scss";
 
-const NotFoundPage = ({ data }: { data: GatsbyTypes.getAllPagesQuery }) => (
+export type GetAllPageQuery = { data: GatsbyTypes.getAllPagesQuery }
+
+const NotFoundPage = ({ data }: GetAllPageQuery) => (
   <div className="container">
     <div className="row">
       <div className="col">
         <h1>404 Not Found...</h1>
         <h2>Anything else...?</h2>
-        {data.allSitePage.edges.map((page) => (
-          <Link to={page.node.path} key={page.node.path}>
-            <li>{page.node.path}</li>
-          </Link>
-        ))}
+        <ul>
+          {data.allSitePage.edges.map((page) => (
+            <li>
+              <Link to={page.node.path} key={page.node.path}>
+                {page.node.path}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>
