@@ -19,6 +19,9 @@ module.exports = {
   "framework": "@storybook/react",
   env: (config) => ({
     ...config,
+    GATSBY_ALGOLIA_SEARCH_API_KEY: config.GATSBY_ALGOLIA_SEARCH_API_KEY,
+    GATSBY_ALGOLIA_INDEX_NAME: config.GATSBY_ALGOLIA_INDEX_NAME,
+    GATSBY_ALGOLIA_APP_ID: config.GATSBY_ALGOLIA_APP_ID,
   }),
   webpackFinal: async (config) => {
     // Transpile Gatsby module because Gatsby includes un-transpiled ES6 code.
