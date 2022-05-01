@@ -1,12 +1,12 @@
 import React from "react";
 import ReactGA from "react-ga";
 import { Link, withPrefix } from "gatsby";
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const Tag = ({ name, count }: { name: string; count: number }) => (
   <Link
     to={withPrefix(`/tag/${name}`)}
-    className="header-tag"
+    className={style.headerTag}
     title={name}
     onClick={() =>
       ReactGA.event({ category: "Tag", action: `push Tag ${name}` })

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 import ReactGA from "react-ga";
 import dayjs from "dayjs";
 import { AllPost } from "../entity";
@@ -24,7 +24,7 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
     )
   ).sort((a, b) => (a < b ? 1 : -1));
   return (
-    <div className="archive">
+    <div className={style.archive}>
       <p>
         <span className="icon-calendar" />
         &nbsp;Archives
