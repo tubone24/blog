@@ -9,6 +9,7 @@ const CommentButton = () => (
     className={style.shareButton + " " + style.comment}
     href="#gitalk-container"
     title="コメントする"
+    data-testid="CommentButton"
     onClick={() =>
       ReactGA.event({
         category: "User",
@@ -25,6 +26,7 @@ const GotoTopButton = () => (
     className={style.shareButton + " " + style.top}
     href="#header"
     title="トップに戻る"
+    data-testid="GotoTopButton"
     onClick={() => {
       ReactGA.event({
         category: "User",
