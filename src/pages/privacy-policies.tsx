@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Content from "../components/Content";
 import ShareBox from "../components/ShareBox";
 import SEO from "../components/SEO";
+import * as style from "./privacy-policies.module.scss";
 
 const html = `
   <h1>プライバシーポリシー</h1>
@@ -41,7 +42,7 @@ const html = `
 `;
 
 const About = () => (
-  <div className="row post order-2">
+  <div className={style.post + " row order-2"}>
     <Header
       img="https://i.imgur.com/FyHE8bb.png"
       title="プライバシーポリシー"
@@ -50,7 +51,7 @@ const About = () => (
       subTitle="20xx/xx/xx"
     />
     <Sidebar />
-    <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
+    <div className={style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"}>
       <Content post={html} />
     </div>
 

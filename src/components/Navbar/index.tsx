@@ -4,13 +4,13 @@ import { navigate, withPrefix } from "gatsby";
 
 import NavItem from "./NavItem";
 import ExternalLink from "../ExternalLink";
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const NavbarClass = [
   "navbar",
   "navbar-expand-md",
   "sticky-top",
-  "custom-navbar",
+  style.customNavbar,
 ];
 
 const Navbar = () => (
@@ -22,7 +22,7 @@ const Navbar = () => (
     <div className="container">
       <button
         type="button"
-        className="navbar-brand btn btn-default"
+        className={style.navbarBrand + " navbar-brand btn btn-default"}
         onClick={() => {
           ReactGA.event({
             category: "User",
@@ -37,7 +37,7 @@ const Navbar = () => (
         </h1>
       </button>
       <button
-        className="navbar-toggler"
+        className={style.navbarToggler + " navbar-toggler"}
         type="button"
         data-bs-toggle="collapse"
         aria-label="navbar-toggler"
@@ -50,7 +50,7 @@ const Navbar = () => (
         id="navbarSupportedContent"
         role="navigation"
       >
-        <ul className="navbar-nav mr-2">
+        <ul className={style.navbarNav + " navbar-nav mr-2"}>
           <li>
             <NavItem url="/tags/" name="Tags" key="/tags/" />
           </li>

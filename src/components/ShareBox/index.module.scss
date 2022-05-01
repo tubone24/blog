@@ -1,0 +1,43 @@
+.m-share-box {
+  position: fixed;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background: rgb(255 255 255 / 90%);
+}
+
+.share-button {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.4rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  text-align: center;
+  border: 1px solid #337ab7;
+  border-radius: 50%;
+}
+
+.share-button-no-border {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.4rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
+.comment {
+  line-height: 1.7rem;
+  color: #337ab7;
+  padding-left: 0.15rem;
+}
+
+.top {
+  line-height: 1.7rem;
+  padding-left: 0.1rem;
+}

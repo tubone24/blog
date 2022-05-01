@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Content from "./index";
-import "../../templates/blog-post.scss";
 
 // https://www.aozora.gr.jp/cards/000148/card772.html
 const sampleText =

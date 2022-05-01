@@ -3,7 +3,6 @@ import Archive from "../Archive";
 import { AllPost as AllPostProps } from "../entity";
 import WordCloud from "../WordCloud";
 import LatestPost, { Post as LatestPostProps } from "../LatestPost";
-import "./index.scss";
 
 const Information = ({
   totalCount,
@@ -14,7 +13,7 @@ const Information = ({
   posts: LatestPostProps[];
   allPosts: AllPostProps[];
 }) => (
-  <div className="d-none d-lg-block information my-2">
+  <div className="d-none d-lg-block my-2">
     <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
     <hr />

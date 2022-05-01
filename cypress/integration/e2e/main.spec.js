@@ -16,9 +16,7 @@ describe("UI Test", () => {
     cy.get("div > #toc_container > .toc_list > li:nth-child(3) > a").click();
     cy.location("href").should("include", "/about/#aboutblog");
     cy.window().its("scrollY").should("not.equal", 0);
-    cy.get(
-      ".container-fluid > .row > .m-share-box > .share-button > .icon-chevron-up"
-    ).click();
+    cy.get("[data-testid=GotoTopButton]").click();
     cy.wait(5000);
     cy.window().its("scrollY").should("be.lt", 100);
   });

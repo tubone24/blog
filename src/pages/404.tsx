@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Link, graphql } from "gatsby";
-import "./404.scss";
+import * as style from "./404.module.scss";
 
 export type GetAllPageQuery = { data: GatsbyTypes.getAllPagesQuery }
 
 const NotFoundPage = ({ data }: GetAllPageQuery) => (
   <div className="container">
     <div className="row">
-      <div className="col">
+      <div className={style.notFound + " col"}>
         <h1>404 Not Found...</h1>
         <h2>Anything else...?</h2>
         <ul>

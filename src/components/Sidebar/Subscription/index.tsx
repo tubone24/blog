@@ -1,13 +1,13 @@
 import React from "react";
 import ReactGA from "react-ga";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const Subscription = () => (
   <div className="subscription">
     <a
       href="/rss.xml"
-      className="btn subrss"
+      className={style.subrss + " btn"}
       role="button"
       onClick={() =>
         ReactGA.event({ category: "User", action: "push RSS Button" })

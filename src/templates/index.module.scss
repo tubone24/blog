@@ -1,5 +1,17 @@
 @import "../styles/colors";
 
+.row-homepage {
+  margin-top: 20px;
+}
+
+.row-pager {
+  justify-content: space-around;
+  margin-bottom: 20px;
+  display: grid;
+  grid-auto-flow: column;
+  max-width: 100%;
+}
+
 .navlink {
   display: inline-block;
   padding: 0.5rem 0.9rem;
@@ -9,12 +21,14 @@
   background: white;
   border: solid 1px #d7d7d7;
   border-radius: 0.2rem;
-  &.active-link {
-    color: #5252FF;
-  }
-  &.disable-link {
-    color: #737373;
-  }
+}
+
+.active-link {
+  color: #5252FF;
+}
+
+.disable-link {
+  color: #737373;
 }
 
 .pagenum {
@@ -27,10 +41,4 @@
   background: $tag-blue;
   border: solid 1px #d7d7d7;
   border-radius: 0.2rem;
-}
-
-.pager {
-  display: grid;
-  grid-auto-flow: column;
-  max-width: 100%;
 }

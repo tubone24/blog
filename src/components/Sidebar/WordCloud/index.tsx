@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const placeHolder =
   "data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7";
 
 const WordCloud = () => (
-  <div className="wordcloud">
+  <div className={style.wordcloud}>
     <p>
       <span className="icon-cloud" />
       &nbsp;WordCloud

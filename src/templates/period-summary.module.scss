@@ -1,8 +1,12 @@
 @import "../styles/colors";
 
-.tags-page {
+.period {
   padding: 10px;
   background-color: $bg;
   background-image: $bg-backGround-pic;
   background-size: contain;
+}
+
+.row {
+  margin: 15px;
 }

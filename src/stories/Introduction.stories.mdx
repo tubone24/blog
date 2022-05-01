@@ -1,12 +1,9 @@
-import { Meta } from '@storybook/addon-docs';
-import Code from './assets/code-brackets.svg';
-import Colors from './assets/colors.svg';
-import Comments from './assets/comments.svg';
-import Direction from './assets/direction.svg';
-import Flow from './assets/flow.svg';
-import Plugin from './assets/plugin.svg';
-import Repo from './assets/repo.svg';
-import StackAlt from './assets/stackalt.svg';
+import { Meta } from "@storybook/addon-docs";
+import Code from "./assets/code-brackets.svg";
+import StorybookIcon from "./assets/storybook.png";
+import Direction from "./assets/direction.svg";
+import Repo from "./assets/repo.svg";
+import Screenshot from "./assets/screenshot.png";
 
 <Meta title="Introduction" />
 
@@ -111,94 +108,61 @@ import StackAlt from './assets/stackalt.svg';
     display: inline-block;
   }
 
+  .screenshot {
+    width: 100%;
+    margin: 20px;
+  }
+
   
 `}</style>
 
 # tubone Blog's Storybook
 
-The components used in the blog are managed using Storybook.
+The components used in my blog are managed using Storybook.
 
-<div className="subheading">About Our Blog</div>
+All components are written in React, making it an ideal format template for a **Japanese-language technical blog**.
 
-<div className="link-list">
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/addons/addon-types"
-    target="_blank"
-  >
-    <img src={Plugin} alt="plugin" />
-    <span>
-      <strong>Presets for popular tools</strong>
-      Easy setup for TypeScript, SCSS and more.
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/configure/webpack"
-    target="_blank"
-  >
-    <img src={StackAlt} alt="Build" />
-    <span>
-      <strong>Build configuration</strong>
-      How to customize webpack and Babel
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/configure/styling-and-css"
-    target="_blank"
-  >
-    <img src={Colors} alt="colors" />
-    <span>
-      <strong>Styling</strong>
-      How to load and configure CSS libraries
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/get-started/setup#configure-storybook-for-your-stack"
-    target="_blank"
-  >
-    <img src={Flow} alt="flow" />
-    <span>
-      <strong>Data</strong>
-      Providers and mocking for data libraries
-    </span>
-  </a>
-</div>
-
-<div className="subheading">Learn</div>
+<div className="subheading">Links</div>
 
 <div className="link-list">
-  <a className="link-item" href="https://storybook.js.org/docs" target="_blank">
-    <img src={Repo} alt="repo" />
-    <span>
-      <strong>Storybook documentation</strong>
-      Configure, customize, and extend
+    <a className="link-item" href="https://blog.tubone-project24.xyz/" target="_blank">
+        <img src={Repo} alt="blog" />
+        <span>
+      <strong>Blog</strong>
+      This is my blog.
     </span>
-  </a>
-  <a className="link-item" href="https://storybook.js.org/tutorials/" target="_blank">
-    <img src={Direction} alt="direction" />
-    <span>
-      <strong>In-depth guides</strong>
-      Best practices from leading teams
-    </span>
-  </a>
-  <a className="link-item" href="https://github.com/storybookjs/storybook" target="_blank">
-    <img src={Code} alt="code" />
-    <span>
+    </a>
+    <a className="link-item" href="https://github.com/tubone24/blog" target="_blank">
+        <img src={Code} alt="code" />
+        <span>
       <strong>GitHub project</strong>
       View the source and add issues
     </span>
-  </a>
-  <a className="link-item" href="https://discord.gg/storybook" target="_blank">
-    <img src={Comments} alt="comments" />
-    <span>
-      <strong>Discord chat</strong>
-      Chat with maintainers and the community
+    </a>
+    <a className="link-item" href="https://tubone24.github.io/blog/lh/report.html" target="_blank">
+        <img src={Direction} alt="Lighthouse" />
+        <span>
+      <strong>Lighthouse Score</strong>
+      View the score
     </span>
-  </a>
+    </a>
+    <a className="link-item" href="/" target="_blank">
+        <img src={StorybookIcon} alt="Storybook" />
+        <span>
+      <strong>Storybook</strong>
+      This site.
+    </span>
+    </a>
 </div>
+
+<div className="subheading">Concept</div>
+
+The blog is designed to be bright and easy to read, with a bright green color scheme that eliminates the dark and geeky feel typical of technical blogs.
+The site is also responsive, making it easy to read on both smartphones and PCs.
+
+<img className="screenshot" src={Screenshot} alt="screenshot" />
+
+We also make full use of PWA and SSG (Gatsby.js) to speed up the site's display speed as much as possible, and we use preact and purge CSS in bootstrap5 to create a rich UX.
 
 <div className="tip-wrapper">
   <span className="tip">Tip</span>Edit the Markdown in{' '}

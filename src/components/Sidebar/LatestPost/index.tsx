@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 import ReactGA from "react-ga";
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 export type Post = {
   node: {
@@ -23,7 +23,7 @@ const LatestPost = ({
   posts: Post[];
   totalCount: number;
 }) => (
-  <div className="latest-post">
+  <div className={style.latestPost}>
     <p>
       <span className="icon-newspaper-o" />
       &nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;

@@ -24,6 +24,33 @@ module.exports = {
     config.module.rules[0].use[0].options.plugins.push(
         require.resolve("babel-plugin-remove-graphql-queries")
     )
+
+    config.module.rules.push({
+      test: /\.module\.scss$/,
+      use: [
+        {
+          loader: "style-loader",
+          options: {
+            modules: {
+              // for use CSS module in Storybook, namedExport is true.
+              namedExport: true,
+            },
+          },
+        },
+        {
+          loader: "css-loader",
+          options: {
+            importLoaders: 1,
+            modules: {
+              // for use CSS module in Storybook, namedExport is true.
+              namedExport: true,
+            }
+          },
+        },
+        "sass-loader",
+      ],
+      include: path.resolve(__dirname, '../'),
+    })
     config.module.rules.push({
       test: /\.scss$/,
       use: [
@@ -33,12 +60,13 @@ module.exports = {
           options: {
             modules: {
               auto: true,
-            },
-          },
+            }
+          }
         },
         "sass-loader",
       ],
       include: path.resolve(__dirname, '../'),
+      exclude: /\.module\.scss$/
     })
     return config
   },

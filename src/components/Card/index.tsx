@@ -5,7 +5,7 @@ import Tag from "../Tag";
 
 import { parseImgur, SizeMapping } from "../../utils/images";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 const CardHeader = ({
   url,
@@ -23,7 +23,7 @@ const CardHeader = ({
       <Link to={url}>
         <span className="visually-hidden">{title}</span>
         <div
-          className="wrapper lozad"
+          className={style.wrapper + " lozad"}
           data-background-image={parseImgur(image, SizeMapping.large)}
           title={title}
           aria-hidden="true"
@@ -35,7 +35,7 @@ const CardHeader = ({
     <Link to={url}>
       <span className="visually-hidden">{title}</span>
       <div
-        className="wrapper"
+        className={style.wrapper}
         style={{
           backgroundImage: ` url(${parseImgur(image, SizeMapping.large)})`,
         }}
@@ -64,7 +64,7 @@ const Card = ({
   index: number;
 }) => (
   <div className="col-sm-12 pb-4">
-    <div className="custom-card">
+    <div className={style.customCard}>
       {headerImage && (
         <CardHeader
           url={withPrefix(url)}
@@ -73,16 +73,16 @@ const Card = ({
           index={index}
         />
       )}
-      <div className="data">
-        <div className="content">
-          <div className="stats">
-            <span className="date">{date?.split("T")[0]}</span>
+      <div className={style.data}>
+        <div className={style.dataContent}>
+          <div className={style.stats}>
+            <span className={style.date}>{date?.split("T")[0]}</span>
             {tags.map((name) => (
               <Tag name={name || ""} key={name} />
             ))}
           </div>
           <Link to={withPrefix(url)}>
-            <h3 className="title">{title}</h3>
+            <h3 className={style.title}>{title}</h3>
           </Link>
           <p>{description}</p>
           <Link to={withPrefix(url)}>....Read more....</Link>

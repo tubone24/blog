@@ -9,7 +9,7 @@ import { AllPost } from "./entity";
 import SearchBox from "../SearchBox";
 import Subscription from "./Subscription";
 import TagCloud from "./TagCloud";
-import "./index.scss";
+import * as style from "./index.module.scss";
 import { isBrowser } from "../../utils";
 
 const Icon = ({
@@ -26,9 +26,9 @@ const Icon = ({
     href={href}
     title={title}
     rel="external nofollow noopener noreferrer"
-    className="custom-icon"
+    className={style.customIcon}
   >
-    <span className="fa-layers fa-fw fa-2x">
+    <span className={style.faLayers + " fa-fw fa-2x"}>
       <span className={icon} />
       &nbsp;
     </span>
@@ -91,12 +91,12 @@ export const Sidebar = ({
       } as AllPost)
   );
   return (
-    <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
-      <div className="about-me">
+    <header className={style.introHeader + " site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1"}>
+      <div className={style.aboutMe}>
         <a href="https://portfolio.tubone-project24.xyz/">
           <picture>
             <source
-              className="avatar"
+              className={style.avatar}
               srcSet="/assets/avater.webp"
               type="image/webp"
               onClick={() =>
@@ -107,7 +107,7 @@ export const Sidebar = ({
               }
             />
             <img
-              className="avatar"
+              className={style.avatar}
               src="/assets/avater.png"
               alt="tubone"
               decoding="async"
@@ -131,7 +131,7 @@ export const Sidebar = ({
         >
           <h2>tubone</h2>
         </a>
-        <p className="soliloquy">It&apos;s my life</p>
+        <p className={style.soliloquy}>It&apos;s my life</p>
         <Icon
           href="https://github.com/tubone24"
           icon="icon-github"

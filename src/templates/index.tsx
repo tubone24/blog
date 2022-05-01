@@ -8,7 +8,7 @@ import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
 import ShareBox from "../components/ShareBox";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 import SEO from "../components/SEO";
 
 const NavLinkText = ({
@@ -20,12 +20,12 @@ const NavLinkText = ({
 }) => {
   if (disabled) {
     return (
-      <div className="navlink disable-link" aria-disabled={true}>
+      <div className={style.navlink + " " + style.disableLink} aria-disabled={true}>
         {text}
       </div>
     );
   } else {
-    return <div className="navlink active-link">{text}</div>;
+    return <div className={style.navlink + " " + style.activeLink}>{text}</div>;
   }
 };
 
@@ -50,7 +50,7 @@ const NavLink = ({
 };
 
 const PageNum = ({ page, all }: { page: number; all: number }) => (
-  <div className="pagenum">
+  <div className={style.pagenum}>
     {page}/{all}
   </div>
 );
@@ -89,12 +89,7 @@ const Page = ({
 
   return (
     <>
-      <div
-        className="row homepage"
-        style={{
-          marginTop: 20,
-        }}
-      >
+      <div className={style.rowHomepage + " row homepage"}>
         <Sidebar />
         <div className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
           {group.map(({ node }, num) => (
@@ -115,20 +110,14 @@ const Page = ({
             />
           ))}
 
-          <div
-            className="row pager"
-            style={{
-              justifyContent: "space-around",
-              marginBottom: "20px",
-            }}
-          >
-            <div className="previousLink">
+          <div className={style.rowPager + " row pager"}>
+            <div>
               <NavLink test={!first} url={previousUrl} text="Previous" />
             </div>
-            <div className="pageNum">
+            <div>
               <PageNum page={index} all={pageCount} />
             </div>
-            <div className="nextLink">
+            <div>
               <NavLink test={!last} url={nextUrl} text="Next" />
             </div>
           </div>

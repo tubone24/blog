@@ -1,5 +1,4 @@
-@import "../../styles/colors.scss"; // Colors
-// Content
+@import "../../styles/colors.scss";
 
 .fadeIn {
   animation-name: fadeIn;
@@ -45,4 +44,25 @@
   border-bottom-right-radius: 0.3em;
   padding: 3px;
   top: 1px;
+}
+
+#toc_container {
+  display: table;
+  width: auto;
+  padding: 20px;
+  margin-bottom: 1em;
+  font-size: 95%;
+  background: #f9f9f9 none repeat scroll 0 0;
+  border: 1px solid #aaa;
+}
+
+.toc_title {
+  font-weight: 700;
+  text-align: center;
+}
+
+#toc_container li,
+#toc_container ul,
+#toc_container ul li {
+  list-style: outside none none !important;
 }
