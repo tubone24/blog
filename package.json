@@ -22,7 +22,7 @@
     "classnames": "2.3.1",
     "dayjs": "1.10.7",
     "dotenv": "10.0.0",
-    "faunadb": "4.4.1",
+    "faunadb": "4.5.4",
     "flexboxgrid": "6.3.1",
     "gatsby": "4.13.0",
     "gatsby-legacy-polyfills": "2.10.0",
