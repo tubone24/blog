@@ -1,4 +1,154 @@
+@import "../../styles/colors";
 .content-white-inner {
   padding: 30px;
   background: white;
+  a {
+    color: $light-blue;
+
+    &:hover {
+      color: $blue;
+      text-decoration: none;
+    }
+  }
+
+  @for $i from 3 through 6 {
+    h#{$i} {
+      margin-top: 60px;
+      margin-bottom: 30px;
+      font-size: 32 - $i * 3px;
+      font-weight: 400;
+    }
+  }
+
+  h1 {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 48px;
+    font-weight: 600;
+  }
+
+  h2 {
+    position: relative;
+    padding-bottom: 5px;
+    margin-top: 60px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    border-bottom: solid 3px;
+  }
+
+  h2::before {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    display: block;
+    width: 60px;
+    height: 3px;
+    content: "";
+    background-color: $main-green;
+  }
+
+  ul,
+  ol {
+    padding: 0.5em 0.5em 0.5em 2em;
+    margin-right: 10px;
+    margin-left: 10px;
+    background: #f1f8ff;
+    border-radius: 9px;
+    box-shadow: 0 0 0 10px #f1f8ff;
+  }
+
+  ul li,
+  ol li {
+    padding: 0.5em 0;
+    line-height: 1.5;
+  }
+
+  blockquote {
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-style: italic;
+    color: #464646;
+    border: solid 3px #3ca5d4;
+    border-left-width: 50px;
+  }
+
+  blockquote::before {
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    display: inline-block;
+    //font-family: sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    color: #fff;
+    content: ">";
+    transform: translateY(-50%);
+    transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  blockquote p {
+    position: relative;
+    z-index: 3;
+    padding: 0;
+    margin: 10px 0;
+    line-height: 1.7;
+  }
+
+  blockquote cite {
+    display: block;
+    font-size: 0.9em;
+    color: #888;
+    text-align: right;
+  }
+
+  table {
+    margin-top: 40px;
+    margin-bottom: 50px;
+
+    th {
+      td {
+        line-height: 1.5;
+        border-collapse: collapse;
+        border: 1px solid #ccc;
+      }
+    }
+  }
+
+  table.type06 th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    vertical-align: top;
+    background: #3f3f3f;
+  }
+
+  table.type06 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) {
+    background: #d9d9d9;
+  }
+
+  code,
+  pre {
+    font-family: SFMono-Regular, Consolas, "Roboto Mono", "Courier New", "BIZ UDGothic", Meiryo, monospace;
+
+    /* SFMono, monospace (macOS10.11+, iOS9+) */
+
+    /* Consolas, BIZ UDゴシック (Windows10 October 2018 Update+) */
+
+    /* Consolas, Meiryo (Windows7+) */
+
+    /* Courier New, monospace (macOS10.3+?, iOS4+, WindowsXP+?) */
+
+    /* Robot Mono, monospace (Android4+) */
+  }
 }

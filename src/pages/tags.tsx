@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Tag from "../components/Tag";
 import SEO from "../components/SEO";
 
-import "./tags.scss";
+import * as style from "./tags.module.scss";
 
 const TagPage = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
   const mapping: { [key: string]: number } = {};
@@ -27,10 +27,10 @@ const TagPage = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
 
   return (
     <div className="container">
-      <div className="row tags-row">
+      <div className={style.tagsRow + " row"}>
         <Sidebar />
 
-        <div className="col order-2 tags-page">
+        <div className={style.tagsPage + " col order-2"}>
           {tags.map((item) => (
             <Tag name={item} key={item} count={mapping[item]} />
           ))}

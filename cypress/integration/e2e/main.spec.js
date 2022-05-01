@@ -19,8 +19,5 @@ describe("UI Test", () => {
     cy.get("[data-testid=GotoTopButton]").click();
     cy.wait(5000);
     cy.window().its("scrollY").should("be.lt", 100);
-    cy.get("[data-testid=CommentButton]").click();
-    cy.wait(5000);
-    cy.window().its("scrollY").should("be.gt", 100);
   });
 });

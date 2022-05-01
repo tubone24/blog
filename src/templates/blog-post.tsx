@@ -15,7 +15,7 @@ const Gitalk = loadable(
   () => import(/* webpackPrefetch: true */ "../components/Gitalk")
 );
 
-import "./blog-post.scss";
+import * as style from "./blog-post.module.scss";
 import RelatedPosts from "../components/Relateds";
 
 type Props = {
@@ -41,7 +41,7 @@ class BlogPost extends Component<Props> {
 
     const shareURL = `https://blog.tubone-project24.xyz/${fields?.slug}`;
     return (
-      <div className="row post order-2">
+      <div className={style.post + " row order-2"}>
         <Header
           img={frontmatter?.headerImage || "https://i.imgur.com/M795H8A.jpg"}
           title={frontmatter?.title}
@@ -50,7 +50,7 @@ class BlogPost extends Component<Props> {
           subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />
-        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
+        <div className={style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"}>
           <TimeToRead
             words={this.props.pageContext.words}
             minutes={this.props.pageContext.minutes}

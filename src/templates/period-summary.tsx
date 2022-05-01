@@ -3,7 +3,7 @@ import { graphql, Link, withPrefix } from "gatsby";
 import SEO from "../components/SEO";
 import Sidebar from "../components/Sidebar";
 
-import "./period-summary.scss";
+import * as style from "./period-summary.module.scss";
 
 const PeriodSummary = ({
   data,
@@ -25,15 +25,10 @@ const PeriodSummary = ({
   }
   return (
     <div className="container">
-      <div
-        className="row"
-        style={{
-          margin: 15,
-        }}
-      >
+      <div className={style.row + " row"}>
         <Sidebar />
 
-        <div className="col order-2 period">
+        <div className={style.period + " col order-2"}>
           <h2>{title}</h2>
           <ul>
             {edges.map(({ node }) => {
