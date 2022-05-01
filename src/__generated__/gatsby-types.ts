@@ -2766,11 +2766,6 @@ type tagQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArr
         )> }
       ) }> } };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
 type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2780,6 +2775,11 @@ type getAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type getAllTagsQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'tags'>> } }> } };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 

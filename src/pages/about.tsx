@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Content from "../components/Content";
 import ShareBox from "../components/ShareBox";
 import SEO from "../components/SEO";
+import * as style from "./about.module.scss";
 
 const html = `
   <h1>Who am I?</h1>
@@ -98,7 +99,7 @@ const html = `
 class About extends Component {
   render() {
     return (
-      <div className="row post order-2">
+      <div className={style.post + " row order-2"}>
         <Header
           img="https://i.imgur.com/6B7WC7D.jpg"
           title="Who is tubone?"
@@ -107,7 +108,11 @@ class About extends Component {
           subTitle="Why do I write this blog?"
         />
         <Sidebar />
-        <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
+        <div
+          className={
+            style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
+          }
+        >
           <Content post={html} />
         </div>
 
