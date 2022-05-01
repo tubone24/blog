@@ -113,10 +113,11 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public/bundle-report.html
+          publish_dir: ./public/webpack-bundle-analyser/
+          destination_dir: ba
           keep_files: true
       - name: Remove Bundle Analyze
-        run: rm ./public/bundle-report.html
+        run: rm ./public/webpack-bundle-analyser/index.html
       - name: Deploy to netlify
         run: npx netlify-cli deploy --prod --dir=./public
         env:
@@ -155,12 +156,11 @@ jobs:
           STORYBOOK_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           NETLIFY_ENV: production
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
-          keep_files: true
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --prod --dir=./public
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
   lighthouse:
     runs-on: macos-latest
     needs: ['build']

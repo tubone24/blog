@@ -2716,18 +2716,10 @@ type MarkdownRemarkSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type cardDataFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<(
-    Pick<MarkdownRemarkFrontmatter, 'title' | 'date'>
-    & { url: MarkdownRemarkFrontmatter['slug'] }
-  )> };
-
-type SidebarQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type SidebarQueryQuery = { readonly all: (
-    Pick<MarkdownRemarkConnection, 'totalCount'>
-    & { readonly allPosts: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'tags'>> } }> }
-  ), readonly limited: { readonly latestPosts: ReadonlyArray<{ readonly node: cardDataFragment }> } };
+type getAllPagesQuery = { readonly allSitePage: { readonly edges: ReadonlyArray<{ readonly node: Pick<SitePage, 'path'> }> } };
 
 type getAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2746,6 +2738,40 @@ type BlogPostQueryQuery = { readonly content: { readonly edges: ReadonlyArray<{ 
         & postFragment
       ) }> } };
 
+type tagQueryQueryVariables = Exact<{
+  tag: Maybe<ReadonlyArray<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+type tagQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'id'>
+        & { readonly frontmatter: Maybe<(
+          Pick<MarkdownRemarkFrontmatter, 'id' | 'title' | 'date' | 'tags' | 'headerImage' | 'description'>
+          & { url: MarkdownRemarkFrontmatter['slug'] }
+        )> }
+      ) }> } };
+
+type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_1_Query = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'excerpt'>
+        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'headerImage' | 'date' | 'tags'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
+      ) }> } };
+
+type cardDataFragment = { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<(
+    Pick<MarkdownRemarkFrontmatter, 'title' | 'date'>
+    & { url: MarkdownRemarkFrontmatter['slug'] }
+  )> };
+
+type SidebarQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SidebarQueryQuery = { readonly all: (
+    Pick<MarkdownRemarkConnection, 'totalCount'>
+    & { readonly allPosts: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'tags'>> } }> }
+  ), readonly limited: { readonly latestPosts: ReadonlyArray<{ readonly node: cardDataFragment }> } };
+
 type PeriodQueryQueryVariables = Exact<{
   periodStartDate: Maybe<Scalars['Date']>;
   periodEndDate: Maybe<Scalars['Date']>;
@@ -2762,31 +2788,5 @@ type PeriodQueryQuery = { readonly allMarkdownRemark: (
         )> }
       ) }> }
   ) };
-
-type tagQueryQueryVariables = Exact<{
-  tag: Maybe<ReadonlyArray<Scalars['String']> | Scalars['String']>;
-}>;
-
-
-type tagQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'id'>
-        & { readonly frontmatter: Maybe<(
-          Pick<MarkdownRemarkFrontmatter, 'id' | 'title' | 'date' | 'tags' | 'headerImage' | 'description'>
-          & { url: MarkdownRemarkFrontmatter['slug'] }
-        )> }
-      ) }> } };
-
-type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type getAllPagesQuery = { readonly allSitePage: { readonly edges: ReadonlyArray<{ readonly node: Pick<SitePage, 'path'> }> } };
-
-type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_1_Query = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'excerpt'>
-        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'headerImage' | 'date' | 'tags'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
-      ) }> } };
 
 }
