@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import lozad from "lozad";
 
 import { isBrowser } from "../../utils";
-import "./index.scss";
+import * as style from "./index.module.scss";
 
 type Props = {
   post: string;
@@ -48,10 +48,10 @@ class Content extends Component<Props> {
     return (
       <>
         <div
-          className="content-white-inner"
+          className={style.contentWhiteInner}
           dangerouslySetInnerHTML={{ __html: post }}
         />
-        <div className="content-white-inner">
+        <div className={style.contentWhiteInner}>
           <h2>tubone24にラーメンを食べさせよう！</h2>
           <p>ぽちっとな↓</p>
           <a href="https://www.buymeacoffee.com/tubone24">
