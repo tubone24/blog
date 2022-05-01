@@ -205,7 +205,7 @@ jobs:
           STORYBOOK_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
           STORYBOOK_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
           GATSBY_GITHUB_SHA: ${{ github.sha }}
-          NETLIFY_ENV: production
+          NETLIFY_ENV: deploy-preview
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./storybook-static > cli.txt
         env:
