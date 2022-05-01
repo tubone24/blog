@@ -3,7 +3,7 @@ import { Link, withPrefix } from "gatsby";
 
 import { parseImgur, SizeMapping } from "../../utils/images";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 import Tag from "../Tag";
 
 const imageStyle = (headerImage: string) =>
@@ -11,7 +11,10 @@ const imageStyle = (headerImage: string) =>
 
 const CardHeader = ({ url, image }: { url: string; image: string }) => (
   <Link to={url}>
-    <div className="wrapper lozad" data-background-image={imageStyle(image)} />
+    <div
+      className={style.wrapper + " lozad"}
+      data-background-image={imageStyle(image)}
+    />
   </Link>
 );
 
@@ -33,18 +36,18 @@ const RelatedCard = ({
 }) => (
   <div className="col-sm-12 pb-4">
     <Link to={withPrefix(url)}>
-      <div className="custom-card">
-        <div className="data">
-          <div className="content">
-            <div className="stats">
-              <span className="date">{date.split("T")[0]}</span>
+      <div className={style.customCard}>
+        <div className={style.data}>
+          <div className={style.content}>
+            <div className={style.stats}>
+              <span className={style.date}>{date.split("T")[0]}</span>
               {tags.map((name) => (
                 <Tag name={name || ""} key={name} />
               ))}
             </div>
             <CardHeader url={withPrefix(url)} image={headerImage} />
             <Link to={withPrefix(url)}>
-              <h4 className="title">{title}</h4>
+              <h4 className={style.title}>{title}</h4>
             </Link>
             <p>{description}</p>
           </div>

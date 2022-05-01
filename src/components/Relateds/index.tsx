@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from "gatsby";
 import lozad from "lozad";
 import RelatedCard from "../RelatedCard";
 
-import "./index.scss";
+import * as style from "./index.module.scss";
 import { isBrowser } from "../../utils";
 
 const RelatedPosts = ({
@@ -67,13 +67,13 @@ const RelatedPosts = ({
           return null;
         }
         return (
-          <div className="related-posts">
-            <h2 className="related-posts-title">
+          <div className={style.relatedPosts}>
+            <h2>
               <span className="icon-newspaper-o" />
               &nbsp;Related Posts
             </h2>
             {relatedPosts.map((relatedPost) => (
-              <div className="related-post">
+              <div>
                 <RelatedCard
                   title={relatedPost.node.frontmatter?.title || ""}
                   tags={relatedPost.node.frontmatter?.tags || []}
