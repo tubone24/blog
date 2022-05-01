@@ -162,7 +162,6 @@
     "prettier": "2.6.2",
     "sass-loader": "12.4.0",
     "start-server-and-test": "1.14.0",
-    "storybook-addon-gatsby": "^0.0.5",
     "stylelint": "14.1.0",
     "stylelint-config-recess-order": "3.0.0",
     "stylelint-config-recommended-scss": "5.0.2",
