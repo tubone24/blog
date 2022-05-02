@@ -14,7 +14,9 @@ export default {
   },
 } as ComponentMeta<typeof ShareBox>;
 
-const Template: ComponentStory<typeof ShareBox> = (args) => <ShareBox {...args} />;
+const Template: ComponentStory<typeof ShareBox> = (args) => (
+  <ShareBox {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

@@ -50,7 +50,11 @@ class BlogPost extends Component<Props> {
           subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />
-        <div className={style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"}>
+        <div
+          className={
+            style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
+          }
+        >
           <TimeToRead
             words={this.props.pageContext.words}
             minutes={this.props.pageContext.minutes}

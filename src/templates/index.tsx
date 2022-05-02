@@ -20,7 +20,10 @@ const NavLinkText = ({
 }) => {
   if (disabled) {
     return (
-      <div className={style.navlink + " " + style.disableLink} aria-disabled={true}>
+      <div
+        className={style.navlink + " " + style.disableLink}
+        aria-disabled={true}
+      >
         {text}
       </div>
     );
