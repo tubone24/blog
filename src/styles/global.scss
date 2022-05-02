@@ -1,7 +1,7 @@
-@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
 
 @font-face {
-  font-family: "icomoon";
+  font-family: icomoon;
   font-style: normal;
   font-weight: normal;
   src: url("/fonts/icomoon.eot?s0mo8f");
@@ -17,7 +17,9 @@
 [class^="icon-"],
 [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "icomoon" !important;
+  /* stylelint-disable font-family-no-missing-generic-family-keyword */
+  font-family: icomoon !important;
+  /* stylelint-enable font-family-no-missing-generic-family-keyword */
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -151,8 +153,6 @@
 }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, Verdana, Roboto, arial, "HiraKakuProN-W3", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDGothic", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Sans Emoji";
-
   /* San Francisco, ヒラギノ (macOS10.11+, iOS9+) */
 
   /* Helvetica, ヒラギノ (macOS10.0+?, iOS4+?) */
@@ -162,11 +162,27 @@
   /* Verdana, Meiryo (WindowsVista+) */
 
   /* Robot (Android4.1+) */
-  // font-family: 'Noto Sans CJK JP', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', sans-serif;
+  // font-family: '
+  //   Noto Sans CJK JP', 'Noto Sans JP', -apple-system,
+  //   BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', sans-serif;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Verdana,
+    Roboto,
+    arial,
+    "HiraKakuProN-W3",
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "BIZ UDGothic",
+    Meiryo,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Sans Emoji";
   font-size: inherit;
-  font-feature-settings: "kern", "liga", "clig", "calt";
-  font-feature-settings: "kern", "liga", "clig", "calt";
-  font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
   font-kerning: normal;
   line-height: inherit;

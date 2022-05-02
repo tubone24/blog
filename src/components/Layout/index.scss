@@ -1,5 +1,6 @@
-@import "../../styles/colors.scss";
+@import "../../styles/colors";
 
+/* stylelint-disable selector-class-pattern, selector-id-pattern, keyframes-name-pattern */
 .fadeIn {
   animation-name: fadeIn;
   animation-duration: 1s;
@@ -66,3 +67,4 @@
 #toc_container ul li {
   list-style: outside none none !important;
 }
+/* stylelint-enable selector-class-pattern, selector-id-pattern, keyframes-name-pattern */
