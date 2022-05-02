@@ -25,25 +25,25 @@
 }
 
 .gatsby-code-title {
-  display: block;
   position: relative;
-  background: #272822;
-  width: 100%;
   top: 10px;
+  display: block;
+  width: 100%;
+  background: #272822;
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
 }
 
 .gatsby-code-title span {
-  display: inline;
   position: relative;
+  top: 1px;
+  display: inline;
+  padding: 3px;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   color: #eee;
   background: #777;
   border-top-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
-  padding: 3px;
-  top: 1px;
 }
 
 #toc_container {

@@ -8,7 +8,6 @@
   &:hover {
     box-shadow: 0 0 30px 0 rgb(0 0 0 / 30%);
   }
-
 }
 
 .data {
@@ -20,8 +19,8 @@
   position: relative;
   z-index: 1;
   padding: 0.01em;
-  background-image: $bg-backGround-pic;
   background-color: #fff;
+  background-image: $bg-backGround-pic;
 
   h4 {
     margin: 10px !important;
@@ -43,8 +42,8 @@
 }
 
 .title {
-  color: $light-blue;
   margin-top: 10px;
+  color: $light-blue;
 }
 
 .date {
