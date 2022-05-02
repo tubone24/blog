@@ -116,7 +116,8 @@
     "textlint": "npx textlint \"src/content/*.md\"",
     "textlint:fix": "npx textlint --fix \"src/content/*.md\"",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",
@@ -157,7 +158,7 @@
     "eslint-plugin-react": "7.29.4",
     "gatsby-plugin-webpack-bundle-analyser-v2": "1.1.27",
     "gh-pages": "3.2.3",
-    "husky": "7.0.4",
+    "husky": "7.0.0",
     "lint-staged": "12.3.8",
     "netlify-cli": "10.0.0",
     "netlify-lambda": "2.0.15",
