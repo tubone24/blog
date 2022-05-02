@@ -46,6 +46,7 @@ Special, thanks!
 - Sitemap generate
 - RSS feed generate
 - Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), top page Lighthouse's accessibility score is 100!
+- Use Sentry for detecting error and check performance
 
 #### For Developer
 
