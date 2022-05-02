@@ -93,9 +93,8 @@
     "build:nocache": "npm run clean && npm run build",
     "develop": "gatsby develop",
     "develop:remote": "gatsby develop -p 8080 -H 0.0.0.0",
-    "deploy": "npm run build && gh-pages -d public",
-    "format": "eslint ./src",
-    "format:fix": "eslint --fix ./src",
+    "format": "eslint .",
+    "format:fix": "eslint --fix .",
     "format-style": "npx stylelint **/*.scss",
     "format-style:fix": "npx stylelint **/*.scss --fix",
     "typecheck": "tsc",
@@ -117,7 +116,8 @@
     "textlint:fix": "npx textlint --fix \"src/content/*.md\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",
@@ -153,13 +153,14 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.29.4",
     "gatsby-plugin-webpack-bundle-analyser-v2": "1.1.27",
     "gh-pages": "3.2.3",
     "husky": "7.0.0",
-    "lint-staged": "12.3.8",
+    "lint-staged": "^12.3.8",
     "netlify-cli": "10.0.0",
     "netlify-lambda": "2.0.15",
     "prettier": "2.6.2",
@@ -185,5 +186,16 @@
   "browserslist": [
     ">0.25% in JP",
     "not dead"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "npm run format:fix"
+    ],
+    "*.{scss}": [
+      "npm run format-style:fix"
+    ],
+    "*.{md}": [
+      "npm run textlint:fix"
+    ]
+  }
 }

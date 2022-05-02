@@ -3,8 +3,11 @@ const {
   URL: NETLIFY_SITE_URL = "https://blog.tubone-project24.xyz",
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   GATSBY_GITHUB_CLIENT_ID,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   GATSBY_GITHUB_CLIENT_SECRET,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   GATSBY_GITHUB_SHA,
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === "production";

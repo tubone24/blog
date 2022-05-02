@@ -1,10 +1,15 @@
 // refs: https://github.com/reireias/reireias.github.io/blob/source/scripts/benchmark.js
 
 /* eslint no-console: 0 */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require("fs");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const qs = require("qs");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const axios = require("axios");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const dayjs = require("dayjs");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
 
 const TARGET_URL = process.argv[2];
@@ -21,7 +26,7 @@ const saveJsonFile = (obj, client) => {
 };
 
 const main = async () => {
-  ["desktop", "mobile"].forEach(async (client) => {
+  for (const client of ["desktop", "mobile"]) {
     const params = {
       url: TARGET_URL,
       locale: "ja",
@@ -49,7 +54,7 @@ const main = async () => {
     }
 
     saveJsonFile(result.data, client);
-  });
+  }
 };
 (async () => {
   try {
