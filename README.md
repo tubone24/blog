@@ -11,13 +11,59 @@
 
 ## What is this?
 
-This is tubone BOYAKI, I mean tubone's Blog by Gatsby and Netlify.
+This is tubone's Blog by Gatsby and Netlify.
 
 [https://blog.tubone-project24.xyz/](https://blog.tubone-project24.xyz/)
 
-![Home Page](https://i.imgur.com/o4itWu0.png)
+![Home Page](https://i.imgur.com/NyU0Bhy.png)
 
-## How deploy?
+### Templated by?
+
+[Gatsby Starter - Calpa's Blog](https://github.com/calpa/gatsby-starter-calpa-blog])
+
+Special, thanks!
+
+## Features
+
+#### Structure
+
+- Gatsby.js v4, Static site generating
+  - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
+  - All Components writen by TypeScript
+  - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
+  - Use [Sass(Scss)](https://sass-lang.com/) and Scoped by CSS Modules
+  - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
+- For Search Engine Optimization, generate header meta tag and OGP
+- High Performance, purge CSS to Bootstrap, optimise SVG and minify HTML, CSS and JS
+- Google Analytics v3, planning to update to v4
+- Site searching by Algolia search
+- Code syntax highlighting by [Prism.js](https://prismjs.com/)
+- PWA Support, and prefetch page-data.json
+- Deploy Netlify
+- Icons used by Fontawesome, and optimised to [Icomoon](https://icomoon.io/)
+- Sitemap generate
+- RSS feed generate
+- Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), Lighthouse's accessibility is 100!
+
+#### For Developer
+
+- Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for format codes
+- Use [Cypress](https://www.cypress.io/) for End-To-End testing
+- Components managed by [Storybook](#storybook)
+  - Generate all preview-deploy and production-deploy
+- Each production-deploy is measured by [Lighthouse](#Lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
+- Each production-deploy is measured by [Bundle Analyzer](#bundle-analyzer) and [reports](https://tubone24.github.io/blog/ba/index.html) are output
+- unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
+- Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
+
+#### For contributor of articles
+
+- Post articles in `/src/content/*.md`, and Create [GitHub Pull Request](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to master branch
+  - Deploy netlify in preview environment and check your articles
+- Or use [Netlify CMS](https://www.netlifycms.org/) in `/admin/`
+- Use [textlint](#textlint) before merge master by GitHub Actions
+
+## How to develop?
 
 Run at local, execute commands below, and access [http://localhost:8000](http://localhost:8000)
 
@@ -27,6 +73,8 @@ $ npm start
 ```
 
 ## CI/CD
+
+This repository uses GitHub Actions as CI. There are two workflows, one for preview deployments and one for production deployments.
 
 [![DeployToNetlifyPreview](https://github.com/tubone24/blog/workflows/DeployToNetlifyPreview/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPreview)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
@@ -63,7 +111,7 @@ Push the button below.
 
 ## textlint
 
-I use texlint to proofread my blog text.
+I use [textlint](https://textlint.github.io/) to proofread my blog text.
 
 ```
 npm run textlint
