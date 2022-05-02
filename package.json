@@ -161,7 +161,7 @@
     "netlify-cli": "10.0.0",
     "netlify-lambda": "2.0.15",
     "prettier": "2.6.2",
-    "sass-loader": "12.4.0",
+    "sass-loader": "12.6.0",
     "start-server-and-test": "1.14.0",
     "stylelint": "14.1.0",
     "stylelint-config-recess-order": "3.0.0",
