@@ -258,9 +258,6 @@ type Site = Node & {
   readonly port: Maybe<Scalars['Int']>;
   readonly host: Maybe<Scalars['String']>;
   readonly pathPrefix: Maybe<Scalars['String']>;
-  readonly polyfill: Maybe<Scalars['Boolean']>;
-  readonly jsxRuntime: Maybe<Scalars['String']>;
-  readonly trailingSlash: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -561,9 +558,6 @@ type Query_siteArgs = {
   port: Maybe<IntQueryOperatorInput>;
   host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
-  polyfill: Maybe<BooleanQueryOperatorInput>;
-  jsxRuntime: Maybe<StringQueryOperatorInput>;
-  trailingSlash: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1532,9 +1526,6 @@ type SiteFieldsEnum =
   | 'port'
   | 'host'
   | 'pathPrefix'
-  | 'polyfill'
-  | 'jsxRuntime'
-  | 'trailingSlash'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1669,9 +1660,6 @@ type SiteFilterInput = {
   readonly port: Maybe<IntQueryOperatorInput>;
   readonly host: Maybe<StringQueryOperatorInput>;
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
-  readonly polyfill: Maybe<BooleanQueryOperatorInput>;
-  readonly jsxRuntime: Maybe<StringQueryOperatorInput>;
-  readonly trailingSlash: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -2766,6 +2754,11 @@ type tagQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArr
         )> }
       ) }> } };
 
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+
 type getAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2775,11 +2768,6 @@ type getAllTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type getAllTagsQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'tags'>> } }> } };
-
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 

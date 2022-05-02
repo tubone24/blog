@@ -115,6 +115,7 @@ jobs:
       - name: Cat cli.txt
         run: |
           cat cli.txt
+          sed '1s/^/## Deploy Preview\\n/g'
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
           cat cli.txt
@@ -214,6 +215,7 @@ jobs:
       - name: Cat cli.txt
         run: |
           cat cli.txt
+          sed '1s/^/## Storybook Preview\\n/g'
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
           cat cli.txt
