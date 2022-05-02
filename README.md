@@ -40,14 +40,17 @@ Special, thanks!
 - Code syntax highlighting by [Prism.js](https://prismjs.com/)
 - PWA Support, and prefetch page-data.json
 - Deploy Netlify
+- Image hosted by [imgur](https://imgur.com)
+- Use [Gitalk](https://gitalk.github.io/) for blog comment system
 - Icons used by Fontawesome, and optimised to [Icomoon](https://icomoon.io/)
 - Sitemap generate
 - RSS feed generate
-- Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), Lighthouse's accessibility is 100!
+- Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), top page Lighthouse's accessibility score is 100!
 
 #### For Developer
 
 - Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for format codes
+- Use [EditorConfig](https://editorconfig.org/)
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
@@ -90,6 +93,8 @@ Use the button below to code with the blog system:
 The components used in my blog are managed using Storybook.
 
 <https://blog-storybook.netlify.app/>
+
+![storybook](https://i.imgur.com/I5euw3q.png)
 
 ## Lighthouse
 
