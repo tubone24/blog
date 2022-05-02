@@ -191,10 +191,10 @@
     "*.{js,ts,jsx,tsx}": [
       "npm run format:fix"
     ],
-    "*.{scss}": [
+    "*.{scss,sass,css}": [
       "npm run format-style:fix"
     ],
-    "*.{md}": [
+    "*.md": [
       "npm run textlint:fix"
     ]
   }
