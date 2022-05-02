@@ -105,7 +105,7 @@
     "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cypress:run",
     "test:e2e:base": "start-server-and-test develop http://localhost:8000 cypress:base",
     "functions": "netlify-lambda serve functions",
-    "clean": "rimraf public/ .cache/",
+    "clean": "gatsby clean",
     "clean-all": "rimraf public/ .cache/ node_modules/",
     "build:functions": "netlify-lambda build functions -c ./webpack.config.js",
     "benchmark": "node scripts/benchmark.js https://blog.tubone-project24.xyz $(git rev-parse HEAD)",
