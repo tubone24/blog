@@ -50,8 +50,9 @@ Special, thanks!
 
 #### For Developer
 
-- Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for format codes
-- Use [EditorConfig](https://editorconfig.org/)
+- Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for lint codes
+- Use [EditorConfig](https://editorconfig.org/) formatting and indent
+- Use [husky](https://typicode.github.io/husky/#/) run linter before git commit and push
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
