@@ -11,12 +11,12 @@ import SEO from "../components/SEO";
 import Header from "../components/Header";
 import ShareBox from "../components/ShareBox";
 import TimeToRead from "../components/TimeToRead";
-const Gitalk = loadable(
-  () => import(/* webpackPrefetch: true */ "../components/Gitalk")
-);
 
 import * as style from "./blog-post.module.scss";
 import RelatedPosts from "../components/Relateds";
+const Gitalk = loadable(
+  () => import(/* webpackPrefetch: true */ "../components/Gitalk")
+);
 
 type Props = {
   data: GatsbyTypes.BlogPostQueryQuery;

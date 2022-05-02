@@ -4,6 +4,9 @@ const eslintrc = {
     "plugin:prettier/recommended",
     "prettier",
     "plugin:json/recommended",
+    "react-app",
+    "plugin:cypress/recommended",
+    "plugin:react-hooks/recommended",
   ],
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],
@@ -16,7 +19,9 @@ const eslintrc = {
       "react-helmet",
     ],
   },
-  rules: {},
+  rules: {
+    "no-unused-vars": "off", // duplicate @typescript-eslint/no-unused-vars
+  },
   env: {
     browser: true,
   },
