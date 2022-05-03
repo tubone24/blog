@@ -22,3 +22,6 @@ benchmark
 
 # Storybook
 storybook-static
+
+# jest
+coverage

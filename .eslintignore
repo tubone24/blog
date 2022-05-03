@@ -5,4 +5,4 @@ node_modules/*
 functions/src/complaints*
 storybook-static/*
 static/adstir.js
-
+coverage/*

@@ -7,9 +7,10 @@ const eslintrc = {
     "react-app",
     "plugin:cypress/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:jest-dom/recommended",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "jest-dom", "testing-library"],
   settings: {
     "import/core-modules": [
       "react",
@@ -25,6 +26,12 @@ const eslintrc = {
   env: {
     browser: true,
   },
+  overrides: [
+    {
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      extends: ["plugin:testing-library/react"],
+    },
+  ],
 };
 
 module.exports = eslintrc;

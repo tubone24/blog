@@ -18,7 +18,7 @@ describe("UI Test", () => {
     cy.window().its("scrollY").should("not.equal", 0);
     cy.get("[data-testid=GotoTopButton]").click();
     // Because of smooth scrolling
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    // eslint-disable-next-line cypress/no-unnecessary-waiting,testing-library/await-async-utils
     cy.wait(5000);
     cy.window().its("scrollY").should("be.lt", 100);
   });
