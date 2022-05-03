@@ -72,7 +72,7 @@ Special, thanks!
 flowchart TB
 CreateMarkdown -->|WriteArticle| PushMarkdown
 PushMarkdown --->|CreatePullRequest| DeployPreview
-EditArticle --->|WriteArticle| DeployPreview
+EditArticle --->|PushMarkdown| DeployPreview
 DeployPreview --->|CheckArticle| EditArticle
 DeployPreview --->|ReviewOthersArticle| Approved
 Approved --->|Merge| DeployProduction
