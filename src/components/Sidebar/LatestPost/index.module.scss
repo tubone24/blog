@@ -2,10 +2,10 @@
 
 .latest-post {
   a {
+    display: block;
     margin: 5px 0;
     color: $light-blue;
     text-align: left;
-    display: block;
 
     &:hover {
       text-decoration: none;

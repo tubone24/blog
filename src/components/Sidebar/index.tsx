@@ -91,7 +91,12 @@ export const Sidebar = ({
       } as AllPost)
   );
   return (
-    <header className={style.introHeader + " site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1"}>
+    <header
+      className={
+        style.introHeader +
+        " site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1"
+      }
+    >
       <div className={style.aboutMe}>
         <a href="https://portfolio.tubone-project24.xyz/">
           <picture>
@@ -168,6 +173,7 @@ Sidebar.defaultProps = {
   latestPosts: [],
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default () => (
   <StaticQuery
     query={graphql`

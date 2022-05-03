@@ -11,12 +11,12 @@ import SEO from "../components/SEO";
 import Header from "../components/Header";
 import ShareBox from "../components/ShareBox";
 import TimeToRead from "../components/TimeToRead";
-const Gitalk = loadable(
-  () => import(/* webpackPrefetch: true */ "../components/Gitalk")
-);
 
 import * as style from "./blog-post.module.scss";
 import RelatedPosts from "../components/Relateds";
+const Gitalk = loadable(
+  () => import(/* webpackPrefetch: true */ "../components/Gitalk")
+);
 
 type Props = {
   data: GatsbyTypes.BlogPostQueryQuery;
@@ -50,7 +50,11 @@ class BlogPost extends Component<Props> {
           subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />
-        <div className={style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"}>
+        <div
+          className={
+            style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
+          }
+        >
           <TimeToRead
             words={this.props.pageContext.words}
             minutes={this.props.pageContext.minutes}

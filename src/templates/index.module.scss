@@ -5,11 +5,11 @@
 }
 
 .row-pager {
-  justify-content: space-around;
-  margin-bottom: 20px;
   display: grid;
   grid-auto-flow: column;
+  justify-content: space-around;
   max-width: 100%;
+  margin-bottom: 20px;
 }
 
 .navlink {
@@ -24,7 +24,7 @@
 }
 
 .active-link {
-  color: #5252FF;
+  color: #5252ff;
 }
 
 .disable-link {
