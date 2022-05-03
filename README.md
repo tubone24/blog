@@ -29,7 +29,7 @@ Special, thanks!
 
 - Gatsby.js v4, Static site generating
   - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
-  - All Components writen by TypeScript
+  - All Components writen by [TypeScript](https://www.typescriptlang.org/)
   - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
   - Use [Sass(Scss)](https://sass-lang.com/) and Scoped by CSS Modules
   - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
@@ -67,6 +67,16 @@ Special, thanks!
   - Deploy netlify in preview environment and check your articles
 - Or use [Netlify CMS](https://www.netlifycms.org/) in `/admin/`
 - Use [textlint](#textlint) before merge master by GitHub Actions
+
+```mermaid
+flowchart TB
+CreateMarkdown -->|WriteArticle| PushMarkdown
+PushMarkdown --->|CreatePullRequest| DeployPreview
+EditArticle --->|WriteArticle| DeployPreview
+DeployPreview --->|CheckArticle| EditArticle
+DeployPreview --->|ReviewOthersArticle| Approved
+Approved --->|Merge| DeployProduction
+```
 
 ## How to develop?
 
