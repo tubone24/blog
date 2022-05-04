@@ -105,6 +105,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: npm run format-style
+      - name: Yaml Lint Check
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm run format-yml
   build:
     runs-on: ubuntu-latest
     needs: ['test', 'lint']

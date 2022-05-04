@@ -70,7 +70,10 @@ module.exports = {
     })
     return config
   },
-  "core": {
-    "builder": "@storybook/builder-webpack5"
-  }
+  features: {
+    interactionsDebugger: true,
+  },
+  core: {
+    builder: "@storybook/builder-webpack5"
+  },
 }
