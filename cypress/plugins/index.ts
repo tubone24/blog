@@ -16,16 +16,21 @@
  * @type {Cypress.PluginConfig}
  */
 
-/* eslint-disable @typescript-eslint/no-var-requires */
-const getCompareSnapshotsPlugin = require("cypress-visual-regression/dist/plugin");
-const task = require("@cypress/code-coverage/task");
-const browserifyIstanbul = require("@cypress/code-coverage/use-browserify-istanbul");
+import getCompareSnapshotsPlugin from "cypress-visual-regression/dist/plugin";
 
-module.exports = (on, config) => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import task from "@cypress/code-coverage/task";
+
+const plugins = (
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions
+) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   getCompareSnapshotsPlugin(on, config);
   task(on, config);
-  on("file:preprocessor", browserifyIstanbul);
   return config;
 };
+
+export default plugins;
