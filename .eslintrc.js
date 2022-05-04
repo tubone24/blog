@@ -7,9 +7,12 @@ const eslintrc = {
     "react-app",
     "plugin:cypress/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "jest-dom", "testing-library", "jest"],
   settings: {
     "import/core-modules": [
       "react",
@@ -21,10 +24,19 @@ const eslintrc = {
   },
   rules: {
     "no-unused-vars": "off", // duplicate @typescript-eslint/no-unused-vars
+    "jest/consistent-test-it": ["error", { fn: "it" }],
+    "jest/require-top-level-describe": ["error"],
   },
   env: {
     browser: true,
+    "jest/globals": true,
   },
+  overrides: [
+    {
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      extends: ["plugin:testing-library/react"],
+    },
+  ],
 };
 
 module.exports = eslintrc;

@@ -1,0 +1,7 @@
+{
+  "schema": "DEFAULT_SCHEMA",
+  "ignore": [
+    "node_modules/**/*.yaml",
+    ".cache/**/*.yaml"
+  ]
+}

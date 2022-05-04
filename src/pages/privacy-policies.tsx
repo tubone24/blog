@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Content from "../components/Content";
-import ShareBox from "../components/ShareBox";
-import SEO from "../components/SEO";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import Content from "@/components/Content";
+import ShareBox from "@/components/ShareBox";
+import SEO from "@/components/SEO";
 import * as style from "./privacy-policies.module.scss";
 
 const html = `
@@ -51,13 +51,13 @@ const About = () => (
       subTitle="20xx/xx/xx"
     />
     <Sidebar />
-    <div
+    <main
       className={
         style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
       }
     >
       <Content post={html} />
-    </div>
+    </main>
 
     <ShareBox url="https://blog.tubone-project24.xyz/privacy-policies" />
 

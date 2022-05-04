@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
-import ExternalLink from "../ExternalLink";
+import ExternalLink from "@/components/ExternalLink";
 
 import * as style from "./index.module.scss";
 
@@ -9,9 +9,9 @@ const Footer = () => (
     <div className="container">
       <div className="row">
         <div className="col-sm-12 text-center">
-          <p className="architecture">
+          <p data-testid="architecture">
             Build with&nbsp;
-            <ExternalLink href="https://www.gatsbyjs.org/" title="GatsbyJS" />
+            <ExternalLink href="https://www.gatsbyjs.com/" title="GatsbyJS" />
             &nbsp;and&nbsp;
             <ExternalLink href="https://preactjs.com/" title="PReact" />
             .&nbsp;Hosted on&nbsp;
@@ -19,7 +19,7 @@ const Footer = () => (
             .&nbsp;Also indexed posts with&nbsp;
             <ExternalLink href="https://www.algolia.com/" title="Algolia" />
           </p>
-          <p className={style.copyright}>
+          <p className={style.copyright} data-testid="copyright">
             Copyright&nbsp;
             <ExternalLink
               href="https://portfolio.tubone-project24.xyz/"

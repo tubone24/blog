@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 
-import { parseImgur, SizeMapping } from "../../utils/images";
+import { parseImgur, SizeMapping } from "@/utils/images";
 
 import * as style from "./index.module.scss";
-import Tag from "../Tag";
+import Tag from "@/components/Tag";
 
 const imageStyle = (headerImage: string) =>
   `${parseImgur(headerImage, SizeMapping.large)}`;

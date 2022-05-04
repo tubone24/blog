@@ -1,9 +1,9 @@
 import React from "react";
 
-import Transition from "../Transition";
-import Navbar from "../Navbar";
+import Transition from "@/components/Transition";
+import Navbar from "@/components/Navbar";
 import Head from "./Head";
-import Footer from "../Footer";
+import Footer from "@/components/Footer";
 import "./index.scss";
 
 if (typeof window !== "undefined") {

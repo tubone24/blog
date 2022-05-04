@@ -15,11 +15,22 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const getCompareSnapshotsPlugin = require("cypress-visual-regression/dist/plugin");
-// eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {
+
+import getCompareSnapshotsPlugin from "cypress-visual-regression/dist/plugin";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import task from "@cypress/code-coverage/task";
+
+const plugins = (
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions
+) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   getCompareSnapshotsPlugin(on, config);
+  task(on, config);
+  return config;
 };
+
+export default plugins;

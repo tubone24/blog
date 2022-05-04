@@ -3,7 +3,7 @@ import ReactGA from "react-ga";
 import { navigate, withPrefix } from "gatsby";
 
 import NavItem from "./NavItem";
-import ExternalLink from "../ExternalLink";
+import ExternalLink from "@/components/ExternalLink";
 import * as style from "./index.module.scss";
 
 const NavbarClass = [

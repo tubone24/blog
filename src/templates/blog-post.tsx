@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import loadable from "@loadable/component";
 import { graphql } from "gatsby";
 
-import { parseDate } from "../utils";
+import { parseDate } from "@/utils";
 
-import Sidebar from "../components/Sidebar";
-import Content from "../components/Content";
-import SEO from "../components/SEO";
+import Sidebar from "@/components/Sidebar";
+import Content from "@/components/Content";
+import SEO from "@/components/SEO";
 
-import Header from "../components/Header";
-import ShareBox from "../components/ShareBox";
-import TimeToRead from "../components/TimeToRead";
+import Header from "@/components/Header";
+import ShareBox from "@/components/ShareBox";
+import TimeToRead from "@/components/TimeToRead";
 
 import * as style from "./blog-post.module.scss";
-import RelatedPosts from "../components/Relateds";
+import RelatedPosts from "@/components/Relateds";
 const Gitalk = loadable(
-  () => import(/* webpackPrefetch: true */ "../components/Gitalk")
+  () => import(/* webpackPrefetch: true */ "@/components/Gitalk")
 );
 
 type Props = {
@@ -50,7 +50,7 @@ class BlogPost extends Component<Props> {
           subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />
-        <div
+        <main
           className={
             style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
           }
@@ -70,7 +70,7 @@ class BlogPost extends Component<Props> {
             title={frontmatter?.title || ""}
             tags={frontmatter?.tags || []}
           />
-        </div>
+        </main>
 
         <ShareBox url={shareURL} />
 

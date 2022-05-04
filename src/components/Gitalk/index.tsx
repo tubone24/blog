@@ -33,7 +33,13 @@ class GitalkFC extends Component<Props> {
     GitTalkInstance.render("gitalk-container");
   }
   render() {
-    return <div className={style.gitalkContainer} id="gitalk-container" />;
+    return (
+      <div
+        className={style.gitalkContainer}
+        id="gitalk-container"
+        data-testid="gitalk-container"
+      />
+    );
   }
 }
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Card from "../components/Card";
-import SEO from "../components/SEO";
-import Sidebar from "../components/Sidebar";
+import Card from "@/components/Card";
+import SEO from "@/components/SEO";
+import Sidebar from "@/components/Sidebar";
 import * as style from "./tag.module.scss";
 
 const TagPage = ({

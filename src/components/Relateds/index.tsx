@@ -1,10 +1,10 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 import lozad from "lozad";
-import RelatedCard from "../RelatedCard";
+import RelatedCard from "@/components/RelatedCard";
 
 import * as style from "./index.module.scss";
-import { isBrowser } from "../../utils";
+import { isBrowser } from "@/utils";
 
 const RelatedPosts = ({
   title,

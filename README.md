@@ -5,6 +5,7 @@
 [![DeployToNetlifyPreview](https://github.com/tubone24/blog/workflows/DeployToNetlifyPreview/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPreview)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
 [![CodeFactor](https://www.codefactor.io/repository/github/tubone24/blog/badge)](https://www.codefactor.io/repository/github/tubone24/blog)
+[![storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://blog-storybook.netlify.app/)
 [![time tracker](https://wakatime.com/badge/github/tubone24/blog.svg)](https://wakatime.com/badge/github/tubone24/blog)
 <a href="https://validator.w3.org/feed/check.cgi?url=https%3A//blog.tubone-project24.xyz/rss.xml"><img src="https://validator.w3.org/feed/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
 [![websiteup](https://img.shields.io/website.svg?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fblog.tubone-project24.xyz)](https://blog.tubone-project24.xyz)
@@ -53,6 +54,7 @@ Special, thanks!
 - Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for lint codes
 - Use [EditorConfig](https://editorconfig.org/) formatting and indent
 - Use [husky](https://typicode.github.io/husky/#/) run linter before git commit and push
+- Use [Jest](https://jestjs.io/ja/) for Unit and React Component testing
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
@@ -86,6 +88,62 @@ Run at local, execute commands below, and access [http://localhost:8000](http://
 $ npm install
 $ npm start
 ```
+
+Or Build Artifact, execute commands below
+
+```
+npm run build
+```
+
+Fix your code format by TSC, [ESLint](https://eslint.org/) and  [stylelint](https://stylelint.io/)
+
+```
+npm run typecheck
+npm run format:fix
+npm run format-style:fix
+```
+
+Testing React Component and Unit testing, execute commands below
+
+```
+npm test
+npm run test:e2e
+```
+
+If you error occurred on gatsby build, execute commands below
+
+```
+> Error loading a result for the page query in "/". Query was not run and no cached result was found.
+
+npm run clean
+```
+
+## Update Browsers List
+
+```
+npm run browserslist:update
+```
+
+## Environment variables
+
+Copy `.env.example` to create the `.env` file
+
+```
+cp .env.example .env
+```
+
+| Key                              | Description                                              | Default | 
+| -------------------------------- | -------------------------------------------------------- | ------- | 
+| GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       | 
+| GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       | 
+| GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   | 
+| GATSBY_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       | 
+| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's ADMIN API KEY, use index post content   | -       | 
+| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   | 
+| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       | 
+| GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       | 
+| GATSBY_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       | 
+| FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       | 
 
 ## CI/CD
 

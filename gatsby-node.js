@@ -1,5 +1,6 @@
 exports.onCreateNode = require("./gatsby/onCreateNode");
 
-exports.createPages = require("./gatsby/CreatePages");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+exports.createPages = require("./gatsby/index").createPages;
 
 exports.onCreateWebpackConfig = require("./gatsby/onCreateWebpackConfig");
