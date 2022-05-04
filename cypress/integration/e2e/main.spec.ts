@@ -31,6 +31,7 @@ describe("UI Test", () => {
   });
 });
 describe("a11y", () => {
+  // eslint-disable-next-line jest/expect-expect
   it("Has no detectable accessibility violations on TopPage", () => {
     cy.visit("/").injectAxe();
     cy.checkA11y(undefined, axeRunOptions);
@@ -38,6 +39,7 @@ describe("a11y", () => {
 });
 
 describe("404 Page", () => {
+  // eslint-disable-next-line jest/expect-expect
   it("Invalid Page returns 404 site", () => {
     cy.visit("/hogehogehogehogehoge", { failOnStatusCode: false }).injectAxe();
     cy.get("button").contains("Preview").click();

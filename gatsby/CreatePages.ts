@@ -53,8 +53,10 @@ type Node = {
       year: string;
       month: string;
     };
-    fields: any;
-    html: any;
+    fields: {
+      slug: string;
+    };
+    html: string;
   };
 };
 
@@ -66,6 +68,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   if (result.errors) {
     throw result.errors;
   }
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { edges = [] } = result.data!.allMarkdownRemark;
 
   const tagSet = new Set();
