@@ -1,5 +1,14 @@
+/// <reference types="Cypress" />
+/* eslint-disable jest/valid-expect */
+
+const axeRunOptions = {
+  rules: {
+    "frame-title": { enabled: false },
+  },
+};
+
 describe("UI Test", () => {
-  it("about page", () => {
+  it("about page smooth scroll", () => {
     cy.visit("/");
     cy.contains("About").click();
     cy.location("href").should("include", "/about");
@@ -21,5 +30,11 @@ describe("UI Test", () => {
     // eslint-disable-next-line cypress/no-unnecessary-waiting,testing-library/await-async-utils
     cy.wait(5000);
     cy.window().its("scrollY").should("be.lt", 100);
+  });
+});
+describe("a11y", () => {
+  it("Has no detectable accessibility violations on TopPage", () => {
+    cy.visit("/").injectAxe();
+    cy.checkA11y(undefined, axeRunOptions);
   });
 });

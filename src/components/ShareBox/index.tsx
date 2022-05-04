@@ -45,7 +45,7 @@ const ShareBox = ({
   url: string;
   hasCommentBox?: boolean;
 }) => (
-  <div className={style.mShareBox}>
+  <div className={style.mShareBox} role="application">
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
       title="FacebookでShareする"

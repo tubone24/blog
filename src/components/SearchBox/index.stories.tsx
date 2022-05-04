@@ -36,7 +36,7 @@ FilledSearchBox.play = async ({ canvasElement }) => {
     }
   );
   await waitFor(() => {
-    const items = canvas.getAllByRole("listbox");
-    expect(items.length).toBe(1);
+    const items = canvas.getByRole("listbox");
+    expect(items).toBeInTheDocument();
   });
 };

@@ -50,7 +50,7 @@ class BlogPost extends Component<Props> {
           subTitle={parseDate(frontmatter?.date)}
         />
         <Sidebar />
-        <div
+        <main
           className={
             style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
           }
@@ -70,7 +70,7 @@ class BlogPost extends Component<Props> {
             title={frontmatter?.title || ""}
             tags={frontmatter?.tags || []}
           />
-        </div>
+        </main>
 
         <ShareBox url={shareURL} />
 

@@ -51,13 +51,13 @@ const About = () => (
       subTitle="20xx/xx/xx"
     />
     <Sidebar />
-    <div
+    <main
       className={
         style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
       }
     >
       <Content post={html} />
-    </div>
+    </main>
 
     <ShareBox url="https://blog.tubone-project24.xyz/privacy-policies" />
 

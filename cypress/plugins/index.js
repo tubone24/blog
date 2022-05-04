@@ -15,11 +15,17 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+
+/* eslint-disable @typescript-eslint/no-var-requires */
 const getCompareSnapshotsPlugin = require("cypress-visual-regression/dist/plugin");
-// eslint-disable-next-line no-unused-vars
+const task = require("@cypress/code-coverage/task");
+const browserifyIstanbul = require("@cypress/code-coverage/use-browserify-istanbul");
+
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   getCompareSnapshotsPlugin(on, config);
+  task(on, config);
+  on("file:preprocessor", browserifyIstanbul);
+  return config;
 };

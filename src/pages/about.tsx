@@ -108,13 +108,13 @@ class About extends Component {
           subTitle="Why do I write this blog?"
         />
         <Sidebar />
-        <div
+        <main
           className={
             style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
           }
         >
           <Content post={html} />
-        </div>
+        </main>
 
         <ShareBox url="https://blog.tubone-project24.xyz/about" />
 

@@ -23,5 +23,7 @@ benchmark
 # Storybook
 storybook-static
 
-# jest
+# test coverage
 coverage
+coverage-e2e
+.nyc_output

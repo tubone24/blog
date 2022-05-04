@@ -94,7 +94,7 @@ const Page = ({
     <>
       <div className={style.rowHomepage + " row homepage"}>
         <Sidebar />
-        <div className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
+        <main className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
           {group.map(({ node }, num) => (
             <Card
               {...node.frontmatter}
@@ -124,7 +124,7 @@ const Page = ({
               <NavLink test={!last} url={nextUrl} text="Next" />
             </div>
           </div>
-        </div>
+        </main>
         <div className="col-xl-2 col-lg-1 order-3" />
       </div>
       <ShareBox url={location.href} hasCommentBox={false} />

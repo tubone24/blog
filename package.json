@@ -121,6 +121,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.17.9",
+    "@cypress/code-coverage": "^3.9.12",
     "@storybook/addon-a11y": "6.4.22",
     "@storybook/addon-actions": "6.4.22",
     "@storybook/addon-controls": "6.4.22",
@@ -137,6 +138,7 @@
     "@storybook/manager-webpack5": "6.4.22",
     "@storybook/react": "6.4.22",
     "@storybook/testing-library": "0.0.11",
+    "@testing-library/cypress": "^8.0.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.1.1",
@@ -147,22 +149,26 @@
     "@types/lozad": "1.16.1",
     "@types/react-test-renderer": "^18.0.0",
     "@types/react-transition-group": "4.4.4",
+    "axe-core": "^4.4.1",
     "babel-eslint": "10.1.0",
     "babel-jest": "^28.0.3",
+    "babel-plugin-istanbul": "^6.1.1",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-gatsby": "^2.13.0",
     "core-js": "^3.0.1",
     "cross-env": "7.0.3",
     "css-loader": "6.7.1",
     "cypress": "9.3.1",
+    "cypress-axe": "^0.14.0",
     "cypress-visual-regression": "1.7.0",
-    "eslint": "8.14.0",
+    "eslint": "^8.14.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jest": "^26.1.5",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
@@ -180,6 +186,7 @@
     "lint-staged": "^12.3.8",
     "netlify-cli": "10.0.0",
     "netlify-lambda": "2.0.15",
+    "nyc": "^15.1.0",
     "prettier": "2.6.2",
     "react-test-renderer": "^17.0.2",
     "sass-loader": "12.4.0",
@@ -216,6 +223,13 @@
     ],
     "src/content/*.md": [
       "npm run textlint:fix"
+    ]
+  },
+  "nyc": {
+    "report-dir": "coverage-e2e",
+    "reporter": [
+      "text",
+      "lcov"
     ]
   }
 }
