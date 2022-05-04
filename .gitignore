@@ -27,3 +27,6 @@ storybook-static
 coverage
 coverage-e2e
 .nyc_output
+
+# Cypress
+cypress/videos/e2e

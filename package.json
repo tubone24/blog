@@ -230,10 +230,14 @@
     ]
   },
   "nyc": {
+    "all": true,
     "report-dir": "coverage-e2e",
+    "include": ["src/**"],
+    "exclude": ["**/*.spec.*", "**/*.stories.*", "**/*.md"],
     "reporter": [
       "text",
-      "lcov"
+      "lcov",
+      "json"
     ]
   }
 }
