@@ -96,7 +96,7 @@
     "format:fix": "eslint --fix .",
     "format-style": "npx stylelint **/*.scss",
     "format-style:fix": "npx stylelint **/*.scss --fix",
-    "format-yml": "yamllint .",
+    "format-yml": "yamllint **/*.yaml **/*.yml",
     "typecheck": "tsc",
     "test": "jest",
     "test:cov": "jest --coverage",
