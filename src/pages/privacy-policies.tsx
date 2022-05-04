@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Content from "../components/Content";
-import ShareBox from "../components/ShareBox";
-import SEO from "../components/SEO";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import Content from "@/components/Content";
+import ShareBox from "@/components/ShareBox";
+import SEO from "@/components/SEO";
 import * as style from "./privacy-policies.module.scss";
 
 const html = `

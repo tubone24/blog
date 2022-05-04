@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-import Sidebar from "../components/Sidebar";
-import Tag from "../components/Tag";
-import SEO from "../components/SEO";
+import Sidebar from "@/components/Sidebar";
+import Tag from "@/components/Tag";
+import SEO from "@/components/SEO";
 
 import * as style from "./tags.module.scss";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
-import ExternalLink from "../ExternalLink";
+import ExternalLink from "@/components/ExternalLink";
 
 import * as style from "./index.module.scss";
 

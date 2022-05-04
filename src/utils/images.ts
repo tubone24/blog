@@ -63,22 +63,3 @@ export const parseImgur = (
   }
   return `https://i.imgur.com/${resizedImage}`;
 };
-
-const parseTitle = (title: string, text: string) => `title="${title || text}"`;
-
-export const parseImageTag = ({
-  href,
-  title,
-  text,
-}: {
-  href: string;
-  title: string;
-  text: string;
-}) =>
-  `<img class="lozad d-block mx-auto" data-src=${parseImgur(
-    href,
-    SizeMapping.large
-  )} ${parseTitle(title, text)}  alt=${parseTitle(
-    title,
-    text
-  )} loading="lazy" />`;

@@ -2,14 +2,14 @@ import React from "react";
 import Link from "gatsby-link";
 import lozad from "lozad";
 
-import { isBrowser } from "../utils";
+import { isBrowser } from "@/utils";
 
-import Card from "../components/Card";
-import Sidebar from "../components/Sidebar";
-import ShareBox from "../components/ShareBox";
+import Card from "@/components/Card";
+import Sidebar from "@/components/Sidebar";
+import ShareBox from "@/components/ShareBox";
 
 import * as style from "./index.module.scss";
-import SEO from "../components/SEO";
+import SEO from "@/components/SEO";
 
 const NavLinkText = ({
   text,

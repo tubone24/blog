@@ -6,11 +6,11 @@ import lozad from "lozad";
 import Information from "./Information";
 import { Post as LatestPostProps } from "./LatestPost";
 import { AllPost } from "./entity";
-import SearchBox from "../SearchBox";
+import SearchBox from "@/components/SearchBox";
 import Subscription from "./Subscription";
 import TagCloud from "./TagCloud";
 import * as style from "./index.module.scss";
-import { isBrowser } from "../../utils";
+import { isBrowser } from "@/utils";
 
 const Icon = ({
   href,

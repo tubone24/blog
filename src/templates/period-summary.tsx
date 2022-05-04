@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, Link, withPrefix } from "gatsby";
-import SEO from "../components/SEO";
-import Sidebar from "../components/Sidebar";
+import SEO from "@/components/SEO";
+import Sidebar from "@/components/Sidebar";
 
 import * as style from "./period-summary.module.scss";
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import lozad from "lozad";
 
-import { isBrowser } from "../../utils";
+import { isBrowser } from "@/utils";
 import * as style from "./index.module.scss";
 
 type Props = {
