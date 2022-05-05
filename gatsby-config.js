@@ -14,7 +14,8 @@ const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 const siteTitle = "tubone BOYAKI";
 const siteShortTitle = "tuboneBOYAKI";
-const siteDescription = "tubone BOYAKI is a tubone blog";
+const siteDescription =
+  "tubones BOYAKI is the developer blog by tubone who is Japanese IT Developer";
 const siteAuthor = "tubone";
 
 module.exports = {
