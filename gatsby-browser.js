@@ -15,7 +15,7 @@ const isLocalDevelopment = () =>
   window.location.origin !== "https://blog.tubone-project24.xyz";
 
 if (isLocalDevelopment() === false) {
-  ReactGA.initialize("UA-146792080-1");
+  ReactGA.initialize("G-CCJKJ2L8BY");
   Sentry.init({
     dsn: "https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608",
     release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
