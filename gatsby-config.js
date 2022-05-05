@@ -162,8 +162,6 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          "gatsby-remark-embed-youtube",
-          "gatsby-plugin-twitter",
           {
             resolve: "gatsby-remark-table-of-contents",
             options: {
@@ -173,16 +171,25 @@ module.exports = {
               toHeading: 4,
             },
           },
-          "gatsby-remark-numbered-footnotes",
           {
-            resolve: "gatsby-remark-embed-soundcloud",
+            resolve: "@raae/gatsby-remark-oembed",
             options: {
-              width: "80%", // default is "100%"
-              height: 200, // default is 300
-              color: "#6cff8c", // default is #ff5500
-              autoplay: false, // default is false
+              usePrefix: false,
+              providers: {
+                settings: {
+                  hatenablog: {
+                    endpoints: [
+                      {
+                        schemes: ["https://*.hatenablog.com/*"],
+                        url: "https://hatenablog.com/oembed",
+                      },
+                    ],
+                  },
+                },
+              },
             },
           },
+          "gatsby-remark-numbered-footnotes",
           "gatsby-remark-prismjs-title",
           {
             resolve: "gatsby-remark-prismjs",

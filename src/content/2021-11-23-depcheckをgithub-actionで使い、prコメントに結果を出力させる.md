@@ -26,7 +26,7 @@ JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode.js Pack
 
 もちろんこちらの問題はさまざまな議論が尽くされているわけですし、今更どうこう言うつもりはないです。
 
-`youtube:https://www.youtube.com/embed/SHIci8-6_gs`
+https://youtu.be/SHIci8-6_gs
 
 上記問題を解決する方法はいろいろあると思いますが、私のような末端開発者にはとりあえず使ってないライブラリを削除する、くらいしかできないのでそれらを加速させる方法を考えていきましょう。
 

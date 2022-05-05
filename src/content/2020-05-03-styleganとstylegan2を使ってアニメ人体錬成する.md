@@ -41,7 +41,7 @@ DCGANについても詳細は専門家に任せます。[これ](https://arxiv.o
 
 その時作ったモデルの結果がこちらです。
 
-`youtube:https://www.youtube.com/embed/FhBeuX4cYoE`
+https://youtu.be/FhBeuX4cYoE
 
 解像度が64×64なので、うーん大したことありませんね。
 
@@ -140,8 +140,6 @@ Styleの形で特徴を細かく分割し、Mixing Regularizationでそれぞれ
 当然、高解像度のGANは演算量は増えるので莫大な時間とお金(GPU)が必要になります。
 
 「子どもに学習学習っていいたくないですよね...。NVIDIAだからできたこと。(激寒)」
-
-`youtube:https://www.youtube.com/embed/vtKutkRhCZY`
 
 私はNVIDIAではないのでモンスターGPUを大量に購入するお金ないですので今回は学習済みのモデルを借りて実験してみます。
 
@@ -312,7 +310,7 @@ if __name__ == "__main__":
 
 生成した画像をMP4にするとこんな感じになりました！
 
-`youtube:https://www.youtube.com/embed/VAAm-Ne3T6Y`
+https://youtu.be/VAAm-Ne3T6Y
 
 おおー！すごい！なかなかしっかりしてますね。512x512の高解像度美少女キャラが無限増殖してます！
 
@@ -571,7 +569,7 @@ Unicode warinigはでるものの、
 
 まったく関係ないですが、ハローといえば**Radio Happy**ですよね。好き。
 
-`youtube:https://www.youtube.com/embed/9pY9MrjeLD4`
+https://youtu.be/9pY9MrjeLD4
 
 よし！時はきた！
 
@@ -762,13 +760,13 @@ ble.
 
 紗枝はんといえばやっぱり**美に入り彩を穿つ**ですよね。
 
-`youtube:https://www.youtube.com/embed/96rmz41v6QE`
+https://youtu.be/96rmz41v6QE
 
 ごほん！
 
 ちゃんとTransitionもうまく出力されているようです！
 
-`youtube:https://www.youtube.com/embed/KpjWeNB5TUI`
+https://youtu.be/KpjWeNB5TUI
 
 ## 結論
 

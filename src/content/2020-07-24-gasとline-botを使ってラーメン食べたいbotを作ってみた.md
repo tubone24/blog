@@ -27,7 +27,7 @@ StayHomeとは、**COVID-19**の感染拡大を防止するために、**「人�
 
 個人的には、
 
-youtube:https://www.youtube.com/embed/t54TNjoZ210
+https://youtu.be/Lk3MZrxXswY
 
 がもはや星野源さん関係ないけど笑ってしまいました。天和上がったよって顔がまたなんとも...。
 
