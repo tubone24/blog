@@ -1,6 +1,6 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import lozad from "lozad";
 
 import Information from "./Information";

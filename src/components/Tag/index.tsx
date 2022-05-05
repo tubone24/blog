@@ -1,5 +1,5 @@
 import React from "react";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import { Link, withPrefix } from "gatsby";
 import * as style from "./index.module.scss";
 

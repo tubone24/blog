@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withPrefix } from "gatsby";
 
 import * as style from "./index.module.scss";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import dayjs from "dayjs";
 import { AllPost } from "../entity";
 

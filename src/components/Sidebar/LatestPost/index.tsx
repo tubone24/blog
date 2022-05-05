@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import * as style from "./index.module.scss";
 
 export type Post = {

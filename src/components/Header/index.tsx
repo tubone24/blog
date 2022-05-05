@@ -1,7 +1,7 @@
 import React from "react";
 import * as style from "./index.module.scss";
 
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 const Header = ({
   img = "",
