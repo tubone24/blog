@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { navigate, withPrefix } from "gatsby";
 import "./index.scss";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import {
   SearchClient,
   SearchIndex,

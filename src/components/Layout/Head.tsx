@@ -1,11 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { siteTitle } from "@/config/index.json";
 
 const Head = () => (
-  <Helmet defaultTitle="tubone BOYAKI" titleTemplate="%s | tubone BOYAKI">
+  <Helmet defaultTitle={siteTitle} titleTemplate={`%s | ${siteTitle}`}>
     <meta
       name="description"
-      content="tubone's BOYAKI is the developer blog by tubone who is Japanese IT Developer"
+      content="tubone BOYAKI is the developer blog by tubone who is Japanese IT Developer"
     />
     <meta
       name="keyword"

@@ -1,4 +1,4 @@
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
 
@@ -24,9 +24,9 @@ if (isLocalDevelopment() === false) {
   });
 }
 
-export const onRouteUpdate = (state) => {
+export const onRouteUpdate = (_state) => {
   if (isLocalDevelopment() !== true) {
-    ReactGA.pageview(state.location.pathname);
+    ReactGA.send("pageview");
   }
 };
 

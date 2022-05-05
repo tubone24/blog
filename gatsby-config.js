@@ -12,13 +12,19 @@ const {
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+const siteTitle = "tubone BOYAKI";
+const siteShortTitle = "tuboneBOYAKI";
+const siteDescription =
+  "tubones BOYAKI is the developer blog by tubone who is Japanese IT Developer";
+const siteAuthor = "tubone";
+
 module.exports = {
   pathPrefix: "/",
   siteMetadata: {
-    title: "tubone BOYAKI",
-    description: "tubone BOYAKI is a tubone blog",
+    title: siteTitle,
+    description: siteDescription,
     siteUrl,
-    author: "tubone",
+    author: siteAuthor,
   },
   plugins: [
     "gatsby-plugin-preact",
@@ -145,9 +151,9 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "tubone BOYAKI",
-            feed_url: "https://blog.tubone-project24.xyz/rss.xml",
-            site_url: "https://blog.tubone-project24.xyz",
+            title: siteTitle,
+            feed_url: `${siteUrl}/rss.xml`,
+            site_url: siteUrl,
             docs: "http://github.com/dylang/node-rss",
           },
         ],
@@ -162,8 +168,6 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          "gatsby-remark-embed-youtube",
-          "gatsby-plugin-twitter",
           {
             resolve: "gatsby-remark-table-of-contents",
             options: {
@@ -173,16 +177,25 @@ module.exports = {
               toHeading: 4,
             },
           },
-          "gatsby-remark-numbered-footnotes",
           {
-            resolve: "gatsby-remark-embed-soundcloud",
+            resolve: "@raae/gatsby-remark-oembed",
             options: {
-              width: "80%", // default is "100%"
-              height: 200, // default is 300
-              color: "#6cff8c", // default is #ff5500
-              autoplay: false, // default is false
+              usePrefix: false,
+              providers: {
+                settings: {
+                  hatenablog: {
+                    endpoints: [
+                      {
+                        schemes: ["https://*.hatenablog.com/*"],
+                        url: "https://hatenablog.com/oembed",
+                      },
+                    ],
+                  },
+                },
+              },
             },
           },
+          "gatsby-remark-numbered-footnotes",
           "gatsby-remark-prismjs-title",
           {
             resolve: "gatsby-remark-prismjs",
@@ -201,6 +214,7 @@ module.exports = {
               rel: "noopener noreferrer",
             },
           },
+          "gatsby-remark-check-links",
         ],
       },
     },
@@ -226,9 +240,9 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "tubone BOYAKI",
-        short_name: "tuboneBOYAKI",
-        description: "tubone Blog",
+        name: siteTitle,
+        short_name: siteShortTitle,
+        description: siteDescription,
         lang: "ja",
         start_url: "/",
         background_color: "#ededed",

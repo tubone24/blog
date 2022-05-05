@@ -60,7 +60,7 @@ YouTube、ニコ動で「まくまく」さんって方が昔演奏していて�
 
 ギターサウンドも大好きでした。
 
-`youtube:https://www.youtube.com/embed/6WtUMZwVq8o`
+https://youtu.be/6WtUMZwVq8o
 
 この人です。かわいいでしょ。
 

@@ -58,7 +58,7 @@ CompositionAPIを使おうと思ったのは、Vue3.xで採用されるという
 
 上記のツラミ・スゴミについて詳しくは下記のプレゼンがすごくわかりやすかったです。
 
-[Composition API TypeScriptはVue.jsの夢を見るか?](https://speakerdeck.com/daikids2/composition-api-typescripthavue-dot-jsfalsemeng-wojian-ruka)
+https://speakerdeck.com/jiko21/composition-api-typescripthavue-dot-jsfalsemeng-wojian-ruka
 
 ざっくりと書き方の違いとしては
 
