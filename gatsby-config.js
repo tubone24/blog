@@ -12,13 +12,18 @@ const {
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+const siteTitle = "tubone BOYAKI";
+const siteShortTitle = "tuboneBOYAKI";
+const siteDescription = "tubone BOYAKI is a tubone blog";
+const siteAuthor = "tubone";
+
 module.exports = {
   pathPrefix: "/",
   siteMetadata: {
-    title: "tubone BOYAKI",
-    description: "tubone BOYAKI is a tubone blog",
+    title: siteTitle,
+    description: siteDescription,
     siteUrl,
-    author: "tubone",
+    author: siteAuthor,
   },
   plugins: [
     "gatsby-plugin-preact",
@@ -145,9 +150,9 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "tubone BOYAKI",
-            feed_url: "https://blog.tubone-project24.xyz/rss.xml",
-            site_url: "https://blog.tubone-project24.xyz",
+            title: siteTitle,
+            feed_url: `${siteUrl}/rss.xml`,
+            site_url: siteUrl,
             docs: "http://github.com/dylang/node-rss",
           },
         ],
@@ -208,6 +213,7 @@ module.exports = {
               rel: "noopener noreferrer",
             },
           },
+          "gatsby-remark-check-links",
         ],
       },
     },
@@ -233,9 +239,9 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "tubone BOYAKI",
-        short_name: "tuboneBOYAKI",
-        description: "tubone Blog",
+        name: siteTitle,
+        short_name: siteShortTitle,
+        description: siteDescription,
         lang: "ja",
         start_url: "/",
         background_color: "#ededed",
