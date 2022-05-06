@@ -2,7 +2,7 @@ import React from "react";
 import * as style from "./index.module.scss";
 
 const TimeToRead = ({ words, minutes }: { words: number; minutes: number }) => (
-  <div className={style.countdown}>
+  <div className={style.countdown} data-testid="countdown">
     <span className="fa-layers fa-fw fa-1x">
       <span className="icon-clock" />
     </span>

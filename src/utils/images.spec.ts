@@ -52,5 +52,18 @@ describe("Images", () => {
         "https://i.imgur.com/testImages.png"
       );
     });
+    it("Default Image is M795H8A.jpg", () => {
+      expect(parseImgur("")).toBe("https://i.imgur.com/M795H8A.jpg");
+    });
+    it("gif Prevent double http url", () => {
+      expect(parseImgur("http://i.imgur.com/testImages.gif")).toBe(
+        "http://i.imgur.com/testImages.gif"
+      );
+    });
+    it("Invalid mapped size", () => {
+      expect(parseImgur("testImages.png", "invalid!!!" as SizeMapping)).toBe(
+        "https://i.imgur.com/testImages.png"
+      );
+    });
   });
 });
