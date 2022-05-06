@@ -62,8 +62,8 @@ jobs:
         run: npm run test:e2e:ci
       - uses: actions/upload-artifact@v2
         with:
-          name: main.spec.js.mp4
-          path: ./cypress/videos/e2e/main.spec.js.mp4
+          name: main.spec.ts.mp4
+          path: ./cypress/videos/e2e/main.spec.ts.mp4
   lint:
     runs-on: ubuntu-latest
     steps:

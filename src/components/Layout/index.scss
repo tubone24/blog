@@ -58,6 +58,8 @@
 }
 
 .gatsby-highlight {
+  overflow-x: scroll;
+
   code[class*="language-"],
   pre[class*="language-"] {
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;

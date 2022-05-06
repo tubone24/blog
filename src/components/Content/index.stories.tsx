@@ -43,7 +43,7 @@ const sampleText =
   "<blockquote><p>芸術は爆発だ！</p><cite>芸術は爆発だ! 岡本太郎痛快語録</cite></blockquote>" +
   "<p>引用を使ったり</p>" +
   codeBlock +
-  "<p>コードブロックを使うこともできます。</p>" +
+  "<p>コードブロックを使うこともできます。(コードブロックは<a href='https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/'>gatsby-remark-prismjs-title</a>で作ってます。)</p>" +
   codeBlockShell +
   "<p>コマンドラインを表現することもできます。</p>" +
   "<h2>テーブル</h2>" +

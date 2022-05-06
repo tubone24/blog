@@ -49,6 +49,7 @@ class Content extends Component<Props> {
       <>
         <div
           className={style.contentWhiteInner}
+          data-testid="innerHTML"
           dangerouslySetInnerHTML={{ __html: post }}
         />
         <div className={style.contentWhiteInner}>

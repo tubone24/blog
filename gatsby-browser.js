@@ -25,7 +25,7 @@ if (isLocalDevelopment() === false) {
   });
 }
 
-export const onRouteUpdate = (_state) => {
+export const onRouteUpdate = () => {
   if (isLocalDevelopment() !== true) {
     ReactGA.send("pageview");
   }

@@ -16,7 +16,12 @@ const Header = ({
   authorImage?: boolean;
   authorName?: string;
 }) => (
-  <div className="col-12 header" style={{ padding: 0 }} id="header">
+  <div
+    className="col-12 header"
+    style={{ padding: 0 }}
+    id="header"
+    data-testid="header"
+  >
     <div
       className={style.imgContainer}
       style={{
