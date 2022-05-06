@@ -1,9 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import TimeToRead from "./index";
-import ReactGA from "react-ga4";
 
 describe("Content", () => {
   it("TimeToRead contains text", async () => {
