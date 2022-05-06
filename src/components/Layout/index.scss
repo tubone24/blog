@@ -35,6 +35,16 @@
   border-top-right-radius: 0.3em;
 }
 
+.gatsby-highlight-code-line {
+  display: block;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  margin-right: -1em;
+  margin-left: -1em;
+  background-color: #343426;
+  border-left: 0.25em solid #f99;
+}
+
 .gatsby-code-title span {
   position: relative;
   top: 1px;
@@ -45,6 +55,21 @@
   background: #777;
   border-top-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
+}
+
+.gatsby-highlight {
+  code[class*="language-"],
+  pre[class*="language-"] {
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace !important;
+  }
+}
+
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding: 0 0 0 2.8em;
+
+  .line-numbers-rows {
+    margin-left: 5px;
+  }
 }
 
 #toc_container {

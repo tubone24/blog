@@ -4,6 +4,7 @@ import { Integrations } from "@sentry/tracing";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/plugins/command-line/prism-command-line.css";
 import "./src/styles/global.scss";
 // Use bootstrap dropdown menu
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
