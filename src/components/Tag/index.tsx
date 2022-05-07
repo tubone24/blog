@@ -18,8 +18,4 @@ const Tag = ({ name, count }: { name: string; count: number }) => (
   </Link>
 );
 
-Tag.defaultProps = {
-  count: "",
-};
-
 export default Tag;

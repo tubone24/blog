@@ -30,6 +30,7 @@ module.exports = {
         href: to,
       })
   ),
+  navigate: jest.fn(),
   StaticQuery: jest.fn(),
   useStaticQuery: jest.fn(),
 };

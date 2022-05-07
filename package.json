@@ -187,6 +187,7 @@
     "jest": "28.0.3",
     "jest-axe": "6.0.0",
     "jest-environment-jsdom": "28.0.2",
+    "jest-location-mock": "^1.0.9",
     "lint-staged": "12.3.8",
     "netlify-cli": "10.0.0",
     "netlify-lambda": "2.0.15",
