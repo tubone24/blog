@@ -3,7 +3,13 @@ import ReactGA from "react-ga4";
 import { Link, withPrefix } from "gatsby";
 import * as style from "./index.module.scss";
 
-const Tag = ({ name, count }: { name: string; count: number }) => (
+const Tag = ({
+  name,
+  count = "",
+}: {
+  name: string;
+  count?: number | string;
+}) => (
   <Link
     to={withPrefix(`/tag/${name}`)}
     className={style.headerTag}
