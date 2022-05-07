@@ -45,13 +45,14 @@ const ShareBox = ({
   url: string;
   hasCommentBox?: boolean;
 }) => (
-  <div className={style.mShareBox} role="application">
+  <div className={style.mShareBox} role="application" data-testid="share-box">
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
       title="FacebookでShareする"
       target="_blank"
       rel="noopener noreferrer"
       className={style.shareButton}
+      data-testid="facebook-link"
       onClick={() =>
         ReactGA.event({
           category: "Share",
@@ -67,6 +68,7 @@ const ShareBox = ({
       target="_blank"
       rel="noopener noreferrer"
       className={style.shareButton}
+      data-testid="twitter-link"
       onClick={() =>
         ReactGA.event({
           category: "Share",
@@ -82,6 +84,7 @@ const ShareBox = ({
       target="_blank"
       rel="noopener noreferrer"
       className={style.shareButton}
+      data-testid="pocket-link"
       onClick={() =>
         ReactGA.event({
           category: "Share",
@@ -97,6 +100,7 @@ const ShareBox = ({
       data-hatena-bookmark-layout="vertical-normal"
       data-hatena-bookmark-lang="ja"
       title="このエントリーをはてなブックマークに追加"
+      data-testid="hatebu-link"
       target="_blank"
       rel="noopener noreferrer"
       onClick={() =>
