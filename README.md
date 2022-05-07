@@ -2,8 +2,8 @@
 
 [![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
-[![DeployToNetlifyPreview](https://github.com/tubone24/blog/workflows/DeployToNetlifyPreview/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPreview)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
+[![Coverage Status](https://coveralls.io/repos/github/tubone24/blog/badge.svg?branch=master)](https://coveralls.io/github/tubone24/blog?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/tubone24/blog/badge)](https://www.codefactor.io/repository/github/tubone24/blog)
 [![storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://blog-storybook.netlify.app/)
 [![time tracker](https://wakatime.com/badge/github/tubone24/blog.svg)](https://wakatime.com/badge/github/tubone24/blog)
@@ -36,7 +36,7 @@ Special, thanks!
   - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
 - For Search Engine Optimization, generate header meta tag and OGP
 - High Performance, purge CSS to Bootstrap, optimise SVG and minify HTML, CSS and JS
-- Google Analytics v3, planning to update to v4
+- Google Analytics ~~v3, planning to update to~~ v4
 - Site searching by Algolia search
 - Code syntax highlighting by [Prism.js](https://prismjs.com/)
 - PWA Support, and prefetch page-data.json
@@ -55,6 +55,7 @@ Special, thanks!
 - Use [EditorConfig](https://editorconfig.org/) formatting and indent
 - Use [husky](https://typicode.github.io/husky/#/) run linter before git commit and push
 - Use [Jest](https://jestjs.io/ja/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for Unit and React Component testing
+- Use [Snapshot tests](https://storybook.js.org/docs/react/writing-tests/snapshot-testing) for Snapshot tests
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
@@ -105,8 +106,11 @@ npm run format-style:fix
 
 Testing React Component and Unit testing, execute commands below
 
+And also, you can test Storybook Snapshot test!
+
 ```
 npm test
+npm run test:storybook
 npm run test:e2e
 ```
 

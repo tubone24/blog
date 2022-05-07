@@ -9,8 +9,17 @@ import Tag from "@/components/Tag";
 const imageStyle = (headerImage: string) =>
   `${parseImgur(headerImage, SizeMapping.large)}`;
 
-const CardHeader = ({ url, image }: { url: string; image: string }) => (
+const CardHeader = ({
+  url,
+  image,
+  title,
+}: {
+  url: string;
+  image: string;
+  title: string;
+}) => (
   <Link to={url}>
+    <span className="visually-hidden">{title}</span>
     <div
       className={style.wrapper + " lozad"}
       data-background-image={imageStyle(image)}
@@ -45,7 +54,11 @@ const RelatedCard = ({
                 <Tag name={name || ""} key={name} />
               ))}
             </div>
-            <CardHeader url={withPrefix(url)} image={headerImage} />
+            <CardHeader
+              url={withPrefix(url)}
+              image={headerImage}
+              title={title}
+            />
             <Link to={withPrefix(url)}>
               <h4 className={style.title}>{title}</h4>
             </Link>

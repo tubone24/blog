@@ -27,7 +27,7 @@ module.exports = {
     __PATH_PREFIX__: ``,
   },
   testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
-  moduleFileExtensions: ["ts", "tsx", "js"],
+  moduleFileExtensions: ["ts", "tsx", "js", "json"],
   collectCoverage: false,
   coverageReporters: ["lcov", "text", "html"],
   testEnvironment: "jsdom",

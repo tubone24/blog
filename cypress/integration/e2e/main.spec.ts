@@ -29,7 +29,34 @@ describe("UI Test", () => {
     cy.wait(5000);
     cy.window().its("scrollY").should("be.lt", 100);
   });
+  // eslint-disable-next-line jest/expect-expect
+  it("tag page with jump", () => {
+    cy.visit("/");
+    cy.contains("Tags").click();
+    cy.location("href").should("include", "/tags");
+    cy.contains("test 1").click();
+    cy.location("href").should("include", "/tag/test");
+    cy.contains("このBlogテンプレートのテスト用投稿").click();
+    cy.location("href").should("include", "/2011/08/30");
+    cy.get("title").should(
+      "have.text",
+      "このBlogテンプレートのテスト用投稿 | tubone BOYAKI"
+    );
+  });
+  // eslint-disable-next-line jest/expect-expect
+  it("sidebar page with jump", () => {
+    cy.visit("/");
+    cy.contains("2011").click();
+    cy.location("href").should("include", "/2011/");
+    cy.contains("このBlogテンプレートのテスト用投稿").click();
+    cy.location("href").should("include", "/2011/08/30");
+    cy.get("title").should(
+      "have.text",
+      "このBlogテンプレートのテスト用投稿 | tubone BOYAKI"
+    );
+  });
 });
+
 describe("a11y", () => {
   // eslint-disable-next-line jest/expect-expect
   it("Has no detectable accessibility violations on TopPage", () => {
