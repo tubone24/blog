@@ -9,7 +9,7 @@ module.exports = ({ plugins, actions, stage, getConfig }) => {
     }
     actions.replaceWebpackConfig(config);
     actions.setWebpackConfig({
-      devtool: true,
+      devtool: false,
     });
   }
   actions.setWebpackConfig({
