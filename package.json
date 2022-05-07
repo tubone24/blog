@@ -101,6 +101,7 @@
     "typecheck": "tsc",
     "test": "jest",
     "test:cov": "jest --coverage",
+    "test:storybook": "npm test storybook.test.ts",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:base": "cypress run --env type=base --config screenshotsFolder=cypress/snapshots/base,testFiles=\\\"**/*main.spec.ts\\\"",

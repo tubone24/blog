@@ -36,7 +36,7 @@ Special, thanks!
   - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
 - For Search Engine Optimization, generate header meta tag and OGP
 - High Performance, purge CSS to Bootstrap, optimise SVG and minify HTML, CSS and JS
-- Google Analytics v3, planning to update to v4
+- Google Analytics ~~v3, planning to update to~~ v4
 - Site searching by Algolia search
 - Code syntax highlighting by [Prism.js](https://prismjs.com/)
 - PWA Support, and prefetch page-data.json
@@ -105,8 +105,11 @@ npm run format-style:fix
 
 Testing React Component and Unit testing, execute commands below
 
+And also, you can test Storybook Snapshot test!
+
 ```
 npm test
+npm run test:storybook
 npm run test:e2e
 ```
 
