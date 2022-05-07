@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 
-import Tag from "../../Tag";
+import Tag from "@/components/Tag";
 import { AllPost } from "../entity";
 
 const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
