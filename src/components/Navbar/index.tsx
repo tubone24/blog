@@ -23,6 +23,7 @@ const Navbar = () => (
       <button
         type="button"
         className={style.navbarBrand + " navbar-brand btn btn-default"}
+        data-testid="logo"
         onClick={() => {
           ReactGA.event({
             category: "User",
@@ -31,7 +32,13 @@ const Navbar = () => (
           navigate(withPrefix("/"));
         }}
       >
-        <img src="/assets/logo3.svg" alt="" width="135" height="45" />
+        <img
+          src="/assets/logo3.svg"
+          alt=""
+          width="135"
+          height="45"
+          data-testid="logo-img"
+        />
         <h1 className="visually-hidden">
           Japanese IT Developer's Blog tubone BOYAKI
         </h1>

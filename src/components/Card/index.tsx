@@ -27,6 +27,7 @@ const CardHeader = ({
           data-background-image={parseImgur(image, SizeMapping.large)}
           title={title}
           aria-hidden="true"
+          data-testid="card-header"
         />
       </Link>
     );
@@ -41,6 +42,7 @@ const CardHeader = ({
         }}
         title={title}
         aria-hidden="true"
+        data-testid="card-header"
       />
     </Link>
   );
@@ -58,12 +60,12 @@ const Card = ({
   title: string;
   date: string;
   url: string;
-  headerImage: string;
+  headerImage?: string;
   description: string;
   tags: readonly (string | undefined)[];
   index: number;
 }) => (
-  <div className="col-sm-12 pb-4">
+  <div className="col-sm-12 pb-4" data-testid="card">
     <div className={style.customCard}>
       {headerImage && (
         <CardHeader
@@ -77,8 +79,8 @@ const Card = ({
         <div className={style.dataContent}>
           <div className={style.stats}>
             <span className={style.date}>{date?.split("T")[0]}</span>
-            {tags.map((name) => (
-              <Tag name={name || ""} key={name} />
+            {tags.map((name, index) => (
+              <Tag name={name || ""} key={`${name}-${index}`} />
             ))}
           </div>
           <Link to={withPrefix(url)}>

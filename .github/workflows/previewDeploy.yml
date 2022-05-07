@@ -48,7 +48,13 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
         run: npm run test:cov
-      - name: Test E2E
+      - name: Use Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
+          flag-name: Unit
+      - name: Test e2e
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
           GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
@@ -60,10 +66,16 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
         run: npm run test:e2e:ci
+      - name: Use Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage-e2e/lcov.info
+          flag-name: e2e
       - uses: actions/upload-artifact@v2
         with:
-          name: main.spec.js.mp4
-          path: ./cypress/videos/e2e/main.spec.js.mp4
+          name: main.spec.ts.mp4
+          path: ./cypress/videos/e2e/main.spec.ts.mp4
   lint:
     runs-on: ubuntu-latest
     steps:
