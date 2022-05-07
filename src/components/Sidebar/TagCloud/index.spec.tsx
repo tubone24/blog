@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import TagCloud from "./index";
 import { axe } from "jest-axe";
 import { AllPost } from "@/components/Sidebar/entity";

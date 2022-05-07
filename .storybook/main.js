@@ -14,6 +14,7 @@ module.exports = {
     '@storybook/addon-controls',
     '@storybook/addon-interactions',
     "@storybook/addon-viewport",
+    "@storybook/addon-storysource",
   ],
   "staticDirs": ["../static"],
   "framework": "@storybook/react",
