@@ -59,7 +59,7 @@
     "gatsby-remark-prismjs-title": "1.0.0",
     "gatsby-remark-table-of-contents": "2.0.0",
     "gatsby-source-filesystem": "4.13.0",
-    "gatsby-transformer-remark": "5.5.2",
+    "gatsby-transformer-remark": "5.14.0",
     "gitalk": "git+https://github.com/tubone24/gitalk.git",
     "html-minifier": "4.0.0",
     "intersection-observer": "0.12.0",
