@@ -30,3 +30,8 @@ coverage-e2e
 
 # Cypress
 cypress/videos/e2e
+
+# Terraform
+prd.tfvars
+.terraform
+terraform.log
