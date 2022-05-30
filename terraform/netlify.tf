@@ -1,4 +1,5 @@
 variable "netlify_token" {
+  type = string
 }
 
 provider "netlify" {
