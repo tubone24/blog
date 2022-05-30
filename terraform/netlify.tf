@@ -15,9 +15,9 @@ provider "netlify" {
 
 resource "netlify_site" "blog" {
   name = "pensive-lamport-5822d2"
-  command = "npm run build"
   custom_domain = "https://blog.tubone-project24.xyz"
   repo {
+    command = "npm run build"
     provider    = "github"
     dir = "public"
     repo_branch = "master"
