@@ -1,11 +1,7 @@
 variable "netlify_token" {
-  type        = string
-  description = "Token"
 }
 
 variable "netlify_base_url" {
-  type        = string
-  description = "URL"
 }
 
 provider "netlify" {
@@ -13,7 +9,7 @@ provider "netlify" {
   base_url = var.netlify_base_url
 }
 
-resource "netlify_site" "blog" {
+resource "netlify_site" "main" {
   name = "pensive-lamport-5822d2"
   custom_domain = "https://blog.tubone-project24.xyz"
   repo {
