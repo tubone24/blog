@@ -41,6 +41,7 @@ Special, thanks!
 - Code syntax highlighting by [Prism.js](https://prismjs.com/)
 - PWA Support, and prefetch page-data.json
 - Deploy Netlify
+  - Managed by [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
 - Image hosted by [imgur](https://imgur.com)
 - Use [Gitalk](https://gitalk.github.io/) for blog comment system
 - Icons used by Fontawesome, and optimised to [Icomoon](https://icomoon.io/)
@@ -195,3 +196,9 @@ I use [textlint](https://textlint.github.io/) to proofread my blog text.
 ```
 npm run textlint
 ```
+
+## Change Netlify Config
+
+Use Terraform Cloud to change Netlify configuration values.
+
+[Workspace](https://app.terraform.io/app/tubone24-test/workspaces/blog)
