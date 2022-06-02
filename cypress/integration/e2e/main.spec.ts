@@ -73,4 +73,11 @@ describe("404 Page", () => {
     cy.get("h1").contains("404 Not Found...");
     cy.get("h2").contains("Anything else...?");
   });
+
+  describe("Privacy Policy Page", () => {
+    // eslint-disable-next-line jest/expect-expect
+    it("PrivacyPolicy", () => {
+      cy.get("h1").contains("プライバシーポリシー");
+    });
+  });
 });
