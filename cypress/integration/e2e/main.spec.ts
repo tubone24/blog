@@ -77,6 +77,7 @@ describe("404 Page", () => {
   describe("Privacy Policy Page", () => {
     // eslint-disable-next-line jest/expect-expect
     it("PrivacyPolicy", () => {
+      cy.visit("/privacy-policies");
       cy.get("h1").contains("プライバシーポリシー");
     });
   });
