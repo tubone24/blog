@@ -21,6 +21,7 @@ module.exports = {
     `public`,
     `cypress`,
     `storybook-static`,
+    `.storybook`,
   ],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`, `\\.svg`],
   globals: {
