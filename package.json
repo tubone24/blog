@@ -6,7 +6,7 @@
   "dependencies": {
     "@loadable/component": "5.15.2",
     "@popperjs/core": "2.11.5",
-    "@raae/gatsby-remark-oembed": "0.3.1",
+    "@raae/gatsby-remark-oembed": "0.3.2",
     "@sentry/browser": "6.17.2",
     "@sentry/node": "6.19.6",
     "@sentry/react": "6.19.3",
