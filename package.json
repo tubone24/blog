@@ -5,7 +5,7 @@
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
     "@loadable/component": "5.15.2",
-    "@popperjs/core": "2.11.5",
+    "@popperjs/core": "2.11.6",
     "@raae/gatsby-remark-oembed": "0.3.2",
     "@sentry/browser": "6.17.2",
     "@sentry/node": "6.19.6",
