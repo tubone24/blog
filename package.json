@@ -13,7 +13,7 @@
     "@sentry/tracing": "6.19.7",
     "@types/react-helmet": "6.1.5",
     "@typescript-eslint/eslint-plugin": "5.10.0",
-    "@typescript-eslint/parser": "5.10.0",
+    "@typescript-eslint/parser": "5.34.0",
     "algoliasearch": "4.13.0",
     "autocomplete.js": "0.38.1",
     "axios": "0.27.2",
