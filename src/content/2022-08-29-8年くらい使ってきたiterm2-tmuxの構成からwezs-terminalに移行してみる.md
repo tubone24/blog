@@ -10,6 +10,13 @@ templateKey: blog-post
 ---
 ## Table of Contents
 
+ついにターミナル周りを更新します。
+
 ```toc
 
 ```
+
+## Wez's Terminalとは
+
+Wez's Terminalとは
+
