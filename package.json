@@ -24,7 +24,7 @@
     "dayjs": "1.10.7",
     "dotenv": "10.0.0",
     "flexboxgrid": "6.3.1",
-    "gatsby": "4.14.0",
+    "gatsby": "4.22.0",
     "gatsby-legacy-polyfills": "2.10.0",
     "gatsby-link": "4.3.0",
     "gatsby-paginate": "1.1.1",
