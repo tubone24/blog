@@ -198,7 +198,7 @@
     "react-test-renderer": "17.0.2",
     "sass-loader": "12.4.0",
     "start-server-and-test": "1.14.0",
-    "stylelint": "14.1.0",
+    "stylelint": "14.11.0",
     "stylelint-config-recess-order": "3.0.0",
     "stylelint-config-recommended-scss": "5.0.2",
     "stylelint-config-standard": "24.0.0",
