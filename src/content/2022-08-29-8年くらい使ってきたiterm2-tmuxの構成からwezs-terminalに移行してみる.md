@@ -5,6 +5,7 @@ date: 2022-08-29T13:00:24.971Z
 description: 8年くらい使ってきたiTerm2 + tmuxの構成からWez's Terminalに移行してみる
 tags:
   - terminal
+  - 開発環境
 headerImage: https://i.imgur.com/h5RiIEv.png
 templateKey: blog-post
 ---
@@ -44,9 +45,18 @@ GPUアクセラレータは以前のターミナル（iTerm2）で不満もな�
 
 ![img](https://i.imgur.com/h5RiIEv.png)
 
-こんな感じになりました。
+見た目はこんな感じになりました。
 
 コンフィグは[Lua](https://www.lua.org/)で作るのですが[ドキュメント](https://wezfurlong.org/wezterm/config/files.html)がしっかりしているのとWezさんが結構GitHub Issueでコンフィグ例を公開しているのでめちゃくちゃ参考になりました。
+
+下記に軽くだけ設定を共有します。
+
+### SSH Connection
+
+正直最近コンテナ仕事が多くて直にサーバーにログインする機会がそこまで多くないのですが
+あらかじめweztermをサーバーに入れておけば[ターミナルマルチプレクサ](https://wezfurlong.org/wezterm/multiplexing.html#multiplexing)でセッションを作ることができます。
+しかも[enumerate_ssh_hosts](https://wezfurlong.org/wezterm/config/lua/wezterm/enumerate_ssh_hosts.html)を使うことで勝手に **~/.ssh/config** を読み込んでくれて設定してくれます。
+本機能を使うのであればぜひとも使いたいですね。
 
 ```lua
 local wezterm = require 'wezterm';
@@ -61,7 +71,13 @@ for host, config in pairs(wezterm.enumerate_ssh_hosts()) do
         ssh_option = { identityfile = config["identityfile"] },
     })
 end
+```
 
+### target_triple
+
+クロスプラットフォームが売りなので、プラットフォームを[Rust target triple](https://doc.rust-lang.org/nightly/rustc/platform-support.html)で確認してコンフィグを分岐させることができます。
+
+```lua
 -- デフォルト(ほぼLinux)はbash
 local default_prog = { 'bash', '-l' }
 
@@ -73,6 +89,21 @@ if wezterm.target_triple == "x86_64-apple-darwin" then
   default_prog = { 'zsh', '-l' }
 end
 
+```
+
+### タブのカスタマイズ
+
+タブのタイトルもカスタマイズ可能です。
+
+タイトルにはタブ番号、ディレクトリ、プロセス名を出すようにしてます。
+
+あと、pane分割を実施した際に特定のpaneにズームした際にわかるようにしてます。
+
+また、プロセス名によってアイコンを変えてます。そこまでバリエーション作ってませんが...。
+
+![img](https://i.imgur.com/NOGpKZf.png)
+
+```lua
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
 -- Given "c:\\foo\\bar" returns "bar"
@@ -114,6 +145,14 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	}
 end)
 
+
+### 右ステータス
+
+ほぼ<https://github.com/wez/wezterm/issues/500>のパクリですが右ステータスも作ることができます。
+
+リモートで仕事しているとWebミーティングに遅刻しないように秒まで刻むような生活になってしまったので秒数まで時刻表示させてます。
+
+```lua
 -- 右ステータスのカスタマイズ
 wezterm.on("update-right-status", function(window, pane)
     local cells = {};
@@ -196,6 +235,20 @@ wezterm.on("update-right-status", function(window, pane)
     window:set_right_status(wezterm.format(elements));
   end);
 
+
+### その他
+
+その他の設定値はreturnで返してあげれば設定できます。
+
+カラースキーマ―は[VibrantInk](https://wezfurlong.org/wezterm/colorschemes/v/index.html?highlight=VibrantInk#vibrantink)を使ってます。
+
+一時期コントラストの薄いスキーマ―使ってましたがやっぱりハイコントラストがかっこいいですね。個人の主観です。
+
+あと、個人的にマストかなと思うのがvisual_bellです。Macの音声をmuteにしている時にも警告が可視化できたほうがいいと考えているからです。
+
+ちょっと目がチカチカする設定なのでもしかしたら今後変更するかもしれません。
+
+```lua
 return {
     -- https://wezfurlong.org/wezterm/colorschemes/v/index.html?highlight=VibrantInk#vibrantink
     color_scheme = 'VibrantInk',
@@ -232,4 +285,14 @@ return {
 
 キーバインドはとりあえずデフォルトのままにしてます。これから頑張って覚えていこうと思います！
 
+コピーモードさえちゃんと使えこなせればほぼクリアと思ってます。
 
+## 結論
+
+久しぶりに開発環境を更新しましたが楽しかったです。
+
+## 参考
+
+- [Wez's Terminal Emulator Docs](https://wezfurlong.org/wezterm/index.html)
+- [Tmux Like Status Bar](https://github.com/wez/wezterm/issues/500)
+- [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes#screenshots)
