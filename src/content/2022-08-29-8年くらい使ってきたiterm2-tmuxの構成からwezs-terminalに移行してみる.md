@@ -144,7 +144,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		{ Text = " " .. title .. " " },
 	}
 end)
-
+```
 
 ### 右ステータス
 
@@ -234,7 +234,7 @@ wezterm.on("update-right-status", function(window, pane)
   
     window:set_right_status(wezterm.format(elements));
   end);
-
+```
 
 ### その他
 
