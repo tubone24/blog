@@ -154,7 +154,7 @@
     "@types/node": "17.0.31",
     "@types/react-test-renderer": "18.0.0",
     "@types/react-transition-group": "4.4.4",
-    "axe-core": "4.4.1",
+    "axe-core": "4.4.3",
     "babel-eslint": "10.1.0",
     "babel-jest": "28.0.3",
     "babel-plugin-istanbul": "6.1.1",
