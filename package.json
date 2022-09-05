@@ -123,7 +123,7 @@
     "lint-staged": "lint-staged"
   },
   "devDependencies": {
-    "@babel/core": "7.17.9",
+    "@babel/core": "7.18.13",
     "@cypress/code-coverage": "3.9.12",
     "@storybook/addon-a11y": "6.4.22",
     "@storybook/addon-actions": "6.4.22",
