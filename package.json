@@ -213,7 +213,7 @@
     "textlint-rule-no-start-duplicated-conjunction": "2.0.2",
     "textlint-rule-preset-smarthr": "1.13.0",
     "textlint-rule-prh": "5.3.0",
-    "textlint-rule-terminology": "2.1.5",
+    "textlint-rule-terminology": "2.1.6",
     "ts-jest": "28.0.0",
     "ts-node": "10.7.0",
     "yaml-lint": "1.6.0"
