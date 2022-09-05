@@ -65,6 +65,14 @@ describe("a11y", () => {
   });
 });
 
+describe("Privacy Policy Page", () => {
+  // eslint-disable-next-line jest/expect-expect
+  it("PrivacyPolicy", () => {
+    cy.visit("/privacy-policies");
+    cy.get("h1").contains("プライバシーポリシー");
+  });
+});
+
 describe("404 Page", () => {
   // eslint-disable-next-line jest/expect-expect
   it("Invalid Page returns 404 site", () => {
