@@ -13,7 +13,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           registry-url: https://npm.pkg.github.com/
@@ -94,7 +94,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           registry-url: https://npm.pkg.github.com/
@@ -139,7 +139,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           registry-url: https://npm.pkg.github.com/
@@ -223,7 +223,7 @@ jobs:
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
       - uses: actions/checkout@v2
       - name: Cache
         uses: actions/cache@v3
@@ -270,7 +270,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - name: install dependencies
