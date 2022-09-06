@@ -19,7 +19,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache
@@ -100,7 +100,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache
@@ -145,7 +145,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache
@@ -226,7 +226,7 @@ jobs:
       - uses: actions/setup-node@v2
       - uses: actions/checkout@v2
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache
@@ -256,7 +256,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache
