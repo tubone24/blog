@@ -3,28 +3,12 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: weekly
+    interval: daily
     time: "20:00"
-  open-pull-requests-limit: 10
+  open-pull-requests-limit: 0
   versioning-strategy: widen
 #   ignore:
 #   - dependency-name: faunadb
 #     versions:
 #     - 4.0.3
 #     - 4.1.1
-#   - dependency-name: gatsby-remark-autolink-headers
-#     versions:
-#     - 2.10.0
-#     - 2.7.0
-#   - dependency-name: gatsby-plugin-netlify
-#     versions:
-#     - 2.10.0
-#   - dependency-name: "@sentry/react"
-#     versions:
-#     - 6.0.2
-#   - dependency-name: gatsby-plugin-algolia
-#     versions:
-#     - 0.16.2
-#   - dependency-name: algoliasearch
-#     versions:
-#     - 4.8.3
