@@ -48,7 +48,7 @@
     "gatsby-plugin-sass": "5.22.0",
     "gatsby-plugin-sitemap": "5.22.0",
     "gatsby-plugin-twitter": "4.22.0",
-    "gatsby-plugin-typegen": "2.2.4",
+    "gatsby-plugin-typegen": "3.0.0",
     "gatsby-react-router-scroll": "5.22.0",
     "gatsby-remark-autolink-headers": "5.22.0",
     "gatsby-remark-check-links": "2.1.0",
