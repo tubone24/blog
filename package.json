@@ -86,9 +86,9 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "start": "npm run develop",
+    "start": "yarn develop",
     "build": "gatsby build --prefix-paths",
-    "build:nocache": "npm run clean && npm run build",
+    "build:nocache": "yarn clean && yarn build",
     "develop": "gatsby develop",
     "develop:e2e": "cross-env NODE_ENV=development gatsby develop",
     "develop:remote": "gatsby develop -p 8080 -H 0.0.0.0",
@@ -224,13 +224,13 @@
   ],
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "npm run format:fix"
+      "yarn format:fix"
     ],
     "*.{scss,sass,css}": [
-      "npm run format-style:fix"
+      "yarn format-style:fix"
     ],
     "src/content/*.md": [
-      "npm run textlint:fix"
+      "yarn textlint:fix"
     ]
   },
   "nyc": {
