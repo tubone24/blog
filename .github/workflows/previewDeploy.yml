@@ -38,7 +38,7 @@ jobs:
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Test
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -122,7 +122,7 @@ jobs:
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Type check
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -179,7 +179,7 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -252,7 +252,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Execute textlint for article
         run: npx textlint -f checkstyle "src/content/*.md" >> .textlint.log
       - name: Run reviewdog
@@ -289,7 +289,7 @@ jobs:
         with:
           node-version: 16.x
       - name: install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}

@@ -38,7 +38,7 @@ jobs:
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Test
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -122,7 +122,7 @@ jobs:
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Type check
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -181,7 +181,7 @@ jobs:
           NETLIFY_ENV: production
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -236,7 +236,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
