@@ -216,7 +216,7 @@
     "textlint-rule-terminology": "2.1.6",
     "ts-jest": "28.0.8",
     "ts-node": "10.9.1",
-    "yaml-lint": "1.6.0"
+    "yaml-lint": "1.7.0"
   },
   "browserslist": [
     ">0.25% in JP",
