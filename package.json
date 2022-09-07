@@ -86,9 +86,9 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "start": "npm run develop",
+    "start": "yarn develop",
     "build": "gatsby build --prefix-paths",
-    "build:nocache": "npm run clean && npm run build",
+    "build:nocache": "yarn clean && yarn build",
     "develop": "gatsby develop",
     "develop:e2e": "cross-env NODE_ENV=development gatsby develop",
     "develop:remote": "gatsby develop -p 8080 -H 0.0.0.0",
@@ -124,6 +124,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.18.13",
+    "@babel/preset-typescript": "7.18.6",
     "@cypress/code-coverage": "3.10.0",
     "@storybook/addon-a11y": "6.5.10",
     "@storybook/addon-actions": "6.5.10",
@@ -154,11 +155,13 @@
     "@types/node": "17.0.31",
     "@types/react-test-renderer": "18.0.0",
     "@types/react-transition-group": "4.4.5",
+    "@types/responselike": "1.0.0",
     "axe-core": "4.4.3",
     "babel-eslint": "10.1.0",
     "babel-jest": "28.1.3",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-module-resolver": "4.1.0",
+    "babel-plugin-remove-graphql-queries": "4.22.0",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-gatsby": "2.22.0",
     "core-js": "3.25.0",
@@ -224,13 +227,13 @@
   ],
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "npm run format:fix"
+      "yarn format:fix"
     ],
     "*.{scss,sass,css}": [
-      "npm run format-style:fix"
+      "yarn format-style:fix"
     ],
     "src/content/*.md": [
-      "npm run textlint:fix"
+      "yarn textlint:fix"
     ]
   },
   "nyc": {
