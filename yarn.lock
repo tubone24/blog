@@ -11870,6 +11870,7 @@ fast-safe-stringify@^2.0.7:
 
 "fast-xml-parser@github:Delagen/fast-xml-parser":
   version "3.17.4"
+  uid "1c5242775113a190650d8fef08c78105430d6405"
   resolved "https://codeload.github.com/Delagen/fast-xml-parser/tar.gz/1c5242775113a190650d8fef08c78105430d6405"
 
 fastest-levenshtein@^1.0.12, fastest-levenshtein@^1.0.16:
@@ -13501,6 +13502,7 @@ git-up@^6.0.0:
 
 "gitalk@git+https://github.com/tubone24/gitalk.git":
   version "1.7.4"
+  uid "443d9c0dfe4644ab8a2addcae118b70baf2e6089"
   resolved "git+https://github.com/tubone24/gitalk.git#443d9c0dfe4644ab8a2addcae118b70baf2e6089"
   dependencies:
     autosize "3.0.21"
@@ -23674,9 +23676,9 @@ supports-color@^8.0.0, supports-color@^8.1.1:
     has-flag "^4.0.0"
 
 supports-color@^9.0.0:
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-9.2.2.tgz#502acaf82f2b7ee78eb7c83dcac0f89694e5a7bb"
-  integrity sha512-XC6g/Kgux+rJXmwokjm9ECpD6k/smUoS5LKlUCcsYr4IY3rW0XyAympon2RmxGrlnZURMpg5T18gWDP9CsHXFA==
+  version "9.2.3"
+  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-9.2.3.tgz#a6e2c97fc20c80abecd69e50aebe4783ff77d45a"
+  integrity sha512-aszYUX/DVK/ed5rFLb/dDinVJrQjG/vmU433wtqVSD800rYsJNWxh2R3USV90aLSU+UsyQkbNeffVLzc6B6foA==
 
 supports-hyperlinks@^2.0.0, supports-hyperlinks@^2.2.0:
   version "2.3.0"
@@ -24227,6 +24229,7 @@ textlint-rule-no-hankaku-kana@^1.0.2:
 
 "textlint-rule-no-hoso-kinshi-yogo@github:tubone24/textlint-rule-no-hoso-kinshi-yogo":
   version "1.3.2"
+  uid ccbd2a82b5e13dae552bf0afce5b111562a8d45b
   resolved "https://codeload.github.com/tubone24/textlint-rule-no-hoso-kinshi-yogo/tar.gz/ccbd2a82b5e13dae552bf0afce5b111562a8d45b"
   dependencies:
     fast-xml-parser "github:Delagen/fast-xml-parser"
@@ -25987,10 +25990,11 @@ winston-transport@^4.5.0:
     triple-beam "^1.3.0"
 
 winston@^3.2.1, winston@^3.6.0:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/winston/-/winston-3.8.1.tgz#76f15b3478cde170b780234e0c4cf805c5a7fb57"
-  integrity sha512-r+6YAiCR4uI3N8eQNOg8k3P3PqwAm20cLKlzVD9E66Ch39+LZC+VH1UKf9JemQj2B3QoUHfKD7Poewn0Pr3Y1w==
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/winston/-/winston-3.8.2.tgz#56e16b34022eb4cff2638196d9646d7430fdad50"
+  integrity sha512-MsE1gRx1m5jdTTO9Ld/vND4krP2To+lgDoMEHGGa4HIlAUyXJtfc7CxQcGXVyz2IBpw5hbFkj2b/AtUdQwyRew==
   dependencies:
+    "@colors/colors" "1.5.0"
     "@dabh/diagnostics" "^2.0.2"
     async "^3.2.3"
     is-stream "^2.0.0"
