@@ -124,7 +124,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.18.13",
-    "@cypress/code-coverage": "3.9.12",
+    "@cypress/code-coverage": "3.10.0",
     "@storybook/addon-a11y": "6.5.10",
     "@storybook/addon-actions": "6.5.10",
     "@storybook/addon-controls": "6.5.10",
