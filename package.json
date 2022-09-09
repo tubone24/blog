@@ -194,7 +194,7 @@
     "jest-environment-jsdom": "28.1.3",
     "jest-location-mock": "1.0.9",
     "lint-staged": "13.0.3",
-    "netlify-cli": "11.5.1",
+    "netlify-cli": "11.6.0",
     "netlify-lambda": "2.0.15",
     "nyc": "15.1.0",
     "prettier": "2.7.1",
