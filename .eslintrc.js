@@ -1,6 +1,5 @@
 const eslintrc = {
   extends: [
-    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "prettier",
     "plugin:json/recommended",
@@ -12,7 +11,7 @@ const eslintrc = {
     "plugin:jest/style",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "jest-dom", "testing-library", "jest"],
+  plugins: ["jest-dom", "testing-library", "jest"],
   settings: {
     "import/core-modules": [
       "react",
