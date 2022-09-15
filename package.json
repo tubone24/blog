@@ -120,7 +120,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "memlab": "memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
   },
   "devDependencies": {
     "@babel/core": "7.19.0",
@@ -194,6 +195,7 @@
     "jest-environment-jsdom": "29.0.3",
     "jest-location-mock": "1.0.9",
     "lint-staged": "13.0.3",
+    "memlab": "^1.1.27",
     "netlify-cli": "11.7.1",
     "netlify-lambda": "2.0.15",
     "nyc": "15.1.0",
