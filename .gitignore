@@ -35,3 +35,6 @@ cypress/videos/e2e
 prd.tfvars
 .terraform
 terraform.log
+
+# memlab
+test/memlab/data
