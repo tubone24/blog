@@ -35,16 +35,16 @@ Special, thanks!
   - Use [Sass(Scss)](https://sass-lang.com/) and Scoped by CSS Modules
   - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
 - For Search Engine Optimization, generate header meta tag and OGP
-- High Performance, purge CSS to Bootstrap, optimise SVG and minify HTML, CSS and JS
-- Google Analytics ~~v3, planning to update to~~ v4
-- Site searching by Algolia search
+- High Performance, [purge CSS](https://purgecss.com/) to [Bootstrap5](https://getbootstrap.jp/), optimise SVG and minify HTML, CSS and JS
+- Use [Google Analytics v4](https://support.google.com/analytics/answer/10089681?hl=ja)
+- Site inner searching by [Algolia search](https://www.algolia.com/)
 - Code syntax highlighting by [Prism.js](https://prismjs.com/)
-- PWA Support, and prefetch page-data.json
-- Deploy Netlify
-  - Managed by [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
+- [PWA](https://developer.mozilla.org/ja/docs/Web/Progressive_web_apps) Support, and prefetch page-data.json
+- Deploy [Netlify](https://www.netlify.com/)
+  - Managed by [Terraform Cloud](https://cloud.hashicorp.com/products/terraform) for Netlify settings
 - Image hosted by [imgur](https://imgur.com)
 - Use [Gitalk](https://gitalk.github.io/) for blog comment system
-- Icons used by Fontawesome, and optimised to [Icomoon](https://icomoon.io/)
+- Icons used by [Fontawesome](https://fontawesome.com/), and optimised to [Icomoon](https://icomoon.io/)
 - Sitemap generate
 - RSS feed generate
 - Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), top page Lighthouse's accessibility score is 100!
@@ -64,6 +64,7 @@ Special, thanks!
 - Each production-deploy is measured by [Bundle Analyzer](#bundle-analyzer) and [reports](https://tubone24.github.io/blog/ba/index.html) are output
 - unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
+- Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 
 #### For contributor of articles
 
@@ -84,49 +85,103 @@ Approved --->|Merge| DeployProduction
 
 ## How to develop?
 
-Run at local, execute commands below, and access [http://localhost:8000](http://localhost:8000)
+### Running at local
+
+Run **at local**, execute commands below, and access [http://localhost:8000](http://localhost:8000)
 
 ```
-$ npm install
-$ npm start
+$ yarn install
+$ yarn start
 ```
+
+### Build
 
 Or Build Artifact, execute commands below
 
 ```
-npm run build
+yarn build
 ```
 
-Fix your code format by TSC, [ESLint](https://eslint.org/) and  [stylelint](https://stylelint.io/)
+### lint, format codes
+
+Fix your code format by [TSC](https://www.typescriptlang.org/docs/handbook/compiler-options.html), [ESLint](https://eslint.org/) and  [stylelint](https://stylelint.io/)
 
 ```
-npm run typecheck
-npm run format:fix
-npm run format-style:fix
+yarn typecheck
+yarn format:fix
+yarn format-style:fix
 ```
+
+You can also fix YAML format by [yamllint](https://github.com/adrienverge/yamllint)
+
+```
+yarn format-yml
+```
+
+### Testing
 
 Testing React Component and Unit testing, execute commands below
 
 And also, you can test Storybook Snapshot test!
 
 ```
-npm test
-npm run test:storybook
-npm run test:e2e
+yarn test
+yarn test:storybook
+yarn test:e2e
 ```
+
+If you want to check testing coverage, execute commands below
+
+```
+yarn test:cov
+```
+
+### Cleaning
 
 If you error occurred on gatsby build, execute commands below
 
 ```
 > Error loading a result for the page query in "/". Query was not run and no cached result was found.
 
-npm run clean
+yarn clean
 ```
 
-## Update Browsers List
+Also, you want to clean dependencies, execute commands below
 
 ```
-npm run browserslist:update
+yarn clean-all
+```
+
+### Update Browsers List
+
+This project use Browsers List, so you can update it
+
+```
+yarn browserslist:update
+```
+
+### benchmark
+
+If you want to check benchmark, you can use lighthouse script below
+
+```
+yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
+```
+
+### Storybook
+
+If you want to check storybook, execute commands below
+
+```
+yarn storybook
+```
+
+### memlab
+
+If you want to detect browser's memory leaks, you can use memlab script below
+
+```
+yarn memlab
 ```
 
 ## Environment variables
@@ -152,7 +207,7 @@ cp .env.example .env
 
 ## CI/CD
 
-This repository uses GitHub Actions as CI. There are two workflows, one for preview deployments and one for production deployments.
+This repository uses [GitHub Actions](https://github.co.jp/features/actions) as CI. There are two workflows, one for preview deployments and one for production deployments.
 
 [![DeployToNetlifyPreview](https://github.com/tubone24/blog/workflows/DeployToNetlifyPreview/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPreview)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
@@ -202,3 +257,11 @@ npm run textlint
 Use Terraform Cloud to change Netlify configuration values.
 
 [Workspace](https://app.terraform.io/app/tubone24-test/workspaces/blog)
+
+## Detect credentials leak
+
+[Gitguardian](https://www.gitguardian.com/)
+
+## Automatic security vulnerability
+
+[Brightsec](https://brightsec.com/)
