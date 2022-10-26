@@ -186,7 +186,7 @@
     "eslint-plugin-react": "7.31.10",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-testing-library": "5.7.2",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "1.1.27",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "1.1.30",
     "gh-pages": "4.0.0",
     "husky": "8.0.1",
     "identity-obj-proxy": "3.0.0",
