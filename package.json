@@ -168,7 +168,7 @@
     "core-js": "3.25.5",
     "cross-env": "7.0.3",
     "css-loader": "6.7.1",
-    "cypress": "9.7.0",
+    "cypress": "10.11.0",
     "cypress-axe": "1.0.0",
     "cypress-visual-regression": "1.7.0",
     "eslint": "8.25.0",
