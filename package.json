@@ -223,6 +223,9 @@
     "ts-node": "10.9.1",
     "yaml-lint": "1.7.0"
   },
+  "resolutions": {
+    "loader-utils": "2.0.3"
+  },
   "browserslist": [
     ">0.25% in JP",
     "not dead"
