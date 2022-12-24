@@ -227,7 +227,10 @@
     "loader-utils": "2.0.4",
     "jsonwebtoken": "9.0.0",
     "follow-redirects": "1.14.8",
-    "nth-check": "2.0.1"
+    "nth-check": "2.0.1",
+    "parse-url": "8.1.0",
+    "minimatch": "3.0.5",
+    ""
   },
   "browserslist": [
     ">0.25% in JP",
