@@ -224,7 +224,10 @@
     "yaml-lint": "1.7.0"
   },
   "resolutions": {
-    "loader-utils": "2.0.3"
+    "loader-utils": "2.0.3",
+    "jsonwebtoken": "9.0.0",
+    "follow-redirects": "1.14.7",
+    "nth-check": "2.0.1"
   },
   "browserslist": [
     ">0.25% in JP",
