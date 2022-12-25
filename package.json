@@ -235,7 +235,10 @@
     "marked": "4.0.10",
     "trim-newlines":  "3.0.1",
     "glob-parent": "5.1.2",
-    "trim": "0.0.3"
+    "trim": "0.0.3",
+    "engine.io": "6.2.1",
+    "deep-object-diff": "1.1.9",
+    "got": "11.8.5"
   },
   "browserslist": [
     ">0.25% in JP",
