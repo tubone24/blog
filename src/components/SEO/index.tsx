@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { siteTitle } from "@/config/index.json";
+import config from "@/config/index.json";
 
 type Props = {
   url: string;
@@ -36,7 +36,7 @@ const schemaOrgJSONLD = ({
     "@type": "WebSite",
     url,
     name: title,
-    alternateName: siteTitleAlt || siteTitle,
+    alternateName: siteTitleAlt || config.siteTitle,
   });
 
   if (isPost) {
@@ -91,7 +91,7 @@ const schemaOrgJSONLD = ({
 
 const SEO = ({
   url,
-  title = siteTitle,
+  title = config.siteTitle,
   description,
   image,
   siteTitleAlt,

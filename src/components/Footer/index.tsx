@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withPrefix } from "gatsby";
 import ExternalLink from "@/components/ExternalLink";
-import { siteTitle } from "@/config/index.json";
+import config from "@/config/index.json";
 
 import * as style from "./index.module.scss";
 
@@ -28,7 +28,7 @@ const Footer = () => (
             />
             &nbsp;
             <b>
-              <Link to={withPrefix("/")}>{siteTitle}</Link>
+              <Link to={withPrefix("/")}>{config.siteTitle}</Link>
               &nbsp;
             </b>
             2017-{new Date().getFullYear()}
