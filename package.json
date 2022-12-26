@@ -236,7 +236,8 @@
     "trim-newlines":  "3.0.1",
     "glob-parent": "5.1.2",
     "trim": "0.0.3",
-    "deep-object-diff": "1.1.9"
+    "deep-object-diff": "1.1.9",
+    "engine.io": "6.2.1"
   },
   "browserslist": [
     ">0.25% in JP",
