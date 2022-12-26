@@ -239,7 +239,8 @@
     "deep-object-diff": "1.1.9",
     "engine.io": "6.2.1",
     "got": "11.8.5",
-    "decode-uri-component": "0.2.1"
+    "decode-uri-component": "0.2.1",
+    "sanitize-html": "2.3.2"
   },
   "browserslist": [
     ">0.25% in JP",
