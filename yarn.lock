@@ -3806,10 +3806,10 @@
     "@prefresh/core" "^1.3.3"
     "@prefresh/utils" "^1.1.2"
 
-"@raae/gatsby-remark-oembed@0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@raae/gatsby-remark-oembed/-/gatsby-remark-oembed-0.3.2.tgz#417ccaa17285564b680d2eab926d905b0b59eb8b"
-  integrity sha512-dvaNFMns0ZSrMHSYjh6SxvTfjNeCiYCzt4qaUJ+AzPt879PuEIclUUymu7EvY+BWzZ+73C7nbu2P5EMMMTP4cw==
+"@raae/gatsby-remark-oembed@0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@raae/gatsby-remark-oembed/-/gatsby-remark-oembed-0.3.3.tgz#7bef853aa2d03c10cbf122eb2119caa66d2db4d1"
+  integrity sha512-7x7I0lqwEkqYVMeyc1bTV4Zn4CBNs5vCkJMvF+lHR/iUTs2lTFZfRuQjOxTU/pvLlNUecJkYNiTnU2KMR632ZQ==
   dependencies:
     axios "0.27.2"
     lodash "4.17.21"
