@@ -197,11 +197,6 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      - name: get Netlify Draft URL
-        id: get-netlify-draft-url
-        run: |
-          cat cli.txt | sed -r 's/Website Draft URL: (.*)$/\1/'
-          echo "url=$(cat cli.txt | sed -r 's/Website Draft URL: (.*)$/\1/')" >> $GITHUB_OUTPUT
       - name: Cat cli.txt
         run: |
           cat cli.txt
@@ -218,6 +213,11 @@ jobs:
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                ${URL}
+      - name: get Netlify Draft URL
+        id: get-netlify-draft-url
+        run: |
+          cat cli.txt | sed -r 's/Website Draft URL: (.*)$/\1/'
+          echo "url=$(cat cli.txt | sed -r 's/Website Draft URL: (.*\n)$/\1/')" >> $GITHUB_OUTPUT
       - name: test
         run: echo ${{ steps.get-netlify-draft-url.outputs.url }}
     outputs:
