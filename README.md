@@ -230,7 +230,13 @@ The components used in my blog are managed using Storybook.
 
 After production deploy, Run and report Lighthouse.
 
+![lighthouse](https://i.imgur.com/NG260hR.png)
+
 <https://tubone24.github.io/blog/lh/report.html>
+
+Also, create PR, Check Lighthouse score via [pagespeedapi.runpagespeed](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed) and Comment your PR.
+
+![lighthouseScoreWithGitHubComments](https://i.imgur.com/LZmrqgS.png)
 
 ## Bundle Analyzer
 
@@ -265,3 +271,10 @@ Use Terraform Cloud to change Netlify configuration values.
 ## Automatic security vulnerability
 
 [Brightsec](https://brightsec.com/)
+
+# License
+
+- The source code under the MIT LICENSE.
+- `src/content` under the CC-BY [![CC-BY](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+
+[tubone boyaki]: https://blog.tubone-project24.xyz  "tubone boyaki"

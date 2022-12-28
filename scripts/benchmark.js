@@ -18,11 +18,27 @@ const PAGE_SPEED_INSIGHTS_URL =
   "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
 
 const saveJsonFile = (obj, client) => {
-  const dateString = dayjs().format("yyyymmddhhMMss");
+  const dateString = dayjs().format("YYYYMMDDHHmmSSS");
   const path = `./benchmark/raw/${client}-raw-${dateString}-${VERSION}.json`;
   fs.writeFileSync(path, JSON.stringify(obj));
   const lhPath = `./benchmark/${client}-lh-${dateString}-${VERSION}.json`;
   fs.writeFileSync(lhPath, JSON.stringify(obj.lighthouseResult));
+};
+
+const summarizeScore = (obj, client) => {
+  const dateString = dayjs().format("YYYYMMDDHHmmSSS");
+  const path = `./benchmark/summary/${client}-${dateString}-${VERSION}.txt`;
+  const lighthouseResult = obj.lighthouseResult;
+  const summaryText = `performance: ${
+    lighthouseResult.categories.performance.score * 100
+  }\naccessibility: ${
+    lighthouseResult.categories.accessibility.score * 100
+  }\nbest-practices: ${
+    lighthouseResult.categories["best-practices"].score * 100
+  }\nseo: ${lighthouseResult.categories.seo.score * 100}\npwa: ${
+    lighthouseResult.categories.pwa.score * 100
+  }`;
+  fs.writeFileSync(path, summaryText);
 };
 
 const main = async () => {
@@ -54,6 +70,7 @@ const main = async () => {
     }
 
     saveJsonFile(result.data, client);
+    summarizeScore(result.data, client);
   }
 };
 (async () => {

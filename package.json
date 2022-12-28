@@ -195,7 +195,7 @@
     "jest-environment-jsdom": "29.1.2",
     "jest-location-mock": "1.0.9",
     "lint-staged": "13.0.3",
-    "memlab": "1.1.30",
+    "memlab": "1.1.36",
     "netlify-cli": "12.5.0",
     "netlify-lambda": "2.0.15",
     "nyc": "15.1.0",
