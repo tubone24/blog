@@ -262,14 +262,15 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: yarn install --frozen-lockfile
       - name: run lighthouse benchmark
-        run: yarn benchmark https://63ac2193d25597632befef4c--pensive-lamport-5822d2.netlify.app ci
+        run: yarn benchmark ${{ needs.build.outputs.draftUrl }} ci
       - name: summarize scores
         run: |
           touch summarize.txt
-          sed -i '1s/^/# Lighthouse Score\\n/g' summarize.txt
-          sed -i '2s/^/## Desktop\\n/g' summarize.txt
+          echo '# Lighthouse Score\\n' >> summarize.txt
+          echo '## Desktop\\n' >> summarize.txt
           cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          sed -i '8s/^/## Mobile\\n/g' summarize.txt
+          echo '\\n' >> summarize.txt
+          echo '## Mobile\\n' >> summarize.txt
           cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
           cat summarize.txt
       - name: Post Lighthouse Score Comment
