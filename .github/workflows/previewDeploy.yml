@@ -266,11 +266,14 @@ jobs:
       - name: summarize scores
         run: |
           touch summarize.txt
-          echo -n '# Lighthouse Score' >> summarize.txt
-          echo -n '## Desktop' >> summarize.txt
+          echo '# Lighthouse Score' >> summarize.txt
+          echo '## Desktop' >> summarize.txt
+          echo '' >> summarize.txt
           cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo -n '' >> summarize.txt
-          echo -n '## Mobile' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '## Mobile' >> summarize.txt
+          echo '' >> summarize.txt
           cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
       - name: Post Lighthouse Score Comment
