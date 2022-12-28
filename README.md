@@ -230,7 +230,13 @@ The components used in my blog are managed using Storybook.
 
 After production deploy, Run and report Lighthouse.
 
+![lighthouse](https://i.imgur.com/NG260hR.png)
+
 <https://tubone24.github.io/blog/lh/report.html>
+
+Also, create PR, Check Lighthouse score via [pagespeedapi.runpagespeed](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed) and Comment your PR.
+
+![lighthouseScoreWithGitHubComments](https://i.imgur.com/LZmrqgS.png)
 
 ## Bundle Analyzer
 
