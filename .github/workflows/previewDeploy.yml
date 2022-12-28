@@ -216,10 +216,10 @@ jobs:
       - name: get Netlify Draft URL
         id: get-netlify-draft-url
         run: |
-          cat cli.txt | sed -r 's/Website Draft URL: (.*\n)/\1/'
-          echo "url=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*\n).*/\1/')" >> $GITHUB_OUTPUT
+          cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/'
+          echo "url=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> $GITHUB_OUTPUT
       - name: test
-        run: echo ${{ steps.get-netlify-draft-url.outputs.url }}
+        run: echo "${{ steps.get-netlify-draft-url.outputs.url }}"
     outputs:
       url: ${{ steps.get-netlify-draft-url.outputs.url }}
 
