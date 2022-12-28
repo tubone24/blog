@@ -218,10 +218,10 @@ jobs:
         run: |
           cat cli.txt | sed -r 's/Website Draft URL: (.*)$/\1/'
           echo "url=$(cat cli.txt | sed -r 's/Website Draft URL: (.*)$/\1/')" >> $GITHUB_OUTPUT
-        outputs:
-          url: ${{ steps.get-netlify-draft-url.outputs.url }}
       - name: test
         run: echo ${{ steps.get-netlify-draft-url.outputs.url }}
+    outputs:
+      url: ${{ steps.get-netlify-draft-url.outputs.url }}
 
   dep-check:
     runs-on: ubuntu-latest
