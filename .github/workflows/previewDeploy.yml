@@ -266,13 +266,13 @@ jobs:
       - name: summarize scores
         run: |
           touch summarize.txt
-          echo '# Lighthouse Score\\n' >> summarize.txt
-          echo '## Desktop\\n' >> summarize.txt
+          echo -n '# Lighthouse Score' >> summarize.txt
+          echo -n '## Desktop' >> summarize.txt
           cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo '\\n' >> summarize.txt
-          echo '## Mobile\\n' >> summarize.txt
+          echo -n '' >> summarize.txt
+          echo -n '## Mobile' >> summarize.txt
           cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          cat summarize.txt
+          sed -i -z 's/\n/\\n/g' summarize.txt
       - name: Post Lighthouse Score Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
