@@ -6,5 +6,8 @@
   "settings": {
   },
   "extensions": [
-  ]
+	"dsznajder.es7-react-js-snippets",
+	"dbaeumer.vscode-eslint",
+	"ms-azuretools.vscode-docker"
+]
 }
