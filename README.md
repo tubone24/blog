@@ -1,5 +1,7 @@
 # Blog
 
+> Super powerfully all-packaged blog system 
+
 [![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
@@ -20,7 +22,7 @@ This is tubone's Blog by Gatsby and Netlify.
 
 ### Templated by?
 
-[Gatsby Starter - Calpa's Blog](https://github.com/calpa/gatsby-starter-calpa-blog])
+[Gatsby Starter - Calpa's Blog](https://github.com/calpa/gatsby-starter-calpa-blog)
 
 Special, thanks!
 
@@ -34,7 +36,7 @@ Special, thanks!
   - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
   - Use [Sass(Scss)](https://sass-lang.com/) and Scoped by CSS Modules
   - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
-- For Search Engine Optimization, generate header meta tag and OGP
+- For Search Engine Optimization, generate header meta tag and [OGP](https://www.popwebdesign.net/what-is-ogp.html)
 - High Performance, [purge CSS](https://purgecss.com/) to [Bootstrap5](https://getbootstrap.jp/), optimise SVG and minify HTML, CSS and JS
 - Use [Google Analytics v4](https://support.google.com/analytics/answer/10089681?hl=ja)
 - Site inner searching by [Algolia search](https://www.algolia.com/)
