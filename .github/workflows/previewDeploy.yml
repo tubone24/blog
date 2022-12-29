@@ -7,6 +7,21 @@ env:
   cache-version: v1
 
 jobs:
+  check-skip-flags:
+    name: Check skip flags
+    runs-on: ubuntu-latest
+    outputs:
+      head-commit-message: ${{ steps.get-head-commit-message.outputs.headCommitMsg }}
+    steps:
+      - name: Get repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Print head git commit message
+        id: get-head-commit-message
+        run: |
+          echo "::set-output name=headCommitMsg::$(git show -s --format=%s)"
+          echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
   test:
     runs-on: ubuntu-latest
     steps:
@@ -194,19 +209,19 @@ jobs:
         run: yarn build
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public > cli.txt
-        if: "!contains(github.event.head_commit.message, 'netlify skip')"
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       - name: Create Netlify Draft URL Message
-        if: "!contains(github.event.head_commit.message, 'netlify skip')"
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
           cat cli.txt
           sed -i '1s/^/## Deploy Preview\\n/g' cli.txt
           sed -i -z 's/\n/\\n/g' cli.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
       - name: Post Netlify CLI Comment
-        if: "!contains(github.event.head_commit.message, 'netlify skip')"
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.comments_url }}
@@ -216,7 +231,7 @@ jobs:
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                ${URL}
       - name: get Netlify Draft URL
-        if: "!contains(github.event.head_commit.message, 'netlify skip')"
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
           echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> $GITHUB_OUTPUT
