@@ -420,7 +420,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
-          snyk auth $SNYK_TOKEN
+          snyk test .
           snyk test . > snyk.txt
           snyk code test . > snyk_code.txt
           snyk iac test terraform > snyk_iac.txt
