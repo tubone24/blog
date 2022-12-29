@@ -128,7 +128,7 @@ const Page = ({
         <div className="col-xl-2 col-lg-1 order-3" />
       </div>
       <ShareBox
-        url={location.href.replace(/\?.*$/, "")}
+        url={String(location.href).replace(/\?.*$/, "")}
         hasCommentBox={false}
       />
       <SEO
