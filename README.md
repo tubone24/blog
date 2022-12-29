@@ -290,7 +290,9 @@ API request based security check is used by [Brightsec](https://brightsec.com/)
 
 Also, [Snyk](https://app.snyk.io/org/tubone24/project/f01f63e7-832e-45ca-a080-eb4d0da4b8e6), OSS Package check and code, IaC code check.
 
-If you create PR, check [snyk CLI](https://docs.snyk.io/snyk-cli)
+If you create PR, check security vulnerability for [snyk CLI](https://docs.snyk.io/snyk-cli) and push PR comment.
+
+![snyk comments](https://i.imgur.com/fEL1cFj.png)
 
 # License
 
