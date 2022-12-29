@@ -192,6 +192,10 @@ Or if you want to test against a specific URL, set an environment variable.
 URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
 ```
 
+And also, creating PR, you can check memory leak report via GitHub PR Comments.
+
+![memlab leaks report](https://i.imgur.com/JdjbTuo.png)
+
 ## Environment variables
 
 Copy `.env.example` to create the `.env` file
