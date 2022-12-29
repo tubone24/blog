@@ -20,7 +20,6 @@ jobs:
       - name: Print head git commit message
         id: get-head-commit-message
         run: |
-          echo "::set-output name=headCommitMsg::$(git show -s --format=%s)"
           echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
   test:
     runs-on: ubuntu-latest
@@ -350,6 +349,7 @@ jobs:
           npm install -g memlab
       - name: run memlab
         run: |
+          which memlab
           URL=http://localhost:9000
           npx start-server-and-test build-serve:e2e http://localhost:9000 'npx memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab' > leaks.txt
       - name: summarize
@@ -417,6 +417,7 @@ jobs:
 
   storybook:
     runs-on: ubuntu-latest
+    needs: check-skip-flags
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -464,11 +465,13 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           NETLIFY_ENV: deploy-preview
       - name: Deploy to netlify
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: npx netlify-cli deploy --dir=./storybook-static > cli.txt
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
       - name: Cat cli.txt
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
           cat cli.txt
           sed -i '1s/^/## Storybook Preview\\n/g' cli.txt
@@ -476,6 +479,7 @@ jobs:
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" cli.txt
           cat cli.txt
       - name: Post Netlify CLI Comment
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.comments_url }}
