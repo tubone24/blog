@@ -270,6 +270,10 @@ Use Terraform Cloud to change Netlify configuration values.
 
 [Gitguardian](https://www.gitguardian.com/)
 
+## Alert monitoring
+
+Use [Sentry](https://sentry.io/organizations/tubone-project24/projects/)
+
 ## Automatic security vulnerability
 
 [Brightsec](https://brightsec.com/)
