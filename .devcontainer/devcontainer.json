@@ -1,0 +1,13 @@
+{
+  "name": "Node.js (v16)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "blog",
+  "workspaceFolder": "/app",
+  "settings": {
+  },
+  "extensions": [
+	"dsznajder.es7-react-js-snippets",
+	"dbaeumer.vscode-eslint",
+	"ms-azuretools.vscode-docker"
+]
+}

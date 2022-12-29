@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - ../:/app
+    working_dir: /app
+    command: /bin/sh -c "while sleep 1000; do :; done"
