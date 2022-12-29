@@ -330,10 +330,10 @@ jobs:
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          sudo yarn install --frozen-lockfile
-          sudo npm install -g memlab
+          yarn install --frozen-lockfile
+          npm install -g memlab
       - name: run memlab
-        run: sudo yarn memlab:ci > leaks.txt
+        run: memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab > leaks.txt
       - name: summarize
         run: |
           cat leaks.txt
