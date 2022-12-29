@@ -286,7 +286,11 @@ Use [Sentry](https://sentry.io/organizations/tubone-project24/projects/)
 
 ## Automatic security vulnerability
 
-[Brightsec](https://brightsec.com/)
+API request based security check is used by [Brightsec](https://brightsec.com/)
+
+Also, [Snyk](https://app.snyk.io/org/tubone24/project/f01f63e7-832e-45ca-a080-eb4d0da4b8e6), OSS Package check and code, IaC code check.
+
+If you create PR, check [snyk CLI](https://docs.snyk.io/snyk-cli)
 
 # License
 
