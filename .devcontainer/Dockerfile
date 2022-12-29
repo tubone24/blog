@@ -29,8 +29,8 @@ RUN apt-get update \
     && rm -f /usr/local/bin/yarnpkg \
     && apt-get install -y curl apt-transport-https lsb-release \
     #
-    # Install tslint and typescript globally
-    && npm install -g tslint typescript gatsby-cli yarn \
+    # Install yarn
+    && npm install -g yarn \
     #
     # [Optional] Update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
     && if [ "$USER_GID" != "1000" ]; then groupmod node --gid $USER_GID; fi \
