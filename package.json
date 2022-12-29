@@ -238,7 +238,7 @@
     "prismjs": "1.27.0",
     "node-fetch": "2.6.7",
     "marked": "4.0.10",
-    "trim-newlines":  "3.0.1",
+    "trim-newlines": "3.0.1",
     "glob-parent": "5.1.2",
     "trim": "0.0.3",
     "deep-object-diff": "1.1.9",
