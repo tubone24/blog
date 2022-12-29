@@ -422,9 +422,9 @@ jobs:
         run: |
           snyk test .
           snyk code test .
-          snyk test . > snyk.txt
-          snyk code test . > snyk_code.txt
-          snyk iac test terraform > snyk_iac.txt
+          snyk test . > snyk.txt || :
+          snyk code test . > snyk_code.txt  || :
+          snyk iac test terraform > snyk_iac.txt  || :
       - name: summarize
         run: |
           cat snyk.txt
