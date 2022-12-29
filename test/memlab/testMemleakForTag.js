@@ -5,8 +5,8 @@ const url = () => {
 };
 
 const action = async (page) => {
-  // Go to the about page and catch memory leaks
-  const elements = await page.$x("//a[contains(., 'About')]");
+  // Go to the Tag page and catch memory leaks
+  const elements = await page.$x("//a[contains(., 'Tag')]");
   const [link] = elements;
   if (link) {
     await link.click();

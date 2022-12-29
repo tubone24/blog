@@ -127,7 +127,10 @@ const Page = ({
         </main>
         <div className="col-xl-2 col-lg-1 order-3" />
       </div>
-      <ShareBox url={location.href} hasCommentBox={false} />
+      <ShareBox
+        url={String(location.href).replace(/\?.*$/, "")}
+        hasCommentBox={false}
+      />
       <SEO
         title="tubone BOYAKI"
         url="https://blog.tubone-project24.xyz/"

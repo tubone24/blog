@@ -1,5 +1,7 @@
 # Blog
 
+> Super powerfully all-packaged blog system 
+
 [![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
@@ -20,13 +22,13 @@ This is tubone's Blog by Gatsby and Netlify.
 
 ### Templated by?
 
-[Gatsby Starter - Calpa's Blog](https://github.com/calpa/gatsby-starter-calpa-blog])
+[Gatsby Starter - Calpa's Blog](https://github.com/calpa/gatsby-starter-calpa-blog)
 
 Special, thanks!
 
 ## Features
 
-#### Structure
+### Structure
 
 - Gatsby.js v4, Static site generating
   - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
@@ -34,7 +36,7 @@ Special, thanks!
   - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
   - Use [Sass(Scss)](https://sass-lang.com/) and Scoped by CSS Modules
   - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
-- For Search Engine Optimization, generate header meta tag and OGP
+- For Search Engine Optimization, generate header meta tag and [OGP](https://www.popwebdesign.net/what-is-ogp.html)
 - High Performance, [purge CSS](https://purgecss.com/) to [Bootstrap5](https://getbootstrap.jp/), optimise SVG and minify HTML, CSS and JS
 - Use [Google Analytics v4](https://support.google.com/analytics/answer/10089681?hl=ja)
 - Site inner searching by [Algolia search](https://www.algolia.com/)
@@ -50,7 +52,7 @@ Special, thanks!
 - Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), top page Lighthouse's accessibility score is 100!
 - Use [Sentry](https://sentry.io/welcome/) for detecting error and check performance
 
-#### For Developer
+### For Developer
 
 - Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for lint codes
 - Use [EditorConfig](https://editorconfig.org/) formatting and indent
@@ -66,7 +68,7 @@ Special, thanks!
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 
-#### For contributor of articles
+### For contributor of articles
 
 - Post articles in `/src/content/*.md`, and Create [GitHub Pull Request](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to master branch
   - Deploy netlify in preview environment and check your articles
@@ -160,9 +162,9 @@ This project use Browsers List, so you can update it
 yarn browserslist:update
 ```
 
-### benchmark
+### benchmark (Lighthouse)
 
-If you want to check benchmark, you can use lighthouse script below
+If you want to check benchmark, you can use Lighthouse script below
 
 ```
 yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
@@ -184,6 +186,16 @@ If you want to detect browser's memory leaks, you can use memlab script below
 yarn memlab
 ```
 
+Or if you want to test against a specific URL, set an environment variable.
+
+```
+URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
+```
+
+And also, creating PR, you can check memory leak report via GitHub PR Comments.
+
+![memlab leaks report](https://i.imgur.com/JdjbTuo.png)
+
 ## Environment variables
 
 Copy `.env.example` to create the `.env` file
@@ -192,8 +204,8 @@ Copy `.env.example` to create the `.env` file
 cp .env.example .env
 ```
 
-| Key                              | Description                                              | Default | 
-| -------------------------------- | -------------------------------------------------------- | ------- | 
+| Key                              | Description                                              | Default |
+|----------------------------------| -------------------------------------------------------- | ------- | 
 | GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       | 
 | GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       | 
 | GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   | 
@@ -255,7 +267,7 @@ Push the button below.
 I use [textlint](https://textlint.github.io/) to proofread my blog text.
 
 ```
-npm run textlint
+yarn textlint
 ```
 
 ## Change Netlify Config
@@ -268,9 +280,19 @@ Use Terraform Cloud to change Netlify configuration values.
 
 [Gitguardian](https://www.gitguardian.com/)
 
+## Alert monitoring
+
+Use [Sentry](https://sentry.io/organizations/tubone-project24/projects/)
+
 ## Automatic security vulnerability
 
-[Brightsec](https://brightsec.com/)
+API request based security check is used by [Brightsec](https://brightsec.com/)
+
+Also, [Snyk](https://app.snyk.io/org/tubone24/project/f01f63e7-832e-45ca-a080-eb4d0da4b8e6), OSS Package check and code, IaC code check.
+
+If you create PR, check security vulnerability for [snyk CLI](https://docs.snyk.io/snyk-cli) and push PR comment.
+
+![snyk comments](https://i.imgur.com/fEL1cFj.png)
 
 # License
 

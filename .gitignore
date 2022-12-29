@@ -38,3 +38,6 @@ terraform.log
 
 # memlab
 test/memlab/data
+
+# synk
+.dccache

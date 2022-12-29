@@ -93,6 +93,8 @@
     "develop:e2e": "cross-env NODE_ENV=development gatsby develop",
     "develop:remote": "gatsby develop -p 8080 -H 0.0.0.0",
     "serve": "gatsby serve",
+    "build-serve": "yarn build && yarn serve",
+    "build-serve:e2e": "NODE_ENV=development yarn build && NODE_ENV=development yarn serve",
     "format": "eslint .",
     "format:fix": "eslint --fix .",
     "format-style": "npx stylelint **/*.scss",
@@ -121,7 +123,10 @@
     "build-storybook": "build-storybook",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "memlab": "memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
+    "memlab": "memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
+    "memlab:serve": "URL=http://localhost:9000 memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
+    "memlab:ci": "start-server-and-test build-serve:e2e http://localhost:9000 memlab:serve",
+    "memlab:tag": "memlab run --scenario test/memlab/testMemleakForTag.js --work-dir test/memlab"
   },
   "devDependencies": {
     "@babel/core": "7.19.6",
@@ -233,7 +238,7 @@
     "prismjs": "1.27.0",
     "node-fetch": "2.6.7",
     "marked": "4.0.10",
-    "trim-newlines":  "3.0.1",
+    "trim-newlines": "3.0.1",
     "glob-parent": "5.1.2",
     "trim": "0.0.3",
     "deep-object-diff": "1.1.9",
