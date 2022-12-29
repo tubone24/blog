@@ -333,7 +333,9 @@ jobs:
           yarn install --frozen-lockfile
           npm install -g memlab
       - name: run memlab
-        run: npx start-server-and-test build-serve:e2e http://localhost:9000 'URL=http://localhost:9000 memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab' > leaks.txt
+        run: |
+          URL=http://localhost:9000
+          npx start-server-and-test build-serve:e2e http://localhost:9000 'npx memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab' > leaks.txt
       - name: summarize
         run: |
           cat leaks.txt
