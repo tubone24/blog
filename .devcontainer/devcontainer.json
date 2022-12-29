@@ -1,0 +1,10 @@
+{
+  "name": "Node.js (v16)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "blog",
+  "workspaceFolder": "/app",
+  "settings": {
+  },
+  "extensions": [
+  ]
+}
