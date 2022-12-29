@@ -446,6 +446,7 @@ jobs:
           echo '' >> summarize.txt
           cat snyk_iac.txt | sed -z 's/\n/\\n/g' >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
+          sed -i 's/Testing \.\.\.\.//g' summarize.txt
       - name: Post snyk Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
