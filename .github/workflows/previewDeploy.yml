@@ -156,6 +156,7 @@ jobs:
         run: yarn format-yml
   build:
     runs-on: ubuntu-latest
+    needs: check-skip-flags
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
