@@ -28,7 +28,7 @@ Special, thanks!
 
 ## Features
 
-#### Structure
+### Structure
 
 - Gatsby.js v4, Static site generating
   - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
@@ -52,7 +52,7 @@ Special, thanks!
 - Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), top page Lighthouse's accessibility score is 100!
 - Use [Sentry](https://sentry.io/welcome/) for detecting error and check performance
 
-#### For Developer
+### For Developer
 
 - Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for lint codes
 - Use [EditorConfig](https://editorconfig.org/) formatting and indent
@@ -68,7 +68,7 @@ Special, thanks!
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 
-#### For contributor of articles
+### For contributor of articles
 
 - Post articles in `/src/content/*.md`, and Create [GitHub Pull Request](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to master branch
   - Deploy netlify in preview environment and check your articles
@@ -162,9 +162,9 @@ This project use Browsers List, so you can update it
 yarn browserslist:update
 ```
 
-### benchmark
+### benchmark (Lighthouse)
 
-If you want to check benchmark, you can use lighthouse script below
+If you want to check benchmark, you can use Lighthouse script below
 
 ```
 yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
@@ -184,6 +184,12 @@ If you want to detect browser's memory leaks, you can use memlab script below
 
 ```
 yarn memlab
+```
+
+Or if you want to test against a specific URL, set an environment variable.
+
+```
+URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
 ```
 
 ## Environment variables
