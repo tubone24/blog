@@ -351,21 +351,21 @@ jobs:
         run: |
           MEMLAB_PATH=$(which memlab)
           URL=http://localhost:9000
-          npx start-server-and-test build-serve:e2e http://localhost:9000 "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab" > leaks.txt
+          npx start-server-and-test build-serve:e2e http://localhost:9000 "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
       - name: summarize
         run: |
-          cat leaks.txt
-          sed -i '1s/^/## Memlab Report\\n/g' leaks.txt
-          sed -i -z 's/\n/\\n/g' leaks.txt
-          sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" leaks.txt
-      - name: Post Lighthouse Score Comment
+          cat test/memlab/data/out/leaks.txt
+          sed -i '1s/^/## Memlab leaks report\\n/g' test/memlab/data/out/leaks.txt
+          sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
+          sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
+      - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.comments_url }}
         run: |
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
-               -d "{\"body\": \"$(cat leaks.txt)\"}" \
+               -d "{\"body\": \"$(cat test/memlab/data/out/leaks.txt)\"}" \
                ${URL}
   dep-check:
     runs-on: ubuntu-latest

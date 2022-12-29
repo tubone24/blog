@@ -194,8 +194,8 @@ Copy `.env.example` to create the `.env` file
 cp .env.example .env
 ```
 
-| Key                              | Description                                              | Default | 
-| -------------------------------- | -------------------------------------------------------- | ------- | 
+| Key                              | Description                                              | Default |
+|----------------------------------| -------------------------------------------------------- | ------- | 
 | GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       | 
 | GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       | 
 | GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   | 
@@ -257,7 +257,7 @@ Push the button below.
 I use [textlint](https://textlint.github.io/) to proofread my blog text.
 
 ```
-npm run textlint
+yarn textlint
 ```
 
 ## Change Netlify Config
