@@ -22,6 +22,7 @@ services:
   owasp:
     container_name: owasp
     image: owasp/zap2docker-stable
+    command: bash -c "zap.sh -cmd -addonuninstall hud && zap-webswing.sh"
     volumes:
       - ./zap:/zap/wrk/
     ports:
