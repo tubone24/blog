@@ -18,7 +18,6 @@ services:
       - "8000:8000" # yarn dev
     networks:
       - myNW
-    tty: true
 
   owasp:
     container_name: owasp
@@ -33,7 +32,6 @@ services:
     networks:
       - myNW
       - default
-    tty: true
 
 networks:
   myNW:
