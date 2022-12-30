@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  web:
+    container_name: web-target
+    build:
+      context: ../
+      dockerfile: owasp/Dockerfile
+    command:
+      - "npx"
+      - "serve"
+      - "-s"
+      - "-l"
+      - "9000"
+      - "public"
+    ports:
+      - "9000:9000" # yarn serve
+      - "8000:8000" # yarn dev
+    networks:
+      - myNW
+    tty: true
+
+  owasp:
+    container_name: owasp
+    image: owasp/zap2docker-stable
+    volumes:
+      - ./zap:/zap/wrk/
+    ports:
+      - "18081:8080"
+      - "18090:8090"
+    depends_on:
+      - web
+    networks:
+      - myNW
+      - default
+    tty: true
+
+networks:
+  myNW:
+    internal: true
