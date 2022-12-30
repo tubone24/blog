@@ -33,6 +33,7 @@ services:
     networks:
       - myNW
       - default
+    tty: true
 
 networks:
   myNW:
