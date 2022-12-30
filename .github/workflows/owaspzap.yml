@@ -60,4 +60,4 @@ jobs:
       - name: Action Full Scan
         run: |
           docker-compose -f owasp/docker-compose-ci.yml up -d
-          docker-compose -f owasp/docker-compose-ci.yml exec owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -j -z "-config alert.maxInstances=0 -config view.locale=ja_JP"
+          docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -j -z "-config alert.maxInstances=0 -config view.locale=ja_JP"
