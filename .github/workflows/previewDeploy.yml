@@ -579,6 +579,7 @@ jobs:
       - build
       - check-skip-flags
     steps:
+      - uses: actions/checkout@v3
       - name: Capture Webpage Screenshot
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         uses: saadmk11/comment-website-screenshot@v0.5
