@@ -60,13 +60,6 @@ jobs:
           chmod 777 owasp/zap
           docker-compose -f owasp/docker-compose-ci.yml up -d
           docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -j -I -m 1 -z "-config alert.maxInstances=0 -config view.locale=ja_JP"
-      - name: Capture Webpage Screenshot
-        if: always()
-        uses: saadmk11/comment-website-screenshot@v0.5
-        with:
-          upload_to: github_branch
-          capture_changed_html_files: yes
-          capture_html_file_paths: "owasp/zap/report.html"
       - name: Deploy Report
         uses: peaceiris/actions-gh-pages@v3
         with:
