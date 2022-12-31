@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: default-src 'self'; img-src *; script-src 'self' 'nonce-ZsQmvvc24RF0Q3OGhq', 'https://www.google-analytics.com', 'https://ssl.google-analytics.com', 'https://platform.twitter.com', 'https://www.instagram.com', 'https://embedr.flickr.com', 'https://embed.redditmedia.com'
