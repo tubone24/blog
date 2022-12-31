@@ -28,8 +28,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -161,8 +159,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -224,8 +220,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}

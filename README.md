@@ -10,6 +10,7 @@
 [![storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://blog-storybook.netlify.app/)
 [![time tracker](https://wakatime.com/badge/github/tubone24/blog.svg)](https://wakatime.com/badge/github/tubone24/blog)
 <a href="https://validator.w3.org/feed/check.cgi?url=https%3A//blog.tubone-project24.xyz/rss.xml"><img src="https://validator.w3.org/feed/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
+![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-score&lastDay=184)
 [![websiteup](https://img.shields.io/website.svg?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fblog.tubone-project24.xyz)](https://blog.tubone-project24.xyz)
 
 ## What is this?
@@ -67,6 +68,8 @@ Special, thanks!
 - unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
+- Detect vulnerability by [Snyk](https://app.snyk.io/)
+- Detect vulnerability by [OWASP ZAP](https://www.zaproxy.org/)
 
 ### For contributor of articles
 
@@ -214,7 +217,7 @@ cp .env.example .env
 | STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   | 
 | STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       | 
 | GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       | 
-| GATSBY_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       | 
+| GATSBY_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
 | FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       | 
 
 ## CI/CD
@@ -270,29 +273,62 @@ I use [textlint](https://textlint.github.io/) to proofread my blog text.
 yarn textlint
 ```
 
-## Change Netlify Config
+## Infrastructure
+
+### Change Netlify Config
 
 Use Terraform Cloud to change Netlify configuration values.
 
 [Workspace](https://app.terraform.io/app/tubone24-test/workspaces/blog)
 
-## Detect credentials leak
-
-[Gitguardian](https://www.gitguardian.com/)
-
 ## Alert monitoring
 
 Use [Sentry](https://sentry.io/organizations/tubone-project24/projects/)
 
-## Automatic security vulnerability
+## Automatic security and vulnerability check
+
+### Detect credentials leak
+
+There is a security risk of credentials getting into the code, but we use [Gitguardian](https://www.gitguardian.com/) to check each PR to make sure they are not mixed in.
+
+### API Based
 
 API request based security check is used by [Brightsec](https://brightsec.com/)
 
-Also, [Snyk](https://app.snyk.io/org/tubone24/project/f01f63e7-832e-45ca-a080-eb4d0da4b8e6), OSS Package check and code, IaC code check.
+### static code analysis for vulnerability
+
+We use [Snyk](https://app.snyk.io/org/tubone24/project/f01f63e7-832e-45ca-a080-eb4d0da4b8e6) for static code analysis.
+In addition to detecting vulnerabilities in the libraries used, we scan code and IaC tools.
 
 If you create PR, check security vulnerability for [snyk CLI](https://docs.snyk.io/snyk-cli) and push PR comment.
 
 ![snyk comments](https://i.imgur.com/fEL1cFj.png)
+
+### OWASP ZAP
+
+[OWASP ZAP](https://www.zaproxy.org/) [Full Scan](https://www.zaproxy.org/docs/docker/full-scan/) can be run securely against a locally built Docker container.
+
+The results can be viewed at the following URL
+
+<https://tubone24.github.io/blog/owasp/report.html>
+
+Full Scan of OWASP ZAP has a very long execution time, so manual execution with [workflow_dispatch](https://github.com/tubone24/blog/actions/workflows/owaspzap.yml) is recommended.
+
+## CI Healthy
+
+Last 14 days, CI Score by [meercode.io](https://meercode.io)
+
+### CI Score
+
+![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-score&lastDay=14)
+
+### CI Count
+
+![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-count&lastDay=14)
+
+### CI Success Rate
+
+![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-success-rate&lastDay=14)
 
 # License
 

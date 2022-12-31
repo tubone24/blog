@@ -42,8 +42,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -126,8 +124,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -175,8 +171,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -262,8 +256,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -330,8 +322,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -360,10 +350,10 @@ jobs:
       - name: summarize
         run: |
           cat test/memlab/data/out/leaks.txt
-          sed -i '1s/^/## Memlab leaks report\\n\`\`\`\\n/g' test/memlab/data/out/leaks.txt
+          sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n\`\`\`\\n/g' test/memlab/data/out/leaks.txt
           sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
-          echo -n "\\n \`\`\` \\n " >> test/memlab/data/out/leaks.txt
+          echo -n "\\n \`\`\` \\n</details>\\n " >> test/memlab/data/out/leaks.txt
       - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -394,8 +384,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -432,17 +420,28 @@ jobs:
           echo '# Snyk vulnerability report' >> summarize.txt
           echo '## OSS packages' >> summarize.txt
           echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
           cat snyk.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '</details>' >> summarize.txt
           echo '' >> summarize.txt
           echo '' >> summarize.txt
           echo '## Application' >> summarize.txt
           echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
           cat snyk_code.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '</details>' >> summarize.txt
           echo '' >> summarize.txt
           echo '' >> summarize.txt
           echo '## IaC' >> summarize.txt
           echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
+          echo '' >> summarize.txt
           cat snyk_iac.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '</details>' >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
           sed -i 's/Testing \.\.\.\.//g' summarize.txt
           sed -i 's/Testing \. \.\.\.//g' summarize.txt
@@ -461,7 +460,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
       - name: "depcheck"
-        uses: tubone24/depcheck_action@v1.1.0
+        uses: tubone24/depcheck_action@v1.2.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
@@ -485,8 +484,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -519,8 +516,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -577,3 +572,18 @@ jobs:
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                ${URL}
 
+
+  webscreenshot:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - check-skip-flags
+    steps:
+      - uses: actions/checkout@v3
+      - name: Capture Webpage Screenshot
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
+        uses: saadmk11/comment-website-screenshot@v0.5
+        with:
+          upload_to: github_branch
+          capture_changed_html_files: yes
+          capture_urls: ${{ needs.build.outputs.draftUrl }}
