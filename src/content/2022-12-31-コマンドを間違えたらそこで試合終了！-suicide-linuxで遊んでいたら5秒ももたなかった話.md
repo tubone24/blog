@@ -31,15 +31,15 @@ templateKey: blog-post
 <https://github.com/tiagoad/suicide-linux>
 
 > You know how sometimes if you mistype a filename in Bash, it corrects your spelling and runs the command anyway? Such as when changing directory, or opening a file.
-
+> 
 > I have invented Suicide Linux. Any time - any time - you type any remotely incorrect command, the interpreter creatively resolves it into rm -rf / and wipes your hard drive.
-
+> 
 > It's a game. Like walking a tightrope. You have to see how long you can continue to use the operating system before losing all your data.
-
+> 
 > Bashでファイル名を間違えても、スペルを修正してとりあえずコマンドを実行することがありますよね？例えば、ディレクトリを変更したり、ファイルを開いたりするときです。
-
+> 
 > 私はSuicide Linuxを発明しました。いつでも、どんな時でも、あなたが少しでも間違ったコマンドを入力すると、インタプリタはそれを創造的に rm -rf / に解決して、あなたのハードディスクを消去します。
-
+> 
 > これはゲームなんだ。綱渡りのようなものだ。すべてのデータを失う前に、どれだけ長くオペレーティング・システムを使い続けられるか、見なければならない。
 
 とのことです。
