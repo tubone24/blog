@@ -67,7 +67,14 @@ jobs:
           upload_to: github_branch
           capture_changed_html_files: yes
           capture_html_file_paths: "owasp/zap/report.html"
-
+      - name: Deploy Report
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          destination_dir: owasp
+          keep_files: true
+          exclude_assets: '*.cer,*.key'
       - name: push report
         if: always()
         uses: actions/upload-artifact@v3
