@@ -44,7 +44,7 @@ templateKey: blog-post
 
 とのことです。
 
-私もよくあるのですが、コマンドの打ち間違いで
+私もよくあるのですが、コマンドの打ち間違いで、
 
 ```shell{promptUser: tubone}{promptHost: dev.localhost}
 sl
@@ -140,7 +140,7 @@ Suicide Linuxでは、command_not_found_handleで**Oops, 〜**とかいうふざ
 
 今回のようにネタで使う使い方もありますが、普通にコマンドを間違えたときに何らかの検索処理を作ったりするのにすごく便利な機能だと思います。
 
-コマンドを失敗した時、プロンプトの色を変えたりする処理は__sl_set_ps1で実行してました。ここらへんはターミナルで動くアプリを実装したことのある人なら馴染みが深いと思いますが、[ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code) でカラーコードを指定する感じです。
+コマンドを失敗したとき、プロンプトの色を変えたりする処理は__sl_set_ps1で実行してました。ここらへんはターミナルで動くアプリを実装したことのある人なら馴染みが深いと思いますが、[ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code) でカラーコードを指定する感じです。
 
 ```bash
 function __sl_set_ps1 {
