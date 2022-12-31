@@ -2,8 +2,7 @@ name: Build Devcontainer Base Image
 on:
   push:
     branches:
-      - master
-#      - 'image/**'
+      - 'image/**'
 
 jobs:
   build_base_images:
