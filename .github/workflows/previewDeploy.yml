@@ -461,7 +461,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
       - name: "depcheck"
-        uses: tubone24/depcheck_action@v1.1.0
+        uses: tubone24/depcheck_action@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
