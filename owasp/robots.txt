@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: https://blog.tubone-project24.xyz/sitemap/sitemap-index.xml
+Host: https://blog.tubone-project24.xyz
