@@ -432,17 +432,28 @@ jobs:
           echo '# Snyk vulnerability report' >> summarize.txt
           echo '## OSS packages' >> summarize.txt
           echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
           cat snyk.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '</details>' >> summarize.txt
           echo '' >> summarize.txt
           echo '' >> summarize.txt
           echo '## Application' >> summarize.txt
           echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
           cat snyk_code.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '</details>' >> summarize.txt
           echo '' >> summarize.txt
           echo '' >> summarize.txt
           echo '## IaC' >> summarize.txt
           echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
+          echo '' >> summarize.txt
           cat snyk_iac.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '</details>' >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
           sed -i 's/Testing \.\.\.\.//g' summarize.txt
           sed -i 's/Testing \. \.\.\.//g' summarize.txt
@@ -461,7 +472,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
       - name: "depcheck"
-        uses: tubone24/depcheck_action@main
+        uses: tubone24/depcheck_action@v1.2.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
