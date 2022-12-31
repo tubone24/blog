@@ -527,6 +527,8 @@ jobs:
           node-version: 16.x
       - name: install dependencies
         run: yarn install --frozen-lockfile
+      - name: delete headers file
+        run: rm -f static/_headers
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}

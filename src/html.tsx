@@ -32,10 +32,7 @@ const HTML = ({
     <body {...bodyAttributes}>
       {preBodyComponents}
       <script src="/adstir.js" />
-      <script
-        src="https://js.ad-stir.com/js/adstir.js"
-        nonce="ZsQmvvc24RF0Q3OGhq"
-      />
+      <script src="https://js.ad-stir.com/js/adstir.js" />
       <div
         key="body"
         id="___gatsby"
