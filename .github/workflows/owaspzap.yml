@@ -25,8 +25,6 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            .cache
-            public
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
@@ -61,7 +59,7 @@ jobs:
         run: |
           chmod 777 owasp/zap
           docker-compose -f owasp/docker-compose-ci.yml up -d
-          docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -j -z "-config alert.maxInstances=0 -config view.locale=ja_JP"
+          docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -j -I -m 1 -z "-config alert.maxInstances=0 -config view.locale=ja_JP"
       - name: Capture Webpage Screenshot
         if: always()
         uses: saadmk11/comment-website-screenshot@v0.5
