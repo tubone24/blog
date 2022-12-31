@@ -20,7 +20,7 @@ templateKey: blog-post
 
 ## 年末いかがお過ごしですか？
 
-こんばんわ。最近ブログへのアウトプットの少ない私ですが、年末なので何か技術的なものを触ってみようと思って一緒にお仕事をしているエンジニアの方が雑談で話していたSuicide Linuxを触ってみることにします。
+こんばんわ。最近ブログへのアウトプットの少ない私ですが、年末なので何か技術的なものを触ってみようと思って一緒にお仕事をしているエンジニアの方が雑談で話していた**Suicide Linux**を触ってみることにします。
 
 ## Suicide Linuとは？
 
@@ -120,7 +120,9 @@ ENTRYPOINT ["bash"]
 
 工夫があるのはやはり謎の[bashrc](https://github.com/tiagoad/suicide-linux/blob/master/bash.bashrc)です。実は結構bashの細かい仕様を活用してたりします。
 
-まず、 **command_not_found_handle** というFunctionですが、これは文字通りcommand not foundが発生した際に実行されるFunctionそのものです。こいつを上書きしてあげれば任意の動きになるということですね。
+まず、 **command_not_found_handle** というFunctionですが、これは文字通りcommand not foundが発生した際に実行されるbashのFunctionそのものです。こいつを上書きしてあげれば任意の動きになるということですね。
+
+これは[GNU](https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html)のbash manualにも書いてあります。
 
 ```bash
 function command_not_found_handle {
@@ -131,3 +133,37 @@ function command_not_found_handle {
      fi
 }
 ```
+
+Suicide Linuxでは、command_not_found_handleで**Oops, 〜**とかいうふざけたメッセージとともに、 rm -rfを容赦なくバックグラウンド実行してますね。
+
+ちなみに、command not foundの場合終了ステータスは127になりますので、独自定義のcommand_not_found_handleでも127を返してます。
+
+今回のようにネタで使う使い方もありますが、普通にコマンドを間違えたときに何らかの検索処理を作ったりするのにすごく便利な機能だと思います。
+
+コマンドを失敗した時、プロンプトの色を変えたりする処理は__sl_set_ps1で実行してました。ここらへんはターミナルで動くアプリを実装したことのある方なら馴染みが深いと思いますが、[ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code) でカラーコードを指定しする感じです。
+
+```bash
+function __sl_set_ps1 {
+     COUNT=${FAILED_AT:-$HISTCMD}
+     if [ -z "$FAILED_AT" ]; then
+          PROMPT_COLOR=$CLR_L_GREEN
+          COUNT_COLOR=$CLR_YELLOW
+          TERMINAL_TITLE="Suicide Linux"
+     else
+          PROMPT_COLOR=$CLR_L_RED
+          COUNT_COLOR=$CLR_L_RED
+          TERMINAL_TITLE="Suicide Linux | (×_×)"
+     fi
+
+     TERMINAL_TITLE="$TERMINAL_TITLE | survived $COUNT commands"
+
+     PS1="${CLR_RESET}[${COUNT_COLOR}${COUNT}${CLR_RESET}] ${PROMPT_COLOR}\u@\h:\w\$${CLR_RESET} "
+     echo -en "\033]0;${TERMINAL_TITLE}\a"
+}
+```
+
+## まとめ
+
+結論非常にくだらないネタLinuxでしたが、実はbashのお勉強にもなって面白かった、という結論でした〜。
+
+良いお年を。
