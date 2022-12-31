@@ -1,0 +1,20 @@
+name: Build Devcontainer Base Image
+on:
+  push:
+    branches:
+      - master
+#      - 'image/**'
+
+jobs:
+  build_base_images:
+    runs-on: ubuntu-latest
+    name: build Docker Base image
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: docker login
+        run: docker login docker.pkg.github.com -u tubone24 -p ${{ secrets.GITHUB_TOKEN }}
+      - name: docker build
+        run: docker build -t docker.pkg.github.com/tubone24/blog/dev-container-base -f .devcontainer/Dockerfile_base .
+      - name: docker push
+        run: docker push docker.pkg.github.com/tubone24/blog/dev-container-base
