@@ -360,7 +360,7 @@ jobs:
       - name: summarize
         run: |
           cat test/memlab/data/out/leaks.txt
-          sed -i '1s/^/## Memlab leaks report\\n\`\`\`\\n\<details\>\\n/g' test/memlab/data/out/leaks.txt
+          sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n\`\`\`\\n/g' test/memlab/data/out/leaks.txt
           sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
           echo -n "\\n \`\`\` \\n</details>\\n " >> test/memlab/data/out/leaks.txt
