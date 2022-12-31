@@ -26,7 +26,7 @@ const HTML = ({
       />
       <meta
         httpEquiv="Content-Security-Policy"
-        content="default-src 'self'; img-src *; media-src *; script-src 'self' 'nonce-ZsQmvvc24RF0Q3OGhq' 'https://www.google-analytics.com' 'https://ssl.google-analytics.com' 'https://platform.twitter.com' 'https://www.instagram.com' 'https://embedr.flickr.com' 'https://embed.redditmedia.com';"
+        content="default-src 'self'; img-src *; media-src *; script-src 'self' 'nonce-ZsQmvvc24RF0Q3OGhq' 'https://www.google-analytics.com' 'https://ssl.google-analytics.com' 'https://platform.twitter.com' 'https://www.instagram.com' 'https://embedr.flickr.com' 'https://embed.redditmedia.com' 'https://ad.ad-stir.com';"
       />
       <meta name="p:domain_verify" content="2accdaac3153e1b438ab307ac5c4b855" />
       <link rel="prefetch" href="/fonts/icomoon.woff2?s0mo8f" />
