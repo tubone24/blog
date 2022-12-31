@@ -50,7 +50,7 @@ templateKey: blog-post
 sl
 ```
 
-とタイポして
+とタイポして、
 
 ```
 zsh: command not found: sl
@@ -60,7 +60,7 @@ zsh: command not found: sl
 
 **私はあります。**
 
-というより、私の使っているzshの拡張機能でタイポの可能性のあるコマンドが実行された場合
+というより、私の使っているzshの拡張機能でタイポの可能性のあるコマンドが実行された場合、
 
 ```
 ls is correct? [Yes, No, Abort, Edit]:
@@ -106,7 +106,7 @@ Suicide Linuxも例に漏れず、設定されていなかったです。
 
 コマンドをミスるだけで、rm -rfしてくれるSuicide Linuxですが、どうやって動作を実現しているのでしょうか？
 
-まず、[Dockerfile](https://github.com/tiagoad/suicide-linux/blob/master/Dockerfile)を見ると
+まず、[Dockerfile](https://github.com/tiagoad/suicide-linux/blob/master/Dockerfile)を見ると、
 
 ```dockerfile
 FROM debian:bullseye
@@ -140,7 +140,7 @@ Suicide Linuxでは、command_not_found_handleで**Oops, 〜**とかいうふざ
 
 今回のようにネタで使う使い方もありますが、普通にコマンドを間違えたときに何らかの検索処理を作ったりするのにすごく便利な機能だと思います。
 
-コマンドを失敗した時、プロンプトの色を変えたりする処理は__sl_set_ps1で実行してました。ここらへんはターミナルで動くアプリを実装したことのある方なら馴染みが深いと思いますが、[ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code) でカラーコードを指定しする感じです。
+コマンドを失敗した時、プロンプトの色を変えたりする処理は__sl_set_ps1で実行してました。ここらへんはターミナルで動くアプリを実装したことのある人なら馴染みが深いと思いますが、[ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code) でカラーコードを指定する感じです。
 
 ```bash
 function __sl_set_ps1 {
