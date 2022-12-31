@@ -41,3 +41,7 @@ test/memlab/data
 
 # synk
 .dccache
+
+# OWASPZAP
+owasp/zap/*.key
+owasp/zap/*.cer
