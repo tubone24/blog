@@ -250,7 +250,8 @@ module.exports = {
             "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com",
           "style-src": "'self' 'unsafe-inline'",
           "img-src": "*",
-          // you can add your directives or override defaults
+          "frame-ancestors":
+            "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
         },
       },
     },
@@ -311,6 +312,7 @@ module.exports = {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
         headers: {
+          "/*": ["X-Content-Type-Options: nosniff"],
           "/*.html": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/*.json": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/page-data/*": ["Cache-Control: public, max-age=0, must-revalidate"],
