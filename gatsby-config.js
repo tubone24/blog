@@ -294,6 +294,10 @@ module.exports = {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
         headers: {
+          "/*": [
+            "X-Content-Type-Options: nosniff",
+            "Content-Security-Policy: default-src 'self'; img-src *; media-src *; font-src *; script-src 'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com; frame-ancestors 'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com; object-src 'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
+          ],
           "/*.html": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/*.json": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/page-data/*": ["Cache-Control: public, max-age=0, must-revalidate"],
