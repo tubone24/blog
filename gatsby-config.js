@@ -247,7 +247,7 @@ module.exports = {
         mergeDefaultDirectives: true,
         directives: {
           "script-src":
-            "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com",
+            "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'",
           "style-src": "'self' 'unsafe-inline'",
           "img-src": "*",
           "frame-ancestors":
