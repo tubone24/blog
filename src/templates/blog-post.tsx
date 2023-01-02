@@ -14,6 +14,9 @@ import TimeToRead from "@/components/TimeToRead";
 
 import * as style from "./blog-post.module.scss";
 import RelatedPosts from "@/components/Relateds";
+
+import config from "@/config/index.json";
+
 const Gitalk = loadable(
   () => import(/* webpackPrefetch: true */ "@/components/Gitalk")
 );
@@ -43,9 +46,9 @@ class BlogPost extends Component<Props> {
     return (
       <div className={style.post + " row order-2"}>
         <Header
-          img={frontmatter?.headerImage || "https://i.imgur.com/M795H8A.jpg"}
+          img={frontmatter?.headerImage || config.defaultImage}
           title={frontmatter?.title}
-          authorName="tubone"
+          authorName={config.author}
           authorImage={true}
           subTitle={parseDate(frontmatter?.date)}
         />
@@ -77,11 +80,11 @@ class BlogPost extends Component<Props> {
         <SEO
           title={frontmatter?.title}
           url={shareURL}
-          siteTitleAlt="tubone BOYAKI"
+          siteTitleAlt={config.siteTitle}
           isPost
           tag={frontmatter?.tags ? frontmatter.tags[0] || "" : ""}
           description={excerpt || ""}
-          image={frontmatter?.headerImage || "https://i.imgur.com/4r1DViT.png"}
+          image={frontmatter?.headerImage || config.defaultImage || ""}
         />
       </div>
     );
