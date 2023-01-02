@@ -164,6 +164,7 @@ describe("SEO", () => {
     expect(fbAppId).toBe("280941406476272");
     expect(twitterCard).toBe("summary_large_image");
     expect(twitterTitle).toBe("testTitle");
+    expect(twitterCreator).toBe("@meitante1conan");
     expect(twitterDescription).toBe("testDescription");
     expect(twitterImage).toBe("https://example.com/test.png");
   });
