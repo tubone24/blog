@@ -1,0 +1,349 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for src/components/Content/index.stories.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/Content</a> index.stories.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>9/9</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>9/9</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+&nbsp;
+import Content from "./index";
+// Code Highlighting
+import "@/components/Layout/index.scss";
+import "prismjs/themes/prism-okaidia.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/plugins/command-line/prism-command-line.css";
+&nbsp;
+const codeBlock = `&lt;div class="gatsby-highlight has-highlighted-lines" data-language="javascript"&gt;&lt;pre style="counter-reset: linenumber 4" class="language-javascript line-numbers"&gt;&lt;code class="language-javascript"&gt;&lt;span class="token comment"&gt;// In your gatsby-config.js\n&lt;/span&gt;
+&lt;span class="gatsby-highlight-code-line"&gt;&lt;span class="token literal-property property"&gt;plugins&lt;/span&gt;&lt;span class="token operator"&gt;:&lt;/span&gt; &lt;span class="token punctuation"&gt;[&lt;/span&gt;&lt;/span&gt;  &lt;span class="token punctuation"&gt;{&lt;/span&gt;
+    &lt;span class="token literal-property property"&gt;resolve&lt;/span&gt;&lt;span class="token operator"&gt;:&lt;/span&gt; &lt;span class="token template-string"&gt;&lt;span class="token template-punctuation string"&gt;\`&lt;/span&gt;&lt;span class="token string"&gt;gatsby-transformer-remark&lt;/span&gt;&lt;span class="token template-punctuation string"&gt;\`&lt;/span&gt;&lt;/span&gt;&lt;span class="token punctuation"&gt;,&lt;/span&gt;
+    &lt;span class="token literal-property property"&gt;options&lt;/span&gt;&lt;span class="token operator"&gt;:&lt;/span&gt; &lt;span class="token punctuation"&gt;{&lt;/span&gt;
+      &lt;span class="token literal-property property"&gt;plugins&lt;/span&gt;&lt;span class="token operator"&gt;:&lt;/span&gt; &lt;span class="token punctuation"&gt;[&lt;/span&gt;
+        &lt;span class="token template-string"&gt;&lt;span class="token template-punctuation string"&gt;\`&lt;/span&gt;&lt;span class="token string"&gt;gatsby-remark-prismjs&lt;/span&gt;&lt;span class="token template-punctuation string"&gt;\`&lt;/span&gt;&lt;/span&gt;&lt;span class="token punctuation"&gt;,&lt;/span&gt;
+      &lt;span class="token punctuation"&gt;]&lt;/span&gt;
+    &lt;span class="token punctuation"&gt;}&lt;/span&gt;
+  &lt;span class="token punctuation"&gt;}&lt;/span&gt;
+&lt;span class="token punctuation"&gt;]&lt;/span&gt;&lt;/code&gt;&lt;span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;`;
+&nbsp;
+const codeBlockShell = `&lt;div class="gatsby-highlight" data-language="shell"&gt;&lt;pre class="language-shell"&gt;&lt;code class="language-shell"&gt;&lt;span class="command-line-prompt"&gt;&lt;span data-user="alice" data-host="dev.localhost"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="token function"&gt;npm&lt;/span&gt; run build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;`;
+&nbsp;
+const listBlock = `&lt;ul&gt;&lt;li&gt;1&lt;/li&gt;&lt;li&gt;2&lt;ul&gt;&lt;li&gt;2-1&lt;/li&gt;&lt;li&gt;2-2&lt;ul&gt;&lt;li&gt;2-2-1&lt;/li&gt;&lt;li&gt;2-2-2&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;`;
+&nbsp;
+const tableBlock = `&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Head&lt;/th&gt;&lt;th&gt;Head&lt;/th&gt;&lt;th&gt;Head&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;td&gt;Text&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;`;
+&nbsp;
+// https://www.aozora.gr.jp/cards/000148/card772.html
+const sampleText =
+  "&lt;h2&gt;見出し&lt;/h2&gt;" +
+  "&lt;p&gt;H2/H3/H4を基本的に利用する。&lt;/p&gt;" +
+  "&lt;p&gt;H1はブログヘッダーに適用されているため、content内で利用すると２重にH1を定義することになる。極力使わないこと。&lt;/p&gt;" +
+  "&lt;h2&gt;H2見出し&lt;/h2&gt;" +
+  "&lt;h3&gt;H3見出し&lt;/h3&gt;" +
+  "&lt;h4&gt;H4見出し&lt;/h4&gt;" +
+  "&lt;h5&gt;H5見出し&lt;/h5&gt;" +
+  "&lt;h2&gt;リスト&lt;/h2&gt;" +
+  "&lt;p&gt;個人的趣味により、olは使ってない&lt;/p&gt;" +
+  listBlock +
+  "&lt;h2&gt;インライン要素&lt;/h2&gt;" +
+  "&lt;p&gt;この文章は途中で&lt;em style='font-style: italic;'&gt;イタリック(itaric)&lt;/em&gt;になったり&lt;strong&gt;太文字(strong)&lt;/strong&gt;になったり&lt;del&gt;打ち消し(delete)&lt;/del&gt;たり忙しい文章です。&lt;/p&gt;" +
+  "&lt;p&gt;このように&lt;a href='#'&gt;リンク&lt;/a&gt;を作ったり&lt;/p&gt;" +
+  "&lt;blockquote&gt;&lt;p&gt;芸術は爆発だ！&lt;/p&gt;&lt;cite&gt;芸術は爆発だ! 岡本太郎痛快語録&lt;/cite&gt;&lt;/blockquote&gt;" +
+  "&lt;p&gt;引用を使ったり&lt;/p&gt;" +
+  codeBlock +
+  "&lt;p&gt;コードブロックを使うこともできます。(コードブロックは&lt;a href='https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/'&gt;gatsby-remark-prismjs-title&lt;/a&gt;で作ってます。)&lt;/p&gt;" +
+  codeBlockShell +
+  "&lt;p&gt;コマンドラインを表現することもできます。&lt;/p&gt;" +
+  "&lt;h2&gt;テーブル&lt;/h2&gt;" +
+  tableBlock +
+  "&lt;h2&gt;サンプル文章: 私の個人主義&lt;/h2&gt;" +
+  "&lt;p&gt;それは当時同時にわが＃「共について事のためからするなませ。最も生涯に楽ようもしきりにその約束ですませでもをよしがいるたがも通知売っただて、まだにも解らでませましです。背後が引き返しない訳はもし事実についたですで。とうとう岡田さんで希望家来そう意味に云っませ耳その家来あなたか発展をというご講演ですたずだろて、そうした生涯は私か肴世界中にありて、岡田さんの方に新聞のあれをよくご奨励としてあなた権力をご学習をもっように近頃小遠慮をできるですらしいて、もしはなはだ所有が取次いだからいなものをなりでない。それでただご傾向がしのはそう大変というたて、その個性にも向いたてに対して先生の困るて得るですない。&lt;/p&gt;" +
+  "&lt;p&gt;同じ後下働きの上この茫然はおれ上をきまっでかと木下さんでただすならまし、理由のほかでについて大留学ありなたので、世間の以上を学校で結果でもの人が先刻聴いばいるから、まだの生涯がなっばそのためがもし見つかりたますと見えるですのですから、憂ですたてどうお主義やりだ事ありたませ。&lt;/p&gt;" +
+  "&lt;p&gt;だから義務か立派か落第へやりまして、翌日上見識の教えてなりだろ中をお関係のたくさんを起しあるた。十月がもひとまず調っから担がなうたたて、とにかく現に起って学習もまだ大きくなのな。だからお講演からきてはいでのんから、道徳には、もう私かしながら作っせるないないするれですませと勤めから、図書館はするているでう。ぼんやりしかるにもともかく理科というかかるなければ、それをは今末ばかり私のお自覚は長く移ろいるないです。&lt;/p&gt;" +
+  "&lt;p&gt;私はもちろん留学の事にお学問は来からいるでしょですですなて、一一の大牢のまだ存じますという通用でて、またその主人の向背にいうせるて、私かへ私の空を蹂躙に亡びているですのなけれでしょと関係して試験説きしまいありあっ。故意にまた嘉納さんにつまり当然したのないたです。&lt;/p&gt;" +
+  "&lt;p&gt;槙さんはこう田舎にするで述べるたのましあるでし。（それでも学校が行っためありなですばありは伴っううと、）ぴたり教えだ原因に、dutyの会でも移れから知らという、元の腐敗も今日のためまで通じなっのに窮めないて答弁院出るてしまっですに対してお弟なけれのだ。これはのらくら自分をするですように怒りていただくたのませてしかしちょっと大森自分あるですだ。&lt;/p&gt;" +
+  "&lt;p&gt;しかしこれから三通りも時代がなっじゃ、ほかにいくら聞かたですとしと、ないたないてしかし不理解を買うませべき。道の場合から、どんなところに今からもたじゃ、場合上が必ず次第四一二円に思いまでの国家に、それか用いよまし汚辱にあっなたくさんはもうなりれものありて、どうしてももう少し腰で淋しいて、こういう事が用いのが高等なかっないできでた。または無論前一十一日の出れでもはしありとかいう非常なけれお話がして、後でその頃この時がさばくれなのない。しっくりに中腰から目下さいます十十口今に叱りて、何かしですながらいるんってのにそう使うです事ますと、至極しものに十分ないで、おそらく本国に得から教えているないです。&lt;/p&gt;" +
+  "&lt;p&gt;道がならとしが何かないのでしようにありばかり減っでだて、また仕方はよかっ事のして、私が基礎にただす来るから三カ所が一杯は一人はもう叱りと得るまでうのませ。&lt;/p&gt;" +
+  "&lt;p&gt;今日ですんか得通りに充たすから、その義務も立派ない高等ないとするうはずべきは思わならな、悪い性質のつどの考えです人ずみと気に入るがいただきうつもりますらしい。それで私は熱心ないと散らかすたらのですはない、公平たて直さましのんとしがそれの手の画がそんな用と記念探して来なけれます。学校をは主ずいくら変っばいるれるた場合と支に行ったり、取消を尊ぶとか、さて画がつけ加えと云っ材料が立つ一つ、横着ないば、やはりするてない人格が広めよたと読んて、権利に洗わて孔雀だけ国家までからし人間は云うだ。あるいは十分がはその知人の不愉快らを今に倒さあり時へ進んが無論比較受けてい今にし事だ。&lt;/p&gt;" +
+  "&lt;p&gt;だからこれはある時が云っ持っのた、使用の軍隊に帰着思いない仕方のもさたんでないは進んたです。もう私はこの大切だ火事に推しなりた、講演の申をすこぶる与えなかろで得るているますのない。もっともし二十一円であったが、内心には箸よりは何を学校のしだから殖やしですのと行きですた。あるいは絶対そう自分を食わせろて得るですまいと、任命にしかるに矛盾のようます。&lt;/p&gt;" +
+  "&lt;p&gt;どう大反抗より這入っようです品評もなるいなけれて、わがのにご諸君家を与えます。&lt;/p&gt;";
+&nbsp;
+export default {
+  title: "Components/Content",
+  component: Content,
+  parameters: {
+    backgrounds: {
+      default: "green",
+      values: [{ name: "green", value: "#d5ffd7" }],
+    },
+  },
+} as ComponentMeta&lt;typeof Content&gt;;
+&nbsp;
+const Template: ComponentStory&lt;typeof Content&gt; = (args) =&gt; (
+  &lt;div className="row post order-2"&gt;
+    &lt;header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1"&gt;
+      test Side Bar
+    &lt;/header&gt;
+    &lt;div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content"&gt;
+      &lt;Content {...args} /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+);
+&nbsp;
+export const Default = Template.bind({});
+Default.args = {
+  post: sampleText,
+};
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2023-01-02T10:01:39.130Z
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    
