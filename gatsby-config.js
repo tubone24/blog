@@ -252,6 +252,7 @@ module.exports = {
           "img-src": "*",
           "frame-ancestors":
             "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
+          "report-uri": "",
         },
       },
     },

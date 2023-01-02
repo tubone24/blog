@@ -202,7 +202,7 @@ jobs:
           NETLIFY_ENV: deploy-preview
         run: yarn build
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --dir=./public > cli.txt
+        run: npx netlify-cli deploy --dir=./public --functions=./functions/src > cli.txt
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
