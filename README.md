@@ -141,6 +141,17 @@ If you want to check testing coverage, execute commands below
 yarn test:cov
 ```
 
+And also, check your coverage report on PR with [Coveralls](https://coveralls.io/).
+
+[![Coverage Status](https://coveralls.io/repos/github/tubone24/blog/badge.svg?branch=master)](https://coveralls.io/github/tubone24/blog?branch=master)
+
+And more, you can check production test coverage report below.
+
+- jest test report
+  - <https://tubone24.github.io/blog/cov/index.html>
+- cypress e2e test report
+  - <https://tubone24.github.io/blog/e2e-cov/index.html>
+
 ### Cleaning
 
 If you error occurred on gatsby build, execute commands below

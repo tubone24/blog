@@ -89,6 +89,20 @@ jobs:
         with:
           name: main.spec.ts.mp4
           path: ./cypress/videos/e2e/main.spec.ts.mp4
+      - name: Upload Test Coverage
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coverage
+          destination_dir: cov
+          keep_files: true
+      - name: Upload e2e Test Coverage
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coverage-e2e/lcov-report
+          destination_dir: e2e-cov
+          keep_files: true
   lint:
     runs-on: ubuntu-latest
     steps:
