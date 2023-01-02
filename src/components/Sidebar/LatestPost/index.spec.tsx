@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import LatestPost, { Post } from "./index";
 import { axe } from "jest-axe";
-import { AllPost } from "@/components/Sidebar/entity";
-import TagCloud from "@/components/Sidebar/TagCloud";
+import ReactGA from "react-ga4";
+import userEvent from "@testing-library/user-event";
 
 describe("LatestPost", () => {
   it("has url", async () => {
@@ -58,6 +58,24 @@ describe("LatestPost", () => {
     expect(screen.getByTestId("latestArticleCount")).toHaveTextContent(
       "Recent posts 6 / 1"
     );
+  });
+  it("ga button clicked", async () => {
+    const posts: Post[] = [
+      {
+        node: {
+          frontmatter: { url: "url", slug: "slug", title: "testTitle" },
+          fields: { slug: "testFieldsSlug" },
+        },
+      },
+    ];
+    render(<LatestPost posts={posts} totalCount={1} />);
+    const mockReactGA = jest.spyOn(ReactGA, "event");
+    await userEvent.click(screen.getByRole("link"));
+    expect(mockReactGA.mock.calls[0][0]).toStrictEqual({
+      category: "User",
+      action: "Click latest-post item: testFieldsSlug",
+    });
+    mockReactGA.mockRestore();
   });
   it("should not have basic accessibility issues", async () => {
     const posts: Post[] = [
