@@ -13041,6 +13041,14 @@ gatsby-plugin-algolia@0.26.0:
     deep-equal "^2.0.5"
     lodash.chunk "^4.2.0"
 
+gatsby-plugin-csp@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-csp/-/gatsby-plugin-csp-1.1.4.tgz#f93901ae8c0bdf262c1e0dc26940e52f6bdfbff7"
+  integrity sha512-aMDN27QAbHcI/3F5sH9J3w4wE0vNWWKTxGXjQ4VsKVVbIfxnPNXf82i9nOp4Ef2MQT4bIKnfZjf9jaLG3aWXcQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    lodash.flatten "^4.4.0"
+
 gatsby-plugin-exclude@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-exclude/-/gatsby-plugin-exclude-1.0.2.tgz#eaf889fcb177553e3fa548d5bac02e1926dad113"

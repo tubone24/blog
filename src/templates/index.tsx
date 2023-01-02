@@ -11,6 +11,8 @@ import ShareBox from "@/components/ShareBox";
 import * as style from "./index.module.scss";
 import SEO from "@/components/SEO";
 
+import config from "@/config/index.json";
+
 const NavLinkText = ({
   text,
   disabled = false,
@@ -132,13 +134,13 @@ const Page = ({
         hasCommentBox={false}
       />
       <SEO
-        title="tubone BOYAKI"
+        title={config.siteTitle}
         url="https://blog.tubone-project24.xyz/"
-        siteTitleAlt="tubone BOYAKI"
+        siteTitleAlt={config.siteTitle}
         isPost={false}
-        description="tubone BLOG: Python, Docker, TS and other techs.."
+        description={config.description}
         tag=""
-        image="https://i.imgur.com/4r1DViT.png"
+        image={config.defaultImage}
       />
     </>
   );

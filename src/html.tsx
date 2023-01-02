@@ -1,4 +1,5 @@
 import React from "react";
+import config from "@/config/index.json";
 
 const HTML = ({
   htmlAttributes = {},
@@ -24,7 +25,7 @@ const HTML = ({
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-      <meta name="p:domain_verify" content="2accdaac3153e1b438ab307ac5c4b855" />
+      <meta name="p:domain_verify" content={config.domain_verify} />
       <link rel="prefetch" href="/fonts/icomoon.woff2?s0mo8f" />
       <link rel="preconnect dns-prefetch" href="//i.imgur.com" />
       {headComponents}

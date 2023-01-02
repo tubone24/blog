@@ -5,6 +5,8 @@ import Sidebar from "@/components/Sidebar";
 
 import * as style from "./period-summary.module.scss";
 
+import config from "@/config/index.json";
+
 const PeriodSummary = ({
   data,
   pageContext,
@@ -54,7 +56,7 @@ const PeriodSummary = ({
       <SEO
         title={title}
         url={url}
-        siteTitleAlt="tubone BOYAKI"
+        siteTitleAlt={config.siteTitle}
         isPost={false}
         description={title}
         tag=""

@@ -201,7 +201,7 @@ jobs:
       - name: Remove Bundle Analyze
         run: rm ./public/webpack-bundle-analyser/index.html
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --prod --dir=./public
+        run: npx netlify-cli deploy --prod --dir=./public --functions=./functions/src
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -231,8 +231,6 @@ jobs:
           node-version: 16.x
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: delete headers file
-        run: rm -f static/_headers
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
