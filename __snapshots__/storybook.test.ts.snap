@@ -632,7 +632,9 @@ exports[`Storyshots Components/Sidebar Default 1`] = `
       >
         <hr />
         <div>
-          <p>
+          <p
+            data-testid="latestArticleCount"
+          >
             <span
               className="icon-newspaper-o"
             />

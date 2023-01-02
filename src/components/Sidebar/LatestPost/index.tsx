@@ -24,7 +24,7 @@ const LatestPost = ({
   totalCount: number;
 }) => (
   <div className={style.latestPost}>
-    <p>
+    <p data-testid="latestArticleCount">
       <span className="icon-newspaper-o" />
       &nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
       {totalCount}
