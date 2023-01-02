@@ -679,7 +679,9 @@ exports[`Storyshots Components/Sidebar Default 1`] = `
           </a>
         </div>
         <hr />
-        <div>
+        <div
+          data-testid="Archive"
+        >
           <p>
             <span
               className="icon-calendar"
