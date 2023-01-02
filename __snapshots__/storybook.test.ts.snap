@@ -256,7 +256,7 @@ exports[`Storyshots Components/Footer Default 1`] = `
           >
             Privacy Policies
           </a>
-            Here is  
+             
           <a
             href="/sitemap-index.xml"
             title="sitemap"
