@@ -13,6 +13,14 @@ const transaction = Sentry.startTransaction({
 
 exports.handler = (event, context) => {
   console.log(event, context);
+  if (!event.body) {
+    Sentry.captureException(new Error(event));
+    transaction.finish();
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ status: "Bad Request" }),
+    };
+  }
   const body = JSON.parse(event.body);
   Sentry.captureException(new Error(body));
   transaction.finish();
