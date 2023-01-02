@@ -11,14 +11,11 @@ const Footer = () => (
       <div className="row">
         <div className="col-sm-12 text-center">
           <p data-testid="architecture">
-            Build with&nbsp;
-            <ExternalLink href="https://www.gatsbyjs.com/" title="GatsbyJS" />
-            &nbsp;and&nbsp;
-            <ExternalLink href="https://preactjs.com/" title="PReact" />
-            .&nbsp;Hosted on&nbsp;
-            <ExternalLink href="https://www.netlify.com/" title="Netlify" />
-            .&nbsp;Also indexed posts with&nbsp;
-            <ExternalLink href="https://www.algolia.com/" title="Algolia" />
+            The source code for this blog is maintained on &nbsp;
+            <ExternalLink
+              href="https://github.com/tubone24/blog"
+              title="GitHub."
+            />
           </p>
           <p className={style.copyright} data-testid="copyright">
             Copyright&nbsp;

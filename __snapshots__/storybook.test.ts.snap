@@ -190,41 +190,14 @@ exports[`Storyshots Components/Footer Default 1`] = `
         <p
           data-testid="architecture"
         >
-          Build with 
+          The source code for this blog is maintained on  
           <a
             className=""
-            href="https://www.gatsbyjs.com/"
+            href="https://github.com/tubone24/blog"
             rel="external nofollow noopener"
             target="_blank"
           >
-            GatsbyJS
-          </a>
-           and 
-          <a
-            className=""
-            href="https://preactjs.com/"
-            rel="external nofollow noopener"
-            target="_blank"
-          >
-            PReact
-          </a>
-          . Hosted on 
-          <a
-            className=""
-            href="https://www.netlify.com/"
-            rel="external nofollow noopener"
-            target="_blank"
-          >
-            Netlify
-          </a>
-          . Also indexed posts with 
-          <a
-            className=""
-            href="https://www.algolia.com/"
-            rel="external nofollow noopener"
-            target="_blank"
-          >
-            Algolia
+            GitHub.
           </a>
         </p>
         <p

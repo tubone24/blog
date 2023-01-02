@@ -12,13 +12,9 @@ describe("Footer", () => {
   });
   it("Displays valid Architecture", () => {
     render(<Footer />);
-    expect(screen.getByText("GatsbyJS")).toHaveAttribute(
+    expect(screen.getByText("GitHub.")).toHaveAttribute(
       "href",
-      "https://www.gatsbyjs.com/"
-    );
-    expect(screen.getByText("PReact")).toHaveAttribute(
-      "href",
-      "https://preactjs.com/"
+      "https://github.com/tubone24/blog"
     );
   });
   it("should not have basic accessibility issues", async () => {
