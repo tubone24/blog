@@ -24,7 +24,7 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
     )
   ).sort((a, b) => (a < b ? 1 : -1));
   return (
-    <div className={style.archive}>
+    <div className={style.archive} data-testid="Archive">
       <p>
         <span className="icon-calendar" />
         &nbsp;Archives
