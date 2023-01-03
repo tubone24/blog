@@ -256,6 +256,7 @@ module.exports = {
         },
       },
     },
+    "gatsby-plugin-csp-nonce",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -313,10 +314,7 @@ module.exports = {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
         headers: {
-          "/*": [
-            "X-Content-Type-Options: nosniff",
-            " Content-Security-Policy: default-src 'self'; script-src 'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'; style-src 'self' 'unsafe-inline'; img-src *; frame-ancestors 'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com; report-uri /.netlify/functions/csp-report;",
-          ],
+          "/*": ["X-Content-Type-Options: nosniff"],
           "/*.html": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/*.json": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/page-data/*": ["Cache-Control: public, max-age=0, must-revalidate"],

@@ -4,4 +4,15 @@
   command = "npm run build"
 
 [[plugins]]
-  package = "netlify-plugin-gatsby-cache"
+  package = "netlify-plugin-csp-generator"
+
+[plugins.inputs]
+  buildDir = "public"
+  reportURI = "/.netlify/functions/csp-report"
+
+[plugins.inputs.policies]
+  defaultSrc = "'self'"
+  imgSrc = "*"
+  styleSrc = "'self' 'unsafe-inline'"
+  scriptSrc="'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'"
+  frameAncestors="'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;"
