@@ -302,12 +302,12 @@ module.exports = {
         mergeDefaultDirectives: true,
         directives: {
           "script-src":
-            "'self' https://*.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'sha256-DSMO0z2RhMbkqQAuMaTTaJ19AmO447WUgmBfvurIXDc=';", // sha-256はBootstrapのInline Script
-          "style-src": "'self' 'unsafe-inline';",
-          "img-src": "'self' data: *;",
+            "'self' https://*.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'sha256-DSMO0z2RhMbkqQAuMaTTaJ19AmO447WUgmBfvurIXDc='", // sha-256はBootstrapのInline Script
+          "style-src": "'self' 'unsafe-inline'",
+          "img-src": "'self' data: *",
           "frame-ancestors":
-            "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
-          "report-uri": "/.netlify/functions/csp-report;",
+            "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com",
+          "report-uri": "/.netlify/functions/csp-report",
         },
       },
     },
