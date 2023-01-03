@@ -33,7 +33,7 @@ templateKey: blog-post
 
 BootStrap v3で動いていたこのブログのソースを見てもらえばわかるのですが、Gatsby.jsで動いているブログなのに、Bootstrapは **&lt;script&gt;** タグを使ってCDNライクに使ってました。(CDN配信ではありません。ここらへんも闇です。)
   
-Gatsby.jsでは**html.js**というファイルを作ることでHTMLファイルのビルド時に任意のタグを埋め込むことができます。
+Gatsby.jsでは**HTML.js**というファイルを作ることでHTMLファイルのビルド時に任意のタグを埋め込むことができます。
 
 それを**悪用**して次のようにBootstrapのCSSを **&lt;link&gt;** タグで、jQueryとBootstrapのJSを **&lt;script&gt;** タグでそれぞれ配信されたものを使っている形となっておりました。
 
@@ -117,7 +117,7 @@ node-sassやめてPostCSSにすれば直りそうですが、年末にCSSをい�
 
 ## やったこと
 
-まず、html.jsでの **&lt;script&gt;** タグでのBootstrap利用をやめました。
+まず、HTML.jsでの **&lt;script&gt;** タグでのBootstrap利用をやめました。
 
 Gatsby.jsでは**gatsby-browser.js**を使って、ブラウザ側で利用したいモジュールを設定できますのでこちらにCSSとJSをimportするようにします。
 
@@ -174,7 +174,7 @@ Columnの順番を制御できるOrderについて今までは無邪気にorder-
 
 ### デフォルトでaタグにtext-decoration: underlineがつく
 
-といういらない変更が入っていたので、こちらは**global.scss**でnoneを上書きします。
+といういらない変更が入っていたので、こちらは**global.sCSS**でnoneを上書きします。
     
 ![underlineがつく](https://i.imgur.com/RRvEIHy.png)
 
@@ -186,7 +186,7 @@ a {
   
 ### デフォルトでscroll-behavior smoothがつく
 
-というおせっかいが入っているのでこちらもglobal.scssで無効化します。別にあってもいいかなとも思ったのですが、画像の**Lazy loading**との相性が最悪で遷移先のページでうまく画像を読み込んでくれなかったので無効化します。
+というおせっかいが入っているのでこちらもglobal.sCSSで無効化します。別にあってもいいかなとも思ったのですが、画像の**Lazy loading**との相性が最悪で遷移先のページでうまく画像を読み込んでくれなかったので無効化します。
  
 ```css
 :root {
@@ -200,7 +200,7 @@ a {
 
 さてこれでBootstrap v5化はできました。Tailwindを使おうと思った理由はPurgeだったので、Purgeしてしまいます。
 
-Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgecss](https://www.gatsbyjs.com/plugins/gatsby-plugin-purgecss/)が利用できます。今回はglobal.scssにBootstrapのCSSをimportしているので**gatsby-config.js**に次のように設定してあげることで利用してないCSS RuleをPurgeしてくれます。
+Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgeCSS](https://www.gatsbyjs.com/plugins/gatsby-plugin-purgecss/)が利用できます。今回はglobal.sCSSにBootstrapのCSSをimportしているので**gatsby-config.js**に次のように設定してあげることで利用してないCSS RuleをPurgeしてくれます。
 
 ```javascript
     {
