@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = "https://blog.tubone-project24.xyz",
@@ -238,26 +240,6 @@ module.exports = {
     },
     "gatsby-plugin-optimize-svgs",
     {
-      resolve: "gatsby-plugin-csp",
-      options: {
-        disableOnDev: true,
-        reportOnly: false,
-        mergeScriptHashes: true,
-        mergeStyleHashes: true,
-        mergeDefaultDirectives: true,
-        directives: {
-          "script-src":
-            "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'",
-          "style-src": "'self' 'unsafe-inline'",
-          "img-src": "*",
-          "frame-ancestors":
-            "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
-          "report-uri": "/.netlify/functions/csp-report",
-        },
-      },
-    },
-    "gatsby-plugin-csp-nonce",
-    {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: siteTitle,
@@ -311,6 +293,25 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-csp",
+      options: {
+        disableOnDev: true,
+        reportOnly: false,
+        mergeScriptHashes: true,
+        mergeStyleHashes: true,
+        mergeDefaultDirectives: true,
+        directives: {
+          "script-src":
+            "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'",
+          "style-src": "'self'",
+          "img-src": "*",
+          "frame-ancestors":
+            "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
+          "report-uri": "/.netlify/functions/csp-report",
+        },
+      },
+    },
+    {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
         headers: {
@@ -327,6 +328,37 @@ module.exports = {
           "/**/*.js": ["Cache-Control: public, max-age=31536000, immutable"],
           "/**/*.css": ["Cache-Control: public, max-age=31536000, immutable"],
         },
+        transformHeaders: (headers, _path) => {
+          console.log(headers);
+          console.log(_path);
+          const filePath = "./public/index.html";
+          const rawHtml = fs.readFileSync(filePath).toString();
+          if (
+            !/<meta http-?equiv="Content-Security-Policy" content="[\S|\s]*?"\/?>/.test(
+              rawHtml
+            )
+          ) {
+            console.log("do not have csp");
+            return headers;
+          }
+          const csp =
+            /<meta http-?equiv="Content-Security-Policy" content="([\S|\s]*?)"\/?>/
+              .exec(rawHtml)[1]
+              .replace(/&#x27;/g, `'`);
+          console.log(csp);
+          headers.push(`Content-Security-Policy: ${csp}`);
+          fs.writeFileSync(
+            filePath,
+            rawHtml.replace(
+              /<meta http-?equiv="Content-Security-Policy" content="[\S|\s]*?"\/?>/g,
+              ""
+            )
+          );
+          return headers;
+        },
+        mergeSecurityHeaders: true,
+        mergeCachingHeaders: true,
+        generateMatchPathRewrites: true,
       },
     },
   ],
