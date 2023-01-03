@@ -275,8 +275,8 @@ module.exports = {
         removeEmptyElements: false,
         removeComments: true,
         removeAttributeQuotes: false,
-        minifyCSS: true,
-        minifyJS: true,
+        minifyCSS: false,
+        minifyJS: false,
       },
     },
     {
