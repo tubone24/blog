@@ -314,7 +314,8 @@ module.exports = {
       options: {
         headers: {
           "/*": [
-            "X-Content-Type-Options: nosniff Content-Security-Policy: default-src 'self'; script-src 'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'; style-src 'self' 'unsafe-inline'; img-src *; frame-ancestors 'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com; report-uri /.netlify/functions/csp-report;",
+            "X-Content-Type-Options: nosniff",
+            " Content-Security-Policy: default-src 'self'; script-src 'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'; style-src 'self' 'unsafe-inline'; img-src *; frame-ancestors 'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com; report-uri /.netlify/functions/csp-report;",
           ],
           "/*.html": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/*.json": ["Cache-Control: public, max-age=0, must-revalidate"],
