@@ -302,7 +302,7 @@ module.exports = {
         mergeDefaultDirectives: true,
         directives: {
           "script-src":
-            "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'",
+            "'self' https://*.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com",
           "style-src": "'self'",
           "img-src": "*",
           "frame-ancestors":
@@ -329,6 +329,7 @@ module.exports = {
           "/**/*.css": ["Cache-Control: public, max-age=31536000, immutable"],
         },
         transformHeaders: (headers, _path) => {
+          // gatsby-plugin-cspで作ったmetaタグCSPをレスポンスヘッダーに変更する処理
           console.log(headers);
           console.log(_path);
           const filePath = "./public/index.html";
