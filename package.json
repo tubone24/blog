@@ -24,12 +24,12 @@
     "dayjs": "1.11.6",
     "dotenv": "16.0.3",
     "flexboxgrid": "6.3.1",
-    "gatsby": "4.23.1",
+    "gatsby": "4.25.1",
     "gatsby-legacy-polyfills": "2.23.0",
     "gatsby-link": "4.23.0",
     "gatsby-paginate": "1.1.1",
     "gatsby-plugin-algolia": "0.26.0",
-    "gatsby-plugin-csp": "^1.1.4",
+    "gatsby-plugin-csp": "1.1.4",
     "gatsby-plugin-exclude": "1.0.2",
     "gatsby-plugin-feed": "4.23.1",
     "gatsby-plugin-flexsearch": "1.0.3",
@@ -246,7 +246,8 @@
     "engine.io": "6.2.1",
     "got": "11.8.5",
     "decode-uri-component": "0.2.1",
-    "sanitize-html": "2.3.2"
+    "sanitize-html": "2.3.2",
+    "axios": "0.27.2"
   },
   "browserslist": [
     ">0.25% in JP",
