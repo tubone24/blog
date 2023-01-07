@@ -135,7 +135,7 @@ const Page = ({
       />
       <SEO
         title={config.siteTitle}
-        url="https://blog.tubone-project24.xyz/"
+        url={config.siteUrl}
         siteTitleAlt={config.siteTitle}
         isPost={false}
         description={config.description}
