@@ -21,4 +21,3 @@ const back = async (page) => {
 };
 
 module.exports = { action, back, url };
-// test
