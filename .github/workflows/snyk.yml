@@ -1,5 +1,6 @@
 name: Snyk
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - master
@@ -54,6 +55,20 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           yarn global add snyk
+      - name: yarn build
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          GATSBY_GITHUB_SHA: ${{ github.sha }}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          NETLIFY_ENV: deploy-preview
+        run: yarn build
+      - name: build docker image
+        run: docker build -t test-blog -f owasp/Dockerfile .
       - name: run snyk
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -61,11 +76,13 @@ jobs:
           snyk test . > snyk.txt || :
           snyk code test . > snyk_code.txt  || :
           snyk iac test terraform > snyk_iac.txt  || :
+          snyk container test test-blog > snyk_container.txt  || :
       - name: summarize
         run: |
           cat snyk.txt
           cat snyk_code.txt
           cat snyk_iac.txt
+          cat snyk_container.txt
           touch summarize.txt
           echo '# Snyk vulnerability report' >> summarize.txt
           echo '## OSS packages' >> summarize.txt
@@ -92,6 +109,15 @@ jobs:
           cat snyk_iac.txt | sed -z 's/\n/\\n/g' >> summarize.txt
           echo '' >> summarize.txt
           echo '</details>' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '## Container' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '' >> summarize.txt
+          echo '<details>' >> summarize.txt
+          cat snyk_container.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          echo '</details>' >> summarize.txt
+          echo '' >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
           sed -i 's/Testing \.\.\.\.//g' summarize.txt
           sed -i 's/Testing \. \.\.\.//g' summarize.txt
