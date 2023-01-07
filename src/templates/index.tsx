@@ -74,7 +74,7 @@ const Page = ({
   location,
 }: {
   pageContext: PageContext;
-  location: { href: string };
+  location: Location;
 }) => {
   const { group, index, first, last, pathPrefix, pageCount } = pageContext;
 
@@ -130,7 +130,7 @@ const Page = ({
         <div className="col-xl-2 col-lg-1 order-3" />
       </div>
       <ShareBox
-        url={String(location.href).replace(/\?.*$/, "")}
+        url={config.siteUrl + String(location.pathname)}
         hasCommentBox={false}
       />
       <SEO
