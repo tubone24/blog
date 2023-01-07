@@ -9,7 +9,7 @@ on:
       - src/**
       - test/**
       - terraform/**
-      - '!**.md'
+      - '!*.md'
 env:
   cache-version: v1
 
