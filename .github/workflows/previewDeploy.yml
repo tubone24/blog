@@ -483,6 +483,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
           cat << EOF > comments.txt
+          ## Bundle Analyzer URL
           ${{ needs.build.outputs.draftUrl }}/webpack-bundle-analyser
           EOF
       - name: Post comments
