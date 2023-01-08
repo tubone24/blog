@@ -11,7 +11,7 @@ on:
       - terraform/**
       - '!src/content/**'
 env:
-  cache-version: v1
+  cache-version: v2
 
 jobs:
   snyk:
@@ -38,8 +38,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}

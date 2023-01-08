@@ -5427,10 +5427,10 @@
     traverse "^0.6.6"
     unified "^9.2.2"
 
-"@textlint/module-interop@^12.1.0":
-  version "12.2.1"
-  resolved "https://registry.yarnpkg.com/@textlint/module-interop/-/module-interop-12.2.1.tgz#afc65d7073377f6a5eacba7e5b63b1b4e03bbdbc"
-  integrity sha512-/SixwKngWuTvVl9AArK4FEWGrNAwD7/ABvLCy/pdFprljnUa87P5JvSi7/v1PjpAXcnMQ2r04wDJjegs9oblBA==
+"@textlint/module-interop@^12.2.1":
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/@textlint/module-interop/-/module-interop-12.5.0.tgz#3a47f3cd3682b939c7d7576921b968b0020ffd84"
+  integrity sha512-NmkHL5tt+HEqLm00JSW1f03KTbEqOzupliboSZ2HeNhOqZxSX4wR3lBlGqVeVi5dImMWrt40oa+AbkqkD78b9Q==
 
 "@textlint/module-interop@^12.2.2":
   version "12.2.2"
@@ -24452,16 +24452,6 @@ textlint-rule-ja-hiragana-daimeishi@^1.0.0:
     kuromojin "^2.1.1"
     morpheme-match-all "^1.1.0"
 
-textlint-rule-ja-hiragana-fukushi@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/textlint-rule-ja-hiragana-fukushi/-/textlint-rule-ja-hiragana-fukushi-1.3.0.tgz#fbc7af15788c5947eb9937c3647a42891864075c"
-  integrity sha512-j8+5XUDnUKbc87GUklCEOl/UrR9HPvokgKJmPN52Ask1y67rQT594pjGkiRvdmv3wESqe6PKOKK8mUFKCwiDYw==
-  dependencies:
-    js-yaml "^3.8.2"
-    kuromojin "^2.1.1"
-    morpheme-match-all "^1.1.0"
-    untildify "^4.0.0"
-
 textlint-rule-ja-hiragana-hojodoushi@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/textlint-rule-ja-hiragana-hojodoushi/-/textlint-rule-ja-hiragana-hojodoushi-1.0.4.tgz#39495f512a50b873e034b55d33df8d9c68b9e64d"
@@ -24471,7 +24461,7 @@ textlint-rule-ja-hiragana-hojodoushi@^1.0.4:
     kuromojin "^1.3.2"
     morpheme-match-all "^1.1.0"
 
-textlint-rule-ja-keishikimeishi@^1.0.3:
+textlint-rule-ja-keishikimeishi@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/textlint-rule-ja-keishikimeishi/-/textlint-rule-ja-keishikimeishi-1.0.4.tgz#734abc0d98f277ddb305a1eed58e6dee13ecbfba"
   integrity sha512-mAxb4fdvjst4j0iZgFQrnoK1nf9NRkFQJuxRJmbqKZhgvXilSq19cqOalIc+pMTHEF+VdUCdEC43+2Ave2QMFA==
@@ -24511,7 +24501,7 @@ textlint-rule-ja-no-mixed-period@^2.1.1:
     check-ends-with-period "^1.0.1"
     textlint-rule-helper "^2.0.0"
 
-textlint-rule-ja-no-redundant-expression@^4.0.0:
+textlint-rule-ja-no-redundant-expression@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/textlint-rule-ja-no-redundant-expression/-/textlint-rule-ja-no-redundant-expression-4.0.1.tgz#a146107100523eef51c88bd36c393f41527d4bc5"
   integrity sha512-r8Qe6S7u9N97wD0gcrASqBUdZs5CMEVlgc8Ul+D2NQFiOi1BoseOMo5I9yUsEZMAL46yh/eaw9+EWz6IDlPWeA==
@@ -24590,7 +24580,7 @@ textlint-rule-no-double-negative-ja@^2.0.1:
   dependencies:
     kuromojin "^3.0.0"
 
-textlint-rule-no-doubled-conjunction@^2.0.2:
+textlint-rule-no-doubled-conjunction@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/textlint-rule-no-doubled-conjunction/-/textlint-rule-no-doubled-conjunction-2.0.4.tgz#ff36ce32afd71a05ed7655359e1721da2cb32c54"
   integrity sha512-GUpZgJoEYk1EsqoE+0bcdln8ZbH6UDK9TWld3E2II+lGMw/0ALkoTNXhAsNK1ST/M7zYEX6a5qOCN68t2grDaA==
@@ -24637,8 +24627,8 @@ textlint-rule-no-hankaku-kana@^1.0.2:
     textlint-rule-helper "^1.1.5"
 
 "textlint-rule-no-hoso-kinshi-yogo@github:tubone24/textlint-rule-no-hoso-kinshi-yogo":
-  version "1.3.2"
-  resolved "https://codeload.github.com/tubone24/textlint-rule-no-hoso-kinshi-yogo/tar.gz/ccbd2a82b5e13dae552bf0afce5b111562a8d45b"
+  version "1.3.3"
+  resolved "https://codeload.github.com/tubone24/textlint-rule-no-hoso-kinshi-yogo/tar.gz/3e73fc14c05c8d864651116df6bb9e642f33d766"
   dependencies:
     fast-xml-parser "github:Delagen/fast-xml-parser"
     isomorphic-fetch "^3.0.0"
@@ -24680,21 +24670,20 @@ textlint-rule-no-start-duplicated-conjunction@2.0.2:
     sentence-splitter "^3.0.6"
     textlint-rule-helper "^2.0.0"
 
-textlint-rule-preset-smarthr@1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/textlint-rule-preset-smarthr/-/textlint-rule-preset-smarthr-1.13.0.tgz#973878d1488581ca1aa5e3e70245de2f9fd0d524"
-  integrity sha512-H6NRIpYse7wiXZPDoFpg4i8eXRTqI301ElDj3YUMR5baTlmiO20mz2rjYAX0Ap/f7xbMb2RreiXvVVwVS7rYHQ==
+textlint-rule-preset-smarthr@1.17.1:
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/textlint-rule-preset-smarthr/-/textlint-rule-preset-smarthr-1.17.1.tgz#f011cad19e87ff005ce8995b44193f38a91b2b5e"
+  integrity sha512-9RkU1UFzJ6khb47BreFSxYYf2P0uEsrrC3nyc7OneUdv13MO7WK174mKS6us6w4l1proBjF2kXIcD3LOqhstCw==
   dependencies:
     "@textlint-rule/textlint-rule-no-unmatched-pair" "^1.0.8"
-    "@textlint/module-interop" "^12.1.0"
+    "@textlint/module-interop" "^12.2.1"
     textlint-rule-ja-hiragana-daimeishi "^1.0.0"
-    textlint-rule-ja-hiragana-fukushi "^1.3.0"
     textlint-rule-ja-hiragana-hojodoushi "^1.0.4"
-    textlint-rule-ja-keishikimeishi "^1.0.3"
+    textlint-rule-ja-keishikimeishi "^1.0.4"
     textlint-rule-ja-nakaguro-or-halfwidth-space-between-katakana "^2.2.0"
     textlint-rule-ja-no-abusage "^3.0.0"
     textlint-rule-ja-no-mixed-period "^2.1.1"
-    textlint-rule-ja-no-redundant-expression "^4.0.0"
+    textlint-rule-ja-no-redundant-expression "^4.0.1"
     textlint-rule-ja-no-space-around-parentheses "^2.2.0"
     textlint-rule-ja-no-space-between-full-width "^2.2.0"
     textlint-rule-ja-space-after-exclamation "^2.2.0"
@@ -24703,7 +24692,7 @@ textlint-rule-preset-smarthr@1.13.0:
     textlint-rule-ja-space-between-half-and-full-width "^2.2.0"
     textlint-rule-max-ten "^4.0.3"
     textlint-rule-no-double-negative-ja "^2.0.1"
-    textlint-rule-no-doubled-conjunction "^2.0.2"
+    textlint-rule-no-doubled-conjunction "^2.0.4"
     textlint-rule-no-doubled-conjunctive-particle-ga "^2.0.4"
     textlint-rule-no-doubled-joshi "^4.0.1"
     textlint-rule-no-dropping-the-ra "^3.0.0"

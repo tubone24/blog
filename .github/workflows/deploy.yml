@@ -4,7 +4,7 @@ on:
     branches:
       - master
 env:
-  cache-version: v1
+  cache-version: v2
 
 jobs:
   test:
@@ -31,8 +31,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -129,8 +128,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -176,8 +174,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -237,8 +234,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:

@@ -103,7 +103,7 @@ SSH ConfigをJSON形式で鍵ファイルとともに1ファイルにラッピ�
 
 <https://ssh-config-json.readthedocs.io/en/latest/>
 
-一例を書きますとまずインストールはpipで行います。
+一例を書きますとまずインストールはpipで行ないます。
 
 ```
 pip install ssh-config-json
@@ -197,7 +197,7 @@ Pythonの暗号化ライブラリといえばpycryptoが有名ですが、こち
 
 そこで、AES(今回は話が分かりやすいようにブロック暗号に絞ります)ではいくつかの暗号利用モードを定義し、例えばCBCというモードでは前の暗号ブロック（最初の場合は初期化ベクトル）と次の平文のブロックのXORをとり、そこへ暗号をかけるようにします。
 
-そうすることにより、同じ平文、同じ鍵を用いた場合一つ前のブロックと次のブロックとの間で出現する文字列が異なってくるので暗号文から推測される可能性を少なくできます。
+そうすることにより、同じ平文、同じ鍵を用いた場合1つ前のブロックと次のブロックとの間で出現する文字列が異なってくるので暗号文から推測される可能性を少なくできます。
 
 ちょっと古い内容かつ厳密にはブロック暗号ではないですが、エニグマ暗号も出現する文字のパターンから平文への頻度分析から判断されないように単純な換字式暗号を用いず、入力ごとに換字表が入れ替わるローターを仕込んで対策してました。ちょっと仕組みはCBCと比べるとあっさりしてますが、まぁやりたいことは似たような感じですね。
 
@@ -205,7 +205,7 @@ Pythonの暗号化ライブラリといえばpycryptoが有名ですが、こち
 
 さて、話を戻します。
 
-EAXモード[EAXモード（encrypt-then-authenticat-then-translate）](https://en.wikipedia.org/wiki/EAX_mode)は、暗号ブロック暗号の動作モードの一つで、メッセージの認証（完全性）と秘匿性を同時に提供するように設計されたモードで、いわゆる**Authenticated Encryption with Associated Data (AEAD) アルゴリズム**となっております。
+EAXモード[EAXモード（encrypt-then-authenticat-then-translate）](https://en.wikipedia.org/wiki/EAX_mode)は、暗号ブロック暗号の動作モードの1つで、メッセージの認証（完全性）と秘匿性を同時に提供するように設計されたモードで、いわゆる**Authenticated Encryption with Associated Data (AEAD) アルゴリズム**となっております。
 
 ![img](https://i.imgur.com/bbXnZFo.png)
 

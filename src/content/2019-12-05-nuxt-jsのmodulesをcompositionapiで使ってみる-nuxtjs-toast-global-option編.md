@@ -24,7 +24,7 @@ templateKey: blog-post
 
 という声が聞こえてきそうです。
 
-いやはやその通りだとは思いますのでmodulesのもう一つの魅力、**global options**の実装を進めようかと思います。
+いやはやその通りだとは思いますのでmodulesのもう1つの魅力、**global options**の実装を進めようかと思います。
 
 ## Table of Contents
 
