@@ -36,6 +36,8 @@ const Footer = () => (
               Sitemap
             </a>
           </p>
+          <script src="/adstir.js" />
+          <script src="https://js.ad-stir.com/js/adstir.js" />
         </div>
       </div>
     </div>
