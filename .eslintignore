@@ -1,8 +1,0 @@
-static/vendors/*
-static/firebase-messaging-sw.js
-public/*
-node_modules/*
-functions/src/complaints*
-storybook-static/*
-static/adstir.js
-coverage/*

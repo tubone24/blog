@@ -1,9 +1,0 @@
-@import "../../../styles/hover";
-
-.nav-btn {
-  @extend %hover;
-
-  .navbar-nav & {
-    color: $tag-blue;
-  }
-}
