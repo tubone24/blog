@@ -330,5 +330,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: "tubone24/blog"
           GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
-          BRANCH_NAME: ${{ github.head_ref }}
+          BRANCH_NAME: "master"
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
