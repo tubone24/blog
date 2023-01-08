@@ -495,7 +495,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        width: [1200, 992, 768, 600]
+        width: [992, 768, 600]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
