@@ -26,6 +26,7 @@ services:
     command: bash -c "zap.sh -cmd -addonuninstall hud && zap-webswing.sh"
     volumes:
       - ./zap:/zap/wrk/
+      - ./zapHome:/home/zap/
     ports:
       - "18081:8080"
       - "18090:8090"
