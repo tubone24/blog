@@ -32,7 +32,7 @@ const gitHubHeaders = {
   Authorization: `Bearer ${gitHubToken}`,
 };
 
-const gitHubUploadurl = `${GITHUB_API_URL}/repos/${gitHubRepo}/contents/file-uploader/${fileName}`;
+const gitHubUploadurl = `${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${fileName}`;
 
 const gitHubRes = await fetch(gitHubUploadurl, {
   method: "PUT",
