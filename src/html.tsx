@@ -32,8 +32,6 @@ const HTML = ({
     </head>
     <body {...bodyAttributes}>
       {preBodyComponents}
-      <script src="/adstir.js" />
-      <script src="https://js.ad-stir.com/js/adstir.js" />
       <div
         key="body"
         id="___gatsby"
