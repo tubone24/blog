@@ -127,7 +127,7 @@ td {
 	</h2>
 
 	<h3>
-		Generated on 日, 8 1月 2023 13:13:42
+		Generated on 日, 8 1月 2023 14:06:30
 	</h3>
 
 	
@@ -152,7 +152,7 @@ td {
 					<div>中</div>
 				</td>
 				<td align="center">
-					<div>1</div>
+					<div>0</div>
 				</td>
 			</tr>
 			<tr>
@@ -176,7 +176,7 @@ td {
 					<div>				False Positives:</div>
 				</td>
 				<td align="center">
-					<div>3</div>
+					<div>4</div>
 				</td>
 			</tr>
 		</table>
@@ -194,11 +194,6 @@ td {
 					align="center">Number of Instances</th>
 			</tr>
 			<tr>
-				<td><a href="#90022">Application Error Disclosure</a></td>
-				<td align="center" class="risk-2">中</td>
-				<td align="center">2</td>
-			</tr>
-			<tr>
 				<td><a href="#10017">Cross-Domain JavaScript Source File Inclusion</a></td>
 				<td align="center" class="risk-1">低</td>
 				<td align="center">15</td>
@@ -211,7 +206,7 @@ td {
 			<tr>
 				<td><a href="#10038">Content Security Policy (CSP) Header Not Set</a></td>
 				<td align="center" class="risk-0">情報</td>
-				<td align="center">14</td>
+				<td align="center">11</td>
 			</tr>
 			<tr>
 				<td><a href="#10027">Information Disclosure - Suspicious Comments</a></td>
@@ -221,12 +216,17 @@ td {
 			<tr>
 				<td><a href="#10020">Missing Anti-clickjacking Header</a></td>
 				<td align="center" class="risk-0">情報</td>
-				<td align="center">12</td>
+				<td align="center">11</td>
 			</tr>
 			<tr>
 				<td><a href="#10104">User Agent Fuzzer</a></td>
 				<td align="center" class="risk-0">情報</td>
 				<td align="center">84</td>
+			</tr>
+			<tr>
+				<td><a href="#90022">Application Error Disclosure</a></td>
+				<td align="center" class="risk--1">				False Positives:</td>
+				<td align="center">2</td>
 			</tr>
 			<tr>
 				<td><a href="#90034">Cloud Metadata Potentially Exposed</a></td>
@@ -249,108 +249,6 @@ td {
 
 	
 		<h3>Alert Detail</h3>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-2"><a
-						id="90022"></a>
-						<div>中</div></th>
-					<th class="risk-2">Application Error Disclosure</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2022/01/03/owaspzap/page-data.json">http://web:9000/page-data/2022/01/03/owaspzap/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/index/page-data.json">http://web:9000/page-data/index/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">2</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/90022/">90022</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
 		
 			<table class="results">
 				<tr height="24">
@@ -891,6 +789,32 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Content-Type-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
 					</tr>
 					<tr>
@@ -944,32 +868,6 @@ td {
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Content-Type-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1210,85 +1108,33 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2020/">http://web:9000/2020/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2021/">http://web:9000/2021/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/">http://web:9000/2022/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1418,32 +1264,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/about/">http://web:9000/about/</a></td>
 					</tr>
 					<tr>
@@ -1521,7 +1341,7 @@ td {
 				
 				<tr>
 					<td width="20%">Instances</td>
-					<td width="80%">14</td>
+					<td width="80%">11</td>
 				</tr>
 				<tr>
 					<td width="20%">Solution</td>
@@ -1645,7 +1465,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/app-310606890f3584d52407.js">http://web:9000/app-310606890f3584d52407.js</a></td>
+						<td width="80%"><a href="http://web:9000/app-891884ac1a8981427ac7.js">http://web:9000/app-891884ac1a8981427ac7.js</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1825,7 +1645,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/">http://web:9000/2022/</a></td>
+						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1851,7 +1671,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
+						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1981,32 +1801,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/about/">http://web:9000/about/</a></td>
 					</tr>
 					<tr>
@@ -2084,7 +1878,7 @@ td {
 				
 				<tr>
 					<td width="20%">Instances</td>
-					<td width="80%">12</td>
+					<td width="80%">11</td>
 				</tr>
 				<tr>
 					<td width="20%">Solution</td>
@@ -4349,6 +4143,108 @@ td {
 					<td width="20%">Plugin Id</td>
 					<td width="80%"><a
 						href="https://www.zaproxy.org/docs/alerts/10104/">10104</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk--1"><a
+						id="90022"></a>
+						<div>				False Positives:</div></th>
+					<th class="risk--1">Application Error Disclosure</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/page-data/2022/01/03/owaspzap/page-data.json">http://web:9000/page-data/2022/01/03/owaspzap/page-data.json</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal Server Error</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/page-data/index/page-data.json">http://web:9000/page-data/index/page-data.json</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal Server Error</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">2</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/90022/">90022</a></td>
 				</tr>
 			</table>
 			<div class="spacer"></div>
