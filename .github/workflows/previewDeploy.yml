@@ -531,7 +531,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        width: [992, 768, 600]
+        width: [1200, 992, 768, 600]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -545,10 +545,11 @@ jobs:
           destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           width: ${{ matrix.width }}
           delay: 10
-      - uses: actions/upload-artifact@v3
+      - uses: actions/download-artifact@v3
         with:
-          name: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
-          path: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          name: screenshot-${{ matrix.os }}-${{ matrix.width }}
+      - name: ls
+        run: ls -la
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
