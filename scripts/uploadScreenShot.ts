@@ -40,8 +40,4 @@ const gitHubRes = await fetch(gitHubUploadurl, {
   body: JSON.stringify(gitHubPayload),
 });
 
-// const gitHubJson = gitHubRes.json();
-// const { data: gitHubData } = await gitHubJson;
-// const imgurLink = gitHubData.link;
-
 console.log(gitHubRes);
