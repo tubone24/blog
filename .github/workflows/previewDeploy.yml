@@ -501,7 +501,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Capture Webpage Screenshot
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        uses: swinton/screenshot-website@v1.0.0
+        uses: swinton/screenshot-website@v1.0.2
         with:
           source: ${{ needs.build.outputs.draftUrl }}
           destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
