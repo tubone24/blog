@@ -489,16 +489,24 @@ jobs:
 
 
   webscreenshot:
-    runs-on: ubuntu-latest
     needs:
       - build
       - check-skip-flags
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        width: [1200, 992, 768, 600]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - name: Capture Webpage Screenshot
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        uses: saadmk11/comment-website-screenshot@v0.5
+        uses: swinton/screenshot-website@v1.0.0
         with:
-          upload_to: github_branch
-          capture_changed_html_files: yes
-          capture_urls: ${{ needs.build.outputs.draftUrl }}
+          source: ${{ needs.build.outputs.draftUrl }}
+          destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          width: ${{ matrix.width }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          path: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
