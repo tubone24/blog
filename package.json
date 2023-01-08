@@ -244,7 +244,7 @@
     "trim": "0.0.3",
     "deep-object-diff": "1.1.9",
     "engine.io": "6.2.1",
-    "got": "11.8.5",
+    "got": "11.8.6",
     "decode-uri-component": "0.2.2",
     "sanitize-html": "2.3.2",
     "axios": "0.27.2",
