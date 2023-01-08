@@ -37,7 +37,10 @@ const Footer = () => (
             </a>
           </p>
           <script src="/adstir.js" />
-          <script src="https://js.ad-stir.com/js/adstir.js" />
+          <script
+            crossOrigin="anonymous"
+            src="https://js.ad-stir.com/js/adstir.js"
+          />
         </div>
       </div>
     </div>
