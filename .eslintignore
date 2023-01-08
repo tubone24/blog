@@ -6,3 +6,4 @@ functions/src/complaints*
 storybook-static/*
 static/adstir.js
 coverage/*
+scripts/uploadScreenShot.ts

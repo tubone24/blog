@@ -487,7 +487,6 @@ jobs:
         run:
           gh pr comment -F ./comments.txt "${URL}"
 
-
   webscreenshot:
     needs:
       - build
@@ -495,18 +494,38 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        width: [1200, 992, 768, 600]
+        width: [1920, 1200, 768, 400]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: 'v1.x'
+      - name: install noto font
+        run: sudo apt install fonts-noto
       - name: Capture Webpage Screenshot
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        uses: swinton/screenshot-website@v1.0.0
+        uses: swinton/screenshot-website@v1.0.2
         with:
           source: ${{ needs.build.outputs.draftUrl }}
           destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           width: ${{ matrix.width }}
-      - uses: actions/upload-artifact@v3
+          delay: 10
+      - uses: actions/download-artifact@v3
         with:
-          name: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
-          path: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          name: screenshot-${{ matrix.os }}-${{ matrix.width }}
+      - name: ls
+        run: ls -la
+      - name: Get PR Number
+        id: get-pr-num
+        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
+      - name: PR Comments
+        env:
+          FILE_PATH: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          FILE_NAME: screenshot-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}.png
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: "tubone24/blog"
+          GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
+          BRANCH_NAME: "screenshot"
+        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
+
