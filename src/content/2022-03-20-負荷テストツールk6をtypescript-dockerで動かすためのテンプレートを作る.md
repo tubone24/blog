@@ -62,7 +62,7 @@ brew install k6
 
 なので、まとめて環境をDocker composeしてしまいましょう。
 
-~~もちろん、本来は結果をきちんと残しておくためにInfluxDBとGrafanaを永続化する必要がありますが、今回はテスト実行なのでInfluxDB永続化は行いません。~~ 永続化することにしました。代わりにInfluxDBのcleanコマンドを実装する形にしました。本格的に負荷テスト環境を作るならAWS ECSであればデータボリュームを[Amazon EFS ボリューム](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/efs-volumes.html)とかで管理すると幸せになれる気がします。
+~~もちろん、本来は結果をきちんと残しておくためにInfluxDBとGrafanaを永続化する必要がありますが、今回はテスト実行なのでInfluxDB永続化は行ないません。~~ 永続化することにしました。代わりにInfluxDBのcleanコマンドを実装する形にしました。本格的に負荷テスト環境を作るならAWS ECSであればデータボリュームを[Amazon EFS ボリューム](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/efs-volumes.html)とかで管理すると幸せになれる気がします。
 
 次のような**docker-compose.yml**を作るだけで完成です。楽でいいですねdocker compose。
 

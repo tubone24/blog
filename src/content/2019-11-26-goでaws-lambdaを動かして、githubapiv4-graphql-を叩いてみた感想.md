@@ -35,7 +35,7 @@ Lambda自体は、裏側の基盤に[AWS Firecracker](https://aws.amazon.com/jp/
 
 ~~どこかでFirecrackerをいじりたいですね。~~
 
-仕事上使う機会に恵まれたので今回Go Lambdaを初めて触ることにしました。
+仕事上使う機会に恵まれたので今回Go Lambdaをはじめて触ることにしました。
 
 ## 今回の開発スコープ
 
@@ -139,7 +139,7 @@ func main() {
 
 Goはまぎれもなくサーバーサイドな言語なのでどちらかというと関心事がGraphQLのサーバーサイド実装でBFFたくさん作るのめんどくさいからまとめてGraphQLで返したい！という感じのモチベーションの記事が多めではありますが、ちゃんと**GraphQLクライアント**みつけました。
 
-[shurcooL/graphql](shurcooL/graphql)
+[shurcooL/GraphQL](shurcooL/graphql)
 
 さらに、**GitHubAPIv4専用のクライアント**も見つけましたのでこっちを使うことにします。
 

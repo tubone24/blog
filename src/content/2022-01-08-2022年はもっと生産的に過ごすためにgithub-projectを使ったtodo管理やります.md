@@ -38,15 +38,15 @@ templateKey: blog-post
 
 世の中には玉石混交のToDoリストアプリで溢れかえってますが、筆者が思うに**ネイティブアプリ専用のToDoリスト**はまず開かなくなります。
 
-そもそもパソコンで仕事してるケースが多いのでパソコンでもスマホでも操作できないと使わなくなります。それにスマホ開いたらTwitter見ちゃうでしょ。
+そもそもパソコンで仕事してるケースが多いのでパソコンでもスマートフォンでも操作できないと使わなくなります。それにスマートフォン開いたらTwitter見ちゃうでしょ。
 
-また、タスク期日や依存関係、カテゴリ、タグなど、一つのToDoを書くためにやたら記載欄が多いToDoアプリも適当になりがちなでおすすめできません。後々の振り返り分析なんかにはいいんですが、めんどくさいですよね。
+また、タスク期日や依存関係、カテゴリ、タグなど、1つのToDoを書くためにやたら記載欄が多いToDoアプリも適当になりがちなでおすすめできません。後々の振り返り分析なんかにはいいんですが、めんどくさいですよね。
 
 またタスクの期日に応じたリマインダー機能があると続ける気になりそうです。ただ、リマインドはSlackに送らないと意味がありません。Gmailはまず見ません。
 
 まとめると、
 
-1. パソコンでもスマホでも使える
+1. パソコンでもスマートフォンでも使える
 2. 入力欄がシンプル(わかりきっていることは自動で入力してほしい)
 3. リマインダーがある(Slack)
 
@@ -64,7 +64,7 @@ templateKey: blog-post
 
 が、GitHub Projectには**GitHub Actions**という最強のCIがついてますのでこちらを使うことで劇的に使いやすいToDoアプリになります。
 
-まず、GitHub Projectはパソコンでもスマホでも利用可能なので、何も実装しなくても **1. パソコンでもスマホでも使える** はクリアとなります。ありがたい。
+まず、GitHub Projectはパソコンでもスマートフォンでも利用可能なので、何も実装しなくても **1. パソコンでもスマートフォンでも使える** はクリアとなります。ありがたい。
 
 今回はGitHub Issueを基軸に運用したいのでProjectのテンプレートは[Automated Kanban](https://docs.github.com/ja/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards#templates-for-project-boards)を選択しました。これで、**Issueがクローズされた際にProject側でもタスクを勝手にDone**にしてくれます。
 
@@ -74,7 +74,7 @@ templateKey: blog-post
 
 GitHub ProjectはGitHub IssueおよびPull Requestと紐づけして運用できるのですが、**Issueを切った際にProjectのToDoに自動紐づけされません。** (Automated KanbanではIssue CloseでDoneにしてくれるのに逆のことはしてくれないんだ...)
 
-Issueを切った際**手動**で、指定したProjectに紐づけを行なう必要があります。一つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐づけるのはつらすぎます。
+Issueを切った際**手動**で、指定したProjectに紐づけを行なう必要があります。1つのRepositoryに対して複数のProjectが存在するケースがあるのである意味ソフトウェア開発的には正当な動きと思いますが、個人ToDoには荷が重すぎます。わざわざ毎回手動で紐づけるのはつらすぎます。
 
 そこで僕はGitHub Actions。 (もこみち風)
 
@@ -115,7 +115,7 @@ GitHub Issues, Projectには[Label](https://docs.github.com/ja/issues/using-labe
 
 ![img](https://i.imgur.com/RsOQAlV.png)
 
-このようにLabel管理することで、タスクの優先度や作業場所のカテゴライズを行いやすくできました！
+このようにLabel管理することで、タスクの優先度や作業場所のカテゴライズを行ないやすくできました！
 
 ## カスタマイズ3 期日を管理したい
 

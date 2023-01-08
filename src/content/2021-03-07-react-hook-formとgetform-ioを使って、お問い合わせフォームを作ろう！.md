@@ -172,7 +172,7 @@ const { register, handleSubmit, errors } = useForm<Inputs>();
 
 そして肝心な送信(Submit)部分ですがこちらは[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)とほぼ同じように**onSubmit**に合わせて処理する関数を用意して、formの**onsubmit属性**に渡してあげればいいだけです。
 
-........いいだけですが一つ注意として、渡す際に**handleSubmit**で関数をラップしないと、form情報がうまく取れない、ということです。忘れずに設定してくださいませ。
+........いいだけですが1つ注意として、渡す際に**handleSubmit**で関数をラップしないと、form情報がうまく取れない、ということです。忘れずに設定してくださいませ。
 
 ```typescript
  <form onSubmit={handleSubmit(onSubmit)}>

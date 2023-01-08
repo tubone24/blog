@@ -85,7 +85,7 @@ GANで1024x1024などの高解像度画像を生成するのは至難の業で�
 
 ### スタイル変換 Style Transfer
 
-もう一つの特徴はスタイル変換([Style Transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))と呼ばれる技術を使っていることです。
+もう1つの特徴はスタイル変換([Style Transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))と呼ばれる技術を使っていることです。
 
 ![img](https://i.imgur.com/9EAE63P.png)
 ([Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf))
@@ -174,7 +174,7 @@ Styleの形で特徴を細かく分割し、Mixing Regularizationでそれぞれ
 
 結構バージョンとかで苦戦しますので[こちら](https://qiita.com/chin_self_driving_car/items/f00af2dbd022b65c9068)を参考に設定しましょう。
 
-私の環境は下記で行いました。
+私の環境は下記で行ないました。
 
 key | value
 --- | ---
@@ -403,7 +403,7 @@ if __name__ == "__main__":
 
 ```
 
-1点コードを変更したところとしてはStyleGAN2のdnnlibに**config**がないのでresultsディレクトリの指定は文字列で行います。
+1点コードを変更したところとしてはStyleGAN2のdnnlibに**config**がないのでresultsディレクトリの指定は文字列で行ないます。
 
 さあ！実行しますわよー！
 

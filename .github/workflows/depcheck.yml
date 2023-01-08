@@ -8,7 +8,7 @@ on:
       - yarn.lock
       - .terraform.lock.hcl
 env:
-  cache-version: v1
+  cache-version: v2
 
 jobs:
   dep-check:

@@ -18,7 +18,7 @@ templateKey: blog-post
 
 最近[**Nuxt.js**](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[**CompositionAPI**](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
 
-いよいよツラミもわかってきた頃合いなので一つずつまとめていこうかと思います。
+いよいよツラミもわかってきた頃合いなので1つずつまとめていこうかと思います。
 
 今回は**Nuxt.js**の**modules**を**CompositionAPI**でどう使っていくかを書きます。
 
@@ -146,7 +146,7 @@ CompositionAPIで書くパターン
         type: String
       }
     },
-    //setup()で初めてVueインスタンス化されるのでinjectされたものはsetup内でしかとれない。
+    //setup()ではじめてVueインスタンス化されるのでinjectされたものはsetup内でしかとれない。
     setup (props: Props, ctx) {
 
       // propsをsetup内ローカル変数で再設定

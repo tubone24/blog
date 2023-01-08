@@ -3,3 +3,8 @@ rules:
     pattern:
       - ！！！
     prh: びっくりマーク3つはPentium IIIのロゴ由来です
+  - expected: '流行って'
+    pattern:
+      - 流行って
+      - ハヤって
+    prh: 「はやる」
