@@ -45,3 +45,4 @@ test/memlab/data
 # OWASPZAP
 owasp/zap/*.key
 owasp/zap/*.cer
+owasp/zap/zapHome/
