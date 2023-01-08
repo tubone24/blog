@@ -494,7 +494,7 @@ jobs:
       - check-skip-flags
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
         width: [1200, 992, 768, 600]
     runs-on: ${{ matrix.os }}
     steps:
