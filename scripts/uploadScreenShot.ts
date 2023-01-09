@@ -1,8 +1,8 @@
 import { encode } from "https://deno.land/std/encoding/base64.ts";
 
 const GITHUB_API_URL = "https://api.github.com";
-const AUTHOR_NAME = "github-actions[bot]";
-const AUTHOR_EMAIL = "github-actions[bot]@users.noreply.github.com";
+const AUTHOR_NAME = "tubone24";
+const AUTHOR_EMAIL = "9511227+tubone24@users.noreply.github.com";
 const filePath = Deno.env.get("FILE_PATH") as string;
 const fileName = Deno.env.get("FILE_NAME") as string;
 const gitHubToken = Deno.env.get("GITHUB_TOKEN") as string;
@@ -13,8 +13,10 @@ const branchName = Deno.env.get("BRANCH_NAME") as string;
 const readImageData = await Deno.readFile(filePath);
 const encodedData = encode(readImageData);
 
+const message = prNumber === "" ? "[file upload] Added file on master" : `[file upload] Added file for PR #${prNumber}`;
+
 const gitHubPayload = {
-  message: `[file upload] Added file for PR #${prNumber}`,
+  message: message,
   content: encodedData.replace(new RegExp("data.*base64,"), ""),
   branch: branchName,
   author: {

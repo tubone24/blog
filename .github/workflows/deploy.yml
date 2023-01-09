@@ -18,6 +18,13 @@ jobs:
           node-version: 16.x
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: 'v1.x'
+      - name: install noto font
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
@@ -88,6 +95,15 @@ jobs:
         with:
           name: main.spec.ts.mp4
           path: ./cypress/videos/e2e/main.spec.ts.mp4
+      - name: Upload video for screenshot branch
+        env:
+          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+          FILE_NAME: main.spec.ts.mp4
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: "tubone24/blog"
+          GITHUB_PULL_REQUEST_NUMBER: ""
+          BRANCH_NAME: "screenshot"
+        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
       - name: Upload Test Coverage
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -325,12 +341,12 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: screenshot-${{ matrix.os }}-${{ matrix.width }}
-      - name: PR Comments
+      - name: Upload screenshot to screenshot branch
         env:
           FILE_PATH: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           FILE_NAME: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: "tubone24/blog"
-          GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
+          GITHUB_PULL_REQUEST_NUMBER: ""
           BRANCH_NAME: "screenshot"
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
