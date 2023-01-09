@@ -385,7 +385,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Execute textlint for article
-        run: npx textlint -f checkstyle "src/content/*.md" >> .textlint.log
+        env:
+          RUNNER_TMP: ${{ runner.temp }}
+        run: |
+          wget -P ${{ runner.temp }} https://www.dropbox.com/s/qy7qd44k1bfbsl1/housouKinshiYougo.xml?dl=0
+          npx textlint -f checkstyle "src/content/*.md" >> .textlint.log
       - name: Run reviewdog
         if: failure()
         env:
