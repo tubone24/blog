@@ -32,6 +32,13 @@ jobs:
           node-version: 16.x
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: 'v1.x'
+      - name: install noto font
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
@@ -102,6 +109,18 @@ jobs:
         with:
           name: main.spec.ts.mp4
           path: ./cypress/videos/e2e/main.spec.ts.mp4
+      - name: Get PR Number
+        id: get-pr-num
+        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
+      - name: PR Comments
+        env:
+          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+          FILE_NAME: video-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}-main.spec.ts.mp4
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: "tubone24/blog"
+          GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
+          BRANCH_NAME: "screenshot"
+        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
   lint:
     runs-on: ubuntu-latest
     steps:
