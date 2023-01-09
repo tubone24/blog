@@ -19,7 +19,21 @@ This is tubone's Blog by Gatsby and Netlify.
 
 [https://blog.tubone-project24.xyz/](https://blog.tubone-project24.xyz/)
 
-![Home Page](https://i.imgur.com/NyU0Bhy.png)
+## Preview
+
+Screenshots from the last deployment on the master branch.
+
+### Desktop
+
+Width 1200px
+
+![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/screenshot-ubuntu-latest-1200.png)
+
+### Mobile
+
+Width 400px
+
+<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />
 
 ### Templated by?
 
