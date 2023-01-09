@@ -1,8 +1,8 @@
 import { encode } from "https://deno.land/std/encoding/base64.ts";
 
 const GITHUB_API_URL = "https://api.github.com";
-const AUTHOR_NAME = "github-actions[bot]";
-const AUTHOR_EMAIL = "github-actions[bot]@users.noreply.github.com";
+const AUTHOR_NAME = "tubone24";
+const AUTHOR_EMAIL = "tubone24@users.noreply.github.com";
 const filePath = Deno.env.get("FILE_PATH") as string;
 const fileName = Deno.env.get("FILE_NAME") as string;
 const gitHubToken = Deno.env.get("GITHUB_TOKEN") as string;
