@@ -1,5 +1,6 @@
-name: Ping Google
+name: Ping Sitemap
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
