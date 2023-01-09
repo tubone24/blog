@@ -1,6 +1,6 @@
 # Blog
 
-> Super powerfully all-packaged blog system 
+> Super powerfully all-packaged blog system
 
 [![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
@@ -77,7 +77,7 @@ Special, thanks!
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
-- Each production-deploy is measured by [Lighthouse](#Lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
+- Each production-deploy is measured by [Lighthouse](#lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
 - Each production-deploy is measured by [Bundle Analyzer](#bundle-analyzer) and [reports](https://tubone24.github.io/blog/ba/index.html) are output
 - unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
@@ -108,16 +108,16 @@ Approved --->|Merge| DeployProduction
 
 Run **at local**, execute commands below, and access [http://localhost:8000](http://localhost:8000)
 
-```
-$ yarn install
-$ yarn start
+```sh
+yarn install
+yarn start
 ```
 
 ### Build
 
 Or Build Artifact, execute commands below
 
-```
+```sh
 yarn build
 ```
 
@@ -125,7 +125,7 @@ yarn build
 
 Fix your code format by [TSC](https://www.typescriptlang.org/docs/handbook/compiler-options.html), [ESLint](https://eslint.org/) and  [stylelint](https://stylelint.io/)
 
-```
+```sh
 yarn typecheck
 yarn format:fix
 yarn format-style:fix
@@ -133,7 +133,7 @@ yarn format-style:fix
 
 You can also fix YAML format by [yamllint](https://github.com/adrienverge/yamllint)
 
-```
+```sh
 yarn format-yml
 ```
 
@@ -143,7 +143,7 @@ Testing React Component and Unit testing, execute commands below
 
 And also, you can test Storybook Snapshot test!
 
-```
+```sh
 yarn test
 yarn test:storybook
 yarn test:e2e
@@ -151,7 +151,7 @@ yarn test:e2e
 
 If you want to check testing coverage, execute commands below
 
-```
+```sh
 yarn test:cov
 ```
 
@@ -170,15 +170,18 @@ And more, you can check production test coverage report below.
 
 If you error occurred on gatsby build, execute commands below
 
-```
-> Error loading a result for the page query in "/". Query was not run and no cached result was found.
+```sh
+$ yarn build
+....
+....
+Error loading a result for the page query in "/". Query was not run and no cached result was found.
 
-yarn clean
+$ yarn clean
 ```
 
 Also, you want to clean dependencies, execute commands below
 
-```
+```sh
 yarn clean-all
 ```
 
@@ -186,7 +189,7 @@ yarn clean-all
 
 This project use Browsers List, so you can update it
 
-```
+```sh
 yarn browserslist:update
 ```
 
@@ -194,7 +197,7 @@ yarn browserslist:update
 
 If you want to check benchmark, you can use Lighthouse script below
 
-```
+```sh
 yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
 ```
 
@@ -202,7 +205,7 @@ yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
 
 If you want to check storybook, execute commands below
 
-```
+```sh
 yarn storybook
 ```
 
@@ -210,13 +213,13 @@ yarn storybook
 
 If you want to detect browser's memory leaks, you can use memlab script below
 
-```
+```sh
 yarn memlab
 ```
 
 Or if you want to test against a specific URL, set an environment variable.
 
-```
+```sh
 URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
 ```
 
@@ -228,22 +231,22 @@ And also, creating PR, you can check memory leak report via GitHub PR Comments.
 
 Copy `.env.example` to create the `.env` file
 
-```
+```sh
 cp .env.example .env
 ```
 
 | Key                              | Description                                              | Default |
-|----------------------------------| -------------------------------------------------------- | ------- | 
-| GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       | 
-| GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       | 
-| GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   | 
-| GATSBY_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       | 
-| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's ADMIN API KEY, use index post content   | -       | 
-| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   | 
-| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       | 
-| GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       | 
+|----------------------------------|----------------------------------------------------------|---------|
+| GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       |
+| GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       |
+| GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   |
+| GATSBY_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       |
+| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's ADMIN API KEY, use index post content   | -       |
+| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   |
+| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       |
+| GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
 | GATSBY_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
-| FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       | 
+| FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       |
 
 ## CI/CD
 
@@ -294,7 +297,7 @@ Push the button below.
 
 I use [textlint](https://textlint.github.io/) to proofread my blog text.
 
-```
+```sh
 yarn textlint
 ```
 
@@ -355,9 +358,7 @@ Last 14 days, CI Score by [meercode.io](https://meercode.io)
 
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-success-rate&lastDay=14)
 
-# License
+## License
 
 - The source code under the MIT LICENSE.
 - `src/content` under the CC-BY [![CC-BY](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-
-[tubone boyaki]: https://blog.tubone-project24.xyz  "tubone boyaki"

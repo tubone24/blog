@@ -385,7 +385,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Execute textlint for article
-        run: npx textlint -f checkstyle "src/content/*.md" >> .textlint.log
+        run: |
+          npx textlint -f checkstyle "src/content/*.md" >> .textlint.log
       - name: Run reviewdog
         if: failure()
         env:
