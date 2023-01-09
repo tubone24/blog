@@ -312,7 +312,9 @@ jobs:
         with:
           deno-version: 'v1.x'
       - name: install noto font
-        run: sudo apt install fonts-noto
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-noto
       - name: Capture Webpage Screenshot
         uses: swinton/screenshot-website@v1.0.2
         with:
@@ -330,5 +332,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: "tubone24/blog"
           GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
-          BRANCH_NAME: "master"
+          BRANCH_NAME: "screenshot"
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
