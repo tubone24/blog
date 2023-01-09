@@ -45,7 +45,7 @@ Thanks again for your interest on contributing to `blog/tubone24`!
 
 ## What if I want (or need) a blog post written?
 
-Please do not create a PR, but create an Issue first. The author will examine the [article request issue](.github/ISSUE_TEMPLATE/article_request.md) carefully 
+Please do not create a PR, but create an Issue first. The author will examine the [article request issue](.github/ISSUE_TEMPLATE/article_request.md) carefully
 and consider whether to publish it as an article before responding.
 
 :heart:
