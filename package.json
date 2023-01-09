@@ -101,8 +101,8 @@
     "format-style": "npx stylelint **/*.scss",
     "format-style:fix": "npx stylelint **/*.scss --fix",
     "format-yml": "yamllint **/*.yaml **/*.yml",
-    "format-md": "markdownlint-cli2 *.md .github/**/*.md",
-    "format-md:fix": "markdownlint-cli2-fix *.md .github/**/*.md",
+    "format-md": "markdownlint-cli2 *.md **/*.md !node_modules !src/content",
+    "format-md:fix": "markdownlint-cli2-fix *.md !node_modules !src/content",
     "typecheck": "tsc",
     "test": "jest",
     "test:cov": "jest --coverage",
@@ -267,7 +267,7 @@
     "src/content/*.md": [
       "yarn textlint:fix"
     ],
-    ".github/**/*.md": [
+    "*.md": [
       "yarn format-md:fix"
     ]
   },
