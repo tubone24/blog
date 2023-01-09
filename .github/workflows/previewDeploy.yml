@@ -388,7 +388,7 @@ jobs:
         env:
           RUNNER_TMP: ${{ runner.temp }}
         run: |
-          wget -P ${{ runner.temp }} https://www.dropbox.com/s/qy7qd44k1bfbsl1/housouKinshiYougo.xml?dl=0
+          wget -P ${{ runner.temp }} -O housouKinshiYougo.xml https://www.dropbox.com/s/qy7qd44k1bfbsl1/housouKinshiYougo.xml?dl=0
           npx textlint -f checkstyle "src/content/*.md" >> .textlint.log
       - name: Run reviewdog
         if: failure()
