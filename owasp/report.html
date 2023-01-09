@@ -127,7 +127,7 @@ td {
 	</h2>
 
 	<h3>
-		Generated on 日, 8 1月 2023 14:51:54
+		Generated on 月, 9 1月 2023 02:22:51
 	</h3>
 
 	
@@ -144,7 +144,7 @@ td {
 					<div>高</div>
 				</td>
 				<td align="center">
-					<div>1</div>
+					<div>0</div>
 				</td>
 			</tr>
 			<tr>
@@ -152,7 +152,7 @@ td {
 					<div>中</div>
 				</td>
 				<td align="center">
-					<div>3</div>
+					<div>0</div>
 				</td>
 			</tr>
 			<tr>
@@ -160,7 +160,7 @@ td {
 					<div>低</div>
 				</td>
 				<td align="center">
-					<div>5</div>
+					<div>3</div>
 				</td>
 			</tr>
 			<tr>
@@ -168,7 +168,7 @@ td {
 					<div>情報</div>
 				</td>
 				<td align="center">
-					<div>2</div>
+					<div>4</div>
 				</td>
 			</tr>
 			<tr>
@@ -176,7 +176,7 @@ td {
 					<div>				False Positives:</div>
 				</td>
 				<td align="center">
-					<div>0</div>
+					<div>4</div>
 				</td>
 			</tr>
 		</table>
@@ -194,39 +194,9 @@ td {
 					align="center">Number of Instances</th>
 			</tr>
 			<tr>
-				<td><a href="#90034">Cloud Metadata Potentially Exposed</a></td>
-				<td align="center" class="risk-3">高</td>
-				<td align="center">1</td>
-			</tr>
-			<tr>
-				<td><a href="#90022">Application Error Disclosure</a></td>
-				<td align="center" class="risk-2">中</td>
-				<td align="center">2</td>
-			</tr>
-			<tr>
-				<td><a href="#10038">Content Security Policy (CSP) Header Not Set</a></td>
-				<td align="center" class="risk-2">中</td>
-				<td align="center">12</td>
-			</tr>
-			<tr>
-				<td><a href="#10020">Missing Anti-clickjacking Header</a></td>
-				<td align="center" class="risk-2">中</td>
-				<td align="center">12</td>
-			</tr>
-			<tr>
 				<td><a href="#10017">Cross-Domain JavaScript Source File Inclusion</a></td>
 				<td align="center" class="risk-1">低</td>
 				<td align="center">15</td>
-			</tr>
-			<tr>
-				<td><a href="#10023">Information Disclosure - Debug Error Messages</a></td>
-				<td align="center" class="risk-1">低</td>
-				<td align="center">2</td>
-			</tr>
-			<tr>
-				<td><a href="#2">Private IP Disclosure</a></td>
-				<td align="center" class="risk-1">低</td>
-				<td align="center">1</td>
 			</tr>
 			<tr>
 				<td><a href="#10021">X-Content-Type-Options Header Missing</a></td>
@@ -239,14 +209,44 @@ td {
 				<td align="center">10</td>
 			</tr>
 			<tr>
+				<td><a href="#10038">Content Security Policy (CSP) Header Not Set</a></td>
+				<td align="center" class="risk-0">情報</td>
+				<td align="center">12</td>
+			</tr>
+			<tr>
 				<td><a href="#10027">Information Disclosure - Suspicious Comments</a></td>
 				<td align="center" class="risk-0">情報</td>
 				<td align="center">5</td>
 			</tr>
 			<tr>
+				<td><a href="#10020">Missing Anti-clickjacking Header</a></td>
+				<td align="center" class="risk-0">情報</td>
+				<td align="center">12</td>
+			</tr>
+			<tr>
 				<td><a href="#10104">User Agent Fuzzer</a></td>
 				<td align="center" class="risk-0">情報</td>
 				<td align="center">84</td>
+			</tr>
+			<tr>
+				<td><a href="#90022">Application Error Disclosure</a></td>
+				<td align="center" class="risk--1">				False Positives:</td>
+				<td align="center">2</td>
+			</tr>
+			<tr>
+				<td><a href="#90034">Cloud Metadata Potentially Exposed</a></td>
+				<td align="center" class="risk--1">				False Positives:</td>
+				<td align="center">1</td>
+			</tr>
+			<tr>
+				<td><a href="#10023">Information Disclosure - Debug Error Messages</a></td>
+				<td align="center" class="risk--1">				False Positives:</td>
+				<td align="center">2</td>
+			</tr>
+			<tr>
+				<td><a href="#2">Private IP Disclosure</a></td>
+				<td align="center" class="risk--1">				False Positives:</td>
+				<td align="center">1</td>
 			</tr>
 		</table>
 		<div class="spacer-lg"></div>
@@ -254,940 +254,6 @@ td {
 
 	
 		<h3>Alert Detail</h3>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-3"><a
-						id="90034"></a>
-						<div>高</div></th>
-					<th class="risk-3">Cloud Metadata Potentially Exposed</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>The Cloud Metadata Attack attempts to abuse a misconfigured NGINX server in order to access the instance metadata maintained by cloud service providers such as AWS, GCP and Azure.</div>
-							<br />
-						
-							<div>All of these providers provide metadata via an internal unroutable IP address &#39;169.254.169.254&#39; - this can be exposed by incorrectly configured NGINX servers and accessed by using this IP address in the Host header field.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/latest/meta-data/">http://web:9000/latest/meta-data/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%">169.154.169.254</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">1</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Do not trust any user data in NGINX configs. In this case it is probably the use of the $host variable which is set from the &#39;Host&#39; header and can be controlled by an attacker.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%">
-							<a href="https://www.nginx.com/blog/trust-no-one-perils-of-trusting-user-input/">https://www.nginx.com/blog/trust-no-one-perils-of-trusting-user-input/</a>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/90034/">90034</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-2"><a
-						id="90022"></a>
-						<div>中</div></th>
-					<th class="risk-2">Application Error Disclosure</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2022/01/03/owaspzap/page-data.json">http://web:9000/page-data/2022/01/03/owaspzap/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/index/page-data.json">http://web:9000/page-data/index/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">2</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/90022/">90022</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-2"><a
-						id="10038"></a>
-						<div>中</div></th>
-					<th class="risk-2">Content Security Policy (CSP) Header Not Set</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000">http://web:9000</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/">http://web:9000/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2021/">http://web:9000/2021/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/">http://web:9000/2022/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/about/">http://web:9000/about/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/sitemap.xml">http://web:9000/sitemap.xml</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/tags/">http://web:9000/tags/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">12</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header, to achieve optimal browser support: &quot;Content-Security-Policy&quot; for Chrome 25+, Firefox 23+ and Safari 7+, &quot;X-Content-Security-Policy&quot; for Firefox 4.0+ and Internet Explorer 10+, and &quot;X-WebKit-CSP&quot; for Chrome 14+ and Safari 6+.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%">
-							<a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</a>
-							<br />
-						
-							<a href="https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</a>
-							<br />
-						
-							<a href="http://www.w3.org/TR/CSP/">http://www.w3.org/TR/CSP/</a>
-							<br />
-						
-							<a href="http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html">http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</a>
-							<br />
-						
-							<a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/">http://www.html5rocks.com/en/tutorials/security/content-security-policy/</a>
-							<br />
-						
-							<a href="http://caniuse.com/#feat=contentsecuritypolicy">http://caniuse.com/#feat=contentsecuritypolicy</a>
-							<br />
-						
-							<a href="http://content-security-policy.com/">http://content-security-policy.com/</a>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">15</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/10038/">10038</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-2"><a
-						id="10020"></a>
-						<div>中</div></th>
-					<th class="risk-2">Missing Anti-clickjacking Header</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>The response does not include either Content-Security-Policy with &#39;frame-ancestors&#39; directive or X-Frame-Options to protect against &#39;ClickJacking&#39; attacks.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000">http://web:9000</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/">http://web:9000/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/">http://web:9000/2022/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2023/">http://web:9000/2023/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/about/">http://web:9000/about/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/sitemap.xml">http://web:9000/sitemap.xml</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/tags/">http://web:9000/tags/</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">12</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</div>
-							<br />
-						
-							<div>If you expect the page to be framed only by pages on your server (e.g. it&#39;s part of a FRAMESET) then you&#39;ll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy&#39;s &quot;frame-ancestors&quot; directive.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%">
-							<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/1021.html">1021</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">15</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/10020/">10020</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
 		
 			<table class="results">
 				<tr height="24">
@@ -1632,187 +698,6 @@ td {
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-1"><a
-						id="10023"></a>
-						<div>低</div></th>
-					<th class="risk-1">Information Disclosure - Debug Error Messages</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>The response appeared to contain common error messages returned by platforms such as ASP.NET, and Web-servers such as IIS and Apache. You can configure the list of common debug messages.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2022/01/03/owaspzap/page-data.json">http://web:9000/page-data/2022/01/03/owaspzap/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/index/page-data.json">http://web:9000/page-data/index/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">2</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Disable debugging messages before pushing to production.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/10023/">10023</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-1"><a
-						id="2"></a>
-						<div>低</div></th>
-					<th class="risk-1">Private IP Disclosure</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>A private IP (such as 10.x.x.x, 172.x.x.x, 192.168.x.x) or an Amazon EC2 private hostname (for example, ip-10-0-56-78) has been found in the HTTP response body. This information might be helpful for further attacks targeting internal systems.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/assets/logo3.svg">http://web:9000/assets/logo3.svg</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">10.37.52.13</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">1</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Remove the private IP address from the HTTP response body.  For comments, use JSP/ASP/PHP comment instead of HTML/JavaScript comment which can be seen by client browsers.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%">
-							<a href="https://tools.ietf.org/html/rfc1918">https://tools.ietf.org/html/rfc1918</a>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/2/">2</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-1"><a
 						id="10021"></a>
 						<div>低</div></th>
 					<th class="risk-1">X-Content-Type-Options Header Missing</th>
@@ -1987,7 +872,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
+						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2471,6 +1356,389 @@ td {
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-0"><a
+						id="10038"></a>
+						<div>情報</div></th>
+					<th class="risk-0">Content Security Policy (CSP) Header Not Set</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000">http://web:9000</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/">http://web:9000/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/">http://web:9000/2023/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/about/">http://web:9000/about/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/sitemap.xml">http://web:9000/sitemap.xml</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/tags/">http://web:9000/tags/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">12</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header, to achieve optimal browser support: &quot;Content-Security-Policy&quot; for Chrome 25+, Firefox 23+ and Safari 7+, &quot;X-Content-Security-Policy&quot; for Firefox 4.0+ and Internet Explorer 10+, and &quot;X-WebKit-CSP&quot; for Chrome 14+ and Safari 6+.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</a>
+							<br />
+						
+							<a href="https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</a>
+							<br />
+						
+							<a href="http://www.w3.org/TR/CSP/">http://www.w3.org/TR/CSP/</a>
+							<br />
+						
+							<a href="http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html">http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</a>
+							<br />
+						
+							<a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/">http://www.html5rocks.com/en/tutorials/security/content-security-policy/</a>
+							<br />
+						
+							<a href="http://caniuse.com/#feat=contentsecuritypolicy">http://caniuse.com/#feat=contentsecuritypolicy</a>
+							<br />
+						
+							<a href="http://content-security-policy.com/">http://content-security-policy.com/</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">15</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10038/">10038</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-0"><a
 						id="10027"></a>
 						<div>情報</div></th>
 					<th class="risk-0">Information Disclosure - Suspicious Comments</th>
@@ -2541,7 +1809,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/app-b8a4ca189b0dcddbc8c3.js">http://web:9000/app-b8a4ca189b0dcddbc8c3.js</a></td>
+						<td width="80%"><a href="http://web:9000/app-233450e740303c0da226.js">http://web:9000/app-233450e740303c0da226.js</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2644,6 +1912,374 @@ td {
 					<td width="20%">Plugin Id</td>
 					<td width="80%"><a
 						href="https://www.zaproxy.org/docs/alerts/10027/">10027</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-0"><a
+						id="10020"></a>
+						<div>情報</div></th>
+					<th class="risk-0">Missing Anti-clickjacking Header</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>The response does not include either Content-Security-Policy with &#39;frame-ancestors&#39; directive or X-Frame-Options to protect against &#39;ClickJacking&#39; attacks.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000">http://web:9000</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/">http://web:9000/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/">http://web:9000/2023/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/about/">http://web:9000/about/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/sitemap.xml">http://web:9000/sitemap.xml</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/tags/">http://web:9000/tags/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">12</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</div>
+							<br />
+						
+							<div>If you expect the page to be framed only by pages on your server (e.g. it&#39;s part of a FRAMESET) then you&#39;ll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy&#39;s &quot;frame-ancestors&quot; directive.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/1021.html">1021</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">15</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10020/">10020</a></td>
 				</tr>
 			</table>
 			<div class="spacer"></div>
@@ -4877,6 +4513,370 @@ td {
 					<td width="20%">Plugin Id</td>
 					<td width="80%"><a
 						href="https://www.zaproxy.org/docs/alerts/10104/">10104</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk--1"><a
+						id="90022"></a>
+						<div>				False Positives:</div></th>
+					<th class="risk--1">Application Error Disclosure</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/page-data/2022/01/03/owaspzap/page-data.json">http://web:9000/page-data/2022/01/03/owaspzap/page-data.json</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal Server Error</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/page-data/index/page-data.json">http://web:9000/page-data/index/page-data.json</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal Server Error</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">2</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/90022/">90022</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk--1"><a
+						id="90034"></a>
+						<div>				False Positives:</div></th>
+					<th class="risk--1">Cloud Metadata Potentially Exposed</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>The Cloud Metadata Attack attempts to abuse a misconfigured NGINX server in order to access the instance metadata maintained by cloud service providers such as AWS, GCP and Azure.</div>
+							<br />
+						
+							<div>All of these providers provide metadata via an internal unroutable IP address &#39;169.254.169.254&#39; - this can be exposed by incorrectly configured NGINX servers and accessed by using this IP address in the Host header field.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/latest/meta-data/">http://web:9000/latest/meta-data/</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%">169.154.169.254</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">1</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Do not trust any user data in NGINX configs. In this case it is probably the use of the $host variable which is set from the &#39;Host&#39; header and can be controlled by an attacker.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://www.nginx.com/blog/trust-no-one-perils-of-trusting-user-input/">https://www.nginx.com/blog/trust-no-one-perils-of-trusting-user-input/</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/90034/">90034</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk--1"><a
+						id="10023"></a>
+						<div>				False Positives:</div></th>
+					<th class="risk--1">Information Disclosure - Debug Error Messages</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>The response appeared to contain common error messages returned by platforms such as ASP.NET, and Web-servers such as IIS and Apache. You can configure the list of common debug messages.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/page-data/2022/01/03/owaspzap/page-data.json">http://web:9000/page-data/2022/01/03/owaspzap/page-data.json</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal Server Error</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/page-data/index/page-data.json">http://web:9000/page-data/index/page-data.json</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal Server Error</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">2</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Disable debugging messages before pushing to production.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10023/">10023</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk--1"><a
+						id="2"></a>
+						<div>				False Positives:</div></th>
+					<th class="risk--1">Private IP Disclosure</th>
+				</tr>
+				<tr>
+					<td width="20%">説明</td>
+					<td width="80%">
+							<div>A private IP (such as 10.x.x.x, 172.x.x.x, 192.168.x.x) or an Amazon EC2 private hostname (for example, ip-10-0-56-78) has been found in the HTTP response body. This information might be helpful for further attacks targeting internal systems.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/assets/logo3.svg">http://web:9000/assets/logo3.svg</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">10.37.52.13</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					<td width="80%">1</td>
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Remove the private IP address from the HTTP response body.  For comments, use JSP/ASP/PHP comment instead of HTML/JavaScript comment which can be seen by client browsers.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://tools.ietf.org/html/rfc1918">https://tools.ietf.org/html/rfc1918</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/2/">2</a></td>
 				</tr>
 			</table>
 			<div class="spacer"></div>
