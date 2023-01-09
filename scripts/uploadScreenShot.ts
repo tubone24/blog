@@ -13,8 +13,10 @@ const branchName = Deno.env.get("BRANCH_NAME") as string;
 const readImageData = await Deno.readFile(filePath);
 const encodedData = encode(readImageData);
 
+const message = prNumber === "" ? "[file upload] Added file on master" : `[file upload] Added file for PR #${prNumber}`;
+
 const gitHubPayload = {
-  message: `[file upload] Added file for PR #${prNumber}`,
+  message: message,
   content: encodedData.replace(new RegExp("data.*base64,"), ""),
   branch: branchName,
   author: {
