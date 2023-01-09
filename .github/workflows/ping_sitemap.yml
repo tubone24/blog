@@ -1,4 +1,4 @@
-name: DeployToNetlifyPRD
+name: Ping Google
 on:
   push:
     branches:
