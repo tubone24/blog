@@ -46,3 +46,19 @@ List general components of the application that this PR will affect:
 
 - aaa
 - bbb
+
+## Screenshot
+
+Replace FIXME_BRANCH_NAME in the URL below with this branch name.
+
+### Desktop
+
+Width 1200px
+
+![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/FIXME_BRANCH_NAME/screenshot-ubuntu-latest-1200.png)
+
+### Mobile
+
+Width 400px
+
+<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/FIXME_BRANCH_NAME/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />

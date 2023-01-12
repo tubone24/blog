@@ -112,11 +112,12 @@ jobs:
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
-      - name: PR Comments
+      - name: Add file
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
           FILE_NAME: video-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}-main.spec.ts.mp4
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
           GITHUB_REPOSITORY: "tubone24/blog"
           GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
           BRANCH_NAME: "screenshot"
