@@ -46,10 +46,12 @@ if (content.ok) {
       email: AUTHOR_EMAIL,
     },
   }
-  await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}`, {
+  const resp = await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}`, {
     method: "DELETE",
     headers: gitHubHeaders,
+    body: JSON.stringify(gitHubDeletePayload),
   });
+  console.log(resp);
 }
 
 await sleep(10);
