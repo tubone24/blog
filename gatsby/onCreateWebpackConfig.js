@@ -8,9 +8,9 @@ module.exports = ({ plugins, actions, stage, getConfig }) => {
       miniCssExtractPlugin.options.ignoreOrder = true;
     }
     actions.replaceWebpackConfig(config);
-    actions.setWebpackConfig({
-      devtool: true,
-    });
+//     actions.setWebpackConfig({
+//       devtool: true,
+//     });
   }
   actions.setWebpackConfig({
     plugins: [
