@@ -28,13 +28,13 @@ Screenshots from the last deployment on the master branch.
 
 Width 1200px
 
-![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/screenshot-ubuntu-latest-1200.png)
+![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/master/screenshot-ubuntu-latest-1200.png)
 
 ### Mobile
 
 Width 400px
 
-<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />
+<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/master/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />
 
 ### Templated by?
 
