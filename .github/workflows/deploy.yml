@@ -99,6 +99,7 @@ jobs:
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
           FILE_NAME: main.spec.ts.mp4
+          HEAD_REF: ${{ github.head_ref }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: "tubone24/blog"
           GITHUB_PULL_REQUEST_NUMBER: ""
