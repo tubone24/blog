@@ -99,7 +99,7 @@ jobs:
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
           FILE_NAME: main.spec.ts.mp4
-          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REF: "master"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: "tubone24/blog"
           GITHUB_PULL_REQUEST_NUMBER: ""
@@ -346,7 +346,7 @@ jobs:
         env:
           FILE_PATH: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           FILE_NAME: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
-          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REF: "master"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: "tubone24/blog"
           GITHUB_PULL_REQUEST_NUMBER: ""
