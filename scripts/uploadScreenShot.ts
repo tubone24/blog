@@ -10,6 +10,7 @@ const gitHubToken = Deno.env.get("GITHUB_TOKEN") as string;
 const gitHubRepo = Deno.env.get("GITHUB_REPOSITORY") as string;
 const prNumber = Deno.env.get("GITHUB_PULL_REQUEST_NUMBER") as string;
 const branchName = Deno.env.get("BRANCH_NAME") as string;
+const headRef = Deno.env.get("HEAD_REF") as string;
 
 const readImageData = await Deno.readFile(filePath);
 const encodedData = encode(readImageData);
@@ -23,7 +24,7 @@ const gitHubHeaders = {
   Authorization: `Bearer ${gitHubToken}`,
 };
 
-const content = await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${fileName}?ref=${branchName}`, {
+const content = await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}?ref=${branchName}`, {
   method: "GET",
   headers: gitHubHeaders,
 });
@@ -44,7 +45,7 @@ if (content.ok) {
       email: AUTHOR_EMAIL,
     },
   }
-  await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${fileName}`, {
+  await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}`, {
     method: "DELETE",
     headers: gitHubHeaders,
   });
@@ -66,7 +67,7 @@ const gitHubUploadPayload = {
   },
 };
 
-const gitHubUploadurl = `${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${fileName}`;
+const gitHubUploadurl = `${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}`;
 
 const gitHubRes = await fetch(gitHubUploadurl, {
   method: "PUT",
