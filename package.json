@@ -181,7 +181,7 @@
     "cypress-visual-regression": "1.7.0",
     "eslint": "8.31.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-prettier": "8.5.0",
+    "eslint-config-prettier": "8.6.0",
     "eslint-config-react-app": "7.0.1",
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-cypress": "2.12.1",
