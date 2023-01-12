@@ -1,5 +1,5 @@
 import { encode } from "https://deno.land/std@0.171.0/encoding/base64.ts";
-import { sleep } from "https://deno.land/x/sleep/mod.ts";
+import { sleep } from "https://deno.land/x/sleep@v1.2.1/mod.ts";
 
 const GITHUB_API_URL = "https://api.github.com";
 const AUTHOR_NAME = "tubone24";
@@ -30,6 +30,7 @@ const content = await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs
 });
 
 if (content.ok) {
+  console.log("already have contents");
   const contentJson = await content.json();
   console.log(contentJson.sha)
   const gitHubDeletePayload = {
