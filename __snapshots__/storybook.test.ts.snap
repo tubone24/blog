@@ -856,6 +856,55 @@ exports[`Storyshots Components/Tag Default 1`] = `
 </a>
 `;
 
+exports[`Storyshots Components/TagCloud Default 1`] = `
+<div
+  className="d-none d-lg-block information my-2"
+>
+  <a
+    href="/tags"
+    title="Tags"
+  >
+    <p>
+      <span
+        className="icon-tags"
+      />
+       
+      3
+       / 
+      3
+       Tags
+    </p>
+  </a>
+  <a
+    href="/tag/test"
+    onClick={[Function]}
+    title="test"
+  >
+    test
+     
+    3
+  </a>
+  <a
+    href="/tag/foo"
+    onClick={[Function]}
+    title="foo"
+  >
+    foo
+     
+    1
+  </a>
+  <a
+    href="/tag/bar"
+    onClick={[Function]}
+    title="bar"
+  >
+    bar
+     
+    1
+  </a>
+</div>
+`;
+
 exports[`Storyshots Components/TimeToRead Default 1`] = `
 <div
   data-testid="countdown"
