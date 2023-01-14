@@ -18,7 +18,7 @@ templateKey: blog-post
 前回[Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
 ](https://blog.tubone-project24.xyz/2019/12/04/nuxt-toast)ではNuxt.jsのmodulesを使ってtoastを出してみました。
 
-ただ、前回の実装だとどこからともなく
+ただ、前回の実装だとどこからともなく、
 
 > 特に再利用もしてないし、共通処理も定義してないからpluginsとか使ってあげれば、modulesじゃなくていいんじゃないんですかねぇ
 
@@ -130,7 +130,7 @@ const doDownload = async (filePath: string): Promise<void> => {
 
 ```
 
-とtoastの情報を登録しておくことにより利用側で
+とtoastの情報を登録しておくことにより利用側で、
 
 ```typescript{numberLines: 1}{10,12}
 const doDownload = async (filePath: string): Promise<void> => {
@@ -161,5 +161,3 @@ const doDownload = async (filePath: string): Promise<void> => {
 ## 結論
 
 modulesのglobal optionsをつかうことによりコードの見通しが良くなった気がします。
-
-

@@ -62,7 +62,6 @@ APIのリソースはstatusという名前です。詳しくは下記OpenAPIを�
 
 [ソースGitHub](https://github.com/tubone24/ebook_homebrew)
 
-
 ![img](https://i.imgur.com/9OhZRsB.png "利用するAPIリファレンス")
 
 ## Nuxt.jsでのVuexの使い方
@@ -133,7 +132,9 @@ export const getters = {
 };
 ```
 
-基本的なことかもしれませんが、Stateの更新はAction, Mutationどちらからでもできますが、Componentsからの更新は非同期を許容するActionに統一したほうがいいかもです。
+基本的なことかもしれませんが、Stateの更新はAction, Mutationどちらからでもできます。
+
+ただし、Componentsからの更新は非同期を許容するActionに統一したほうがいいかもです。
 
 ![img](https://vuex.vuejs.org/vuex.png "Vuexのライフサイクル")
 
@@ -142,7 +143,6 @@ export const getters = {
 それでは上記で作成したVuexストアをComponentsで使っていきます。
 
 **何度も言っていますがVuexストアを正しく直さないと動きませんよ**。
-
 
 ```typescript
 <template>
@@ -228,7 +228,6 @@ Composition APIでは**Vuexストアはsetup内でしか取り出せません**�
 
 **fetchStatus**はsetup外に作られた関数なので、**seutupのなかでfetshStatusの引数にstoreを渡して**あげます。
 
-
 ### Getterの呼び出し
 
 (※3)のようにあらかじめVuexストア(store)をsetupのreturnに設定することで(※6)のように **store.getters['status/getStatus']**というVuexモジュールモードのgetterの呼び出しの形でtemplate内でGetterが利用できます。
@@ -247,9 +246,7 @@ Actionを正しくdispatchしていても、ServerStatus, ServerVersionはtempla
 
 ## ReactiveなVuexストアを作る
 
-結論から言えば、VuexストアのStateをReactiveにしちゃえばいいわけなので
-
-ストアを次のように作り直します。
+結論から言えば、VuexストアのStateをReactiveにしちゃえばいいわけなので、 ストアを次のように作り直します。
 
 ```typescript
 import axios from 'axios';
@@ -328,7 +325,7 @@ Composition APIにはReactiveな値を作り出すことのできる方法とし
 
 ### Reactiveな関係性を引き継ぐtoRefs
 
-StateをReactiveにすることはできました。
+StateをReactiveにできました。
 
 ですが、reactiveには**スコープ**が存在しますのでreturnで戻してしまうと**戻り先でReactiveな関係が解消**されてしまいます。
 
@@ -483,4 +480,3 @@ Composition APIとVuexの相性があまりよくないことが分かった気�
 - [Composition API RFC](https://vue-composition-api-rfc.netlify.com/#summary)
 - [Composition APIってなんだ](https://qiita.com/ushironoko/items/2aa90f38acea9439c09b)
 - [きたるべきvue-nextのコアを理解する](https://qiita.com/neutron63zf/items/506c7493a53cea44860e#vue-next%E3%81%AE%E3%83%AA%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E9%99%A5%E7%A9%BD)
-

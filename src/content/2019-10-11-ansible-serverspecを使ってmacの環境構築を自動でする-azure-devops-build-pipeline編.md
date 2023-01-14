@@ -34,11 +34,11 @@ CIで回そう！
 
 ```
 
-## MacOS X が使えるCIってあるの？
+## macOS X が使えるCIってあるの？
 
 結論から先にかけばあります。
 
-私の大好きなCIのCircleCIだってMacOS XのOSイメージは用意されています。
+私の大好きなCIのCircleCIだってmacOS XのOSイメージは用意されています。
 
 ですが、CircleCIの場合で[$39/Month](https://circleci.jp/pricing/#build-os-x)とお金がかかってしまいます…。(2019/10現在)
 
