@@ -233,6 +233,24 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - uses: chrnorm/deployment-action@v2
+        if: success()
+        name: Create GitHub deploy (Success)
+        id: deployment-prod
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: "https://blog.tubone-project24.xyz"
+          state: "success"
+      - uses: chrnorm/deployment-action@v2
+        if: failure()
+        name: Create GitHub deploy (Failure)
+        id: deployment-prod
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: "https://blog.tubone-project24.xyz"
+          state: "failure"
   storybook:
     runs-on: ubuntu-latest
     steps:
