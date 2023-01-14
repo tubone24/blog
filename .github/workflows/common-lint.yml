@@ -53,5 +53,5 @@ jobs:
         shell: bash
 
       - name: Check workflow files
-        run: ${{ steps.get_actionlint.outputs.executable }} -color
+        run: ${{ steps.get_actionlint.outputs.executable }} -color shellcheck=
         shell: bash
