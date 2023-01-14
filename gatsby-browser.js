@@ -1,7 +1,6 @@
 import ReactGA from "react-ga4";
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
-import config from "src/config/index.json";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
@@ -10,6 +9,7 @@ import "./src/styles/global.scss";
 // Use bootstrap dropdown menu
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Dropdown } from "bootstrap/dist/js/bootstrap";
+const config = require("./src/config/index.json");
 
 const isLocalDevelopment = () =>
   window &&

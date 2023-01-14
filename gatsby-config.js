@@ -1,4 +1,4 @@
-import config from "src/config/index.json";
+const config = require("./src/config/index.json");
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = "https://blog.tubone-project24.xyz",
