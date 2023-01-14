@@ -3,6 +3,7 @@
 > Super powerfully all-packaged blog system
 
 [![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
+[![Release Version](https://release-badges-generator.vercel.app/api/releases.svg?user=tubone24&repo=blog&gradient=00ffff,8bd1fa)](https://github.com/tubone24/blog/releases/latest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
 [![Coverage Status](https://coveralls.io/repos/github/tubone24/blog/badge.svg?branch=master)](https://coveralls.io/github/tubone24/blog?branch=master)
@@ -13,6 +14,7 @@
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-score&lastDay=184)
 [![websiteup](https://img.shields.io/website.svg?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fblog.tubone-project24.xyz)](https://blog.tubone-project24.xyz)
 [![Buy me a coffee](https://camo.githubusercontent.com/3c1dd7a8a20dafe2a0b9b3b14ddaec4b63f73060625d1456761e9fd2e71f82bc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f42794d6541436f666665652d7475626f6e6532342d627269676874677265656e3f6c6f676f3d4275792532304d6525323041253230436f66666565)](https://www.buymeacoffee.com/tubone24)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/tubone24/blog/blob/master/CONTRIBUTING.md)
 
 ## What is this?
 
@@ -22,7 +24,7 @@ This is tubone's Blog by Gatsby and Netlify.
 
 ## Preview
 
-Screenshots from the last deployment on the master branch.
+[Screenshots](https://github.com/tubone24/blog/tree/screenshot) from the last deployment on the master branch.
 
 ### Desktop
 
@@ -46,7 +48,7 @@ Special, thanks!
 
 ### Structure
 
-- Gatsby.js v4, Static site generating
+- [Gatsby.js v4](https://www.gatsbyjs.com/gatsby-4/), Static site generating
   - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
   - All Components writen by [TypeScript](https://www.typescriptlang.org/)
   - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
@@ -85,6 +87,7 @@ Special, thanks!
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 - Detect vulnerability by [Snyk](https://app.snyk.io/)
 - Detect vulnerability by [OWASP ZAP](https://www.zaproxy.org/)
+- Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master.
 
 ### For contributor of articles
 
@@ -358,6 +361,16 @@ Last 14 days, CI Score by [meercode.io](https://meercode.io)
 ### CI Success Rate
 
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-success-rate&lastDay=14)
+
+## Change log and versioning
+
+This Blog's CHANGELOG integrated [GitHub Releases](https://github.com/tubone24/blog/releases)
+
+And this blog's versioning policy is [semver](https://semver.org/) like `1.0.1`
+
+- MAJOR version when you make incompatible API changes
+- MINOR version when you add functionality in a backwards compatible manner or **create articles**.
+- PATCH version when you make backwards compatible bug fixes or **update (include delete) articles**.
 
 ## License
 

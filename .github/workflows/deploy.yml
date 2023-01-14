@@ -7,6 +7,33 @@ env:
   cache-version: v2
 
 jobs:
+  create-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+      - name: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: yarn install --frozen-lockfile
   test:
     runs-on: ubuntu-latest
     steps:
@@ -27,9 +54,9 @@ jobs:
           sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -132,9 +159,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -172,6 +199,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-prod
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -180,9 +213,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -233,16 +266,40 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - uses: chrnorm/deployment-status@v2
+        if: success()
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: "https://blog.tubone-project24.xyz"
+          deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: failure()
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: "https://blog.tubone-project24.xyz"
+          deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
+          state: "failure"
   storybook:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-prod-storybook
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -283,6 +340,24 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
+      - uses: chrnorm/deployment-status@v2
+        if: success()
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
+          environment-url: "https://blog-storybook.netlify.app"
+          deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: failure()
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
+          environment-url: "https://blog-storybook.netlify.app"
+          deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
+          state: "failure"
   lighthouse:
     runs-on: macos-latest
     needs: ['build']

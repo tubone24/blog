@@ -20,7 +20,34 @@ jobs:
       - name: Print head git commit message
         id: get-head-commit-message
         run: |
-          echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+          echo "headCommitMsg=$(git show -s --format=%s)" >> "${GITHUB_OUTPUT}"
+  create-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+      - name: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: yarn install --frozen-lockfile
   test:
     runs-on: ubuntu-latest
     steps:
@@ -41,9 +68,9 @@ jobs:
           sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -111,11 +138,11 @@ jobs:
           path: ./cypress/videos/e2e/main.spec.ts.mp4
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
+        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
       - name: Add file
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
-          FILE_NAME: video-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}-main.spec.ts.mp4
+          FILE_NAME: video-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-main.spec.ts.mp4
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_REF: ${{ github.head_ref }}
           GITHUB_REPOSITORY: "tubone24/blog"
@@ -135,9 +162,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -173,6 +200,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-dev
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -181,9 +214,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -240,12 +273,30 @@ jobs:
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
-               ${URL}
+               "${URL}"
       - name: get Netlify Draft URL
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> $GITHUB_OUTPUT
+          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+      - uses: chrnorm/deployment-status@v2
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development
+          environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') && failure() }}
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development
+          environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev.outputs.deployment_id }}
+          state: "failure"
     outputs:
       draftUrl: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
 
@@ -265,9 +316,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -330,9 +381,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -377,7 +428,7 @@ jobs:
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat test/memlab/data/out/leaks.txt)\"}" \
-               ${URL}
+               "${URL}"
   textlint:
     name: textlint
     runs-on: ubuntu-latest
@@ -390,9 +441,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -420,11 +471,17 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-dev-storybook
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development-storybook
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -483,7 +540,30 @@ jobs:
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
-               ${URL}
+               "${URL}"
+      - name: get Netlify Draft URL
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
+        id: get-netlify-draft-url
+        run: |
+          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+      - uses: chrnorm/deployment-status@v2
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development-storybook
+          environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev-storybook.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') && failure() }}
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development-storybook
+          environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev-storybook.outputs.deployment_id }}
+          state: "failure"
 
 
   bundle-analyzer-link:
@@ -535,12 +615,14 @@ jobs:
           width: ${{ matrix.width }}
           delay: 10
       - uses: actions/download-artifact@v3
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         with:
           name: screenshot-${{ matrix.os }}-${{ matrix.width }}
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
+        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
       - name: PR Comments
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           FILE_PATH: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           FILE_NAME: screenshot-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}.png

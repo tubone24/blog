@@ -49,16 +49,16 @@ List general components of the application that this PR will affect:
 
 ## Screenshot
 
-Replace FIXME_BRANCH_NAME in the URL below with this branch name.
+Replace `FIXME_BRANCH_NAME`, `FIXME_PR_NUMBER` in the URL below with this branch name and PR number.
 
 ### Desktop
 
 Width 1200px
 
-![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/FIXME_BRANCH_NAME/screenshot-ubuntu-latest-1200.png)
+![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/FIXME_BRANCH_NAME/screenshot-ubuntu-latest-FIXME_PR_NUMBER-FIXME_BRANCH_NAME-1200.png)
 
 ### Mobile
 
 Width 400px
 
-<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/FIXME_BRANCH_NAME/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />
+<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/FIXME_BRANCH_NAME/screenshot-ubuntu-latest-FIXME_PR_NUMBER-FIXME_BRANCH_NAME-400.png" width="200px" alt="mobile home" />
