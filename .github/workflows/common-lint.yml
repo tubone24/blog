@@ -51,8 +51,6 @@ jobs:
         id: get_actionlint
         run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
         shell: bash
-      - name: which shellcheck
-        run: which shellcheck
       - name: Check workflow files
-        run: ${{ steps.get_actionlint.outputs.executable }} -color -shellcheck "/usr/bin/shellcheck -e SC2002"
+        run: ${{ steps.get_actionlint.outputs.executable }} -color -shellcheck "$(which shellcheck) -e SC2002"
         shell: bash
