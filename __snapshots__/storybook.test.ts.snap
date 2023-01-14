@@ -962,3 +962,63 @@ exports[`Storyshots Pages/NotFoundPage Default 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots Pages/tags Default 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="undefined row"
+  >
+    <div
+      className="undefined col order-2"
+    >
+      <a
+        href="/tag/foo"
+        onClick={[Function]}
+        title="foo"
+      >
+        foo
+         
+        3
+      </a>
+      <a
+        href="/tag/bar"
+        onClick={[Function]}
+        title="bar"
+      >
+        bar
+         
+        2
+      </a>
+      <a
+        href="/tag/hoge"
+        onClick={[Function]}
+        title="hoge"
+      >
+        hoge
+         
+        1
+      </a>
+      <a
+        href="/tag/huga"
+        onClick={[Function]}
+        title="huga"
+      >
+        huga
+         
+        1
+      </a>
+      <a
+        href="/tag/日本語"
+        onClick={[Function]}
+        title="日本語"
+      >
+        日本語
+         
+        1
+      </a>
+    </div>
+  </div>
+</div>
+`;

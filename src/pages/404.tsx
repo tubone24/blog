@@ -13,7 +13,7 @@ const NotFoundPage = ({ data }: GetAllPageQuery) => (
         <h2>Anything else...?</h2>
         <ul>
           {data.allSitePage.edges.map((page) => (
-            <li>
+            <li key={page.node.path}>
               <Link to={page.node.path} key={page.node.path}>
                 {page.node.path}
               </Link>
