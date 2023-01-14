@@ -128,4 +128,4 @@ jobs:
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat summarize.txt)\"}" \
-               ${URL}
+               "${URL}"

@@ -111,11 +111,11 @@ jobs:
           path: ./cypress/videos/e2e/main.spec.ts.mp4
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
+        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
       - name: Add file
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
-          FILE_NAME: video-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}-main.spec.ts.mp4
+          FILE_NAME: video-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}-main.spec.ts.mp4
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_REF: ${{ github.head_ref }}
           GITHUB_REPOSITORY: "tubone24/blog"
@@ -240,7 +240,7 @@ jobs:
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
-               ${URL}
+               "${URL}"
       - name: get Netlify Draft URL
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
