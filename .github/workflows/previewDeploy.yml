@@ -173,6 +173,13 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-dev
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development
+          environment-url: ""
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -249,11 +256,11 @@ jobs:
       - uses: chrnorm/deployment-action@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         name: Create GitHub deploy (Success)
-        id: deployment-dev
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: development
           environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev.outputs.deployment_id }}
           state: "success"
       - uses: chrnorm/deployment-action@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }} && failure()
@@ -262,6 +269,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: development
           environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev.outputs.deployment_id }}
           state: "failure"
     outputs:
       draftUrl: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
