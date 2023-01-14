@@ -54,5 +54,5 @@ jobs:
       - name: which shellcheck
         run: which shellcheck
       - name: Check workflow files
-        run: ${{ steps.get_actionlint.outputs.executable }} -color shellcheck="/usr/bin/shellcheck -e SC2002"
+        run: ${{ steps.get_actionlint.outputs.executable }} -color -shellcheck "/usr/bin/shellcheck -e SC2002"
         shell: bash
