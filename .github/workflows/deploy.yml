@@ -245,7 +245,6 @@ jobs:
       - uses: chrnorm/deployment-action@v2
         if: failure()
         name: Create GitHub deploy (Failure)
-        id: deployment-prod
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: production

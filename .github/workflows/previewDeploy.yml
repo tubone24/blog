@@ -258,7 +258,6 @@ jobs:
       - uses: chrnorm/deployment-action@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }} && failure()
         name: Create GitHub deploy (Failure)
-        id: deployment-dev
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: development
