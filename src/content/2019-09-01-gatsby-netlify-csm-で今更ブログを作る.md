@@ -20,9 +20,9 @@ templateKey: blog-post
 
 ```
 
-## なぜこんなことを・・・。
+## なぜこんなことを・・・
 
-今更にはなりますがNetlify CMSを使ってみたくなったのでGatsbyを使ってブログ作ってみました。
+いまさらにはなりますがNetlify CMSを使ってみたくなったのでGatsbyを使ってブログ作ってみました。
 
 ## 登場人物
 
@@ -30,8 +30,7 @@ templateKey: blog-post
 
 <https://www.netlify.com/>
 
-
-Netlifyとは静的ホスティングサービスですが、S3とは違いGithubのpush契機にBuildが走るCI機能などが充実していてこれでOK感ある。
+Netlifyとは静的ホスティングサービスですが、S3とは違いGitHubのpush契機にBuildが走るCI機能などが充実していてこれでOK感ある。
 
 Identityという認証も用意されているのでCMSサイトも作れちゃう。
 
@@ -44,7 +43,7 @@ Identityという認証も用意されているのでCMSサイトも作れちゃ
 <https://www.netlifycms.org/>
 
 NetlifyにGithubへのアクセスキーを持たせることで、CMS上でコンテンツを編集、GithubへのPushを一気にやってしまうことができます。
-さらに記事のWorkflowも[Github Flow](http://scottchacon.com/2011/08/31/github-flow.html) に乗っけることができるので、CMSで編集しながらにしてレポジトリはぐちゃぐちゃにならない。
+さらに記事のWorkflowも[GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html) に乗っけることができるので、CMSで編集しながらにしてレポジトリはぐちゃぐちゃにならない。
 
 これ結構いいアイディア！
 
@@ -66,7 +65,7 @@ MarkdownをGithubにPostすれば完全に求めている感じのことがで�
 
 ### Netlify対応版のGatsby-starterをダウンロードする
 
-[https://github.com/netlify-templates/gatsby-starter-netlify-cms
+[<https://github.com/netlify-templates/gatsby-starter-netlify-cms>
 ](https://github.com/netlify-templates/gatsby-starter-netlify-cms
 )
 
@@ -75,8 +74,8 @@ git cloneしてきます。
 とりあえずローカル上で動かしてみます。
 
 ```bash{numberLines: 1}
-$ npm install
-$ npm start
+npm install
+npm start
 ```
 
 するとコーヒー屋さん（？）のページが出てきます。
@@ -92,7 +91,6 @@ CMSの要素は残す必要があるため、ComponentsのTemplateを編集す�
 ### Netlifyのアカウント用意する
 
 無事サイトができたら、Netlifyに挙げていきます。
-
 
 ![Imgur](https://i.imgur.com/P0E2109.png)
 
@@ -144,5 +142,3 @@ Githubの[PersonalAccessToken](https://github.com/settings/tokens/new)から作�
 Netlify CMSはすごいぞ！
 
 ![Imgur](https://i.imgur.com/mIcrB6K.png)
-
-
