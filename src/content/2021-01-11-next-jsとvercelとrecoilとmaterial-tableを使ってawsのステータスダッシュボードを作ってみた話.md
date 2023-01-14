@@ -353,7 +353,7 @@ export const Table = (): JSX.Element => {
   }
 ```
 
-stateの読み込みはgetterから、書き込みはsetterから行います。
+stateの読み込みはgetterから、書き込みはsetterから行ないます。
 
 React Hooksに慣れていれば簡単ですね。
 
@@ -478,7 +478,7 @@ export const AlertPerRegion = (): JSX.Element => {
 
 どうやら、data.jsonはRSSとは違い、同期的に更新されないようです。
 
-大変ご迷惑をおかけしました。あらためて、改修しRSS更新にも対応できるように頑張ります。
+大変ご迷惑をおかけしました。改めて、改修しRSS更新にも対応できるように頑張ります。
 
 
 

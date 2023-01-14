@@ -14,11 +14,11 @@ tags:
 headerImage: 'https://i.imgur.com/29nafu5.png'
 templateKey: blog-post
 ---
-わからん
+わからん。
 
 最近[**Nuxt.js**](https://ja.nuxtjs.org/)と戯れるようにしてますが、Nuxt.jsと[Vue.js](https://jp.vuejs.org/index.html)の新しいAPIである[**CompositionAPI**](https://vue-composition-api-rfc.netlify.com/)の相性があまりよくないのか色々苦戦してます。
 
-いよいよツラミもわかってきた頃合いなので一つずつまとめていこうかと思います。
+いよいよツラミもわかってきた頃合いなので1つずつまとめていこうかと思います。
 
 今回は**Nuxt.js**の**modules**を**CompositionAPI**でどう使っていくかを書きます。
 
@@ -46,7 +46,7 @@ templateKey: blog-post
 
 [CompositionAPI](https://vue-composition-api-rfc.netlify.com/)とは、**Vue3.x系**から正式採用される新しいVue.jsの使い方です。
 
-公式的には
+公式的には、
 
 > a set of additive, function-based APIs that allow flexible composition of component logic. （コンポーネントロジックの構成を柔軟にできる関数ベースな追加API）
 
@@ -58,9 +58,9 @@ CompositionAPIを使おうと思ったのは、Vue3.xで採用されるという
 
 上記のツラミ・スゴミについて詳しくは下記のプレゼンがすごくわかりやすかったです。
 
-https://speakerdeck.com/jiko21/composition-api-typescripthavue-dot-jsfalsemeng-wojian-ruka
+<https://speakerdeck.com/jiko21/composition-api-typescripthavue-dot-jsfalsemeng-wojian-ruka>
 
-ざっくりと書き方の違いとしては
+ざっくりと書き方の違いとしては、
 
 ClassAPI(decoratorを使ったパターン)
 
@@ -98,7 +98,8 @@ export default class HelloWorld extends Vue {
 }
 </script>
 ```
-CompositionAPIで書くパターン
+
+CompositionAPIで書くパターンは、
 
 ```typescript
 <script lang="ts">
@@ -146,7 +147,7 @@ CompositionAPIで書くパターン
         type: String
       }
     },
-    //setup()で初めてVueインスタンス化されるのでinjectされたものはsetup内でしかとれない。
+    //setup()ではじめてVueインスタンス化されるのでinjectされたものはsetup内でしかとれない。
     setup (props: Props, ctx) {
 
       // propsをsetup内ローカル変数で再設定
@@ -356,4 +357,3 @@ toastの利用側のコンポーネントではsetup内で使います。
 ## 結論
 
 むずかしい。
-

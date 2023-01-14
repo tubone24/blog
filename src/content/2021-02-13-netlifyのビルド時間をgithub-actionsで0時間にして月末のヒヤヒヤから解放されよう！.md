@@ -43,7 +43,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 なので、私のような貧民は月末になると、Netlifyのビルド時間が気になって**このブログの記事を書かなくなったり**、**サイトリファクターのペースが落ちて**しまいます。
 
-特にブログ更新は顕著で、例えば今書いている記事も通勤の電車のなかでスマホから書いているわけなので、細かくコミットを打って保存したいのですが、コミットを打ってプッシュしてしまうと、ビルドが走ることになるので、WIPでのコミットが億劫になり、結果的に家のようなまとめてプッシュできるような作業スペースがある場所でないと、
+特にブログ更新は顕著で、例えば今書いている記事も通勤の電車のなかでスマートフォンから書いているわけなので、細かくコミットを打って保存したいのですが、コミットを打ってプッシュしてしまうと、ビルドが走ることになるので、WIPでのコミットが億劫になり、結果的に家のようなまとめてプッシュできるような作業スペースがある場所でないと、
 ブログを書かなくなってしまいました。
 
 せっかく[Netlify CMS化](https://blog.tubone-project24.xyz/2019-09-01-netlify-and-gatsby#cms%E3%81%AE%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)した意味がないですね。
@@ -61,7 +61,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 基本的にNetlifyがビルド時やってることは、例えばGatsby.jsであれば、gatsby buildコマンドを実行し、特定のディレクトリー(大概は./public)に配置されたビルド済みJSをデプロイする動きなので、
 それをそっくりGitHub Actionsに移行すればいいのですが、Netlifyがビルド済みJSに対して後処理(PostProcess)してるパターンもあります。
 
-私の場合、JSやイメージを最適化してくれる**Asset optimization**とFormタグに属性をつければ勝手にFormを作ってくれる**Form detection**の二つが設定されていましたのでそれぞれまず無効化します。
+私の場合、JSやイメージを最適化してくれる**Asset optimization**とFormタグに属性をつければ勝手にFormを作ってくれる**Form detection**の2つが設定されていましたのでそれぞれまず無効化します。
 
 Form detectionの解説は[こちら](https://blog.tubone-project24.xyz/2019/09/30/netlify-form)を参照ください。
 
@@ -73,7 +73,7 @@ Form detectionの解説は[こちら](https://blog.tubone-project24.xyz/2019/09/
 
 ## gatsby-plugin-minify
 
-Asset optimizationのうち、JSやCSSのminiferは[gatsby-plugin-minify](https://www.gatsbyjs.com/plugins/gatsby-plugin-minify/)を使うことでhtmlやJS、CSSをminifyできます。
+Asset optimizationのうち、JSやCSSのminiferは[gatsby-plugin-minify](https://www.gatsbyjs.com/plugins/gatsby-plugin-minify/)を使うことでHTMLやJS、CSSをminifyできます。
 
 インストールはいつも通りNPM(yarn)から、
 
@@ -99,7 +99,7 @@ npm install gatsby-plugin-minify
     },
 ```
 
-minifyCSSとminifyJSをtrueにすることにより、CSSについては[clean-css](https://github.com/jakubpawlowicz/clean-css)、JSについては[UglifyJS](https://github.com/mishoo/UglifyJS)を使って一緒にminifyされます。また、gatsby-plugin-minifyの裏側は[html-minifier](https://github.com/kangax/html-minifier)をgatsby-node.jsでpostbuildで全掛けしているだけなので、細かいオプションは[html-minifier](https://github.com/kangax/html-minifier#options-quick-reference)で設定できる感じです。
+minifyCSSとminifyJSをtrueにすることにより、CSSについては[clean-CSS](https://github.com/jakubpawlowicz/clean-css)、JSについては[UglifyJS](https://github.com/mishoo/UglifyJS)を使って一緒にminifyされます。また、gatsby-plugin-minifyの裏側は[HTML-minifier](https://github.com/kangax/html-minifier)をgatsby-node.jsでpostbuildで全掛けしているだけなので、細かいオプションは[HTML-minifier](https://github.com/kangax/html-minifier#options-quick-reference)で設定できる感じです。
 
 ちなみに、気を付けないといけないのが**removeAttributeQuotes**のオプションをfalseにすること。
 
@@ -113,7 +113,7 @@ RSSのリンクをページのLinkとして仕込んでいる人は要注意で�
 
 [imgur](https://imgur.com/)というサービスがあります。
 
-主にRedditとかGifをあげるための画像ホスティングサービスとして有名なのですが、こちらを使うことで簡単に画像のリサイズとホスティングを実現できるため、このブログではimgurを使ってます。
+主にRedditとかGIFをあげるための画像ホスティングサービスとして有名なのですが、こちらを使うことで簡単に画像のリサイズとホスティングを実現できるため、このブログではimgurを使ってます。
 
 画像URLの後ろに画像サイズに合わせたキーワードを入れることで実現できます。
 

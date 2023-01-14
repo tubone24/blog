@@ -1,0 +1,25 @@
+name: Ping Sitemap
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - src/**
+env:
+  cache-version: v2
+
+jobs:
+  send-sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send google
+        run: |
+          curl -X GET "http://www.google.com/ping?sitemap=https://blog.tubone-project24.xyz/sitemap-index.xml"
+          curl -X GET "http://www.google.com/ping?sitemap=https://blog.tubone-project24.xyz/rss.xml"
+          curl -X GET "http://www.google.com/ping?sitemap=https%3A%2F%2Ftubone-project24.xyz%2Findex.php%3Fxml_sitemap%3Dparams%3D"
+          curl -X GET "http://www.google.com/ping?sitemap=https://tubone-project24.xyz/index.php/feed/"
+      - name: send pingomatic
+        run: |
+          curl -X GET "https://pingomatic.com/ping/?title=tubone+BOYAKI&blogurl=https%3A%2F%2Fblog.tubone-project24.xyz%2F&rssurl=https%3A%2F%2Fblog.tubone-project24.xyz%2Frss.xml&chk_blogs=on&chk_feedburner=on&chk_tailrank=on&chk_superfeedr=on"
+          curl -X GET "https://pingomatic.com/ping/?title=tubone+BOYAKI&blogurl=https%3A%2F%2Ftubone-project24.xyz%2F&rssurl=https%3A%2F%2Ftubone-project24.xyz%2Findex.php%2Ffeed%2F&chk_blogs=on&chk_feedburner=on&chk_tailrank=on&chk_superfeedr=on"

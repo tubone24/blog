@@ -1,0 +1,23 @@
+name: Depcheck
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - package.json
+      - yarn.lock
+      - .terraform.lock.hcl
+env:
+  cache-version: v2
+
+jobs:
+  dep-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: "depcheck"
+        uses: tubone24/depcheck_action@v1.2.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}

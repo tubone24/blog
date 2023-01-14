@@ -19,7 +19,7 @@ tags:
 headerImage: 'https://i.imgur.com/QCjxEBN.png'
 templateKey: blog-post
 ---
-タイトル長い
+タイトル長い。
 
 くっそ長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
 
@@ -47,10 +47,10 @@ ExcelやPowerPointだとVBAがマクロ言語ですが、Google Apps ScriptはJa
 
 またGoogle Apps Scriptのことを省略してGASとか言ったりするそうです。
 
-ｶﾞｽｶﾞｽ
+ガスガス✨
 
 GAS専用のマクロ用関数がある程度用意されてるのでマクロを組むのも簡単ですし、時間で関数をキックするトリガー機能もあるので、簡単なFaaS（Function as a Service）として
-利用することもできます。
+利用できます。
 
 今回は後者の使い方が中心となります。
 
@@ -91,7 +91,7 @@ Chromeベースのキャプチャリングなので、レンダリングも正�
 
 さらに、うれしい機能として遅延キャプチャリング機能があり、ページのレンダリングを待ってからキャプチャを撮ることも可能です。
 
-```
+```text
 https://api.apiflash.com/v1/urltoimage?access_key=hoge&url=hoge&delay=10
 ```
 
@@ -140,7 +140,6 @@ URLFetchAppはもちろんGAS専用のAPIですが、TypeSciptのLintがちゃ�
 
 コードは省略しますが上と同じ要領でURLFetchを使って、Slackコール部も作ります。
 
-
 ## テスト
 
 テストはJestで作ります。
@@ -149,7 +148,7 @@ URLFetchAppはもちろんGAS専用のAPIですが、TypeSciptのLintがちゃ�
 
 Jestのグローバル変数定義であらかじめURLFetchを作り、JestのMock関数をテストケースごとにfetch関数と置き換えることで実現できます。
 
-package.jsonに
+package.jsonに、
 
 ```json
   "jest": {
@@ -160,7 +159,7 @@ package.jsonに
   },
 ```
 
-とすることでグローバルにUrlFetchAppができますので、テストコードで
+とすることでグローバルにUrlFetchAppができますので、テストコードで、
 
 ```typescript
 const mockFetch = jest.fn();
@@ -188,7 +187,7 @@ mock関数をあらかじめ作成しておくと、コールのassertも可能�
 
 StarterではWebpackを使ってTypeSciptのGAS化を実行しているようです。
 
-```
+```shell{promptUser: tubone}{promptHost: dev.localhost}
 npm run build
 ```
 
@@ -196,7 +195,7 @@ npm run build
 
 デプロイは、claspを利用します。
 
-```
+```shell{promptUser: tubone}{promptHost: dev.localhost}
 clasp login
 clasp push
 ```
@@ -215,11 +214,11 @@ clasp loginをローカル上で実施したときに取得できるトークン
 
 GitHub ActionのSecretにはこのようにアクセスします。
 
-```
+```shell{promptUser: tubone}{promptHost: dev.localhost}
 echo "${{ secrets.CLASPRC_JSON }}" > ~/.clasprc.json
 ```
 
-## 完成！
+## 完成
 
 GASにデプロイできたらcronでトリガーさせてあげれば定期的にキャプチャをとります。
 

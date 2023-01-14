@@ -52,7 +52,7 @@ Vue.js版だけでなく、[React版](https://github.com/lindelof/particles-bg)�
 インストールはnpmまたはyarnを使います。
 
 ```bash
-$ npm install --save particles-bg-vue
+npm install --save particles-bg-vue
 ```
 
 簡単ですね。
@@ -119,7 +119,7 @@ particleを当てたいページに対しては上記で作成したlayoutsを�
 
 今回は最新のVue.jsのAPI [Vue Composition API](https://vue-composition-api-rfc.netlify.com/)を例に使ってみます。
 
-たとえばトップページ(index)に当てたい場合
+たとえばトップページ(index)に当てたい場合、
 
 ```javascript{numberLines: 1}{19}
 <template>
@@ -184,7 +184,7 @@ F12(開発者ツール)などで、particle部分のElementsを確認すると�
 
 さらに、Vue.jsの新しいAPI、CompositionAPIでは、templateに渡す変数はreactive、reactiveじゃないに関わらずsetup()のreturnで渡す必要があります。
 
-なので
+なので、
 
 ```javascript{numberLines: 1}{3,26-28,34-36}
 <template>
@@ -228,7 +228,7 @@ F12(開発者ツール)などで、particle部分のElementsを確認すると�
 
 ```
 
-とやってみると
+とやってみると、
 
 ![img](https://i.imgur.com/ct8mkR2.png)
 

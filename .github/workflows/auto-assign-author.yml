@@ -1,0 +1,16 @@
+name: Auto Assign Author
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  assign:
+    if: github.actor != 'dependabot[bot]'
+
+    name: Assign author to PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign author to PR
+        uses: technote-space/assign-author@v1

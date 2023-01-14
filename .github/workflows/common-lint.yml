@@ -1,0 +1,56 @@
+name: common lint
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+      - name: ⬇️ lint markdown files
+        run: yarn format-md
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 🧼 lint renovate config
+        uses: suzuki-shunsuke/github-action-renovate-config-validator@v0.1.2
+        with:
+          config_file_path: 'renovate.json'
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download actionlint
+        id: get_actionlint
+        run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+        shell: bash
+      - name: Check workflow files
+        run: ${{ steps.get_actionlint.outputs.executable }} -color -shellcheck "$(which shellcheck) -e SC2002"
+        shell: bash

@@ -1,8 +1,9 @@
 # Blog
 
-> Super powerfully all-packaged blog system 
+> Super powerfully all-packaged blog system
 
 [![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
+[![Release Version](https://release-badges-generator.vercel.app/api/releases.svg?user=tubone24&repo=blog&gradient=00ffff,8bd1fa)](https://github.com/tubone24/blog/releases/latest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
 [![Coverage Status](https://coveralls.io/repos/github/tubone24/blog/badge.svg?branch=master)](https://coveralls.io/github/tubone24/blog?branch=master)
@@ -12,6 +13,8 @@
 <a href="https://validator.w3.org/feed/check.cgi?url=https%3A//blog.tubone-project24.xyz/rss.xml"><img src="https://validator.w3.org/feed/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-score&lastDay=184)
 [![websiteup](https://img.shields.io/website.svg?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fblog.tubone-project24.xyz)](https://blog.tubone-project24.xyz)
+[![Buy me a coffee](https://camo.githubusercontent.com/3c1dd7a8a20dafe2a0b9b3b14ddaec4b63f73060625d1456761e9fd2e71f82bc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f42794d6541436f666665652d7475626f6e6532342d627269676874677265656e3f6c6f676f3d4275792532304d6525323041253230436f66666565)](https://www.buymeacoffee.com/tubone24)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/tubone24/blog/blob/master/CONTRIBUTING.md)
 
 ## What is this?
 
@@ -19,7 +22,21 @@ This is tubone's Blog by Gatsby and Netlify.
 
 [https://blog.tubone-project24.xyz/](https://blog.tubone-project24.xyz/)
 
-![Home Page](https://i.imgur.com/NyU0Bhy.png)
+## Preview
+
+[Screenshots](https://github.com/tubone24/blog/tree/screenshot) from the last deployment on the master branch.
+
+### Desktop
+
+Width 1200px
+
+![Desktop Home](https://raw.githubusercontent.com/tubone24/blog/screenshot/docs/screenshot/master/screenshot-ubuntu-latest-1200.png)
+
+### Mobile
+
+Width 400px
+
+<img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/master/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />
 
 ### Templated by?
 
@@ -31,7 +48,7 @@ Special, thanks!
 
 ### Structure
 
-- Gatsby.js v4, Static site generating
+- [Gatsby.js v4](https://www.gatsbyjs.com/gatsby-4/), Static site generating
   - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
   - All Components writen by [TypeScript](https://www.typescriptlang.org/)
   - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
@@ -63,13 +80,14 @@ Special, thanks!
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
-- Each production-deploy is measured by [Lighthouse](#Lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
+- Each production-deploy is measured by [Lighthouse](#lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
 - Each production-deploy is measured by [Bundle Analyzer](#bundle-analyzer) and [reports](https://tubone24.github.io/blog/ba/index.html) are output
 - unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 - Detect vulnerability by [Snyk](https://app.snyk.io/)
 - Detect vulnerability by [OWASP ZAP](https://www.zaproxy.org/)
+- Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master.
 
 ### For contributor of articles
 
@@ -94,16 +112,16 @@ Approved --->|Merge| DeployProduction
 
 Run **at local**, execute commands below, and access [http://localhost:8000](http://localhost:8000)
 
-```
-$ yarn install
-$ yarn start
+```sh
+yarn install
+yarn start
 ```
 
 ### Build
 
 Or Build Artifact, execute commands below
 
-```
+```sh
 yarn build
 ```
 
@@ -111,7 +129,7 @@ yarn build
 
 Fix your code format by [TSC](https://www.typescriptlang.org/docs/handbook/compiler-options.html), [ESLint](https://eslint.org/) and  [stylelint](https://stylelint.io/)
 
-```
+```sh
 yarn typecheck
 yarn format:fix
 yarn format-style:fix
@@ -119,7 +137,7 @@ yarn format-style:fix
 
 You can also fix YAML format by [yamllint](https://github.com/adrienverge/yamllint)
 
-```
+```sh
 yarn format-yml
 ```
 
@@ -129,7 +147,7 @@ Testing React Component and Unit testing, execute commands below
 
 And also, you can test Storybook Snapshot test!
 
-```
+```sh
 yarn test
 yarn test:storybook
 yarn test:e2e
@@ -137,7 +155,7 @@ yarn test:e2e
 
 If you want to check testing coverage, execute commands below
 
-```
+```sh
 yarn test:cov
 ```
 
@@ -156,15 +174,18 @@ And more, you can check production test coverage report below.
 
 If you error occurred on gatsby build, execute commands below
 
-```
-> Error loading a result for the page query in "/". Query was not run and no cached result was found.
+```sh
+$ yarn build
+....
+....
+Error loading a result for the page query in "/". Query was not run and no cached result was found.
 
-yarn clean
+$ yarn clean
 ```
 
 Also, you want to clean dependencies, execute commands below
 
-```
+```sh
 yarn clean-all
 ```
 
@@ -172,7 +193,7 @@ yarn clean-all
 
 This project use Browsers List, so you can update it
 
-```
+```sh
 yarn browserslist:update
 ```
 
@@ -180,7 +201,7 @@ yarn browserslist:update
 
 If you want to check benchmark, you can use Lighthouse script below
 
-```
+```sh
 yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
 ```
 
@@ -188,7 +209,7 @@ yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
 
 If you want to check storybook, execute commands below
 
-```
+```sh
 yarn storybook
 ```
 
@@ -196,13 +217,13 @@ yarn storybook
 
 If you want to detect browser's memory leaks, you can use memlab script below
 
-```
+```sh
 yarn memlab
 ```
 
 Or if you want to test against a specific URL, set an environment variable.
 
-```
+```sh
 URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
 ```
 
@@ -214,22 +235,22 @@ And also, creating PR, you can check memory leak report via GitHub PR Comments.
 
 Copy `.env.example` to create the `.env` file
 
-```
+```sh
 cp .env.example .env
 ```
 
 | Key                              | Description                                              | Default |
-|----------------------------------| -------------------------------------------------------- | ------- | 
-| GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       | 
-| GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       | 
-| GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   | 
-| GATSBY_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       | 
-| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's ADMIN API KEY, use index post content   | -       | 
-| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   | 
-| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       | 
-| GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       | 
+|----------------------------------|----------------------------------------------------------|---------|
+| GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       |
+| GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       |
+| GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   |
+| GATSBY_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       |
+| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's ADMIN API KEY, use index post content   | -       |
+| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   |
+| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       |
+| GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
 | GATSBY_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
-| FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       | 
+| FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       |
 
 ## CI/CD
 
@@ -280,7 +301,7 @@ Push the button below.
 
 I use [textlint](https://textlint.github.io/) to proofread my blog text.
 
-```
+```sh
 yarn textlint
 ```
 
@@ -341,9 +362,17 @@ Last 14 days, CI Score by [meercode.io](https://meercode.io)
 
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-success-rate&lastDay=14)
 
-# License
+## Change log and versioning
+
+This Blog's CHANGELOG integrated [GitHub Releases](https://github.com/tubone24/blog/releases)
+
+And this blog's versioning policy is [semver](https://semver.org/) like `1.0.1`
+
+- MAJOR version when you make incompatible API changes
+- MINOR version when you add functionality in a backwards compatible manner or **create articles**.
+- PATCH version when you make backwards compatible bug fixes or **update (include delete) articles**.
+
+## License
 
 - The source code under the MIT LICENSE.
 - `src/content` under the CC-BY [![CC-BY](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-
-[tubone boyaki]: https://blog.tubone-project24.xyz  "tubone boyaki"

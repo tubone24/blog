@@ -11,7 +11,7 @@ headerImage: 'https://i.imgur.com/6T4kjdf.png'
 templateKey: blog-post
 ---
 
-最近Github Actionを触って便利さに気がついてしまったのでご紹介します。
+最近GitHub Actionを触って便利さに気がついてしまったのでご紹介します。
 
 ## Table of Contents
 
@@ -19,17 +19,17 @@ templateKey: blog-post
 
 ```
 
-## Github Actionとは？
+## GitHub Actionとは？
 
-Github Actionとは、 ***built by you, run by us*** です。[（公式より）](https://github.blog/2018-10-17-action-demos/)
+GitHub Actionとは、 ***built by you, run by us*** です。[（公式より）](https://github.blog/2018-10-17-action-demos/)
 
 詰まるところGithub製のCIです。
 
 結構簡単に使えたのでご紹介します。
 
-## Github Actionのプレビューに応募する
+## GitHub Actionのプレビューに応募する
 
-Github Action自体はまだプレビュー版ですので、[こちらのサイト](https://github.com/features/actions)から
+GitHub Action自体はまだプレビュー版ですので、[こちらのサイト](https://github.com/features/actions)から
 利用申請をする必要があります。
 
 私は申し込みから一週間くらいで使えるようになりました。
@@ -41,7 +41,7 @@ Github Action自体はまだプレビュー版ですので、[こちらのサイ
 
 ## Workflowを設定する
 
-Github ActionはほかのCIと同じくYAMLファイルで定義します。
+GitHub ActionはほかのCIと同じくYAMLファイルで定義します。
 
 今回はPythonのPytestでテストを回します。
 
@@ -163,5 +163,4 @@ StepはほかのCIと同じような感じで設定します。
 
 ## 結論
 
-Github Actionを使えば、めんどっちいCIサーバー連携も不要で楽々です。
-
+GitHub Actionを使えば、めんどっちいCIサーバー連携も不要で楽々です。

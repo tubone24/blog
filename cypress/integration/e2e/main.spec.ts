@@ -42,18 +42,23 @@ describe("UI Test", () => {
       "have.text",
       "このBlogテンプレートのテスト用投稿 | tubone BOYAKI"
     );
+    cy.get("[data-testid=CommentButton]").click();
+    // Because of smooth scrolling
+    // eslint-disable-next-line cypress/no-unnecessary-waiting,testing-library/await-async-utils
+    cy.wait(5000);
+    cy.window().its("scrollY").should("not.equal", 0);
   });
   // eslint-disable-next-line jest/expect-expect
-  it("sidebar page with jump", () => {
+  it("Logo click and return home", () => {
+    cy.visit("/about");
+    cy.get("[data-testid=logo-img]").click();
+    cy.location("href").should("include", "/");
+  });
+  // eslint-disable-next-line jest/expect-expect
+  it("Push subscription button", () => {
     cy.visit("/");
-    cy.contains("2011").click();
-    cy.location("href").should("include", "/2011/");
-    cy.contains("このBlogテンプレートのテスト用投稿").click();
-    cy.location("href").should("include", "/2011/08/30");
-    cy.get("title").should(
-      "have.text",
-      "このBlogテンプレートのテスト用投稿 | tubone BOYAKI"
-    );
+    cy.contains("SUBSCRIBE RSS").click();
+    cy.location("href").should("include", "/rss.xml");
   });
 });
 

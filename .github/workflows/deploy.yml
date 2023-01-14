@@ -4,9 +4,36 @@ on:
     branches:
       - master
 env:
-  cache-version: v1
+  cache-version: v2
 
 jobs:
+  create-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+      - name: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: yarn install --frozen-lockfile
   test:
     runs-on: ubuntu-latest
     steps:
@@ -18,11 +45,18 @@ jobs:
           node-version: 16.x
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: 'v1.x'
+      - name: install noto font
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -31,8 +65,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -89,6 +122,16 @@ jobs:
         with:
           name: main.spec.ts.mp4
           path: ./cypress/videos/e2e/main.spec.ts.mp4
+      - name: Upload video for screenshot branch
+        env:
+          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+          FILE_NAME: main.spec.ts.mp4
+          HEAD_REF: "master"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: "tubone24/blog"
+          GITHUB_PULL_REQUEST_NUMBER: ""
+          BRANCH_NAME: "screenshot"
+        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
       - name: Upload Test Coverage
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -116,9 +159,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -129,8 +172,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -157,6 +199,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-prod
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -165,9 +213,9 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -176,8 +224,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -219,16 +266,40 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - uses: chrnorm/deployment-status@v2
+        if: success()
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: "https://blog.tubone-project24.xyz"
+          deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: failure()
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: "https://blog.tubone-project24.xyz"
+          deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
+          state: "failure"
   storybook:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-prod-storybook
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -237,8 +308,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -270,6 +340,24 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
+      - uses: chrnorm/deployment-status@v2
+        if: success()
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
+          environment-url: "https://blog-storybook.netlify.app"
+          deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: failure()
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
+          environment-url: "https://blog-storybook.netlify.app"
+          deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
+          state: "failure"
   lighthouse:
     runs-on: macos-latest
     needs: ['build']
@@ -301,3 +389,41 @@ jobs:
           publish_dir: ./public
           destination_dir: lh
           keep_files: true
+
+  webscreenshot:
+    needs:
+      - build
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        width: [1920, 1200, 768, 400]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: 'v1.x'
+      - name: install noto font
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-noto
+      - name: Capture Webpage Screenshot
+        uses: swinton/screenshot-website@v1.0.2
+        with:
+          source: "https://blog.tubone-project24.xyz"
+          destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          width: ${{ matrix.width }}
+          delay: 10
+      - uses: actions/download-artifact@v3
+        with:
+          name: screenshot-${{ matrix.os }}-${{ matrix.width }}
+      - name: Upload screenshot to screenshot branch
+        env:
+          FILE_PATH: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          FILE_NAME: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          HEAD_REF: "master"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: "tubone24/blog"
+          GITHUB_PULL_REQUEST_NUMBER: ""
+          BRANCH_NAME: "screenshot"
+        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts

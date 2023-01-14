@@ -1,21 +1,39 @@
-# Security Policy
+# Security Policies and Procedures
 
-## Supported Versions
+This document outlines security procedures and general policies for the
+`tubone24/blog` project.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+- [Reporting a Bug](#reporting-a-bug)
+- [Disclosure Policy](#disclosure-policy)
+- [Comments on this Policy](#comments-on-this-policy)
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Reporting a Bug
 
-## Reporting a Vulnerability
+The `tubone24/blog` team and community take all security bugs in
+`tubone24/blog` seriously.  Thank you for improving the security of
+`tubone24/blog`. We appreciate your efforts and responsible disclosure and
+will make every effort to acknowledge your contributions.
 
-Use this section to tell people how to report a vulnerability.
+Report security bugs by contact form. <https://portfolio.tubone-project24.xyz/#contact>
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+The lead maintainer will acknowledge your email within 48 hours, and will send a
+more detailed response within 48 hours indicating the next steps in handling
+your report. After the initial reply to your report, the security team will
+endeavor to keep you informed of the progress towards a fix and full
+announcement, and may ask for additional information or guidance.
+
+## Disclosure Policy
+
+When the security team receives a security bug report, they will assign it to a
+primary handler. This person will coordinate the fix and release process,
+involving the following steps:
+
+- Confirm the problem and determine the affected versions.
+- Audit code to find any potential similar problems.
+- Prepare fixes for all releases still under maintenance. These fixes will be
+  released as quickly as possible.
+
+## Comments on this Policy
+
+If you have suggestions on how this process could be improved please submit a
+pull request.

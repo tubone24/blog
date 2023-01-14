@@ -14,7 +14,7 @@ const transaction = Sentry.startTransaction({
 exports.handler = (event, context) => {
   console.log(event, context);
   if (!event.body) {
-    Sentry.captureException(new Error(event));
+    Sentry.captureException(new Error(JSON.stringify(event)));
     transaction.finish();
     return {
       statusCode: 400,
@@ -22,7 +22,7 @@ exports.handler = (event, context) => {
     };
   }
   const body = JSON.parse(event.body);
-  Sentry.captureException(new Error(body));
+  Sentry.captureException(new Error(JSON.stringify(body)));
   transaction.finish();
   return {
     statusCode: 200,

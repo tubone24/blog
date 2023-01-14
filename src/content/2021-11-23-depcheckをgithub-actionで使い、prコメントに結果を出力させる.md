@@ -146,7 +146,7 @@ on:
 
 ![img](https://i.imgur.com/x0HzZEF.png)
 
-- Unused dependenciesセクションは、package.jsonのdependenciesで定義されたライブラリが、.js、.ts、.jsx、.tsx、.coffee、.sass、.scss、.vueの各ファイルで使用されていないことを示しています。
+- Unused dependenciesセクションは、package.jsonのdependenciesで定義されたライブラリが、.js、.ts、.jsx、.tsx、.coffee、.sass、.SCSS、.vueの各ファイルで使用されていないことを示しています。
 - Unused devDpendenciesセクションは、package.jsonのdevDependenciesで定義されたライブラリが各ファイルに存在しないことを示しています。
 - Missingセクションは、コードで使用されているライブラリがpackage.jsonに存在していないことを示しています。CDNからインポートされたライブラリや、グローバルに宣言されたライブラリを使用している可能性があります。
 

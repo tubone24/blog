@@ -1,8 +1,12 @@
 name: OWASP ZAP Actions
 on:
   workflow_dispatch:
+    inputs:
+      spider-min:
+        default: 0
+        type: string
 env:
-  cache-version: v1
+  cache-version: v2
 jobs:
   website-scan:
     runs-on: ubuntu-latest
@@ -18,7 +22,7 @@ jobs:
           scope: '@tubone24'
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
         uses: actions/cache@v3
         with:
@@ -29,8 +33,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -58,9 +61,9 @@ jobs:
         run: yarn build
       - name: Action Full Scan
         run: |
-          chmod 777 owasp/zap
+          chmod 777 -R owasp/zap
           docker-compose -f owasp/docker-compose-ci.yml up -d
-          docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -j -I -z "-config alert.maxInstances=0 -config view.locale=ja_JP"
+          docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -m ${{ inputs.spider-min }} -j -I -z "-config alert.maxInstances=0 -config view.locale=ja_JP -config scanner.hostPerScan=5 -config scanner.threadPerHost=5 -configfile /zap/wrk/alertFilter.conf"
       - name: Deploy Report
         uses: peaceiris/actions-gh-pages@v3
         with:
