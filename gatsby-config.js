@@ -1,3 +1,4 @@
+const config = require("./src/config/index.json");
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = "https://blog.tubone-project24.xyz",
@@ -12,11 +13,10 @@ const {
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
-const siteTitle = "tubone BOYAKI";
-const siteShortTitle = "tuboneBOYAKI";
-const siteDescription =
-  "tubones BOYAKI is the developer blog by tubone who is Japanese IT Developer";
-const siteAuthor = "tubone";
+const siteTitle = config.siteTitle;
+const siteShortTitle = config.siteShortTitle;
+const siteDescription = config.description;
+const siteAuthor = config.author;
 
 module.exports = {
   pathPrefix: "/",

@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const React = require("react");
+import React from "react";
+
 const gatsby = jest.requireActual("gatsby");
 
 module.exports = {

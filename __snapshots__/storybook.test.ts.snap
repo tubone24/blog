@@ -856,6 +856,55 @@ exports[`Storyshots Components/Tag Default 1`] = `
 </a>
 `;
 
+exports[`Storyshots Components/TagCloud Default 1`] = `
+<div
+  className="d-none d-lg-block information my-2"
+>
+  <a
+    href="/tags"
+    title="Tags"
+  >
+    <p>
+      <span
+        className="icon-tags"
+      />
+       
+      3
+       / 
+      3
+       Tags
+    </p>
+  </a>
+  <a
+    href="/tag/test"
+    onClick={[Function]}
+    title="test"
+  >
+    test
+     
+    3
+  </a>
+  <a
+    href="/tag/foo"
+    onClick={[Function]}
+    title="foo"
+  >
+    foo
+     
+    1
+  </a>
+  <a
+    href="/tag/bar"
+    onClick={[Function]}
+    title="bar"
+  >
+    bar
+     
+    1
+  </a>
+</div>
+`;
+
 exports[`Storyshots Components/TimeToRead Default 1`] = `
 <div
   data-testid="countdown"
@@ -879,6 +928,43 @@ exports[`Storyshots Components/TimeToRead Default 1`] = `
     分
   </b>
   で読めます
+</div>
+`;
+
+exports[`Storyshots Components/WordCloud Default 1`] = `
+<div>
+  <p>
+    <span
+      className="icon-cloud"
+    />
+     WordCloud
+  </p>
+  <a
+    href="/about#wordcloud"
+  >
+    <picture>
+      <source
+        className="lozad"
+        data-srcset="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog.webp"
+        media="(min-width: 992px)"
+        srcSet="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+        type="image/webp"
+      />
+      <source
+        className="lozad"
+        media="(max-width: 991px)"
+        srcSet="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+        type="image/gif"
+      />
+      <img
+        alt="wordCloud"
+        className="lozad"
+        data-src="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog.png"
+        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+        title="wordCloud"
+      />
+    </picture>
+  </a>
 </div>
 `;
 
@@ -921,6 +1007,66 @@ exports[`Storyshots Pages/NotFoundPage Default 1`] = `
           </a>
         </li>
       </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Pages/tags Default 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="undefined row"
+  >
+    <div
+      className="undefined col order-2"
+    >
+      <a
+        href="/tag/foo"
+        onClick={[Function]}
+        title="foo"
+      >
+        foo
+         
+        3
+      </a>
+      <a
+        href="/tag/bar"
+        onClick={[Function]}
+        title="bar"
+      >
+        bar
+         
+        2
+      </a>
+      <a
+        href="/tag/hoge"
+        onClick={[Function]}
+        title="hoge"
+      >
+        hoge
+         
+        1
+      </a>
+      <a
+        href="/tag/huga"
+        onClick={[Function]}
+        title="huga"
+      >
+        huga
+         
+        1
+      </a>
+      <a
+        href="/tag/日本語"
+        onClick={[Function]}
+        title="日本語"
+      >
+        日本語
+         
+        1
+      </a>
     </div>
   </div>
 </div>
