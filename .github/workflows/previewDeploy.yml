@@ -444,6 +444,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-dev-storybook
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development-storybook
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -508,6 +514,29 @@ jobs:
                -H "Authorization: token ${GITHUB_TOKEN}" \
                -d "{\"body\": \"$(cat cli.txt)\"}" \
                "${URL}"
+      - name: get Netlify Draft URL
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
+        id: get-netlify-draft-url
+        run: |
+          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+      - uses: chrnorm/deployment-status@v2
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development-storybook
+          environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev-storybook.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') && failure() }}
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development-storybook
+          environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
+          deployment-id: ${{ steps.deployment-dev-storybook.outputs.deployment_id }}
+          state: "failure"
 
 
   bundle-analyzer-link:

@@ -262,6 +262,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-prod-storybook
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -307,6 +313,24 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
+      - uses: chrnorm/deployment-status@v2
+        if: success()
+        name: Create GitHub deploy (Success)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
+          environment-url: "https://blog-storybook.netlify.app"
+          deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
+          state: "success"
+      - uses: chrnorm/deployment-status@v2
+        if: failure()
+        name: Create GitHub deploy (Failure)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production-storybook
+          environment-url: "https://blog-storybook.netlify.app"
+          deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
+          state: "failure"
   lighthouse:
     runs-on: macos-latest
     needs: ['build']
