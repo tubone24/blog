@@ -28,11 +28,11 @@ Slackにはスタンプ機能があり、回りくどい文章を書かずに感
 最上位の謝罪ができる。
 見た目は汗をかきながら必死にする組体操なので、教育現場への疑問提起もできる。
 
-ダイバーシティーを意識して人種のバリエーションを持たせるのがコツ
+ダイバーシティーを意識して人種のバリエーションを持たせるのがコツ。
 
 ![preview](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/man-bowing-pyramid.png)
 
-```
+```text
 :man-bowing: < ごめん！
                   :man-bowing::skin-tone-3:
               :man-bowing::man-bowing::skin-tone-6:
@@ -49,7 +49,7 @@ Slackにはスタンプ機能があり、回りくどい文章を書かずに感
 
 ![img](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/invador.png)
 
-```
+```text
 :space_invader: :space_invader: :space_invader: :space_invader: :space_invader:
 :space_invader:       :boom: :space_invader:
 
@@ -70,7 +70,7 @@ Slackのスタンプになぜ顔のパーツがあるか、考えた結果思い
 
 ![img](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/hukuwarai.png)
 
-```
+```text
 :eye:   :eye: 
     :nose::skin-tone-4: 
     :lips:
@@ -88,6 +88,6 @@ Slackのスタンプになぜ顔のパーツがあるか、考えた結果思い
 
 これからも思いつき次第下記noteに記載していきます!!
 
-https://note.tubone-project24.xyz/loose/slack-stamp-snipet.html#%E8%AC%9D%E7%BD%AA%E3%83%94%E3%83%A9%E3%83%9F%E3%83%83%E3%83%89
+<https://note.tubone-project24.xyz/loose/slack-stamp-snipet.html#%E8%AC%9D%E7%BD%AA%E3%83%94%E3%83%A9%E3%83%9F%E3%83%83%E3%83%89>
 
 みんなもSlackスタンプ生活、始めよう！

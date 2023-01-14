@@ -61,77 +61,77 @@ Lambda自体は、裏側の基盤に[AWS Firecracker](https://aws.amazon.com/jp/
 package main
 
 import (
-	"context"
-	"fmt"
-	"github.com/shurcooL/githubv4"
-	"golang.org/x/oauth2"
-	"github.com/deckarep/golang-set"
-	"github.com/aws/aws-lambda-go/lambda"
+ "context"
+ "fmt"
+ "github.com/shurcooL/githubv4"
+ "golang.org/x/oauth2"
+ "github.com/deckarep/golang-set"
+ "github.com/aws/aws-lambda-go/lambda"
 )
 
 type Language struct {
-	Name  string
-	Color string
+ Name  string
+ Color string
 }
 
 type Repository struct {
-	Name string
-	Languages struct {
-		Nodes []struct {
-			Language `graphql:"... on Language"`
-		}
-	} `graphql:"languages(first: 100)"`
+ Name string
+ Languages struct {
+  Nodes []struct {
+   Language `graphql:"... on Language"`
+  }
+ } `graphql:"languages(first: 100)"`
 }
 
 var query struct {
-	Search struct {
-		Nodes []struct {
-			Repository `graphql:"... on Repository"`
-		}
-	} `graphql:"search(first: 100, query: $q, type: $searchType)"`
+ Search struct {
+  Nodes []struct {
+   Repository `graphql:"... on Repository"`
+  }
+ } `graphql:"search(first: 100, query: $q, type: $searchType)"`
 }
 
 
 func getLangList () (mapset.Set){
-	src := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: "7xxxxxxxxxxxxxxxxxxxxxxxx"},
-	)
-	httpClient := oauth2.NewClient(context.Background(), src)
+ src := oauth2.StaticTokenSource(
+  &oauth2.Token{AccessToken: "7xxxxxxxxxxxxxxxxxxxxxxxx"},
+ )
+ httpClient := oauth2.NewClient(context.Background(), src)
 
-	client := githubv4.NewClient(httpClient)
+ client := githubv4.NewClient(httpClient)
 
-	langlist := mapset.NewSet()
+ langlist := mapset.NewSet()
 
-	variables := map[string]interface{}{
-		"q": githubv4.String("user:tubone24"), //検索するuser名
-		"searchType":  githubv4.SearchTypeRepository,
-	}
-	
-	err := client.Query(context.Background(), &query, variables)
-	if err != nil {
-		// Handle error.
-		fmt.Println(err)
-	}
+ variables := map[string]interface{}{
+  "q": githubv4.String("user:tubone24"), //検索するuser名
+  "searchType":  githubv4.SearchTypeRepository,
+ }
+ 
+ err := client.Query(context.Background(), &query, variables)
+ if err != nil {
+  // Handle error.
+  fmt.Println(err)
+ }
 
-	for _, repo := range query.Search.Nodes {
-		fmt.Println("---------")
-		fmt.Println(repo.Name)
-		for _, lang := range repo.Languages.Nodes {
-			fmt.Println(lang.Name)
-			langlist.Add(lang.Name)
-		}
-	}
-	return langlist
+ for _, repo := range query.Search.Nodes {
+  fmt.Println("---------")
+  fmt.Println(repo.Name)
+  for _, lang := range repo.Languages.Nodes {
+   fmt.Println(lang.Name)
+   langlist.Add(lang.Name)
+  }
+ }
+ return langlist
 
 }
 
 func LambdaHandler () (string, error){
-	result := getLangList()
-	return fmt.Sprint(result), nil
+ result := getLangList()
+ return fmt.Sprint(result), nil
 }
 
 func main() {
-	lambda.Start(LambdaHandler)
+ lambda.Start(LambdaHandler)
 }
 ```
 
@@ -184,65 +184,65 @@ shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClient�
 //main.go
 
 import (
-	"context"
-	"fmt"
+ "context"
+ "fmt"
         "golang.org/x/oauth2"
-	"github.com/shurcooL/githubv4"
+ "github.com/shurcooL/githubv4"
 )
 
 // 構造体でGraphQL定義
 
 type Language struct {
-	Name  string
-	Color string
+ Name  string
+ Color string
 }
 
 type Repository struct {
-	Name string
-	Languages struct {
-		Nodes []struct {
-			Language `graphql:"... on Language"`
-		}
-	} `graphql:"languages(first: 100)"`
+ Name string
+ Languages struct {
+  Nodes []struct {
+   Language `graphql:"... on Language"`
+  }
+ } `graphql:"languages(first: 100)"`
 }
 
 var query struct {
-	Search struct {
-		Nodes []struct {
-			Repository `graphql:"... on Repository"`
-		}
-	} `graphql:"search(first: 100, query: $q, type: $searchType)"`
+ Search struct {
+  Nodes []struct {
+   Repository `graphql:"... on Repository"`
+  }
+ } `graphql:"search(first: 100, query: $q, type: $searchType)"`
 }
 
 
 func hoge () {
-	src := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: "7xxxxxxxxxxxxxxxxxxxxxxxx"},
-	) //AccessTokenを設定
+ src := oauth2.StaticTokenSource(
+  &oauth2.Token{AccessToken: "7xxxxxxxxxxxxxxxxxxxxxxxx"},
+ ) //AccessTokenを設定
 
-	httpClient := oauth2.NewClient(context.Background(), src) //AccessTokenをhttpClientに設定
+ httpClient := oauth2.NewClient(context.Background(), src) //AccessTokenをhttpClientに設定
 
-	client := githubv4.NewClient(httpClient) //先ほど作ったhttpClient使ってclientを作成
+ client := githubv4.NewClient(httpClient) //先ほど作ったhttpClient使ってclientを作成
 
-	variables := map[string]interface{}{
-		"q": githubv4.String("user:tubone24"), //検索するuser名
-		"searchType":  githubv4.SearchTypeRepository,
-	}
-	
-	err := client.Query(context.Background(), &query, variables) //client.Queryで実行。エラーのみが戻りで実行結果は咲くほど定義した構造体に格納
-	if err != nil {
-		// Handle error.
-		fmt.Println(err)
-	}
+ variables := map[string]interface{}{
+  "q": githubv4.String("user:tubone24"), //検索するuser名
+  "searchType":  githubv4.SearchTypeRepository,
+ }
+ 
+ err := client.Query(context.Background(), &query, variables) //client.Queryで実行。エラーのみが戻りで実行結果は咲くほど定義した構造体に格納
+ if err != nil {
+  // Handle error.
+  fmt.Println(err)
+ }
 
-	for _, repo := range query.Search.Nodes {
-		fmt.Println("---------")
-		fmt.Println(repo.Name)
-		for _, lang := range repo.Languages.Nodes {
-			fmt.Println(lang.Name)
+ for _, repo := range query.Search.Nodes {
+  fmt.Println("---------")
+  fmt.Println(repo.Name)
+  for _, lang := range repo.Languages.Nodes {
+   fmt.Println(lang.Name)
                         fmt.Println(lang.Color)
-		}
-	}
+  }
+ }
 
 }
 
@@ -275,31 +275,31 @@ func hoge () {
 }
 ```
 
-のようにedgesに項目がありnodeを取りたい場合
+のようにedgesに項目がありnodeを取りたい場合、
 
 ```go{numberLines: 1}{9-13}
 type Language struct {
-	Name  string
-	Color string
+ Name  string
+ Color string
 }
 
 type Repository struct {
-	Name string
-	Languages struct {
+ Name string
+ Languages struct {
             Edges []struct {
-		Node struct {
-			Language `graphql:"... on Language"`
-		}
+  Node struct {
+   Language `graphql:"... on Language"`
+  }
             }
-	} `graphql:"languages(first: 100)"`
+ } `graphql:"languages(first: 100)"`
 }
 
 var query struct {
-	Search struct {
-		Nodes []struct {
-			Repository `graphql:"... on Repository"`
-		}
-	} `graphql:"search(first: 100, query: $q, type: $searchType)"`
+ Search struct {
+  Nodes []struct {
+   Repository `graphql:"... on Repository"`
+  }
+ } `graphql:"search(first: 100, query: $q, type: $searchType)"`
 }
 ```
 
@@ -313,7 +313,6 @@ var query struct {
 
 今回は趣旨から反するのでいったん塩漬け。。
 
-
 ## LambdaでGoを使うとき
 
 main関数にはAWSが用意している `github.com/aws/aws-lambda-go/lambda` からロジックを
@@ -323,12 +322,12 @@ Invokeさせないと問答無用でLambdaでエラーになってしまいま�
 
 ```go{numberLines: 1}{7}
 func LambdaHandler () (string, error){
-	result := hoge() //login
-	return fmt.Sprint(result), nil
+ result := hoge() //login
+ return fmt.Sprint(result), nil
 }
 
 func main() {
-	lambda.Start(LambdaHandler)
+ lambda.Start(LambdaHandler)
 }
 
 ```
@@ -341,8 +340,8 @@ Lambda画面のCloud9から編集できないんですね・・・
 
 実行ファイル、ということはビルドするプラットフォーム(OSとか)に依存してしまうのでは？と思ったのですが、 ベストプラクティスとして `GOOS=linux` をgo build時につけることでLinux互換な実行ファイルになるみたいです。
 
-```
-$ GOOS=linux go build main.go
+```shell{promptUser: tubone}{promptHost: dev.localhost}
+GOOS=linux go build main.go
 ```
 
 あとは実行ファイルをZIPで固めて、Lambda作ってアップロードして保存すれば終わりです。
@@ -373,24 +372,24 @@ PythonではSetという便利なものがあるのですが、Goではあるの
 
 ```go{numberLines: 1}{3,9,16}
 import (
-	"fmt"
-	"github.com/deckarep/golang-set"
+ "fmt"
+ "github.com/deckarep/golang-set"
 )
 
 // 中略・・
 
 func main () {
-	langlist := mapset.NewSet() // setを作る
+ langlist := mapset.NewSet() // setを作る
         // 中略
-	for _, repo := range query.Search.Nodes {
-		fmt.Println("---------")
-		fmt.Println(repo.Name)
-		for _, lang := range repo.Languages.Nodes {
-			fmt.Println(lang.Name)
-			langlist.Add(lang.Name) //setにAddする
-		}
-	}
-	return langlist // set{hoge, fuga} 重複がないsetが返る
+ for _, repo := range query.Search.Nodes {
+  fmt.Println("---------")
+  fmt.Println(repo.Name)
+  for _, lang := range repo.Languages.Nodes {
+   fmt.Println(lang.Name)
+   langlist.Add(lang.Name) //setにAddする
+  }
+ }
+ return langlist // set{hoge, fuga} 重複がないsetが返る
 }
 ```
 
@@ -400,7 +399,7 @@ func main () {
 
 ## 使ってみての感想
 
-GoでLambdaを組んでみての感想は
+GoでLambdaを組んでみての感想は、
 
 - Cloud9で直接Lambda編集したいなぁ…
 - lambda.startにラッピングする必要があるのでローカルで確認しにくいなぁ
