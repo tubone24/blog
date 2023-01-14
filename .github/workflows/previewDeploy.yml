@@ -21,6 +21,33 @@ jobs:
         id: get-head-commit-message
         run: |
           echo "headCommitMsg=$(git show -s --format=%s)" >> "${GITHUB_OUTPUT}"
+  create-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+      - name: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: yarn install --frozen-lockfile
   test:
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +70,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -137,7 +164,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -189,7 +216,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -291,7 +318,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -356,7 +383,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -416,7 +443,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
@@ -454,7 +481,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: |
             ~/.cache
