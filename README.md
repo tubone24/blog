@@ -22,7 +22,7 @@ This is tubone's Blog by Gatsby and Netlify.
 
 ## Preview
 
-Screenshots from the last deployment on the master branch.
+[Screenshots](https://github.com/tubone24/blog/tree/screenshot) from the last deployment on the master branch.
 
 ### Desktop
 
@@ -46,7 +46,7 @@ Special, thanks!
 
 ### Structure
 
-- Gatsby.js v4, Static site generating
+- [Gatsby.js v4](https://www.gatsbyjs.com/gatsby-4/), Static site generating
   - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
   - All Components writen by [TypeScript](https://www.typescriptlang.org/)
   - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
@@ -85,6 +85,7 @@ Special, thanks!
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 - Detect vulnerability by [Snyk](https://app.snyk.io/)
 - Detect vulnerability by [OWASP ZAP](https://www.zaproxy.org/)
+- Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master.
 
 ### For contributor of articles
 
@@ -358,6 +359,16 @@ Last 14 days, CI Score by [meercode.io](https://meercode.io)
 ### CI Success Rate
 
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-success-rate&lastDay=14)
+
+## Change log and versioning
+
+This Blog's CHANGELOG integrated [GitHub Releases](https://github.com/tubone24/blog/releases).
+
+And this blog's versioning policy is [semver](https://semver.org/)
+
+- MAJOR version when you make incompatible API changes
+- MINOR version when you add functionality in a backwards compatible manner or **create articles**.
+- PATCH version when you make backwards compatible bug fixes or **update (include delete) articles**.
 
 ## License
 
