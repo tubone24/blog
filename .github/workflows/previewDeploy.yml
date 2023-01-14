@@ -252,7 +252,7 @@ jobs:
         id: get-netlify-draft-url
         run: |
           echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
-      - uses: chrnorm/deployment-action@v2
+      - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }} %% success()
         name: Create GitHub deploy (Success)
         with:
@@ -261,7 +261,7 @@ jobs:
           environment-url: ${{ steps.get-netlify-draft-url.outputs.draftUrl }}
           deployment-id: ${{ steps.deployment-dev.outputs.deployment_id }}
           state: "success"
-      - uses: chrnorm/deployment-action@v2
+      - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }} && failure()
         name: Create GitHub deploy (Failure)
         with:
