@@ -253,7 +253,7 @@ jobs:
         run: |
           echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
-        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }} && success()
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -262,7 +262,7 @@ jobs:
           deployment-id: ${{ steps.deployment-dev.outputs.deployment_id }}
           state: "success"
       - uses: chrnorm/deployment-status@v2
-        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }} && failure()
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') && failure() }}
         name: Create GitHub deploy (Failure)
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
