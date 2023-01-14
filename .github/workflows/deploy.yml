@@ -172,6 +172,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment-prod
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -236,11 +242,11 @@ jobs:
       - uses: chrnorm/deployment-action@v2
         if: success()
         name: Create GitHub deploy (Success)
-        id: deployment-prod
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: production
           environment-url: "https://blog.tubone-project24.xyz"
+          deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
           state: "success"
       - uses: chrnorm/deployment-action@v2
         if: failure()
@@ -249,6 +255,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: production
           environment-url: "https://blog.tubone-project24.xyz"
+          deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
           state: "failure"
   storybook:
     runs-on: ubuntu-latest
