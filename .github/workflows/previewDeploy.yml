@@ -20,7 +20,7 @@ jobs:
       - name: Print head git commit message
         id: get-head-commit-message
         run: |
-          echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+          echo "headCommitMsg=$(git show -s --format=%s)" >> "${GITHUB_OUTPUT}"
   test:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
           sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
       - name: Cache
         uses: actions/cache@v3
         with:
@@ -111,7 +111,7 @@ jobs:
           path: ./cypress/videos/e2e/main.spec.ts.mp4
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> $GITHUB_OUTPUT
+        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
       - name: Add file
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
