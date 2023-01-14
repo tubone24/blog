@@ -543,12 +543,14 @@ jobs:
           width: ${{ matrix.width }}
           delay: 10
       - uses: actions/download-artifact@v3
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         with:
           name: screenshot-${{ matrix.os }}-${{ matrix.width }}
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
       - name: PR Comments
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           FILE_PATH: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           FILE_NAME: screenshot-${{ matrix.os }}-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-${{ matrix.width }}.png
