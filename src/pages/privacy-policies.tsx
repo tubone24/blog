@@ -41,7 +41,7 @@ const html = `
   <p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
 `;
 
-const About = () => (
+const PrivacyPolicies = () => (
   <div className={style.post + " row order-2"}>
     <Header
       img="https://i.imgur.com/FyHE8bb.png"
@@ -73,4 +73,4 @@ const About = () => (
   </div>
 );
 
-export default About;
+export default PrivacyPolicies;

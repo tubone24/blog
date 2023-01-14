@@ -7,7 +7,7 @@ import SEO from "@/components/SEO";
 
 import * as style from "./tags.module.scss";
 
-const TagPage = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
+const Tags = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
   const mapping: { [key: string]: number } = {};
   data.allMarkdownRemark.edges.forEach(({ node }) => {
     node.frontmatter?.tags?.forEach((name) => {
@@ -49,7 +49,7 @@ const TagPage = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
   );
 };
 
-export default TagPage;
+export default Tags;
 
 export const pageQuery = graphql`
   query getAllTags {

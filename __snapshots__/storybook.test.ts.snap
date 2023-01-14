@@ -882,6 +882,43 @@ exports[`Storyshots Components/TimeToRead Default 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/WordCloud Default 1`] = `
+<div>
+  <p>
+    <span
+      className="icon-cloud"
+    />
+     WordCloud
+  </p>
+  <a
+    href="/about#wordcloud"
+  >
+    <picture>
+      <source
+        className="lozad"
+        data-srcset="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog.webp"
+        media="(min-width: 992px)"
+        srcSet="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+        type="image/webp"
+      />
+      <source
+        className="lozad"
+        media="(max-width: 991px)"
+        srcSet="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+        type="image/gif"
+      />
+      <img
+        alt="wordCloud"
+        className="lozad"
+        data-src="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog.png"
+        src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7"
+        title="wordCloud"
+      />
+    </picture>
+  </a>
+</div>
+`;
+
 exports[`Storyshots Pages/NotFoundPage Default 1`] = `
 <div
   className="container"
