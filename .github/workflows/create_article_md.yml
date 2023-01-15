@@ -38,11 +38,11 @@ jobs:
         run: |
           git checkout -b ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
           cp template/article_template.md src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ dateISO }}/${{ steps.create-meta-data.outputs.dateISO }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          cat ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ dateISO }}/${{ steps.create-meta-data.outputs.dateISO }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          cat src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           git add -A
           DIFF=`git diff --cached --numstat | wc -l`
           if [ $DIFF -eq 0 ]; then
