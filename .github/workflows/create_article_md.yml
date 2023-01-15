@@ -1,0 +1,51 @@
+name: Create Article Markdown
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        default: "draft article"
+        type: string
+      description:
+        default: "draft article"
+        type: string
+
+jobs:
+  create-draft-markdown-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create Meta Data
+        id: create-meta-data
+        run: |
+          echo "dateHyphen=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+          echo "dateISO=$(date '+%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_OUTPUT
+          BRANCH_NAME=${${{ inputs.title }}//" "/"-"}
+          echo "titleHyphen=${BRANCH_NAME}" >> "${GITHUB_OUTPUT}"
+          echo "title=${{ inputs.title }}" >> "${GITHUB_OUTPUT}"
+          echo "description=${{ inputs.description }}" >> "${GITHUB_OUTPUT}"
+          echo "label=netlify-cms/draft" >> "${GITHUB_OUTPUT}"
+      - name: Setup git
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        run: |
+          git config --local user.name GitHubActions
+          git remote set-url origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      - name: Create new draft Branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git checkout -b ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+          cp template/article_template.md src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ dateISO }}/${{ steps.create-meta-data.outputs.dateISO }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g' ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          cat ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          git add -A
+          DIFF=`git diff --cached --numstat | wc -l`
+          if [ $DIFF -eq 0 ]; then
+            exit 0
+          fi
+          git commit -am 'GitHub Actions commit' --allow-empty
+          git push origin ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
