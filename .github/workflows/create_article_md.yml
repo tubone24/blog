@@ -20,7 +20,8 @@ jobs:
         run: |
           echo "dateHyphen=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
           echo "dateISO=$(date '+%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_OUTPUT
-          BRANCH_NAME=${${{ inputs.title }}//" "/"-"}
+          TITLE=${{ inputs.title }}
+          BRANCH_NAME=${TITLE//" "/"-"}
           echo "titleHyphen=${BRANCH_NAME}" >> "${GITHUB_OUTPUT}"
           echo "title=${{ inputs.title }}" >> "${GITHUB_OUTPUT}"
           echo "description=${{ inputs.description }}" >> "${GITHUB_OUTPUT}"
