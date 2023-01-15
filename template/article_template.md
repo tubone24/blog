@@ -1,5 +1,5 @@
 ---
-slug: {{ dateHyphen }}/subscribers
+slug: {{ dateHyphen }}/{{ titleHyphen }}
 title: "{{ title }}"
 date: {{ dateISO }}
 description: {{ description }}

@@ -36,9 +36,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git checkout -b ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+          git checkout -b cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
           cp template/article_template.md src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          sed -i 's/{{ titleHyphen }}/${{ steps.create-meta-data.outputs.titleHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ dateISO }}/${{ steps.create-meta-data.outputs.dateISO }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
@@ -49,4 +50,17 @@ jobs:
             exit 0
           fi
           git commit -am 'GitHub Actions commit' --allow-empty
-          git push origin ${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+          git push origin cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+      - name: Show GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+        shell: bash
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          draft: true
+          branch: cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+          delete-branch: true
+          title: ${{ steps.create-meta-data.outputs.title }}
+          labels: ${{ steps.create-meta-data.outputs.label }}
