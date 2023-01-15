@@ -62,7 +62,6 @@ jobs:
         with:
           draft: true
           branch: cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
-          delete-branch: true
           title: ${{ steps.create-meta-data.outputs.title }}
           labels: ${{ steps.create-meta-data.outputs.label }}
           assignees: ${{ github.triggering_actor }}
