@@ -44,13 +44,6 @@ jobs:
           sed -i 's/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           cat src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          git add -A
-          DIFF=`git diff --cached --numstat | wc -l`
-          if [ $DIFF -eq 0 ]; then
-            exit 0
-          fi
-          git commit -am 'GitHub Actions commit' --allow-empty
-          git push origin -f cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
       - name: Show GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -65,3 +58,4 @@ jobs:
           labels: ${{ steps.create-meta-data.outputs.label }}
           assignees: ${{ github.triggering_actor }}
           base: ${{ github.ref }}
+          body: Automated changes by [create_article_md](https://github.com/tubone24/blog/actions/workflows/create_article_md.yml) GitHub action
