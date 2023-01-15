@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git and needed tools are installed
-    && apt-get -y install --no-install-recommends git iproute2 procps \
+    && apt-get -y install --no-install-recommends git iproute2 procps wget \
     #
     # Remove outdated yarn from /opt and install via package
     # so it can be easily updated via apt-get upgrade yarn
@@ -39,7 +39,19 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends sudo \
     && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/node \
     && chmod 0440 /etc/sudoers.d/node \
-    #
+    # Terraform
+    && apt-get install -y gnupg software-properties-common \
+    && wget -O- https://apt.releases.hashicorp.com/gpg | \
+       gpg --dearmor | \
+       tee /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+    && gpg --no-default-keyring \
+       --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+       --fingerprint \
+    && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+       https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+       tee /etc/apt/sources.list.d/hashicorp.list \
+    && apt-get update \
+    && apt-get install terraform \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
