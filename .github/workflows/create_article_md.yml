@@ -36,7 +36,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git checkout -b cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
           cp template/article_template.md src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
           sed -i 's/{{ titleHyphen }}/${{ steps.create-meta-data.outputs.titleHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
