@@ -32,7 +32,7 @@ jobs:
         run: |
           git config --local user.name GitHubActions
           git remote set-url origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      - name: Create new draft Branch
+      - name: Create new draft articles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
