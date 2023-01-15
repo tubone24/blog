@@ -11174,10 +11174,10 @@ engine.io-parser@~5.0.3:
   resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-5.0.4.tgz#0b13f704fa9271b3ec4f33112410d8f3f41d0fc0"
   integrity sha512-+nVFp+5z1E3HcToEnO7ZIj3g+3k9389DvWtvJZz0T6/eOCPIyyxehFcedoYrZQrp0LgQbD9pPXhpMBKMd5QURg==
 
-engine.io@6.2.1, engine.io@~4.1.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-6.2.1.tgz#e3f7826ebc4140db9bbaa9021ad6b1efb175878f"
-  integrity sha512-ECceEFcAaNRybd3lsGQKas3ZlMVjN3cyWwMP25D2i0zWfyiytVbTpRPa34qrr+FHddtpBVOmq4H/DCv1O0lZRA==
+engine.io@6.3.1, engine.io@~4.1.0:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-6.3.1.tgz#754a5655285b299bbb25e1ddbafd9cecac5a2544"
+  integrity sha512-VhEArSKyCC8dv223fltbMOqaJInFZqIqLABLnD3VLhclriF9sxnAJu6ZvnIMI+p7+ByZBxXd4otTrLAeeMTImg==
   dependencies:
     "@types/cookie" "^0.4.1"
     "@types/cors" "^2.8.12"
@@ -11188,7 +11188,7 @@ engine.io@6.2.1, engine.io@~4.1.0:
     cors "~2.8.5"
     debug "~4.3.1"
     engine.io-parser "~5.0.3"
-    ws "~8.2.3"
+    ws "~8.11.0"
 
 enhanced-resolve@^0.9.1:
   version "0.9.1"
@@ -26776,10 +26776,10 @@ ws@~7.4.2:
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
   integrity sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==
 
-ws@~8.2.3:
-  version "8.2.3"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.2.3.tgz#63a56456db1b04367d0b721a0b80cae6d8becbba"
-  integrity sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==
+ws@~8.11.0:
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
+  integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==
 
 x-default-browser@^0.4.0:
   version "0.4.0"
