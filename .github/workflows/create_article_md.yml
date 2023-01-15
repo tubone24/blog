@@ -56,5 +56,4 @@ jobs:
           title: ${{ steps.create-meta-data.outputs.title }}
           labels: ${{ steps.create-meta-data.outputs.label }}
           assignees: ${{ github.triggering_actor }}
-          base: ${{ github.ref }}
           body: Automated changes by [create_article_md](https://github.com/tubone24/blog/actions/workflows/create_article_md.yml) GitHub action
