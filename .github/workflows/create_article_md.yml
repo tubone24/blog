@@ -50,7 +50,7 @@ jobs:
             exit 0
           fi
           git commit -am 'GitHub Actions commit' --allow-empty
-          git push origin cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+          git push origin -f cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
           git checkout -
       - name: Show GitHub context
         env:
