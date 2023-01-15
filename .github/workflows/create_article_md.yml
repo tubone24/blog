@@ -51,6 +51,7 @@ jobs:
           fi
           git commit -am 'GitHub Actions commit' --allow-empty
           git push origin cms/blog/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}
+          git checkout -
       - name: Show GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -64,3 +65,4 @@ jobs:
           delete-branch: true
           title: ${{ steps.create-meta-data.outputs.title }}
           labels: ${{ steps.create-meta-data.outputs.label }}
+          assignees: ${{ github.triggering_actor }}
