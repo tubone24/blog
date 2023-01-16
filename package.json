@@ -253,7 +253,7 @@
     "sanitize-html": "2.3.2",
     "axios": "0.27.2",
     "json5": "2.2.3",
-    "highlight.js": "10.7.0"
+    "highlight.js": "10.7.3"
   },
   "browserslist": [
     ">0.25% in JP",
