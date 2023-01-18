@@ -19,17 +19,19 @@ templateKey: blog-post
 
 ## Sentry
 
-みなさん、Sentry使ってますか？(長嶋茂雄)
+みなさん、[Sentry](https://sentry.io)使ってますか？(長嶋茂雄)
 
-Sentryはエラートレーシング、監視ツールとして(特にフロントエンドで)かなりデファクトスタンダードになりつつあります。
+[Sentry](https://sentry.io)はエラートレーシング、パフォーマンス監視ツールとして(特にフロントエンドで)かなりデファクトスタンダードになりつつあります。
 
 かくいうこのブログもSentryめっちゃ使ってます。ありがとうございますSentry様。
 
 主にエラー監視とパフォーマンス計測いとして使ってますが、その模様は[下記記事](https://blog.tubone-project24.xyz/2023/01/01/this-blog#sentry)をご確認ください。
 
+ちなみに私が初めてSentryを触ったのは[2019年らしい](https://blog.tubone-project24.xyz/2019/09/22/sentry)ですね。当時はVue.js書いてたんですね...。懐かしい...。
+
 ## Session Replay
 
-今回はSentryの新しい機能(まだBeta版で、wait listに登録が必要です)の[Session Replay](https://sentry.io/for/session-replay/)を検証していきます。
+今回は年末くらいにBeta版になっていた[Sentry](https://sentry.io)の新しい機能(まだBeta版で、wait listに登録が必要です)の[Session Replay](https://sentry.io/for/session-replay/)を検証していきます。
 
 そもそもSession Replayとはなんぞや？ということで、公式のページを確認すると
 
@@ -63,11 +65,13 @@ Networkやconsole logも確認できるのでまるでローカルでDevtoolsを
 
 自分のSentryアカウントはBeta版でSession Replayが使える状態になっていたので早速使ってみます。
 
-このブログはGatsby.jsでできているのでReact版のSentryでReplay機能が使えそうです。
+![beta](https://i.imgur.com/VZ1rCxu.png)
+
+このブログは[Gatsby.js](https://www.gatsbyjs.com/)でできているので[React版のSentry](https://docs.sentry.io/platforms/javascript/guides/react/)でReplay機能が使えそうですが、自分の場合、browser処理をjsxで書かず、後述するgatsby-browser.jsで自前で[@sentry/browser](https://www.npmjs.com/package/@sentry/browser)で実装しているので[@sentry/browser](https://www.npmjs.com/package/@sentry/browser)で実装していきます。
 
 ![install](https://i.imgur.com/GsVnFR4.png)
 
-利用に特に追加のライブラリのインストールはいりませんが、 @sentry/browserを最低**7.27.0**以上にアップグレードする必要がありそうです。
+利用に特に追加のライブラリのインストールはいりませんが、 [@sentry/browser](https://www.npmjs.com/package/@sentry/browser)を最低**7.27.0**以上にアップグレードする必要がありそうです。
 
 とりあえず最新版にアップグレードすればよさそうです。
 
@@ -77,11 +81,13 @@ yarn upgrade @sentry/browser --latest
 
 検証時点で7.31.1がインストールされました。
 
-Gastby.jsの場合、SSGせずブラウザ側で処理したいものはgatsby-browser.jsに定義します。
+Gastby.jsの場合、SSGせずブラウザ側で処理したいものは[gatsby-browser.js](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/)に定義します。
 
-元々パフォーマンス検証のために@sentry/tracingもインストールしてますが、replay用の設定をいくつかしていきます。
+元々パフォーマンス検証のために[@sentry/tracing](https://docs.sentry.io/product/sentry-basics/tracing/)もインストールしてますが、sesson replay用の設定をいくつかしていきます。
 
-replaysSessionSampleRate、replaysOnErrorSampleRateとりあえず適当に入れてますが、エラーが起きた時のキャプチャはしっかり取りたいので1.0、その他はサンプリングしてくれて構わないので0.1になってます。適当な値なので運用してみてチューニングしていきます。
+replaysSessionSampleRate、replaysOnErrorSampleRateにはそれぞれ適当0.1, 1.0を入れてます。
+
+エラーが起きた時のキャプチャはしっかり取りたいので1.0、その他はサンプリングしてくれて構わないので0.1になってます。完全に適当な値なので運用してみてチューニングしていきます。
 
 プラスでintegrationsに`new Sentry.Replay()`を設定すればReplay機能が有効になるっぽいです。
 
@@ -99,15 +105,15 @@ import { Integrations } from "@sentry/tracing";
   });
 ```
 
-早速環境にデプロイして確認していきましょう。
+実装できたので早速環境にデプロイして確認していきましょう。
 
 ## 実際にうごかしてみた
 
-特にブログをいじっていて自分の環境でエラーがでなかったので、しばらくガチャガチャしていたらReplayになにか入ってきました。わくわく。
+特にブログをいじっていて自分の環境でエラーがでなかったので、(~~優秀~~)しばらくガチャガチャしていたらサンプリングの方でReplayになにか入ってきました。わくわく。
 
 ![list](https://i.imgur.com/UdSz3qc.png)
 
-おお〜！こいつ・・・動くぞ！
+おお〜！[こいつ・・・動くぞ！](https://dic.nicovideo.jp/a/%E3%81%93%E3%81%84%E3%81%A4%E3%83%BB%E3%83%BB%E3%83%BB%E5%8B%95%E3%81%8F%E3%81%9E%21)
 
 ![douga](https://i.imgur.com/ajPwE2R.gif)
 
@@ -115,16 +121,34 @@ import { Integrations } from "@sentry/tracing";
 
 ![ims](https://i.imgur.com/pioUHQ4.png)
 
-Networkも見てみました。ただのSSGの画面なので画面遷移時のリクエストしかでてませんね...。もうちょっとバックエンドと通信するようなアプリケーションだときっと楽しそうです。
+Console、Networkも見てみました。
 
-console logなんかも確認できました。
+ただのSSGの画面なので画面遷移時のリクエストしかでてませんね...。もうちょっとバックエンドと通信するようなアプリケーションだときっと楽しそうです。
 
 ![nw](https://i.imgur.com/THPTtHj.png)
 
-メモリも取ることができるっぽいです。メモリリークを見つけるのに役立ちそうですね！（このブログmemlabをCIで実行しているので、結果と比較しながらメモリリークを対応する、みたいな記事書きたいですね。）
+いいな〜と思った機能でどうやらヒープメモリも取ることができるっぽいです。
+
+メモリリークを見つけるのに役立ちそうですね！
+
+（このブログmemlabをCIで実行しているので、結果と比較しながらメモリリークを対応する、みたいな記事書きたいですね！！！）
 
 ![memory](https://i.imgur.com/OjIozWD.png)
+
+## 気になったこと
+
+自分の環境だけなのか、はたまた日本語に対してなのか文字列がすべてマスキングされてしまいました...。
+
+別にブログなので公開情報ばっかりなんですけどね...。
+
+![mask](https://i.imgur.com/WPkRn1L.png)
+
+これはどういった挙動なのかわかっていないので今後調査していきたいと思います。
 
 ## 結論
 
 もうちょっと運用してみて、どんなことができるかをまとめる必要はありますが、なんかすごい〜！ということがわかりました。
+
+蛇足ですが私はこういったトレーシング系のツールが大好きです。[AWS X-RayでLambdaのトレースをしつつ、Datadog APMに連携する](https://blog.tubone-project24.xyz/2020/1/20/x-ray-datadog)とか[GoのEchoでJaegerを使ってボトルネックを調査する](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)とか、結構興味があります。
+
+Sentryにはまだ[Profiling](https://docs.sentry.io/product/profiling/)とか[Cron Monitoring](https://docs.sentry.io/product/crons/)とか私がまだ使いきれてない機能がたくさんあるので時間見つけて検証していきたいと思います。
