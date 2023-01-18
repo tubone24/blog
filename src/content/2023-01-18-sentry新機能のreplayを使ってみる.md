@@ -22,7 +22,7 @@ templateKey: blog-post
 
 みなさん、[Sentry](https://sentry.io)使ってますか？(長嶋茂雄)
 
-[Sentry](https://sentry.io)はエラートレーシング、パフォーマンス監視ツールとして(特にフロントエンドで)かなりデファクトスタンダードになりつつあります。
+[Sentry](https://sentry.io)は**エラートレーシング**、**パフォーマンス監視ツール**として(特にフロントエンドで)かなりデファクトスタンダードになりつつあります。
 
 かくいうこのブログもSentryめっちゃ使ってます。ありがとうございますSentry様。
 
@@ -32,15 +32,15 @@ templateKey: blog-post
 
 ## Session Replay
 
-今回は年末くらいにBeta版になっていた[Sentry](https://sentry.io)の新しい機能(まだBeta版で、wait listに登録が必要です)の[Session Replay](https://sentry.io/for/session-replay/)を検証していきます。
+今回は年末くらいに**Beta版**になっていた[Sentry](https://sentry.io)の新しい機能(まだBeta版で、wait listに登録が必要です)の[Session Replay](https://sentry.io/for/session-replay/)を検証していきます。
 
-そもそもSession Replayとはなんぞや？ということで、公式のページを確認すると、
+そもそも**Session Replay**とはなんぞや？ということで、公式のページを確認すると、
 
 > Sentry's Session Replay provides a video-like reproduction of user interactions on a site or web app, giving developers the details they need to resolve errors and performance issues faster. All user interactions - including page visits, mouse movements, clicks, and scrolls - are captured, helping developers connect the dots between a known issue and how a user experienced it in the UI.
 > 
 > Sentryのセッションリプレイは、サイトやウェブアプリでのユーザーとのやりとりをビデオのように再現し、エラーやパフォーマンスの問題を迅速に解決するために必要な詳細を開発者に提供します。ページの訪問、マウスの動き、クリック、スクロールなど、すべてのユーザーインタラクションがキャプチャされ、開発者は既知の問題とユーザーがUIでどのようにそれを体験したかという点を結びつけるのに役立ちます。
 
-ということらしいです。エラーが出たときのユーザーの操作がビデオのように確認できる、ということですかね。すごいですね。
+ということらしいです。**エラーが出たときのユーザーの操作がビデオのように確認できる**、ということですかね。すごいですね。
 
 公式のデモ動画もありました。ポケモンを捕まえるアプリでエラーをSentryでキャッチしてそのReplayをデモしてます。
 
@@ -48,11 +48,11 @@ https://www.youtube.com/watch?v=sZwMmiwBwho&t=533s&ab_channel=Sentry
 
 ![demo1](https://i.imgur.com/og3l3dy.png)
 
-動画のなかではとあるユーザーがミュウを捕まえたときにundefinedに対してmapを処理する処理が入ってしまったようで画面がホワイトアウトしてしまうエラーが発生ししてましたが、通常のトレーシングだとその耐意見がわかりにくいのでエラーの重要性がわからないということが問題になってました。
+動画のなかではとあるユーザーがミュウを捕まえたときにundefinedに対してmapを処理する処理が入ってしまったようで**画面がホワイトアウト**してしまうエラーが発生ししてましたが、通常のトレーシングだとその耐意見がわかりにくいのでエラーの重要性がわからないということが問題になってました。
 
 ![demo2](https://i.imgur.com/s3r6CdD.png)
 
-Session Replayを使うとユーザーのインタラクションが動画で再現できるので体験が追いやすいとのこと。
+**Session Replay**を使うと**ユーザーのインタラクションが動画**で再現できるので体験が追いやすいとのこと。
 
 ![demo3](https://i.imgur.com/ZG3GBdw.png)
 
@@ -74,23 +74,23 @@ Networkやconsole logも確認できるのでまるでローカルでDevtoolsを
 
 利用に特に追加のライブラリのインストールはいりませんが、 [@sentry/browser](https://www.npmjs.com/package/@sentry/browser)を最低**7.27.0**以上にアップグレードする必要がありそうです。
 
-とりあえず最新版にアップグレードすればよさそうです。
+とりあえず**最新版にアップグレード**すればよさそうです。
 
 ```shell{promptUser: tubone}{promptHost: dev.localhost}
 yarn upgrade @sentry/browser --latest
 ```
 
-検証時点で7.31.1がインストールされました。
+検証時点で**7.31.1**がインストールされました。
 
 Gastby.jsの場合、SSGせずブラウザ側で処理したいものは[gatsby-browser.js](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/)に定義します。
 
 元々パフォーマンス検証のために[@sentry/tracing](https://docs.sentry.io/product/sentry-basics/tracing/)もインストールしてますが、sesson replay用の設定をいくつかしていきます。
 
-replaysSessionSampleRate、replaysOnErrorSampleRateにはそれぞれ適当0.1, 1.0を入れてます。
+**replaysSessionSampleRate**、**replaysOnErrorSampleRate**にはそれぞれ適当0.1, 1.0を入れてます。
 
 エラーが起きたときのキャプチャはしっかり取りたいので1.0、その他はサンプリングしてくれて構わないので0.1になってます。完全に適当な値なので運用してみてチューニングしていきます。
 
-プラスでintegrationsに`new Sentry.Replay()`を設定すればReplay機能が有効になるっぽいです。
+プラスでintegrationsに **new Sentry.Replay()** を設定すればReplay機能が有効になるっぽいです。
 
 ```javascript
 import * as Sentry from "@sentry/browser";
@@ -110,7 +110,7 @@ import { Integrations } from "@sentry/tracing";
 
 ## 実際にうごかしてみた
 
-特にブログをいじっていて自分の環境でエラーがでなかったので、(~~優秀~~)しばらくガチャガチャしていたらサンプリングの方でReplayになにか入ってきました。わくわく。
+特にブログをいじっていて自分の環境でエラーがでなかったので、(~~優秀~~)しばらくガチャガチャしていたら**サンプリング**の方でReplayになにか入ってきました。わくわく。
 
 ![list](https://i.imgur.com/UdSz3qc.png)
 
@@ -130,7 +130,7 @@ Console、Networkも見てみました。
 
 いいな〜と思った機能でどうやらヒープメモリも取ることができるっぽいです。
 
-メモリリークを見つけるのに役立ちそうですね！
+**メモリリークを見つける**のに役立ちそうですね！
 
 （このブログmemlabをCIで実行しているので、結果と比較しながらメモリリークを対応する、みたいな記事書きたいですね！）
 
@@ -148,7 +148,7 @@ Console、Networkも見てみました。
 
 ## 結論
 
-もうちょっと運用してみて、どんなことができるかをまとめる必要はありますが、なんかすごい〜！ということがわかりました。
+もうちょっと運用してみて、どんなことができるかをまとめる必要はありますが、**なんかすごい〜！** ということがわかりました。
 
 蛇足ですが私はこういったトレーシング系のツールが大好きです。[AWS X-RayでLambdaのトレースをしつつ、Datadog APMに連携する](https://blog.tubone-project24.xyz/2020/1/20/x-ray-datadog)とか[GoのEchoでJaegerを使ってボトルネックを調査する](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)とか、結構興味があります。
 
