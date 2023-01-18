@@ -1,10 +1,13 @@
 import axios from "axios";
 import * as Sentry from "@sentry/node";
 import "@sentry/tracing";
+import { ProfilingIntegration } from "@sentry/profiling-node";
 
 Sentry.init({
   dsn: "https://a01a46773c8342dfa4d199c36a30fc28@o302352.ingest.sentry.io/6347154",
   tracesSampleRate: 1.0,
+  integrations: [new ProfilingIntegration()],
+  profilesSampleRate: 1.0,
 });
 
 const transaction = Sentry.startTransaction({

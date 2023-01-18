@@ -9,6 +9,7 @@
     "@raae/gatsby-remark-oembed": "0.3.3",
     "@sentry/browser": "7.31.1",
     "@sentry/node": "7.31.1",
+    "@sentry/profiling-node": "0.0.12",
     "@sentry/react": "7.31.1",
     "@sentry/tracing": "7.31.1",
     "@types/react-helmet": "6.1.6",
