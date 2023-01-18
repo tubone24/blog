@@ -5,8 +5,9 @@ date: 2023-01-18T14:53:12.367Z
 description: とりあえずこのブログを人柱にして年末年始にBeta版が出たSentry新機能のSession Replayを使ってみます。
 tags:
   - Sentry
-  - tracing
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+  - Tracing
+  - Session Replay
+headerImage: https://i.imgur.com/pioUHQ4.png
 templateKey: blog-post
 ---
 ## Table of Contents
@@ -27,27 +28,27 @@ templateKey: blog-post
 
 主にエラー監視とパフォーマンス計測いとして使ってますが、その模様は[下記記事](https://blog.tubone-project24.xyz/2023/01/01/this-blog#sentry)をご確認ください。
 
-ちなみに私が初めてSentryを触ったのは[2019年らしい](https://blog.tubone-project24.xyz/2019/09/22/sentry)ですね。当時はVue.js書いてたんですね...。懐かしい...。
+ちなみに私がはじめてSentryを触ったのは[2019年らしい](https://blog.tubone-project24.xyz/2019/09/22/sentry)ですね。当時はVue.js書いてたんですね...。懐かしい...。
 
 ## Session Replay
 
 今回は年末くらいにBeta版になっていた[Sentry](https://sentry.io)の新しい機能(まだBeta版で、wait listに登録が必要です)の[Session Replay](https://sentry.io/for/session-replay/)を検証していきます。
 
-そもそもSession Replayとはなんぞや？ということで、公式のページを確認すると
+そもそもSession Replayとはなんぞや？ということで、公式のページを確認すると、
 
 > Sentry's Session Replay provides a video-like reproduction of user interactions on a site or web app, giving developers the details they need to resolve errors and performance issues faster. All user interactions - including page visits, mouse movements, clicks, and scrolls - are captured, helping developers connect the dots between a known issue and how a user experienced it in the UI.
 > 
 > Sentryのセッションリプレイは、サイトやウェブアプリでのユーザーとのやりとりをビデオのように再現し、エラーやパフォーマンスの問題を迅速に解決するために必要な詳細を開発者に提供します。ページの訪問、マウスの動き、クリック、スクロールなど、すべてのユーザーインタラクションがキャプチャされ、開発者は既知の問題とユーザーがUIでどのようにそれを体験したかという点を結びつけるのに役立ちます。
 
-ということらしいです。エラーが出た時のユーザーの操作がビデオのように確認できる、ということですかね。すごいですね。
+ということらしいです。エラーが出たときのユーザーの操作がビデオのように確認できる、ということですかね。すごいですね。
 
-公式のデモ動画も有りました。ポケモンを捕まえるアプリでエラーをSentryでキャッチしてそのReplayをデモしてます。
+公式のデモ動画もありました。ポケモンを捕まえるアプリでエラーをSentryでキャッチしてそのReplayをデモしてます。
 
 https://www.youtube.com/watch?v=sZwMmiwBwho&t=533s&ab_channel=Sentry
 
 ![demo1](https://i.imgur.com/og3l3dy.png)
 
-動画の中ではとあるユーザーがミュウを捕まえたときにundefinedに対してmapを処理する処理が入ってしまったようで画面がホワイトアウトしてしまうエラーが発生ししてましたが、通常のトレーシングだとその耐意見がわかりにくいのでエラーの重要性がわからないということが問題になってました。
+動画のなかではとあるユーザーがミュウを捕まえたときにundefinedに対してmapを処理する処理が入ってしまったようで画面がホワイトアウトしてしまうエラーが発生ししてましたが、通常のトレーシングだとその耐意見がわかりにくいのでエラーの重要性がわからないということが問題になってました。
 
 ![demo2](https://i.imgur.com/s3r6CdD.png)
 
@@ -87,7 +88,7 @@ Gastby.jsの場合、SSGせずブラウザ側で処理したいものは[gatsby-
 
 replaysSessionSampleRate、replaysOnErrorSampleRateにはそれぞれ適当0.1, 1.0を入れてます。
 
-エラーが起きた時のキャプチャはしっかり取りたいので1.0、その他はサンプリングしてくれて構わないので0.1になってます。完全に適当な値なので運用してみてチューニングしていきます。
+エラーが起きたときのキャプチャはしっかり取りたいので1.0、その他はサンプリングしてくれて構わないので0.1になってます。完全に適当な値なので運用してみてチューニングしていきます。
 
 プラスでintegrationsに`new Sentry.Replay()`を設定すればReplay機能が有効になるっぽいです。
 
@@ -131,7 +132,7 @@ Console、Networkも見てみました。
 
 メモリリークを見つけるのに役立ちそうですね！
 
-（このブログmemlabをCIで実行しているので、結果と比較しながらメモリリークを対応する、みたいな記事書きたいですね！！！）
+（このブログmemlabをCIで実行しているので、結果と比較しながらメモリリークを対応する、みたいな記事書きたいですね！）
 
 ![memory](https://i.imgur.com/OjIozWD.png)
 
