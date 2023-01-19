@@ -155,6 +155,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+        with:
+          path: /root/blog
       - name: install apt
         run: |
           apt-get -y update
@@ -165,6 +167,7 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+        working-directory: /root/blog
       - name: Cache
         uses: actions/cache/restore@v3
         with:
@@ -180,6 +183,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: yarn install --frozen-lockfile
+        working-directory: /root/blog
       - name: Test e2e
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -192,6 +196,7 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
         run: yarn test:e2e:ci:chrome
+        working-directory: /root/blog
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
