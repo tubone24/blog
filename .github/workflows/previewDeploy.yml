@@ -50,7 +50,7 @@ jobs:
         run: yarn install --frozen-lockfile
   create-cache-e2e:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
+    container: node16.16.0-chrome107-ff107
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -179,7 +179,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
   test-e2e-chrome:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
+    container: node16.16.0-chrome107-ff107
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -241,7 +241,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
   test-e2e-firefox:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
+    container: node16.16.0-chrome107-ff107
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
