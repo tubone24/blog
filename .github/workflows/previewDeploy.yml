@@ -48,6 +48,34 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: yarn install --frozen-lockfile
+  create-cache-e2e:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
+      - name: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: yarn install --frozen-lockfile
   test:
     runs-on: ubuntu-latest
     steps:
@@ -151,7 +179,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
   test-e2e-chrome:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.16.0-chrome107-ff107
+    container: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -172,10 +200,10 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-          key: ${{ runner.os }}-chrome-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-e2e-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-chrome-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-chrome-build-${{ env.cache-version }}-
+            ${{ runner.os }}-e2e-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-e2e-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -204,6 +232,67 @@ jobs:
         env:
           FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
           FILE_NAME: video-chrome-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-main.spec.ts.mp4
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
+          GITHUB_REPOSITORY: "tubone24/blog"
+          GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
+          BRANCH_NAME: "screenshot"
+        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
+  test-e2e-firefox:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: install apt
+        run: |
+          apt-get -y update
+          apt-get -y install fonts-noto unzip build-essential
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: 'v1.x'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-e2e-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-e2e-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-e2e-build-${{ env.cache-version }}-
+      - name: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: yarn install --frozen-lockfile
+      - name: chmod
+        run: |
+          chmod 777 -R /github/home/
+          chmod 777 -R src/
+          chmod 777 -R /__w/blog/blog/
+      - name: Test e2e
+        env:
+          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
+          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
+          GATSBY_GITHUB_SHA: ${{ github.sha }}
+          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          NETLIFY_ENV: deploy-preview
+        run: yarn test:e2e:ci:firefox
+      - name: Get PR Number
+        id: get-pr-num
+        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
+      - name: Add file
+        env:
+          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+          FILE_NAME: video-firefox-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-main.spec.ts.mp4
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_REF: ${{ github.head_ref }}
           GITHUB_REPOSITORY: "tubone24/blog"
