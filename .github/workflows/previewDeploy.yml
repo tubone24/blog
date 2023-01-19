@@ -155,13 +155,13 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - name: install noto font and unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-noto unzip
       - uses: denoland/setup-deno@v1
         with:
           deno-version: 'v1.x'
-      - name: install noto font
-        run: |
-          sudo apt-get update
-          sudo apt-get install fonts-noto
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
