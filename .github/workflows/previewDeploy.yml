@@ -181,7 +181,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: yarn install --frozen-lockfile
       - name: chmod
-        run: chmod 777 -R /github/home/
+        run: |
+          chmod 777 -R /github/home/
+          chmod 777 -R src/
       - name: Test e2e
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
