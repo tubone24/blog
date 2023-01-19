@@ -4,6 +4,7 @@ title: Sentry新機能のSession Replayを使ってみる
 date: 2023-01-18T14:53:12.367Z
 description: とりあえずこのブログを人柱にして年末年始にBeta版が出たSentry新機能のSession Replayを使ってみます。
 tags:
+  - JavaScript
   - Sentry
   - Tracing
   - Session Replay
