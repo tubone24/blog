@@ -158,7 +158,7 @@ jobs:
       - name: install noto font and unzip
         run: |
           apt-get -y update
-          apt-get -y install fonts-noto unzip
+          apt-get -y install fonts-noto unzip build-essential
       - uses: denoland/setup-deno@v1
         with:
           deno-version: 'v1.x'
