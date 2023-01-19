@@ -1,9 +1,12 @@
 import * as Sentry from "@sentry/node";
 import "@sentry/tracing";
+import { ProfilingIntegration } from "@sentry/profiling-node";
 
 Sentry.init({
   dsn: "https://aa2f31c272db4f8494e3903a43cc5ca6@o302352.ingest.sentry.io/4504433289986048",
   tracesSampleRate: 1.0,
+  integrations: [new ProfilingIntegration()],
+  profilesSampleRate: 1.0,
 });
 
 const transaction = Sentry.startTransaction({

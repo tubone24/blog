@@ -4,5 +4,5 @@ ENV NODE_ENV production
 WORKDIR /app
 COPY ["package.json", "./"]
 COPY ["public", "public"]
-RUN npm install -g serve
+RUN npm install -g serve@14.1.2
 CMD ["serve", "-s", "-l", "9000", "public"]
