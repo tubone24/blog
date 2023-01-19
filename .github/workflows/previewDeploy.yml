@@ -50,7 +50,7 @@ jobs:
         run: yarn install --frozen-lockfile
   create-cache-e2e:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
+    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -61,6 +61,17 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -168,7 +179,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
   test-e2e-chrome:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
+    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -230,7 +241,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
   test-e2e-firefox:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
+    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -244,6 +255,17 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+      - name: Cache
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ~/.cache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-e2e-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-e2e-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-e2e-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
