@@ -155,7 +155,7 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-      - name: install noto font and unzip
+      - name: install apt
         run: |
           apt-get -y update
           apt-get -y install fonts-noto unzip build-essential
@@ -172,10 +172,10 @@ jobs:
             ~/.cache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-chrome-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
-            ${{ runner.os }}-build-${{ env.cache-version }}-
+            ${{ runner.os }}-chrome-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-chrome-build-${{ env.cache-version }}-
       - name: yarn install
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -191,7 +191,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
-        run: test:e2e:ci:chrome
+        run: yarn test:e2e:ci:chrome
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
