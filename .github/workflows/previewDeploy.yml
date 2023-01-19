@@ -184,6 +184,7 @@ jobs:
         run: |
           chmod 777 -R /github/home/
           chmod 777 -R src/
+          chmod 777 -R /__w/blog/blog/
       - name: Test e2e
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
