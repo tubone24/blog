@@ -13,3 +13,6 @@ templateKey: blog-post
 ```toc
 
 ```
+
+## Raspberry PIのWifiドングルが定期的に使えなくなる。
+
