@@ -1,5 +1,6 @@
 name: DeployToNetlifyPRD
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -356,6 +357,17 @@ jobs:
           environment-url: "https://blog-storybook.netlify.app"
           deployment-id: ${{ steps.deployment-prod-storybook.outputs.deployment_id }}
           state: "failure"
+      - name: Sentry Release
+        uses: getsentry/action-release@v1.2.1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_TOKEN }}
+          SENTRY_ORG: tubone-project24
+          SENTRY_PROJECT: blog
+        with:
+          environment: production
+          version: tubone-boyaki@${{ github.sha }}
+          sourcemaps: "./public"
+
   lighthouse:
     runs-on: macos-latest
     needs: ['build']
