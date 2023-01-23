@@ -22,11 +22,11 @@ templateKey: blog-post
 
 ## Raspberry PIのWifiドングルが定期的に使えなくなる。
 
-今使っているRaspberry PIがめちゃくちゃ古くて、Wifiに対応してない機種なので、USBのWifiドングルを指して使っているのですが、こいつがしばらく起動しているとRaspberry PIから認識されなくなってしまう問題が発生しております。
+今使っているRaspberry PIがめちゃくちゃ古くて、Wi-Fiに対応してない機種なので、USBのWi-Fiドングルを指して使っているのですが、こいつがしばらく起動しているとRaspberry PIから認識されなくなってしまう問題が発生しております。
 
-[TP-Link WIFI 無線LAN 子機 11n/11g/b デュアルモード対応モデル 英語パッケージ TL-WN725N(EU)](https://www.amazon.co.jp/dp/B008IFXQFU?ref=ppx_pop_dt_b_product_details&th=1)
+[TP-Link Wi-Fi 無線LAN 子機 11n/11g/b デュアルモード対応モデル 英語パッケージ TL-WN725N(EU)](https://www.amazon.co.jp/dp/B008IFXQFU?ref=ppx_pop_dt_b_product_details&th=1)
 
-とりあえずワークアラウンドとしてRaspberry PIの**再起動を定期的**に実施してやり、Wifiドングルを再認識させることにします。
+とりあえずワークアラウンドとしてRaspberry PIの**再起動を定期的**に実施してやり、Wi-Fiドングルを再認識させることにします。
 
 ## crontabを使えば楽勝
 
@@ -80,7 +80,7 @@ requests.post(WEB_HOOK_URL, data = json.dumps({
 ```
 
 Pythonコードは超カンタンで、wlan0のIPアドレスを[netifaces](https://pypi.org/project/netifaces/)を使って取得してIncoming webhookで送信するだけです。
-netifacesのinstallをpipで予め実施しておきます。
+netifacesのinstallをpipであらかじめ実施しておきます。
 
 ```shell{promptUser: pi}{promptHost: dev.raspberrypi}
 pip3 install netifaces==0.11.0
