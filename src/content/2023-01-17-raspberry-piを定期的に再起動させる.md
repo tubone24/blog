@@ -4,12 +4,15 @@ title: Raspberry Piを定期的に再起動させる
 date: 2023-01-17T15:52:28.580Z
 description: Raspberry Piを定期的に再起動させる
 tags:
-  - raspberrypi
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+  - RaspberryPi
+  - cron
+  - reboot
+  - Slack
+headerImage: https://i.imgur.com/oEMLAHF.png
 templateKey: blog-post
 ---
 
-備忘的に残しておきます。
+かんたんですが、備忘的に残しておきます。
 
 ## Table of Contents
 
@@ -23,11 +26,11 @@ templateKey: blog-post
 
 [TP-Link WIFI 無線LAN 子機 11n/11g/b デュアルモード対応モデル 英語パッケージ TL-WN725N(EU)](https://www.amazon.co.jp/dp/B008IFXQFU?ref=ppx_pop_dt_b_product_details&th=1)
 
-とりあえずワークアラウンドとしてRaspberry PIの再起動を定期的に実施してやり、Wifiドングルを定期的に再認識させることにします。
+とりあえずワークアラウンドとしてRaspberry PIの**再起動を定期的**に実施してやり、Wifiドングルを再認識させることにします。
 
 ## crontabを使えば楽勝
 
-なんてことはなく、ただroot権限でcronを実行すればよいだけでした。
+再起動自体はなんてことはなく、ただ**root権限でcronを実行**すればよいだけでした。
 
 ```shell{promptUser: pi}{promptHost: dev.raspberrypi}
 sudo crontab -e
