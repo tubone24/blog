@@ -245,7 +245,7 @@
     "parse-url": "8.1.0",
     "minimatch": "3.0.5",
     "prismjs": "1.27.0",
-    "node-fetch": "2.6.7",
+    "node-fetch": "2.6.8",
     "marked": "4.0.10",
     "trim-newlines": "3.0.1",
     "glob-parent": "5.1.2",
