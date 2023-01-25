@@ -246,7 +246,7 @@
     "minimatch": "3.1.2",
     "prismjs": "1.27.0",
     "node-fetch": "2.6.8",
-    "marked": "4.0.10",
+    "marked": "4.2.12",
     "trim-newlines": "3.0.1",
     "glob-parent": "5.1.2",
     "trim": "0.0.3",
