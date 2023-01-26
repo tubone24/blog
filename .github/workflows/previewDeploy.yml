@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.12.1
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -84,7 +84,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.12.1
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - uses: denoland/setup-deno@v1
@@ -179,7 +179,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
 #  test-e2e-chrome:
 #    runs-on: ubuntu-latest
-#    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
+#    container: cypress/browsers:node18.12.1-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
 #        uses: actions/checkout@v3
@@ -241,7 +241,7 @@ jobs:
 #        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
 #  test-e2e-firefox:
 #    runs-on: ubuntu-latest
-#    container: cypress/browsers:node16.18.0-chrome107-ff106-edge
+#    container: cypress/browsers:node18.12.1-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
 #        uses: actions/checkout@v3
@@ -309,7 +309,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.12.1
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -361,7 +361,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.12.1
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
