@@ -207,7 +207,7 @@
     "jest-axe": "6.0.1",
     "jest-environment-jsdom": "29.1.2",
     "jest-location-mock": "1.0.9",
-    "lint-staged": "13.0.3",
+    "lint-staged": "13.1.0",
     "markdownlint-cli2": "0.6.0",
     "memlab": "1.1.36",
     "netlify-cli": "12.5.0",
