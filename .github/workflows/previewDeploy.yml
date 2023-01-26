@@ -590,6 +590,10 @@ jobs:
         with:
           reviewdog_version: latest
       - uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tubone24'
       - uses: actions/checkout@v3
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
