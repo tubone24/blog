@@ -127,7 +127,7 @@ td {
 	</h2>
 
 	<h3>
-		Generated on 土, 14 1月 2023 19:38:14
+		Generated on 木, 26 1月 2023 04:19:02
 	</h3>
 
 	
@@ -152,7 +152,7 @@ td {
 					<div>中</div>
 				</td>
 				<td align="center">
-					<div>1</div>
+					<div>0</div>
 				</td>
 			</tr>
 			<tr>
@@ -160,7 +160,7 @@ td {
 					<div>低</div>
 				</td>
 				<td align="center">
-					<div>4</div>
+					<div>2</div>
 				</td>
 			</tr>
 			<tr>
@@ -194,29 +194,14 @@ td {
 					align="center">Number of Instances</th>
 			</tr>
 			<tr>
-				<td><a href="#90022">Application Error Disclosure</a></td>
-				<td align="center" class="risk-2">中</td>
-				<td align="center">1</td>
-			</tr>
-			<tr>
 				<td><a href="#10017">Cross-Domain JavaScript Source File Inclusion</a></td>
 				<td align="center" class="risk-1">低</td>
 				<td align="center">15</td>
 			</tr>
 			<tr>
-				<td><a href="#10023">Information Disclosure - Debug Error Messages</a></td>
-				<td align="center" class="risk-1">低</td>
-				<td align="center">1</td>
-			</tr>
-			<tr>
 				<td><a href="#10021">X-Content-Type-Options Header Missing</a></td>
 				<td align="center" class="risk-1">低</td>
 				<td align="center">11</td>
-			</tr>
-			<tr>
-				<td><a href="#10096">タイムスタンプの露見 - Unix</a></td>
-				<td align="center" class="risk-1">低</td>
-				<td align="center">8</td>
 			</tr>
 			<tr>
 				<td><a href="#10038">Content Security Policy (CSP) Header Not Set</a></td>
@@ -264,82 +249,6 @@ td {
 
 	
 		<h3>Alert Detail</h3>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-2"><a
-						id="90022"></a>
-						<div>中</div></th>
-					<th class="risk-2">Application Error Disclosure</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2022/04/09/lambda-urls/page-data.json">http://web:9000/page-data/2022/04/09/lambda-urls/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">1</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/90022/">90022</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
 		
 			<table class="results">
 				<tr height="24">
@@ -784,82 +693,6 @@ td {
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-1"><a
-						id="10023"></a>
-						<div>低</div></th>
-					<th class="risk-1">Information Disclosure - Debug Error Messages</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>The response appeared to contain common error messages returned by platforms such as ASP.NET, and Web-servers such as IIS and Apache. You can configure the list of common debug messages.</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2022/04/09/lambda-urls/page-data.json">http://web:9000/page-data/2022/04/09/lambda-urls/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">Internal Server Error</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">1</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Disable debugging messages before pushing to production.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%"></td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/10023/">10023</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
-					<th width="20%" class="risk-1"><a
 						id="10021"></a>
 						<div>低</div></th>
 					<th class="risk-1">X-Content-Type-Options Header Missing</th>
@@ -930,84 +763,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Content-Type-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Content-Type-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Content-Type-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
 					</tr>
 					<tr>
@@ -1034,7 +789,85 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023-01-15/2023%E5%B9%B4%E3%80%81%E4%BB%8A%E5%B9%B4%E3%81%AE%E7%9B%AE%E6%A8%99">http://web:9000/2023-01-15/2023%E5%B9%B4%E3%80%81%E4%BB%8A%E5%B9%B4%E3%81%AE%E7%9B%AE%E6%A8%99</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Content-Type-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Content-Type-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/18/reboot-linux">http://web:9000/2023/01/18/reboot-linux</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Content-Type-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/18/sentry-replay">http://web:9000/2023/01/18/sentry-replay</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1204,267 +1037,6 @@ td {
 		
 			<table class="results">
 				<tr height="24">
-					<th width="20%" class="risk-1"><a
-						id="10096"></a>
-						<div>低</div></th>
-					<th class="risk-1">タイムスタンプの露見 - Unix</th>
-				</tr>
-				<tr>
-					<td width="20%">説明</td>
-					<td width="80%">
-							<div>A timestamp was disclosed by the application/web server - Unix</div>
-							
-						</td>
-				</tr>
-				<TR vAlign="top">
-					<TD colspan="2"></TD>
-				</TR>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json">http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1404365812</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json">http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1407143708</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json">http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1407143981</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json">http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1407149923</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json">http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1407208809</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json">http://web:9000/page-data/2017/06/04/chainer-chieri-bot/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1407209083</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2019/12/12/julia-beginner/page-data.json">http://web:9000/page-data/2019/12/12/julia-beginner/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1415926535</td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/page-data/2021/01/11/vercel-next/page-data.json">http://web:9000/page-data/2021/01/11/vercel-next/page-data.json</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">1542849575</td>
-					</tr>
-				
-				<tr>
-					<td width="20%">Instances</td>
-					<td width="80%">8</td>
-				</tr>
-				<tr>
-					<td width="20%">Solution</td>
-					<td width="80%">
-							<div>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</div>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">Reference</td>
-					<td width="80%">
-							<a href="http://projects.webappsec.org/w/page/13246936/Information%20Leakage">http://projects.webappsec.org/w/page/13246936/Information%20Leakage</a>
-							
-						</td>
-				</tr>
-				<tr>
-					<td width="20%">CWE Id</td>
-					<td width="80%"><a
-						href="https://cwe.mitre.org/data/definitions/200.html">200</a></td>
-				</tr>
-				<tr>
-					<td width="20%">WASC Id</td>
-					<td width="80%">13</td>
-				</tr>
-				<tr>
-					<td width="20%">Plugin Id</td>
-					<td width="80%"><a
-						href="https://www.zaproxy.org/docs/alerts/10096/">10096</a></td>
-				</tr>
-			</table>
-			<div class="spacer"></div>
-		
-			<table class="results">
-				<tr height="24">
 					<th width="20%" class="risk-0"><a
 						id="10038"></a>
 						<div>情報</div></th>
@@ -1536,84 +1108,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
 					</tr>
 					<tr>
@@ -1640,7 +1134,33 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
+						<td width="80%"><a href="http://web:9000/2023-01-15/2023%E5%B9%B4%E3%80%81%E4%BB%8A%E5%B9%B4%E3%81%AE%E7%9B%AE%E6%A8%99">http://web:9000/2023-01-15/2023%E5%B9%B4%E3%80%81%E4%BB%8A%E5%B9%B4%E3%81%AE%E7%9B%AE%E6%A8%99</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/">http://web:9000/2023/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1667,6 +1187,58 @@ td {
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/18/reboot-linux">http://web:9000/2023/01/18/reboot-linux</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/18/sentry-replay">http://web:9000/2023/01/18/sentry-replay</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1893,7 +1465,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/app-e51cf2d2c40a1965c5ed.js">http://web:9000/app-e51cf2d2c40a1965c5ed.js</a></td>
+						<td width="80%"><a href="http://web:9000/app-39e18f96fcea601862d2.js">http://web:9000/app-39e18f96fcea601862d2.js</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2073,84 +1645,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/01/03/owaspzap">http://web:9000/2022/01/03/owaspzap</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/04/25/renovate-error">http://web:9000/2022/04/25/renovate-error</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/08/29/wezterm">http://web:9000/2022/08/29/wezterm</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">メソッド</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%">X-Frame-Options</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">攻撃</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2022/12/31/suicide-linux">http://web:9000/2022/12/31/suicide-linux</a></td>
 					</tr>
 					<tr>
@@ -2177,7 +1671,33 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://web:9000/2022/4/22/textlint">http://web:9000/2022/4/22/textlint</a></td>
+						<td width="80%"><a href="http://web:9000/2023-01-15/2023%E5%B9%B4%E3%80%81%E4%BB%8A%E5%B9%B4%E3%81%AE%E7%9B%AE%E6%A8%99">http://web:9000/2023-01-15/2023%E5%B9%B4%E3%80%81%E4%BB%8A%E5%B9%B4%E3%81%AE%E7%9B%AE%E6%A8%99</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/">http://web:9000/2023/</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2204,6 +1724,58 @@ td {
 						<td width="20%"
 							class="indent1">URL</td>
 						<td width="80%"><a href="http://web:9000/2023/01/01/this-blog">http://web:9000/2023/01/01/this-blog</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/18/reboot-linux">http://web:9000/2023/01/18/reboot-linux</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">メソッド</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">X-Frame-Options</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">攻撃</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://web:9000/2023/01/18/sentry-replay">http://web:9000/2023/01/18/sentry-replay</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
