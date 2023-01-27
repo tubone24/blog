@@ -1,5 +1,6 @@
 name: Build Devcontainer Base Image
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'image/**'
