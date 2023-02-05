@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
-    "@loadable/component": "5.15.2",
+    "@loadable/component": "5.15.3",
     "@popperjs/core": "2.11.6",
     "@raae/gatsby-remark-oembed": "0.3.3",
     "@sentry/browser": "7.31.1",
