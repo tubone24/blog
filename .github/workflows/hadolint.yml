@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run hadolint
-        uses: hadolint/hadolint-action@88c79a349be88304d8330caafe99af7990abb776
+        uses: hadolint/hadolint-action@d292784f8f3eacda47060b259a580467b0ba410c
         with:
           dockerfile: ./owasp/Dockerfile
           format: sarif
