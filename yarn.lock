@@ -11414,10 +11414,10 @@ engine.io-parser@~5.0.3:
   resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-5.0.4.tgz#0b13f704fa9271b3ec4f33112410d8f3f41d0fc0"
   integrity sha512-+nVFp+5z1E3HcToEnO7ZIj3g+3k9389DvWtvJZz0T6/eOCPIyyxehFcedoYrZQrp0LgQbD9pPXhpMBKMd5QURg==
 
-engine.io@6.3.1, engine.io@~4.1.0:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-6.3.1.tgz#754a5655285b299bbb25e1ddbafd9cecac5a2544"
-  integrity sha512-VhEArSKyCC8dv223fltbMOqaJInFZqIqLABLnD3VLhclriF9sxnAJu6ZvnIMI+p7+ByZBxXd4otTrLAeeMTImg==
+engine.io@6.4.0, engine.io@~4.1.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/engine.io/-/engine.io-6.4.0.tgz#de27f79ecb58301171aea7956f3f6f4fa578490a"
+  integrity sha512-OgxY1c/RuCSeO/rTr8DIFXx76IzUUft86R7/P7MMbbkuzeqJoTNw2lmeD91IyGz41QYleIIjWeMJGgug043sfQ==
   dependencies:
     "@types/cookie" "^0.4.1"
     "@types/cors" "^2.8.12"
