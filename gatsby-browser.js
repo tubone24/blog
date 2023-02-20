@@ -21,7 +21,7 @@ if (isLocalDevelopment() === false) {
   Sentry.init({
     dsn: "https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608",
     release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
-    replaysSessionSampleRate: 0.1,
+    replaysSessionSampleRate: 0.05,
     replaysOnErrorSampleRate: 1.0,
     integrations: [new Integrations.BrowserTracing(), new Sentry.Replay()],
     tracesSampleRate: 1.0,
