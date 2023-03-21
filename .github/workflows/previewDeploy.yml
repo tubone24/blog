@@ -163,13 +163,13 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: main.spec.ts.mp4
-          path: ./cypress/videos/e2e/main.spec.ts.mp4
+          path: ./cypress/videos/main.cy.ts.mp4
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
       - name: Add file
         env:
-          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+          FILE_PATH: ./cypress/videos/main.cy.ts.mp4
           FILE_NAME: video-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-main.spec.ts.mp4
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_REF: ${{ github.head_ref }}
@@ -231,7 +231,7 @@ jobs:
 #        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
 #      - name: Add file
 #        env:
-#          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+#          FILE_PATH: ./cypress/videos/main.cy.ts.mp4
 #          FILE_NAME: video-chrome-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-main.spec.ts.mp4
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #          HEAD_REF: ${{ github.head_ref }}
@@ -293,7 +293,7 @@ jobs:
 #        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
 #      - name: Add file
 #        env:
-#          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+#          FILE_PATH: ./cypress/videos/main.cy.ts.mp4
 #          FILE_NAME: video-firefox-${{ steps.get-pr-num.outputs.prnum }}-${{ github.head_ref }}-main.spec.ts.mp4
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #          HEAD_REF: ${{ github.head_ref }}
