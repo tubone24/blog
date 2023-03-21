@@ -122,10 +122,10 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: main.spec.ts.mp4
-          path: ./cypress/videos/e2e/main.spec.ts.mp4
+          path: ./cypress/videos/main.cy.ts.mp4
       - name: Upload video for screenshot branch
         env:
-          FILE_PATH: ./cypress/videos/e2e/main.spec.ts.mp4
+          FILE_PATH: ./cypress/videos/main.cy.ts.mp4
           FILE_NAME: main.spec.ts.mp4
           HEAD_REF: "master"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
