@@ -9764,15 +9764,15 @@ commander@^8.0.0, commander@^8.3.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
 
+commander@^9.0.0, commander@^9.4.1:
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-9.5.0.tgz#bc08d1eb5cedf7ccb797a96199d41c7bc3e60d30"
+  integrity sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==
+
 commander@^9.1.0, commander@^9.2.0, commander@^9.3.0, commander@^9.4.0:
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-9.4.0.tgz#bc4a40918fefe52e22450c111ecd6b7acce6f11c"
   integrity sha512-sRPT+umqkz90UA8M1yqYfnHlZA7fF6nSphDtxeywPZ49ysjxDQybzk13CL+mXekDRG92skbcqCLVovuCusNmFw==
-
-commander@^9.4.1:
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-9.5.0.tgz#bc08d1eb5cedf7ccb797a96199d41c7bc3e60d30"
-  integrity sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==
 
 commandpost@^1.2.1:
   version "1.4.0"
@@ -19723,10 +19723,10 @@ netlify-headers-parser@^7.1.1:
     path-exists "^5.0.0"
     toml "^3.0.0"
 
-netlify-lambda@2.0.15:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-2.0.15.tgz#3181eca3882a22defc7ae3895eeffa6a10519500"
-  integrity sha512-BrpB/J94tTOh0bSYrcYrI7AMz529MOZI7LJtO7HYVWvej0MsUThbxU8P6eIGH/pSZyReFJyy8KFNNsfKBA7Xmw==
+netlify-lambda@2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-2.0.16.tgz#5403d9447252a9f55aaec58eb39d174d84154ebb"
+  integrity sha512-Wykqt2wBYswjN4nOlZ1nWC15A8Rkoe+OHUWyASBr1byYQB2BcqzCCFwaImt/iwyCW1hgWXezHUlb9XvoVgsADA==
   dependencies:
     "@babel/core" "^7.10.4"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
@@ -19735,7 +19735,7 @@ netlify-lambda@2.0.15:
     "@babel/preset-env" "^7.10.4"
     babel-loader "^8.1.0"
     body-parser "^1.19.0"
-    commander "^5.1.0"
+    commander "^9.0.0"
     express "^4.17.1"
     express-logging "^1.1.1"
     find-up "^5.0.0"
