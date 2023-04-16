@@ -15,7 +15,7 @@
     "@types/react-helmet": "6.1.6",
     "@typescript-eslint/eslint-plugin": "5.38.0",
     "@typescript-eslint/parser": "5.38.0",
-    "algoliasearch": "4.14.3",
+    "algoliasearch": "4.17.0",
     "autocomplete.js": "0.38.1",
     "axios": "0.27.2",
     "babel-loader": "8.3.0",
