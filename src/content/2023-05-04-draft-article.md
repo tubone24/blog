@@ -1,6 +1,6 @@
 ---
-slug: 2023-05-04/draft-article
-title: "draft article"
+slug: 2023-05-04/nfc-business-cart
+title: "NFCタグを使ったデジタル名刺をPageCryptを使って作ってみた"
 date: 2023-05-04T05:01:23+0000
 description: draft article
 tags:
@@ -14,3 +14,14 @@ templateKey: blog-post
 ```toc
 
 ```
+
+## ペーパーレス時代に
+
+これからの時代はペーパーレスです。名刺もきっとペーパーレスにするべきだと思います。(唐突)
+
+直近オフライン系のイベントに参加する機会が多く、紙の名刺を供給するのが面倒なので電子名刺っぽいものを作ってみることにしました。
+
+## 
+
+
+
