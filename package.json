@@ -250,7 +250,7 @@
     "glob-parent": "5.1.2",
     "trim": "0.0.3",
     "deep-object-diff": "1.1.9",
-    "engine.io": "6.4.1",
+    "engine.io": "6.4.2",
     "got": "11.8.6",
     "decode-uri-component": "0.2.2",
     "sanitize-html": "2.10.0",
