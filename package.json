@@ -258,7 +258,7 @@
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
     "webpack": "5.76.0",
-    "fast-xml-parser": "4.1.2"
+    "fast-xml-parser": "4.2.4"
   },
   "browserslist": [
     ">0.25% in JP",
