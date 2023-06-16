@@ -226,7 +226,6 @@
     "textlint-filter-rule-comments": "1.2.2",
     "textlint-rule-aws-spellcheck": "1.3.0",
     "textlint-rule-ja-no-inappropriate-words": "2.0.0",
-    "textlint-rule-no-hoso-kinshi-yogo": "github:tubone24/textlint-rule-no-hoso-kinshi-yogo",
     "textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet": "1.0.1",
     "textlint-rule-no-start-duplicated-conjunction": "2.0.2",
     "textlint-rule-preset-smarthr": "1.17.2",
@@ -257,7 +256,8 @@
     "axios": "0.27.2",
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
-    "webpack": "5.76.0"
+    "webpack": "5.76.0",
+    "fast-xml-parser": "4.2.4"
   },
   "browserslist": [
     ">0.25% in JP",

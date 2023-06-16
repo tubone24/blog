@@ -26,7 +26,6 @@
       "interval": 2
     },
     "no-mixed-zenkaku-and-hankaku-alphabet": true,
-    "no-hoso-kinshi-yogo": true,
     "ja-no-inappropriate-words": true,
     "terminology": {
       "defaultTerms": true,
