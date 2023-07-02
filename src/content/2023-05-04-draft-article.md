@@ -8,7 +8,7 @@ tags:
   - Astro
   - Pagecrypt
   - Render
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/K4G7266.gif
 templateKey: blog-post
 ---
 
