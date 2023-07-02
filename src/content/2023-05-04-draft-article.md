@@ -4,7 +4,10 @@ title: "NFCタグを使ったデジタル名刺をPageCryptを使って作って
 date: 2023-05-04T05:01:23+0000
 description: NFCタグを使ったデジタル名刺をPageCryptを使って作ってみたお話
 tags:
-  - fixme
+  - JavaScript
+  - Astro
+  - Pagecrypt
+  - Render
 headerImage: https://i.imgur.com/QmIHfeR.jpg
 templateKey: blog-post
 ---
