@@ -191,14 +191,16 @@ exports[`Storyshots Components/Footer Default 1`] = `
           data-testid="architecture"
         >
           The source code for this blog is maintained on  
-          <a
-            className=""
-            href="https://github.com/tubone24/blog"
-            rel="external nofollow noopener"
-            target="_blank"
-          >
-            GitHub.
-          </a>
+          <b>
+            <a
+              className=""
+              href="https://github.com/tubone24/blog"
+              rel="external nofollow noopener"
+              target="_blank"
+            >
+              GitHub.
+            </a>
+          </b>
         </p>
         <p
           data-testid="copyright"
