@@ -39,7 +39,7 @@ templateKey: blog-post
 pagecryptは大変優秀で、
 
 - そのままHTMLにアクセスするとパスワードの入力フォームが表示され、正しいパスワードを入力することでアクセス。
-- URLのアンカーにパスワードを設定(例: https://example.com/#password)することでパスワード画面を経由せずアクセス
+- URLのアンカーに`https://example.com/#password` など、パスワードを設定することでパスワード画面を経由せずアクセス
 
 ができます。
 
