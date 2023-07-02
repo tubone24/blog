@@ -25,7 +25,32 @@ templateKey: blog-post
 
 こんな感じの構成にしてみました。
 
-NFCタグにはURLを仕込んでおいて
+![img](https://i.imgur.com/Br1vCID.png)
 
+まず、デジタル名刺ページは[Astro](https://docs.astro.build/ja/getting-started/)を使って作成をしております。ペライチのHTMLをビルドする形になります。
 
+その後、[pagecrypt](https://www.maxlaumeister.com/pagecrypt/)を使って、HTMLを暗号化します。
+
+[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) JavaScript APIをどうやら使っているらしく、AES256で暗号化されます。
+
+pagecryptは大変優秀で、
+
+- そのままHTMLにアクセスするとパスワードの入力フォームが表示され、正しいパスワードを入力することでアクセス。
+- URLのアンカーにパスワードを設定(例: https://example.com/#password)することでパスワード画面を経由せずアクセス
+
+ができます。
+
+(ただし、後者のアクセスはGETリクエストのURLを中間経路でダッシュされる可能性があるので、機微情報を扱う際はおすすめしません。)
+
+![img](https://i.imgur.com/1Oh9APi.png)
+
+NFCタグにはパスワード付きURLを仕込んでおくことで、実質NFCタグ経由じゃないと名刺サイトにアクセスできなくする、という対応が可能となります。
+
+ホスティングの基盤は[render](https://render.com/)を使ってます。
+
+## デモ
+
+この用にNFCタグにスマホをかざすだけで、デジタル名刺サイトにアクセスができました！
+
+![img](https://i.imgur.com/K4G7266.gif)
 
