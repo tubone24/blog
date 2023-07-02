@@ -12,10 +12,12 @@ const Footer = () => (
         <div className="col-sm-12 text-center">
           <p data-testid="architecture">
             The source code for this blog is maintained on &nbsp;
-            <ExternalLink
-              href="https://github.com/tubone24/blog"
-              title="GitHub."
-            />
+            <b>
+              <ExternalLink
+                href="https://github.com/tubone24/blog"
+                title="GitHub."
+              />
+            </b>
           </p>
           <p className={style.copyright} data-testid="copyright">
             Copyright&nbsp;
