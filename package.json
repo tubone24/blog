@@ -256,7 +256,8 @@
     "axios": "0.27.2",
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
-    "webpack": "5.76.0"
+    "webpack": "5.76.0",
+    "yaml": "2.2.2"
   },
   "browserslist": [
     ">0.25% in JP",
