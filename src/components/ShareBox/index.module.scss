@@ -1,9 +1,6 @@
 .m-share-box {
   position: fixed;
-  top: auto;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: auto 0 0;
   z-index: 10;
   display: flex;
   justify-content: space-around;
