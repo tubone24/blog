@@ -1,9 +1,6 @@
 .m-share-box {
   position: fixed;
-  top: auto;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: auto 0 0 0;
   z-index: 10;
   display: flex;
   justify-content: space-around;
@@ -32,12 +29,12 @@
 }
 
 .comment {
-  padding: auto auto auto 0.15rem;
+  padding-left: 0.15rem;
   line-height: 1.7rem;
   color: #337ab7;
 }
 
 .top {
-  padding: auto auto auto 0.1rem;
+  padding-left: 0.1rem;
   line-height: 1.7rem;
 }
