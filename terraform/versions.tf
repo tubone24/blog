@@ -1,5 +1,5 @@
 terraform {
-  required_version = "1.4.4"
+  required_version = "1.5.3"
   required_providers {
     netlify = {
       source  = "ttbud/netlify"
