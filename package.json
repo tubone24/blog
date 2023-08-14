@@ -179,7 +179,7 @@
     "babel-preset-gatsby": "2.23.0",
     "core-js": "3.30.1",
     "cross-env": "7.0.3",
-    "css-loader": "6.7.3",
+    "css-loader": "6.8.1",
     "cypress": "12.9.0",
     "cypress-axe": "1.4.0",
     "cypress-visual-regression": "1.7.0",
