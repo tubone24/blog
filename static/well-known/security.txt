@@ -1,0 +1,4 @@
+Contact: mailto:tubo.yyyuuu@gmail.com
+Expires: 2024-12-04T15:00:00.000Z
+Preferred-Languages: ja, en
+Policy: https://github.com/tubone24/blog/security/policy
