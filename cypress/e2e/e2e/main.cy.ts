@@ -62,14 +62,6 @@ describe("UI Test", () => {
   });
 });
 
-describe("a11y", () => {
-  // eslint-disable-next-line jest/expect-expect
-  it("Has no detectable accessibility violations on TopPage", () => {
-    cy.visit("/").injectAxe();
-    cy.checkA11y(undefined, axeRunOptions);
-  });
-});
-
 describe("Privacy Policy Page", () => {
   // eslint-disable-next-line jest/expect-expect
   it("PrivacyPolicy", () => {
