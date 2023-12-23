@@ -14,12 +14,6 @@ const html = `
   <p>本業のソフトウェア開発をやる傍ら、写真と音楽をやっています。</p>
   <p>何事も好奇心で始めるタイプです。</p>
   <br />
-  <h2>技術的傾向</h2>
-  <h3>Languages</h3>
-  <figure><embed src="https://wakatime.com/share/@tubone/9afcad3b-1d40-4107-8ac0-f855cfd0d74d.svg"/></figure>
-  <h3>Code Activity</h3>
-  <figure><embed src="https://wakatime.com/share/@tubone/93a178e7-6fa6-4fca-8380-c40c9e6e21a3.svg"/></figure>
-  <br />
   <div id="toc_container">
   <b><p class="toc_title">Contents</p></b>
   <ul class="toc_list">
