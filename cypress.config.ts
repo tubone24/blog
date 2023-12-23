@@ -6,6 +6,7 @@ export default defineConfig({
   screenshotsFolder: "./cypress/snapshots/actual",
   trashAssetsBeforeRuns: true,
   chromeWebSecurity: false,
+  video: true,
   videoCompression: 15,
 
   e2e: {

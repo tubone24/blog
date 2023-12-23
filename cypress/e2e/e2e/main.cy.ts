@@ -62,14 +62,6 @@ describe("UI Test", () => {
   });
 });
 
-describe("a11y", () => {
-  // eslint-disable-next-line jest/expect-expect
-  it("Has no detectable accessibility violations on TopPage", () => {
-    cy.visit("/").injectAxe();
-    cy.checkA11y(undefined, axeRunOptions);
-  });
-});
-
 describe("Privacy Policy Page", () => {
   // eslint-disable-next-line jest/expect-expect
   it("PrivacyPolicy", () => {
@@ -85,5 +77,15 @@ describe("404 Page", () => {
     cy.get("button").contains("Preview").click();
     cy.get("h1").contains("404 Not Found...");
     cy.get("h2").contains("Anything else...?");
+  });
+});
+
+describe("a11y", () => {
+  // eslint-disable-next-line jest/expect-expect
+  it("Has no detectable accessibility violations on TopPage", () => {
+    cy.visit("/").injectAxe();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting,testing-library/await-async-utils
+    cy.wait(5000);
+    cy.checkA11y(undefined, axeRunOptions);
   });
 });
