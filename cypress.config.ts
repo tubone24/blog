@@ -6,7 +6,8 @@ export default defineConfig({
   screenshotsFolder: "./cypress/snapshots/actual",
   trashAssetsBeforeRuns: true,
   chromeWebSecurity: false,
-  videoCompression: true,
+  video: true,
+  videoCompression: 15,
 
   e2e: {
     // We've imported your old cypress plugins here.
