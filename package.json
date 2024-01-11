@@ -208,7 +208,7 @@
     "jest-location-mock": "1.0.10",
     "lint-staged": "13.1.2",
     "markdownlint-cli2": "0.6.0",
-    "memlab": "1.1.40",
+    "memlab": "1.1.42",
     "netlify-cli": "12.10.0",
     "netlify-lambda": "2.0.16",
     "nyc": "15.1.0",
