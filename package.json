@@ -138,7 +138,7 @@
   "devDependencies": {
     "@babel/core": "7.23.7",
     "@babel/preset-typescript": "7.23.3",
-    "@cypress/code-coverage": "3.11.0",
+    "@cypress/code-coverage": "3.12.18",
     "@storybook/addon-a11y": "6.5.16",
     "@storybook/addon-actions": "6.5.16",
     "@storybook/addon-controls": "6.5.16",
