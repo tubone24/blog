@@ -159,7 +159,7 @@
     "@testing-library/cypress": "8.0.7",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
-    "@testing-library/user-event": "14.4.3",
+    "@testing-library/user-event": "14.5.2",
     "@textlint-rule/textlint-rule-no-duplicate-abbr": "1.0.2",
     "@types/jest": "29.1.2",
     "@types/jest-axe": "3.5.8",
