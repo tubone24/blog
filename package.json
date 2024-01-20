@@ -12,7 +12,7 @@
     "@sentry/profiling-node": "0.3.0",
     "@sentry/react": "7.31.1",
     "@sentry/tracing": "7.31.1",
-    "@types/react-helmet": "6.1.6",
+    "@types/react-helmet": "6.1.11",
     "@typescript-eslint/eslint-plugin": "5.38.0",
     "@typescript-eslint/parser": "5.38.0",
     "algoliasearch": "4.19.1",
