@@ -61,7 +61,7 @@
     "gatsby-remark-prismjs-title": "1.0.0",
     "gatsby-remark-table-of-contents": "2.0.0",
     "gatsby-source-filesystem": "4.23.0",
-    "gatsby-transformer-remark": "5.25.1",
+    "gatsby-transformer-remark": "6.0.0",
     "gitalk": "1.8.0",
     "html-minifier": "4.0.0",
     "intersection-observer": "0.12.2",
