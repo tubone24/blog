@@ -56,6 +56,8 @@ QuerySerectorで目的の情報までアクセスするため、今後Webペー�
 
 一旦こちらで実装を進めていきます。
 
+![img](https://i.imgur.com/79xoiL5.png)
+
 ```typescript
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 
