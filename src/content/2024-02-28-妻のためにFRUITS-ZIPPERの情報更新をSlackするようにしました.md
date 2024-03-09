@@ -52,11 +52,21 @@ DenoでDOMをパースするには[Deno DOM](https://github.com/b-fuze/deno-dom)
 
 直感的な使い味でとても使いやすかったです。
 
-QuerySerectorで目的の情報までアクセスするため、今後Webページのレイアウトが変わってしまったら壊れてしまうスクリプトにはなってますが、
-
-一旦こちらで実装を進めていきます。
+QuerySerectorで目的の情報までアクセスするため、今後Webページのレイアウトが変わってしまったら壊れてしまうスクリプトにはなってますが、一旦こちらで実装を進めていきます。
 
 ![img](https://i.imgur.com/79xoiL5.png)
+
+サイトの要素を眺めて....作っていきます。
+
+Informationはview allのページがあり、そちらの方がレイアウトの更新に引っ張られなさそうできたのでそちらを使います。
+
+main → section → ul → liとたどれば更新情報が取れそうです。
+
+Nodeも17.5から使えるようにはなってるので、Deno特有の話ではないですが、ライブラリを入れずともfetchが使えるのは便利ですね。
+
+## Denoで時刻を扱う
+
+
 
 ```typescript
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
