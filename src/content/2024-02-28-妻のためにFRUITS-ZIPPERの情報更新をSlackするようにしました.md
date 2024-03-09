@@ -46,7 +46,46 @@ Twitterには告知がされたらしいのですが、告知タイミングが�
 
 Denoでこういったスクリプト作るの、べらぼうに簡単なのでみなさんも利用したら離れられなくなりますよ！！！
 
-## DenoでHTMLをパースする
+## DenoでDOMをパースする
+
+DenoでDOMをパースするには[Deno DOM](https://github.com/b-fuze/deno-dom)を使うのが良さそうです。
+
+直感的な使い味でとても使いやすかったです。
+
+QuerySerectorで目的の情報までアクセスするため、今後Webページのレイアウトが変わってしまったら壊れてしまうスクリプトにはなってますが、
+
+一旦こちらで実装を進めていきます。
+
+```typescript
+import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
+
+const WEB_PAGE_URL_BASE = "https://fruitszipper.asobisystem.com" as const;
+
+// 中略
+
+// FRUITS ZIPPERのサイトにアクセスし、DOMを取得する
+  const page = await fetch(`${WEB_PAGE_URL_BASE}/news/1/`);
+  const pageContents = await page.text();
+
+  // DOMをパースする(Documentオブジェクトを取得する)
+  const document = new DOMParser().parseFromString(pageContents, "text/html");
+
+  // QuerySelectorを使って、更新情報の要素にアクセスする
+  const ul = document.querySelector("main > section  > ul");
+  const lis = ul?.querySelectorAll("li");
+
+  const information: InformationItem[] = [];
+
+  for (const li of lis) {
+    const url = li.querySelector("a")?.getAttribute("href");
+
+    const dateText = li.querySelector("div > .date").textContent;
+    const date = datetime().parse(dateText, "YYYY.MM.dd");
+    const titleText = li.querySelector("div > .tit").textContent;
+
+    information.push({ date: date, title: titleText, url: url });
+  }
+```
 
 ## Slackに投稿する
 
