@@ -6,7 +6,7 @@ description: 妻が好きなFRUITS ZIPPERの更新情報をSlackに投稿して�
 tags:
   - Deno
   - FRUITS ZIPPER
-headerImage: https://i.imgur.com/QmIHfeR.jpg
+headerImage: https://i.imgur.com/FO7l5lW.png
 templateKey: blog-post
 ---
 
@@ -20,7 +20,7 @@ templateKey: blog-post
 
 ## FRUITS ZIPPER
 
-皆様[FRUITS ZIPPER](https://asobisystem.com/talent/fruitszipper/)というアイドルをご存知ですか？
+皆さま[FRUITS ZIPPER](https://asobisystem.com/talent/fruitszipper/)というアイドルをご存じですか？
 
 [アソビシステム](https://asobisystem.com/)所属のアイドルで[昨年のレコード大賞で最優秀新人賞を受賞した](https://news.yahoo.co.jp/articles/c9b2e3ea42b4030cb8641125cb6ca564d3c043d0#:~:text=%E6%97%A5%E6%9C%AC%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E5%A4%A7%E8%B3%9E%E3%80%8D%E3%81%AF%E3%80%812023,ZIPPER%E3%80%8D%E3%81%8C%E9%81%B8%E5%87%BA%E3%81%95%E3%82%8C%E3%81%9F%E3%80%82)今最も勢いのあるアイドルです。
 
@@ -44,7 +44,7 @@ Twitterには告知がされたらしいのですが、告知タイミングが�
 
 また、妻はTypeScriptを勉強中なのでせっかくなので二人でコーディングできるようにDenoで構築しようと思います。
 
-Denoでこういったスクリプト作るの、べらぼうに簡単なのでみなさんも利用したら離れられなくなりますよ！！！
+Denoでこういったスクリプト作るの、べらぼうに簡単なのでみなさんも利用したら離れられなくなりますよ!!!
 
 ## DenoでDOMをパースする
 
@@ -52,7 +52,7 @@ DenoでDOMをパースするには[Deno DOM](https://github.com/b-fuze/deno-dom)
 
 直感的な使い味でとても使いやすかったです。
 
-QuerySerectorで目的の情報までアクセスするため、今後Webページのレイアウトが変わってしまったら壊れてしまうスクリプトにはなってますが、一旦こちらで実装を進めていきます。
+QuerySelectorで目的の情報までアクセスするため、今後Webページのレイアウトが変わってしまったら壊れてしまうスクリプトにはなってますが、一旦こちらで実装を進めていきます。
 
 ![img](https://i.imgur.com/79xoiL5.png)
 
@@ -120,7 +120,7 @@ for (const li of lis) {
 
 SlackのIncoming Webhookで更新があった場合は通知を飛ばすようにしております。
 
-特に工夫されているところもなく上記で作成したinformationオブジェクトを一つずつIncoming WebhookにPOSTしているだけです。
+特に工夫されているところもなく上記で作成したinformationオブジェクトを1つずつIncoming WebhookにPOSTしているだけです。
 
 妻も自分も反応できるように**@channel**投稿にしています。
 
@@ -196,17 +196,29 @@ const writeNotionDatabase = async (information: InformationItem[]) => {
 };
 ```
 
+項目としては、タイトル・日付・リンクのほかに、チェックボックスを設けており、チケットの抽選に対応したかどうかを記録できます。
+
+次のようになりました。
+
 ![img](https://i.imgur.com/yoZJpIh.png)
+
+Viewを変更することでカレンダー表示にもできます。（使い所はちょっとわからないですが。）
 
 ![img](https://i.imgur.com/gPUDGkn.png)
 
 ## GHAに載せる
 
+さて、ここまででスクリプトが完成したので後はGitHub Actionsに載せて定期的に実行するようにしましょう。
+
+今回は一日に一回実行するようにしました。簡単なWorkflowなのでコードは割愛します。
+
 ## 完成
 
 ということで完成しました！
 
-妻からもよいフィードバックが！！やったやったー！
+妻からもよいフィードバックが!!!やったやったー!!!
+
+![img](https://i.imgur.com/FO7l5lW.png)
 
 
 
