@@ -1,11 +1,13 @@
 ---
-slug: 2024-02-28/妻のためにFRUITS-ZIPPERの情報更新をSlackするようにしました
+slug: 2024-02-28/妻のためにアイドルの情報が更新されたらSlackに通知する実装をした
 title: "妻のためにアイドルの情報が更新されたらSlackに通知する実装をした"
 date: 2024-03-11T15:57:29+0000
 description: 妻が好きなFRUITS ZIPPERの更新情報をSlackに投稿して情報に最速アクセスできるようにします。
 tags:
   - Deno
   - FRUITS ZIPPER
+  - Deno DOM
+  - ptera
 headerImage: https://i.imgur.com/FO7l5lW.png
 templateKey: blog-post
 ---
@@ -157,7 +159,7 @@ const notifySlack = async (information: InformationItem[]) => {
 
 実際に投稿されたものはこんな感じです。
 
-![img](https://i.imgur.com/LCFGex8.png)
+![img](https://i.imgur.com/92JtEWa.png)
 
 妻も喜んでますね。
 
@@ -222,5 +224,5 @@ Viewを変更することでカレンダー表示にもできます。（使い�
 
 妻からもよいフィードバックが!!!やったやったー!!!
 
-![img](https://i.imgur.com/FO7l5lW.png)
+![img](https://i.imgur.com/vzyD8Iu.png)
 
