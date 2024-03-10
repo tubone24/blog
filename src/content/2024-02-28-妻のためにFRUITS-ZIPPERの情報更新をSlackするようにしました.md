@@ -28,23 +28,27 @@ TikTokを中心に今若者から絶大な人気を得ています。
 
 そして何を隠そう、妻がこのアイドルのファンなのです。
 
-来る日も来る日も彼女たちの曲を聞いていたら私も俄然興味が出てきました。武道館ライブが当たるといいな。
+来る日も来る日も彼女たちの曲を聞いていたら私も俄然興味が出てきました。[武道館ライブ](https://fruitszipper.asobisystem.com/news/detail/22274)が当たるといいな。
 
 ## 最新情報のキャッチアップに苦戦
 
 とある日、妻がとても悲しんでいて理由を聞いたら、どうやら「[松本かれんちゃん](https://asobisystem.com/talent/matsumotokaren/)のイベント」の申し込みを見逃してしまったようです。
 
-Twitterには告知がされたらしいのですが、告知タイミングが期限ギリギリだったらしく、反応できなかったようです。
+Twitterには告知がされたらしいのですが、告知タイミングが申し込み期限ギリギリだったらしく、締め切りまでに反応できなかったようです。
 
-妻の話によると、どうやら公式ホームページのInformationには情報が反映されるらしく、そちらを定期的に確認さえすれば松本かれんちゃんのイベントに出遅れなかったそうです。
+妻の話によると、どうやら公式ホームページのInformation欄には情報が反映されるらしく、そちらを定期的に確認さえすれば松本かれんちゃんのイベントに出遅れなかったそうです。
+
+とはいえ、毎日ホームページをチェックするのも...。
+
+ということで仕組みで解決しましょう。
 
 ## ということで定期的に確認してみよう
 
-我が家では家族Slackを使ってるので、Slackの特定のチャンネルにInformationが更新されたら、通知する仕組みを作っていきます。
+我が家では家族Slackを導入しているので、Slackの特定のチャンネルにFRUITS ZIPPERのInformationが更新されたら、通知する仕組みを作っていきます。
 
 また、妻はTypeScriptを勉強中なのでせっかくなので二人でコーディングできるようにDenoで構築しようと思います。
 
-Denoでこういったスクリプト作るの、べらぼうに簡単なのでみなさんも利用したら離れられなくなりますよ!!!
+Denoでこういった単発のスクリプト作るのは、べらぼうに簡単なのでみなさんもDeno利用したら離れられなくなりますよ!!!
 
 ## DenoでDOMをパースする
 
@@ -58,21 +62,21 @@ QuerySelectorで目的の情報までアクセスするため、今後Webペー�
 
 サイトの要素を眺めて....作っていきます。
 
-Informationはview allのページがあり、そちらの方がレイアウトの更新に引っ張られなさそうできたのでそちらを使います。
+ホームページのInformationは[view all](https://fruitszipper.asobisystem.com/news/1/)の専用ページがあり、そちらの方が他情報によるレイアウトの更新に引っ張られなさそうでしたのでそちらを使います。
 
-main → section → ul → liとたどれば更新情報が取れそうです。
-
-Nodeも17.5から使えるようにはなってるので、Deno特有の話ではないですが、ライブラリを入れずともfetchが使えるのは便利ですね。
+構造的にmain → section → ul → liとたどれば更新情報が取れそうです。
 
 ## Denoで時刻を扱う
 
 Denoで日時を便利に扱うライブラリとして[ptera](https://github.com/Tak-Iwamoto/ptera)を使いました。
 
-DenoでもDateオブジェクトの扱いは引き続きわかりにくいです。まじで使いづらいです。
+DenoでもDateオブジェクトの扱いは引き続きわかりにくいです。JavaScriptのDateはまじで使いづらいです。
 
 なので、pteraを使って日時を扱います。Dayjsライクな使い勝手でとても使いやすかったです。
 
 [Deno DOM](https://github.com/b-fuze/deno-dom)と[ptera](https://github.com/Tak-Iwamoto/ptera)を使って次のようなコードを書きました。
+
+Deno特有の話ではないですが、(Nodeも17.5からfetchが使えるようにはなってるので)ライブラリを入れずともfetchが使えるのは便利ですね。
 
 ```typescript
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
@@ -122,7 +126,7 @@ SlackのIncoming Webhookで更新があった場合は通知を飛ばすよう�
 
 特に工夫されているところもなく上記で作成したinformationオブジェクトを1つずつIncoming WebhookにPOSTしているだけです。
 
-妻も自分も反応できるように**@channel**投稿にしています。
+妻も自分も反応できるように、**@channel**投稿にしています。
 
 ```typescript
 const notifySlack = async (information: InformationItem[]) => {
@@ -159,7 +163,7 @@ const notifySlack = async (information: InformationItem[]) => {
 
 ## Notion Databaseに記録する
 
-Slackだと会話が流れてしまったり、チケットの抽選を対応したか忘れてしまう問題があったので、合わせてNotion Databaseにも記録を残しておきます。
+Slackだと会話が流れてしまったり、チケットの抽選を対応したか忘れてしまう問題があったので、合わせて[Notion Database](https://www.notion.so/help/intro-to-databases)にも記録を残しておきます。
 
 [NotionのAPI](https://developers.notion.com/docs/working-with-databases#adding-pages-to-a-database)を使って、Databaseに記録しています。
 
@@ -200,11 +204,11 @@ const writeNotionDatabase = async (information: InformationItem[]) => {
 
 次のようになりました。
 
-![img](https://i.imgur.com/yoZJpIh.png)
+![img](https://i.imgur.com/gPUDGkn.png)
 
 Viewを変更することでカレンダー表示にもできます。（使い所はちょっとわからないですが。）
 
-![img](https://i.imgur.com/gPUDGkn.png)
+![img](https://i.imgur.com/yoZJpIh.png)
 
 ## GHAに載せる
 
@@ -219,6 +223,4 @@ Viewを変更することでカレンダー表示にもできます。（使い�
 妻からもよいフィードバックが!!!やったやったー!!!
 
 ![img](https://i.imgur.com/FO7l5lW.png)
-
-
 
