@@ -19,15 +19,18 @@ exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
   const headers = {
     Accept: "application/json",
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   try {
-    const response = await fetch("https://github.com/login/oauth/access_token", {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      "https://github.com/login/oauth/access_token",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
     const data = await response.json();
 
     console.log({
