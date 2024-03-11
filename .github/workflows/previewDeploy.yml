@@ -390,9 +390,11 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          npm_config_arch: x64
+          npm_config_platform: linux
         run: |
           yarn install --frozen-lockfile
-          npm install --os=linux --cpu=x64 sharp
+          yarn add sharp
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
