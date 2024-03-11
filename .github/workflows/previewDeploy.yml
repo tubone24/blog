@@ -393,6 +393,7 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           cd functions/src
+          npm install --os=linux --cpu=x64 sharp
           yarn install --frozen-lockfile
       - name: yarn build
         env:
