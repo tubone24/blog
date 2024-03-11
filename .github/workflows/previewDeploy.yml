@@ -391,7 +391,7 @@ jobs:
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          npm i -g --os=linux --cpu=x64 sharp
+          npm i --os=linux --cpu=x64 sharp
           yarn install --frozen-lockfile
       - name: yarn build
         env:
