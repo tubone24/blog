@@ -5,3 +5,7 @@
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
+
+[functions]
+  directory = "functions/src"
+  included_files = ["functions/src/KaiseiTokumin-Bold.ttf"]
