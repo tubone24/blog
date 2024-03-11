@@ -5,6 +5,3 @@
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
-
-[functions]
-node_bundler = "esbuild"
