@@ -18,7 +18,7 @@ const transaction = Sentry.startTransaction({
 
 // opentype: フォントの読み込み
 const font = opentype.loadSync(
-  "https://github.com/tubone24/blog/raw/cdbc8b20e756d8c0ca9a1a7e1779cfa6201e02b8/functions/src/KaiseiTokumin-Bold.ttf"
+  "https://raw.githubusercontent.com/tubone24/blog/cdbc8b20e756d8c0ca9a1a7e1779cfa6201e02b8/functions/src/KaiseiTokumin-Bold.ttf"
 );
 
 exports.handler = async (event, context) => {
