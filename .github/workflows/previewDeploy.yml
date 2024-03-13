@@ -393,9 +393,8 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           cd functions/src
-          npm install --include=optional sharp
-          npm install
-          npm install --os=linux --cpu=x64
+          npm install --os=linux --cpu=x64 --prefix ./node_modules sharp
+          ls node_modules/
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}

@@ -7,6 +7,5 @@
   package = "netlify-plugin-gatsby-cache"
 
 [functions]
-  external_node_modules = ["functions/src/node_modules"]
   directory = "functions/src"
   included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "KaiseiTokumin-Bold.ttf", "functions/src/node_modules/sharp/**/*"]
