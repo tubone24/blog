@@ -392,11 +392,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           yarn install --frozen-lockfile
-          sudo apt-get update
-          sudo apt install libvips-dev
           cd functions/src
-          npm install --save node-addon-api node-gyp
-          npm install --build-from-source --platform=linux --arch=x64
+          npm install --include=optional sharp
+          npm install
+          npm install --os=linux --cpu=x64
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
