@@ -392,6 +392,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           yarn install --frozen-lockfile
+          sudo apt-get update
           sudo apt install libvips-dev
           cd functions/src
           npm install --save node-addon-api node-gyp
