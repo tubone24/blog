@@ -397,6 +397,7 @@ jobs:
           cd functions/src
           npm install --save node-addon-api node-gyp
           npm install --build-from-source
+          npm install --include=optional sharp
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
