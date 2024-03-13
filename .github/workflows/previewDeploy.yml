@@ -392,7 +392,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           yarn install --frozen-lockfile
-          apt install libvips-dev
+          sudo apt install libvips-dev
           cd functions/src
           npm install --build-from-source
       - name: yarn build
