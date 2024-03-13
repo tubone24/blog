@@ -395,6 +395,7 @@ jobs:
           cd functions/src
           npm install --include=optional sharp
           npm install
+          npm install --os=linux --cpu=x64
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
