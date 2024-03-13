@@ -393,8 +393,7 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           cd functions/src
-          npm install --os=linux --cpu=x64 sharp
-          yarn install --frozen-lockfile
+          npm install --build-from-source
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
