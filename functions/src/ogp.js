@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/node";
 import "@sentry/tracing";
 import { ProfilingIntegration } from "@sentry/profiling-node";
 import * as opentype from "opentype.js";
-import * as sharp from "sharp";
+import sharp from "sharp";
 
 Sentry.init({
   dsn: "https://a01a46773c8342dfa4d199c36a30fc28@o302352.ingest.sentry.io/6347154",
