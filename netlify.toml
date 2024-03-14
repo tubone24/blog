@@ -8,4 +8,4 @@
 
 [functions]
   directory = "functions/src"
-  included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "KaiseiTokumin-Bold.ttf", "functions/src/node_modules/sharp/**/*"]
+  included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "KaiseiTokumin-Bold.ttf", "functions/src/node_modules/**/*"]
