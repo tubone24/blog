@@ -79,7 +79,7 @@ exports.handler = async (event, context) => {
 
     // sharp: SVG画像をPNG画像に変換
     const buffer = await sharp(Buffer.from(svg))
-      .composite([{ input: "./watermark.png", gravity: "center" }])
+      // .composite([{ input: "./watermark.png", gravity: "center" }])
       .png()
       .toBuffer();
 

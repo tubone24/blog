@@ -90,6 +90,7 @@
     "start": "yarn develop",
     "build": "gatsby build --prefix-paths",
     "build:nocache": "yarn clean && yarn build",
+    "gatsby": "gatsby",
     "develop": "gatsby develop",
     "develop:e2e": "cross-env NODE_ENV=development gatsby develop",
     "develop:remote": "gatsby develop -p 8080 -H 0.0.0.0",
