@@ -74,7 +74,7 @@ exports.handler = async (event, context) => {
         })}
       </g>
       <!-- アイコン -->
-      <image href="https://i.imgur.com/6HMBI2C.png" x="80" y="450" height="100px" width="100px"/>
+      <image href="/assets/prIxc3vbVpBQEws1710503052_1710503091.png" x="80" y="450" height="100px" width="100px"/>
     </svg>`;
 
     console.log(svg);
