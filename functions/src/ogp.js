@@ -73,18 +73,20 @@ exports.handler = async (event, context) => {
           lines: 1,
         })}
       </g>
+      <!-- アイコン -->
+      <image href="https://i.imgur.com/6HMBI2C.png" x="80" y="450" height="100px" width="100px"/>
     </svg>`;
 
     console.log(svg);
 
     // sharp: SVG画像をPNG画像に変換
     const buffer = await sharp(Buffer.from(svg))
-      .composite([
-        {
-          input: "./functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp",
-          gravity: "center",
-        },
-      ])
+      // .composite([
+      //   {
+      //     input: "./functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp",
+      //     gravity: "center",
+      //   },
+      // ])
       .png()
       .toBuffer();
 
