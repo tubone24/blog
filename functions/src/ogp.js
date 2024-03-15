@@ -5,7 +5,7 @@ import * as opentype from "opentype.js";
 import sharp from "sharp";
 
 Sentry.init({
-  dsn: "https://a01a46773c8342dfa4d199c36a30fc28@o302352.ingest.sentry.io/6347154",
+  dsn: "https://3bba1fab248c0e15ece4294929ec4185@o302352.ingest.us.sentry.io/4506916048732160",
   tracesSampleRate: 1.0,
   integrations: [new ProfilingIntegration()],
   profilesSampleRate: 1.0,
@@ -13,7 +13,7 @@ Sentry.init({
 
 const transaction = Sentry.startTransaction({
   op: "blog",
-  name: "github cors transaction",
+  name: "ogp transaction",
 });
 
 // opentype: フォントの読み込み
@@ -43,7 +43,7 @@ exports.handler = async (event, context) => {
         </filter>
       </defs>
 
-      <!-- 背景 (灰色) -->
+      <!-- 背景 (緑色) -->
       <rect style="fill:#8af18a;" width="100%" height="100%" />
 
       <!-- 四角角丸 (水色) -->
@@ -69,7 +69,7 @@ exports.handler = async (event, context) => {
       <g transform="translate(150, 470)">
         ${generateTextPath(user, 900, 48, {
           align: "right",
-          color: "#ccc",
+          color: "#aaa",
           lines: 1,
         })}
       </g>
@@ -79,6 +79,7 @@ exports.handler = async (event, context) => {
 
     // sharp: SVG画像をPNG画像に変換
     const buffer = await sharp(Buffer.from(svg))
+      // アイコン合成
       .composite([
         {
           input: "./static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",
@@ -94,7 +95,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: {
-        "Content-Type": "'image/png'",
+        "Content-Type": "image/png",
       },
       body: new Buffer(buffer).toString("base64"),
       isBase64Encoded: true,
