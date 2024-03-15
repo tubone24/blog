@@ -17,7 +17,7 @@ const transaction = Sentry.startTransaction({
 });
 
 // opentype: フォントの読み込み
-const font = opentype.loadSync("./KaiseiTokumin-Bold.ttf");
+const font = opentype.loadSync("./functions/src/KaiseiTokumin-Bold.ttf");
 
 exports.handler = async (event, context) => {
   console.log(event);
@@ -79,7 +79,12 @@ exports.handler = async (event, context) => {
 
     // sharp: SVG画像をPNG画像に変換
     const buffer = await sharp(Buffer.from(svg))
-      // .composite([{ input: "./watermark.png", gravity: "center" }])
+      .composite([
+        {
+          input: "./functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp",
+          gravity: "center",
+        },
+      ])
       .png()
       .toBuffer();
 
