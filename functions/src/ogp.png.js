@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
       </defs>
 
       <!-- 背景 (灰色) -->
-      <rect style="fill:#E9E9E9;" width="100%" height="100%" />
+      <rect style="fill:#8af18a;" width="100%" height="100%" />
 
       <!-- 四角角丸 (水色) -->
       <rect
@@ -75,8 +75,13 @@ exports.handler = async (event, context) => {
       </g>
     </svg>`;
 
+    console.log(svg);
+
     // sharp: SVG画像をPNG画像に変換
-    const buffer = await sharp(Buffer.from(svg)).png().toBuffer();
+    const buffer = await sharp(Buffer.from(svg))
+      .composite([{ input: "./watermark.png", gravity: "center" }])
+      .png()
+      .toBuffer();
 
     transaction.finish();
 
