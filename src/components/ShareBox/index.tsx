@@ -47,7 +47,7 @@ const ShareBox = ({
 }) => (
   <div className={style.mShareBox} role="application" data-testid="share-box">
     <a
-      href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURI(url)}`}
       title="FacebookでShareする"
       target="_blank"
       rel="noopener noreferrer"
@@ -63,7 +63,9 @@ const ShareBox = ({
       <span className="icon-facebook" />
     </a>
     <a
-      href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${url}`}
+      href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${encodeURI(
+        url
+      )}`}
       title="TwitterでShareする"
       target="_blank"
       rel="noopener noreferrer"
@@ -79,7 +81,7 @@ const ShareBox = ({
       <span className="icon-twitter" />
     </a>
     <a
-      href={`http://getpocket.com/edit?url=${url}`}
+      href={`http://getpocket.com/edit?url=${encodeURI(url)}`}
       title="Pocketに追加する"
       target="_blank"
       rel="noopener noreferrer"
@@ -95,7 +97,7 @@ const ShareBox = ({
       <span className="icon-get-pocket" />
     </a>
     <a
-      href={`http://b.hatena.ne.jp/add?mode=confirm&url=${url}`}
+      href={`http://b.hatena.ne.jp/add?mode=confirm&url=${encodeURI(url)}`}
       className={style.shareButtonNoBorder}
       data-hatena-bookmark-layout="vertical-normal"
       data-hatena-bookmark-lang="ja"

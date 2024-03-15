@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -50,14 +50,14 @@ jobs:
         run: yarn install --frozen-lockfile
 #  create-cache-e2e:
 #    runs-on: ubuntu-latest
-#    container: cypress/browsers:node18.12.1-chrome107-ff106-edge
+#    container: cypress/browsers:node18.17.0-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
 #        uses: actions/checkout@v3
 #      - name: Setup Node
 #        uses: actions/setup-node@v3
 #        with:
-#          node-version: 18.12.1
+#          node-version: 18.17.0
 #      - name: Get yarn cache directory path
 #        id: yarn-cache-dir-path
 #        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -84,7 +84,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - uses: denoland/setup-deno@v1
@@ -179,7 +179,7 @@ jobs:
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
 #  test-e2e-chrome:
 #    runs-on: ubuntu-latest
-#    container: cypress/browsers:node18.12.1-chrome107-ff106-edge
+#    container: cypress/browsers:node18.17.0-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
 #        uses: actions/checkout@v3
@@ -241,7 +241,7 @@ jobs:
 #        run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
 #  test-e2e-firefox:
 #    runs-on: ubuntu-latest
-#    container: cypress/browsers:node18.12.1-chrome107-ff106-edge
+#    container: cypress/browsers:node18.17.0-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
 #        uses: actions/checkout@v3
@@ -309,7 +309,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -361,7 +361,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -390,7 +390,11 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install --frozen-lockfile
+        run: |
+          yarn install --frozen-lockfile
+          cd functions/src
+          npm install --os=linux --cpu=x64 --prefix ./ sharp
+          ls node_modules/
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -430,7 +434,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)
@@ -463,7 +467,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -528,7 +532,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -591,7 +595,7 @@ jobs:
           reviewdog_version: latest
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - uses: actions/checkout@v3
@@ -650,7 +654,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.12.1
+          node-version: 18.17.0
       - name: install dependencies
         run: yarn install --frozen-lockfile
       - name: yarn build
@@ -701,7 +705,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website Draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)

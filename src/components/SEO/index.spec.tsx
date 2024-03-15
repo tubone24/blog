@@ -78,13 +78,17 @@ describe("SEO", () => {
     expect(ogType).toBe("article");
     expect(ogTitle).toBe("testTitle");
     expect(ogDescription).toBe("testDescription");
-    expect(ogImage).toBe("https://example.com/test.png");
+    expect(ogImage).toBe(
+      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
+    );
     expect(fbAppId).toBe("280941406476272");
     expect(twitterCard).toBe("summary_large_image");
     expect(twitterCreator).toBe("@meitante1conan");
     expect(twitterTitle).toBe("testTitle");
     expect(twitterDescription).toBe("testDescription");
-    expect(twitterImage).toBe("https://example.com/test.png");
+    expect(twitterImage).toBe(
+      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
+    );
   });
   it("should render metadata (not article)", () => {
     render(
@@ -160,12 +164,16 @@ describe("SEO", () => {
     expect(ogType).toBe("website");
     expect(ogTitle).toBe("testTitle");
     expect(ogDescription).toBe("testDescription");
-    expect(ogImage).toBe("https://example.com/test.png");
+    expect(ogImage).toBe(
+      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
+    );
     expect(fbAppId).toBe("280941406476272");
     expect(twitterCard).toBe("summary_large_image");
     expect(twitterTitle).toBe("testTitle");
     expect(twitterCreator).toBe("@meitante1conan");
     expect(twitterDescription).toBe("testDescription");
-    expect(twitterImage).toBe("https://example.com/test.png");
+    expect(twitterImage).toBe(
+      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
+    );
   });
 });
