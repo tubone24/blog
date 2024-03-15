@@ -169,7 +169,7 @@
     "@types/jest-axe": "3.5.8",
     "@types/loadable__component": "5.13.6",
     "@types/lozad": "1.16.4",
-    "@types/node": "17.0.31",
+    "@types/node": "17.0.45",
     "@types/react-test-renderer": "18.0.0",
     "@types/react-transition-group": "4.4.6",
     "@types/responselike": "1.0.0",
