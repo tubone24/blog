@@ -8,4 +8,4 @@
 
 [functions]
   directory = "functions/src"
-  included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp", "functions/src/node_modules/**/*"]
+  included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp", "static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",  "functions/src/node_modules/**/*"]
