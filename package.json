@@ -262,7 +262,8 @@
     "webpack": "5.76.0",
     "yaml": "2.2.2",
     "postcss": "8.4.33",
-    "tough-cookie": "4.1.3"
+    "tough-cookie": "4.1.3",
+    "sharp": "0.32.6"
   },
   "browserslist": [
     ">0.25% in JP",
