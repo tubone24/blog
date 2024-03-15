@@ -237,7 +237,11 @@ jobs:
           NETLIFY_ENV: production
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: yarn install --frozen-lockfile
+        run: |
+          yarn install --frozen-lockfile
+          cd functions/src
+          npm install --os=linux --cpu=x64 --prefix ./ sharp
+          ls node_modules/
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
