@@ -85,8 +85,8 @@ exports.handler = async (event, context) => {
           left: 80,
           top: 450,
           resize: {
-            width: 100,
-            height: 100,
+            width: 50,
+            height: 50,
           },
         },
       ])
