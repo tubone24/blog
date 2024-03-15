@@ -46,3 +46,6 @@ test/memlab/data
 owasp/zap/*.key
 owasp/zap/*.cer
 owasp/zap/zapHome/
+
+# Local Netlify folder
+.netlify
