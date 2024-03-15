@@ -83,7 +83,11 @@ exports.handler = async (event, context) => {
         {
           input: "./static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",
           left: 80,
-          topOffset: 450,
+          top: 450,
+          resize: {
+            width: 100,
+            height: 100,
+          },
         },
       ])
       .png()
