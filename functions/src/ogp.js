@@ -23,13 +23,19 @@ const font = opentype.loadSync("./functions/src/KaiseiTokumin-Bold.ttf");
 exports.handler = async (event, context) => {
   console.log(event);
   console.log(context);
+  const rawData = Buffer.from(event.blobs, "base64");
+  const data = JSON.parse(rawData.toString("ascii"));
   const queryStringParameters = event.queryStringParameters;
 
   const title = queryStringParameters.title?.toString() || "Hello, World!";
   const user = `by ` + (queryStringParameters.user?.toString() || "tubone24");
 
   try {
-    const ogp = getStore("ogp");
+    const ogp = getStore({
+      name: "ogp",
+      token: data.token,
+      siteID: "3751ef40-b145-4249-9657-39d3fb04ae81",
+    });
     const ogpArrayBuf = await ogp.get(`${encodeURIComponent(title)}`, {
       type: "arrayBuffer",
     });
