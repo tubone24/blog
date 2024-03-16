@@ -12,6 +12,10 @@ Sentry.init({
   profilesSampleRate: 1.0,
 });
 
+export const config = {
+  path: "/functions/ogp.png",
+};
+
 const transaction = Sentry.startTransaction({
   op: "blog",
   name: "ogp transaction",
