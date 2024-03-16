@@ -84,9 +84,7 @@ describe("SEO", () => {
     expect(twitterCreator).toBe("@meitante1conan");
     expect(twitterTitle).toBe("testTitle");
     expect(twitterDescription).toBe("testDescription");
-    expect(twitterImage).toBe(
-      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
-    );
+    expect(twitterImage).toBe("https://example.com/test.png");
   });
   it("should render metadata (not article)", () => {
     render(
@@ -168,8 +166,6 @@ describe("SEO", () => {
     expect(twitterTitle).toBe("testTitle");
     expect(twitterCreator).toBe("@meitante1conan");
     expect(twitterDescription).toBe("testDescription");
-    expect(twitterImage).toBe(
-      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
-    );
+    expect(twitterImage).toBe("https://example.com/test.png");
   });
 });
