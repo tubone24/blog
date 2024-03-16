@@ -8,6 +8,7 @@ type Props = {
   siteTitleAlt: string;
   isPost: boolean;
   image: string;
+  ogpImage?: string;
   tag: string;
   description: string;
 };
@@ -94,13 +95,11 @@ const SEO = ({
   title = config.siteTitle,
   description,
   image,
+  ogpImage,
   siteTitleAlt,
   isPost,
   tag,
 }: Props) => {
-  const ogpImageLink = `https://blog.tubone-project24.xyz/ogp.png?title=${encodeURI(
-    title
-  )}`;
   return (
     <Helmet>
       <title>{title}</title>
@@ -142,7 +141,7 @@ const SEO = ({
       <meta name="twitter:creator" content="@meitante1conan" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogpImageLink} />
+      <meta name="twitter:image" content={ogpImage || image} />
     </Helmet>
   );
 };

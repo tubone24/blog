@@ -9,6 +9,7 @@ tags:
   - Deno DOM
   - ptera
 headerImage: https://i.imgur.com/FO7l5lW.png
+ogpImage: https://i.imgur.com/R4WlvEE.png
 templateKey: blog-post
 ---
 
@@ -225,4 +226,3 @@ Viewを変更することでカレンダー表示にもできます。（使い�
 妻からもよいフィードバックが!!!やったやったー!!!
 
 ![img](https://i.imgur.com/vzyD8Iu.png)
-

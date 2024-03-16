@@ -580,6 +580,7 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.description'
   | 'childMarkdownRemark.frontmatter.headerImage'
   | 'childMarkdownRemark.frontmatter.id'
+  | 'childMarkdownRemark.frontmatter.ogpImage'
   | 'childMarkdownRemark.frontmatter.slug'
   | 'childMarkdownRemark.frontmatter.tags'
   | 'childMarkdownRemark.frontmatter.templateKey'
@@ -647,6 +648,7 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.description'
   | 'childrenMarkdownRemark.frontmatter.headerImage'
   | 'childrenMarkdownRemark.frontmatter.id'
+  | 'childrenMarkdownRemark.frontmatter.ogpImage'
   | 'childrenMarkdownRemark.frontmatter.slug'
   | 'childrenMarkdownRemark.frontmatter.tags'
   | 'childrenMarkdownRemark.frontmatter.templateKey'
@@ -1122,6 +1124,7 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.description'
   | 'frontmatter.headerImage'
   | 'frontmatter.id'
+  | 'frontmatter.ogpImage'
   | 'frontmatter.slug'
   | 'frontmatter.tags'
   | 'frontmatter.templateKey'
@@ -1222,6 +1225,7 @@ type MarkdownRemarkFrontmatter = {
   readonly description: Maybe<Scalars['String']>;
   readonly headerImage: Maybe<Scalars['String']>;
   readonly id: Maybe<Scalars['String']>;
+  readonly ogpImage: Maybe<Scalars['String']>;
   readonly slug: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly templateKey: Maybe<Scalars['String']>;
@@ -1241,6 +1245,7 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly headerImage: InputMaybe<StringQueryOperatorInput>;
   readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly ogpImage: InputMaybe<StringQueryOperatorInput>;
   readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly templateKey: InputMaybe<StringQueryOperatorInput>;
@@ -2779,7 +2784,7 @@ type StringQueryOperatorInput = {
   readonly regex: InputMaybe<Scalars['String']>;
 };
 
-type postFragment = { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly id: string | null, readonly title: string | null, readonly slug: string | null, readonly date: string | null, readonly headerImage: string | null, readonly tags: ReadonlyArray<string | null> | null } | null };
+type postFragment = { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly id: string | null, readonly title: string | null, readonly slug: string | null, readonly date: string | null, readonly headerImage: string | null, readonly ogpImage: string | null, readonly tags: ReadonlyArray<string | null> | null } | null };
 
 type cardDataFragment = { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly title: string | null, readonly date: string | null, readonly url: string | null } | null };
 
@@ -2788,7 +2793,7 @@ type BlogPostQueryQueryVariables = Exact<{
 }>;
 
 
-type BlogPostQueryQuery = { readonly content: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly id: string | null, readonly title: string | null, readonly slug: string | null, readonly date: string | null, readonly headerImage: string | null, readonly tags: ReadonlyArray<string | null> | null } | null } }> } };
+type BlogPostQueryQuery = { readonly content: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly id: string | null, readonly title: string | null, readonly slug: string | null, readonly date: string | null, readonly headerImage: string | null, readonly ogpImage: string | null, readonly tags: ReadonlyArray<string | null> | null } | null } }> } };
 
 type PeriodQueryQueryVariables = Exact<{
   periodStartDate: InputMaybe<Scalars['Date']>;

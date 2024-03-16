@@ -85,6 +85,12 @@ class BlogPost extends Component<Props> {
           tag={frontmatter?.tags ? frontmatter.tags[0] || "" : ""}
           description={excerpt || ""}
           image={frontmatter?.headerImage || config.defaultImage || ""}
+          ogpImage={
+            frontmatter?.ogpImage ||
+            frontmatter?.headerImage ||
+            config.defaultImage ||
+            ""
+          }
         />
       </div>
     );
@@ -102,6 +108,7 @@ export const pageQuery = graphql`
       slug
       date
       headerImage
+      ogpImage
       tags
     }
   }
