@@ -6,6 +6,7 @@
   "dependencies": {
     "@loadable/component": "5.15.3",
     "@netlify/blobs": "7.0.1",
+    "@netlify/edge-functions": "2.3.1",
     "@popperjs/core": "2.11.8",
     "@raae/gatsby-remark-oembed": "0.3.3",
     "@sentry/browser": "7.31.1",

@@ -3403,6 +3403,11 @@
     urlpattern-polyfill "8.0.2"
     uuid "^9.0.0"
 
+"@netlify/edge-functions@2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@netlify/edge-functions/-/edge-functions-2.3.1.tgz#45dc30894e57948b47a6b4fe6f05f664ec55716c"
+  integrity sha512-3sJzP1DmzMZppkAZpUixdHA4ryiKD1NSpLMRViYStE9Oe10rZPSnM8yl6A90vTBqCYvbAF5S7W9oPf2ucrCCIQ==
+
 "@netlify/framework-info@^9.8.10":
   version "9.8.10"
   resolved "https://registry.yarnpkg.com/@netlify/framework-info/-/framework-info-9.8.10.tgz#a18589f132dafb5cb7f86c05a9895b9118633fe1"
