@@ -85,7 +85,7 @@ describe("SEO", () => {
     expect(twitterTitle).toBe("testTitle");
     expect(twitterDescription).toBe("testDescription");
     expect(twitterImage).toBe(
-      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
+      "https://blog.tubone-project24.xyz/ogp.png?title=testTitle"
     );
   });
   it("should render metadata (not article)", () => {
@@ -169,7 +169,7 @@ describe("SEO", () => {
     expect(twitterCreator).toBe("@meitante1conan");
     expect(twitterDescription).toBe("testDescription");
     expect(twitterImage).toBe(
-      "https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=testTitle"
+      "https://blog.tubone-project24.xyz/ogp.png?title=testTitle"
     );
   });
 });

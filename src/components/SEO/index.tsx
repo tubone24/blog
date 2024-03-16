@@ -98,7 +98,7 @@ const SEO = ({
   isPost,
   tag,
 }: Props) => {
-  const ogpImageLink = `https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=${encodeURI(
+  const ogpImageLink = `https://blog.tubone-project24.xyz/ogp.png?title=${encodeURI(
     title
   )}`;
   return (
