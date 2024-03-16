@@ -98,6 +98,9 @@ const SEO = ({
   isPost,
   tag,
 }: Props) => {
+  const ogpImageLink = `https://blog.tubone-project24.xyz/ogp.png?title=${encodeURI(
+    title
+  )}`;
   return (
     <Helmet>
       <title>{title}</title>
@@ -139,7 +142,7 @@ const SEO = ({
       <meta name="twitter:creator" content="@meitante1conan" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={ogpImageLink} />
     </Helmet>
   );
 };
