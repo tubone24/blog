@@ -12,7 +12,7 @@ Sentry.init({
   profilesSampleRate: 1.0,
 });
 
-export const config = {
+exports.config = {
   path: "/functions/ogp.png",
 };
 
