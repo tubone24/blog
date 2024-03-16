@@ -21,9 +21,6 @@ const transaction = Sentry.startTransaction({
   name: "ogp transaction",
 });
 
-// opentype: フォントの読み込み
-const font = opentype.loadSync("./functions/src/KaiseiTokumin-Bold.ttf");
-
 exports.handler = async (event, context) => {
   console.log(event);
   console.log(context);
@@ -145,6 +142,9 @@ exports.handler = async (event, context) => {
 };
 
 function generateTextPath(text, width, lineHight, textOptions) {
+  // opentype: フォントの読み込み
+  const font = opentype.loadSync("./functions/src/KaiseiTokumin-Bold.ttf");
+
   // テキストオプションのデフォルト値を設定
   textOptions = {
     align: textOptions?.align ?? `left`,
