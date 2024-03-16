@@ -40,7 +40,7 @@ const PeriodSummary = ({
                   {frontmatter?.yyyymmdd}&nbsp;&nbsp;
                   <Link
                     to={withPrefix(frontmatter?.url || "/")}
-                    title={frontmatter?.title}
+                    title={frontmatter?.title || ""}
                   >
                     {frontmatter?.title}
                   </Link>

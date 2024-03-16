@@ -11,7 +11,7 @@ const RelatedPosts = ({
   tags,
 }: {
   title: string;
-  tags: readonly (string | undefined)[];
+  tags: readonly (string | null | undefined)[];
 }) => {
   React.useEffect(() => {
     if (isBrowser()) {
@@ -78,7 +78,7 @@ const RelatedPosts = ({
                   title={relatedPost.node.frontmatter?.title || ""}
                   tags={relatedPost.node.frontmatter?.tags || []}
                   date={relatedPost.node.frontmatter?.date || ""}
-                  headerImage={relatedPost.node.frontmatter?.headerImage}
+                  headerImage={relatedPost.node.frontmatter?.headerImage || ""}
                   url={relatedPost.node.fields?.slug || ""}
                 />
               </div>

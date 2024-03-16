@@ -62,7 +62,7 @@ const Card = ({
   url: string;
   headerImage?: string;
   description: string;
-  tags: readonly (string | undefined)[];
+  tags: readonly (string | null | undefined)[];
   index: number;
 }) => (
   <div className="col-sm-12 pb-4" data-testid="card">

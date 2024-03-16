@@ -37,7 +37,7 @@ const RelatedCard = ({
 }: {
   title: string;
   url: string;
-  tags: readonly (string | undefined)[];
+  tags: readonly (string | null | undefined)[];
   date: string;
   headerImage?: string;
   headerBackgroundColor?: string;
