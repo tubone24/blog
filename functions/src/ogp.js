@@ -3,6 +3,7 @@ import "@sentry/tracing";
 import { ProfilingIntegration } from "@sentry/profiling-node";
 import * as opentype from "opentype.js";
 import sharp from "sharp";
+import { getStore } from "@netlify/blobs";
 
 Sentry.init({
   dsn: "https://3bba1fab248c0e15ece4294929ec4185@o302352.ingest.us.sentry.io/4506916048732160",
@@ -28,6 +29,23 @@ exports.handler = async (event, context) => {
   const user = `by ` + (queryStringParameters.user?.toString() || "tubone24");
 
   try {
+    const ogp = getStore("ogp");
+    const ogpArrayBuf = await ogp.get(`${encodeURIComponent(title)}`, {
+      type: "arrayBuffer",
+    });
+
+    if (ogpArrayBuf !== null) {
+      transaction.finish();
+      return {
+        statusCode: 200,
+        headers: {
+          "Content-Type": "image/png",
+        },
+        body: new Buffer(Buffer.from(ogpArrayBuf)).toString("base64"),
+        isBase64Encoded: true,
+      };
+    }
+
     // SVGを生成
     const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${1200}" height="${630}">
@@ -89,6 +107,12 @@ exports.handler = async (event, context) => {
       ])
       .png()
       .toBuffer();
+
+    const arrayBuf = new Uint8Array(buffer).buffer;
+
+    await ogp.set(`${encodeURIComponent(title)}`, arrayBuf, {
+      createdAt: new Date(),
+    });
 
     transaction.finish();
 

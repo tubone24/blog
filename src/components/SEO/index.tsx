@@ -97,54 +97,48 @@ const SEO = ({
   siteTitleAlt,
   isPost,
   tag,
-}: Props) => {
-  const ogpImageLink = `https://blog.tubone-project24.xyz/.netlify/functions/ogp?title=${encodeURI(
-    title
-  )}`;
-  return (
-    <Helmet>
-      <title>{title}</title>
+}: Props) => (
+  <Helmet>
+    <title>{title}</title>
 
-      {/* General tags */}
-      <meta name="description" content={description} />
-      <meta name="image" content={image} />
+    {/* General tags */}
+    <meta name="description" content={description} />
+    <meta name="image" content={image} />
 
-      {/* Schema.org tags */}
-      <script type="application/ld+json">
-        {JSON.stringify(
-          schemaOrgJSONLD({
-            url,
-            title,
-            siteTitleAlt,
-            isPost,
-            image: ogpImageLink,
-            description,
-            tag,
-          })
-        )}
-      </script>
-
-      {/* OpenGraph tags */}
-      <meta property="og:url" content={url} />
-      {isPost ? (
-        <meta property="og:type" content="article" />
-      ) : (
-        <meta property="og:type" content="website" />
+    {/* Schema.org tags */}
+    <script type="application/ld+json">
+      {JSON.stringify(
+        schemaOrgJSONLD({
+          url,
+          title,
+          siteTitleAlt,
+          isPost,
+          image,
+          description,
+          tag,
+        })
       )}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogpImageLink} />
-      <meta property="og:locale" content="ja_JP" />
-      <meta property="fb:app_id" content="280941406476272" />
+    </script>
 
-      {/* Twitter Card tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content="@meitante1conan" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogpImageLink} />
-    </Helmet>
-  );
-};
+    {/* OpenGraph tags */}
+    <meta property="og:url" content={url} />
+    {isPost ? (
+      <meta property="og:type" content="article" />
+    ) : (
+      <meta property="og:type" content="website" />
+    )}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="fb:app_id" content="280941406476272" />
+
+    {/* Twitter Card tags */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@meitante1conan" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+  </Helmet>
+);
 
 export default SEO;

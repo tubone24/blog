@@ -5,6 +5,7 @@
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
     "@loadable/component": "5.15.3",
+    "@netlify/blobs": "7.0.1",
     "@popperjs/core": "2.11.8",
     "@raae/gatsby-remark-oembed": "0.3.3",
     "@sentry/browser": "7.31.1",
@@ -140,8 +141,8 @@
   "devDependencies": {
     "@babel/core": "7.23.7",
     "@babel/eslint-parser": "7.23.3",
-    "@babel/preset-typescript": "7.23.3",
     "@babel/plugin-syntax-typescript": "7.23.3",
+    "@babel/preset-typescript": "7.23.3",
     "@cypress/code-coverage": "3.12.18",
     "@storybook/addon-a11y": "6.5.16",
     "@storybook/addon-actions": "6.5.16",
