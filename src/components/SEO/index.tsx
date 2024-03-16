@@ -106,7 +106,7 @@ const SEO = ({
 
       {/* General tags */}
       <meta name="description" content={description} />
-      <meta name="image" content={image} />
+      <meta name="image" content={ogpImage || image} />
 
       {/* Schema.org tags */}
       <script type="application/ld+json">
@@ -116,7 +116,7 @@ const SEO = ({
             title,
             siteTitleAlt,
             isPost,
-            image,
+            image: ogpImage || image,
             description,
             tag,
           })
@@ -132,7 +132,7 @@ const SEO = ({
       )}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={ogpImage || image} />
       <meta property="og:locale" content="ja_JP" />
       <meta property="fb:app_id" content="280941406476272" />
 

@@ -47,10 +47,10 @@ class BlogPost extends Component<Props> {
       <div className={style.post + " row order-2"}>
         <Header
           img={frontmatter?.headerImage || config.defaultImage}
-          title={frontmatter?.title}
+          title={frontmatter?.title || ""}
           authorName={config.author}
           authorImage={true}
-          subTitle={parseDate(frontmatter?.date)}
+          subTitle={parseDate(frontmatter?.date || "2021-01-01")}
         />
         <Sidebar />
         <main
@@ -78,7 +78,7 @@ class BlogPost extends Component<Props> {
         <ShareBox url={shareURL} />
 
         <SEO
-          title={frontmatter?.title}
+          title={frontmatter?.title || ""}
           url={shareURL}
           siteTitleAlt={config.siteTitle}
           isPost
