@@ -5,4 +5,4 @@
 /sitemap.xml /sitemap-index.xml 301
 /latest/meta-data/ / 301
 /.well-known/security.txt /well-known/security.txt 301
-/ogp.png /.netlify/functions/ogp 301
+/ogp.png /.netlify/functions/ogp 302
