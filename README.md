@@ -63,6 +63,7 @@ Special, thanks!
 - Deploy [Netlify](https://www.netlify.com/)
   - Managed by [Terraform Cloud](https://cloud.hashicorp.com/products/terraform) for Netlify settings
 - Image hosted by [imgur](https://imgur.com)
+- [OGP](https://ogp.me/) is supported. Many sites display header images as OGP images, and Twitter card dynamically generates images highlighting article titles like [Zenn](https://zenn.dev/) or [Qiita](https://qiita.com/).
 - Use [Gitalk](https://gitalk.github.io/) for blog comment system
 - Icons used by [Fontawesome](https://fontawesome.com/), and optimised to [Icomoon](https://icomoon.io/)
 - Sitemap generate
