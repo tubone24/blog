@@ -1,6 +1,7 @@
 import React from "react";
 import config from "@/config/index.json";
 
+// test-coveralls
 const HTML = ({
   htmlAttributes = {},
   headComponents = null,
