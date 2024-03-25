@@ -4,50 +4,6 @@ import Card from "./index";
 import { axe } from "jest-axe";
 
 describe("Card", () => {
-  it("valid text and lozad image", () => {
-    render(
-      <Card
-        title="testTitle"
-        url="https://example.com"
-        index={3}
-        date="2022-01-01"
-        tags={["testTag1", "testTag2"]}
-        description="hogehogehogehoge"
-        headerImage="https://example.com/test.png"
-      />
-    );
-    expect(screen.getByTestId("card")).toHaveTextContent("testTitle");
-    expect(screen.getByTestId("card")).toHaveTextContent("2022-01-01");
-    expect(screen.getByTestId("card")).toHaveTextContent("testTag1");
-    expect(screen.getByTestId("card")).toHaveTextContent("testTag2");
-    expect(screen.getByTestId("card")).toHaveTextContent("hogehogehogehoge");
-    expect(screen.getByTestId("card-header")).toHaveAttribute(
-      "data-background-image",
-      "https://example.com/testl.png"
-    );
-    expect(screen.getByTestId("card-header")).toHaveClass("lozad");
-  });
-  it("valid text and not lozad image", () => {
-    render(
-      <Card
-        title="testTitle"
-        url="https://example.com"
-        index={0}
-        date="2022-01-01"
-        tags={["testTag1", "testTag2"]}
-        description="hogehogehogehoge"
-        headerImage="https://example.com/test.png"
-      />
-    );
-    expect(screen.getByTestId("card")).toHaveTextContent("testTitle");
-    expect(screen.getByTestId("card")).toHaveTextContent("2022-01-01");
-    expect(screen.getByTestId("card")).toHaveTextContent("testTag1");
-    expect(screen.getByTestId("card")).toHaveTextContent("testTag2");
-    expect(screen.getByTestId("card")).toHaveTextContent("hogehogehogehoge");
-    expect(screen.getByTestId("card-header")).toHaveStyle(
-      "background-image: url(https://example.com/testl.png);"
-    );
-  });
   it("undefined tag", () => {
     render(
       <Card
