@@ -3064,7 +3064,7 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
   integrity sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
 
-"@memlab/api@^1.0.11", "@memlab/api@^1.0.27":
+"@memlab/api@^1.0.27":
   version "1.0.27"
   resolved "https://registry.yarnpkg.com/@memlab/api/-/api-1.0.27.tgz#1eb114150b2821e296fdffaf5950663f914d3efe"
   integrity sha512-cLpEoxPU9sz00mQC685h57TT65izUosk1DTTNxG3rFYr9ZO5rUq29FeKxpdXafxdP0xTHfHlyIkEelZuu6c64Q==
@@ -3083,7 +3083,7 @@
     util.promisify "^1.1.1"
     xvfb "^0.4.0"
 
-"@memlab/cli@^1.0.11":
+"@memlab/cli@^1.0.30":
   version "1.0.30"
   resolved "https://registry.yarnpkg.com/@memlab/cli/-/cli-1.0.30.tgz#70ea8af4f481af3f536424c92ee092a15cb76181"
   integrity sha512-U5S3sZ+XPi/tQXEhztZ2iuk7Zcn6yEnV3Sofb4j7zTZDl789koqlyx2dxAI3lfnvIT0GHBCsEbegRgmBjv+wKA==
@@ -3104,7 +3104,7 @@
     util.promisify "^1.1.1"
     xvfb "^0.4.0"
 
-"@memlab/core@^1.1.10", "@memlab/core@^1.1.28":
+"@memlab/core@^1.1.28":
   version "1.1.28"
   resolved "https://registry.yarnpkg.com/@memlab/core/-/core-1.1.28.tgz#42cde83b2818b0b57ece7940485f4b7eaef1b110"
   integrity sha512-ew1ohhZAzmDreEow3A8Nl/fNHfUBh+DVzO8Y1sKfUhF1/eun025LUeV9uNNRVmxYaOb1nOVHAUhPtfrrh94TQQ==
@@ -3120,7 +3120,7 @@
     util.promisify "^1.1.1"
     xvfb "^0.4.0"
 
-"@memlab/e2e@^1.0.11", "@memlab/e2e@^1.0.28":
+"@memlab/e2e@^1.0.28":
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/@memlab/e2e/-/e2e-1.0.28.tgz#5f9320b175910a0aa642782ce005825284ae070b"
   integrity sha512-IKlO7H9UnoBWhGN68EQjT1tqCaJDFo6BPXB+sYUl1elxsENP+9f2dtEZbsHAts3txw/X0uXM90qpZTVm5MpFyA==
@@ -3141,7 +3141,7 @@
     util.promisify "^1.1.1"
     xvfb "^0.4.0"
 
-"@memlab/heap-analysis@^1.0.25", "@memlab/heap-analysis@^1.0.9":
+"@memlab/heap-analysis@^1.0.25":
   version "1.0.25"
   resolved "https://registry.yarnpkg.com/@memlab/heap-analysis/-/heap-analysis-1.0.25.tgz#112fe47d449a5693191d48adfc393aa59202a46a"
   integrity sha512-u+hLqP6wN7fYv4Y9+JYkjER6fA+UzOMf85FQ07VXraTt4WwWpPVvJsbD74JksPXLPOdXh29uUXpSHwID07Q5xw==
@@ -18917,16 +18917,16 @@ memfs@^3.1.2, memfs@^3.2.2:
   dependencies:
     fs-monkey "^1.0.4"
 
-memlab@1.1.42:
-  version "1.1.42"
-  resolved "https://registry.yarnpkg.com/memlab/-/memlab-1.1.42.tgz#64242ebae04365bde11fe6dc94832dce5024119e"
-  integrity sha512-jjgOOZ+CfG4ZOKX0t6OCibdVB7jlWLgvCE/EoW8QX//2NcQgTbtcPfJh/Jt7tCqotx4NvlfiKQUlgYiRuA2mAQ==
+memlab@1.1.45:
+  version "1.1.45"
+  resolved "https://registry.yarnpkg.com/memlab/-/memlab-1.1.45.tgz#b3fc87af23f8eef64b6b1fd5f3d87a77e4779f35"
+  integrity sha512-S0kNnkeDL8EYgWb03wPUMsgEtfYMlow+3y2B+rhi2hfSPLN1cqa23YTvGF13Rp1CBbTYWoi0lIzLxa5tKRYQyw==
   dependencies:
-    "@memlab/api" "^1.0.11"
-    "@memlab/cli" "^1.0.11"
-    "@memlab/core" "^1.1.10"
-    "@memlab/e2e" "^1.0.11"
-    "@memlab/heap-analysis" "^1.0.9"
+    "@memlab/api" "^1.0.27"
+    "@memlab/cli" "^1.0.30"
+    "@memlab/core" "^1.1.28"
+    "@memlab/e2e" "^1.0.28"
+    "@memlab/heap-analysis" "^1.0.25"
     ansi "^0.3.1"
     babar "^0.2.0"
     chalk "^4.0.0"
