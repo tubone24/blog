@@ -139,10 +139,10 @@
     "memlab:tag": "memlab run --scenario test/memlab/testMemleakForTag.js --work-dir test/memlab"
   },
   "devDependencies": {
-    "@babel/core": "7.23.7",
-    "@babel/eslint-parser": "7.23.3",
-    "@babel/plugin-syntax-typescript": "7.23.3",
-    "@babel/preset-typescript": "7.23.3",
+    "@babel/core": "7.24.4",
+    "@babel/eslint-parser": "7.24.1",
+    "@babel/plugin-syntax-typescript": "7.24.1",
+    "@babel/preset-typescript": "7.24.1",
     "@cypress/code-coverage": "3.12.18",
     "@storybook/addon-a11y": "6.5.16",
     "@storybook/addon-actions": "6.5.16",
