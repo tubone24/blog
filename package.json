@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
-    "@loadable/component": "5.15.3",
+    "@loadable/component": "5.16.3",
     "@netlify/blobs": "7.0.1",
     "@popperjs/core": "2.11.8",
     "@raae/gatsby-remark-oembed": "0.3.3",
