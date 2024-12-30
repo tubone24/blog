@@ -9,8 +9,12 @@ headerImage: https://i.imgur.com/QmIHfeR.jpg
 templateKey: blog-post
 ---
 
+AWSはマネージドサービスがやっぱりいいですよね。
+
 ## Table of Contents
 
 ```toc
 
 ```
+
+## Langfuse v3
