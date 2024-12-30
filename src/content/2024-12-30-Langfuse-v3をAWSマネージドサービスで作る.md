@@ -263,14 +263,14 @@ Langfuse v3.0.0の1つ前のv2バージョンがv2.93.7でしたので、まず�
 
 一応、Langfuse [v2.93.7 -> v3.0.0の差分](https://github.com/langfuse/langfuse/compare/v2.93.7...v3.0.0)を確認し下記2つの簡単なマイグレーションのみが存在することを確認したため、万が一の切り戻しも問題ないと判断しました。
 
-packages/shared/prisma/migrations/20241124115100_add_projects_deleted_at/migration.sql
+[packages/shared/prisma/migrations/20241124115100_add_projects_deleted_at/migration.sql](https://github.com/langfuse/langfuse/blob/485120806ef47d31b52344d0995d32e01c6160f0/packages/shared/prisma/migrations/20241124115100_add_projects_deleted_at/migration.sql)
 
 ```sql
 -- AlterTable
 ALTER TABLE "projects" ADD COLUMN "deleted_at" TIMESTAMP(3);
 ```
 
-packages/shared/prisma/migrations/20241206115829_remove_trace_score_observation_constraints/migration.sql
+[packages/shared/prisma/migrations/20241206115829_remove_trace_score_observation_constraints/migration.sql](https://github.com/langfuse/langfuse/blob/485120806ef47d31b52344d0995d32e01c6160f0/packages/shared/prisma/migrations/20241206115829_remove_trace_score_observation_constraints/migration.sql)
 
 ```sql
 -- DropForeignKey
@@ -279,3 +279,12 @@ ALTER TABLE "job_executions" DROP CONSTRAINT "job_executions_job_output_score_id
 -- DropForeignKey
 ALTER TABLE "traces" DROP CONSTRAINT "traces_session_id_project_id_fkey";
 ```
+
+## インフラ構築
+
+[Migrate Langfuse v2 to v3](https://langfuse.com/self-hosting/upgrade-guides/upgrade-v2-to-v3)ではv2とv3の両方のインフラを作成しDNSかEBか何かしらの手段でトラフィックを切り替える作戦を提示されていましたが、めんどくさいので次のような作戦を取りました。
+
+- v2のApp Runner・Amazon Aurora serverless v2を動かし続ける
+- v3で新規に必要になった各種インフラを作成する
+  - WorkerはRedisのキュー契機で動くため、v3のイメージを当てておく
+- v3のすべてのインフラが問題なく動いたことを確認しApp Runnerのイメージをv3に切り替える
