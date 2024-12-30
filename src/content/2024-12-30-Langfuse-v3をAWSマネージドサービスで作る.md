@@ -77,23 +77,77 @@ Langfuse v3は、Langfuse Web Server, Async Worker、Langfuse OLTP(PostgreSQL)�
 
 ちょっと文句が出てきそうですが、v3のアーキテクチャはLangfuse v2のアーキテクチャが解決したい課題を解決していると感じました。
 
-Langfuseの中の人ではないので課題を正しく捉えていないかもですが[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)を参考に自分なりにまとめていきます。
+Langfuseの中の人ではないので課題を正しく捉えていないかもですが[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)を参考に自分なりの考察とともに抜粋しまとめていきます。
 
 ### 近年のLLMアプリケーションの需要増加とObservation特性
 
 LLMアプリケーション自体の数が増えたり、利用者が増えたことによりLangfuse自体の利用も増えてきたことからLangfuse Cloudでのスケーラビリティが問題になってきたと[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)で言及されています。
 
-<figure>
   <blockquote>
     <p>Initial Pain Point: By summer 2023, spiky traffic patterns led to response times on our ingestion API spiking up to 50 seconds.</p>
+    <p><cite><a href="https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution">From Zero to Scale: Langfuse's Infrastructure Evolution</a> by Steffen Schmitz and Max Deichmann</cite></p>
   </blockquote>
-  <figcaption>
-    Challenge 1: Building a Resilient High-Throughput Ingestion Pipeline <cite><a href="https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution">From Zero to Scale: Langfuse's Infrastructure Evolution</a></cite> by Steffen Schmitz and Max Deichmann
-  </figcaption>
-</figure>
 
 また、昨今のLLMアプリケーションは、単純な入力とLLMの出力だけで構成されるアプリケーションではなく、複数のツールを呼び出し、複数のデータストアを参照し、複数の出力を返す複雑なアプリケーションが増えてきています。
 
 加えて、それらを並列・非同期で処理することも増えてきたため1回の回答生成（Langfuseではこの単位をTraceと呼ぶ）に対していくつものイベント(Observation)が同時発生することが増えてきました。
 
-また、
+結果として、Langfuse v2のアーキテクチャではスケーラビリティが追いつかなくなってきたということです。
+
+![昨今のLLMアプリケーションのObservation特性](https://i.imgur.com/W0NoiX1.png)
+
+### プロンプトマネジメントAPIの低レイテンシー要件
+
+Langfuseにはプロンプトマネジメント機能があります。LLMアプリケーションの再デプロイをせずともバージョン管理されたプロンプトを画面から任意のタイミングで差し替えできる機能でLLMアプリケーション開発にはなくてはならない機能となってきました。
+
+先ほど挙げたTrace/Observationに比べて、こちらはレイテンシーがより深刻です。
+
+Trace/Observationは例えばJavaScriptなら本線のアプリケーション動作のなかでLangfuseへのIngestionを非同期・ノンブロッキングで解決することで、アプリの作りとしてユーザー影響を最小限に抑えることができます。（データ欠損など問題はありえますが）
+
+しかしながら、プロンプトマネジメントはLLMアプリケーションの動作起点になる処理でレイテンシーが高いとユーザー体験に直結してしまいます。
+
+この点も[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)で言及されています。
+
+  <blockquote>
+    <p>While tracing is asynchronous and non-blocking, prompts are in the critical path of LLM applications. This made a seemingly straightforward functionality a complex performance challenge: During high ingestion periods, our p95 latency for prompt retrieval spiked to 7 seconds. The situation demanded an architectural solution that could maintain consistent low-latency performance, even under heavy system load from other operations.</p>
+    <p><cite><a href="https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution">From Zero to Scale: Langfuse's Infrastructure Evolution</a> by Steffen Schmitz and Max Deichmann</cite></p>
+  </blockquote>
+
+### 高度な分析要件と立ちはだかる巨大なデータ
+
+繰り返しになりますが、LangfuseはLLMアプリケーションのトレースデータを分析するためのツールです。
+
+分析ということは大量のトレースデータを処理することになります。
+
+昨今のLLMがロングコンテキストな文章を扱うことができるようになったことやマルチモーダルLLMの台頭により、トレースデータ自体のサイズが増えてきています。
+
+高度分析を行なうためにはPostgreSQLのようなOLTPより、OLAPなデータウェアハウスが必要になってきています。
+
+後ほど説明しますがLangfuse v2ではPostgreSQLを使っていましたが、OLAPとしてLangfuse v3ではClickHouseを使っています。
+
+  <blockquote>
+    <p> With LLM analytical data often consisting of large blobs, row-oriented storage was too heavy on disk when scanning through millions of rows. The irony wasn’t lost on us - the very customers who needed our analytics capabilities the most were experiencing the worst performance. This growing pain signaled that our initial architecture, while perfect for rapid development, needed a fundamental rethink to handle enterprise-scale analytical workloads.</p>
+    <p><cite><a href="https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution">From Zero to Scale: Langfuse's Infrastructure Evolution</a> by Steffen Schmitz and Max Deichmann</cite></p>
+  </blockquote>
+
+## Langfuse v3のアーキテクチャDeep Dive
+
+さて、そんな課題を解決するためにLangfuse v3のアーキテクチャはどのようになっているのでしょうか？
+
+少し[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)からDeeo Diveしてみます。
+
+（ここでは記載を省きますが、Langfuse Cloudとして取り組んだプロンプトマネジメントAPIをALBのターゲットグループで分けるなどのアーキテクチャ改善のお話もとてもおもしろいのでぜひ[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)をくまなく読んでいただくことをおすすめします）
+
+### イベントのOLTP書き込み非同期化
+
+散々Langfuse v3のアーキテクチャを見てきたので知った話かもしれませんが、v3ではWeb/Workerの2つのコンポーネントに分かれています。
+
+そして、それらの間にはRedisをキューとして挟むことでイベントの書き込みを非同期化しています。
+
+![Redisをキューとして挟むことでトレースの書き込みを非同期化](https://i.imgur.com/RciSsWv.png)
+
+こうすることで、PostgreSQLのIOPS上限を超えることなくイベントの書き込みを行なうことができるようになりました。
+
+### OLAPとしてのClickhouse導入とレコードの更新処理
+
+Langfuse v3ではOLAPとしてClickHouseを導入しています。ClickHouseはOLAPに特化したデータベースで、分析ワークロードにおいてPostgreSQLに比べ効率的に処理できることが特徴です。
