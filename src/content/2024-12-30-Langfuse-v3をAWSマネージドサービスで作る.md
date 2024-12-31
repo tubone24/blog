@@ -29,6 +29,12 @@ LLMそのものにはあまり興味が持てなかった私ですが、案件�
 
 良い子の皆さんは、大掃除や年越し準備をしている時期ですが、私はLangfuse v3をAWSマネージドサービスで作っていました.....。よろしくない。
 
+## だいぶ長い記事なので先に結論
+
+Langfuse v3のアーキテクチャをAWSマネージドサービスで作りたい場合はぜひ拙作のTerraformモジュールをご利用ください。
+
+<a href="https://github.com/tubone24/langfuse-v3-terraform"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/tubone24/langfuse-v3-terraform.png" width="460px"></a>
+
 ## Langfuseとは
 
 まずおさらいですが、[Langfuse](https://langfuse.com/)とは**LLMアプリケーション向けのオープンソースの監視と分析プラットフォーム**です。
@@ -123,6 +129,8 @@ Ingestionはプロダクションコードのなかで**非同期・ノンブロ
 <p><cite><a href="https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution">From Zero to Scale: Langfuse's Infrastructure Evolution</a> by Steffen Schmitz and Max Deichmann</cite></p>
 </blockquote>
 
+![プロンプトマネジメントAPIの低レイテンシーが必要な理由](https://i.imgur.com/9G3pUC7.png)
+
 ### 高度な分析要件と立ちはだかる巨大なデータ
 
 繰り返しになりますが、LangfuseはLLMアプリケーションのTrace/Observationを **"分析"** するためのツールです。
@@ -215,7 +223,7 @@ ENGINE = ReplacingMergeTree()
 
 この動作をすることで、ClickHouseの**各ノード・OLAPキューブ**で更新処理が独立して実施でき、更新のパフォーマンスが向上するのですが、**バックグラウンドタスクのタイミングを制御しきれないため**、レコード更新後の**読み取り一貫性が保証されるまでの時間が長くなる**という問題があります。
 
-（※正確には**select_sequential_consistency**を使うことで一貫性を保証することはできますが、高コストかつパフォーマンスを犠牲にする運用となってしまいます。）
+（※正確には**select_sequential_consistency**を使うことで一貫性を保証できますが、高コストかつパフォーマンスを犠牲にする運用となってしまいます。）
 
 上記の例ではTextカラムのみの更新でしたが、レコードの**一部カラムを断続的に更新**する場合、一度ClickHouseから**最新のレコードを取得してから更新処理を行なう**必要がでてくるため、レコードの一貫性を保つことが難しくなるというわけです。
 
@@ -456,47 +464,6 @@ UPDATE background_migrations SET failed_at = '2024-12-28 12:00:00', failed_reaso
 これで、ClickHouseデータを飛ばしてしまったときにも**自己責任でデータのリカバリー**ができるようになりました。
 
 (ClickHouseをセルフホステッドからマーケットプレイス経由でCloud版に契約変更する際に参考になるかもしれません。)
-
-## おまけ（ClickHouseに保存されたデータを見てみる)
-
-[tubone24/langfuse-v3-terraform](https://github.com/tubone24/langfuse-v3-terraform)にはClickHouseのデータを見るための**Grafana**も含まれています。
-
-**AWS App Runner**で構築され、構築時にClickHouseの接続情報に関するYAMLを同梱したDockerイメージを使っています。
-
-GitHub Actionsをお使いであればこんな感じでDockerfileを作ってECRにPushすれば、App Runnerに設定した環境変数・シークレットから接続情報がセットされた形で立ち上がります。
-
-```yaml
-      - name: Create Grafana Docker context
-        run: |
-          mkdir -p grafana
-          cat << EOF > grafana/Dockerfile
-          FROM grafana/grafana:latest
-          RUN grafana-cli plugins install grafana-clickhouse-datasource
-          COPY datasources.yaml /etc/grafana/provisioning/datasources/
-          EOF
-          cat << EOF > grafana/datasources.yaml
-          apiVersion: 1
-          datasources:
-            - name: ClickHouse
-              type: grafana-clickhouse-datasource
-              access: proxy
-              url: http://\${CLICKHOUSE_HOST}:8123
-              jsonData:
-                defaultDatabase: default
-                port: 8123
-                username: \${CLICKHOUSE_USER}
-                protocol: http
-              secureJsonData:
-                password: \${CLICKHOUSE_PASSWORD}
-              version: 1
-              editable: true
-          EOF
-      - name: Build and push Grafana image
-        run: |
-          docker build -t ${{ env.ECR_URL }}/grafana:latest ./grafana
-          aws ecr batch-delete-image --repository-name grafana --image-ids imageTag=latest || true
-          docker push ${{ env.ECR_URL }}/grafana:latest
-```
 
 ## まとめ
 
