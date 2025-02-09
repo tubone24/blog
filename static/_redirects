@@ -6,3 +6,5 @@
 /latest/meta-data/ / 301
 /.well-known/security.txt /well-known/security.txt 301
 /ogp.png /.netlify/functions/ogp 200
+http://tubone-project24.xyz/* https://blog.tubone-project24.xyz/:splat 301!
+https://tubone-project24.xyz/* https://blog.tubone-project24.xyz/:splat 301!
