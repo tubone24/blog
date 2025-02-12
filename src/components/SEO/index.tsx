@@ -48,7 +48,7 @@ const schemaOrgJSONLD = ({
           "@type": "ListItem",
           position: 1,
           item: {
-            "@id": "https://blog.tubone-project24.xyz",
+            "@id": "https://tubone-project24.xyz",
             name: "tubone BOYAKI",
           },
         },
@@ -56,7 +56,7 @@ const schemaOrgJSONLD = ({
           "@type": "ListItem",
           position: 2,
           item: {
-            "@id": `https://blog.tubone-project24.xyz/tag/${tag}`,
+            "@id": `https://tubone-project24.xyz/tag/${tag}`,
             name: "tubone BOYAKI",
           },
         },
@@ -98,7 +98,7 @@ const SEO = ({
   isPost,
   tag,
 }: Props) => {
-  const ogpImageLink = `https://blog.tubone-project24.xyz/ogp.png?title=${encodeURI(
+  const ogpImageLink = `https://tubone-project24.xyz/ogp.png?title=${encodeURI(
     title
   )}`;
   return (

@@ -15,8 +15,8 @@ jobs:
     steps:
       - name: send google
         run: |
-          curl -X GET "http://www.google.com/ping?sitemap=https://blog.tubone-project24.xyz/sitemap-index.xml"
-          curl -X GET "http://www.google.com/ping?sitemap=https://blog.tubone-project24.xyz/rss.xml"
+          curl -X GET "http://www.google.com/ping?sitemap=https://tubone-project24.xyz/sitemap-index.xml"
+          curl -X GET "http://www.google.com/ping?sitemap=https://tubone-project24.xyz/rss.xml"
           curl -X GET "http://www.google.com/ping?sitemap=https%3A%2F%2Ftubone-project24.xyz%2Findex.php%3Fxml_sitemap%3Dparams%3D"
           curl -X GET "http://www.google.com/ping?sitemap=https://tubone-project24.xyz/index.php/feed/"
       - name: send pingomatic

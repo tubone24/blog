@@ -14,7 +14,8 @@ const config = require("./src/config/index.json");
 const isLocalDevelopment = () =>
   window &&
   window.location &&
-  window.location.origin !== "https://blog.tubone-project24.xyz";
+  (window.location.origin !== "https://tubone-project24.xyz" ||
+    window.location.origin !== "https://tubone-project24.xyz");
 
 if (isLocalDevelopment() === false) {
   ReactGA.initialize(config.gaMeasurementId);

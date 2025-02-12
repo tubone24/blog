@@ -10,7 +10,7 @@ const html = `
   <h1>プライバシーポリシー</h1>
   <img src="https://i.imgur.com/FyHE8bb.png" alt="key" title="key">
   <h2>私たちについて</h2>
-  <p>私たちのサイトアドレスは<b>https://blog.tubone-project24.xyz</b>です。</p>
+  <p>私たちのサイトアドレスは<b>https://tubone-project24.xyz</b>です。</p>
   <h2>このサイトが収集する個人データと収集の理由</h2>
   <h3>コメント</h3>
   <p>当サイトのコメント機能には<a href="https://github.com/gitalk/gitalk">Gitalk</a>を使用してます。訪問者が
@@ -59,11 +59,11 @@ const PrivacyPolicies = () => (
       <Content post={html} />
     </main>
 
-    <ShareBox url="https://blog.tubone-project24.xyz/privacy-policies" />
+    <ShareBox url="https://tubone-project24.xyz/privacy-policies" />
 
     <SEO
       title="プライバシーポリシー"
-      url="https://blog.tubone-project24.xyz/privacy-policies"
+      url="https://tubone-project24.xyz/privacy-policies"
       siteTitleAlt="プライバシーポリシー"
       isPost
       description="プライバシーポリシー"

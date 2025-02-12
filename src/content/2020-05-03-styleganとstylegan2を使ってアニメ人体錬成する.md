@@ -51,7 +51,7 @@ https://youtu.be/FhBeuX4cYoE
 
 ## GANの革命児 StyleGAN
 
-あきらめていた美少女無限増殖ですが、最近[Jetson Nanoを買った](https://blog.tubone-project24.xyz/2020/04/21/jetson-nano)のでせっかくなのでまたGANに挑戦しようと思いました。
+あきらめていた美少女無限増殖ですが、最近[Jetson Nanoを買った](https://tubone-project24.xyz/2020/04/21/jetson-nano)のでせっかくなのでまたGANに挑戦しようと思いました。
 
 さて、最近GANなんて触っていなかったので気が付かなかったのですが、[**StyleGAN**](https://arxiv.org/pdf/1812.04948.pdf)というのが盛り上がっている（いた？）と知ります。
 

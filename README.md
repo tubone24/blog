@@ -2,7 +2,7 @@
 
 > Super powerfully all-packaged blog system
 
-[![Twitter URL](https://img.shields.io/twitter/url/https/blog.tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Fblog.tubone-project24.xyz)
+[![Twitter URL](https://img.shields.io/twitter/url/https/tubone-project24.xyz?style=social)](https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Ftubone-project24.xyz)
 [![Release Version](https://release-badges-generator.vercel.app/api/releases.svg?user=tubone24&repo=blog&gradient=00ffff,8bd1fa)](https://github.com/tubone24/blog/releases/latest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
@@ -10,9 +10,9 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/tubone24/blog/badge)](https://www.codefactor.io/repository/github/tubone24/blog)
 [![storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://blog-storybook.netlify.app/)
 [![time tracker](https://wakatime.com/badge/github/tubone24/blog.svg)](https://wakatime.com/badge/github/tubone24/blog)
-<a href="https://validator.w3.org/feed/check.cgi?url=https%3A//blog.tubone-project24.xyz/rss.xml"><img src="https://validator.w3.org/feed/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
+<a href="https://validator.w3.org/feed/check.cgi?url=https%3A//tubone-project24.xyz/rss.xml"><img src="https://validator.w3.org/feed/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
 ![blog Actions](https://api.meercode.io/badge/tubone24/blog?type=ci-score&lastDay=184)
-[![websiteup](https://img.shields.io/website.svg?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fblog.tubone-project24.xyz)](https://blog.tubone-project24.xyz)
+[![websiteup](https://img.shields.io/website.svg?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Ftubone-project24.xyz)](https://tubone-project24.xyz)
 [![Buy me a coffee](https://camo.githubusercontent.com/3c1dd7a8a20dafe2a0b9b3b14ddaec4b63f73060625d1456761e9fd2e71f82bc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f42794d6541436f666665652d7475626f6e6532342d627269676874677265656e3f6c6f676f3d4275792532304d6525323041253230436f66666565)](https://www.buymeacoffee.com/tubone24)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/tubone24/blog/blob/master/CONTRIBUTING.md)
 
@@ -20,7 +20,7 @@
 
 This is tubone's Blog by Gatsby and Netlify.
 
-[https://blog.tubone-project24.xyz/](https://blog.tubone-project24.xyz/)
+[https://tubone-project24.xyz/](https://tubone-project24.xyz/)
 
 ## Preview
 
@@ -203,7 +203,7 @@ yarn browserslist:update
 If you want to check benchmark, you can use Lighthouse script below
 
 ```sh
-yarn benchmark "https://blog.tubone-project24.xyz" $(git rev-parse HEAD)
+yarn benchmark "https://tubone-project24.xyz" $(git rev-parse HEAD)
 ```
 
 ### Storybook

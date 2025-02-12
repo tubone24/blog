@@ -70,7 +70,7 @@ https://youtu.be/Lk3MZrxXswY
 さて、GASが今回も出てきました。GAS大好きすぎるマンですね。すみません。
 
 GASとはGoogle Apps Scriptsのことで詳しくは過去ブログ[Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮る
-](https://blog.tubone-project24.xyz/2019/10/24/gas-webscreenshot#google-apps-scriptgas%E3%81%A8%E3%81%AF%EF%BC%9F)をご確認いただければと思います。
+](https://tubone-project24.xyz/2019/10/24/gas-webscreenshot#google-apps-scriptgas%E3%81%A8%E3%81%AF%EF%BC%9F)をご確認いただければと思います。
 
 今回もTypeScript + Claspで開発していき、GitHub Actionsでデプロイまで完了するCI/CDを構築していきたいと思います。
 

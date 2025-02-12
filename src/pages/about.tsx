@@ -55,11 +55,11 @@ class About extends Component {
           <Content post={html} />
         </main>
 
-        <ShareBox url="https://blog.tubone-project24.xyz/about" />
+        <ShareBox url="https://tubone-project24.xyz/about" />
 
         <SEO
           title="Who is tubone?"
-          url="https://blog.tubone-project24.xyz/about"
+          url="https://tubone-project24.xyz/about"
           siteTitleAlt="tubone BOYAKI Profile"
           isPost
           description="About tubone Profile"

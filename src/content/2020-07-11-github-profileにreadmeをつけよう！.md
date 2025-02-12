@@ -54,7 +54,7 @@ GitHub ProfileにGitHub README.mdをつけられるらしいです。
 <a href="https://soundcloud.com/user-453736300"><img height="30" src="https://raw.githubusercontent.com/tubone24/tubone24/master/soundcloud.png"></a>&nbsp;&nbsp;
 <a href="https://www.slideshare.net/tubone24"><img height="30" src="https://raw.githubusercontent.com/tubone24/tubone24/master/share.png"></a>&nbsp;&nbsp;
 <a href="https://500px.com/tubone24"><img height="30" src="https://raw.githubusercontent.com/tubone24/tubone24/master/photography.png"></a>&nbsp;&nbsp;
-<a href="https://blog.tubone-project24.xyz"><img height="30" src="https://raw.githubusercontent.com/tubone24/tubone24/master/blog.png"></a>&nbsp;&nbsp;
+<a href="https://tubone-project24.xyz"><img height="30" src="https://raw.githubusercontent.com/tubone24/tubone24/master/blog.png"></a>&nbsp;&nbsp;
 <a href="https://tubone24.github.io/resume/"><img height="30" src="https://raw.githubusercontent.com/tubone24/tubone24/master/resume.png"></a>&nbsp;&nbsp;
 </p>
 

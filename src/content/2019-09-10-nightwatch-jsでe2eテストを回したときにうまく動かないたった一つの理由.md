@@ -13,7 +13,7 @@ templateKey: blog-post
 ---
 エラーをよく読もう・・
 
-前回書いた記事[ChromeDriverがGoogleChrome v76 に対応していないらしい。](https://blog.tubone-project24.xyz/2019-09-03-chromedriver)の解決編です。
+前回書いた記事[ChromeDriverがGoogleChrome v76 に対応していないらしい。](https://tubone-project24.xyz/2019-09-03-chromedriver)の解決編です。
 
 出てくるエラーでググってもそれっぽいものが出てこないので苦しい戦いでしたが、
 
@@ -47,9 +47,9 @@ CircleCIで出ているエラーを見てみると次のようなエラーが出
 
 そこで、前回の記事内で下記のことを実施しました。
 
-- [ChromeDriverとGoogleChromeのVersionを確認する](https://blog.tubone-project24.xyz/2019-09-03-chromedriver#chromedriver%E3%81%A8googlechrome%E3%81%AEversion%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
-- [CircleCIのDockerfileを確認してみる](https://blog.tubone-project24.xyz/2019-09-03-chromedriver#circleciのdockerfileを確認してみる)
-- [Chrome Betaに変えてみる (自前Build環境の作成)](https://blog.tubone-project24.xyz/2019-09-03-chromedriver#chrome-beta%E3%81%AB%E5%A4%89%E3%81%88%E3%81%A6%E3%81%BF%E3%82%8B)
+- [ChromeDriverとGoogleChromeのVersionを確認する](https://tubone-project24.xyz/2019-09-03-chromedriver#chromedriver%E3%81%A8googlechrome%E3%81%AEversion%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
+- [CircleCIのDockerfileを確認してみる](https://tubone-project24.xyz/2019-09-03-chromedriver#circleciのdockerfileを確認してみる)
+- [Chrome Betaに変えてみる (自前Build環境の作成)](https://tubone-project24.xyz/2019-09-03-chromedriver#chrome-beta%E3%81%AB%E5%A4%89%E3%81%88%E3%81%A6%E3%81%BF%E3%82%8B)
 
 が、しかし結局直りませんでした。
 

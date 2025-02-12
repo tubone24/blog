@@ -33,7 +33,7 @@ class GitalkFC extends Component<Props> {
       owner: "tubone24",
       pagerDirection: "first",
       proxy:
-        "https://blog.tubone-project24.xyz/.netlify/functions/cors-proxy-github",
+        "https://tubone-project24.xyz/.netlify/functions/cors-proxy-github",
       id: this.id,
     });
     GitTalkInstance.render("gitalk-container");

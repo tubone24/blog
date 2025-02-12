@@ -17,7 +17,7 @@ templateKey: blog-post
 ---
 すすめられたので使ってみた。
 
-以前、[particles.jsをVue.jsで使ってかっこいいページを作る](https://blog.tubone-project24.xyz/2019-09-12-particles-js)という記事を書いたところ、記事にコメントがありました。
+以前、[particles.jsをVue.jsで使ってかっこいいページを作る](https://tubone-project24.xyz/2019-09-12-particles-js)という記事を書いたところ、記事にコメントがありました。
 
 [lindelof](https://github.com/lindelof)さんというOSS作者さんからでparticleをVue.jsのBackgroundに当てたいなら[indelof/particles-bg-vue](https://github.com/lindelof/particles-bg-vue)がいいよ～と紹介されましたので早速使ってみました。
 
