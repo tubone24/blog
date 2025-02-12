@@ -21,7 +21,7 @@ NimのTwitterSDKを作ってOSS兄貴になろうと思ったら、結局なれ�
 ## Nimとは？
 
 詳しくは[docoptはNimでも使えたのお話
-](https://blog.tubone-project24.xyz/2019/11/20/docopt-nim#%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82nim%E3%81%A8%E3%81%AF%EF%BC%9F)をご覧いただければと思いますが、**静的型付なコンパイラ言語**でPython, Ada, modulaなどの成熟した言語のいいとこ取りをした**能率的**で、**表現力豊か**で、**エレガントな言語**です。
+](https://tubone-project24.xyz/2019/11/20/docopt-nim#%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82nim%E3%81%A8%E3%81%AF%EF%BC%9F)をご覧いただければと思いますが、**静的型付なコンパイラ言語**でPython, Ada, modulaなどの成熟した言語のいいとこ取りをした**能率的**で、**表現力豊か**で、**エレガントな言語**です。
 
 ![img](https://i.imgur.com/BbHTNwQ.png)
 
@@ -353,7 +353,7 @@ proc formatTweet*(tweet: Tweet) =
 
 docoptは便利なので本当に愛用しているのですが、Nimでも使えるので今回も使います。
 
-詳しい解説は過去記事[docoptはNimでも使えたのお話](https://blog.tubone-project24.xyz/2019/11/20/docopt-nim)をご確認ください。
+詳しい解説は過去記事[docoptはNimでも使えたのお話](https://tubone-project24.xyz/2019/11/20/docopt-nim)をご確認ください。
 
 ## WindowsでもMacでもUbuntuでも使いたい！
 
@@ -373,7 +373,7 @@ windows-latest | Windows Server 2019
 
 さらに！
 
-Release noteをGitHub Releaseに乗っけたいので、[前回作った](https://blog.tubone-project24.xyz/2020/08/14/github-action)[Update GitHub Release
+Release noteをGitHub Releaseに乗っけたいので、[前回作った](https://tubone-project24.xyz/2020/08/14/github-action)[Update GitHub Release
 ](https://github.com/marketplace/actions/update-github-release)を使ってます。
 
 Release noteの作成は[git-chglog](https://github.com/git-chglog/git-chglog)を使って作成します。このツールめちゃスゴ..。

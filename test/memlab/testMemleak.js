@@ -1,5 +1,5 @@
 const url = () => {
-  const url = process.env["URL"] || "https://blog.tubone-project24.xyz";
+  const url = process.env["URL"] || "https://tubone-project24.xyz";
   console.log(url);
   return url;
 };

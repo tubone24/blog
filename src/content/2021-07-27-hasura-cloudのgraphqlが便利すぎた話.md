@@ -55,7 +55,7 @@ Hasuraを使うためにPostgreSQLを作らなければいけません。もち�
 
 ![arch](https://i.imgur.com/iz9IpHf.png)
 
-今回はこのようなアーキテクチャにします。以前[Raspberry PIを使って植物の水やり監視システムを作る](https://blog.tubone-project24.xyz/2020/05/10/plant-check)で作ったラズパイ水やり管理システムのメトリックを定期的に収集してHasuraのGraphQL mutationを介してHeroku PostgreSQLに書き込み、それをVercel + Next.jsで作ったダッシュボードでこれまたHasura GraphQLを介してQuery取得し可視化する、というものです。
+今回はこのようなアーキテクチャにします。以前[Raspberry PIを使って植物の水やり監視システムを作る](https://tubone-project24.xyz/2020/05/10/plant-check)で作ったラズパイ水やり管理システムのメトリックを定期的に収集してHasuraのGraphQL mutationを介してHeroku PostgreSQLに書き込み、それをVercel + Next.jsで作ったダッシュボードでこれまたHasura GraphQLを介してQuery取得し可視化する、というものです。
 
 ~~別に毎日水やりすればいいだけなのですが...~~
 
@@ -318,7 +318,7 @@ export const Table = (): JSX.Element => {
 
 ちょっと詰まったなと思ったところはAppoloから取得したGraphQLの結果にはQueryで指定した項目以外に\[\[Prototype\]\]が付いてきます。今回取得した値をrecoilを使って状態管理しようと思ったのですが、このprototypeが邪魔でrecoilがうまく動かなかったので、mapで配列を再定義している、というわけです。
 
-他はmeterial table使ったり、chart.js使ったりしてますがこちらは以前作った[Next.jsとVercelとRecoilとMaterial Tableを使ってAWSのステータスダッシュボードを作ってみた話](https://blog.tubone-project24.xyz/2021/01/11/vercel-next)のパクリコードなので解説は割愛します。
+他はmeterial table使ったり、chart.js使ったりしてますがこちらは以前作った[Next.jsとVercelとRecoilとMaterial Tableを使ってAWSのステータスダッシュボードを作ってみた話](https://tubone-project24.xyz/2021/01/11/vercel-next)のパクリコードなので解説は割愛します。
 
 ## できた
 

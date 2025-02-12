@@ -27,9 +27,9 @@ templateKey: blog-post
 
 かくいうこのブログもSentryめっちゃ使ってます。ありがとうございますSentry様。
 
-主にエラー監視とパフォーマンス計測いとして使ってますが、その模様は[下記記事](https://blog.tubone-project24.xyz/2023/01/01/this-blog#sentry)をご確認ください。
+主にエラー監視とパフォーマンス計測いとして使ってますが、その模様は[下記記事](https://tubone-project24.xyz/2023/01/01/this-blog#sentry)をご確認ください。
 
-ちなみに私がはじめてSentryを触ったのは[2019年らしい](https://blog.tubone-project24.xyz/2019/09/22/sentry)ですね。当時はVue.js書いてたんですね...。懐かしい...。
+ちなみに私がはじめてSentryを触ったのは[2019年らしい](https://tubone-project24.xyz/2019/09/22/sentry)ですね。当時はVue.js書いてたんですね...。懐かしい...。
 
 ## Session Replay
 
@@ -151,6 +151,6 @@ Console、Networkも見てみました。
 
 もうちょっと運用してみて、どんなことができるかをまとめる必要はありますが、**なんかすごい〜！** ということがわかりました。
 
-蛇足ですが私はこういったトレーシング系のツールが大好きです。[AWS X-RayでLambdaのトレースをしつつ、Datadog APMに連携する](https://blog.tubone-project24.xyz/2020/1/20/x-ray-datadog)とか[GoのEchoでJaegerを使ってボトルネックを調査する](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)とか、結構興味があります。
+蛇足ですが私はこういったトレーシング系のツールが大好きです。[AWS X-RayでLambdaのトレースをしつつ、Datadog APMに連携する](https://tubone-project24.xyz/2020/1/20/x-ray-datadog)とか[GoのEchoでJaegerを使ってボトルネックを調査する](https://tubone-project24.xyz/2019/1/3/go-jaeger)とか、結構興味があります。
 
 Sentryにはまだ[Profiling](https://docs.sentry.io/product/profiling/)とか[Cron Monitoring](https://docs.sentry.io/product/crons/)とか私がまだ使いきれてない機能がたくさんあるので時間見つけて検証していきたいと思います。

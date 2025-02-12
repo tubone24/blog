@@ -33,7 +33,7 @@ templateKey: blog-post
 
 [Getform.io](https://getform.io/)はフォームのバックエンドを提供するすばらしいサービスです。
 
-詳しくは[こちらの過去記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)をご確認いただければと思います。
+詳しくは[こちらの過去記事](https://tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)をご確認いただければと思います。
 
 ## React Hook Form + Getform.io
 
@@ -170,7 +170,7 @@ const { register, handleSubmit, errors } = useForm<Inputs>();
 
 ### Submit
 
-そして肝心な送信(Submit)部分ですがこちらは[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)とほぼ同じように**onSubmit**に合わせて処理する関数を用意して、formの**onsubmit属性**に渡してあげればいいだけです。
+そして肝心な送信(Submit)部分ですがこちらは[前記事](https://tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)とほぼ同じように**onSubmit**に合わせて処理する関数を用意して、formの**onsubmit属性**に渡してあげればいいだけです。
 
 ........いいだけですが1つ注意として、渡す際に**handleSubmit**で関数をラップしないと、form情報がうまく取れない、ということです。忘れずに設定してくださいませ。
 
@@ -296,7 +296,7 @@ Form部分をすべて実装するとこんな感じです。
 
 もう完成です。実に簡単ですね。
 
-React Hook Formを使わないと、[前記事](https://blog.tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
+React Hook Formを使わないと、[前記事](https://tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
 
 React Hook Formを使わない場合、
 

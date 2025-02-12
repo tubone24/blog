@@ -8,5 +8,5 @@ provider "netlify" {
 
 resource "netlify_site" "main" {
   name = "pensive-lamport-5822d2"
-  custom_domain = "blog.tubone-project24.xyz"
+  custom_domain = "tubone-project24.xyz"
 }

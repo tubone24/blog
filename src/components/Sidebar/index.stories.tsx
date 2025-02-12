@@ -90,7 +90,7 @@ const latestPosts: StaticQueryLatestPost[] = [
       frontmatter: {
         date: "2022-01-01",
         title: "testtest",
-        url: "https://blog.tubone-project24.xyz",
+        url: "https://tubone-project24.xyz",
       },
     },
   },
@@ -102,7 +102,7 @@ const latestPosts: StaticQueryLatestPost[] = [
       frontmatter: {
         date: "2022-01-02",
         title: "testtest2",
-        url: "https://blog.tubone-project24.xyz",
+        url: "https://tubone-project24.xyz",
       },
     },
   },
@@ -114,7 +114,7 @@ const latestPosts: StaticQueryLatestPost[] = [
       frontmatter: {
         date: "2022-01-01",
         title: "testtest",
-        url: "https://blog.tubone-project24.xyz",
+        url: "https://tubone-project24.xyz",
       },
     },
   },
@@ -126,7 +126,7 @@ const latestPosts: StaticQueryLatestPost[] = [
       frontmatter: {
         date: "2022-01-02",
         title: "testtest2",
-        url: "https://blog.tubone-project24.xyz",
+        url: "https://tubone-project24.xyz",
       },
     },
   },
@@ -138,7 +138,7 @@ const latestPosts: StaticQueryLatestPost[] = [
       frontmatter: {
         date: "2022-01-01",
         title: "testtest",
-        url: "https://blog.tubone-project24.xyz",
+        url: "https://tubone-project24.xyz",
       },
     },
   },
@@ -150,7 +150,7 @@ const latestPosts: StaticQueryLatestPost[] = [
       frontmatter: {
         date: "2022-01-02",
         title: "testtest2",
-        url: "https://blog.tubone-project24.xyz",
+        url: "https://tubone-project24.xyz",
       },
     },
   },

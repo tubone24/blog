@@ -20,10 +20,10 @@ const PeriodSummary = ({
   let url;
   if (displayMonth == null) {
     title = `${displayYear}年の記事 (${totalCount}件)`;
-    url = `https://blog.tubone-project24.xyz/${displayYear}/`;
+    url = `https://tubone-project24.xyz/${displayYear}/`;
   } else {
     title = `${displayYear}年${displayMonth}月の記事 (${totalCount}件)`;
-    url = `https://blog.tubone-project24.xyz/${displayYear}/${displayMonth}`;
+    url = `https://tubone-project24.xyz/${displayYear}/${displayMonth}`;
   }
   return (
     <div className="container">

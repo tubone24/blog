@@ -41,7 +41,7 @@ AWSのTracingサービスのX-Rayを使って、LambdaのService MapやTraceを�
 このようなサービスのことを**Tracing**とか言ったりします。
 
 実は、X-Rayをお勉強する前に、この手のサービス(Tracing)の基本を押さえる必要があると思い、お正月に[GoのEchoでJaegerを使ってボトルネックを調査する
-](https://blog.tubone-project24.xyz/2019/1/3/go-jaeger)という記事を書いてました。
+](https://tubone-project24.xyz/2019/1/3/go-jaeger)という記事を書いてました。
 
 X-Rayからは若干離れますが、[OpenTracing](https://opentracing.io/)な情報を知りたいほうは上記も読んでみてくださいませ。
 

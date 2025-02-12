@@ -123,7 +123,7 @@
     "clean": "gatsby clean",
     "clean-all": "gatsby clean && rimraf node_modules/",
     "benchmark": "node scripts/benchmark.js",
-    "benchmark:prod": "node scripts/benchmark.js https://blog.tubone-project24.xyz $(git rev-parse HEAD)",
+    "benchmark:prod": "node scripts/benchmark.js https://tubone-project24.xyz $(git rev-parse HEAD)",
     "browserslist": "npx browserslist",
     "browserslist:update": "npx browserslist --update-db",
     "textlint": "npx textlint \"src/content/*.md\"",

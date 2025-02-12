@@ -46,7 +46,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 特にブログ更新は顕著で、例えば今書いている記事も通勤の電車のなかでスマートフォンから書いているわけなので、細かくコミットを打って保存したいのですが、コミットを打ってプッシュしてしまうと、ビルドが走ることになるので、WIPでのコミットが億劫になり、結果的に家のようなまとめてプッシュできるような作業スペースがある場所でないと、
 ブログを書かなくなってしまいました。
 
-せっかく[Netlify CMS化](https://blog.tubone-project24.xyz/2019-09-01-netlify-and-gatsby#cms%E3%81%AE%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)した意味がないですね。
+せっかく[Netlify CMS化](https://tubone-project24.xyz/2019-09-01-netlify-and-gatsby#cms%E3%81%AE%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)した意味がないですね。
 
 ## この悩みGitHub Actionsにお任せください
 
@@ -63,7 +63,7 @@ NetlifyはGitHubのレポジトリと連携して、フロントのビルドを�
 
 私の場合、JSやイメージを最適化してくれる**Asset optimization**とFormタグに属性をつければ勝手にFormを作ってくれる**Form detection**の2つが設定されていましたのでそれぞれまず無効化します。
 
-Form detectionの解説は[こちら](https://blog.tubone-project24.xyz/2019/09/30/netlify-form)を参照ください。
+Form detectionの解説は[こちら](https://tubone-project24.xyz/2019/09/30/netlify-form)を参照ください。
 
 ![img](https://i.imgur.com/ytjbJQA.png)
 

@@ -42,7 +42,7 @@ class BlogPost extends Component<Props> {
 
     const { frontmatter, fields, excerpt, id: graphqlId } = node;
 
-    const shareURL = `https://blog.tubone-project24.xyz/${fields?.slug}`;
+    const shareURL = `https://tubone-project24.xyz/${fields?.slug}`;
     return (
       <div className={style.post + " row order-2"}>
         <Header

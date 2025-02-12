@@ -21,7 +21,7 @@ templateKey: blog-post
 
 ### スクリプトのTypeScript化
 
-前回[Hasura CloudのGraphQLが便利すぎた話](https://blog.tubone-project24.xyz/2021/07/27/hasura-graphql#%E5%8F%8D%E7%9C%81)の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
+前回[Hasura CloudのGraphQLが便利すぎた話](https://tubone-project24.xyz/2021/07/27/hasura-graphql#%E5%8F%8D%E7%9C%81)の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
 
 がしかし、あろうことかスクリプトは**TypeScript**じゃなく、**JavaScript(ES module)**でした。
 

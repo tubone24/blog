@@ -644,37 +644,37 @@ exports[`Storyshots Components/Sidebar Default 1`] = `
             8
           </p>
           <a
-            href="https://blog.tubone-project24.xyz"
+            href="https://tubone-project24.xyz"
             onClick={[Function]}
           >
             testtest
           </a>
           <a
-            href="https://blog.tubone-project24.xyz"
+            href="https://tubone-project24.xyz"
             onClick={[Function]}
           >
             testtest2
           </a>
           <a
-            href="https://blog.tubone-project24.xyz"
+            href="https://tubone-project24.xyz"
             onClick={[Function]}
           >
             testtest
           </a>
           <a
-            href="https://blog.tubone-project24.xyz"
+            href="https://tubone-project24.xyz"
             onClick={[Function]}
           >
             testtest2
           </a>
           <a
-            href="https://blog.tubone-project24.xyz"
+            href="https://tubone-project24.xyz"
             onClick={[Function]}
           >
             testtest
           </a>
           <a
-            href="https://blog.tubone-project24.xyz"
+            href="https://tubone-project24.xyz"
             onClick={[Function]}
           >
             testtest2

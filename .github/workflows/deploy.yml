@@ -275,7 +275,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: production
-          environment-url: "https://blog.tubone-project24.xyz"
+          environment-url: "https://tubone-project24.xyz"
           deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
           state: "success"
       - uses: chrnorm/deployment-status@v2
@@ -284,7 +284,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: production
-          environment-url: "https://blog.tubone-project24.xyz"
+          environment-url: "https://tubone-project24.xyz"
           deployment-id: ${{ steps.deployment-prod.outputs.deployment_id }}
           state: "failure"
       - name: Sentry Release
@@ -394,7 +394,7 @@ jobs:
           lighthouse \
             --chrome-flags="--headless" \
             --output html --output-path /tmp/report.html \
-            'https://blog.tubone-project24.xyz'
+            'https://tubone-project24.xyz'
           cp /tmp/report.html ./public/report.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -424,7 +424,7 @@ jobs:
       - name: Capture Webpage Screenshot
         uses: swinton/screenshot-website@v1.0.2
         with:
-          source: "https://blog.tubone-project24.xyz"
+          source: "https://tubone-project24.xyz"
           destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           width: ${{ matrix.width }}
           delay: 10

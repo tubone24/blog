@@ -147,7 +147,7 @@ scj dump dump_config.json -i -e
 
 やはり便利なのはusageを書いているとロジックもできあがるところで、なんというかまぁ本当にべんりです。
 
-Nimのdocoptの解説になってしまいますが、詳しくは[docoptはNimでも使えたのお話](https://blog.tubone-project24.xyz/2019/11/20/docopt-nim)をご確認ください。
+Nimのdocoptの解説になってしまいますが、詳しくは[docoptはNimでも使えたのお話](https://tubone-project24.xyz/2019/11/20/docopt-nim)をご確認ください。
 
 ### コマンドラインパーサーのテストコード
 
@@ -383,7 +383,7 @@ long_description_content_type = text/x-rst
 url = https://github.com/tubone24/ssh_config_json
 project-urls =
     Documentation = https://ssh-config-json.readthedocs.io/en/latest/
-    ProjectBlog = https://blog.tubone-project24.xyz
+    ProjectBlog = https://tubone-project24.xyz
 author = tubone24
 author_email = tubo.yyyuuu@gmail.com
 keywords = ssh-config, json, backup, AES

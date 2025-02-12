@@ -16,7 +16,7 @@ templateKey: blog-post
 前回の続きです。
 
 前回[Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
-](https://blog.tubone-project24.xyz/2019/12/04/nuxt-toast)ではNuxt.jsのmodulesを使ってtoastを出してみました。
+](https://tubone-project24.xyz/2019/12/04/nuxt-toast)ではNuxt.jsのmodulesを使ってtoastを出してみました。
 
 ただ、前回の実装だとどこからともなく、
 

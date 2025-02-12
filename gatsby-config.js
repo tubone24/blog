@@ -1,7 +1,7 @@
 const config = require("./src/config/index.json");
 const {
   NODE_ENV,
-  URL: NETLIFY_SITE_URL = "https://blog.tubone-project24.xyz",
+  URL: NETLIFY_SITE_URL = "https://tubone-project24.xyz",
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
