@@ -208,7 +208,7 @@ const writeNotionDatabase = async (information: InformationItem[]) => {
 
 ![img](https://i.imgur.com/gPUDGkn.png)
 
-Viewを変更することでカレンダー表示にもできます。（使い所はちょっとわからないですが。）
+Viewを変更することでカレンダー表示にもできます。(使い所はちょっとわからないですが。)
 
 ![img](https://i.imgur.com/yoZJpIh.png)
 
@@ -225,4 +225,3 @@ Viewを変更することでカレンダー表示にもできます。（使い�
 妻からもよいフィードバックが!!!やったやったー!!!
 
 ![img](https://i.imgur.com/vzyD8Iu.png)
-
