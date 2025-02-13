@@ -28,6 +28,7 @@ const HTML = ({
       <meta name="p:domain_verify" content={config.domain_verify} />
       <link rel="prefetch" href="/fonts/icomoon.woff2?s0mo8f" />
       <link rel="preconnect dns-prefetch" href="//i.imgur.com" />
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2404030439308059" crossorigin="anonymous"></script>
       {headComponents}
     </head>
     <body {...bodyAttributes}>
