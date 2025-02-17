@@ -567,8 +567,9 @@ jobs:
       - name: run memlab
         run: |
           MEMLAB_PATH=$(which memlab)
-          URL=http://localhost:9000
           npx start-server-and-test build-serve:e2e http://localhost:9000 "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
+        env:
+          URL: "http://localhost:9000"
       - name: summarize
         run: |
           cat test/memlab/data/out/leaks.txt
