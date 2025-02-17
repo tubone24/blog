@@ -14,7 +14,7 @@ jobs:
       head-commit-message: ${{ steps.get-head-commit-message.outputs.headCommitMsg }}
     steps:
       - name: Get repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Print head git commit message
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -53,7 +53,7 @@ jobs:
 #    container: cypress/browsers:node18.17.0-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
-#        uses: actions/checkout@v3
+#        uses: actions/checkout@v4
 #      - name: Setup Node
 #        uses: actions/setup-node@v3
 #        with:
@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -182,7 +182,7 @@ jobs:
 #    container: cypress/browsers:node18.17.0-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
-#        uses: actions/checkout@v3
+#        uses: actions/checkout@v4
 #      - name: install apt
 #        run: |
 #          apt-get -y update
@@ -244,7 +244,7 @@ jobs:
 #    container: cypress/browsers:node18.17.0-chrome107-ff106-edge
 #    steps:
 #      - name: Checkout source code
-#        uses: actions/checkout@v3
+#        uses: actions/checkout@v4
 #      - name: install apt
 #        run: |
 #          apt-get -y update
@@ -305,7 +305,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -351,7 +351,7 @@ jobs:
     needs: check-skip-flags
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - uses: chrnorm/deployment-action@v2
         name: Create GitHub deployment
         id: deployment-dev
@@ -463,7 +463,7 @@ jobs:
       - check-skip-flags
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -528,7 +528,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -598,7 +598,7 @@ jobs:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -630,7 +630,7 @@ jobs:
     needs: check-skip-flags
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - uses: chrnorm/deployment-action@v2
         name: Create GitHub deployment
         id: deployment-dev-storybook
@@ -732,7 +732,7 @@ jobs:
       - build
       - check-skip-flags
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Create Bundle Analyzer URL Comment
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
@@ -758,7 +758,7 @@ jobs:
         width: [1920, 1200, 768, 400]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v1
         with:
           deno-version: 'v1.x'
