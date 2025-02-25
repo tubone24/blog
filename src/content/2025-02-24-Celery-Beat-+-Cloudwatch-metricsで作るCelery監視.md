@@ -62,7 +62,7 @@ result = add.delay(4, 5).get()
 
 - [Broker](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#broker-overview): Taskの要求をWorkerとのメッセージの仲介役として機能し、[Redis](https://redis.io/)や[RabbitMQ](https://www.rabbitmq.com/), AWSなら[SQS](https://aws.amazon.com/jp/sqs/)が主にサポートされています。
 
-- [Result Backend](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/): Taskの実行結果を保存する場所。Workerが処理したTask(関数の戻り)を保存します。戻りの記録が不要であれば省略も可能です。[Redis](https://redis.io/)や[MongoDB](https://www.mongodb.com/)などのNoSQLだけでなく、ORM([SQLAlchemy](https://www.sqlalchemy.org/))経由でRDBも対応してます。AWSなら[DynamoDB](https://aws.amazon.com/jp/dynamodb/)、[S3](https://aws.amazon.com/jp/s3/)などがサポートされています。[Async Result](https://docs.celeryq.dev/en/stable/reference/celery.app.task.html#celery.app.task.Task.AsyncResult)を使うことで、Taskの中間結果を取得することもできます。
+- [Result Backend](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/): Taskの実行結果を保存する場所。Workerが処理したTask(関数の戻り)を保存します。戻りの記録が不要であれば省略も可能です。[Redis](https://redis.io/)や[MongoDB](https://www.mongodb.com/)などのNoSQLだけでなく、ORM([SQLAlchemy](https://www.sqlalchemy.org/))経由でRDBも対応してます。AWSなら[DynamoDB](https://aws.amazon.com/jp/dynamodb/)、[S3](https://aws.amazon.com/jp/s3/)などがサポートされています。[Async Result](https://docs.celeryq.dev/en/stable/reference/celery.app.task.html#celery.app.task.Task.AsyncResult)を使うことで、Taskの中間結果を取得できます。
 
 - [Worker](https://docs.celeryq.dev/en/stable/userguide/workers.html#guide-workers): 実際にTaskを実行するプロセス。celerydが常駐プロセスとして動作します。
 
@@ -70,7 +70,7 @@ result = add.delay(4, 5).get()
 
 ![img](https://i.imgur.com/vFkl2kl.png)
 
-BrokerとResult Backendは、例えば[RabbitMQ](https://www.rabbitmq.com/)、[MongoDB](https://www.mongodb.com/)などそれぞれPub/Sub、データベースの専用の製品で構成することもできますが、[Redis](https://redis.io/)で両方を構成することもできます。
+BrokerとResult Backendは、例えば[RabbitMQ](https://www.rabbitmq.com/)、[MongoDB](https://www.mongodb.com/)などそれぞれPub/Sub、データベースの専用の製品で構成できますが、[Redis](https://redis.io/)で両方を兼ねて構成できます。
 
 ちなみにAWSでCeleryを絡めた構成をつくるならこのような形で構成されることが多いです。
 
@@ -88,7 +88,7 @@ Celeryを使っていると、**タスクがどれくらい進んでいるのか
 
 Flowerは、Celeryのタスクの状態を見るためのWebベースのツールで、上記のようにタスクの状態をリアルタイムで確認できます。
 
-加えて、 **/metrics**エンドポイントを使って[Prometheus](https://prometheus.io/)などの監視ツールと連携することで、Celery Workerのメトリクスを取得することもできます。
+加えて、 **/metrics**エンドポイントを使って[Prometheus](https://prometheus.io/)などの監視ツールと連携することで、Celery Workerのメトリクスを取得できます。
 
 一般的にCeleryの監視といえばFlowerが有名ですが、開発用用途を除き**リアルタイムでのタスクの可視化**だけ実施していてもあまり意味はなく、Flower + Prometheus + [Grafana](https://grafana.com/ja/)などの組み合わせで**時系列の可視化**、[AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/)を入れてアラートの発報をすることが多いです。
 
@@ -106,7 +106,7 @@ Flowerを使わずに、Celery Beatで定期的にタスクの状態を取得し
 
 ![img](https://i.imgur.com/6TIgeYT.png)
 
-Celery Beatは、Celery Workerとは**別のプロセス**として動作し、（同じプロセスで実行することも可能ですが本番ではおすすめできません）Celery Workerがタスクを実行するのに対して、Celery Beatは**タスクのスケジューリング**を行ないます。
+Celery Beatは、Celery Workerとは**別のプロセス**として動作し、（同じプロセスで実行可能ですが本番ではおすすめできません）Celery Workerがタスクを実行するのに対して、Celery Beatは**タスクのスケジューリング**を行ないます。
 
 次のようにCelery **config**に実行したいタスクを登録し、スケジュールを**秒数**または**CronTab**で記載することで、定期的にタスクを実行できます。
 
@@ -137,7 +137,7 @@ def scheduled_task():
 celery --app=myapp beat -l debug
 ```
 
-また、-Bオプションをつけることで、Celery WorkerとCelery Beatを同時に起動することもできます。(本番では推奨されない構成です。)
+また、-Bオプションをつけることで、Celery WorkerとCelery Beatを同時に起動できます。(本番では推奨されない構成です。)
 
 ```bash
 celery --app=myapp worker -B
