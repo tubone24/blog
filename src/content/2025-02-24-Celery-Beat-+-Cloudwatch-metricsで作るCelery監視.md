@@ -96,7 +96,7 @@ Flowerは、Celeryのタスクの状態を見るためのWebベースのツー�
 
 ## Celery Beat + Control Inspect + CloudWatch metricsで作るCelery監視
 
-そこで今回は、[Celery Beat](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html#introduction) + [Control Inspect](https://docs.celeryq.dev/en/latest/reference/celery.app.control.html#celery.app.control.Control.inspect) + [Amazon CloudWatch metrics](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/working_with_metrics.html)を使って、Celeryの監視を行ってみます。
+そこで今回は、[Celery Beat](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html#introduction) + [Control Inspect](https://docs.celeryq.dev/en/latest/reference/celery.app.control.html#celery.app.control.Control.inspect) + [Amazon CloudWatch metrics](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/working_with_metrics.html)を使って、Celeryの監視してみます。
 
 Flowerを使わずに、Celery Beatで定期的にタスクの状態を取得し、CloudWatch metricsに送信することで、Celeryの監視します。
 
