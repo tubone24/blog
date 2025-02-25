@@ -443,6 +443,6 @@ resource "aws_cloudwatch_metric_alarm" "celery_active_tasks" {
 
 ## 結論
 
-Celery Beat + Control Inspect + Amazon CloudWatch metricsを使って、Celeryの監視を行なう方法を紹介しました。
+Celery Beat + Control Inspect + Amazon CloudWatch metricsを使って、Celeryの監視方法を紹介しました。
 
 Flowerを使わずに、Celery Beatで定期的にタスクの状態を取得し、CloudWatch metricsに送信することで、Celeryの監視を行なうことができますので、ぜひお試しください。
