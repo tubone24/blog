@@ -27,7 +27,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
       - name: Get yarn cache directory path
@@ -55,7 +55,7 @@ jobs:
 #      - name: Checkout source code
 #        uses: actions/checkout@v4
 #      - name: Setup Node
-#        uses: actions/setup-node@v3
+#        uses: actions/setup-node@v4
 #        with:
 #          node-version: 18.17.0
 #      - name: Get yarn cache directory path
@@ -82,7 +82,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
@@ -307,7 +307,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
@@ -359,7 +359,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: development
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
@@ -465,7 +465,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
@@ -530,7 +530,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
@@ -594,7 +594,7 @@ jobs:
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
           registry-url: https://npm.pkg.github.com/
@@ -653,7 +653,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-version }}-${{ hashFiles('**/yarn.lock') }}
             ${{ runner.os }}-build-${{ env.cache-version }}-
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.17.0
       - name: install dependencies
