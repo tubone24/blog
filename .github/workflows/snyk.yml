@@ -72,10 +72,12 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
-          snyk test . > snyk.txt || :
-          snyk code test . > snyk_code.txt  || :
-          snyk iac test terraform > snyk_iac.txt  || :
-          snyk container test test-blog > snyk_container.txt  || :
+          {
+            snyk test . > snyk.txt || :
+            snyk code test . > snyk_code.txt  || :
+            snyk iac test terraform > snyk_iac.txt  || :
+            snyk container test test-blog > snyk_container.txt  || :
+          }
       - name: summarize
         run: |
           cat snyk.txt

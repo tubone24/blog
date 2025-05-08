@@ -166,7 +166,7 @@ jobs:
           path: ./cypress/videos/main.cy.ts.mp4
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
+        run:  echo "prnum=${GITHUB_REF//[^0-9]/}" >> "${GITHUB_OUTPUT}"
       - name: Add file
         env:
           FILE_PATH: ./cypress/videos/main.cy.ts.mp4
@@ -504,15 +504,17 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
           touch summarize.txt
-          echo '# Lighthouse Score' >> summarize.txt
-          echo '## Desktop' >> summarize.txt
-          echo '' >> summarize.txt
-          cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '## Mobile' >> summarize.txt
-          echo '' >> summarize.txt
-          cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g' >> summarize.txt
+          {
+            echo '# Lighthouse Score'
+            echo '## Desktop'
+            echo ''
+            cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g'
+            echo ''
+            echo ''
+            echo '## Mobile'
+            echo ''
+            cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g'
+          } >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
       - name: Post Lighthouse Score Comment
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
@@ -567,7 +569,7 @@ jobs:
       - name: run memlab
         run: |
           MEMLAB_PATH=$(which memlab)
-          npx start-server-and-test build-serve:e2e http://localhost:9000 "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
+          npx start-server-and-test build-serve:e2e "http://localhost:9000" "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
         env:
           URL: "http://localhost:9000"
       - name: summarize
@@ -576,7 +578,7 @@ jobs:
           sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n\`\`\`\\n/g' test/memlab/data/out/leaks.txt
           sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
-          echo -n "\\n \`\`\` \\n</details>\\n " >> test/memlab/data/out/leaks.txt
+          printf "\\n \`\`\` \\n</details>\\n " >> test/memlab/data/out/leaks.txt
       - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -781,7 +783,7 @@ jobs:
           name: screenshot-${{ matrix.os }}-${{ matrix.width }}
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo $GITHUB_REF | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
+        run:  echo "prnum=${GITHUB_REF//[^0-9]/}" >> "${GITHUB_OUTPUT}"
       - name: PR Comments
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
@@ -793,4 +795,3 @@ jobs:
           GITHUB_PULL_REQUEST_NUMBER: ${{ steps.get-pr-num.outputs.prnum }}
           BRANCH_NAME: "screenshot"
         run: deno run --allow-env --allow-read --allow-net scripts/uploadScreenShot.ts
-
