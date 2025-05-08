@@ -3,7 +3,8 @@ on:
   workflow_dispatch:
     inputs:
       spider-min:
-        default: 0
+        description: "スパイダーの最小実行時間（分）"
+        default: "0"
         type: string
 env:
   cache-version: v2
@@ -65,7 +66,7 @@ jobs:
           docker-compose -f owasp/docker-compose-ci.yml up -d
           docker-compose -f owasp/docker-compose-ci.yml exec -T owasp zap-full-scan.py -t http://web:9000 -r report.html -a -d -m ${{ inputs.spider-min }} -j -I -z "-config alert.maxInstances=0 -config view.locale=ja_JP -config scanner.hostPerScan=5 -config scanner.threadPerHost=5 -configfile /zap/wrk/alertFilter.conf"
       - name: Deploy Report
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./owasp/zap/

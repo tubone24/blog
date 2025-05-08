@@ -148,7 +148,7 @@ export const Sidebar = ({
           title="tubone24 SoundCloud"
         />
         <Icon
-          href="https://twitter.com/meitante1conan"
+          href="https://twitter.com/tubone24"
           icon="icon-twitter"
           title="tubone24 twitter"
         />

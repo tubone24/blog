@@ -4,9 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       title:
+        description: "記事のタイトル"
         default: "draft article"
         type: string
       description:
+        description: "記事の説明"
         default: "draft article"
         type: string
 
@@ -18,14 +20,16 @@ jobs:
       - name: Create Meta Data
         id: create-meta-data
         run: |
-          echo "dateHyphen=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-          echo "dateISO=$(date '+%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_OUTPUT
+          echo "dateHyphen=$(date +'%Y-%m-%d')" >> "${GITHUB_OUTPUT}"
+          echo "dateISO=$(date '+%Y-%m-%dT%H:%M:%S%z')" >> "${GITHUB_OUTPUT}"
           TITLE="${{ inputs.title }}"
           BRANCH_NAME=${TITLE//" "/"-"}
-          echo "titleHyphen=${BRANCH_NAME}" >> "${GITHUB_OUTPUT}"
-          echo "title=${{ inputs.title }}" >> "${GITHUB_OUTPUT}"
-          echo "description=${{ inputs.description }}" >> "${GITHUB_OUTPUT}"
-          echo "label=netlify-cms/draft" >> "${GITHUB_OUTPUT}"
+          {
+            echo "titleHyphen=${BRANCH_NAME}"
+            echo "title=${{ inputs.title }}"
+            echo "description=${{ inputs.description }}"
+            echo "label=netlify-cms/draft"
+          } >> "${GITHUB_OUTPUT}"
       - name: Setup git
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
@@ -36,13 +40,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cp template/article_template.md src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ titleHyphen }}/${{ steps.create-meta-data.outputs.titleHyphen }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ dateISO }}/${{ steps.create-meta-data.outputs.dateISO }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          sed -i 's/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g' src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
-          cat src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md
+          FILE_PATH="src/content/${{ steps.create-meta-data.outputs.dateHyphen }}-${{ steps.create-meta-data.outputs.titleHyphen }}.md"
+          cp template/article_template.md "${FILE_PATH}"
+          sed -i "s/{{ dateHyphen }}/${{ steps.create-meta-data.outputs.dateHyphen }}/g" "${FILE_PATH}"
+          sed -i "s/{{ titleHyphen }}/${{ steps.create-meta-data.outputs.titleHyphen }}/g" "${FILE_PATH}"
+          sed -i "s/{{ dateISO }}/${{ steps.create-meta-data.outputs.dateISO }}/g" "${FILE_PATH}"
+          sed -i "s/{{ title }}/${{ steps.create-meta-data.outputs.title }}/g" "${FILE_PATH}"
+          sed -i "s/{{ description }}/${{ steps.create-meta-data.outputs.description }}/g" "${FILE_PATH}"
+          cat "${FILE_PATH}"
       - name: Show GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
