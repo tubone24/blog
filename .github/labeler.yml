@@ -1,19 +1,9 @@
-src:
-  - src/**/*
-content:
-  - src/content/**/*
-scripts:
-  - scripts/**/*
-functions:
-  - functions/**/*
-cypress:
-  - cypress/**/*
-terraform:
-  - terraform/**/*
-memlab:
-  - test/memlab/**/*
-readme:
-  - README.md
-packages:
-  - package.json
-  - yarn.lock
+src: ['src/**/*']
+content: ['src/content/**/*']
+scripts: ['scripts/**/*']
+functions: ['functions/**/*']
+cypress: ['cypress/**/*']
+terraform: ['terraform/**/*']
+memlab: ['test/memlab/**/*']
+readme: ['README.md']
+packages: ['package.json', 'yarn.lock']
