@@ -380,16 +380,6 @@ exports[`Storyshots Components/Navbar Default 1`] = `
         <li>
           <a
             className="nav-btn btn btn-link"
-            href="https://note.tubone-project24.xyz"
-            rel="external nofollow noopener"
-            target="_blank"
-          >
-            Note
-          </a>
-        </li>
-        <li>
-          <a
-            className="nav-btn btn btn-link"
             href="https://tubone24.github.io/boyakifm/"
             rel="external nofollow noopener"
             target="_blank"

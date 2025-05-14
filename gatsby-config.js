@@ -193,6 +193,7 @@ module.exports = {
                   },
                 },
               },
+              exclude: ["Reddit", "Flickr", "Vimeo"],
             },
           },
           "gatsby-remark-numbered-footnotes",
@@ -309,12 +310,12 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-google-adsense`,
-      options: {
-        publisherId: `ca-pub-2404030439308059`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-google-adsense`,
+    //   options: {
+    //     publisherId: `ca-pub-2404030439308059`,
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {

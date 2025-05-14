@@ -81,13 +81,6 @@ const Navbar = () => (
           <li>
             <ExternalLink
               className="nav-btn btn btn-link"
-              title="Note"
-              href="https://note.tubone-project24.xyz"
-            />
-          </li>
-          <li>
-            <ExternalLink
-              className="nav-btn btn btn-link"
               title="FM"
               href="https://tubone24.github.io/boyakifm/"
             />
