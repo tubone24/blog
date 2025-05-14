@@ -193,7 +193,7 @@ module.exports = {
                   },
                 },
               },
-              exclude: ["Reddit"],
+              exclude: ["Reddit", "Flickr", "Vimeo"],
             },
           },
           "gatsby-remark-numbered-footnotes",
