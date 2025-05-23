@@ -19,7 +19,7 @@ templateKey: blog-post
 
 多分、もっとちゃんとしたやり方があるとは思いますがひとまず動いたので記事にしていきます。
 
-とりあえず動いたゴミコードは[こちらのGitHub](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client)にあげてます。
+とりあえず動いたコードは[こちらのGitHub](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client)にあげてます。
 
 ~~結構適当にやってます。~~
 

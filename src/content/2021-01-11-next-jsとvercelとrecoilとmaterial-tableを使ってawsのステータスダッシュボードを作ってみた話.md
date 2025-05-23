@@ -240,7 +240,7 @@ import tableIcons from '../components/tableIcons'
 
 あと、微妙に型もおかしく例えば、actionsはactionを複数指定できるはずですが、型チェックで怒られるので、仕方なくts-ignoreしてます。
 
-あなたが直せばいいじゃんアゼルバイジャンって言われそうですが、めんどくさくなってしまいIssueだけあげてしまいました。申し訳ねぇ...。
+あなたが直せばいいじゃんって言われそうですが、めんどくさくなってしまいIssueだけあげてしまいました。申し訳ねぇ...。
 
 <https://github.com/mbrn/material-table/issues/2762>
 

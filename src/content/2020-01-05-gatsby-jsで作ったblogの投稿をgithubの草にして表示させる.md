@@ -19,9 +19,9 @@ templateKey: blog-post
 
 ```
 
-## 中国兄貴たちの技術ブログがかっこいい！
+## 中国エンジニアの技術ブログがかっこいい！
 
-と思った**正月**でした。多くのエンジニアが使っていたBlog技術要素が[**Hexo**](https://hexo.io/)だったのですが、そのなかでもひときわかっこいいデザインのThemeを使っている兄貴が多数おりました。
+と思った**正月**でした。多くのエンジニアが使っていたBlog技術要素が[**Hexo**](https://hexo.io/)だったのですが、そのなかでもひときわかっこいいデザインのThemeを使っている人が多数おりました。
 
 そのThemeこそ、[hexo-theme-matery](https://github.com/blinkfox/hexo-theme-matery)です。
 

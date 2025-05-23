@@ -21,7 +21,7 @@ templateKey: blog-post
 ---
 タイトル長い。
 
-くっそ長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
+長いタイトルで恐縮ですが、Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮っていきたいと思います。
 
 作成したコード [GitHub](https://github.com/tubone24/web-screenshot-to-slack-gas)はこちらとなります。
 
@@ -185,7 +185,7 @@ mock関数をあらかじめ作成しておくと、コールのassertも可能�
 
 ## Buildとdeploy
 
-StarterではWebpackを使ってTypeSciptのGAS化を実行しているようです。
+StarterではWebpackを使ってTypeScriptのGAS化を実行しているようです。
 
 ```shell{promptUser: tubone}{promptHost: dev.localhost}
 npm run build

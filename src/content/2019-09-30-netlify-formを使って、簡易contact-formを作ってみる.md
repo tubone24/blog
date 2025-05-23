@@ -13,7 +13,7 @@ tags:
 headerImage: 'https://i.imgur.com/uWmwQRq.png'
 templateKey: blog-post
 ---
-くっそかんたんにFormできた。
+かんたんにFormできた。
 
 Netlifyに簡単にFormを作る機能が用意されているので利用用途ないですが、Gatsby.jsで作ったBlogにFormを作ってみようかと思います。
 
