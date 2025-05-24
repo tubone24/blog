@@ -55,7 +55,7 @@ Langfuse v3のアーキテクチャをAWSマネージドサービスで作りた
 
 特徴として、**Langfuse Server**は[AWS App Runner](https://aws.amazon.com/jp/apprunner/)でデプロイしており、データベースは[Amazon Aurora serverless v2](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)で構築、それぞれのつなぎ込みは[VPC Connector](https://docs.aws.amazon.com/ja_jp/apprunner/latest/dg/network-vpc.html)を利用するというかなりシンプルな構成にしていました。
 
-ありがたいことにLangfuse v2はNext.jsで構築されていることから**リクエストベースでコンテナが実行されればよいため**、（常駐する必要がないため）コスト最適化の観点でも**AWS App Runner**でデプロイしておりました。
+ありがたいことにLangfuse v2はNext.jsで構築されていることから**リクエストベースでコンテナが実行されればよいため**、(常駐する必要がないため)コスト最適化の観点でも**AWS App Runner**でデプロイしておりました。
 
 また、データベース(PostgreSQL)もAmazon Aurora serverless v2で構築することでApp Runnerと合わせてインフラ管理をできるだけ最小限にするAWSマネージドサービスを組み合わせて運用できてました。
 
@@ -65,7 +65,7 @@ Langfuse v3のアーキテクチャをAWSマネージドサービスで作りた
 
 さて、話をLangfuse v3に戻します。
 
-[Langfuse v3がGA]((<https://langfuse.com/changelog/2024-12-09-Langfuse-v3-stable-release>))したということで、早く使ってみたい気持ちがはやりますが、**すぐに移行できる代物ではなかった**のです。
+[Langfuse v3がGA](https://langfuse.com/changelog/2024-12-09-Langfuse-v3-stable-release)したということで、早く使ってみたい気持ちがはやりますが、**すぐに移行できる代物ではなかった**のです。
 
 Langfuse v3はLangfuse v2とは全く異なるアーキテクチャになっていました。
 
@@ -102,7 +102,7 @@ LLMアプリケーション自体の数が増えたり、利用者が増えた�
 
 ここからは私の私見ですが上記に加えて、昨今のLLMアプリケーションは**単純な入力とLLMの出力**だけで構成されるアプリケーションではなく、**複数のツールを呼び出し**、**RAGのように複数のデータストアを参照**し、**より複雑な出力**を返すアプリケーションが増えてきています。
 
-また、よりよい顧客体験のため時間のかかる推論を**並列・非同期で処理することも増えてきたため**1回の回答生成（Langfuseではこの単位をTraceと呼びます）に対していくつもの中間生成結果(Observation)が同時発生することが増えてきました。
+また、よりよい顧客体験のため時間のかかる推論を**並列・非同期で処理することも増えてきたため**1回の回答生成(Langfuseではこの単位をTraceと呼びます)に対していくつもの中間生成結果(Observation)が同時発生することが増えてきました。
 
 結果として、Langfuse v2のアーキテクチャでは増えゆく需要に対して、**スケーラビリティが追いつかなくなってきた**ということです。
 
@@ -116,7 +116,7 @@ Langfuseには[プロンプトマネジメント機能](https://langfuse.com/doc
 
 [近年のLLMアプリケーションの需要増加とObservation特性](#%E8%BF%91%E5%B9%B4%E3%81%AEllm%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E9%9C%80%E8%A6%81%E5%A2%97%E5%8A%A0%E3%81%A8observation%E7%89%B9%E6%80%A7)で取り上げたTrace/Observationの記録(Ingestion)に比べて、プロンプトマネジメントは**レイテンシーの増加がより深刻な結果**をもたらします。
 
-Ingestionはプロダクションコードのなかで**非同期・ノンブロッキング**の手法を用いることで、エンドユーザーに**レイテンシーを与えない**作りができるため影響を最小限に抑えることができます。（とはいえデータ欠損など問題はありえますが...）
+Ingestionはプロダクションコードのなかで**非同期・ノンブロッキング**の手法を用いることで、エンドユーザーに**レイテンシーを与えない**作りができるため影響を最小限に抑えることができます。(とはいえデータ欠損など問題はありえますが...)
 
 このあたりの知見はLLMOpsが始まる以前の一般的なWebアプリケーションのObservationの文脈でもよく取り上げられる話なので解決策を出すことに苦労はさほどしないはずです。
 
@@ -154,7 +154,7 @@ Ingestionはプロダクションコードのなかで**非同期・ノンブロ
 
 少し[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)と[実際のコード](https://github.com/langfuse/langfuse)から**Deep Dive**してみます。
 
-（ここでは記載を省きますが、[Langfuse Cloud版](https://langfuse.com/faq/tag/cloud)として取り組んだプロンプトマネジメントAPIをALBのターゲットグループで分けるなどのアーキテクチャ改善のお話もとてもおもしろいのでぜひ[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)をくまなく読んでいただくことをおすすめします!!!）
+(ここでは記載を省きますが、[Langfuse Cloud版](https://langfuse.com/faq/tag/cloud)として取り組んだプロンプトマネジメントAPIをALBのターゲットグループで分けるなどのアーキテクチャ改善のお話もとてもおもしろいのでぜひ[公式ブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)をくまなく読んでいただくことをおすすめします!!!)
 
 ### イベントのOLTP書き込み非同期化
 
@@ -174,13 +174,13 @@ Ingestionはプロダクションコードのなかで**非同期・ノンブロ
 
 ### OLAPとしてのClickHouse導入とレコードの更新処理
 
-（ここは個人的にLangfuse v3のアーキテクチャのなかで一番興味深い部分です）
+(ここは個人的にLangfuse v3のアーキテクチャのなかで一番興味深い部分です)
 
 散々繰り返してますが、Langfuse v3ではOLAPとして[ClickHouse](https://ClickHouse.com/jp)を導入しています。ClickHouseはOLAPに特化したデータベースで、分析ワークロードにおいてPostgreSQLに比べ効率的に処理できることが特徴です。
 
 前述したイベントのOLTP書き込みと同様に、ClickHouseに対してもイベントの書き込みは**Async Workerで非同期**で行なっています。
 
-ここでポイントになることは**OLAPの1行レコード更新はOLTPに比べてかなり遅い**（書き込み後の**読み取り一貫性が保証されるまでの時間が長い**）ということです。
+ここでポイントになることは**OLAPの1行レコード更新はOLTPに比べてかなり遅い**(書き込み後の**読み取り一貫性が保証されるまでの時間が長い**)ということです。
 
 LangfuseはTrace/Observationがすべて**一意のIDを持っている**ため、同じIDに対してイベントが発生した場合にはレコードの**更新処理**を実施する必要があります。
 
@@ -223,7 +223,7 @@ ENGINE = ReplacingMergeTree()
 
 この動作をすることで、ClickHouseの**各ノード・OLAPキューブ**で更新処理が独立して実施でき、更新のパフォーマンスが向上するのですが、**バックグラウンドタスクのタイミングを制御しきれないため**、レコード更新後の**読み取り一貫性が保証されるまでの時間が長くなる**という問題があります。
 
-（※正確には**select_sequential_consistency**を使うことで一貫性を保証できますが、高コストかつパフォーマンスを犠牲にする運用となってしまいます。）
+(※正確には**select_sequential_consistency**を使うことで一貫性を保証できますが、高コストかつパフォーマンスを犠牲にする運用となってしまいます。)
 
 上記の例ではTextカラムのみの更新でしたが、レコードの**一部カラムを断続的に更新**する場合、一度ClickHouseから**最新のレコードを取得してから更新処理を行なう**必要がでてくるため、レコードの一貫性を保つことが難しくなるというわけです。
 
@@ -239,17 +239,17 @@ Async Workerはひとまとまりのイベントを処理する際に、ClickHou
 
 イベントのOLTP書き込み非同期化にて記載の通り、イベントの書き込みは**Redisをキューとして挟むことで非同期化**されています。
 
-ただし、正確には**Blob Storage(S3)にイベント全データをJSONで格納**し、Redisには**イベントのIDのみを格納**しています。（①②）
+ただし、正確には**Blob Storage(S3)にイベント全データをJSONで格納**し、Redisには**イベントのIDのみを格納**しています。(①②)
 
 これはLLMへのコンテキストや生成結果をRedisに保存してしまうとRedisの容量が足りなくなるためと公式ブログで語られていました。
 
-その後Async Workerは**イベントのIDをRedisから取得**し、**S3からイベント全データを取得**します。（③④）
+その後Async Workerは**イベントのIDをRedisから取得**し、**S3からイベント全データを取得**します。(③④)
 
-そして、イベント全データをまずOLTPであるPostgreSQLに書き込みます。（⑤）
+そして、イベント全データをまずOLTPであるPostgreSQLに書き込みます。(⑤)
 
-同時にClickHouseへの書き込みも実行されます。 一回のClickHouse書き込み時にAsync Worker内部で**レコードの最終更新状態になるように同一のIDでのイベントをマージ処理**を行ない、ClickHouseへの書き込みキューに登録します。（⑥⑦）
+同時にClickHouseへの書き込みも実行されます。 一回のClickHouse書き込み時にAsync Worker内部で**レコードの最終更新状態になるように同一のIDでのイベントをマージ処理**を行ない、ClickHouseへの書き込みキューに登録します。(⑥⑦)
 
-そして、ClickHouseに書き込みを行ないます。（⑧）
+そして、ClickHouseに書き込みを行ないます。(⑧)
 
 こうすることで、ClickHouseの**ReplacingMergeTreeの仕組みを使いつつ**、短時間の断続したレコード更新の際でも、Worker内部でのマージ処理によって**レコードの一貫性を保つ**ことができるようになっています。素晴らしい...。
 
@@ -314,7 +314,7 @@ After
 
 しかしながら、確認して気がついたのですが、Langfuseのマイグレーションファイル一式には**down.sqlが存在していませんでした**。
 
-（理由は推測になりますが、往々にしてdown.sqlを利用したマイグレーションの切り戻しはデータの損失が発生する可能性があるため、自動のマイグレーションスクリプトには含めないということかもしれません。私も過去のプロジェクトで似たような判断をしたことがあります。）
+(理由は推測になりますが、往々にしてdown.sqlを利用したマイグレーションの切り戻しはデータの損失が発生する可能性があるため、自動のマイグレーションスクリプトには含めないということかもしれません。私も過去のプロジェクトで似たような判断をしたことがあります。)
 
 この場合、万が一のときは切り戻しのためのマイグレーションスクリプトを自分で作成、もしくは直接DBの書き換えを行なう必要がありますので覚悟を決めました。
 
@@ -363,7 +363,7 @@ ALTER TABLE "traces" DROP CONSTRAINT "traces_session_id_project_id_fkey";
 
 Langfuse v3のアーキテクチャではWeb、Workerから**ClickHouseへのアクセス経路**をどうするかが課題でした。
 
-ClickHouse自体は**外（VPC外）から直接叩く要件はなく**、かつ**不要なインフラを作りたくなかった**ため、Internet facing / Internal限らず**ALBやNLB**でのエンドポイント化はせず、なんとか**コンテナ間で通信**を行なわせたいと考えました。
+ClickHouse自体は**外(VPC外)から直接叩く要件はなく**、かつ**不要なインフラを作りたくなかった**ため、Internet facing / Internal限らず**ALBやNLB**でのエンドポイント化はせず、なんとか**コンテナ間で通信**を行なわせたいと考えました。
 
 やりたいことのイメージはこんな感じです。
 
@@ -405,7 +405,7 @@ ECS Fargateの**エフェメラルストレージ**はタスクが終了する�
 
 ![EFSのマウント失敗](https://i.imgur.com/AuhZn4M.png)
 
-（キャプチャ取り忘れましたが途中**botocoreのインストールをしてね**、という謎のメッセージもでたので苦労しました。EFSで永続化チャレンジするときはエラーメッセージに騙されないようにしましょう！）
+(キャプチャ取り忘れましたが途中**botocoreのインストールをしてね**、という謎のメッセージもでたので苦労しました。EFSで永続化チャレンジするときはエラーメッセージに騙されないようにしましょう！)
 
 ```bash
 check that your file system ID is correct, and ensure that the VPC has an EFS mount target for this file system ID. See https://docs.aws.amazon.com/console/efs/mount-dns-name for more detail. 
