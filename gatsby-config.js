@@ -89,6 +89,7 @@ module.exports = {
         env: {
           production: {
             policy: [{ userAgent: "*" }],
+            sitemap: `${siteUrl}/sitemap.xml`,
           },
           "branch-deploy": {
             policy: [{ userAgent: "*", disallow: ["/"] }],
@@ -228,7 +229,22 @@ module.exports = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
-        output: "/",
+        output: "/sitemap.xml",
+        excludes: [
+          "/dev-404-page/",
+          "/404/",
+          "/404.html",
+          "/offline-plugin-app-shell-fallback/",
+        ],
+        createLinkInHead: true,
+        serialize: ({ path, modifiedGmt }) => {
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+            changefreq: "weekly",
+            priority: 0.7,
+          };
+        },
       },
     },
     {
