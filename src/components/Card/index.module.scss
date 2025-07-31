@@ -78,3 +78,20 @@
     opacity: 0.9;
   }
 }
+
+// Style for img tag to match div.wrapper
+img.wrapper {
+  display: block;
+  width: 100%;
+  height: 5.7rem;
+  object-fit: cover;
+  object-position: center;
+
+  @media (min-width: 576px) {
+    height: 15rem;
+  }
+}
+
+.image-link {
+  display: block;
+}

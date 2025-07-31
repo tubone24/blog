@@ -18,13 +18,15 @@ const CardHeader = ({
   title: string;
   index: number;
 }) => {
+  const imageUrl = parseImgur(image, SizeMapping.large);
+
   if (index > 1) {
     return (
       <Link to={url}>
         <span className="visually-hidden">{title}</span>
         <div
           className={style.wrapper + " lozad"}
-          data-background-image={parseImgur(image, SizeMapping.large)}
+          data-background-image={imageUrl}
           title={title}
           aria-hidden="true"
           data-testid="card-header"
@@ -32,13 +34,32 @@ const CardHeader = ({
       </Link>
     );
   }
+
+  // For the first image (LCP), use img tag with eager loading and high priority
+  if (index === 0) {
+    return (
+      <Link to={url} className={style.imageLink}>
+        <span className="visually-hidden">{title}</span>
+        <img
+          src={imageUrl}
+          alt={title}
+          className={style.wrapper}
+          loading="eager"
+          fetchPriority="high"
+          data-testid="card-header"
+        />
+      </Link>
+    );
+  }
+
+  // For other early images, keep the existing background-image approach
   return (
     <Link to={url}>
       <span className="visually-hidden">{title}</span>
       <div
         className={style.wrapper}
         style={{
-          backgroundImage: ` url(${parseImgur(image, SizeMapping.large)})`,
+          backgroundImage: ` url(${imageUrl})`,
         }}
         title={title}
         aria-hidden="true"
