@@ -44,8 +44,18 @@ describe("Card", () => {
     expect(screen.getByTestId("card")).toHaveTextContent("testTag1");
     expect(screen.getByTestId("card")).toHaveTextContent("testTag2");
     expect(screen.getByTestId("card")).toHaveTextContent("hogehogehogehoge");
-    expect(screen.getByTestId("card-header")).toHaveStyle(
-      "background-image: url(https://example.com/testl.png);"
+    // For index === 0, it's now an img tag
+    expect(screen.getByTestId("card-header")).toHaveAttribute(
+      "src",
+      "https://example.com/testl.png"
+    );
+    expect(screen.getByTestId("card-header")).toHaveAttribute(
+      "loading",
+      "eager"
+    );
+    expect(screen.getByTestId("card-header")).toHaveAttribute(
+      "fetchpriority",
+      "high"
     );
   });
   it("undefined tag", () => {
@@ -53,7 +63,7 @@ describe("Card", () => {
       <Card
         title="testTitle"
         url="https://example.com"
-        index={0}
+        index={1}
         date="2022-01-01"
         tags={[undefined]}
         description="hogehogehogehoge"

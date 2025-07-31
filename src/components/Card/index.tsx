@@ -42,10 +42,10 @@ const CardHeader = ({
         <span className="visually-hidden">{title}</span>
         <img
           src={imageUrl}
-          alt={title}
+          alt=""
           className={style.wrapper}
           loading="eager"
-          fetchPriority="high"
+          fetchpriority="high"
           data-testid="card-header"
         />
       </Link>
