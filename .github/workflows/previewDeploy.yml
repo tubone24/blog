@@ -568,8 +568,12 @@ jobs:
           npm install -g memlab
       - name: run memlab
         run: |
-          MEMLAB_PATH=$(which memlab)
-          npx start-server-and-test build-serve:e2e "http://localhost:9000" "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
+          cat > run-memlab.sh << 'EOF'
+          #!/bin/bash
+          memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab
+          EOF
+          chmod +x run-memlab.sh
+          npx start-server-and-test build-serve:e2e "http://localhost:9000" "./run-memlab.sh"
         env:
           URL: "http://localhost:9000"
       - name: summarize
