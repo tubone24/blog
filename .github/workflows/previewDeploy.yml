@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -57,7 +57,7 @@ jobs:
 #      - name: Setup Node
 #        uses: actions/setup-node@v4
 #        with:
-#          node-version: 18.17.0
+#          node-version: 18.19.0
 #      - name: Get yarn cache directory path
 #        id: yarn-cache-dir-path
 #        run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -84,7 +84,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - uses: denoland/setup-deno@v1
@@ -309,7 +309,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -361,7 +361,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -467,7 +467,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -534,7 +534,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -568,8 +568,12 @@ jobs:
           npm install -g memlab
       - name: run memlab
         run: |
-          MEMLAB_PATH=$(which memlab)
-          npx start-server-and-test build-serve:e2e "http://localhost:9000" "${MEMLAB_PATH} run --scenario test/memlab/testMemleak.js --work-dir test/memlab"
+          cat > run-memlab.sh << 'EOF'
+          #!/bin/bash
+          memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab
+          EOF
+          chmod +x run-memlab.sh
+          npx start-server-and-test build-serve:e2e "http://localhost:9000" "./run-memlab.sh"
         env:
           URL: "http://localhost:9000"
       - name: summarize
@@ -598,7 +602,7 @@ jobs:
           reviewdog_version: latest
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - uses: actions/checkout@v4
@@ -657,7 +661,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.17.0
+          node-version: 18.19.0
       - name: install dependencies
         run: yarn install --frozen-lockfile
       - name: yarn build
@@ -762,25 +766,70 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.19.0
       - uses: denoland/setup-deno@v1
         with:
           deno-version: 'v1.x'
+      - name: Install Playwright
+        run: |
+          mkdir -p /tmp/playwright-install
+          cd /tmp/playwright-install
+          npm init -y
+          npm install playwright
+          npx playwright install chromium --with-deps
       - name: install noto font
         run: |
           sudo apt-get update
           sudo apt-get install fonts-noto
       - name: Capture Webpage Screenshot
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        uses: swinton/screenshot-website@v1.0.2
-        with:
-          source: ${{ needs.build.outputs.draftUrl }}
-          destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
-          width: ${{ matrix.width }}
-          delay: 10
-      - uses: actions/download-artifact@v4
+        run: |
+          cat > capture-screenshot.js << 'EOF'
+          const { chromium } = require('/tmp/playwright-install/node_modules/playwright');
+          
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            
+            // Set viewport width
+            await page.setViewportSize({ 
+              width: parseInt(process.env.WIDTH), 
+              height: 1080 
+            });
+            
+            // Navigate to the page
+            await page.goto(process.env.SOURCE_URL, { 
+              waitUntil: 'networkidle',
+              timeout: 60000 
+            });
+            
+            // Wait for additional time if needed
+            await page.waitForTimeout(parseInt(process.env.DELAY) * 1000);
+            
+            // Take screenshot
+            await page.screenshot({ 
+              path: process.env.DESTINATION,
+              fullPage: true 
+            });
+            
+            await browser.close();
+          })();
+          EOF
+          
+          node capture-screenshot.js
+        env:
+          SOURCE_URL: ${{ needs.build.outputs.draftUrl }}
+          DESTINATION: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          WIDTH: ${{ matrix.width }}
+          DELAY: 10
+      - name: Upload screenshot artifact
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
+        uses: actions/upload-artifact@v4
         with:
           name: screenshot-${{ matrix.os }}-${{ matrix.width }}
+          path: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
       - name: Get PR Number
         id: get-pr-num
         run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"

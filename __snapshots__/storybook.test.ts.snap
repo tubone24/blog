@@ -270,6 +270,7 @@ exports[`Storyshots Components/Header Default 1`] = `
           />
           <img
             alt="tubone"
+            fetchPriority="high"
             onClick={[Function]}
             src="/assets/avater.png"
           />
