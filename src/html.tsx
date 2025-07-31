@@ -26,8 +26,13 @@ const HTML = ({
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       <meta name="p:domain_verify" content={config.domain_verify} />
-      <link rel="prefetch" href="/fonts/icomoon.woff2?s0mo8f" />
-      <link rel="preconnect dns-prefetch" href="//i.imgur.com" />
+      <link
+        rel="preload"
+        href="/fonts/icomoon.woff2?s0mo8f"
+        as="font"
+        type="font/woff2"
+      />
+      <link rel="preconnect" href="https://i.imgur.com" crossorigin />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
