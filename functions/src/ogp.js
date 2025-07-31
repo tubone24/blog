@@ -1,6 +1,5 @@
 import * as Sentry from "@sentry/node";
 import "@sentry/tracing";
-import { ProfilingIntegration } from "@sentry/profiling-node";
 import * as opentype from "opentype.js";
 import sharp from "sharp";
 import { getStore } from "@netlify/blobs";
@@ -8,8 +7,6 @@ import { getStore } from "@netlify/blobs";
 Sentry.init({
   dsn: "https://3bba1fab248c0e15ece4294929ec4185@o302352.ingest.us.sentry.io/4506916048732160",
   tracesSampleRate: 1.0,
-  integrations: [new ProfilingIntegration()],
-  profilesSampleRate: 1.0,
 });
 
 exports.config = {
