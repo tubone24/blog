@@ -774,6 +774,8 @@ jobs:
           deno-version: 'v1.x'
       - name: Install Playwright
         run: |
+          mkdir -p /tmp/playwright-install
+          cd /tmp/playwright-install
           npm init -y
           npm install playwright
           npx playwright install chromium --with-deps
@@ -785,7 +787,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
           cat > capture-screenshot.js << 'EOF'
-          const { chromium } = require('playwright');
+          const { chromium } = require('/tmp/playwright-install/node_modules/playwright');
           
           (async () => {
             const browser = await chromium.launch();
