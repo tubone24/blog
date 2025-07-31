@@ -17,7 +17,7 @@ exports[`Storyshots Components/Card Default 1`] = `
       <img
         alt=""
         data-testid="card-header"
-        fetchpriority="high"
+        fetchPriority="high"
         loading="eager"
         src="https://i.imgur.com/6B7WC7Dl.jpg"
       />
@@ -85,7 +85,7 @@ exports[`Storyshots Components/Card No Tags 1`] = `
       <img
         alt=""
         data-testid="card-header"
-        fetchpriority="high"
+        fetchPriority="high"
         loading="eager"
         src="https://i.imgur.com/6B7WC7Dl.jpg"
       />
