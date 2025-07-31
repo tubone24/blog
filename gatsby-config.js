@@ -177,25 +177,6 @@ module.exports = {
               toHeading: 4,
             },
           },
-          {
-            resolve: "@raae/gatsby-remark-oembed",
-            options: {
-              usePrefix: false,
-              providers: {
-                settings: {
-                  hatenablog: {
-                    endpoints: [
-                      {
-                        schemes: ["https://*.hatenablog.com/*"],
-                        url: "https://hatenablog.com/oembed",
-                      },
-                    ],
-                  },
-                },
-              },
-              exclude: ["Reddit", "Flickr", "Vimeo"],
-            },
-          },
           "gatsby-remark-numbered-footnotes",
           "gatsby-remark-prismjs-title",
           {
