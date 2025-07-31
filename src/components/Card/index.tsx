@@ -45,7 +45,7 @@ const CardHeader = ({
           alt=""
           className={style.wrapper}
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
           data-testid="card-header"
         />
       </Link>

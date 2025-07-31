@@ -32,7 +32,11 @@ const HTML = ({
         as="font"
         type="font/woff2"
       />
-      <link rel="preconnect" href="https://i.imgur.com" crossorigin />
+      <link
+        rel="preconnect"
+        href="https://i.imgur.com"
+        crossOrigin="anonymous"
+      />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
