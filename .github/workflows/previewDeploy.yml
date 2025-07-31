@@ -770,7 +770,8 @@ jobs:
           deno-version: 'v1.x'
       - name: Install Playwright
         run: |
-          npm install -g playwright
+          npm init -y
+          npm install playwright
           npx playwright install chromium --with-deps
       - name: install noto font
         run: |
