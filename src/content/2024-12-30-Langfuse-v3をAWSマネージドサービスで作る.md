@@ -1,5 +1,5 @@
 ---
-slug: 2024-12-30/Langfuse-v3をAWSマネージドサービスで作る
+slug: 2024-12-30/langfuse-v3-aws-managed-service
 title: "Langfuse v3はv2からどのように変わったのかを噛み締めながらAWSマネージドサービスでLangfuse v3を作りきる"
 date: 2024-12-31T02:35:41+0000
 description: Langfuse v3のアーキテクチャが大幅に変わったことから、Langfuse v3のアーキテクチャをDeepDiveしながらAWSマネージドサービスで作る際の課題と解決策を噛み締めて解説します。
