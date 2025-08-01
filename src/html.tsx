@@ -31,6 +31,7 @@ const HTML = ({
         href="/fonts/icomoon.woff2?s0mo8f"
         as="font"
         type="font/woff2"
+        crossOrigin="anonymous"
       />
       <link
         rel="preconnect"

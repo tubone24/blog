@@ -9,7 +9,7 @@ import * as style from "./about.module.scss";
 const html = `
   <h1>Who am I?</h1>
   <img src="https://i.imgur.com/VUti8s3m.png" alt="tubone" title="tubone">
-  <span  style="font-size: xx-large; color: #0bbf00; "><b>tubone</b></span> &nbsp; (29)
+  <span  style="font-size: xx-large; color: #0bbf00; "><b>tubone</b></span>
   <p>はじめまして。<b>tubone</b>と申します。</p>
   <p>本業のソフトウェア開発をやる傍ら、写真と音楽をやっています。</p>
   <p>何事も好奇心で始めるタイプです。</p>
