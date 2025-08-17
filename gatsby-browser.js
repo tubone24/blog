@@ -1,6 +1,8 @@
+import React from "react";
 import ReactGA from "react-ga4";
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
+import { HelmetProvider } from "react-helmet-async";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
@@ -37,4 +39,8 @@ export const onRouteUpdate = () => {
 
 export const onServiceWorkerUpdateReady = () => {
   window.location.reload(true);
+};
+
+export const wrapRootElement = ({ element }) => {
+  return <HelmetProvider>{element}</HelmetProvider>;
 };

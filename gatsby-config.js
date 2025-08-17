@@ -27,7 +27,6 @@ module.exports = {
     author: siteAuthor,
   },
   plugins: [
-    "gatsby-plugin-preact",
     "gatsby-plugin-typegen",
     // Pages Storybook don't create pages-json
     {
