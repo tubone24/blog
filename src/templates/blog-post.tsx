@@ -85,6 +85,12 @@ class BlogPost extends Component<Props> {
           tag={frontmatter?.tags ? frontmatter.tags[0] || "" : ""}
           description={excerpt || ""}
           image={frontmatter?.headerImage || config.defaultImage || ""}
+          datePublished={frontmatter?.date}
+          dateModified={frontmatter?.date}
+          keywords={
+            frontmatter?.tags?.filter((tag): tag is string => tag !== null) ||
+            []
+          }
         />
       </div>
     );

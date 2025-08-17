@@ -85,10 +85,20 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
+        host: NETLIFY_SITE_URL,
+        sitemap: `${NETLIFY_SITE_URL}/sitemap-index.xml`,
         resolveEnv: () => NETLIFY_ENV,
         env: {
           production: {
-            policy: [{ userAgent: "*" }],
+            policy: [
+              { userAgent: "*", allow: "/" },
+              { userAgent: "*", disallow: "/admin" },
+              { userAgent: "*", disallow: "/*.json$" },
+              { userAgent: "*", disallow: "/page-data/*" },
+              { userAgent: "*", disallow: "/*.netlify.app$" },
+              { userAgent: "*", disallow: "/preview/" },
+              { userAgent: "*", crawlDelay: 2 },
+            ],
           },
           "branch-deploy": {
             policy: [{ userAgent: "*", disallow: ["/"] }],
@@ -128,12 +138,16 @@ module.exports = {
                 date: edge.node.frontmatter.date,
                 url: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
                 guid: `${site.siteMetadata.siteUrl}/${edge.node.fields.slug}`,
+                custom_elements: [
+                  { "content:encoded": edge.node.html },
+                  { author: config.author },
+                ],
               })),
             query: `
               {
                 allMarkdownRemark(
                   sort: { order: DESC, fields: [frontmatter___date] },
-                  limit: 20,
+                  limit: 50,
                 ) {
                   edges {
                     node {
@@ -152,9 +166,14 @@ module.exports = {
             `,
             output: "/rss.xml",
             title: siteTitle,
+            description: siteDescription,
             feed_url: `${siteUrl}/rss.xml`,
             site_url: siteUrl,
             docs: "http://github.com/dylang/node-rss",
+            language: "ja",
+            copyright: `Copyright © ${new Date().getFullYear()} ${
+              config.author
+            }`,
           },
         ],
       },
