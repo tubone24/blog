@@ -182,10 +182,10 @@ const SEO = ({
   return (
     <Helmet>
       <title>{title}</title>
-      <html lang="ja" />
 
       {/* General tags */}
       <meta name="description" content={description} />
+      <meta name="image" content={image} />
       <meta name="keywords" content={allKeywords} />
       <meta name="author" content={author || config.author} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
