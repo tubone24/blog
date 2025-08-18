@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - uses: denoland/setup-deno@v1
@@ -155,7 +155,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -207,7 +207,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path
@@ -325,7 +325,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: yarn build
@@ -380,7 +380,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Install lighthouse
@@ -416,7 +416,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.19.0
+          node-version: 24.1.0
       - uses: denoland/setup-deno@v1
         with:
           deno-version: 'v1.x'
@@ -435,36 +435,36 @@ jobs:
         run: |
           cat > capture-screenshot.js << 'EOF'
           const { chromium } = require('/tmp/playwright-install/node_modules/playwright');
-          
+
           (async () => {
             const browser = await chromium.launch();
             const page = await browser.newPage();
-            
+
             // Set viewport width
-            await page.setViewportSize({ 
-              width: parseInt(process.env.WIDTH), 
-              height: 1080 
+            await page.setViewportSize({
+              width: parseInt(process.env.WIDTH),
+              height: 1080
             });
-            
+
             // Navigate to the page
-            await page.goto(process.env.SOURCE_URL, { 
+            await page.goto(process.env.SOURCE_URL, {
               waitUntil: 'networkidle',
-              timeout: 60000 
+              timeout: 60000
             });
-            
+
             // Wait for additional time if needed
             await page.waitForTimeout(parseInt(process.env.DELAY) * 1000);
-            
+
             // Take screenshot
-            await page.screenshot({ 
+            await page.screenshot({
               path: process.env.DESTINATION,
-              fullPage: true 
+              fullPage: true
             });
-            
+
             await browser.close();
           })();
           EOF
-          
+
           node capture-screenshot.js
         env:
           SOURCE_URL: "https://tubone-project24.xyz"

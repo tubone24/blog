@@ -9,6 +9,7 @@ const eslintrc = {
     "plugin:jest-dom/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
+    // "plugin:storybook/recommended" // 一時的に無効化
   ],
   parser: "@typescript-eslint/parser",
   plugins: ["jest-dom", "testing-library", "jest"],

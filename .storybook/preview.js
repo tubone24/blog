@@ -1,4 +1,6 @@
-import { action } from "@storybook/addon-actions"
+import { action } from "storybook/actions"
+import React from "react"
+
 // Gatsby's Link overrides:
 // Gatsby Link calls the `enqueue` & `hovering` methods on the global variable ___loader.
 // This global object isn't set in storybook context, requiring you to override it to empty functions (no-op),
@@ -15,12 +17,24 @@ window.___navigate = pathname => {
   action("NavigateTo:")(pathname)
 }
 
+// Mock gatsby module
+global.__PATH_PREFIX__ = ""
+global.__GATSBY = {
+  buildId: "storybook-build",
+  nextDataPath: "/",
+}
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+
   controls: {
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
     },
   },
+
+  docs: {
+    codePanel: true
+  }
 }
