@@ -144,7 +144,7 @@
     "@babel/eslint-parser": "7.24.1",
     "@babel/plugin-syntax-typescript": "7.24.1",
     "@babel/preset-typescript": "7.24.1",
-    "@cypress/code-coverage": "3.12.18",
+    "@cypress/code-coverage": "3.14.6",
     "@storybook/addon-a11y": "6.5.16",
     "@storybook/addon-actions": "6.5.16",
     "@storybook/addon-controls": "6.5.16",
