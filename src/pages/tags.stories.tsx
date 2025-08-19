@@ -1,22 +1,11 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Tags from "./tags";
 
 jest.mock("@/components/Sidebar", () => () => {
   return null;
 });
-
-export default {
-  title: "Pages/tags",
-  component: Tags,
-  parameters: {
-    backgrounds: {
-      default: "green",
-      values: [{ name: "green", value: "#d5ffd7" }],
-    },
-  },
-} as ComponentMeta<typeof Tags>;
 
 const pageQuery: GatsbyTypes.getAllTagsQuery = {
   allMarkdownRemark: {
@@ -32,9 +21,22 @@ const pageQuery: GatsbyTypes.getAllTagsQuery = {
   },
 };
 
-const Template: ComponentStory<typeof Tags> = (args) => <Tags {...args} />;
+const meta = {
+  title: "Pages/tags",
+  component: Tags,
+  parameters: {
+    backgrounds: {
+      default: "green",
+      values: [{ name: "green", value: "#d5ffd7" }],
+    },
+  },
+} satisfies Meta<typeof Tags>;
 
-export const Default = Template.bind({});
-Default.args = {
-  data: pageQuery,
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    data: pageQuery,
+  },
 };

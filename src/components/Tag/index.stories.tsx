@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Tag from "./index";
 
-export default {
+const meta = {
   title: "Components/Tag",
   component: Tag,
   parameters: {
@@ -12,12 +12,14 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof Tag>;
+} satisfies Meta<typeof Tag>;
 
-const Template: ComponentStory<typeof Tag> = (args) => <Tag {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  name: "test",
-  count: 4,
+export const Default: Story = {
+  args: {
+    name: "test",
+    count: 4,
+  },
 };

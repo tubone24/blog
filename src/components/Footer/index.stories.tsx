@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Footer from "./index";
 
-export default {
+const meta = {
   title: "Components/Footer",
   component: Footer,
   parameters: {
@@ -12,8 +12,9 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof Footer>;
+} satisfies Meta<typeof Footer>;
 
-const Template: ComponentStory<typeof Footer> = () => <Footer />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

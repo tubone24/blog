@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Content from "./index";
 // Code Highlighting
@@ -60,7 +60,7 @@ const sampleText =
   "<p>だからこれはある時が云っ持っのた、使用の軍隊に帰着思いない仕方のもさたんでないは進んたです。もう私はこの大切だ火事に推しなりた、講演の申をすこぶる与えなかろで得るているますのない。もっともし二十一円であったが、内心には箸よりは何を学校のしだから殖やしですのと行きですた。あるいは絶対そう自分を食わせろて得るですまいと、任命にしかるに矛盾のようます。</p>" +
   "<p>どう大反抗より這入っようです品評もなるいなけれて、わがのにご諸君家を与えます。</p>";
 
-export default {
+const meta = {
   title: "Components/Content",
   component: Content,
   parameters: {
@@ -69,20 +69,23 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof Content>;
+} satisfies Meta<typeof Content>;
 
-const Template: ComponentStory<typeof Content> = (args) => (
-  <div className="row post order-2">
-    <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
-      test Side Bar
-    </header>
-    <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
-      <Content {...args} />
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    post: sampleText,
+  },
+  render: (args) => (
+    <div className="row post order-2">
+      <header className="intro-header site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1">
+        test Side Bar
+      </header>
+      <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2 content">
+        <Content {...args} />
+      </div>
     </div>
-  </div>
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  post: sampleText,
+  ),
 };

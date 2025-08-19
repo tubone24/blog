@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Sidebar, StaticQueryAllPost, StaticQueryLatestPost } from "./index";
 
-export default {
+const meta = {
   title: "Components/Sidebar",
   component: Sidebar,
   parameters: {
@@ -12,7 +12,10 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof Sidebar>;
+} satisfies Meta<typeof Sidebar>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const allPosts: StaticQueryAllPost[] = [
   {
@@ -156,22 +159,22 @@ const latestPosts: StaticQueryLatestPost[] = [
   },
 ];
 
-const Template: ComponentStory<typeof Sidebar> = (args) => (
-  <div
-    className="row homepage"
-    style={{
-      marginTop: 20,
-    }}
-  >
-    <Sidebar {...args} />
-    <div className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">aaa</div>
-    <div className="col-xl-2 col-lg-1 order-3" />
-  </div>
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  latestPosts: latestPosts,
-  totalCount: 8,
-  allPosts: allPosts,
+export const Default: Story = {
+  args: {
+    latestPosts: latestPosts,
+    totalCount: 8,
+    allPosts: allPosts,
+  },
+  render: (args) => (
+    <div
+      className="row homepage"
+      style={{
+        marginTop: 20,
+      }}
+    >
+      <Sidebar {...args} />
+      <div className="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">aaa</div>
+      <div className="col-xl-2 col-lg-1 order-3" />
+    </div>
+  ),
 };

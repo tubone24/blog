@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Subscription from "./index";
 
-export default {
+const meta = {
   title: "Components/Subscription",
   component: Subscription,
   parameters: {
@@ -12,10 +12,9 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof Subscription>;
+} satisfies Meta<typeof Subscription>;
 
-const Template: ComponentStory<typeof Subscription> = (args) => (
-  <Subscription />
-);
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

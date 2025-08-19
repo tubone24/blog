@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import WordCloud from "./index";
 
-export default {
+const meta = {
   title: "Components/WordCloud",
   component: WordCloud,
   parameters: {
@@ -12,8 +12,9 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof WordCloud>;
+} satisfies Meta<typeof WordCloud>;
 
-const Template: ComponentStory<typeof WordCloud> = (args) => <WordCloud />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

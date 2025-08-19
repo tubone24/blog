@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import ShareBox from "./index";
 
-export default {
+const meta = {
   title: "Components/ShareBox",
   component: ShareBox,
   parameters: {
@@ -12,14 +12,14 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof ShareBox>;
+} satisfies Meta<typeof ShareBox>;
 
-const Template: ComponentStory<typeof ShareBox> = (args) => (
-  <ShareBox {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  url: "test",
-  hasCommentBox: true,
+export const Default: Story = {
+  args: {
+    url: "test",
+    hasCommentBox: true,
+  },
 };

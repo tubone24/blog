@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import Navbar from "./index";
 
-export default {
+const meta = {
   title: "Components/Navbar",
   component: Navbar,
   parameters: {
@@ -12,8 +12,9 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof Navbar>;
+} satisfies Meta<typeof Navbar>;
 
-const Template: ComponentStory<typeof Navbar> = () => <Navbar />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

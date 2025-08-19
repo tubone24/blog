@@ -1,18 +1,7 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import NotFoundPage, { GetAllPageQuery } from "./404";
-
-export default {
-  title: "Pages/NotFoundPage",
-  component: NotFoundPage,
-  parameters: {
-    backgrounds: {
-      default: "green",
-      values: [{ name: "green", value: "#d5ffd7" }],
-    },
-  },
-} as ComponentMeta<typeof NotFoundPage>;
 
 const getAllPageQuery: GetAllPageQuery = {
   data: {
@@ -32,11 +21,22 @@ const getAllPageQuery: GetAllPageQuery = {
   },
 };
 
-const Template: ComponentStory<typeof NotFoundPage> = (args) => (
-  <NotFoundPage {...args} />
-);
+const meta = {
+  title: "Pages/NotFoundPage",
+  component: NotFoundPage,
+  parameters: {
+    backgrounds: {
+      default: "green",
+      values: [{ name: "green", value: "#d5ffd7" }],
+    },
+  },
+} satisfies Meta<typeof NotFoundPage>;
 
-export const Default = Template.bind({});
-Default.args = {
-  data: getAllPageQuery.data,
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    data: getAllPageQuery.data,
+  },
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react-webpack5";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import TagCloud from "./index";
 
@@ -16,7 +16,7 @@ const allPosts: AllPost[] = [
   },
 ];
 
-export default {
+const meta = {
   title: "Components/TagCloud",
   component: TagCloud,
   parameters: {
@@ -25,13 +25,13 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof TagCloud>;
+} satisfies Meta<typeof TagCloud>;
 
-const Template: ComponentStory<typeof TagCloud> = (args) => (
-  <TagCloud {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  allPosts,
+export const Default: Story = {
+  args: {
+    allPosts,
+  },
 };

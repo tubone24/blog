@@ -10,11 +10,11 @@ const HTML = ({
   postBodyComponents = null,
 }: {
   htmlAttributes?: React.HTMLAttributes<HTMLHtmlElement>;
-  headComponents?: JSX.Element | null;
+  headComponents?: React.JSX.Element | null;
   bodyAttributes?: React.HTMLAttributes<HTMLBodyElement>;
-  preBodyComponents?: JSX.Element | null;
+  preBodyComponents?: React.JSX.Element | null;
   body?: string;
-  postBodyComponents?: JSX.Element | null;
+  postBodyComponents?: React.JSX.Element | null;
 }) => (
   <html {...htmlAttributes} lang="ja">
     <head>
