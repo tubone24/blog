@@ -5,7 +5,7 @@ const eslintrc = {
     "plugin:json/recommended",
     "react-app",
     "plugin:cypress/recommended",
-    "plugin:react-hooks/recommended",
+    // "plugin:react-hooks/recommended", // react-appに含まれているため削除
     "plugin:jest-dom/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
