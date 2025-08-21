@@ -214,6 +214,8 @@
     "netlify-cli": "17.19.1",
     "netlify-lambda": "2.0.16",
     "nyc": "15.1.0",
+    "os-browserify": "0.3.0",
+    "path-browserify": "1.0.1",
     "prettier": "2.8.8",
     "react-test-renderer": "^18",
     "sass-loader": "13.2.2",
@@ -236,6 +238,7 @@
     "textlint-rule-terminology": "3.0.5",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.2",
+    "tty-browserify": "0.0.1",
     "yaml-lint": "1.7.0"
   },
   "resolutions": {
