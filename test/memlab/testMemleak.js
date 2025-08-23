@@ -25,8 +25,11 @@ const action = async (page) => {
 };
 
 const back = async (page) => {
-  // Return Top page via clicking logo
-  await page.click('[data-testid="logo"]');
+  // Return Top page via direct navigation to avoid page reload
+  await page.evaluate(() => {
+    window.history.pushState({}, "", "/");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  });
 };
 
 module.exports = { action, back, url };
