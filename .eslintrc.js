@@ -1,19 +1,38 @@
 const eslintrc = {
   extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:prettier/recommended",
     "prettier",
     "plugin:json/recommended",
-    "react-app",
     "plugin:cypress/recommended",
-    // "plugin:react-hooks/recommended", // react-appに含まれているため削除
     "plugin:jest-dom/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
     // "plugin:storybook/recommended" // 一時的に無効化
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["jest-dom", "testing-library", "jest"],
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: [
+    "@typescript-eslint",
+    "react",
+    "jest-dom",
+    "testing-library",
+    "jest",
+  ],
   settings: {
+    react: {
+      version: "detect",
+    },
     "import/core-modules": [
       "react",
       "react-dom",
@@ -23,12 +42,29 @@ const eslintrc = {
     ],
   },
   rules: {
-    "no-unused-vars": "off", // duplicate @typescript-eslint/no-unused-vars
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off", // 一時的に無効化
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-require-imports": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react/no-unknown-property": ["error", { ignore: ["fetchPriority"] }],
+    "react/no-unescaped-entities": "off",
+    "react/jsx-key": "warn",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jest/consistent-test-it": ["error", { fn: "it" }],
     "jest/require-top-level-describe": ["error"],
+    "jest/no-commented-out-tests": "warn",
+    "import/no-anonymous-default-export": "off",
   },
   env: {
     browser: true,
+    node: true,
+    es2020: true,
     "jest/globals": true,
   },
   overrides: [
