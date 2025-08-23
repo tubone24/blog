@@ -87,7 +87,7 @@
   "main": "n/a",
   "scripts": {
     "start": "yarn develop",
-    "build": "gatsby build --prefix-paths",
+    "build": "gatsby build",
     "build:nocache": "yarn clean && yarn build",
     "gatsby": "gatsby",
     "develop": "gatsby develop",

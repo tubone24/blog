@@ -19,7 +19,7 @@ const siteDescription = config.description;
 const siteAuthor = config.author;
 
 module.exports = {
-  pathPrefix: "/",
+  // pathPrefix: "/",
   siteMetadata: {
     title: siteTitle,
     description: siteDescription,
