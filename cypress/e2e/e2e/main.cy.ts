@@ -34,7 +34,7 @@ describe("UI Test", () => {
     cy.visit("/");
     cy.contains("Tags").click();
     cy.location("href").should("include", "/tags");
-    cy.get('a[href="/tag/test"]').click();
+    cy.get('a[title="test"]').first().click();
     cy.location("href").should("include", "/tag/test");
     cy.contains("このBlogテンプレートのテスト用投稿").click();
     cy.location("href").should("include", "/2011/08/30");
