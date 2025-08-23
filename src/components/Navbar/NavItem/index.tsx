@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, navigate, withPrefix } from "gatsby";
+import { Link } from "gatsby";
 import ReactGA from "react-ga4";
 
 import "./index.scss";
@@ -13,7 +13,6 @@ const NavItem = ({ url, name }: { url: string; name: string }) => (
         category: "User",
         action: `Click nav-menu: ${name}`,
       });
-      navigate(withPrefix(url));
     }}
   >
     {name}

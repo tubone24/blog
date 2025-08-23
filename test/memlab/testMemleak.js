@@ -6,13 +6,22 @@ const url = () => {
 
 const action = async (page) => {
   // Go to the about page and catch memory leaks
-  const elements = await page.$x("//a[contains(., 'About')]");
-  const [link] = elements;
-  if (link) {
-    await link.click();
+  try {
+    // Wait for navigation to be available
+    await page.waitForSelector('a[href*="/about/"]', { timeout: 5000 });
+    await page.click('a[href*="/about/"]');
+  } catch (error) {
+    console.log("About link not found, trying alternative selector");
+    // Alternative approach using text content
+    const aboutButton = await page.evaluateHandle(() => {
+      const links = Array.from(document.querySelectorAll("a"));
+      return links.find((link) => link.textContent.includes("About"));
+    });
+    if (aboutButton) {
+      await aboutButton.click();
+      await aboutButton.dispose();
+    }
   }
-  // clean up external references from memlab
-  await Promise.all(elements.map((e) => e.dispose()));
 };
 
 const back = async (page) => {
