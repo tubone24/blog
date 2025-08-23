@@ -19,7 +19,7 @@ const siteDescription = config.description;
 const siteAuthor = config.author;
 
 module.exports = {
-  pathPrefix: "/",
+  // pathPrefix: "/",
   siteMetadata: {
     title: siteTitle,
     description: siteDescription,
@@ -27,7 +27,6 @@ module.exports = {
     author: siteAuthor,
   },
   plugins: [
-    "gatsby-plugin-preact",
     "gatsby-plugin-typegen",
     // Pages Storybook don't create pages-json
     {

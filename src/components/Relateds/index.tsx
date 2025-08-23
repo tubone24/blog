@@ -72,8 +72,8 @@ const RelatedPosts = ({
               <span className="icon-newspaper-o" />
               &nbsp;Related Posts
             </h2>
-            {relatedPosts.map((relatedPost) => (
-              <div>
+            {relatedPosts.map((relatedPost, index) => (
+              <div key={index}>
                 <RelatedCard
                   title={relatedPost.node.frontmatter?.title || ""}
                   tags={relatedPost.node.frontmatter?.tags || []}

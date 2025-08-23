@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import TimeToRead from "./index";
 
-export default {
+const meta = {
   title: "Components/TimeToRead",
   component: TimeToRead,
   parameters: {
@@ -12,14 +12,14 @@ export default {
       values: [{ name: "green", value: "#d5ffd7" }],
     },
   },
-} as ComponentMeta<typeof TimeToRead>;
+} satisfies Meta<typeof TimeToRead>;
 
-const Template: ComponentStory<typeof TimeToRead> = (args) => (
-  <TimeToRead {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  words: 3,
-  minutes: 4,
+export const Default: Story = {
+  args: {
+    words: 3,
+    minutes: 4,
+  },
 };
