@@ -307,23 +307,10 @@ module.exports = {
             {
               urlPattern: /^https?:.*\/page-data\/.*\.json/,
               handler: "NetworkFirst",
-              options: {
-                networkTimeoutSeconds: 3,
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
             },
             {
               urlPattern: /\.(?:png|jpg|jpeg|webp|svg|gif|tiff|js|css)$/,
               handler: "StaleWhileRevalidate",
-              options: {
-                cacheName: "assets",
-                expiration: {
-                  maxEntries: 100,
-                  maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
-                },
-              },
             },
           ],
         },
