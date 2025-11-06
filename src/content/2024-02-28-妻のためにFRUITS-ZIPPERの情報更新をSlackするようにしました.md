@@ -1,5 +1,5 @@
 ---
-slug: 2024-02-28/妻のためにアイドルの情報が更新されたらSlackに通知する実装をした
+slug: 2024-02-28/idol-update-slack-notification-for-wife
 title: "妻のためにアイドルの情報が更新されたらSlackに通知する実装をした"
 date: 2024-03-11T15:57:29+0000
 description: 妻が好きなFRUITS ZIPPERの更新情報をSlackに投稿して情報に最速アクセスできるようにします。

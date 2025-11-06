@@ -1,5 +1,5 @@
 ---
-slug: 2025-02-24/Celery-Beat-+-Cloudwatch-metricsで作るCelery監視
+slug: 2025-02-24/celery-monitoring-with-beat-and-cloudwatch
 title: "Celery Beat + Cloudwatch metricsで作るCelery監視"
 date: 2025-02-24T08:52:25+0000
 description: Celery Beat + Cloudwatch metricsで作るCelery監視
