@@ -2,6 +2,11 @@
   functions = "functions/src"
   publish = "public"
   command = "npm run build"
+  
+  # Build environment
+  [build.environment]
+  NODE_VERSION = "18"
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
@@ -9,3 +14,23 @@
 [functions]
   directory = "functions/src"
   included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp", "static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",  "functions/src/node_modules/**/*"]
+
+# Service Worker and PWA redirects
+[[redirects]]
+  from = "/sw.js"
+  to = "/sw.js"
+  status = 200
+  headers = {Cache-Control = "public, max-age=0, must-revalidate"}
+
+# Fallback for pages when service worker fails
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# Handle 404s properly  
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
