@@ -332,7 +332,10 @@ module.exports = {
           "/favicons/*": ["Cache-Control: public, max-age=31536000, immutable"],
           "/icons/*": ["Cache-Control: public, max-age=31536000, immutable"],
           "/fonts/*": ["Cache-Control: public, max-age=31536000, immutable"],
-          "/sw.js": ["Cache-Control: public, max-age=0, must-revalidate", "Content-Type: application/javascript"],
+          "/sw.js": [
+            "Cache-Control: public, max-age=0, must-revalidate",
+            "Content-Type: application/javascript",
+          ],
           "/**/*.js": ["Cache-Control: public, max-age=31536000, immutable"],
           "/**/*.css": ["Cache-Control: public, max-age=31536000, immutable"],
         },
