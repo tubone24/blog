@@ -297,25 +297,28 @@ module.exports = {
         minifyJS: true,
       },
     },
-    {
-      resolve: "gatsby-plugin-offline",
-      options: {
-        workboxConfig: {
-          globPatterns: ["*.html"],
-          maximumFileSizeToCacheInBytes: 5000000,
-          runtimeCaching: [
-            {
-              urlPattern: /^https?:.*\/page-data\/.*\.json/,
-              handler: "NetworkFirst",
-            },
-            {
-              urlPattern: /\.(?:png|jpg|jpeg|webp|svg|gif|tiff|js|css)$/,
-              handler: "StaleWhileRevalidate",
-            },
-          ],
-        },
-      },
-    },
+    // Temporarily disabled gatsby-plugin-offline to fix ERR_FAILED issues
+    // {
+    //   resolve: "gatsby-plugin-offline",
+    //   options: {
+    //     precachePages: [`/`, `/404.html`],
+    //     workboxConfig: {
+    //       globPatterns: ["*.html"],
+    //       skipWaiting: true,
+    //       clientsClaim: true,
+    //       runtimeCaching: [
+    //         {
+    //           urlPattern: /\/$/,
+    //           handler: "NetworkFirst",
+    //         },
+    //         {
+    //           urlPattern: /^https?:.*\/page-data\/.*\.json/,
+    //           handler: "CacheFirst",
+    //         },
+    //       ],
+    //     },
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
@@ -329,7 +332,10 @@ module.exports = {
           "/favicons/*": ["Cache-Control: public, max-age=31536000, immutable"],
           "/icons/*": ["Cache-Control: public, max-age=31536000, immutable"],
           "/fonts/*": ["Cache-Control: public, max-age=31536000, immutable"],
-          "/sw.js": ["Cache-Control: public, max-age=0, must-revalidate"],
+          "/sw.js": [
+            "Cache-Control: public, max-age=0, must-revalidate",
+            "Content-Type: application/javascript",
+          ],
           "/**/*.js": ["Cache-Control: public, max-age=31536000, immutable"],
           "/**/*.css": ["Cache-Control: public, max-age=31536000, immutable"],
         },
