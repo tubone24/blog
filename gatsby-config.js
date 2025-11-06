@@ -301,7 +301,7 @@ module.exports = {
       resolve: "gatsby-plugin-offline",
       options: {
         workboxConfig: {
-          globPatterns: ['*.html'],
+          globPatterns: ["*.html"],
           maximumFileSizeToCacheInBytes: 5000000,
           runtimeCaching: [
             {
