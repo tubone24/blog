@@ -4,23 +4,6 @@ import ReactGA from "react-ga4";
 
 import * as style from "./index.module.scss";
 
-const CommentButton = () => (
-  <a
-    className={style.shareButton + " " + style.comment}
-    href="#gitalk-container"
-    title="コメントする"
-    data-testid="CommentButton"
-    onClick={() =>
-      ReactGA.event({
-        category: "User",
-        action: "Goto Comment Box",
-      })
-    }
-  >
-    <span className="icon-comment" />
-  </a>
-);
-
 const GotoTopButton = () => (
   <a
     className={style.shareButton + " " + style.top}
@@ -38,13 +21,7 @@ const GotoTopButton = () => (
   </a>
 );
 
-const ShareBox = ({
-  url,
-  hasCommentBox = true,
-}: {
-  url: string;
-  hasCommentBox?: boolean;
-}) => (
+const ShareBox = ({ url }: { url: string }) => (
   <div className={style.mShareBox} role="application" data-testid="share-box">
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURI(url)}`}
@@ -119,9 +96,7 @@ const ShareBox = ({
         height="30"
       />
     </a>
-    {hasCommentBox && <CommentButton />}
-
-    {hasCommentBox && <GotoTopButton />}
+    <GotoTopButton />
   </div>
 );
 
