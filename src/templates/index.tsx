@@ -129,10 +129,7 @@ const Page = ({
         </main>
         <div className="col-xl-2 col-lg-1 order-3" />
       </div>
-      <ShareBox
-        url={config.siteUrl + String(location.pathname)}
-        hasCommentBox={false}
-      />
+      <ShareBox url={config.siteUrl + String(location.pathname)} />
       <SEO
         title={config.siteTitle}
         url={config.siteUrl}
