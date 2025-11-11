@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import loadable from "@loadable/component";
 import { graphql } from "gatsby";
 
 import { parseDate } from "@/utils";
@@ -16,10 +15,6 @@ import * as style from "./blog-post.module.scss";
 import RelatedPosts from "@/components/Relateds";
 
 import config from "@/config/index.json";
-
-const Gitalk = loadable(
-  () => import(/* webpackPrefetch: true */ "@/components/Gitalk")
-);
 
 type Props = {
   data: GatsbyTypes.BlogPostQueryQuery;
@@ -63,12 +58,6 @@ class BlogPost extends Component<Props> {
             minutes={this.props.pageContext.minutes}
           />
           <Content post={this.props.pageContext.repHtml} />
-          <Gitalk
-            id={frontmatter?.id || graphqlId}
-            title={frontmatter?.title || ""}
-            clientId={process.env.GATSBY_GITHUB_CLIENT_ID || ""}
-            clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET || ""}
-          />
           <RelatedPosts
             title={frontmatter?.title || ""}
             tags={frontmatter?.tags || []}

@@ -15,13 +15,6 @@
     "description": "aaaaaaa"
   },
   "title": "tubone BOYAKI",
-  "gitalk": {
-    "repo": "blog",
-    "admin": ["tubone24"],
-    "owner": "tubone24",
-    "pagerDirection": "first",
-    "distractionFreeMode": true
-  },
   "gaTrackId": "UA-146792080-1",
   "navbarList": [
     {

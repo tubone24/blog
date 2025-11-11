@@ -89,39 +89,41 @@ jobs:
           cat snyk_iac.txt
           cat snyk_container.txt
           touch summarize.txt
-          echo '# Snyk vulnerability report' >> summarize.txt
-          echo '## OSS packages' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '<details>' >> summarize.txt
-          cat snyk.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo '</details>' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '## Application' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '<details>' >> summarize.txt
-          cat snyk_code.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo '</details>' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '## IaC' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '<details>' >> summarize.txt
-          echo '' >> summarize.txt
-          cat snyk_iac.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '</details>' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '## Container' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '' >> summarize.txt
-          echo '<details>' >> summarize.txt
-          cat snyk_container.txt | sed -z 's/\n/\\n/g' >> summarize.txt
-          echo '</details>' >> summarize.txt
+          {
+            echo '# Snyk vulnerability report'
+            echo '## OSS packages'
+            echo ''
+            echo ''
+            echo '<details>'
+            cat snyk.txt | sed -z 's/\n/\\n/g'
+            echo '</details>'
+            echo ''
+            echo ''
+            echo '## Application'
+            echo ''
+            echo ''
+            echo '<details>'
+            cat snyk_code.txt | sed -z 's/\n/\\n/g'
+            echo '</details>'
+            echo ''
+            echo ''
+            echo '## IaC'
+            echo ''
+            echo ''
+            echo '<details>'
+            echo ''
+            cat snyk_iac.txt | sed -z 's/\n/\\n/g'
+            echo ''
+            echo '</details>'
+            echo ''
+            echo ''
+            echo '## Container'
+            echo ''
+            echo ''
+            echo '<details>'
+            cat snyk_container.txt | sed -z 's/\n/\\n/g'
+            echo '</details>'
+          } >> summarize.txt
           echo '' >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
           sed -i 's/Testing \.\.\.\.//g' summarize.txt

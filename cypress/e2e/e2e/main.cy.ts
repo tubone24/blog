@@ -9,10 +9,8 @@ const axeRunOptions = {
 
 describe("UI Test", () => {
   it("about page with smooth scroll", () => {
-    cy.visit("/");
-    cy.contains("About").click();
+    cy.visit("/about");
     cy.location("href").should("include", "/about");
-    cy.window().its("scrollY").should("equal", 0);
     cy.get("div > #toc_container > .toc_list > li").should(($lis) => {
       expect($lis, "toc list num").to.have.length(2);
       expect($lis.eq(0), "このブログについて").to.contain(
@@ -20,10 +18,11 @@ describe("UI Test", () => {
       );
       expect($lis.eq(1), "WordCloud").to.contain("2 WordCloud");
     });
+    cy.window().its("scrollY").should("equal", 0);
     cy.get("div > #toc_container > .toc_list > li:nth-child(1) > a").click();
-    cy.location("href").should("include", "/about/#aboutblog");
+    cy.location("href").should("include", "/about#aboutblog");
     cy.window().its("scrollY").should("not.equal", 0);
-    cy.get("[data-testid=GotoTopButton]").click();
+    cy.get("[data-testid=share-box] [data-testid=GotoTopButton]").click();
     // Because of smooth scrolling
     // eslint-disable-next-line cypress/no-unnecessary-waiting,testing-library/await-async-utils
     cy.wait(5000);
@@ -42,11 +41,11 @@ describe("UI Test", () => {
       "have.text",
       "このBlogテンプレートのテスト用投稿 | tubone BOYAKI"
     );
-    cy.get("[data-testid=CommentButton]").click();
+    cy.get("[data-testid=share-box] [data-testid=GotoTopButton]").click();
     // Because of smooth scrolling
     // eslint-disable-next-line cypress/no-unnecessary-waiting,testing-library/await-async-utils
     cy.wait(5000);
-    cy.window().its("scrollY").should("not.equal", 0);
+    cy.window().its("scrollY").should("be.lt", 100);
   });
   // eslint-disable-next-line jest/expect-expect
   it("Logo click and return home", () => {

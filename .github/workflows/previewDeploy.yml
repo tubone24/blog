@@ -166,7 +166,7 @@ jobs:
           path: ./cypress/videos/main.cy.ts.mp4
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
+        run:  echo "prnum=${GITHUB_REF//[^0-9]/}" >> "${GITHUB_OUTPUT}"
       - name: Add file
         env:
           FILE_PATH: ./cypress/videos/main.cy.ts.mp4
@@ -579,10 +579,10 @@ jobs:
       - name: summarize
         run: |
           cat test/memlab/data/out/leaks.txt
-          sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n\`\`\`\\n/g' test/memlab/data/out/leaks.txt
+          sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n```\\n/g' test/memlab/data/out/leaks.txt
           sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
           sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
-          printf "\\n \`\`\` \\n</details>\\n " >> test/memlab/data/out/leaks.txt
+          printf '\\n ``` \\n</details>\\n ' >> test/memlab/data/out/leaks.txt
       - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -832,7 +832,7 @@ jobs:
           path: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
       - name: Get PR Number
         id: get-pr-num
-        run:  echo "prnum=$(echo "${GITHUB_REF}" | sed -e 's/[^0-9]//g')" >> "${GITHUB_OUTPUT}"
+        run:  echo "prnum=${GITHUB_REF//[^0-9]/}" >> "${GITHUB_OUTPUT}"
       - name: PR Comments
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:

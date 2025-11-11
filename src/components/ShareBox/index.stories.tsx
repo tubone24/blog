@@ -21,5 +21,4 @@ const Template: ComponentStory<typeof ShareBox> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   url: "test",
-  hasCommentBox: true,
 };

@@ -346,8 +346,9 @@ exports[`Storyshots Components/Navbar Default 1`] = `
         <li>
           <a
             className="nav-btn btn btn-link"
-            href="/about/"
-            onClick={[Function]}
+            href="https://portfolio.tubone-project24.xyz/#about-me"
+            rel="external nofollow noopener"
+            target="_blank"
           >
             About
           </a>
@@ -486,17 +487,6 @@ exports[`Storyshots Components/ShareBox Default 1`] = `
       height="30"
       src="/assets/button-only@2x.png"
       width="30"
-    />
-  </a>
-  <a
-    className="undefined undefined"
-    data-testid="CommentButton"
-    href="#gitalk-container"
-    onClick={[Function]}
-    title="コメントする"
-  >
-    <span
-      className="icon-comment"
     />
   </a>
   <a
