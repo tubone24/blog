@@ -346,8 +346,9 @@ exports[`Storyshots Components/Navbar Default 1`] = `
         <li>
           <a
             className="nav-btn btn btn-link"
-            href="/about/"
-            onClick={[Function]}
+            href="https://portfolio.tubone-project24.xyz/#about-me"
+            rel="external nofollow noopener"
+            target="_blank"
           >
             About
           </a>
