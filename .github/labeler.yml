@@ -1,9 +1,37 @@
-src: ['src/**/*']
-content: ['src/content/**/*']
-scripts: ['scripts/**/*']
-functions: ['functions/**/*']
-cypress: ['cypress/**/*']
-terraform: ['terraform/**/*']
-memlab: ['test/memlab/**/*']
-readme: ['README.md']
-packages: ['package.json', 'yarn.lock']
+src:
+  - changed-files:
+    - any-glob-to-any-file: 'src/**/*'
+
+content:
+  - changed-files:
+    - any-glob-to-any-file: 'src/content/**/*'
+
+scripts:
+  - changed-files:
+    - any-glob-to-any-file: 'scripts/**/*'
+
+functions:
+  - changed-files:
+    - any-glob-to-any-file: 'functions/**/*'
+
+cypress:
+  - changed-files:
+    - any-glob-to-any-file: 'cypress/**/*'
+
+terraform:
+  - changed-files:
+    - any-glob-to-any-file: 'terraform/**/*'
+
+memlab:
+  - changed-files:
+    - any-glob-to-any-file: 'test/memlab/**/*'
+
+readme:
+  - changed-files:
+    - any-glob-to-any-file: 'README.md'
+
+packages:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'package.json'
+      - 'yarn.lock'
