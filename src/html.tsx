@@ -38,6 +38,11 @@ const HTML = ({
         href="https://i.imgur.com"
         crossOrigin="anonymous"
       />
+      <link
+        type="text/plain"
+        rel="author"
+        href="https://tubone-project24.xyz/humans.txt"
+      />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
