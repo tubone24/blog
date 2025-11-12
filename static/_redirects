@@ -5,6 +5,7 @@
 /sitemap.xml /sitemap-index.xml 301
 /latest/meta-data/ / 301
 /.well-known/security.txt /well-known/security.txt 301
+/.well-known/humans.txt /well-known/humans.txt 301
 /ogp.png /.netlify/functions/ogp 200
 https://blog.tubone-project24.xyz/* https://tubone-project24.xyz/:splat 301!
 http://blog.tubone-project24.xyz/* https://tubone-project24.xyz/:splat 301!

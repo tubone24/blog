@@ -1,4 +1,10 @@
 Contact: mailto:tubo.yyyuuu@gmail.com
-Expires: 2024-12-04T15:00:00.000Z
+Contact: https://portfolio.tubone-project24.xyz/#contact
+Expires: 2026-12-04T15:00:00.000Z
+Canonical: https://tubone-project24.xyz/.well-known/security.txt
 Preferred-Languages: ja, en
 Policy: https://github.com/tubone24/blog/security/policy
+Acknowledgments: https://tubone-project24.xyz/security-thanks
+
+# セキュリティに関する問題を発見した場合は、上記の連絡先までご報告ください。
+# 責任ある開示に感謝いたします。
