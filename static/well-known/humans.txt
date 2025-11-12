@@ -1,5 +1,31 @@
 /* TEAM */
 Developer: tubone
 Site: https://tubone-project24.xyz
+GitHub: https://github.com/tubone24
 Twitter: @tubone24
 Location: Kawasaki, Japan
+Contact: https://portfolio.tubone-project24.xyz/#contact
+
+/* ABOUT */
+このサイトは技術ブログ「tubone BOYAKI」です。
+AI、ソフトウェア開発、インフラに関する記事を発信しています。
+
+/* BOOKS */
+Published:
+- やさしいMCP入門 (2025)
+- AIエージェント開発/運用入門 (2025)
+
+/* LINKS */
+Blog: https://tubone-project24.xyz
+GitHub: https://github.com/tubone24
+Twitter: https://twitter.com/tubone24
+Portfolio: https://portfolio.tubone-project24.xyz
+
+/* SECURITY */
+Security Contact: https://portfolio.tubone-project24.xyz/#contact
+Security Policy: https://github.com/tubone24/blog/security/policy
+Hall of Fame: https://tubone-project24.xyz/security-thanks
+
+/* LICENSE */
+src/content (BLOG ARTICLE): CC BY 4.0 (unless otherwise noted)
+Other Codes: MIT License (unless otherwise noted)
