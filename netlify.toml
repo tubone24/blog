@@ -29,8 +29,15 @@
   status = 200
   conditions = {Role = ["admin"]}
 
-# Handle 404s properly  
+# Handle 404s properly
 [[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
+
+# Headers for llms.txt
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Content-Type = "text/plain; charset=utf-8"
