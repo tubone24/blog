@@ -13,7 +13,7 @@ const NavbarClass = [
   style.customNavbar,
 ];
 
-const Navbar = () => (
+const Navbar = ({ isPostPage = false }: { isPostPage?: boolean }) => (
   <nav
     id="m-navbar"
     className={`${NavbarClass.join(" ")} navbar-night`}
@@ -39,9 +39,15 @@ const Navbar = () => (
           height="45"
           data-testid="logo-img"
         />
-        <h1 className="visually-hidden">
-          Japanese IT Developer's Blog tubone BOYAKI
-        </h1>
+        {isPostPage ? (
+          <div className="visually-hidden">
+            Japanese IT Developer's Blog tubone BOYAKI
+          </div>
+        ) : (
+          <h1 className="visually-hidden">
+            Japanese IT Developer's Blog tubone BOYAKI
+          </h1>
+        )}
       </button>
       <button
         className={style.navbarToggler + " navbar-toggler"}

@@ -35,7 +35,7 @@ class BlogPost extends Component<Props> {
   render() {
     const { node } = this.data.content.edges[0];
 
-    const { frontmatter, fields, excerpt, id: graphqlId } = node;
+    const { frontmatter, fields, excerpt } = node;
 
     const shareURL = `https://tubone-project24.xyz/${fields?.slug}`;
     return (

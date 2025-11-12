@@ -31,4 +31,21 @@ describe("Card", () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
+  it("should render h1 when isPostPage is false", () => {
+    render(<Navbar isPostPage={false} />);
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent(
+      "Japanese IT Developer's Blog tubone BOYAKI"
+    );
+  });
+  it("should not render h1 when isPostPage is true", () => {
+    render(<Navbar isPostPage={true} />);
+    const headings = screen.queryByRole("heading", { level: 1 });
+    expect(headings).not.toBeInTheDocument();
+    // visually-hiddenクラスのdivには依然としてテキストが含まれている
+    expect(screen.getByTestId("logo")).toHaveTextContent(
+      "Japanese IT Developer's Blog tubone BOYAKI"
+    );
+  });
 });
