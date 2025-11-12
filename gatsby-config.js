@@ -359,6 +359,10 @@ module.exports = {
             "Cache-Control: public, max-age=0, must-revalidate",
             "Content-Type: application/javascript",
           ],
+          "llms.txt": [
+            "X-Robots-Tag: noindex",
+            "Content-Type: text/plain; charset=utf-8",
+          ],
           "/**/*.js": ["Cache-Control: public, max-age=31536000, immutable"],
           "/**/*.css": ["Cache-Control: public, max-age=31536000, immutable"],
         },

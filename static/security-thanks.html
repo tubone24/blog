@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セキュリティ研究者への謝辞 | tubone BOYAKI</title>
+    <meta name="description" content="tubone-project24.xyzのセキュリティ向上に貢献してくださった研究者の皆様への感謝を表します">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .intro h2 {
+            color: #2563eb;
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            margin-bottom: 10px;
+        }
+
+        .year-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .year-section h3 {
+            color: #1e40af;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+        }
+
+        .researcher {
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .researcher:last-child {
+            border-bottom: none;
+        }
+
+        .researcher-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .researcher-name a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .researcher-name a:hover {
+            text-decoration: underline;
+        }
+
+        .vulnerability-type {
+            color: #dc2626;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .report-date {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .contact-info h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+
+        .contact-info a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .intro, .year-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🏆 Security Hall of Fame</h1>
+        <p>セキュリティ研究者への謝辞</p>
+    </header>
+
+    <div class="intro">
+        <h2>感謝の言葉</h2>
+        <p>
+            このページでは、tubone-project24.xyzのセキュリティ向上に貢献してくださったセキュリティ研究者の皆様に心から感謝の意を表します。
+        </p>
+        <p>
+            責任ある脆弱性の開示を通じて、私たちのサービスをより安全なものにしていただき、誠にありがとうございます。
+            皆様の貢献により、ユーザーの安全とプライバシーが守られています。
+        </p>
+        <p>
+            <strong>※ 本リストに掲載されている脆弱性は全て修正済みです。</strong>
+        </p>
+    </div>
+
+    <!-- 2025年 -->
+    <div class="year-section">
+        <h3>2025年</h3>
+        <div class="empty-state">
+            <p>現在、記載はありません</p>
+            <p>セキュリティ上の問題を発見された方は、<a href="/.well-known/security.txt">security.txt</a>に記載の連絡先までご報告ください。</p>
+        </div>
+
+        <!-- 報告があった場合の記載例（コメントアウト） -->
+        <!--
+        <div class="researcher">
+            <div class="researcher-name">
+                <a href="https://twitter.com/researcher_name" target="_blank" rel="noopener">山田 太郎</a>
+            </div>
+            <div class="vulnerability-type">🔒 XSS脆弱性の報告</div>
+            <div class="report-date">報告日: 2025年11月5日</div>
+        </div>
+
+        <div class="researcher">
+            <div class="researcher-name">匿名の研究者A</div>
+            <div class="vulnerability-type">🔐 認証バイパスの報告</div>
+            <div class="report-date">報告日: 2025年10月20日</div>
+        </div>
+        -->
+    </div>
+
+    <!-- 過去の年度を追加する場合のテンプレート -->
+    <!--
+    <div class="year-section">
+        <h3>2024年</h3>
+        <div class="researcher">
+            <div class="researcher-name">
+                <a href="https://github.com/example" target="_blank" rel="noopener">佐藤 花子</a>
+            </div>
+            <div class="vulnerability-type">🔓 情報漏洩の可能性の報告</div>
+            <div class="report-date">報告日: 2024年12月15日</div>
+        </div>
+    </div>
+    -->
+
+    <div class="contact-info">
+        <h3>脆弱性を発見されましたか？</h3>
+        <p>
+            セキュリティ上の問題を発見された場合は、
+            <a href="/.well-known/security.txt">security.txt</a>に記載の連絡先まで責任を持ってご報告ください。
+        </p>
+        <p>
+            報告方法の詳細は<a href="/security-policy">セキュリティポリシー</a>をご確認ください。
+        </p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 tubone BOYAKI. All rights reserved.</p>
+        <p><a href="/">トップページへ戻る</a></p>
+    </footer>
+</div>
+</body>
+</html>
