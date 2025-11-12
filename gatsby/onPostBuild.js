@@ -48,13 +48,13 @@ exports.onPostBuild = async ({ graphql }) => {
 
   const llmsTxtContent = `# tubone BOYAKI
 
-> 技術ブログ by Yu Matsuzaki (tubone24). AIエージェント開発、AWS/クラウドインフラ、Web技術について執筆。
+> 技術ブログ by Yu Otsubo (tubone24). AIエージェント開発、AWS/クラウドインフラ、Web技術について執筆。
 
 ## 著者について
 
 - GitHub: https://github.com/tubone24
 - 技術書著者: 「やさしいMCP入門」「AIエージェント開発/運用入門」他
-- 専門分野: AI Agent開発、LLM、AWS、インフラストラクチャ
+- 専門分野: AI Agent開発、Webアプリ開発、インフラストラクチャ
 
 ## 最新記事
 
