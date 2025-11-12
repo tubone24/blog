@@ -93,11 +93,8 @@ module.exports = {
             policy: [
               { userAgent: "*", allow: "/" },
               { userAgent: "*", disallow: "/admin" },
-              { userAgent: "*", disallow: "/*.json$" },
-              { userAgent: "*", disallow: "/page-data/*" },
               { userAgent: "*", disallow: "/*.netlify.app$" },
               { userAgent: "*", disallow: "/preview/" },
-              { userAgent: "*", crawlDelay: 2 },
             ],
           },
           "branch-deploy": {
@@ -229,6 +226,51 @@ module.exports = {
       resolve: "gatsby-plugin-sitemap",
       options: {
         output: "/",
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            allMarkdownRemark {
+              nodes {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  date
+                }
+              }
+            }
+          }
+        `,
+        resolvePages: ({ allSitePage, allMarkdownRemark }) => {
+          const markdownPages = allMarkdownRemark.nodes.reduce((acc, node) => {
+            const path = `/${node.fields.slug}`;
+            acc[path] = {
+              path,
+              lastmod: node.frontmatter.date,
+            };
+            return acc;
+          }, {});
+
+          return allSitePage.nodes.map((page) => ({
+            ...page,
+            ...(markdownPages[page.path] || {}),
+          }));
+        },
+        serialize: ({ path, lastmod }) => {
+          return {
+            url: path,
+            lastmod,
+          };
+        },
       },
     },
     {
@@ -238,25 +280,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-optimize-svgs",
-    {
-      resolve: `gatsby-plugin-csp`,
-      options: {
-        disableOnDev: true,
-        reportOnly: false,
-        mergeScriptHashes: true,
-        mergeStyleHashes: true,
-        mergeDefaultDirectives: true,
-        directives: {
-          "script-src":
-            "'self' *.google-analytics.com https://*.twitter.com https://*.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com 'strict-dynamic'",
-          "style-src": "'self' 'unsafe-inline'",
-          "img-src": "*",
-          "frame-ancestors":
-            "'self' https://*.google-analytics.com https://*.twitter.com https://www.instagram.com https://embedr.flickr.com https://embed.redditmedia.com https://*.ad-stir.com https://blog-storybook.netlify.app https://www.youtube.com;",
-          "report-uri": "/.netlify/functions/csp-report",
-        },
-      },
-    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
