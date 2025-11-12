@@ -10,3 +10,5 @@
 /ogp.png /.netlify/functions/ogp 200
 https://blog.tubone-project24.xyz/* https://tubone-project24.xyz/:splat 301!
 http://blog.tubone-project24.xyz/* https://tubone-project24.xyz/:splat 301!
+https://pensive-lamport-5822d2.netlify.app/* https://tubone-project24.xyz/:splat 301!
+http://pensive-lamport-5822d2.netlify.app/* https://tubone-project24.xyz/:splat 301!
