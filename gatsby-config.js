@@ -226,6 +226,51 @@ module.exports = {
       resolve: "gatsby-plugin-sitemap",
       options: {
         output: "/",
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            allMarkdownRemark {
+              nodes {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  date
+                }
+              }
+            }
+          }
+        `,
+        resolvePages: ({ allSitePage, allMarkdownRemark }) => {
+          const markdownPages = allMarkdownRemark.nodes.reduce((acc, node) => {
+            const path = `/${node.fields.slug}`;
+            acc[path] = {
+              path,
+              lastmod: node.frontmatter.date,
+            };
+            return acc;
+          }, {});
+
+          return allSitePage.nodes.map((page) => ({
+            ...page,
+            ...(markdownPages[page.path] || {}),
+          }));
+        },
+        serialize: ({ path, lastmod }) => {
+          return {
+            url: path,
+            lastmod,
+          };
+        },
       },
     },
     {
