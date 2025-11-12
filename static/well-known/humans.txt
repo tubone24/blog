@@ -5,6 +5,7 @@ GitHub: https://github.com/tubone24
 Twitter: @tubone24
 Location: Kawasaki, Japan
 Contact: https://portfolio.tubone-project24.xyz/#contact
+Analytics: Privacy-focused analytics
 
 /* ABOUT */
 このサイトは技術ブログ「tubone BOYAKI」です。
@@ -21,6 +22,9 @@ GitHub: https://github.com/tubone24
 Twitter: https://twitter.com/tubone24
 Portfolio: https://portfolio.tubone-project24.xyz
 
+/* TECH STACK */
+More info: https://github.com/tubone24/blog/tree/master
+
 /* SECURITY */
 Security Contact: https://portfolio.tubone-project24.xyz/#contact
 Security Policy: https://github.com/tubone24/blog/security/policy
@@ -29,3 +33,13 @@ Hall of Fame: https://tubone-project24.xyz/security-thanks
 /* LICENSE */
 src/content (BLOG ARTICLE): CC BY 4.0 (unless otherwise noted)
 Other Codes: MIT License (unless otherwise noted)
+
+  _        _
+ | |_ _  _| |__   ___  _ __   ___
+ | __| | | | '_ \ / _ \| '_ \ / _ \
+ | |_| |_| | |_) | (_) | | | |  __/
+  \__|\__,_|_.__/ \___/|_| |_|\___|
+
+Made with ❤️ by tubone
+
+/* EOF */
