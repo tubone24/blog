@@ -497,12 +497,20 @@ jobs:
             echo '# Lighthouse Score'
             echo '## Desktop'
             echo ''
-            cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g'
+            if ls benchmark/summary/desktop-*.txt 1> /dev/null 2>&1; then
+              cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g'
+            else
+              echo 'No desktop results found'
+            fi
             echo ''
             echo ''
             echo '## Mobile'
             echo ''
-            cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g'
+            if ls benchmark/summary/mobile-*.txt 1> /dev/null 2>&1; then
+              cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g'
+            else
+              echo 'No mobile results found'
+            fi
           } >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
       - name: Post Lighthouse Score Comment
@@ -559,19 +567,28 @@ jobs:
         run: |
           cat > run-memlab.sh << 'EOF'
           #!/bin/bash
-          memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab
+          memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab 2>&1 | tee test/memlab/data/out/leaks.txt
           EOF
           chmod +x run-memlab.sh
+
+          # Ensure output directory exists
+          mkdir -p test/memlab/data/out
+
           npx start-server-and-test build-serve:e2e "http://localhost:9000" "./run-memlab.sh"
         env:
           URL: "http://localhost:9000"
       - name: summarize
         run: |
-          cat test/memlab/data/out/leaks.txt
-          sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n```\\n/g' test/memlab/data/out/leaks.txt
-          sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
-          sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
-          printf '\\n ``` \\n</details>\\n ' >> test/memlab/data/out/leaks.txt
+          # Check if leaks.txt exists and has content
+          if [ -f test/memlab/data/out/leaks.txt ] && [ -s test/memlab/data/out/leaks.txt ]; then
+            cat test/memlab/data/out/leaks.txt
+            sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n```\\n/g' test/memlab/data/out/leaks.txt
+            sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
+            sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
+            printf '\\n ``` \\n</details>\\n ' >> test/memlab/data/out/leaks.txt
+          else
+            echo "## Memlab leaks report\\n\<details\>\\n\\n```\\nNo memlab output found\\n```\\n</details>" > test/memlab/data/out/leaks.txt
+          fi
       - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

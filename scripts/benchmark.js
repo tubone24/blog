@@ -19,6 +19,15 @@ const PAGE_SPEED_INSIGHTS_URL =
 
 const saveJsonFile = (obj, client) => {
   const dateString = dayjs().format("YYYYMMDDHHmmSSS");
+
+  // Ensure directories exist
+  if (!fs.existsSync("./benchmark")) {
+    fs.mkdirSync("./benchmark");
+  }
+  if (!fs.existsSync("./benchmark/raw")) {
+    fs.mkdirSync("./benchmark/raw");
+  }
+
   const path = `./benchmark/raw/${client}-raw-${dateString}-${VERSION}.json`;
   fs.writeFileSync(path, JSON.stringify(obj));
   const lhPath = `./benchmark/${client}-lh-${dateString}-${VERSION}.json`;
@@ -27,6 +36,12 @@ const saveJsonFile = (obj, client) => {
 
 const summarizeScore = (obj, client) => {
   const dateString = dayjs().format("YYYYMMDDHHmmSSS");
+
+  // Ensure summary directory exists
+  if (!fs.existsSync("./benchmark/summary")) {
+    fs.mkdirSync("./benchmark/summary", { recursive: true });
+  }
+
   const path = `./benchmark/summary/${client}-${dateString}-${VERSION}.txt`;
   const lighthouseResult = obj.lighthouseResult;
   const summaryText = `performance: ${
