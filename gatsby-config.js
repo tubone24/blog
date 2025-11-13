@@ -322,28 +322,6 @@ module.exports = {
         minifyJS: true,
       },
     },
-    // Temporarily disabled gatsby-plugin-offline to fix ERR_FAILED issues
-    // {
-    //   resolve: "gatsby-plugin-offline",
-    //   options: {
-    //     precachePages: [`/`, `/404.html`],
-    //     workboxConfig: {
-    //       globPatterns: ["*.html"],
-    //       skipWaiting: true,
-    //       clientsClaim: true,
-    //       runtimeCaching: [
-    //         {
-    //           urlPattern: /\/$/,
-    //           handler: "NetworkFirst",
-    //         },
-    //         {
-    //           urlPattern: /^https?:.*\/page-data\/.*\.json/,
-    //           handler: "CacheFirst",
-    //         },
-    //       ],
-    //     },
-    //   },
-    // },
     {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {

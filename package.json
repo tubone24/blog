@@ -39,7 +39,6 @@
     "gatsby-plugin-minify-classnames": "5.0.0",
     "gatsby-plugin-netlify": "5.1.1",
     "gatsby-plugin-nprogress": "5.15.0",
-    "gatsby-plugin-offline": "6.15.0",
     "gatsby-plugin-optimize-svgs": "1.0.5",
     "gatsby-plugin-purgecss": "6.2.1",
     "gatsby-plugin-react-helmet-async": "1.2.3",
