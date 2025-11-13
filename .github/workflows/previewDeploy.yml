@@ -376,6 +376,7 @@ jobs:
           GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          GATSBY_ACTIVE_ENV: deploy-preview
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |

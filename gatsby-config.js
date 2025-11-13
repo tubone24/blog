@@ -90,7 +90,6 @@ module.exports = {
             policy: [
               { userAgent: "*", allow: "/" },
               { userAgent: "*", disallow: "/admin" },
-              { userAgent: "*", disallow: "/*.netlify.app$" },
               { userAgent: "*", disallow: "/preview/" },
             ],
           },
@@ -339,7 +338,7 @@ module.exports = {
             "Cache-Control: public, max-age=0, must-revalidate",
             "Content-Type: application/javascript",
           ],
-          "llms.txt": [
+          "/llms.txt": [
             "X-Robots-Tag: noindex",
             "Content-Type: text/plain; charset=utf-8",
           ],
