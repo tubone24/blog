@@ -488,7 +488,12 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: run lighthouse benchmark
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        run: yarn benchmark ${{ needs.build.outputs.draftUrl }} ci
+        run: |
+          echo "Running benchmark for URL: ${{ needs.build.outputs.draftUrl }}"
+          yarn benchmark ${{ needs.build.outputs.draftUrl }} ci || echo "Benchmark failed, continuing..."
+          echo "Checking for generated files..."
+          ls -la benchmark/ || echo "benchmark directory not found"
+          ls -la benchmark/summary/ || echo "benchmark/summary directory not found"
       - name: summarize scores
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
@@ -501,6 +506,7 @@ jobs:
               cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g'
             else
               echo 'No desktop results found'
+              echo 'This may be due to benchmark script failure or API rate limiting'
             fi
             echo ''
             echo ''
@@ -510,6 +516,7 @@ jobs:
               cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g'
             else
               echo 'No mobile results found'
+              echo 'This may be due to benchmark script failure or API rate limiting'
             fi
           } >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
@@ -587,7 +594,7 @@ jobs:
             sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
             printf '\\n ``` \\n</details>\\n ' >> test/memlab/data/out/leaks.txt
           else
-            echo "## Memlab leaks report\\n\<details\>\\n\\n```\\nNo memlab output found\\n```\\n</details>" > test/memlab/data/out/leaks.txt
+            printf "## Memlab leaks report\\n<details>\\n\\n\`\`\`\\nNo memlab output found\\n\`\`\`\\n</details>" > test/memlab/data/out/leaks.txt
           fi
       - name: Post Memlab Report Comment
         env:
