@@ -20,6 +20,7 @@ const siteAuthor = config.author;
 
 module.exports = {
   pathPrefix: "/",
+  graphqlTypegen: true,
   siteMetadata: {
     title: siteTitle,
     description: siteDescription,
@@ -27,21 +28,14 @@ module.exports = {
     author: siteAuthor,
   },
   plugins: [
-    "gatsby-plugin-preact",
-    "gatsby-plugin-typegen",
+    // gatsby-plugin-preact is not compatible with React 18 / Gatsby 5
+    // "gatsby-plugin-preact",
     // Pages Storybook don't create pages-json
     {
       resolve: "gatsby-plugin-exclude",
       options: { paths: ["/*.stories/"] },
     },
-    "gatsby-plugin-react-helmet",
-    {
-      resolve: "gatsby-plugin-react-helmet-canonical-urls",
-      options: {
-        siteUrl: NETLIFY_SITE_URL,
-        noQueryString: true,
-      },
-    },
+    "gatsby-plugin-react-helmet-async",
     "gatsby-plugin-sass",
     {
       resolve: "gatsby-plugin-minify-classnames",
