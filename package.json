@@ -133,6 +133,7 @@
   "devDependencies": {
     "@babel/core": "7.24.4",
     "@babel/eslint-parser": "7.24.1",
+    "@babel/helper-create-regexp-features-plugin": "7.24.7",
     "@babel/plugin-syntax-typescript": "7.24.1",
     "@babel/preset-typescript": "7.24.1",
     "@cypress/code-coverage": "3.12.18",
