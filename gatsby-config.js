@@ -31,8 +31,6 @@ module.exports = {
     author: siteAuthor,
   },
   plugins: [
-    // gatsby-plugin-preact is not compatible with React 18 / Gatsby 5
-    // "gatsby-plugin-preact",
     // Pages Storybook don't create pages-json
     {
       resolve: "gatsby-plugin-exclude",
