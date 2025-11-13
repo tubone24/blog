@@ -9,20 +9,28 @@ import "./index.scss";
 const Layout = ({
   children,
   location,
+  isPostPage,
 }: {
   children: React.ReactNode;
   location: {
     pathname: string;
   };
-}) => (
-  <div className="layout">
-    <Head />
-    <Navbar />
-    <Transition location={location}>
-      <div className="container-fluid">{children}</div>
-    </Transition>
-    <Footer />
-  </div>
-);
+  isPostPage?: boolean;
+}) => {
+  // isPostPageが明示的に渡されていない場合、pathnameから判定
+  // ブログポストページは /20XX-XX-XX のようなパターンを持つ
+  const isPost = isPostPage ?? /^\/20\d{2}-/.test(location.pathname);
+
+  return (
+    <div className="layout">
+      <Head />
+      <Navbar isPostPage={isPost} />
+      <Transition location={location}>
+        <div className="container-fluid">{children}</div>
+      </Transition>
+      <Footer />
+    </div>
+  );
+};
 
 export default Layout;
