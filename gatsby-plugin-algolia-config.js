@@ -51,9 +51,12 @@ const queries = [
 ];
 
 module.exports = {
-  appId: process.env.GATSBY_ALGOLIA_APP_ID,
-  apiKey: process.env.GATSBY_ALGOLIA_ADMIN_API_KEY,
-  indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
-  skipIndexing: process.env.NETLIFY_ENV !== "production",
+  appId: process.env.GATSBY_ALGOLIA_APP_ID || "dummy",
+  apiKey: process.env.GATSBY_ALGOLIA_ADMIN_API_KEY || "dummy",
+  indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME || "dummy",
+  skipIndexing:
+    !process.env.GATSBY_ALGOLIA_APP_ID ||
+    !process.env.GATSBY_ALGOLIA_ADMIN_API_KEY ||
+    process.env.NETLIFY_ENV !== "production",
   queries,
 };
