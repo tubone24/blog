@@ -1,36 +1,47 @@
 const path = require("path")
+
 module.exports = {
-  "stories": [
+  stories: [
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
-  "addons": [
+  addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    '@storybook/addon-actions',
-    '@storybook/addon-knobs',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y',
-    '@storybook/addon-controls',
-    '@storybook/addon-interactions',
-    "@storybook/addon-viewport",
+    "@storybook/addon-a11y",
+    "@storybook/addon-interactions",
     "@storybook/addon-storysource",
   ],
-  "staticDirs": ["../static"],
-  "framework": "@storybook/react",
+  staticDirs: ["../static"],
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {
+      builder: {
+        useSWC: true,
+      },
+    },
+  },
+  docs: {
+    autodocs: true,
+  },
   webpackFinal: async (config) => {
     // https://github.com/gatsbyjs/gatsby/discussions/36293
     config.externals = ["react-dom/client"]
+
+    // Add alias for @ to src directory
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, '../src'),
+    }
+
     // Transpile Gatsby module because Gatsby includes un-transpiled ES6 code.
-    config.module.rules[0].exclude = [/node_modules\/(?!(gatsby)\/)/]
-    // Use babel-plugin-remove-graphql-queries to remove static queries from components when rendering in storybook
-    config.module.rules[0].use[0].options.plugins.push([
-        require.resolve("babel-plugin-remove-graphql-queries"),
-      {
-        stage: config.mode === `development` ? "develop-html" : "build-html",
-        staticQueryDir: "page-data/sq/d",
-      },
-    ])
+    // Find the rule that handles JavaScript/TypeScript files
+    config.module.rules.forEach((rule) => {
+      if (rule.test && String(rule.test).includes('jsx')) {
+        // Update exclude to transpile gatsby modules
+        rule.exclude = [/node_modules\/(?!(gatsby|@gatsbyjs)\/)/];
+      }
+    });
 
     config.module.rules.push({
       test: /\.module\.scss$/,
@@ -58,6 +69,7 @@ module.exports = {
       ],
       include: path.resolve(__dirname, '../'),
     })
+
     config.module.rules.push({
       test: /\.scss$/,
       use: [
@@ -75,12 +87,7 @@ module.exports = {
       include: path.resolve(__dirname, '../'),
       exclude: /\.module\.scss$/
     })
+
     return config
-  },
-  features: {
-    interactionsDebugger: true,
-  },
-  core: {
-    builder: "@storybook/builder-webpack5"
   },
 }
