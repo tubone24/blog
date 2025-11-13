@@ -9,7 +9,8 @@ describe("ShareBox", () => {
   it("Displays valid ShareBox", () => {
     render(<ShareBox url="https://example.com" />);
     expect(screen.getByTestId("share-box")).toBeInTheDocument();
-    expect(screen.getAllByRole("link")).toHaveLength(5);
+    expect(screen.getAllByRole("link")).toHaveLength(4);
+    expect(screen.getByRole("button")).toBeInTheDocument();
     expect(screen.getByTestId("GotoTopButton")).toBeInTheDocument();
   });
   it("Facebook share button clicked", async () => {
