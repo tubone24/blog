@@ -106,7 +106,9 @@ const Card = ({
             <h3 className={style.title}>{title}</h3>
           </Link>
           <p>{description}</p>
-          <Link to={withPrefix(url)}>続きを読む</Link>
+          <Link to={withPrefix(url)} aria-label={`${title}の続きを読む`}>
+            続きを読む
+          </Link>
         </div>
       </div>
     </div>
