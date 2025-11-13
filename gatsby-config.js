@@ -4,6 +4,8 @@ const {
   URL: NETLIFY_SITE_URL = "https://tubone-project24.xyz",
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
+  GATSBY_ALGOLIA_APP_ID,
+  GATSBY_ALGOLIA_ADMIN_API_KEY,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   GATSBY_GITHUB_CLIENT_ID,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,6 +14,7 @@ const {
   GATSBY_GITHUB_SHA,
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === "production";
+const hasAlgoliaConfig = GATSBY_ALGOLIA_APP_ID && GATSBY_ALGOLIA_ADMIN_API_KEY;
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 const siteTitle = config.siteTitle;
 const siteShortTitle = config.siteShortTitle;
@@ -20,6 +23,7 @@ const siteAuthor = config.author;
 
 module.exports = {
   pathPrefix: "/",
+  graphqlTypegen: true,
   siteMetadata: {
     title: siteTitle,
     description: siteDescription,
@@ -27,21 +31,14 @@ module.exports = {
     author: siteAuthor,
   },
   plugins: [
-    "gatsby-plugin-preact",
-    "gatsby-plugin-typegen",
+    // gatsby-plugin-preact is not compatible with React 18 / Gatsby 5
+    // "gatsby-plugin-preact",
     // Pages Storybook don't create pages-json
     {
       resolve: "gatsby-plugin-exclude",
       options: { paths: ["/*.stories/"] },
     },
-    "gatsby-plugin-react-helmet",
-    {
-      resolve: "gatsby-plugin-react-helmet-canonical-urls",
-      options: {
-        siteUrl: NETLIFY_SITE_URL,
-        noQueryString: true,
-      },
-    },
+    "gatsby-plugin-react-helmet-async",
     "gatsby-plugin-sass",
     {
       resolve: "gatsby-plugin-minify-classnames",
@@ -175,11 +172,16 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: "gatsby-plugin-algolia",
-      // eslint-disable-next-line global-require
-      options: require("./gatsby-plugin-algolia-config.js"),
-    },
+    // Conditionally add Algolia plugin only if credentials are available
+    ...(hasAlgoliaConfig
+      ? [
+          {
+            resolve: "gatsby-plugin-algolia",
+            // eslint-disable-next-line global-require
+            options: require("./gatsby-plugin-algolia-config.js"),
+          },
+        ]
+      : []),
     {
       resolve: "gatsby-transformer-remark",
       options: {

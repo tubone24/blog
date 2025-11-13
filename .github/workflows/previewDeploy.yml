@@ -148,18 +148,6 @@ jobs:
       #     github-token: ${{ secrets.GITHUB_TOKEN }}
       #     path-to-lcov: ./coverage-e2e/lcov.info
       #     flag-name: e2e
-      - name: Test Storybook Snapshot
-        env:
-          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
-          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
-          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
-          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
-          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
-          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
-          GATSBY_GITHUB_SHA: ${{ github.sha }}
-          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
-          NETLIFY_ENV: deploy-preview
-        run: yarn test:storybook
       - uses: actions/upload-artifact@v4
         with:
           name: main.spec.ts.mp4
@@ -586,6 +574,10 @@ jobs:
       - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
+          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
+          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
+          GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
           URL: ${{ github.event.pull_request.comments_url }}
         run: |
           curl -X POST \
