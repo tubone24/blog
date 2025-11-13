@@ -27,7 +27,6 @@ const CardHeader = ({
         <div
           className={style.wrapper + " lozad"}
           data-background-image={imageUrl}
-          title={title}
           aria-hidden="true"
           data-testid="card-header"
         />
@@ -61,7 +60,6 @@ const CardHeader = ({
         style={{
           backgroundImage: ` url(${imageUrl})`,
         }}
-        title={title}
         aria-hidden="true"
         data-testid="card-header"
       />
@@ -108,7 +106,7 @@ const Card = ({
             <h3 className={style.title}>{title}</h3>
           </Link>
           <p>{description}</p>
-          <Link to={withPrefix(url)}>....Read more....</Link>
+          <Link to={withPrefix(url)}>続きを読む</Link>
         </div>
       </div>
     </div>

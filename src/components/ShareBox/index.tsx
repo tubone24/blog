@@ -5,20 +5,22 @@ import ReactGA from "react-ga4";
 import * as style from "./index.module.scss";
 
 const GotoTopButton = () => (
-  <a
+  <button
+    type="button"
     className={style.shareButton + " " + style.top}
-    href="#header"
     title="トップに戻る"
     data-testid="GotoTopButton"
     onClick={() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       ReactGA.event({
         category: "User",
         action: "Scroll to Top",
       });
     }}
   >
-    <span className="icon-chevron-up" />
-  </a>
+    <span className="icon-chevron-up" aria-hidden="true" />
+    <span className="visually-hidden">トップに戻る</span>
+  </button>
 );
 
 const ShareBox = ({ url }: { url: string }) => (
