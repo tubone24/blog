@@ -60,7 +60,7 @@ exports[`Storyshots Components/Card Default 1`] = `
         <a
           href="/#"
         >
-          ....Read more....
+          続きを読む
         </a>
       </div>
     </div>
@@ -110,7 +110,7 @@ exports[`Storyshots Components/Card No Tags 1`] = `
         <a
           href="/#"
         >
-          ....Read more....
+          続きを読む
         </a>
       </div>
     </div>
@@ -489,17 +489,23 @@ exports[`Storyshots Components/ShareBox Default 1`] = `
       width="30"
     />
   </a>
-  <a
+  <button
     className="undefined undefined"
     data-testid="GotoTopButton"
-    href="#header"
     onClick={[Function]}
     title="トップに戻る"
+    type="button"
   >
     <span
+      aria-hidden="true"
       className="icon-chevron-up"
     />
-  </a>
+    <span
+      className="visually-hidden"
+    >
+      トップに戻る
+    </span>
+  </button>
 </div>
 `;
 

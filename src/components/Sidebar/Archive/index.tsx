@@ -6,17 +6,6 @@ import ReactGA from "react-ga4";
 import dayjs from "dayjs";
 import { AllPost } from "../entity";
 
-const yearLink = ({ year }: { year: string }) => (
-  <Link
-    to={withPrefix(`/${year}/`)}
-    title={`Articles written in ${year}`}
-    onClick={() =>
-      ReactGA.event({ category: "Archive", action: `push Archive ${year}` })
-    }
-  >
-    {year}
-  </Link>
-);
 const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   const yearList = Array.from(
     new Set(
@@ -29,7 +18,21 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
         <span className="icon-calendar" />
         &nbsp;Archives
       </p>
-      {yearList.map((year) => yearLink({ year }))}
+      {yearList.map((year) => (
+        <Link
+          key={year}
+          to={withPrefix(`/${year}/`)}
+          title={`Articles written in ${year}`}
+          onClick={() =>
+            ReactGA.event({
+              category: "Archive",
+              action: `push Archive ${year}`,
+            })
+          }
+        >
+          {year}
+        </Link>
+      ))}
     </div>
   );
 };
