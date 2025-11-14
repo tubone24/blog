@@ -164,6 +164,7 @@
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-gatsby": "3.15.0",
     "core-js": "3.35.0",
+    "cp-file": "11.0.0",
     "css-loader": "6.10.0",
     "cypress": "15.6.0",
     "cypress-axe": "1.7.0",
