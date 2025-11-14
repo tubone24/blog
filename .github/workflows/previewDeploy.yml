@@ -688,17 +688,6 @@ jobs:
           node-version: 20.19.2
       - name: install dependencies
         run: yarn install --frozen-lockfile
-      - name: yarn build
-        env:
-          GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
-          GATSBY_GITHUB_CLIENT_ID: ${{secrets.GATSBY_GITHUB_CLIENT_ID}}
-          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{secrets.GATSBY_ALGOLIA_SEARCH_API_KEY}}
-          GATSBY_ALGOLIA_INDEX_NAME: ${{secrets.GATSBY_ALGOLIA_INDEX_NAME}}
-          GATSBY_ALGOLIA_APP_ID: ${{secrets.GATSBY_ALGOLIA_APP_ID}}
-          GATSBY_GITHUB_SHA: ${{ github.sha }}
-          FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
-          NETLIFY_ENV: deploy-preview
-        run: yarn build
       - name: build storybook
         run: yarn build-storybook
         env:
