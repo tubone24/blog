@@ -242,7 +242,7 @@
     "axios": "0.28.0",
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
-    "webpack": "5.76.0",
+    "webpack": "5.94.0",
     "yaml": "2.2.2",
     "postcss": "8.4.38",
     "tough-cookie": "4.1.3",
