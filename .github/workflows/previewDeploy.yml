@@ -424,7 +424,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+          echo "draftUrl=$(cat cli.txt | grep -oP 'https://[^\s]+--[^\s]+\.netlify\.app' | head -1)" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)
@@ -740,7 +740,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+          echo "draftUrl=$(cat cli.txt | grep -oP 'https://[^\s]+--[^\s]+\.netlify\.app' | head -1)" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)
