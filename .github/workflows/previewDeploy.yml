@@ -395,6 +395,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
+          GATSBY_ACTIVE_ENV: deploy-preview
         run: yarn build
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./public --functions=./functions/src > cli.txt
