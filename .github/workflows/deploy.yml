@@ -258,15 +258,6 @@ jobs:
           NETLIFY_ENV: production
           PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
         run: yarn build:nocache
-      - name: Push Bundle Analyze
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public/webpack-bundle-analyser/
-          destination_dir: ba
-          keep_files: true
-      - name: Remove Bundle Analyze
-        run: rm ./public/webpack-bundle-analyser/index.html
       - name: Deploy to netlify
         run: npx netlify-cli deploy --prod --no-build --dir=./public --functions=./functions/src
         env:

@@ -761,28 +761,6 @@ jobs:
           state: "failure"
 
 
-  bundle-analyzer-link:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - check-skip-flags
-    steps:
-      - uses: actions/checkout@v4
-      - name: Create Bundle Analyzer URL Comment
-        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        run: |
-          cat << EOF > comments.txt
-          ## Bundle Analyzer URL
-          ${{ needs.build.outputs.draftUrl }}/webpack-bundle-analyser
-          EOF
-      - name: Post comments
-        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          URL: ${{ github.event.pull_request.html_url }}
-        run:
-          gh pr comment -F ./comments.txt "${URL}"
-
   webscreenshot:
     needs:
       - build
