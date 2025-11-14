@@ -82,7 +82,6 @@ Special, thanks!
 - Components managed by [Storybook](#storybook)
   - Generate all preview-deploy and production-deploy
 - Each production-deploy is measured by [Lighthouse](#lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
-- Each production-deploy is measured by [Bundle Analyzer](#bundle-analyzer) and [reports](https://tubone24.github.io/blog/ba/index.html) are output
 - unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
@@ -285,12 +284,6 @@ After production deploy, Run and report Lighthouse.
 Also, create PR, Check Lighthouse score via [pagespeedapi.runpagespeed](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed) and Comment your PR.
 
 ![lighthouseScoreWithGitHubComments](https://i.imgur.com/LZmrqgS.png)
-
-## Bundle Analyzer
-
-After production deploy, Run and report Bundle Analyzer.
-
-<https://tubone24.github.io/blog/ba/index.html>
 
 ## Deploy at Netlify
 
