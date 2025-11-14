@@ -9,8 +9,16 @@ const eslintrc = {
     "plugin:jest-dom/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
+    "plugin:storybook/recommended",
   ],
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   plugins: ["jest-dom", "testing-library", "jest"],
   settings: {
     "import/core-modules": [

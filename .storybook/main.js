@@ -1,47 +1,43 @@
 const path = require("path")
 
 module.exports = {
-  stories: [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+
   addons: [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "@storybook/addon-a11y",
-    "@storybook/addon-interactions",
-    "@storybook/addon-storysource",
+    "@storybook/addon-webpack5-compiler-swc",
+    "@chromatic-com/storybook",
+    "@storybook/addon-docs"
   ],
+
   staticDirs: ["../static"],
+
   framework: {
     name: "@storybook/react-webpack5",
     options: {
-      builder: {
-        useSWC: true,
-      },
+      builder: {},
     },
   },
-  docs: {
-    autodocs: true,
-  },
-  webpackFinal: async (config) => {
-    // https://github.com/gatsbyjs/gatsby/discussions/36293
-    config.externals = ["react-dom/client"]
 
+  docs: {},
+
+  webpackFinal: async (config) => {
     // Add alias for @ to src directory
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, '../src'),
-    }
+      // Mock Gatsby modules to avoid import issues in Storybook
+      'gatsby': path.resolve(__dirname, './__mocks__/gatsby.js'),
+    };
 
-    // Transpile Gatsby module because Gatsby includes un-transpiled ES6 code.
-    // Find the rule that handles JavaScript/TypeScript files
-    config.module.rules.forEach((rule) => {
-      if (rule.test && String(rule.test).includes('jsx')) {
-        // Update exclude to transpile gatsby modules
-        rule.exclude = [/node_modules\/(?!(gatsby|@gatsbyjs)\/)/];
-      }
-    });
+    // Provide process polyfill for browser environment
+    const webpack = require('webpack');
+    config.plugins.push(
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      })
+    );
 
     config.module.rules.push({
       test: /\.module\.scss$/,
@@ -90,4 +86,8 @@ module.exports = {
 
     return config
   },
+
+  typescript: {
+    reactDocgen: false
+  }
 }
