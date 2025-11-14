@@ -227,11 +227,6 @@ module.exports = {
         output: "/",
         query: `
           {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
             allSitePage {
               nodes {
                 path
@@ -249,26 +244,35 @@ module.exports = {
             }
           }
         `,
+        resolveSiteUrl: () => siteUrl,
         resolvePages: ({ allSitePage, allMarkdownRemark }) => {
           const markdownPages = allMarkdownRemark.nodes.reduce((acc, node) => {
-            const path = `/${node.fields.slug}`;
-            acc[path] = {
-              path,
-              lastmod: node.frontmatter.date,
-            };
+            const slug = node.fields.slug;
+            // slugが/で始まる場合はそのまま、そうでない場合は/を追加
+            let path = slug.startsWith("/") ? slug : `/${slug}`;
+            // 末尾に/を追加（allSitePageのpathは末尾に/がある）
+            if (!path.endsWith("/")) {
+              path = `${path}/`;
+            }
+            acc[path] = node.frontmatter.date;
             return acc;
           }, {});
 
-          return allSitePage.nodes.map((page) => ({
-            ...page,
-            ...(markdownPages[page.path] || {}),
-          }));
+          return allSitePage.nodes.map((page) => {
+            return {
+              ...page,
+              lastmod: markdownPages[page.path] || null,
+            };
+          });
         },
         serialize: ({ path, lastmod }) => {
-          return {
+          const entry = {
             url: path,
-            lastmod,
           };
+          if (lastmod) {
+            entry.lastmod = lastmod;
+          }
+          return entry;
         },
       },
     },
