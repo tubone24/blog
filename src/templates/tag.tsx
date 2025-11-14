@@ -61,7 +61,7 @@ export default TagPage;
 export const pageQuery = graphql`
   query tagQuery($tag: [String!]) {
     allMarkdownRemark(
-      sort: { order: DESC, fields: frontmatter___date }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tags: { in: $tag } } }
     ) {
       edges {

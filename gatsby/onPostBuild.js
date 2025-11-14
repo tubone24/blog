@@ -4,7 +4,7 @@ const path = require("path");
 const query = `
   {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
     ) {
