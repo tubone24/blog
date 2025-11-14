@@ -588,13 +588,23 @@ jobs:
         run: |
           # Check if leaks.txt exists and has content
           if [ -f test/memlab/data/out/leaks.txt ] && [ -s test/memlab/data/out/leaks.txt ]; then
-            cat test/memlab/data/out/leaks.txt
-            sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n```\\n/g' test/memlab/data/out/leaks.txt
-            sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
-            sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
-            printf '\\n ``` \\n</details>\\n ' >> test/memlab/data/out/leaks.txt
+            # Remove null bytes and control characters, then clean up ANSI codes
+            tr -d '\000' < test/memlab/data/out/leaks.txt | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" > test/memlab/data/out/leaks_clean.txt
+
+            # Create formatted output
+            {
+              printf "## Memlab leaks report\n<details>\n\n\`\`\`\n"
+              cat test/memlab/data/out/leaks_clean.txt
+              printf "\n\`\`\`\n</details>\n"
+            } > test/memlab/data/out/leaks_formatted.txt
+
+            # Display the result
+            cat test/memlab/data/out/leaks_formatted.txt
+
+            # Prepare for JSON (escape newlines)
+            sed -z 's/\n/\\n/g' test/memlab/data/out/leaks_formatted.txt > test/memlab/data/out/leaks.txt
           else
-            printf "## Memlab leaks report\\n<details>\\n\\n\`\`\`\\nNo memlab output found\\n\`\`\`\\n</details>" > test/memlab/data/out/leaks.txt
+            printf "## Memlab leaks report\n<details>\n\n\`\`\`\nNo memlab output found\n\`\`\`\n</details>" > test/memlab/data/out/leaks.txt
           fi
       - name: Post Memlab Report Comment
         env:
