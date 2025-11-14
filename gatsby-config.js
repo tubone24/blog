@@ -82,7 +82,7 @@ module.exports = {
       options: {
         host: NETLIFY_SITE_URL,
         sitemap: `${NETLIFY_SITE_URL}/sitemap-index.xml`,
-        resolveEnv: () => NETLIFY_ENV,
+        resolveEnv: () => process.env.GATSBY_ACTIVE_ENV || NETLIFY_ENV,
         env: {
           production: {
             policy: [
