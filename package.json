@@ -228,7 +228,7 @@
     "nth-check": "2.1.1",
     "parse-url": "8.1.0",
     "minimatch": "6.1.6",
-    "prismjs": "1.29.0",
+    "prismjs": "1.30.0",
     "node-fetch": "2.6.12",
     "marked": "4.2.12",
     "trim-newlines": "3.0.1",
