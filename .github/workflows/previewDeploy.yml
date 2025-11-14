@@ -602,10 +602,10 @@ jobs:
             # Display the result
             cat test/memlab/data/out/leaks_formatted.txt
 
-            # Prepare for JSON (escape newlines)
-            sed -z 's/\n/\\n/g' test/memlab/data/out/leaks_formatted.txt > test/memlab/data/out/leaks.txt
+            # Save for posting (no need to manually escape)
+            cp test/memlab/data/out/leaks_formatted.txt test/memlab/data/out/leaks_final.txt
           else
-            printf "## Memlab leaks report\n<details>\n\n\`\`\`\nNo memlab output found\n\`\`\`\n</details>" > test/memlab/data/out/leaks.txt
+            printf "## Memlab leaks report\n<details>\n\n\`\`\`\nNo memlab output found\n\`\`\`\n</details>" > test/memlab/data/out/leaks_final.txt
           fi
       - name: Post Memlab Report Comment
         env:
@@ -616,9 +616,12 @@ jobs:
           GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
           URL: ${{ github.event.pull_request.comments_url }}
         run: |
+          # Use jq to properly encode JSON
+          BODY=$(jq -Rs . < test/memlab/data/out/leaks_final.txt)
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
-               -d "{\"body\": \"$(cat test/memlab/data/out/leaks.txt)\"}" \
+               -H "Content-Type: application/json" \
+               -d "{\"body\": ${BODY}}" \
                "${URL}"
   textlint:
     name: textlint
