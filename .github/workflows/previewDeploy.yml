@@ -4,7 +4,7 @@ on:
     branches:
       - master
 env:
-  cache-version: v2
+  cache-version: v3
 
 jobs:
   check-skip-flags:
@@ -398,7 +398,7 @@ jobs:
           GATSBY_ACTIVE_ENV: deploy-preview
         run: yarn build
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --dir=./public --functions=./functions/src > cli.txt
+        run: npx netlify-cli deploy --no-build --dir=./public --functions=./functions/src > cli.txt
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -424,7 +424,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+          echo "draftUrl=$(cat cli.txt | grep -oP 'https://[^\s]+--[^\s]+\.netlify\.app' | head -1)" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)
@@ -582,7 +582,7 @@ jobs:
           # Ensure output directory exists
           mkdir -p test/memlab/data/out
 
-          npx start-server-and-test build-serve:e2e "http://localhost:9000" "./run-memlab.sh"
+          npx start-server-and-test build-serve:e2e tcp:9000 "./run-memlab.sh"
         env:
           URL: "http://localhost:9000"
       - name: summarize
@@ -602,10 +602,10 @@ jobs:
             # Display the result
             cat test/memlab/data/out/leaks_formatted.txt
 
-            # Prepare for JSON (escape newlines)
-            sed -z 's/\n/\\n/g' test/memlab/data/out/leaks_formatted.txt > test/memlab/data/out/leaks.txt
+            # Save for posting (no need to manually escape)
+            cp test/memlab/data/out/leaks_formatted.txt test/memlab/data/out/leaks_final.txt
           else
-            printf "## Memlab leaks report\n<details>\n\n\`\`\`\nNo memlab output found\n\`\`\`\n</details>" > test/memlab/data/out/leaks.txt
+            printf "## Memlab leaks report\n<details>\n\n\`\`\`\nNo memlab output found\n\`\`\`\n</details>" > test/memlab/data/out/leaks_final.txt
           fi
       - name: Post Memlab Report Comment
         env:
@@ -616,9 +616,12 @@ jobs:
           GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
           URL: ${{ github.event.pull_request.comments_url }}
         run: |
+          # Use jq to properly encode JSON
+          BODY=$(jq -Rs . < test/memlab/data/out/leaks_final.txt)
           curl -X POST \
                -H "Authorization: token ${GITHUB_TOKEN}" \
-               -d "{\"body\": \"$(cat test/memlab/data/out/leaks.txt)\"}" \
+               -H "Content-Type: application/json" \
+               -d "{\"body\": ${BODY}}" \
                "${URL}"
   textlint:
     name: textlint
@@ -714,7 +717,7 @@ jobs:
           NETLIFY_ENV: deploy-preview
       - name: Deploy to netlify
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        run: npx netlify-cli deploy --dir=./storybook-static > cli.txt
+        run: npx netlify-cli deploy --no-build --dir=./storybook-static > cli.txt
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
@@ -740,7 +743,7 @@ jobs:
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         id: get-netlify-draft-url
         run: |
-          echo "draftUrl=$(cat cli.txt | sed -r 's/.*Website draft URL: (.*)\\n\\nIf everything.*/\1/')" >> "${GITHUB_OUTPUT}"
+          echo "draftUrl=$(cat cli.txt | grep -oP 'https://[^\s]+--[^\s]+\.netlify\.app' | head -1)" >> "${GITHUB_OUTPUT}"
       - uses: chrnorm/deployment-status@v2
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]')  && success() }}
         name: Create GitHub deploy (Success)
@@ -760,28 +763,6 @@ jobs:
           deployment-id: ${{ steps.deployment-dev-storybook.outputs.deployment_id }}
           state: "failure"
 
-
-  bundle-analyzer-link:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - check-skip-flags
-    steps:
-      - uses: actions/checkout@v4
-      - name: Create Bundle Analyzer URL Comment
-        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        run: |
-          cat << EOF > comments.txt
-          ## Bundle Analyzer URL
-          ${{ needs.build.outputs.draftUrl }}/webpack-bundle-analyser
-          EOF
-      - name: Post comments
-        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          URL: ${{ github.event.pull_request.html_url }}
-        run:
-          gh pr comment -F ./comments.txt "${URL}"
 
   webscreenshot:
     needs:

@@ -5,12 +5,19 @@ const eslintrc = {
     "plugin:json/recommended",
     "react-app",
     "plugin:cypress/recommended",
-    "plugin:react-hooks/recommended",
     "plugin:jest-dom/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
+    "plugin:storybook/recommended",
   ],
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   plugins: ["jest-dom", "testing-library", "jest"],
   settings: {
     "import/core-modules": [
@@ -34,6 +41,12 @@ const eslintrc = {
     {
       files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
       extends: ["plugin:testing-library/react"],
+    },
+    {
+      files: ["jest-configs/setup-test-env.js"],
+      rules: {
+        "jest/require-top-level-describe": "off",
+      },
     },
   ],
 };

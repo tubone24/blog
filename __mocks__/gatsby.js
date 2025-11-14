@@ -33,4 +33,8 @@ module.exports = {
   navigate: jest.fn(),
   StaticQuery: jest.fn(),
   useStaticQuery: jest.fn(),
+  withPrefix: jest.fn((path) => {
+    // Add leading slash if not present
+    return path.startsWith("/") ? path : `/${path}`;
+  }),
 };

@@ -1,6 +1,8 @@
+import React from "react";
 import ReactGA from "react-ga4";
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
+import { HelmetProvider } from "react-helmet-async";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
@@ -12,12 +14,13 @@ import { Dropdown } from "bootstrap/dist/js/bootstrap";
 const config = require("./src/config/index.json");
 
 const isLocalDevelopment = () =>
-  window &&
+  typeof window !== "undefined" &&
   window.location &&
   (window.location.origin !== "https://tubone-project24.xyz" ||
     window.location.origin !== "https://tubone-project24.xyz");
 
-if (isLocalDevelopment() === false) {
+// Initialize only in browser environment
+if (typeof window !== "undefined" && isLocalDevelopment() === false) {
   ReactGA.initialize(config.gaMeasurementId);
   Sentry.init({
     dsn: "https://097c36a02dd64e139ba2952e8882046d@sentry.io/1730608",
@@ -36,5 +39,11 @@ export const onRouteUpdate = () => {
 };
 
 export const onServiceWorkerUpdateReady = () => {
-  window.location.reload(true);
+  if (typeof window !== "undefined") {
+    window.location.reload(true);
+  }
+};
+
+export const wrapRootElement = ({ element }) => {
+  return <HelmetProvider>{element}</HelmetProvider>;
 };

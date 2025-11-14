@@ -1,5 +1,6 @@
 {
   "include": ["./src/**/*", "./gatsby/*"],
+  "exclude": ["**/*.stories.tsx", "**/*.stories.ts", ".storybook"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",

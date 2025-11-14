@@ -16,8 +16,7 @@
  * @type {Cypress.PluginConfig}
  */
 
-import getCompareSnapshotsPlugin from "cypress-visual-regression/dist/plugin";
-
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import task from "@cypress/code-coverage/task";
@@ -28,7 +27,6 @@ const plugins = (
 ) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  getCompareSnapshotsPlugin(on, config);
   task(on, config);
   return config;
 };
