@@ -21,15 +21,12 @@
 // @ts-ignore
 import task from "@cypress/code-coverage/task";
 
-const getCompareSnapshotsPlugin = require("cypress-visual-regression/dist/plugin");
-
 const plugins = (
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
 ) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  getCompareSnapshotsPlugin(on, config);
   task(on, config);
   return config;
 };
