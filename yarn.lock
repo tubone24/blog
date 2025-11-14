@@ -5667,10 +5667,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/loadable__component@5.13.6":
-  version "5.13.6"
-  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.13.6.tgz#08ccaf86b3f74d96b9bf930e2e08085301321825"
-  integrity sha512-Xph+OBc6BfduajBZLoMkHYfdot5TH2TOW6dW3bZVb0zSjBrFUiMI6Ltu8L4w7FV8VJMRDodybA4u9yIzfEE7aA==
+"@types/loadable__component@5.13.10":
+  version "5.13.10"
+  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.13.10.tgz#567e6bb371c4157d16aa4a1d7d2a0bea94842457"
+  integrity sha512-2/LjmgG1JcGPj7T3NViq7BB5cvOA0s63gL3Gv+FPULj2L+3ExWfsNQcsFPUIOoGsVUJeZxgNPf320JZDyxjtCQ==
   dependencies:
     "@types/react" "*"
 
