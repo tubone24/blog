@@ -123,7 +123,7 @@
     "lint-staged": "lint-staged",
     "memlab": "memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
     "memlab:serve": "URL=http://localhost:9000 memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
-    "memlab:ci": "start-server-and-test build-serve:e2e http://localhost:9000 memlab:serve",
+    "memlab:ci": "start-server-and-test build-serve:e2e tcp:9000 memlab:serve",
     "memlab:tag": "memlab run --scenario test/memlab/testMemleakForTag.js --work-dir test/memlab"
   },
   "devDependencies": {
