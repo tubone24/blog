@@ -5,7 +5,6 @@ const eslintrc = {
     "plugin:json/recommended",
     "react-app",
     "plugin:cypress/recommended",
-    "plugin:react-hooks/recommended",
     "plugin:jest-dom/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",

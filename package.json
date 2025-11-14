@@ -184,7 +184,6 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-storybook": "10.0.7",
     "eslint-plugin-testing-library": "5.10.2",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "1.1.32",
     "gh-pages": "5.0.0",
     "husky": "8.0.3",
     "identity-obj-proxy": "3.0.0",

@@ -63,13 +63,6 @@ module.exports = {
       resolve: "gatsby-remark-copy-linked-files",
     },
     {
-      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
-      options: {
-        analyzerMode: "static",
-        reportFilename: "webpack-bundle-analyser/index.html",
-      },
-    },
-    {
       resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/src/content`,
