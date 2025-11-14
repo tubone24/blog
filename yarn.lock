@@ -4825,15 +4825,6 @@
   dependencies:
     "@sentry/core" "10.25.0"
 
-"@sentry/react@10.25.0":
-  version "10.25.0"
-  resolved "https://registry.yarnpkg.com/@sentry/react/-/react-10.25.0.tgz#94087a07998c2c8f7f9e66baa3c793924e70bd3b"
-  integrity sha512-LBQHgyPAFzuy99mEJF8ZF2AOxxJiGAmtu10eQhglhFgfJsU7JJVsee0h+vTSmvHMDtFrIwhZi3i1X5snZ/kzoA==
-  dependencies:
-    "@sentry/browser" "10.25.0"
-    "@sentry/core" "10.25.0"
-    hoist-non-react-statics "^3.3.2"
-
 "@sideway/address@^4.1.5":
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.5.tgz#4bc149a0076623ced99ca8208ba780d65a99b9d5"
@@ -12669,7 +12660,7 @@ gatsby-legacy-polyfills@^3.15.0:
     "@babel/runtime" "^7.20.13"
     core-js-compat "3.31.0"
 
-gatsby-link@5.15.0, gatsby-link@^5.15.0:
+gatsby-link@^5.15.0:
   version "5.15.0"
   resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-5.15.0.tgz#dd842ea24ef1122e212374962f4fd74dfa904c2c"
   integrity sha512-YUUWc8p2/6wZpSPES+8qPyWGomX9RRUU1omsLSRpRw+XZ6WxeTJ56SLp0XLU1zvtdpb74FGpdAOj8uvDffEtIw==
@@ -13890,13 +13881,6 @@ highlight.js@10.7.3:
   version "10.7.3"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
   integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
-
-hoist-non-react-statics@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
-  integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
-  dependencies:
-    react-is "^16.7.0"
 
 homedir-polyfill@^1.0.0:
   version "1.0.3"
@@ -19854,7 +19838,7 @@ react-helmet-async@2.0.5:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
-react-is@^16.13.1, react-is@^16.7.0:
+react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
