@@ -141,6 +141,7 @@
     "@storybook/addon-webpack5-compiler-swc": "^4.0.2",
     "@storybook/react": "10.0.7",
     "@storybook/react-webpack5": "10.0.7",
+    "@storybook/test": "8.6.14",
     "@storybook/test-runner": "^0.24.1",
     "@testing-library/cypress": "10.1.0",
     "@testing-library/jest-dom": "5.17.0",
