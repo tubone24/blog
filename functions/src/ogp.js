@@ -1,5 +1,4 @@
 import * as Sentry from "@sentry/node";
-import "@sentry/tracing";
 import * as opentype from "opentype.js";
 import sharp from "sharp";
 import { getStore } from "@netlify/blobs";

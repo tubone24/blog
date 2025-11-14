@@ -209,31 +209,20 @@
     "yaml-lint": "1.7.0"
   },
   "resolutions": {
-    "loader-utils": "2.0.4",
     "jsonwebtoken": "9.0.2",
     "follow-redirects": "1.15.6",
     "nth-check": "2.1.1",
     "parse-url": "8.1.0",
-    "minimatch": "6.1.6",
     "prismjs": "1.30.0",
-    "node-fetch": "2.6.12",
     "marked": "4.2.12",
-    "trim-newlines": "3.0.1",
-    "glob-parent": "5.1.2",
     "trim": "0.0.3",
     "deep-object-diff": "1.1.9",
-    "engine.io": "6.4.2",
-    "got": "11.8.6",
     "decode-uri-component": "0.2.2",
     "sanitize-html": "2.12.1",
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
-    "webpack": "5.76.0",
-    "yaml": "2.2.2",
     "postcss": "8.4.38",
-    "tough-cookie": "4.1.3",
-    "sharp": "0.34.1",
-    "semver": "7.5.4"
+    "sharp": "0.34.1"
   },
   "browserslist": [
     ">0.25% in JP",
