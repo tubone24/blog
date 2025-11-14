@@ -5805,13 +5805,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/loadable__component@5.13.6":
-  version "5.13.6"
-  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.13.6.tgz#08ccaf86b3f74d96b9bf930e2e08085301321825"
-  integrity sha512-Xph+OBc6BfduajBZLoMkHYfdot5TH2TOW6dW3bZVb0zSjBrFUiMI6Ltu8L4w7FV8VJMRDodybA4u9yIzfEE7aA==
-  dependencies:
-    "@types/react" "*"
-
 "@types/lozad@1.16.4":
   version "1.16.4"
   resolved "https://registry.yarnpkg.com/@types/lozad/-/lozad-1.16.4.tgz#a8c96ca5b211e052c7b545aad959c61465662d58"
@@ -12173,11 +12166,6 @@ flatted@^3.2.9:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.3.3.tgz#67c8fad95454a7c7abebf74bb78ee74a44023358"
   integrity sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==
 
-flexsearch@^0.3.4:
-  version "0.3.61"
-  resolved "https://registry.yarnpkg.com/flexsearch/-/flexsearch-0.3.61.tgz#ca65068bfc81e6738a92b55c1036f6ffb30eaed0"
-  integrity sha512-CrzQDICJggD0X41gV2PR6JiACdqWTQiGRqjyt2EaBLJVmOI0+/KaJC69AIOVjzE2yw3pzzyrHYo+hpxdKUQlpg==
-
 fn.name@1.x.x:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/fn.name/-/fn.name-1.1.0.tgz#26cad8017967aea8731bc42961d04a3d5988accc"
@@ -12385,11 +12373,6 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
 
-fs@^0.0.1-security:
-  version "0.0.1-security"
-  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
-  integrity sha512-3XY9e1pP0CVEUCdj5BmfIZxRBTSDycnbqhIOGec9QYtmVH2fbLpj86CFWkrNOkt/Fvty4KZG5lTglL9j/gJ87w==
-
 fsevents@2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
@@ -12588,15 +12571,6 @@ gatsby-plugin-feed@5.15.0:
     lodash.merge "^4.6.2"
     rss "^1.2.2"
 
-gatsby-plugin-flexsearch@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-flexsearch/-/gatsby-plugin-flexsearch-1.0.3.tgz#6b27ad0ca101c66c303fd8868995633fd2c22c5f"
-  integrity sha512-VJ9V8s4Bv78BQOMelsxYzmonaixKbn+L7iYQX/+Oe3ys/1SpnaCr3nxfZHXZPFJ+wnqSAPvjKf+b3IbHjvE++w==
-  dependencies:
-    flexsearch "^0.3.4"
-    fs "^0.0.1-security"
-    lodash "^4.17.11"
-
 gatsby-plugin-layout@4.15.0:
   version "4.15.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-layout/-/gatsby-plugin-layout-4.15.0.tgz#2f7fc80f8f8917f929a3ec2df9a844a233e48226"
@@ -12717,13 +12691,6 @@ gatsby-plugin-sitemap@6.15.0:
     minimatch "^3.1.2"
     sitemap "^7.1.1"
 
-gatsby-plugin-twitter@5.15.0:
-  version "5.15.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-twitter/-/gatsby-plugin-twitter-5.15.0.tgz#0f9223fe6ffb7e7cf49f5c8588d51fde09a10761"
-  integrity sha512-Y7oLsWazdcJRTLLxBu8BLNMrumaM7nQMSbVBlIADh6u/19ekEPUWKyPcyeZug86MwiqP+ez82P78oNCWGA8G9w==
-  dependencies:
-    "@babel/runtime" "^7.20.13"
-
 gatsby-plugin-typescript@^5.15.0:
   version "5.15.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-5.15.0.tgz#6e0492dcb96ecc6505b3cf15525097ec1f99846e"
@@ -12752,7 +12719,7 @@ gatsby-plugin-utils@^4.15.0:
     joi "^17.11.0"
     mime "^3.0.0"
 
-gatsby-react-router-scroll@6.15.0, gatsby-react-router-scroll@^6.15.0:
+gatsby-react-router-scroll@^6.15.0:
   version "6.15.0"
   resolved "https://registry.yarnpkg.com/gatsby-react-router-scroll/-/gatsby-react-router-scroll-6.15.0.tgz#4d24acd3c07547fa2bf1940205f63793cd1d4f3d"
   integrity sha512-Qxgd5Zx/6mpYOZJloO6qwHu/kjUE6dMCLpP00VWfeDgB14BqhPeV4A53zSgvO53vqlO+Vbm6ggUlOOt7daPA4Q==
@@ -16272,7 +16239,7 @@ lodash.uniqwith@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniqwith/-/lodash.uniqwith-4.5.0.tgz#7a0cbf65f43b5928625a9d4d0dc54b18cadc7ef3"
   integrity sha512-7lYL8bLopMoy4CTICbxygAUq6CdRJ36vFc80DucPueUee+d5NBRxz3FdT9Pes/HEx5mPoT9jwnsEJWz1N7uq7Q==
 
-lodash@4.17.21, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@~4.17.0:
+lodash@4.17.21, lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@~4.17.0:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -16575,7 +16542,7 @@ maxstache@1.0.7, maxstache@^1.0.0:
   resolved "https://registry.yarnpkg.com/maxstache/-/maxstache-1.0.7.tgz#2231d5180ba783d5ecfc31c45fedac7ae4276984"
   integrity sha512-53ZBxHrZM+W//5AcRVewiLpDunHnucfdzZUGz54Fnvo4tE+J3p8EL66kBrs2UhBXvYKTWckWYYWBqJqoTcenqg==
 
-md5@2.3.0, md5@^2.3.0:
+md5@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/md5/-/md5-2.3.0.tgz#c3da9a6aae3a30b46b7b0c349b87b110dc3bda4f"
   integrity sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==
@@ -19228,7 +19195,7 @@ prompts@^2.4.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.6, prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -19530,14 +19497,6 @@ rc@1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-body-classname@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/react-body-classname/-/react-body-classname-1.3.1.tgz#f9542289fb99ee7eaf5792e1d852cc88e4d810a0"
-  integrity sha512-PxskbhmoV8kzIyspjiIc/smQkyyBOQHeUsrh1oj9CC5O1Kg/4gvHWPKsYGWEIq0X51TtCT941u/ulM1dTZ/bOw==
-  dependencies:
-    prop-types "^15.5.6"
-    react-side-effect "^1.1.0 || ^2.1.0"
-
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-12.0.1.tgz#ba92edb4a1f379bd46ccd6bcd4e7bc398df33e73"
@@ -19664,11 +19623,6 @@ react-shallow-renderer@^16.15.0:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
-
-"react-side-effect@^1.1.0 || ^2.1.0":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.2.tgz#dc6345b9e8f9906dc2eeb68700b615e0b4fe752a"
-  integrity sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==
 
 react-test-renderer@18.3.1:
   version "18.3.1"
