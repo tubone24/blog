@@ -74,5 +74,5 @@ ${postsList}
   const outputPath = path.join(process.cwd(), "public", "llms.txt");
   fs.writeFileSync(outputPath, llmsTxtContent, "utf-8");
 
-  console.log("✅ llms.txt generated successfully");
+  console.info("llms.txt generated successfully");
 };

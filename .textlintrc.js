@@ -1,0 +1,40 @@
+module.exports = {
+  rules: {
+    "preset-smarthr": {
+      "sentence-length": false,
+      "ja-no-mixed-period": {
+        periodMark: "。",
+        allowPeriodMarks: [
+          "、",
+          ".",
+          ",",
+          "↓",
+          "？",
+          "・",
+          "`",
+          "…",
+        ],
+        allowEmojiAtEnd: true,
+      },
+    },
+    prh: {
+      rulePaths: ["dict/prh_tubone_blog.yml"],
+    },
+    "no-start-duplicated-conjunction": {
+      interval: 2,
+    },
+    "no-mixed-zenkaku-and-hankaku-alphabet": true,
+    "ja-no-inappropriate-words": true,
+    terminology: {
+      defaultTerms: true,
+      skip: ["Blockquote"],
+    },
+    "@textlint-rule/no-duplicate-abbr": true,
+  },
+  filters: {
+    comments: true,
+    allowlist: {
+      allowlistConfigPaths: ["./textlint-allow-list.yml"],
+    },
+  },
+};
