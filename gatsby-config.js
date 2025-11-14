@@ -31,8 +31,6 @@ module.exports = {
     author: siteAuthor,
   },
   plugins: [
-    // gatsby-plugin-preact is not compatible with React 18 / Gatsby 5
-    // "gatsby-plugin-preact",
     // Pages Storybook don't create pages-json
     {
       resolve: "gatsby-plugin-exclude",
@@ -90,7 +88,6 @@ module.exports = {
             policy: [
               { userAgent: "*", allow: "/" },
               { userAgent: "*", disallow: "/admin" },
-              { userAgent: "*", disallow: "/*.netlify.app$" },
               { userAgent: "*", disallow: "/preview/" },
             ],
           },
@@ -322,28 +319,6 @@ module.exports = {
         minifyJS: true,
       },
     },
-    // Temporarily disabled gatsby-plugin-offline to fix ERR_FAILED issues
-    // {
-    //   resolve: "gatsby-plugin-offline",
-    //   options: {
-    //     precachePages: [`/`, `/404.html`],
-    //     workboxConfig: {
-    //       globPatterns: ["*.html"],
-    //       skipWaiting: true,
-    //       clientsClaim: true,
-    //       runtimeCaching: [
-    //         {
-    //           urlPattern: /\/$/,
-    //           handler: "NetworkFirst",
-    //         },
-    //         {
-    //           urlPattern: /^https?:.*\/page-data\/.*\.json/,
-    //           handler: "CacheFirst",
-    //         },
-    //       ],
-    //     },
-    //   },
-    // },
     {
       resolve: "gatsby-plugin-netlify", // make sure to put last in the array
       options: {
@@ -361,7 +336,7 @@ module.exports = {
             "Cache-Control: public, max-age=0, must-revalidate",
             "Content-Type: application/javascript",
           ],
-          "llms.txt": [
+          "/llms.txt": [
             "X-Robots-Tag: noindex",
             "Content-Type: text/plain; charset=utf-8",
           ],

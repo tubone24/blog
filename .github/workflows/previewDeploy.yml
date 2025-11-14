@@ -376,6 +376,7 @@ jobs:
           GATSBY_ALGOLIA_ADMIN_API_KEY: ${{secrets.GATSBY_ALGOLIA_ADMIN_API_KEY}}
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
+          GATSBY_ACTIVE_ENV: deploy-preview
           NETLIFY_ENV: deploy-preview
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
@@ -487,7 +488,12 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: run lighthouse benchmark
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        run: yarn benchmark ${{ needs.build.outputs.draftUrl }} ci
+        run: |
+          echo "Running benchmark for URL: ${{ needs.build.outputs.draftUrl }}"
+          yarn benchmark ${{ needs.build.outputs.draftUrl }} ci || echo "Benchmark failed, continuing..."
+          echo "Checking for generated files..."
+          ls -la benchmark/ || echo "benchmark directory not found"
+          ls -la benchmark/summary/ || echo "benchmark/summary directory not found"
       - name: summarize scores
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
@@ -496,12 +502,22 @@ jobs:
             echo '# Lighthouse Score'
             echo '## Desktop'
             echo ''
-            cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g'
+            if ls benchmark/summary/desktop-*.txt 1> /dev/null 2>&1; then
+              cat benchmark/summary/desktop-*.txt | sed -z 's/\n/\\n/g'
+            else
+              echo 'No desktop results found'
+              echo 'This may be due to benchmark script failure or API rate limiting'
+            fi
             echo ''
             echo ''
             echo '## Mobile'
             echo ''
-            cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g'
+            if ls benchmark/summary/mobile-*.txt 1> /dev/null 2>&1; then
+              cat benchmark/summary/mobile-*.txt | sed -z 's/\n/\\n/g'
+            else
+              echo 'No mobile results found'
+              echo 'This may be due to benchmark script failure or API rate limiting'
+            fi
           } >> summarize.txt
           sed -i -z 's/\n/\\n/g' summarize.txt
       - name: Post Lighthouse Score Comment
@@ -558,19 +574,38 @@ jobs:
         run: |
           cat > run-memlab.sh << 'EOF'
           #!/bin/bash
-          memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab
+          memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab 2>&1 | tee test/memlab/data/out/leaks.txt
           EOF
           chmod +x run-memlab.sh
+
+          # Ensure output directory exists
+          mkdir -p test/memlab/data/out
+
           npx start-server-and-test build-serve:e2e "http://localhost:9000" "./run-memlab.sh"
         env:
           URL: "http://localhost:9000"
       - name: summarize
         run: |
-          cat test/memlab/data/out/leaks.txt
-          sed -i '1s/^/## Memlab leaks report\\n\<details\>\\n\\n```\\n/g' test/memlab/data/out/leaks.txt
-          sed -i -z 's/\n/\\n/g' test/memlab/data/out/leaks.txt
-          sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" test/memlab/data/out/leaks.txt
-          printf '\\n ``` \\n</details>\\n ' >> test/memlab/data/out/leaks.txt
+          # Check if leaks.txt exists and has content
+          if [ -f test/memlab/data/out/leaks.txt ] && [ -s test/memlab/data/out/leaks.txt ]; then
+            # Remove null bytes and control characters, then clean up ANSI codes
+            tr -d '\000' < test/memlab/data/out/leaks.txt | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g" > test/memlab/data/out/leaks_clean.txt
+
+            # Create formatted output
+            {
+              printf "## Memlab leaks report\n<details>\n\n\`\`\`\n"
+              cat test/memlab/data/out/leaks_clean.txt
+              printf "\n\`\`\`\n</details>\n"
+            } > test/memlab/data/out/leaks_formatted.txt
+
+            # Display the result
+            cat test/memlab/data/out/leaks_formatted.txt
+
+            # Prepare for JSON (escape newlines)
+            sed -z 's/\n/\\n/g' test/memlab/data/out/leaks_formatted.txt > test/memlab/data/out/leaks.txt
+          else
+            printf "## Memlab leaks report\n<details>\n\n\`\`\`\nNo memlab output found\n\`\`\`\n</details>" > test/memlab/data/out/leaks.txt
+          fi
       - name: Post Memlab Report Comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

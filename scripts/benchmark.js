@@ -19,6 +19,15 @@ const PAGE_SPEED_INSIGHTS_URL =
 
 const saveJsonFile = (obj, client) => {
   const dateString = dayjs().format("YYYYMMDDHHmmSSS");
+
+  // Ensure directories exist
+  if (!fs.existsSync("./benchmark")) {
+    fs.mkdirSync("./benchmark");
+  }
+  if (!fs.existsSync("./benchmark/raw")) {
+    fs.mkdirSync("./benchmark/raw");
+  }
+
   const path = `./benchmark/raw/${client}-raw-${dateString}-${VERSION}.json`;
   fs.writeFileSync(path, JSON.stringify(obj));
   const lhPath = `./benchmark/${client}-lh-${dateString}-${VERSION}.json`;
@@ -27,6 +36,12 @@ const saveJsonFile = (obj, client) => {
 
 const summarizeScore = (obj, client) => {
   const dateString = dayjs().format("YYYYMMDDHHmmSSS");
+
+  // Ensure summary directory exists
+  if (!fs.existsSync("./benchmark/summary")) {
+    fs.mkdirSync("./benchmark/summary", { recursive: true });
+  }
+
   const path = `./benchmark/summary/${client}-${dateString}-${VERSION}.txt`;
   const lighthouseResult = obj.lighthouseResult;
   const summaryText = `performance: ${
@@ -42,7 +57,11 @@ const summarizeScore = (obj, client) => {
 };
 
 const main = async () => {
+  console.log(`Starting benchmark for URL: ${TARGET_URL}`);
+  console.log(`Version: ${VERSION}`);
+
   for (const client of ["desktop", "mobile"]) {
+    console.log(`\nRunning PageSpeed Insights for ${client}...`);
     const params = {
       url: TARGET_URL,
       locale: "ja",
@@ -58,25 +77,43 @@ const main = async () => {
     if (process.env.PAGE_SPEED_INSIGHTS_URL) {
       params.key = process.env.PAGE_SPEED_INSIGHTS_URL;
     }
-    const result = await axios.get(PAGE_SPEED_INSIGHTS_URL, {
-      params,
-      paramsSerializer: (params) =>
-        qs.stringify(params, { arrayFormat: "repeat" }),
-    });
 
-    if (result.status !== 200) {
-      console.error(result);
-      throw new Error("Insight failed.");
+    try {
+      const result = await axios.get(PAGE_SPEED_INSIGHTS_URL, {
+        params,
+        paramsSerializer: (params) =>
+          qs.stringify(params, { arrayFormat: "repeat" }),
+      });
+
+      if (result.status !== 200) {
+        console.error(`Failed with status: ${result.status}`);
+        console.error(result);
+        throw new Error("Insight failed.");
+      }
+
+      console.log(`Successfully retrieved ${client} results`);
+      saveJsonFile(result.data, client);
+      summarizeScore(result.data, client);
+      console.log(`Saved results for ${client}`);
+    } catch (error) {
+      console.error(`Error running PageSpeed Insights for ${client}:`);
+      console.error(error.message);
+      if (error.response) {
+        console.error(`Response status: ${error.response.status}`);
+        console.error(`Response data:`, error.response.data);
+      }
+      throw error;
     }
-
-    saveJsonFile(result.data, client);
-    summarizeScore(result.data, client);
   }
+
+  console.log("\nBenchmark completed successfully!");
 };
 (async () => {
   try {
     await main();
   } catch (err) {
+    console.error("\nBenchmark failed:");
     console.error(err);
+    process.exit(1);
   }
 })();
