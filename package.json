@@ -136,7 +136,7 @@
     "@babel/plugin-syntax-typescript": "7.24.1",
     "@babel/preset-modules": "0.1.6",
     "@babel/preset-typescript": "7.24.1",
-    "@cypress/code-coverage": "3.12.18",
+    "@cypress/code-coverage": "3.14.7",
     "@storybook/addon-a11y": "7.6.20",
     "@storybook/addon-actions": "7.6.20",
     "@storybook/addon-controls": "7.6.20",
