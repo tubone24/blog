@@ -582,7 +582,7 @@ jobs:
           # Ensure output directory exists
           mkdir -p test/memlab/data/out
 
-          npx start-server-and-test build-serve:e2e "http://localhost:9000" "./run-memlab.sh"
+          npx start-server-and-test build-serve:e2e tcp:9000 "./run-memlab.sh"
         env:
           URL: "http://localhost:9000"
       - name: summarize
