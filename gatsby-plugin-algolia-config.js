@@ -40,11 +40,13 @@ const queries = [
           const cleanText = html
             .replace(/<code[\s\S]*?<\/code>/g, "") // コードブロック削除
             .replace(/<pre[\s\S]*?<\/pre>/g, "") // preタグ削除
-            .replace(/<script[\s\S]*?<\/script>/g, "") // scriptタグ削除
+            .replace(/<script\b[\s\S]*?<\/script[\s\S]*?>/gi, "") // scriptタグ削除
             .replace(/<style[\s\S]*?<\/style>/g, "") // styleタグ削除
             .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "") // HTMLタグ削除
             .replace(/\s+/g, " ") // 連続する空白を1つに
             .trim();
+
+          console.log(cleanText);
 
           // Algoliaの推奨値: 1レコードあたり10KB以下
           // 安全のため、最大8000文字（約8KB、マルチバイト文字考慮）に制限
