@@ -16,11 +16,12 @@
  * @type {Cypress.PluginConfig}
  */
 
-import getCompareSnapshotsPlugin from "cypress-visual-regression/dist/plugin";
-
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import task from "@cypress/code-coverage/task";
+
+const getCompareSnapshotsPlugin = require("cypress-visual-regression/dist/plugin");
 
 const plugins = (
   on: Cypress.PluginEvents,
