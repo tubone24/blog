@@ -37,28 +37,18 @@ const queries = [
           },
         }) => {
           // HTMLタグとコードブロックを除去
-          // 危険なタグを繰り返し削除してインジェクション対策
-          let cleanText = html;
-
-          // 危険なタグを複数回削除（ネストされたタグ対策）
-          for (let i = 0; i < 3; i++) {
-            cleanText = cleanText
-              .replace(/<script\b[\s\S]*?<\/script>/gi, "") // scriptタグ削除
-              .replace(/<style[\s\S]*?<\/style>/gi, "") // styleタグ削除
-              .replace(/<code[\s\S]*?<\/code>/gi, "") // コードブロック削除
-              .replace(/<pre[\s\S]*?<\/pre>/gi, ""); // preタグ削除
-          }
-
-          // Table of Contentsセクション全体を削除
-          cleanText = cleanText.replace(
-            /<h2[^>]*>[\s\S]*?Table of Contents[\s\S]*?<\/h2>[\s\S]*?(?=<h2|$)/gi,
-            ""
-          );
-
-          // 見出しタグと残りのHTMLタグを削除
-          cleanText = cleanText
+          const cleanText = html
+            .replace(/<code[\s\S]*?<\/code>/g, "") // コードブロック削除
+            .replace(/<pre[\s\S]*?<\/pre>/g, "") // preタグ削除
+            .replace(/<script\b[\s\S]*?<\/script[\s\S]*?>/gi, "") // scriptタグ削除
+            .replace(/<style[\s\S]*?<\/style>/g, "") // styleタグ削除
+            // Table of Contentsセクション全体を削除（H2から次のH2まで）
+            .replace(
+              /<h2[^>]*>[\s\S]*?Table of Contents[\s\S]*?<\/h2>[\s\S]*?(?=<h2|$)/gi,
+              ""
+            )
             .replace(/<h[1-6][\s\S]*?<\/h[1-6]>/gi, "") // 見出しタグ削除(H1-H6)
-            .replace(/<[^>]+>/g, "") // すべてのHTMLタグ削除（シンプルで安全）
+            .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "") // HTMLタグ削除
             .replace(/\s+/g, " ") // 連続する空白を1つに
             .trim();
 
