@@ -30,6 +30,9 @@ module.exports = {
       // Mock Gatsby modules to avoid import issues in Storybook
       // Use Storybook-specific mock (ESM format without jest.fn())
       'gatsby': path.resolve(__dirname, './__mocks__/gatsby.js'),
+      // Fix @storybook/test module resolution issue in Storybook 10.x
+      // Force using the browser-compatible .mjs version instead of the Node.js .js version
+      '@storybook/test': path.resolve(__dirname, '../node_modules/@storybook/test/dist/index.mjs'),
     };
 
     // Provide process polyfill for browser environment

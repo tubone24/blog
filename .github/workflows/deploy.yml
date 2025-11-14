@@ -268,7 +268,7 @@ jobs:
       - name: Remove Bundle Analyze
         run: rm ./public/webpack-bundle-analyser/index.html
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --prod --dir=./public --functions=./functions/src
+        run: npx netlify-cli deploy --prod --no-build --dir=./public --functions=./functions/src
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -352,7 +352,7 @@ jobs:
           GATSBY_GITHUB_SHA: ${{ github.sha }}
           NETLIFY_ENV: deploy-preview
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --prod --dir=./storybook-static
+        run: npx netlify-cli deploy --prod --no-build --dir=./storybook-static
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}

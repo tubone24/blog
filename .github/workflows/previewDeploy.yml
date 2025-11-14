@@ -398,7 +398,7 @@ jobs:
           GATSBY_ACTIVE_ENV: deploy-preview
         run: yarn build
       - name: Deploy to netlify
-        run: npx netlify-cli deploy --dir=./public --functions=./functions/src > cli.txt
+        run: npx netlify-cli deploy --no-build --dir=./public --functions=./functions/src > cli.txt
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -714,7 +714,7 @@ jobs:
           NETLIFY_ENV: deploy-preview
       - name: Deploy to netlify
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
-        run: npx netlify-cli deploy --dir=./storybook-static > cli.txt
+        run: npx netlify-cli deploy --no-build --dir=./storybook-static > cli.txt
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_STORYBOOK_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}
