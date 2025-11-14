@@ -202,7 +202,7 @@ export default () => (
         }
 
         limited: allMarkdownRemark(
-          sort: { order: DESC, fields: frontmatter___date }
+          sort: { frontmatter: { date: DESC } }
           limit: 6
         ) {
           latestPosts: edges {

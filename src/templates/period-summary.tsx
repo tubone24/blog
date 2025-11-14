@@ -71,7 +71,7 @@ export default PeriodSummary;
 export const pageQuery = graphql`
   query PeriodQuery($periodStartDate: Date, $periodEndDate: Date) {
     allMarkdownRemark(
-      sort: { order: DESC, fields: frontmatter___date }
+      sort: { frontmatter: { date: DESC } }
       filter: {
         frontmatter: { date: { gte: $periodStartDate, lt: $periodEndDate } }
       }

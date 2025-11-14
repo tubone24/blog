@@ -103,7 +103,7 @@ export const pageQuery = graphql`
 
   query BlogPostQuery($index: Int) {
     content: allMarkdownRemark(
-      sort: { order: DESC, fields: frontmatter___date }
+      sort: { frontmatter: { date: DESC } }
       skip: $index
       limit: 1
     ) {
