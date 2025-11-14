@@ -28,6 +28,7 @@ module.exports = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, '../src'),
       // Mock Gatsby modules to avoid import issues in Storybook
+      // Use Storybook-specific mock (ESM format without jest.fn())
       'gatsby': path.resolve(__dirname, './__mocks__/gatsby.js'),
     };
 

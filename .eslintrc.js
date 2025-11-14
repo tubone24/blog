@@ -43,6 +43,12 @@ const eslintrc = {
       files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
       extends: ["plugin:testing-library/react"],
     },
+    {
+      files: ["jest-configs/setup-test-env.js"],
+      rules: {
+        "jest/require-top-level-describe": "off",
+      },
+    },
   ],
 };
 
