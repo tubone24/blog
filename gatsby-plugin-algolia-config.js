@@ -53,7 +53,7 @@ const queries = [
             .trim();
 
           // Algoliaの推奨値: 1レコードあたり10KB以下
-          const maxLength = 5000;
+          const maxLength = 3000;
           const allText =
             cleanText.length > maxLength
               ? cleanText.substring(0, maxLength)
