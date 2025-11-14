@@ -1,7 +1,6 @@
 import React from "react";
 import ReactGA from "react-ga4";
 import * as Sentry from "@sentry/browser";
-import { Integrations } from "@sentry/tracing";
 import { HelmetProvider } from "react-helmet-async";
 
 import "prismjs/themes/prism-okaidia.css";
@@ -27,7 +26,10 @@ if (typeof window !== "undefined" && isLocalDevelopment() === false) {
     release: `tubone-boyaki@${process.env.GATSBY_GITHUB_SHA}`,
     replaysSessionSampleRate: 0.05,
     replaysOnErrorSampleRate: 1.0,
-    integrations: [new Integrations.BrowserTracing(), new Sentry.Replay()],
+    integrations: [
+      Sentry.browserTracingIntegration(),
+      Sentry.replayIntegration(),
+    ],
     tracesSampleRate: 1.0,
   });
 }
