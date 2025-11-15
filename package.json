@@ -104,7 +104,7 @@
     "textlint:fix": "npx textlint --fix \"src/content/*.md\"",
     "textlint:fix-ls": "npx textlint --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build && cp .storybook/netlify.toml storybook-static/netlify.toml",
+    "build-storybook": "storybook build && cp .storybook/_headers storybook-static/_headers",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "memlab": "memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
