@@ -113,7 +113,7 @@ curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
   }'
 ```
 
-### 記事分析プロンプトを取得
+### ブログテンプレートを取得
 
 ```bash
 curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
@@ -121,6 +121,36 @@ curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
   -d '{
     "jsonrpc": "2.0",
     "id": 7,
+    "method": "resources/read",
+    "params": {
+      "uri": "blog://templates"
+    }
+  }'
+```
+
+### 購読情報を取得
+
+```bash
+curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 8,
+    "method": "resources/read",
+    "params": {
+      "uri": "blog://subscribe"
+    }
+  }'
+```
+
+### 記事分析プロンプトを取得
+
+```bash
+curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 9,
     "method": "prompts/get",
     "params": {
       "name": "analyze_post",
@@ -205,6 +235,18 @@ class MCPBlogClient {
     return this.request('prompts/get', {
       name: 'analyze_post',
       arguments: { slug }
+    });
+  }
+
+  async getTemplates() {
+    return this.request('resources/read', {
+      uri: 'blog://templates'
+    });
+  }
+
+  async getSubscribeInfo() {
+    return this.request('resources/read', {
+      uri: 'blog://subscribe'
     });
   }
 }
@@ -295,6 +337,16 @@ class MCPBlogClient:
         return self.request('tools/call', {
             'name': 'get_posts_by_tag',
             'arguments': {'tag': tag}
+        })
+
+    def get_templates(self):
+        return self.request('resources/read', {
+            'uri': 'blog://templates'
+        })
+
+    def get_subscribe_info(self):
+        return self.request('resources/read', {
+            'uri': 'blog://subscribe'
         })
 
 # 使用例
