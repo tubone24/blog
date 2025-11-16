@@ -40,19 +40,26 @@ const RESOURCES = {
     description: "すべてのタグのリスト",
     mimeType: "application/json",
   },
-  "blog://templates": {
-    uri: "blog://templates",
-    name: "Article Templates",
-    description: "ブログ記事のテンプレート",
-    mimeType: "application/json",
-  },
-  "blog://subscribe": {
-    uri: "blog://subscribe",
-    name: "Subscribe Information",
-    description: "ブログの購読情報（RSS等）",
-    mimeType: "application/json",
-  },
 };
+
+// リソーステンプレートの定義
+const RESOURCE_TEMPLATES = [
+  {
+    uriTemplate: "blog://posts/{slug}",
+    name: "Individual Blog Post",
+    description: "特定のスラッグを持つブログ記事",
+    mimeType: "application/json",
+  },
+  {
+    uriTemplate: "blog://tags/{tag}",
+    name: "Posts by Tag",
+    description: "特定のタグでフィルタリングされたブログ記事",
+    mimeType: "application/json",
+  },
+];
+
+// 購読管理（メモリ内）
+const subscriptions = new Set();
 
 // ツールの定義
 const TOOLS = {
@@ -131,6 +138,22 @@ const TOOLS = {
           default: 100,
         },
       },
+    },
+  },
+  get_article_template: {
+    name: "get_article_template",
+    description: "ブログ記事のMarkdownテンプレートを取得します",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+  get_subscribe_info: {
+    name: "get_subscribe_info",
+    description: "ブログの購読情報（RSS、ソーシャルリンク等）を取得します",
+    inputSchema: {
+      type: "object",
+      properties: {},
     },
   },
 };
@@ -247,65 +270,25 @@ function handleResourcesRequest(method, params) {
         };
       }
 
-      // blog://templates の処理
-      if (uri === "blog://templates") {
-        const templatePath = path.join(
-          process.cwd(),
-          "template",
-          "article_template.md"
-        );
-        const templateContent = fs.readFileSync(templatePath, "utf8");
-
-        const templates = [
-          {
-            name: "article_template.md",
-            description: "標準的なブログ記事のテンプレート",
-            content: templateContent,
-            path: "template/article_template.md",
-          },
-        ];
-
-        return {
-          contents: [
-            {
-              uri: uri,
-              mimeType: "application/json",
-              text: JSON.stringify(templates, null, 2),
-            },
-          ],
-        };
-      }
-
-      // blog://subscribe の処理
-      if (uri === "blog://subscribe") {
-        const subscribeInfo = {
-          rss: {
-            url: `${BLOG_BASE_URL}/rss.xml`,
-            format: "RSS 2.0",
-            description: "ブログの全記事を購読",
-          },
-          website: {
-            url: BLOG_BASE_URL,
-            description: "ブログのトップページ",
-          },
-          social: {
-            github: "https://github.com/tubone24",
-            twitter: "https://twitter.com/tubone24",
-          },
-        };
-
-        return {
-          contents: [
-            {
-              uri: uri,
-              mimeType: "application/json",
-              text: JSON.stringify(subscribeInfo, null, 2),
-            },
-          ],
-        };
-      }
-
       throw new Error(`Unknown resource URI: ${uri}`);
+    }
+
+    case "resources/templates/list":
+      return {
+        resourceTemplates: RESOURCE_TEMPLATES,
+      };
+
+    case "resources/subscribe": {
+      const uri = params.uri;
+      subscriptions.add(uri);
+      // Note: 実際のアプリケーションでは、永続化やクライアントごとの管理が必要
+      return {};
+    }
+
+    case "resources/unsubscribe": {
+      const uri = params.uri;
+      subscriptions.delete(uri);
+      return {};
     }
 
     default:
@@ -402,6 +385,51 @@ function handleToolsRequest(method, params) {
                   null,
                   2
                 ),
+              },
+            ],
+          };
+        }
+
+        case "get_article_template": {
+          const templatePath = path.join(
+            process.cwd(),
+            "template",
+            "article_template.md"
+          );
+          const templateContent = fs.readFileSync(templatePath, "utf8");
+
+          return {
+            content: [
+              {
+                type: "text",
+                text: templateContent,
+              },
+            ],
+          };
+        }
+
+        case "get_subscribe_info": {
+          const subscribeInfo = {
+            rss: {
+              url: `${BLOG_BASE_URL}/rss.xml`,
+              format: "RSS 2.0",
+              description: "ブログの全記事を購読",
+            },
+            website: {
+              url: BLOG_BASE_URL,
+              description: "ブログのトップページ",
+            },
+            social: {
+              github: "https://github.com/tubone24",
+              twitter: "https://twitter.com/tubone24",
+            },
+          };
+
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(subscribeInfo, null, 2),
               },
             ],
           };
@@ -591,9 +619,9 @@ export const handler = async (event, context) => {
             "MCP Blog Server - ブログ記事を取得するためのMCPサーバー",
           endpoints: {
             message: "/mcp-blog-server (POST)",
-            sse: "/mcp-blog-server/sse (GET)",
           },
           resources: Object.keys(RESOURCES),
+          resourceTemplates: RESOURCE_TEMPLATES,
           tools: Object.keys(TOOLS),
           prompts: Object.keys(PROMPTS),
         },

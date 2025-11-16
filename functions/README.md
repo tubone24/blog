@@ -53,11 +53,22 @@ Edge Functionsは低レイテンシですが、Deno環境とファイルシス�
 MCPのリソースは読み取り専用のデータソースです。
 
 - `blog://posts` - すべてのブログ記事のリスト（記事URLを含む）
-- `blog://posts/{slug}` - 特定の記事の詳細
 - `blog://tags` - すべてのタグのリスト
+
+#### リソーステンプレート (Resource Templates)
+
+動的なリソースURIパターン（RFC 6570準拠）:
+
+- `blog://posts/{slug}` - 特定の記事の詳細
 - `blog://tags/{tag}` - 特定タグの記事リスト（記事URLを含む）
-- `blog://templates` - ブログ記事のテンプレート
-- `blog://subscribe` - RSS購読情報とソーシャルリンク
+
+#### リソースメソッド (Resource Methods)
+
+- `resources/list` - 利用可能なリソースのリスト取得
+- `resources/read` - 特定のリソースの読み取り
+- `resources/templates/list` - リソーステンプレートのリスト取得
+- `resources/subscribe` - リソース更新の購読
+- `resources/unsubscribe` - リソース購読の解除
 
 ### 2. ツール (Tools)
 
@@ -68,6 +79,8 @@ MCPのツールは、クライアントが実行できるアクションです�
 - `get_posts_by_tag` - タグで記事をフィルタリング
 - `get_posts_by_date_range` - 日付範囲で記事をフィルタリング
 - `list_all_posts` - すべての記事をリスト（サマリーのみ）
+- `get_article_template` - ブログ記事のMarkdownテンプレートを取得
+- `get_subscribe_info` - RSS購読情報とソーシャルリンクを取得
 
 ### 3. プロンプト (Prompts)
 
@@ -93,7 +106,21 @@ MCPのプロンプトは、テンプレート化されたプロンプトです�
     "message": "/mcp-blog-server (POST)"
   },
   "resources": ["blog://posts", "blog://tags"],
-  "tools": ["search_posts", "get_post_by_slug", "get_posts_by_tag", "get_posts_by_date_range", "list_all_posts"],
+  "resourceTemplates": [
+    {
+      "uriTemplate": "blog://posts/{slug}",
+      "name": "Individual Blog Post",
+      "description": "特定のスラッグを持つブログ記事",
+      "mimeType": "application/json"
+    },
+    {
+      "uriTemplate": "blog://tags/{tag}",
+      "name": "Posts by Tag",
+      "description": "特定のタグでフィルタリングされたブログ記事",
+      "mimeType": "application/json"
+    }
+  ],
+  "tools": ["search_posts", "get_post_by_slug", "get_posts_by_tag", "get_posts_by_date_range", "list_all_posts", "get_article_template", "get_subscribe_info"],
   "prompts": ["analyze_post", "summarize_posts"]
 }
 ```
@@ -232,6 +259,71 @@ JSON-RPCメッセージを受け付けます。
     "arguments": {
       "slug": "2019-09-01-netlify-and-gatsby"
     }
+  }
+}
+```
+
+### 8. リソーステンプレートのリストを取得
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 8,
+  "method": "resources/templates/list",
+  "params": {}
+}
+```
+
+### 9. ブログテンプレートを取得（ツール）
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 9,
+  "method": "tools/call",
+  "params": {
+    "name": "get_article_template",
+    "arguments": {}
+  }
+}
+```
+
+### 10. 購読情報を取得（ツール）
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 10,
+  "method": "tools/call",
+  "params": {
+    "name": "get_subscribe_info",
+    "arguments": {}
+  }
+}
+```
+
+### 11. リソース更新を購読
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 11,
+  "method": "resources/subscribe",
+  "params": {
+    "uri": "blog://posts"
+  }
+}
+```
+
+### 12. リソース購読を解除
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 12,
+  "method": "resources/unsubscribe",
+  "params": {
+    "uri": "blog://posts"
   }
 }
 ```

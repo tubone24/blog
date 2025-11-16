@@ -113,7 +113,7 @@ curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
   }'
 ```
 
-### ブログテンプレートを取得
+### リソーステンプレートのリストを取得
 
 ```bash
 curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
@@ -121,14 +121,12 @@ curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
   -d '{
     "jsonrpc": "2.0",
     "id": 7,
-    "method": "resources/read",
-    "params": {
-      "uri": "blog://templates"
-    }
+    "method": "resources/templates/list",
+    "params": {}
   }'
 ```
 
-### 購読情報を取得
+### ブログテンプレートを取得（ツール）
 
 ```bash
 curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
@@ -136,9 +134,41 @@ curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
   -d '{
     "jsonrpc": "2.0",
     "id": 8,
-    "method": "resources/read",
+    "method": "tools/call",
     "params": {
-      "uri": "blog://subscribe"
+      "name": "get_article_template",
+      "arguments": {}
+    }
+  }'
+```
+
+### 購読情報を取得（ツール）
+
+```bash
+curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 9,
+    "method": "tools/call",
+    "params": {
+      "name": "get_subscribe_info",
+      "arguments": {}
+    }
+  }'
+```
+
+### リソース更新を購読
+
+```bash
+curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 10,
+    "method": "resources/subscribe",
+    "params": {
+      "uri": "blog://posts"
     }
   }'
 ```
@@ -238,15 +268,33 @@ class MCPBlogClient {
     });
   }
 
-  async getTemplates() {
-    return this.request('resources/read', {
-      uri: 'blog://templates'
+  async getResourceTemplates() {
+    return this.request('resources/templates/list', {});
+  }
+
+  async getArticleTemplate() {
+    return this.request('tools/call', {
+      name: 'get_article_template',
+      arguments: {}
     });
   }
 
   async getSubscribeInfo() {
-    return this.request('resources/read', {
-      uri: 'blog://subscribe'
+    return this.request('tools/call', {
+      name: 'get_subscribe_info',
+      arguments: {}
+    });
+  }
+
+  async subscribeToResource(uri) {
+    return this.request('resources/subscribe', {
+      uri: uri
+    });
+  }
+
+  async unsubscribeFromResource(uri) {
+    return this.request('resources/unsubscribe', {
+      uri: uri
     });
   }
 }
@@ -339,14 +387,29 @@ class MCPBlogClient:
             'arguments': {'tag': tag}
         })
 
-    def get_templates(self):
-        return self.request('resources/read', {
-            'uri': 'blog://templates'
+    def get_resource_templates(self):
+        return self.request('resources/templates/list', {})
+
+    def get_article_template(self):
+        return self.request('tools/call', {
+            'name': 'get_article_template',
+            'arguments': {}
         })
 
     def get_subscribe_info(self):
-        return self.request('resources/read', {
-            'uri': 'blog://subscribe'
+        return self.request('tools/call', {
+            'name': 'get_subscribe_info',
+            'arguments': {}
+        })
+
+    def subscribe_to_resource(self, uri):
+        return self.request('resources/subscribe', {
+            'uri': uri
+        })
+
+    def unsubscribe_from_resource(self, uri):
+        return self.request('resources/unsubscribe', {
+            'uri': uri
         })
 
 # 使用例
