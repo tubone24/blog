@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
-const CONTENT_DIR = path.join(process.cwd(), 'src', 'content');
+const CONTENT_DIR = path.join(process.cwd(), "src", "content");
 
 /**
  * すべてのブログ記事を読み込む
@@ -11,30 +11,32 @@ const CONTENT_DIR = path.join(process.cwd(), 'src', 'content');
 export function getAllPosts() {
   try {
     const files = fs.readdirSync(CONTENT_DIR);
-    const markdownFiles = files.filter(file => file.endsWith('.md') && file !== 'README.md');
+    const markdownFiles = files.filter(
+      (file) => file.endsWith(".md") && file !== "README.md"
+    );
 
-    const posts = markdownFiles.map(filename => {
+    const posts = markdownFiles.map((filename) => {
       const filePath = path.join(CONTENT_DIR, filename);
-      const fileContents = fs.readFileSync(filePath, 'utf8');
+      const fileContents = fs.readFileSync(filePath, "utf8");
       const { data, content } = matter(fileContents);
 
       return {
-        slug: data.slug || filename.replace('.md', ''),
-        title: data.title || '',
-        date: data.date || '',
-        description: data.description || '',
+        slug: data.slug || filename.replace(".md", ""),
+        title: data.title || "",
+        date: data.date || "",
+        description: data.description || "",
         tags: data.tags || [],
-        headerImage: data.headerImage || '',
-        templateKey: data.templateKey || 'blog-post',
+        headerImage: data.headerImage || "",
+        templateKey: data.templateKey || "blog-post",
         content: content,
-        filename: filename
+        filename: filename,
       };
     });
 
     // 日付の降順でソート
     return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
   } catch (error) {
-    console.error('Error reading posts:', error);
+    console.error("Error reading posts:", error);
     throw error;
   }
 }
@@ -46,7 +48,7 @@ export function getAllPosts() {
  */
 export function getPostBySlug(slug) {
   const posts = getAllPosts();
-  return posts.find(post => post.slug === slug) || null;
+  return posts.find((post) => post.slug === slug) || null;
 }
 
 /**
@@ -56,8 +58,8 @@ export function getPostBySlug(slug) {
  */
 export function getPostsByTag(tag) {
   const posts = getAllPosts();
-  return posts.filter(post =>
-    post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+  return posts.filter((post) =>
+    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
   );
 }
 
@@ -69,8 +71,8 @@ export function getAllTags() {
   const posts = getAllPosts();
   const tagsSet = new Set();
 
-  posts.forEach(post => {
-    post.tags.forEach(tag => tagsSet.add(tag));
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => tagsSet.add(tag));
   });
 
   return Array.from(tagsSet).sort();
@@ -87,7 +89,7 @@ export function getPostsByDateRange(startDate, endDate) {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  return posts.filter(post => {
+  return posts.filter((post) => {
     const postDate = new Date(post.date);
     return postDate >= start && postDate <= end;
   });
@@ -102,12 +104,12 @@ export function searchPosts(keyword) {
   const posts = getAllPosts();
   const lowerKeyword = keyword.toLowerCase();
 
-  return posts.filter(post => {
+  return posts.filter((post) => {
     return (
       post.title.toLowerCase().includes(lowerKeyword) ||
       post.description.toLowerCase().includes(lowerKeyword) ||
       post.content.toLowerCase().includes(lowerKeyword) ||
-      post.tags.some(tag => tag.toLowerCase().includes(lowerKeyword))
+      post.tags.some((tag) => tag.toLowerCase().includes(lowerKeyword))
     );
   });
 }
@@ -124,6 +126,6 @@ export function createPostSummary(post) {
     date: post.date,
     description: post.description,
     tags: post.tags,
-    headerImage: post.headerImage
+    headerImage: post.headerImage,
   };
 }
