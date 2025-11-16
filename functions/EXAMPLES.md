@@ -331,14 +331,14 @@ Claude Desktop の設定ファイル (`claude_desktop_config.json`) に以下を
 
 設定後、Claudeで以下のように使用できます:
 
-```
+```text
 ブログの記事を検索してください: Gatsby
 ```
 
-```
+```text
 JavaScriptタグの記事を教えてください
 ```
 
-```
+```text
 2019年の記事を要約してください
 ```
