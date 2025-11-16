@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import {
   getAllPosts,
   getPostBySlug,
@@ -20,6 +22,10 @@ const SERVER_INFO = {
   },
 };
 
+// ブログのベースURL（環境変数から取得、デフォルトはローカル）
+const BLOG_BASE_URL =
+  process.env.BLOG_BASE_URL || "https://tubone-project24.xyz";
+
 // リソースの定義
 const RESOURCES = {
   "blog://posts": {
@@ -32,6 +38,18 @@ const RESOURCES = {
     uri: "blog://tags",
     name: "All Tags",
     description: "すべてのタグのリスト",
+    mimeType: "application/json",
+  },
+  "blog://templates": {
+    uri: "blog://templates",
+    name: "Article Templates",
+    description: "ブログ記事のテンプレート",
+    mimeType: "application/json",
+  },
+  "blog://subscribe": {
+    uri: "blog://subscribe",
+    name: "Subscribe Information",
+    description: "ブログの購読情報（RSS等）",
     mimeType: "application/json",
   },
 };
@@ -163,7 +181,9 @@ function handleResourcesRequest(method, params) {
 
       if (uri === "blog://posts") {
         const posts = getAllPosts();
-        const summaries = posts.map(createPostSummary);
+        const summaries = posts.map((post) =>
+          createPostSummary(post, BLOG_BASE_URL)
+        );
         return {
           contents: [
             {
@@ -212,7 +232,9 @@ function handleResourcesRequest(method, params) {
       if (uri.startsWith("blog://tags/")) {
         const tag = decodeURIComponent(uri.replace("blog://tags/", ""));
         const posts = getPostsByTag(tag);
-        const summaries = posts.map(createPostSummary);
+        const summaries = posts.map((post) =>
+          createPostSummary(post, BLOG_BASE_URL)
+        );
 
         return {
           contents: [
@@ -220,6 +242,64 @@ function handleResourcesRequest(method, params) {
               uri: uri,
               mimeType: "application/json",
               text: JSON.stringify(summaries, null, 2),
+            },
+          ],
+        };
+      }
+
+      // blog://templates の処理
+      if (uri === "blog://templates") {
+        const templatePath = path.join(
+          process.cwd(),
+          "template",
+          "article_template.md"
+        );
+        const templateContent = fs.readFileSync(templatePath, "utf8");
+
+        const templates = [
+          {
+            name: "article_template.md",
+            description: "標準的なブログ記事のテンプレート",
+            content: templateContent,
+            path: "template/article_template.md",
+          },
+        ];
+
+        return {
+          contents: [
+            {
+              uri: uri,
+              mimeType: "application/json",
+              text: JSON.stringify(templates, null, 2),
+            },
+          ],
+        };
+      }
+
+      // blog://subscribe の処理
+      if (uri === "blog://subscribe") {
+        const subscribeInfo = {
+          rss: {
+            url: `${BLOG_BASE_URL}/rss.xml`,
+            format: "RSS 2.0",
+            description: "ブログの全記事を購読",
+          },
+          website: {
+            url: BLOG_BASE_URL,
+            description: "ブログのトップページ",
+          },
+          social: {
+            github: "https://github.com/tubone24",
+            twitter: "https://twitter.com/tubone24",
+          },
+        };
+
+        return {
+          contents: [
+            {
+              uri: uri,
+              mimeType: "application/json",
+              text: JSON.stringify(subscribeInfo, null, 2),
             },
           ],
         };
@@ -253,7 +333,11 @@ function handleToolsRequest(method, params) {
             content: [
               {
                 type: "text",
-                text: JSON.stringify(results.map(createPostSummary), null, 2),
+                text: JSON.stringify(
+                  results.map((post) => createPostSummary(post, BLOG_BASE_URL)),
+                  null,
+                  2
+                ),
               },
             ],
           };
@@ -280,7 +364,11 @@ function handleToolsRequest(method, params) {
             content: [
               {
                 type: "text",
-                text: JSON.stringify(posts.map(createPostSummary), null, 2),
+                text: JSON.stringify(
+                  posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
+                  null,
+                  2
+                ),
               },
             ],
           };
@@ -292,7 +380,11 @@ function handleToolsRequest(method, params) {
             content: [
               {
                 type: "text",
-                text: JSON.stringify(posts.map(createPostSummary), null, 2),
+                text: JSON.stringify(
+                  posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
+                  null,
+                  2
+                ),
               },
             ],
           };
@@ -305,7 +397,11 @@ function handleToolsRequest(method, params) {
             content: [
               {
                 type: "text",
-                text: JSON.stringify(posts.map(createPostSummary), null, 2),
+                text: JSON.stringify(
+                  posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
+                  null,
+                  2
+                ),
               },
             ],
           };
@@ -341,6 +437,8 @@ function handlePromptsRequest(method, params) {
             throw new Error(`Post not found: ${args.slug}`);
           }
 
+          const postUrl = `${BLOG_BASE_URL}/${post.slug}`;
+
           return {
             description: `ブログ記事「${post.title}」を分析します`,
             messages: [
@@ -350,9 +448,9 @@ function handlePromptsRequest(method, params) {
                   type: "text",
                   text: `以下のブログ記事を分析してください：\n\nタイトル: ${
                     post.title
-                  }\n日付: ${post.date}\nタグ: ${post.tags.join(
-                    ", "
-                  )}\n\n内容:\n${post.content}`,
+                  }\nURL: ${postUrl}\n日付: ${
+                    post.date
+                  }\nタグ: ${post.tags.join(", ")}\n\n内容:\n${post.content}`,
                 },
               },
             ],

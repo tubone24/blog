@@ -117,10 +117,11 @@ export function searchPosts(keyword) {
 /**
  * 記事のサマリーを作成（コンテンツを含まない軽量版）
  * @param {Object} post - 記事オブジェクト
+ * @param {string} baseUrl - ブログのベースURL（オプション）
  * @returns {Object} サマリー
  */
-export function createPostSummary(post) {
-  return {
+export function createPostSummary(post, baseUrl = null) {
+  const summary = {
     slug: post.slug,
     title: post.title,
     date: post.date,
@@ -128,4 +129,11 @@ export function createPostSummary(post) {
     tags: post.tags,
     headerImage: post.headerImage,
   };
+
+  // ベースURLが提供されている場合はURLを追加
+  if (baseUrl) {
+    summary.url = `${baseUrl}/${post.slug}`;
+  }
+
+  return summary;
 }
