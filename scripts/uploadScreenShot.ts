@@ -15,24 +15,33 @@ const headRef = Deno.env.get("HEAD_REF") as string;
 const readImageData = await Deno.readFile(filePath);
 const encodedData = encode(readImageData);
 
-const uploadMessage = prNumber === "" ? "[file upload] Added file on master" : `[file upload] Added file for PR #${prNumber}`;
+const uploadMessage =
+  prNumber === ""
+    ? "[file upload] Added file on master"
+    : `[file upload] Added file for PR #${prNumber}`;
 
-const deleteMessage = prNumber === "" ? "[file upload] Delete file on master" : `[file upload] Delete file for PR #${prNumber}`;
+const deleteMessage =
+  prNumber === ""
+    ? "[file upload] Delete file on master"
+    : `[file upload] Delete file for PR #${prNumber}`;
 
 const gitHubHeaders = {
   Accept: "application/vnd.github.v3+json",
   Authorization: `Bearer ${gitHubToken}`,
 };
 
-const content = await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}?ref=${branchName}`, {
-  method: "GET",
-  headers: gitHubHeaders,
-});
+const content = await fetch(
+  `${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}?ref=${branchName}`,
+  {
+    method: "GET",
+    headers: gitHubHeaders,
+  },
+);
 
 if (content.ok) {
   console.log("already have contents");
   const contentJson = await content.json();
-  console.log(contentJson.sha)
+  console.log(contentJson.sha);
   const gitHubDeletePayload = {
     message: deleteMessage,
     sha: contentJson.sha,
@@ -45,12 +54,15 @@ if (content.ok) {
       name: AUTHOR_NAME,
       email: AUTHOR_EMAIL,
     },
-  }
-  const resp = await fetch(`${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}`, {
-    method: "DELETE",
-    headers: gitHubHeaders,
-    body: JSON.stringify(gitHubDeletePayload),
-  });
+  };
+  const resp = await fetch(
+    `${GITHUB_API_URL}/repos/${gitHubRepo}/contents/docs/screenshot/${headRef}/${fileName}`,
+    {
+      method: "DELETE",
+      headers: gitHubHeaders,
+      body: JSON.stringify(gitHubDeletePayload),
+    },
+  );
   console.log(resp);
 }
 
