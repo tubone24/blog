@@ -45,6 +45,7 @@ describe("Sidebar", () => {
         frontmatter: {
           url: "/test-post-1",
           title: "Test Post 1",
+          date: "2023-01-01",
         },
         fields: { slug: "/test-post-1" },
       },
@@ -239,12 +240,17 @@ describe("Sidebar", () => {
     });
   });
 
-  it("uses default props when not provided", () => {
+  it("renders with minimal required props", () => {
     const spyIsBrowser = jest.spyOn(utils, "isBrowser");
     spyIsBrowser.mockReturnValue(true);
 
-    // @ts-expect-error Testing default props
-    const { container } = render(<Sidebar allPosts={mockAllPosts} />);
+    const { container } = render(
+      <Sidebar
+        latestPosts={mockLatestPosts}
+        totalCount={10}
+        allPosts={mockAllPosts}
+      />
+    );
 
     expect(container.querySelector("header")).toBeInTheDocument();
   });

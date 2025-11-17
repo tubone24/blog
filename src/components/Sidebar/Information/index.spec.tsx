@@ -122,8 +122,8 @@ describe("Information", () => {
   });
 
   it("uses default empty array for posts when not provided", () => {
-    // @ts-expect-error Testing default prop behavior
     const { container } = render(
+      // @ts-expect-error - Testing default prop behavior (posts has default value)
       <Information totalCount={10} allPosts={mockAllPosts} />
     );
 
