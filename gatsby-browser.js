@@ -7,9 +7,9 @@ import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import "prismjs/plugins/command-line/prism-command-line.css";
 import "./src/styles/global.scss";
-// Use bootstrap dropdown menu
+// Use bootstrap collapse for mobile menu
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Dropdown from "bootstrap/js/dist/dropdown";
+import Collapse from "bootstrap/js/dist/collapse";
 const config = require("./src/config/index.json");
 
 const isLocalDevelopment = () =>
