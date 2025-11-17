@@ -9,7 +9,7 @@ describe("Head", () => {
     const { container } = render(
       <HelmetProvider>
         <Head />
-      </HelmetProvider>
+      </HelmetProvider>,
     );
 
     // HelmetProviderでラップされたコンポーネントが正常にレンダリングされることを確認

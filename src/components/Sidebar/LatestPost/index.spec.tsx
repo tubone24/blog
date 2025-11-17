@@ -42,7 +42,7 @@ describe("LatestPost", () => {
     render(<LatestPost posts={posts} totalCount={1} />);
     expect(screen.getByText("testTitle")).toHaveAttribute(
       "href",
-      "/testFieldsSlug"
+      "/testFieldsSlug",
     );
   });
   it("total count", async () => {
@@ -56,7 +56,7 @@ describe("LatestPost", () => {
     ];
     render(<LatestPost posts={posts} totalCount={1} />);
     expect(screen.getByTestId("latestArticleCount")).toHaveTextContent(
-      "Recent posts 6 / 1"
+      "Recent posts 6 / 1",
     );
   });
   it("ga button clicked", async () => {

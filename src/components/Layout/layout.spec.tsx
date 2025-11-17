@@ -48,7 +48,7 @@ describe("Layout", () => {
     const { getByTestId } = render(
       <Layout location={mockLocation}>
         <div>Test Content</div>
-      </Layout>
+      </Layout>,
     );
 
     expect(getByTestId("mock-head")).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe("Layout", () => {
     const { getByText, getByTestId } = render(
       <Layout location={mockLocation}>
         <div>Test Content</div>
-      </Layout>
+      </Layout>,
     );
 
     expect(getByText("Test Content")).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe("Layout", () => {
     const { getByTestId } = render(
       <Layout location={postLocation}>
         <div>Post Content</div>
-      </Layout>
+      </Layout>,
     );
 
     const navbar = getByTestId("mock-navbar");
@@ -93,7 +93,7 @@ describe("Layout", () => {
     const { getByTestId } = render(
       <Layout location={nonPostLocation}>
         <div>About Content</div>
-      </Layout>
+      </Layout>,
     );
 
     const navbar = getByTestId("mock-navbar");
@@ -104,7 +104,7 @@ describe("Layout", () => {
     const { getByTestId } = render(
       <Layout location={mockLocation} isPostPage={true}>
         <div>Content</div>
-      </Layout>
+      </Layout>,
     );
 
     const navbar = getByTestId("mock-navbar");
@@ -119,7 +119,7 @@ describe("Layout", () => {
     const { getByTestId } = render(
       <Layout location={postLocation} isPostPage={false}>
         <div>Content</div>
-      </Layout>
+      </Layout>,
     );
 
     const navbar = getByTestId("mock-navbar");
@@ -130,7 +130,7 @@ describe("Layout", () => {
     const { container } = render(
       <Layout location={mockLocation}>
         <div>Test Content</div>
-      </Layout>
+      </Layout>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -140,7 +140,7 @@ describe("Layout", () => {
     const { container } = render(
       <Layout location={mockLocation}>
         <div>Test Content</div>
-      </Layout>
+      </Layout>,
     );
 
     const layoutDiv = container.querySelector(".layout");

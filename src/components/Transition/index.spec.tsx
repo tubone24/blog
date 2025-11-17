@@ -14,7 +14,7 @@ describe("Transition", () => {
     const { getByText } = render(
       <Transition location={mockLocation}>
         <div>Test Content</div>
-      </Transition>
+      </Transition>,
     );
     expect(getByText("Test Content")).toBeInTheDocument();
   });
@@ -23,7 +23,7 @@ describe("Transition", () => {
     const { container } = render(
       <Transition location={mockLocation}>
         <div>Test Content</div>
-      </Transition>
+      </Transition>,
     );
 
     // Check that the TransitionGroup is rendered
@@ -35,7 +35,7 @@ describe("Transition", () => {
     const { rerender, container } = render(
       <Transition location={{ pathname: "/path1" }}>
         <div>Content 1</div>
-      </Transition>
+      </Transition>,
     );
 
     const firstRender = container.innerHTML;
@@ -43,7 +43,7 @@ describe("Transition", () => {
     rerender(
       <Transition location={{ pathname: "/path2" }}>
         <div>Content 2</div>
-      </Transition>
+      </Transition>,
     );
 
     const secondRender = container.innerHTML;
@@ -56,7 +56,7 @@ describe("Transition", () => {
     const { container } = render(
       <Transition location={mockLocation}>
         <div>Test Content</div>
-      </Transition>
+      </Transition>,
     );
 
     // Verify the component renders (timeout is applied internally)
@@ -67,7 +67,7 @@ describe("Transition", () => {
     const { container } = render(
       <Transition location={mockLocation}>
         <div>Test Content</div>
-      </Transition>
+      </Transition>,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -80,7 +80,7 @@ describe("Transition", () => {
           <h1>Title</h1>
           <p>Paragraph</p>
         </div>
-      </Transition>
+      </Transition>,
     );
     expect(getByText("Title")).toBeInTheDocument();
     expect(getByText("Paragraph")).toBeInTheDocument();

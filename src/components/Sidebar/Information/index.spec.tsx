@@ -69,7 +69,7 @@ describe("Information", () => {
 
   it("renders all child components", () => {
     render(
-      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />
+      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />,
     );
 
     expect(screen.getByTestId("mock-latestpost")).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe("Information", () => {
 
   it("renders with correct totalCount prop", () => {
     const { container } = render(
-      <Information totalCount={42} posts={mockPosts} allPosts={mockAllPosts} />
+      <Information totalCount={42} posts={mockPosts} allPosts={mockAllPosts} />,
     );
 
     expect(container.querySelector("div")).toBeInTheDocument();
@@ -95,7 +95,7 @@ describe("Information", () => {
 
   it("has correct CSS classes", () => {
     const { container } = render(
-      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />
+      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />,
     );
 
     const mainDiv = container.querySelector("div");
@@ -106,7 +106,7 @@ describe("Information", () => {
 
   it("renders horizontal rules between components", () => {
     const { container } = render(
-      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />
+      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />,
     );
 
     const hrs = container.querySelectorAll("hr");
@@ -115,7 +115,7 @@ describe("Information", () => {
 
   it("should not have basic accessibility issues", async () => {
     const { container } = render(
-      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />
+      <Information totalCount={10} posts={mockPosts} allPosts={mockAllPosts} />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -124,7 +124,7 @@ describe("Information", () => {
   it("uses default empty array for posts when not provided", () => {
     const { container } = render(
       // @ts-expect-error - Testing default prop behavior (posts has default value)
-      <Information totalCount={10} allPosts={mockAllPosts} />
+      <Information totalCount={10} allPosts={mockAllPosts} />,
     );
 
     expect(container.querySelector("div")).toBeInTheDocument();

@@ -17,7 +17,7 @@ export enum SizeMapping {
 
 export const parseImgur = (
   rawImage: string,
-  size: SizeMapping = SizeMapping.large
+  size: SizeMapping = SizeMapping.large,
 ) => {
   if (!rawImage) {
     return `https://i.imgur.com/${defaultPicture}`;

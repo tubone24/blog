@@ -98,7 +98,7 @@ describe("RelatedPosts", () => {
     spyIsBrowser.mockReturnValue(true);
 
     const { getByText } = render(
-      <RelatedPosts title="Test Post 1" tags={["react", "testing"]} />
+      <RelatedPosts title="Test Post 1" tags={["react", "testing"]} />,
     );
 
     expect(getByText("Related Posts")).toBeInTheDocument();
@@ -112,7 +112,7 @@ describe("RelatedPosts", () => {
 
     // Current post title should not appear in related posts
     const relatedCards = document.querySelectorAll(
-      '[data-testid="card-title"]'
+      '[data-testid="card-title"]',
     );
     const titles = Array.from(relatedCards).map((card) => card.textContent);
     expect(titles).not.toContain("Test Post 1");
@@ -123,7 +123,7 @@ describe("RelatedPosts", () => {
     spyIsBrowser.mockReturnValue(true);
 
     const { getAllByTestId } = render(
-      <RelatedPosts title="Current Post" tags={["react"]} />
+      <RelatedPosts title="Current Post" tags={["react"]} />,
     );
 
     // Should show related cards
@@ -154,7 +154,7 @@ describe("RelatedPosts", () => {
     spyIsBrowser.mockReturnValue(true);
 
     const { container } = render(
-      <RelatedPosts title="Test Post" tags={["react"]} />
+      <RelatedPosts title="Test Post" tags={["react"]} />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
@@ -165,7 +165,7 @@ describe("RelatedPosts", () => {
     spyIsBrowser.mockReturnValue(true);
 
     const { container } = render(
-      <RelatedPosts title="Test Post" tags={["react"]} />
+      <RelatedPosts title="Test Post" tags={["react"]} />,
     );
 
     const iconSpan = container.querySelector(".icon-newspaper-o");

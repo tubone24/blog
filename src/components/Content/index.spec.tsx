@@ -16,7 +16,7 @@ describe("Content", () => {
     expect(screen.getByTestId("testImg")).toHaveAttribute("src", "test.png");
     expect(screen.getByTestId("testImg")).toHaveAttribute(
       "data-loaded",
-      "true"
+      "true",
     );
   });
 
@@ -45,11 +45,11 @@ describe("Content", () => {
     render(<Content post={testPost} />);
     expect(screen.getByTestId("innerHTML")).toHaveTextContent("test");
     expect(screen.getByTestId("testImg")).toHaveStyle(
-      "background-image: test.png"
+      "background-image: test.png",
     );
     expect(screen.getByTestId("testImg")).toHaveAttribute(
       "data-loaded",
-      "true"
+      "true",
     );
   });
 

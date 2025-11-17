@@ -65,21 +65,21 @@ async function indexToAlgolia({ graphql, reporter }) {
     });
 
     reporter.success(
-      `Successfully indexed ${allRecords.length} records to Algolia`
+      `Successfully indexed ${allRecords.length} records to Algolia`,
     );
   } catch (error) {
     // Check if error is due to Algolia blocking (quota exceeded)
     if (error.message && error.message.includes("application is blocked")) {
       reporter.warn(
         "Algolia indexing failed: Application is blocked (likely quota exceeded). " +
-          "Skipping Algolia indexing to allow build to continue."
+          "Skipping Algolia indexing to allow build to continue.",
       );
       reporter.warn(`Error details: ${error.message}`);
     } else {
       // For other errors, log but don't fail the build
       reporter.warn(
         "Algolia indexing failed with an error. " +
-          "Skipping Algolia indexing to allow build to continue."
+          "Skipping Algolia indexing to allow build to continue.",
       );
       reporter.warn(`Error details: ${error.message}`);
     }

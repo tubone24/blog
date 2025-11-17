@@ -16,14 +16,14 @@ describe("Header", () => {
         authorImage={true}
         img="test.png"
         subTitle="testSubTitle"
-      />
+      />,
     );
     expect(screen.getByTestId("header")).toHaveTextContent("testTitle");
     expect(screen.getByTestId("header")).toHaveTextContent("testParson");
     expect(screen.getByTestId("header")).toHaveTextContent("testSubTitle");
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
-      "/assets/avater.png"
+      "/assets/avater.png",
     );
   });
   it("Don't Show Author Image", () => {
@@ -34,7 +34,7 @@ describe("Header", () => {
         authorImage={false}
         img="test.png"
         subTitle="testSubTitle"
-      />
+      />,
     );
     expect(screen.getByTestId("header")).toHaveTextContent("testTitle");
     expect(screen.getByTestId("header")).toHaveTextContent("testParson");
@@ -49,7 +49,7 @@ describe("Header", () => {
         authorImage={true}
         img="test.png"
         subTitle="testSubTitle"
-      />
+      />,
     );
     const mockReactGA = jest.spyOn(ReactGA, "event");
     await userEvent.click(screen.getByRole("img"));
@@ -67,7 +67,7 @@ describe("Header", () => {
         authorImage={true}
         img="test.png"
         subTitle="testSubTitle"
-      />
+      />,
     );
     const mockReactGA = jest.spyOn(ReactGA, "event");
 

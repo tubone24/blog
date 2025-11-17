@@ -285,7 +285,7 @@ function handleResourcesRequest(method, params) {
       if (uri === "blog://posts") {
         const posts = getAllPosts();
         const summaries = posts.map((post) =>
-          createPostSummary(post, BLOG_BASE_URL)
+          createPostSummary(post, BLOG_BASE_URL),
         );
         return {
           contents: [
@@ -336,7 +336,7 @@ function handleResourcesRequest(method, params) {
         const tag = decodeURIComponent(uri.replace("blog://tags/", ""));
         const posts = getPostsByTag(tag);
         const summaries = posts.map((post) =>
-          createPostSummary(post, BLOG_BASE_URL)
+          createPostSummary(post, BLOG_BASE_URL),
         );
 
         return {
@@ -399,7 +399,7 @@ async function handleToolsRequest(method, params) {
                 text: JSON.stringify(
                   results.map((post) => createPostSummary(post, BLOG_BASE_URL)),
                   null,
-                  2
+                  2,
                 ),
               },
             ],
@@ -430,7 +430,7 @@ async function handleToolsRequest(method, params) {
                 text: JSON.stringify(
                   posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
                   null,
-                  2
+                  2,
                 ),
               },
             ],
@@ -446,7 +446,7 @@ async function handleToolsRequest(method, params) {
                 text: JSON.stringify(
                   posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
                   null,
-                  2
+                  2,
                 ),
               },
             ],
@@ -463,7 +463,7 @@ async function handleToolsRequest(method, params) {
                 text: JSON.stringify(
                   posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
                   null,
-                  2
+                  2,
                 ),
               },
             ],
@@ -474,7 +474,7 @@ async function handleToolsRequest(method, params) {
           const templatePath = path.join(
             process.cwd(),
             "template",
-            "article_template.md"
+            "article_template.md",
           );
           const templateContent = fs.readFileSync(templatePath, "utf8");
 
@@ -728,7 +728,7 @@ export const handler = async (event, context) => {
           prompts: Object.keys(PROMPTS),
         },
         null,
-        2
+        2,
       ),
     };
   }

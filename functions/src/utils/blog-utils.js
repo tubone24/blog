@@ -12,7 +12,7 @@ export function getAllPosts() {
   try {
     const files = fs.readdirSync(CONTENT_DIR);
     const markdownFiles = files.filter(
-      (file) => file.endsWith(".md") && file !== "README.md"
+      (file) => file.endsWith(".md") && file !== "README.md",
     );
 
     const posts = markdownFiles.map((filename) => {
@@ -59,7 +59,7 @@ export function getPostBySlug(slug) {
 export function getPostsByTag(tag) {
   const posts = getAllPosts();
   return posts.filter((post) =>
-    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase()),
   );
 }
 

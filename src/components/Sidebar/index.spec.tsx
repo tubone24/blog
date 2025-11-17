@@ -76,11 +76,11 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     const portfolioLink = container.querySelector(
-      'a[href="https://portfolio.tubone-project24.xyz/"]'
+      'a[href="https://portfolio.tubone-project24.xyz/"]',
     );
     expect(portfolioLink).toBeInTheDocument();
 
@@ -98,7 +98,7 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     expect(screen.getByText("tubone")).toBeInTheDocument();
@@ -114,33 +114,33 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     // GitHub
     const githubLink = container.querySelector(
-      'a[href="https://github.com/tubone24"]'
+      'a[href="https://github.com/tubone24"]',
     );
     expect(githubLink).toBeInTheDocument();
     expect(githubLink).toHaveAttribute("title", "tubone24 github");
 
     // SoundCloud
     const soundcloudLink = container.querySelector(
-      'a[href="https://soundcloud.com/user-453736300"]'
+      'a[href="https://soundcloud.com/user-453736300"]',
     );
     expect(soundcloudLink).toBeInTheDocument();
     expect(soundcloudLink).toHaveAttribute("title", "tubone24 SoundCloud");
 
     // Twitter
     const twitterLink = container.querySelector(
-      'a[href="https://twitter.com/tubone24"]'
+      'a[href="https://twitter.com/tubone24"]',
     );
     expect(twitterLink).toBeInTheDocument();
     expect(twitterLink).toHaveAttribute("title", "tubone24 twitter");
 
     // 500px
     const px500Link = container.querySelector(
-      'a[href="https://500px.com/tubone24"]'
+      'a[href="https://500px.com/tubone24"]',
     );
     expect(px500Link).toBeInTheDocument();
     expect(px500Link).toHaveAttribute("title", "tubone24 500px");
@@ -155,7 +155,7 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     expect(screen.getByTestId("mock-information")).toBeInTheDocument();
@@ -173,12 +173,12 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     const mockReactGA = jest.spyOn(ReactGA, "event");
     const avatarImg = container.querySelector(
-      'img[alt="tubone"]'
+      'img[alt="tubone"]',
     ) as HTMLElement;
 
     await userEvent.click(avatarImg);
@@ -198,7 +198,7 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     const mockReactGA = jest.spyOn(ReactGA, "event");
@@ -221,15 +221,15 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     const mockReactGA = jest.spyOn(ReactGA, "event");
     const nameLinks = container.querySelectorAll(
-      'a[href="https://portfolio.tubone-project24.xyz/"]'
+      'a[href="https://portfolio.tubone-project24.xyz/"]',
     );
     const nameLink = Array.from(nameLinks).find(
-      (link) => link.textContent === "tubone"
+      (link) => link.textContent === "tubone",
     ) as HTMLElement;
 
     await userEvent.click(nameLink);
@@ -249,7 +249,7 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     expect(container.querySelector("header")).toBeInTheDocument();
@@ -264,7 +264,7 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
 
     const header = container.querySelector("header");
@@ -281,7 +281,7 @@ describe("Sidebar", () => {
         latestPosts={mockLatestPosts}
         totalCount={10}
         allPosts={mockAllPosts}
-      />
+      />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();

@@ -14,7 +14,7 @@ describe("Card", () => {
         tags={["testTag1", "testTag2"]}
         description="hogehogehogehoge"
         headerImage="https://example.com/test.png"
-      />
+      />,
     );
     expect(screen.getByTestId("card")).toHaveTextContent("testTitle");
     expect(screen.getByTestId("card")).toHaveTextContent("2022-01-01");
@@ -23,7 +23,7 @@ describe("Card", () => {
     expect(screen.getByTestId("card")).toHaveTextContent("hogehogehogehoge");
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "data-background-image",
-      "https://example.com/testl.png"
+      "https://example.com/testl.png",
     );
     expect(screen.getByTestId("card-header")).toHaveClass("lozad");
   });
@@ -37,7 +37,7 @@ describe("Card", () => {
         tags={["testTag1", "testTag2"]}
         description="hogehogehogehoge"
         headerImage="https://example.com/test.png"
-      />
+      />,
     );
     expect(screen.getByTestId("card")).toHaveTextContent("testTitle");
     expect(screen.getByTestId("card")).toHaveTextContent("2022-01-01");
@@ -47,15 +47,15 @@ describe("Card", () => {
     // For index === 0, it's now an img tag
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "src",
-      "https://example.com/testl.png"
+      "https://example.com/testl.png",
     );
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "loading",
-      "eager"
+      "eager",
     );
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "fetchpriority",
-      "high"
+      "high",
     );
   });
   it("undefined tag", () => {
@@ -68,14 +68,14 @@ describe("Card", () => {
         tags={[undefined]}
         description="hogehogehogehoge"
         headerImage="https://example.com/test.png"
-      />
+      />,
     );
     expect(screen.getByTestId("card")).toHaveTextContent("testTitle");
     expect(screen.getByTestId("card")).toHaveTextContent("2022-01-01");
     expect(screen.queryByText("testTag1")).not.toBeInTheDocument();
     expect(screen.queryByText("testTag2")).not.toBeInTheDocument();
     expect(screen.getByTestId("card-header")).toHaveStyle(
-      "background-image: url(https://example.com/testl.png);"
+      "background-image: url(https://example.com/testl.png);",
     );
   });
   it("should not have basic accessibility issues", async () => {
@@ -88,7 +88,7 @@ describe("Card", () => {
         tags={["testTag1", "testTag2"]}
         description="hogehogehogehoge"
         headerImage="https://example.com/test.png"
-      />
+      />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();

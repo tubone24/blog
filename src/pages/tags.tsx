@@ -22,7 +22,7 @@ const Tags = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
   });
 
   const tags = Array.from(Object.keys(mapping)).sort(
-    (b, a) => mapping[a] - mapping[b]
+    (b, a) => mapping[a] - mapping[b],
   );
 
   return (

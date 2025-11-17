@@ -19,7 +19,7 @@ describe("UI Test", () => {
     cy.location("href").should("include", "/2011/08/30");
     cy.get("title").should(
       "have.text",
-      "このBlogテンプレートのテスト用投稿 | tubone BOYAKI"
+      "このBlogテンプレートのテスト用投稿 | tubone BOYAKI",
     );
     cy.get("[data-testid=share-box] [data-testid=GotoTopButton]").click();
     // Because of smooth scrolling

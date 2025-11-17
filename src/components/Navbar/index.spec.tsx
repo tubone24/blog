@@ -11,10 +11,10 @@ describe("Card", () => {
     expect(screen.getAllByRole("button")).toHaveLength(2);
     expect(screen.getByTestId("logo-img")).toHaveAttribute(
       "src",
-      "/assets/logo3.svg"
+      "/assets/logo3.svg",
     );
     expect(screen.getByTestId("logo")).toHaveTextContent(
-      "Japanese IT Developer's Blog tubone BOYAKI"
+      "Japanese IT Developer's Blog tubone BOYAKI",
     );
   });
   it("logo clicked", async () => {
@@ -36,7 +36,7 @@ describe("Card", () => {
     const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent(
-      "Japanese IT Developer's Blog tubone BOYAKI"
+      "Japanese IT Developer's Blog tubone BOYAKI",
     );
   });
   it("should not render h1 when isPostPage is true", () => {
@@ -45,7 +45,7 @@ describe("Card", () => {
     expect(headings).not.toBeInTheDocument();
     // visually-hiddenクラスのdivには依然としてテキストが含まれている
     expect(screen.getByTestId("logo")).toHaveTextContent(
-      "Japanese IT Developer's Blog tubone BOYAKI"
+      "Japanese IT Developer's Blog tubone BOYAKI",
     );
   });
 });
