@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import Tag from "./index";
@@ -26,9 +26,11 @@ describe("Tag", () => {
   it("ReactGA event", async () => {
     render(<Tag count={1} name="test" />);
     await userEvent.click(screen.getByRole("link"));
-    expect(ReactGA.event).toHaveBeenCalledWith({
-      category: "Tag",
-      action: `push Tag test`,
+    await waitFor(() => {
+      expect(ReactGA.event).toHaveBeenCalledWith({
+        category: "Tag",
+        action: `push Tag test`,
+      });
     });
   });
   it("should not have basic accessibility issues", async () => {
