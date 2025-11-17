@@ -8,49 +8,47 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-exports.config = {
+export const config = {
   path: "/functions/ogp.png",
 };
 
-const transaction = Sentry.startTransaction({
-  op: "blog",
-  name: "ogp transaction",
-});
+export const handler = async (event, context) => {
+  return await Sentry.startSpan(
+    { name: "ogp transaction", op: "blog" },
+    async () => {
+      console.log(event);
+      console.log(context);
+      const rawData = Buffer.from(event.blobs, "base64");
+      const data = JSON.parse(rawData.toString("ascii"));
+      const queryStringParameters = event.queryStringParameters;
 
-exports.handler = async (event, context) => {
-  console.log(event);
-  console.log(context);
-  const rawData = Buffer.from(event.blobs, "base64");
-  const data = JSON.parse(rawData.toString("ascii"));
-  const queryStringParameters = event.queryStringParameters;
+      const title = queryStringParameters.title?.toString() || "Hello, World!";
+      const user =
+        `by ` + (queryStringParameters.user?.toString() || "tubone24");
 
-  const title = queryStringParameters.title?.toString() || "Hello, World!";
-  const user = `by ` + (queryStringParameters.user?.toString() || "tubone24");
+      try {
+        const ogp = getStore({
+          name: "ogp",
+          token: data.token,
+          siteID: "3751ef40-b145-4249-9657-39d3fb04ae81",
+        });
+        const ogpArrayBuf = await ogp.get(`${encodeURIComponent(title)}`, {
+          type: "arrayBuffer",
+        });
 
-  try {
-    const ogp = getStore({
-      name: "ogp",
-      token: data.token,
-      siteID: "3751ef40-b145-4249-9657-39d3fb04ae81",
-    });
-    const ogpArrayBuf = await ogp.get(`${encodeURIComponent(title)}`, {
-      type: "arrayBuffer",
-    });
+        if (ogpArrayBuf !== null) {
+          return {
+            statusCode: 200,
+            headers: {
+              "Content-Type": "image/png",
+            },
+            body: Buffer.from(Buffer.from(ogpArrayBuf)).toString("base64"),
+            isBase64Encoded: true,
+          };
+        }
 
-    if (ogpArrayBuf !== null) {
-      transaction.finish();
-      return {
-        statusCode: 200,
-        headers: {
-          "Content-Type": "image/png",
-        },
-        body: new Buffer(Buffer.from(ogpArrayBuf)).toString("base64"),
-        isBase64Encoded: true,
-      };
-    }
-
-    // SVGを生成
-    const svg = `
+        // SVGを生成
+        const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${1200}" height="${630}">
       <!-- フィルター定義 -->
       <defs>
@@ -96,45 +94,44 @@ exports.handler = async (event, context) => {
       </g>
     </svg>`;
 
-    console.log(svg);
+        console.log(svg);
 
-    // sharp: SVG画像をPNG画像に変換
-    const buffer = await sharp(Buffer.from(svg))
-      // アイコン合成
-      .composite([
-        {
-          input: "./static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",
-          left: 80,
-          top: 450,
-        },
-      ])
-      .png()
-      .toBuffer();
+        // sharp: SVG画像をPNG画像に変換
+        const buffer = await sharp(Buffer.from(svg))
+          // アイコン合成
+          .composite([
+            {
+              input: "./static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",
+              left: 80,
+              top: 450,
+            },
+          ])
+          .png()
+          .toBuffer();
 
-    const arrayBuf = new Uint8Array(buffer).buffer;
+        const arrayBuf = new Uint8Array(buffer).buffer;
 
-    await ogp.set(`${encodeURIComponent(title)}`, arrayBuf, {
-      createdAt: new Date(),
-    });
+        await ogp.set(`${encodeURIComponent(title)}`, arrayBuf, {
+          createdAt: new Date(),
+        });
 
-    transaction.finish();
-
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "image/png",
-      },
-      body: new Buffer(buffer).toString("base64"),
-      isBase64Encoded: true,
-    };
-  } catch (error) {
-    Sentry.captureException(error);
-    transaction.finish();
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
-    };
-  }
+        return {
+          statusCode: 200,
+          headers: {
+            "Content-Type": "image/png",
+          },
+          body: Buffer.from(buffer).toString("base64"),
+          isBase64Encoded: true,
+        };
+      } catch (error) {
+        Sentry.captureException(error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: error.message }),
+        };
+      }
+    }
+  );
 };
 
 function generateTextPath(text, width, lineHight, textOptions) {
