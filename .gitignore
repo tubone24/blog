@@ -27,6 +27,7 @@ storybook-static
 coverage
 coverage-e2e
 .nyc_output
+coverage-output.txt
 
 # Cypress
 cypress/videos/e2e
