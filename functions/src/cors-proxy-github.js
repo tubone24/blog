@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
         method: "POST",
         headers: headers,
         body: JSON.stringify(body),
-      }
+      },
     );
     const data = await response.json();
 

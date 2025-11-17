@@ -112,7 +112,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     // replace img for lozad
     const repHtml = html.replace(
       /<img[\s|\S]src=/g,
-      '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src='
+      '<img class="lozad" src="data:image/gif;base64,R0lGODlhAQABAGAAACH5BAEKAP8ALAAAAAABAAEAAAgEAP8FBAA7" data-src=',
     );
 
     // word count
@@ -162,7 +162,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
     const newStartDate = new Date(startDate);
     // 月末日を取得
     const endDate = new Date(
-      new Date(newStartDate.setMonth(newStartDate.getMonth() + 1)).getTime() - 1
+      new Date(newStartDate.setMonth(newStartDate.getMonth() + 1)).getTime() -
+        1,
     ).toISOString();
 
     createPage({

@@ -36,7 +36,7 @@ export const FilledSearchBox: Story = {
       "Renovateの作るPRでArtifact update problemが出た時の対処法",
       {
         delay: 100,
-      }
+      },
     );
     await waitFor(() => {
       const items = canvas.getByRole("listbox");

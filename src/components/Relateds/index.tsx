@@ -61,7 +61,7 @@ const RelatedPosts = ({
                 return edge.node.frontmatter.tags[i] === tags[i];
               }
             }
-          }
+          },
         );
         if (!relatedPosts) {
           return null;

@@ -10,11 +10,11 @@ describe("SearchBox", () => {
     expect(screen.getByLabelText("SearchBox")).toBeInTheDocument();
     expect(screen.getByTestId("algolia-search-input")).toBeInTheDocument();
   });
-  it("text input", () => {
+  it("text input", async () => {
     render(<SearchBox />);
-    userEvent.type(
+    await userEvent.type(
       screen.getByPlaceholderText("Enter the keyword..."),
-      "testtest"
+      "testtest",
     );
     expect(screen.getByLabelText("SearchBox")).toBeInTheDocument();
     expect(screen.getByTestId("algolia-search-input")).toBeInTheDocument();

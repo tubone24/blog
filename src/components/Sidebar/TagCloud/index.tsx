@@ -18,7 +18,7 @@ const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
   });
 
   const tags = Array.from(Object.keys(mapping)).sort(
-    (b, a) => mapping[a] - mapping[b]
+    (b, a) => mapping[a] - mapping[b],
   );
   const limitTags = tags.slice(0, 20);
   return (

@@ -43,7 +43,7 @@ const ShareBox = ({ url }: { url: string }) => (
     </a>
     <a
       href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${encodeURI(
-        url
+        url,
       )}`}
       title="TwitterでShareする"
       target="_blank"

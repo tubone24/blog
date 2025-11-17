@@ -165,7 +165,7 @@ const SEO = ({
   keywords = [],
 }: Props) => {
   const ogpImageLink = `https://tubone-project24.xyz/ogp.png?title=${encodeURI(
-    title
+    title,
   )}`;
 
   // 日本語キーワードの自動追加
@@ -226,7 +226,7 @@ const SEO = ({
             datePublished,
             dateModified,
             author,
-          })
+          }),
         )}
       </script>
 

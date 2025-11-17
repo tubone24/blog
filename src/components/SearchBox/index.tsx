@@ -22,12 +22,12 @@ if (typeof window !== "undefined") {
   client = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID || process.env.STORYBOOK_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_API_KEY ||
-      process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY
+      process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY,
   );
   index = client.initIndex(
     process.env.GATSBY_ALGOLIA_INDEX_NAME ||
       process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
-      "posts"
+      "posts",
   );
 }
 
@@ -82,7 +82,7 @@ class SearchBox extends Component {
         });
         // eslint-disable-next-line no-underscore-dangle
         navigate(withPrefix(event._args[0].path));
-      }
+      },
     );
   }
 

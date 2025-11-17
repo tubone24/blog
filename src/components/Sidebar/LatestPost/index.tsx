@@ -32,10 +32,10 @@ const LatestPost = ({
     {posts.map(({ node }) => (
       <Link
         to={withPrefix(
-          node.frontmatter.url || node.frontmatter.slug || node.fields.slug
+          node.frontmatter.url || node.frontmatter.slug || node.fields.slug,
         )}
         key={withPrefix(
-          node.frontmatter.url || node.frontmatter.slug || node.fields.slug
+          node.frontmatter.url || node.frontmatter.slug || node.fields.slug,
         )}
         onClick={() =>
           ReactGA.event({
