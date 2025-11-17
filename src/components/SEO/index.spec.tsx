@@ -16,7 +16,7 @@ describe("SEO", () => {
           tag="testTag"
           description="testDescription"
         />
-      </HelmetProvider>
+      </HelmetProvider>,
     );
 
     // HelmetProviderでラップされたコンポーネントが正常にレンダリングされることを確認
@@ -39,7 +39,7 @@ describe("SEO", () => {
           author="testAuthor"
           keywords={["test", "article"]}
         />
-      </HelmetProvider>
+      </HelmetProvider>,
     );
 
     // HelmetProviderでラップされたコンポーネントが正常にレンダリングされることを確認

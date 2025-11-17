@@ -45,7 +45,7 @@ const queries = [
             // Table of Contentsセクション全体を削除（H2から次のH2まで）
             .replace(
               /<h2[^>]*>[\s\S]*?Table of Contents[\s\S]*?<\/h2>[\s\S]*?(?=<h2|$)/gi,
-              ""
+              "",
             )
             .replace(/<h[1-6][\s\S]*?<\/h[1-6]>/gi, "") // 見出しタグ削除(H1-H6)
             .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "") // HTMLタグ削除
@@ -67,7 +67,7 @@ const queries = [
             tags: tags.join(),
             path: slug,
           };
-        }
+        },
       ),
   },
 ];

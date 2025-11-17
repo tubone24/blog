@@ -130,7 +130,7 @@ export const handler = async (event, context) => {
           body: JSON.stringify({ error: error.message }),
         };
       }
-    }
+    },
   );
 };
 
@@ -159,7 +159,7 @@ function generateTextPath(text, width, lineHight, textOptions) {
     const measureWidth = font.getAdvanceWidth(
       columns[columns.length - 1] + char,
       lineHight,
-      renderOptions
+      renderOptions,
     );
 
     // 改行位置を超えている場合
@@ -180,7 +180,7 @@ function generateTextPath(text, width, lineHight, textOptions) {
     const measureWidth = font.getAdvanceWidth(
       columns[i],
       lineHight,
-      renderOptions
+      renderOptions,
     );
 
     const fontScale = (1 / font.unitsPerEm) * lineHight;
@@ -203,7 +203,7 @@ function generateTextPath(text, width, lineHight, textOptions) {
       offsetX,
       height * i + height,
       lineHight,
-      renderOptions
+      renderOptions,
     );
 
     // 文字色を指定

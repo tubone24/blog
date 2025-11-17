@@ -12,7 +12,7 @@ describe("RelatedCard", () => {
         tags={["test"]}
         url="https://example.com"
         description="testtesttesttest"
-      />
+      />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();

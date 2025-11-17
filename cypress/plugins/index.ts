@@ -23,7 +23,7 @@ import task from "@cypress/code-coverage/task";
 
 const plugins = (
   on: Cypress.PluginEvents,
-  config: Cypress.PluginConfigOptions
+  config: Cypress.PluginConfigOptions,
 ) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config

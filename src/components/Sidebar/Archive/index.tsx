@@ -9,8 +9,8 @@ import { AllPost } from "../entity";
 const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   const yearList = Array.from(
     new Set(
-      allPosts.map((data) => dayjs(data.node.frontmatter.date).format("YYYY"))
-    )
+      allPosts.map((data) => dayjs(data.node.frontmatter.date).format("YYYY")),
+    ),
   ).sort((a, b) => (a < b ? 1 : -1));
   return (
     <div className={style.archive} data-testid="Archive">
