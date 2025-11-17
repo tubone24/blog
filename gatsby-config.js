@@ -162,16 +162,19 @@ module.exports = {
         ],
       },
     },
-    // Conditionally add Algolia plugin only if credentials are available
-    ...(hasAlgoliaConfig
-      ? [
-          {
-            resolve: "gatsby-plugin-algolia",
-            // eslint-disable-next-line global-require
-            options: require("./gatsby-plugin-algolia-config.js"),
-          },
-        ]
-      : []),
+    // Algolia indexing is now handled in gatsby/onPostBuild.js
+    // with custom error handling to prevent build failures when quota is exceeded.
+    // The gatsby-plugin-algolia plugin is no longer used.
+    //
+    // ...(hasAlgoliaConfig
+    //   ? [
+    //       {
+    //         resolve: "gatsby-plugin-algolia",
+    //         // eslint-disable-next-line global-require
+    //         options: require("./gatsby-plugin-algolia-config.js"),
+    //       },
+    //     ]
+    //   : []),
     {
       resolve: "gatsby-transformer-remark",
       options: {

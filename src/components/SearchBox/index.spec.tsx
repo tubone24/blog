@@ -61,9 +61,9 @@ describe("SearchBox", () => {
     expect(screen.getByTestId("algolia-search-input")).toBeInTheDocument();
   });
 
-  it("text input", () => {
+  it("text input", async () => {
     render(<SearchBox />);
-    userEvent.type(
+    await userEvent.type(
       screen.getByPlaceholderText("Enter the keyword..."),
       "testtest"
     );
