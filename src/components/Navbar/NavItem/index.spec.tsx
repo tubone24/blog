@@ -5,7 +5,15 @@ import { axe } from "jest-axe";
 import ReactGA from "react-ga4";
 import userEvent from "@testing-library/user-event";
 
+// Mock react-ga4
+jest.mock("react-ga4", () => ({
+  event: jest.fn(),
+}));
+
 describe("Card", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   it("valid navitem", () => {
     render(<NavItem name="test" url="https://example.com" />);
     expect(screen.getByRole("link")).toHaveTextContent("test");
