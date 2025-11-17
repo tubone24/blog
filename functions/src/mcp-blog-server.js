@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getStore } from "@netlify/blobs";
 import {
   getAllPosts,
   getPostBySlug,
@@ -156,6 +157,21 @@ const TOOLS = {
       properties: {},
     },
   },
+  get_last_updated: {
+    name: "get_last_updated",
+    description:
+      "ブログ記事の最終更新日時を取得します。ポーリングによる変更検出に使用できます",
+    inputSchema: {
+      type: "object",
+      properties: {
+        resource: {
+          type: "string",
+          description: "リソースURI (例: blog://posts, blog://tags)",
+          default: "blog://posts",
+        },
+      },
+    },
+  },
 };
 
 // プロンプトの定義
@@ -188,6 +204,70 @@ const PROMPTS = {
     ],
   },
 };
+
+/**
+ * 記事の最終更新日時を取得する
+ */
+async function getPostsLastUpdated() {
+  try {
+    const posts = getAllPosts();
+    if (posts.length === 0) {
+      return new Date().toISOString();
+    }
+
+    // 最も新しい記事の日付を取得
+    const latestPost = posts.reduce((latest, post) => {
+      const postDate = new Date(post.date);
+      const latestDate = new Date(latest.date);
+      return postDate > latestDate ? post : latest;
+    });
+
+    return new Date(latestPost.date).toISOString();
+  } catch (error) {
+    console.error("Error getting posts last updated:", error);
+    return new Date().toISOString();
+  }
+}
+
+/**
+ * Netlify Blobsから最終更新タイムスタンプを取得
+ */
+async function getLastUpdatedFromBlob(resource = "blog://posts") {
+  try {
+    const store = getStore("blog-metadata");
+    const key = `last-updated-${resource.replace("://", "-")}`;
+    const timestamp = await store.get(key);
+
+    if (timestamp) {
+      return timestamp;
+    }
+
+    // Blobにない場合は、実際の記事から計算して保存
+    const calculatedTimestamp = await getPostsLastUpdated();
+    await store.set(key, calculatedTimestamp);
+    return calculatedTimestamp;
+  } catch (error) {
+    console.error("Error accessing Netlify Blobs:", error);
+    // Blobsが利用できない場合は、直接計算
+    return await getPostsLastUpdated();
+  }
+}
+
+/**
+ * Netlify Blobsに最終更新タイムスタンプを保存
+ */
+async function updateLastUpdatedInBlob(resource = "blog://posts") {
+  try {
+    const store = getStore("blog-metadata");
+    const key = `last-updated-${resource.replace("://", "-")}`;
+    const timestamp = await getPostsLastUpdated();
+    await store.set(key, timestamp);
+    return timestamp;
+  } catch (error) {
+    console.error("Error updating Netlify Blobs:", error);
+    throw error;
+  }
+}
 
 /**
  * リソースハンドラー
@@ -299,7 +379,7 @@ function handleResourcesRequest(method, params) {
 /**
  * ツールハンドラー
  */
-function handleToolsRequest(method, params) {
+async function handleToolsRequest(method, params) {
   switch (method) {
     case "tools/list":
       return {
@@ -435,6 +515,28 @@ function handleToolsRequest(method, params) {
           };
         }
 
+        case "get_last_updated": {
+          const resource = arguments.resource || "blog://posts";
+          const lastUpdated = await getLastUpdatedFromBlob(resource);
+
+          const result = {
+            resource: resource,
+            lastUpdated: lastUpdated,
+            timestamp: new Date(lastUpdated).getTime(),
+            instructions:
+              "クライアントは定期的にこのタイムスタンプをチェックし、変更があれば resources/read でリソースを再取得してください",
+          };
+
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          };
+        }
+
         default:
           throw new Error(`Unknown tool: ${name}`);
       }
@@ -528,7 +630,7 @@ function handlePromptsRequest(method, params) {
 /**
  * JSON-RPCリクエストハンドラー
  */
-function handleJsonRpcRequest(request) {
+async function handleJsonRpcRequest(request) {
   const { jsonrpc, id, method, params } = request;
 
   if (jsonrpc !== "2.0") {
@@ -555,7 +657,7 @@ function handleJsonRpcRequest(request) {
     }
     // Tools
     else if (method.startsWith("tools/")) {
-      result = handleToolsRequest(method, params);
+      result = await handleToolsRequest(method, params);
     }
     // Prompts
     else if (method.startsWith("prompts/")) {
@@ -635,7 +737,7 @@ export const handler = async (event, context) => {
   if (event.httpMethod === "POST") {
     try {
       const request = JSON.parse(event.body);
-      const response = handleJsonRpcRequest(request);
+      const response = await handleJsonRpcRequest(request);
 
       return {
         statusCode: 200,

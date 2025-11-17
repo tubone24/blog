@@ -191,6 +191,24 @@ curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
   }'
 ```
 
+### 最終更新日時を取得（ポーリング用）
+
+```bash
+curl -X POST https://your-site.netlify.app/.netlify/functions/mcp-blog-server \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 11,
+    "method": "tools/call",
+    "params": {
+      "name": "get_last_updated",
+      "arguments": {
+        "resource": "blog://posts"
+      }
+    }
+  }'
+```
+
 ## JavaScriptでの使用例
 
 ```javascript
@@ -297,6 +315,39 @@ class MCPBlogClient {
       uri: uri
     });
   }
+
+  async getLastUpdated(resource = 'blog://posts') {
+    return this.request('tools/call', {
+      name: 'get_last_updated',
+      arguments: { resource }
+    });
+  }
+
+  // ポーリングによる変更検出
+  startPolling(resource = 'blog://posts', interval = 60000, onChange) {
+    let lastTimestamp = null;
+
+    const checkUpdates = async () => {
+      const result = await this.getLastUpdated(resource);
+      const currentTimestamp = result.content[0].text ?
+        JSON.parse(result.content[0].text).timestamp : null;
+
+      if (lastTimestamp && currentTimestamp && currentTimestamp > lastTimestamp) {
+        onChange(resource);
+      }
+
+      lastTimestamp = currentTimestamp;
+    };
+
+    this.pollingInterval = setInterval(checkUpdates, interval);
+    checkUpdates(); // 初回実行
+  }
+
+  stopPolling() {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);
+    }
+  }
 }
 
 // 使用例
@@ -319,6 +370,13 @@ async function demo() {
   // タグでフィルタリング
   const jsPost = await client.getPostsByTag('JavaScript');
   console.log('JavaScript posts:', jsPost);
+
+  // ポーリングを開始（60秒ごとにチェック）
+  client.startPolling('blog://posts', 60000, async (resource) => {
+    console.log(`リソース ${resource} が更新されました！`);
+    const updatedPosts = await client.getAllPosts();
+    console.log('Updated posts:', updatedPosts);
+  });
 }
 
 demo();
@@ -412,6 +470,12 @@ class MCPBlogClient:
             'uri': uri
         })
 
+    def get_last_updated(self, resource='blog://posts'):
+        return self.request('tools/call', {
+            'name': 'get_last_updated',
+            'arguments': {'resource': resource}
+        })
+
 # 使用例
 client = MCPBlogClient(
     'https://your-site.netlify.app/.netlify/functions/mcp-blog-server'
@@ -427,6 +491,10 @@ print('All posts:', json.dumps(posts, indent=2))
 # 記事を検索
 search_results = client.search_posts('Gatsby')
 print('Search results:', json.dumps(search_results, indent=2))
+
+# 最終更新日時を取得
+last_updated = client.get_last_updated('blog://posts')
+print('Last updated:', json.dumps(last_updated, indent=2))
 ```
 
 ## Claude Desktop での設定
