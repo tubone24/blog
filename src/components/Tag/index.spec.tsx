@@ -24,8 +24,9 @@ describe("Tag", () => {
     expect(screen.getByRole("link")).toHaveAttribute("href", "/tag/test");
   });
   it("ReactGA event", async () => {
+    const user = userEvent.setup();
     render(<Tag count={1} name="test" />);
-    await userEvent.click(screen.getByRole("link"));
+    await user.click(screen.getByRole("link"));
     await waitFor(() => {
       expect(ReactGA.event).toHaveBeenCalledWith({
         category: "Tag",
