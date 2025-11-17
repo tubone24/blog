@@ -9,7 +9,7 @@ import "prismjs/plugins/command-line/prism-command-line.css";
 import "./src/styles/global.scss";
 // Use bootstrap dropdown menu
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Dropdown } from "bootstrap/dist/js/bootstrap";
+import Dropdown from "bootstrap/js/dist/dropdown";
 const config = require("./src/config/index.json");
 
 const isLocalDevelopment = () =>
