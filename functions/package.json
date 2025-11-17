@@ -1,0 +1,14 @@
+{
+  "name": "blog-functions",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Netlify Functions for Blog MCP Server",
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "7.0.1",
+    "@sentry/node": "10.25.0",
+    "gray-matter": "4.0.3",
+    "opentype.js": "1.3.4",
+    "sharp": "0.34.1"
+  }
+}
