@@ -69,10 +69,7 @@ async function indexToAlgolia({ graphql, reporter }) {
     );
   } catch (error) {
     // Check if error is due to Algolia blocking (quota exceeded)
-    if (
-      error.message &&
-      error.message.includes("application is blocked")
-    ) {
+    if (error.message && error.message.includes("application is blocked")) {
       reporter.warn(
         "Algolia indexing failed: Application is blocked (likely quota exceeded). " +
           "Skipping Algolia indexing to allow build to continue."
