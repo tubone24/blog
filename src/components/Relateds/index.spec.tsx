@@ -108,9 +108,7 @@ describe("RelatedPosts", () => {
     const spyIsBrowser = jest.spyOn(utils, "isBrowser");
     spyIsBrowser.mockReturnValue(true);
 
-    const { queryByText } = render(
-      <RelatedPosts title="Test Post 1" tags={["react", "testing"]} />
-    );
+    render(<RelatedPosts title="Test Post 1" tags={["react", "testing"]} />);
 
     // Current post title should not appear in related posts
     const relatedCards = document.querySelectorAll(
