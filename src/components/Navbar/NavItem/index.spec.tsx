@@ -23,10 +23,9 @@ describe("NavItem", () => {
     );
   });
   it("push tag", async () => {
-    const mockReactGA = jest.spyOn(ReactGA, "event");
     render(<NavItem name="test" url="https://example.com" />);
     await userEvent.click(screen.getByRole("link"));
-    expect(mockReactGA).toHaveBeenCalledWith({
+    expect(ReactGA.event).toHaveBeenCalledWith({
       category: "User",
       action: `Click nav-menu: test`,
     });
