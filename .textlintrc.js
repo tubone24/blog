@@ -4,16 +4,7 @@ module.exports = {
       "sentence-length": false,
       "ja-no-mixed-period": {
         periodMark: "。",
-        allowPeriodMarks: [
-          "、",
-          ".",
-          ",",
-          "↓",
-          "？",
-          "・",
-          "`",
-          "…",
-        ],
+        allowPeriodMarks: ["、", ".", ",", "↓", "？", "・", "`", "…"],
         allowEmojiAtEnd: true,
       },
     },

@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require("path");
 
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -8,7 +8,7 @@ module.exports = {
     "@storybook/addon-a11y",
     "@storybook/addon-webpack5-compiler-swc",
     "@chromatic-com/storybook",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
   ],
 
   staticDirs: ["../static"],
@@ -26,18 +26,18 @@ module.exports = {
     // Add alias for @ to src directory
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': path.resolve(__dirname, '../src'),
+      "@": path.resolve(__dirname, "../src"),
       // Mock Gatsby modules to avoid import issues in Storybook
       // Use Storybook-specific mock (ESM format without jest.fn())
-      'gatsby': path.resolve(__dirname, './__mocks__/gatsby.js'),
+      gatsby: path.resolve(__dirname, "./__mocks__/gatsby.js"),
     };
 
     // Provide process polyfill for browser environment
-    const webpack = require('webpack');
+    const webpack = require("webpack");
     config.plugins.push(
       new webpack.ProvidePlugin({
-        process: 'process/browser',
-      })
+        process: "process/browser",
+      }),
     );
 
     config.module.rules.push({
@@ -59,13 +59,13 @@ module.exports = {
             modules: {
               // for use CSS module in Storybook, namedExport is true.
               namedExport: true,
-            }
+            },
           },
         },
         "sass-loader",
       ],
-      include: path.resolve(__dirname, '../'),
-    })
+      include: path.resolve(__dirname, "../"),
+    });
 
     config.module.rules.push({
       test: /\.scss$/,
@@ -76,19 +76,19 @@ module.exports = {
           options: {
             modules: {
               auto: true,
-            }
-          }
+            },
+          },
         },
         "sass-loader",
       ],
-      include: path.resolve(__dirname, '../'),
-      exclude: /\.module\.scss$/
-    })
+      include: path.resolve(__dirname, "../"),
+      exclude: /\.module\.scss$/,
+    });
 
-    return config
+    return config;
   },
 
   typescript: {
-    reactDocgen: false
-  }
-}
+    reactDocgen: false,
+  },
+};
