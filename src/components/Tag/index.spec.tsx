@@ -16,10 +16,10 @@ describe("Content", () => {
     expect(screen.getByRole("link")).toHaveAttribute("href", "/tag/test");
   });
   it("ReactGA event", async () => {
-    render(<Tag count={1} name="test" />);
     const mockReactGA = jest.spyOn(ReactGA, "event");
+    render(<Tag count={1} name="test" />);
     await userEvent.click(screen.getByRole("link"));
-    expect(mockReactGA.mock.calls[0][0]).toStrictEqual({
+    expect(mockReactGA).toHaveBeenCalledWith({
       category: "Tag",
       action: `push Tag test`,
     });
