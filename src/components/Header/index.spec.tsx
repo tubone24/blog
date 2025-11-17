@@ -5,6 +5,8 @@ import Header from "./index";
 import ReactGA from "react-ga4";
 import userEvent from "@testing-library/user-event";
 
+/* eslint-disable testing-library/no-container, testing-library/prefer-screen-queries, testing-library/no-node-access, testing-library/no-wait-for-multiple-assertions */
+
 describe("Header", () => {
   it("Show Author Image", () => {
     render(
@@ -39,7 +41,7 @@ describe("Header", () => {
     expect(screen.getByTestId("header")).toHaveTextContent("testSubTitle");
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
-  it("ReactGA event", async () => {
+  it("ReactGA event on img click", async () => {
     render(
       <Header
         title="testTitle"
@@ -52,6 +54,31 @@ describe("Header", () => {
     const mockReactGA = jest.spyOn(ReactGA, "event");
     await userEvent.click(screen.getByRole("img"));
     expect(mockReactGA.mock.calls[0][0]).toStrictEqual({
+      category: "User",
+      action: "push tubone Avatar",
+    });
+  });
+
+  it("ReactGA event on source click", async () => {
+    const { container } = render(
+      <Header
+        title="testTitle"
+        authorName="testParson"
+        authorImage={true}
+        img="test.png"
+        subTitle="testSubTitle"
+      />
+    );
+    const mockReactGA = jest.spyOn(ReactGA, "event");
+
+    // Find the source element
+    const sourceElement = container.querySelector("source");
+    expect(sourceElement).toBeInTheDocument();
+
+    // Click the source element
+    await userEvent.click(sourceElement as HTMLElement);
+
+    expect(mockReactGA).toHaveBeenCalledWith({
       category: "User",
       action: "push tubone Avatar",
     });
