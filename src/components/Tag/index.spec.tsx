@@ -5,7 +5,15 @@ import { axe } from "jest-axe";
 import Tag from "./index";
 import ReactGA from "react-ga4";
 
-describe("Content", () => {
+// Mock react-ga4
+jest.mock("react-ga4", () => ({
+  event: jest.fn(),
+}));
+
+describe("Tag", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   it("Tag contains text", async () => {
     render(<Tag count={1} name="test" />);
     expect(screen.getByRole("link")).toHaveTextContent("test");
@@ -16,10 +24,9 @@ describe("Content", () => {
     expect(screen.getByRole("link")).toHaveAttribute("href", "/tag/test");
   });
   it("ReactGA event", async () => {
-    const mockReactGA = jest.spyOn(ReactGA, "event");
     render(<Tag count={1} name="test" />);
     await userEvent.click(screen.getByRole("link"));
-    expect(mockReactGA).toHaveBeenCalledWith({
+    expect(ReactGA.event).toHaveBeenCalledWith({
       category: "Tag",
       action: `push Tag test`,
     });
