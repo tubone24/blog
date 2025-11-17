@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const algoliasearch = require("algoliasearch");
 
 const query = `
   {
@@ -23,7 +24,76 @@ const query = `
   }
 `;
 
-exports.onPostBuild = async ({ graphql }) => {
+/**
+ * Index data to Algolia with error handling
+ */
+async function indexToAlgolia({ graphql, reporter }) {
+  try {
+    // Load Algolia configuration
+    // eslint-disable-next-line global-require
+    const algoliaConfig = require("../gatsby-plugin-algolia-config.js");
+
+    // Skip if indexing is disabled
+    if (algoliaConfig.skipIndexing) {
+      reporter.info("Algolia indexing is skipped (skipIndexing=true)");
+      return;
+    }
+
+    reporter.info("Starting Algolia indexing...");
+
+    // Initialize Algolia client
+    const client = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+    const index = client.initIndex(algoliaConfig.indexName);
+
+    // Execute all queries and transform data
+    const allRecords = [];
+    for (const queryConfig of algoliaConfig.queries) {
+      const result = await graphql(queryConfig.query);
+      if (result.errors) {
+        throw result.errors;
+      }
+
+      const records = queryConfig.transformer({ data: result.data });
+      allRecords.push(...records);
+    }
+
+    reporter.info(`Indexing ${allRecords.length} records to Algolia...`);
+
+    // Save objects to Algolia
+    await index.replaceAllObjects(allRecords, {
+      autoGenerateObjectIDIfNotExist: false,
+    });
+
+    reporter.success(
+      `Successfully indexed ${allRecords.length} records to Algolia`
+    );
+  } catch (error) {
+    // Check if error is due to Algolia blocking (quota exceeded)
+    if (
+      error.message &&
+      error.message.includes("application is blocked")
+    ) {
+      reporter.warn(
+        "Algolia indexing failed: Application is blocked (likely quota exceeded). " +
+          "Skipping Algolia indexing to allow build to continue."
+      );
+      reporter.warn(`Error details: ${error.message}`);
+    } else {
+      // For other errors, log but don't fail the build
+      reporter.warn(
+        "Algolia indexing failed with an error. " +
+          "Skipping Algolia indexing to allow build to continue."
+      );
+      reporter.warn(`Error details: ${error.message}`);
+    }
+  }
+}
+
+exports.onPostBuild = async ({ graphql, reporter }) => {
+  // Index to Algolia (with error handling that won't fail the build)
+  await indexToAlgolia({ graphql, reporter });
+
+  // Continue with other post-build tasks
   const result = await graphql(query);
   if (result.errors) {
     throw result.errors;
