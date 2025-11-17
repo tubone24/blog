@@ -77,7 +77,7 @@ export const Sidebar = ({
           },
           fields: { slug: p.node.fields?.slug || "" },
         },
-      } as LatestPostProps),
+      }) as LatestPostProps,
   );
   const ap = allPosts.map(
     (p) =>
@@ -88,7 +88,7 @@ export const Sidebar = ({
             tags: p.node.frontmatter?.tags || [],
           },
         },
-      } as AllPost),
+      }) as AllPost,
   );
   return (
     <header
