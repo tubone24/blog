@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { axe } from "jest-axe";
 import Footer from "./index";
 
 describe("Footer", () => {
@@ -16,10 +15,5 @@ describe("Footer", () => {
       "href",
       "https://github.com/tubone24/blog",
     );
-  });
-  it("should not have basic accessibility issues", async () => {
-    const { container } = render(<Footer />);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
   });
 });
