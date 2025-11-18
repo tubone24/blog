@@ -1,12 +1,20 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import Archive from "./index";
 import { AllPost } from "../entity";
 import { axe } from "jest-axe";
 import ReactGA from "react-ga4";
 import userEvent from "@testing-library/user-event";
 
+// Mock react-ga4
+jest.mock("react-ga4", () => ({
+  event: jest.fn(),
+}));
+
 describe("Archive", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   it("has 1 post", async () => {
     const allPosts: AllPost[] = [
       {
@@ -45,6 +53,7 @@ describe("Archive", () => {
     expect(screen.getByTestId("Archive")).toHaveTextContent("2021");
   });
   it("click event ga", async () => {
+    const user = userEvent.setup();
     const allPosts: AllPost[] = [
       {
         node: {
@@ -56,13 +65,13 @@ describe("Archive", () => {
       },
     ];
     render(<Archive allPosts={allPosts} />);
-    const mockReactGA = jest.spyOn(ReactGA, "event");
-    await userEvent.click(screen.getByRole("link"));
-    expect(mockReactGA.mock.calls[0][0]).toStrictEqual({
-      category: "Archive",
-      action: "push Archive 2022",
+    await user.click(screen.getByRole("link"));
+    await waitFor(() => {
+      expect(ReactGA.event).toHaveBeenCalledWith({
+        category: "Archive",
+        action: "push Archive 2022",
+      });
     });
-    mockReactGA.mockRestore();
   });
   it("should not have basic accessibility issues", async () => {
     const allPosts: AllPost[] = [

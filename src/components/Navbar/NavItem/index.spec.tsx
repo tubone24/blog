@@ -10,7 +10,7 @@ jest.mock("react-ga4", () => ({
   event: jest.fn(),
 }));
 
-describe("Card", () => {
+describe("NavItem", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -24,9 +24,8 @@ describe("Card", () => {
   });
   it("push tag", async () => {
     render(<NavItem name="test" url="https://example.com" />);
-    const mockReactGA = jest.spyOn(ReactGA, "event");
     await userEvent.click(screen.getByRole("link"));
-    expect(mockReactGA.mock.calls[0][0]).toStrictEqual({
+    expect(ReactGA.event).toHaveBeenCalledWith({
       category: "User",
       action: `Click nav-menu: test`,
     });
