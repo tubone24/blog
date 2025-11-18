@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import NavItem from "./index";
 import { axe } from "jest-axe";
 import ReactGA from "react-ga4";
@@ -23,11 +23,14 @@ describe("NavItem", () => {
     );
   });
   it("push tag", async () => {
+    const user = userEvent.setup();
     render(<NavItem name="test" url="https://example.com" />);
-    await userEvent.click(screen.getByRole("link"));
-    expect(ReactGA.event).toHaveBeenCalledWith({
-      category: "User",
-      action: `Click nav-menu: test`,
+    await user.click(screen.getByRole("link"));
+    await waitFor(() => {
+      expect(ReactGA.event).toHaveBeenCalledWith({
+        category: "User",
+        action: `Click nav-menu: test`,
+      });
     });
   });
   it("should not have basic accessibility issues", async () => {
