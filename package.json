@@ -204,7 +204,7 @@
   },
   "resolutions": {
     "jsonwebtoken": "9.0.2",
-    "follow-redirects": "1.15.6",
+    "follow-redirects": "1.15.11",
     "nth-check": "2.1.1",
     "parse-url": "8.1.0",
     "prismjs": "1.30.0",
