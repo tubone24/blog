@@ -21,7 +21,9 @@ module.exports = {
     `public`,
     `cypress`,
     `storybook-static`,
+    `.storybook`,
   ],
+  modulePathIgnorePatterns: [`.storybook`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`, `\\.svg`],
   globals: {
     __PATH_PREFIX__: ``,
