@@ -216,7 +216,7 @@
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
     "postcss": "8.4.38",
-    "sharp": "0.34.1"
+    "sharp": "0.34.5"
   },
   "browserslist": [
     ">0.25% in JP",
