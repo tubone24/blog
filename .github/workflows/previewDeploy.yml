@@ -772,7 +772,7 @@ jobs:
       - name: install noto font
         run: |
           sudo apt-get update
-          sudo apt-get install fonts-noto
+          sudo apt-get install fonts-noto imagemagick
       - name: Capture Webpage Screenshot
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         run: |
@@ -814,6 +814,26 @@ jobs:
           DESTINATION: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
           WIDTH: ${{ matrix.width }}
           DELAY: 10
+      - name: Crop screenshot
+        if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
+        run: |
+          # Determine crop height based on width
+          if [ "${{ matrix.width }}" = "1200" ]; then
+            CROP_HEIGHT=600
+          elif [ "${{ matrix.width }}" = "400" ]; then
+            CROP_HEIGHT=800
+          else
+            # For other widths (1920, 768), keep full page
+            CROP_HEIGHT=0
+          fi
+
+          # Crop if height is set
+          if [ "$CROP_HEIGHT" != "0" ]; then
+            convert screenshot-${{ matrix.os }}-${{ matrix.width }}.png \
+              -crop ${{ matrix.width }}x${CROP_HEIGHT}+0+0 \
+              +repage \
+              screenshot-${{ matrix.os }}-${{ matrix.width }}.png
+          fi
       - name: Upload screenshot artifact
         if: ${{ !contains(needs.check-skip-flags.outputs.head-commit-message, '[skip netlify]') }}
         uses: actions/upload-artifact@v4
