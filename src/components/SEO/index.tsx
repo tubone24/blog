@@ -188,7 +188,7 @@ const SEO = ({
       <meta name="image" content={image} />
       <meta name="keywords" content={allKeywords} />
       <meta name="author" content={author || config.author} />
-      {noindex && <meta name="robots" content="noindex, nofollow" />}
+      {noindex && <meta name="robots" content="noindex, follow" />}
 
       {/* カノニカルURL */}
       <link rel="canonical" href={url} />
