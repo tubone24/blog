@@ -51,6 +51,7 @@ const TagPage = ({
         description={tag}
         tag=""
         image="https://i.imgur.com/StLyXdu.png"
+        noindex={true}
       />
     </div>
   );
