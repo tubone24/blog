@@ -44,6 +44,7 @@ const Tags = ({ data }: { data: GatsbyTypes.getAllTagsQuery }) => {
         description="Tags Page"
         tag=""
         image="https://i.imgur.com/M795H8A.jpg"
+        noindex={true}
       />
     </div>
   );

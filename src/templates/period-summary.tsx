@@ -61,6 +61,7 @@ const PeriodSummary = ({
         description={title}
         tag=""
         image="https://i.imgur.com/StLyXdu.png"
+        noindex={true}
       />
     </div>
   );
