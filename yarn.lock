@@ -1543,13 +1543,13 @@
   resolved "https://registry.yarnpkg.com/@builder.io/partytown/-/partytown-0.7.6.tgz#697acea6b552167a4dd43ddd4827018aa42e0364"
   integrity sha512-snXIGNiZpqjno3XYQN2lbBB+05hsQR/LSttbtIW1c0gmZ7Kh/DIo0YrxlDxCDulAMFPFM8J+4voLwvYepSj3sw==
 
-"@chromatic-com/storybook@4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-4.1.2.tgz#d9e6d5a552e125f40c78ac494706f0bd5c2147a2"
-  integrity sha512-QAWGtHwib0qsP5CcO64aJCF75zpFgpKK3jNpxILzQiPK3sVo4EmnVGJVdwcZWpWrGdH8E4YkncGoitw4EXzKMg==
+"@chromatic-com/storybook@4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-4.1.3.tgz#3c2ff2a47bfe9de8741a2fd021fc68c8c58d29fc"
+  integrity sha512-hc0HO9GAV9pxqDE6fTVOV5KeLpTiCfV8Jrpk5ogKLiIgeq2C+NPjpt74YnrZTjiK8E19fYcMP+2WY9ZtX7zHmw==
   dependencies:
     "@neoconfetti/react" "^1.0.0"
-    chromatic "^12.0.0"
+    chromatic "^13.3.3"
     filesize "^10.0.12"
     jsonfile "^6.1.0"
     strip-ansi "^7.1.0"
@@ -8706,10 +8706,10 @@ chownr@^3.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-3.0.0.tgz#9855e64ecd240a9cc4267ce8a4aa5d24a1da15e4"
   integrity sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==
 
-chromatic@^12.0.0:
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-12.2.0.tgz#2f22865d66fa82d7c5565170f70eabb613223671"
-  integrity sha512-GswmBW9ZptAoTns1BMyjbm55Z7EsIJnUvYKdQqXIBZIKbGErmpA+p4c0BYA+nzw5B0M+rb3Iqp1IaH8TFwIQew==
+chromatic@^13.3.3:
+  version "13.3.4"
+  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-13.3.4.tgz#2fd32d9da88891e1bc64e6a08627b63e2a46ebbb"
+  integrity sha512-TR5rvyH0ESXobBB3bV8jc87AEAFQC7/n+Eb4XWhJz6hW3YNxIQPVjcbgLv+a4oKHEl1dUBueWSoIQsOVGTd+RQ==
 
 chrome-trace-event@^1.0.2:
   version "1.0.4"
