@@ -10,11 +10,30 @@ import SEO from "@/components/SEO";
 import Header from "@/components/Header";
 import ShareBox from "@/components/ShareBox";
 import TimeToRead from "@/components/TimeToRead";
+import TextToSpeech from "@/components/TextToSpeech";
 
 import * as style from "./blog-post.module.scss";
 import RelatedPosts from "@/components/Relateds";
 
 import config from "@/config/index.json";
+
+// HTMLからプレーンテキストを抽出する関数
+const extractTextFromHtml = (html: string): string => {
+  return html
+    .replace(/<code[\s\S]*?<\/code>/g, "") // コードブロック除去
+    .replace(/<pre[\s\S]*?<\/pre>/g, "") // preブロック除去
+    .replace(/<script[\s\S]*?<\/script>/g, "") // scriptタグ除去
+    .replace(/<style[\s\S]*?<\/style>/g, "") // styleタグ除去
+    .replace(/<[^>]*>/g, "") // HTMLタグ除去
+    .replace(/&nbsp;/g, " ") // &nbsp;をスペースに
+    .replace(/&lt;/g, "<") // エスケープ文字を変換
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, " ") // 連続空白を整理
+    .trim();
+};
 
 type Props = {
   data: GatsbyTypes.BlogPostQueryQuery;
@@ -53,10 +72,15 @@ class BlogPost extends Component<Props> {
             style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
           }
         >
-          <TimeToRead
-            words={this.props.pageContext.words}
-            minutes={this.props.pageContext.minutes}
-          />
+          <div className={style["article-meta"]}>
+            <TimeToRead
+              words={this.props.pageContext.words}
+              minutes={this.props.pageContext.minutes}
+            />
+            <TextToSpeech
+              text={extractTextFromHtml(this.props.pageContext.repHtml)}
+            />
+          </div>
           <Content post={this.props.pageContext.repHtml} />
           <RelatedPosts
             title={frontmatter?.title || ""}

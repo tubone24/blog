@@ -1,0 +1,163 @@
+@import "../../styles/colors";
+
+.text-to-speech {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  margin-left: 10px;
+  background: $white;
+  border: 1px solid $gray;
+  border-radius: 4px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: $white;
+  cursor: pointer;
+  background: $main-green;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+
+  &:focus {
+    outline: 2px solid $light-blue;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:hover:not(:disabled) {
+    background: $main-green-dark;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
+
+.stop-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: $white;
+  cursor: pointer;
+  background: $pink;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+
+  &:focus {
+    outline: 2px solid $light-blue;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:hover:not(:disabled) {
+    background: $pink-dark;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
+
+.rate-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 4px;
+}
+
+.rate-label {
+  margin-bottom: 2px;
+  font-size: 10px;
+  color: $light-black;
+  white-space: nowrap;
+}
+
+.rate-slider {
+  width: 60px;
+  height: 4px;
+  cursor: pointer;
+  background: $gray;
+  border-radius: 2px;
+  appearance: none;
+
+  &::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    background: $main-green;
+    border-radius: 50%;
+    appearance: none;
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    background: $main-green;
+    border: none;
+    border-radius: 50%;
+  }
+
+  &:focus {
+    outline: 2px solid $light-blue;
+    outline-offset: 2px;
+  }
+}
+
+.error {
+  padding: 4px 8px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: $pink;
+  background: $pink-light;
+  border-radius: 4px;
+}
+
+// レスポンシブ対応
+@media screen and (max-width: 576px) {
+  .text-to-speech {
+    justify-content: center;
+    width: 100%;
+    margin-top: 8px;
+    margin-left: 0;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .rate-control {
+    align-items: center;
+    width: auto;
+    margin-left: 8px;
+  }
+
+  .rate-slider {
+    width: 80px;
+  }
+}
