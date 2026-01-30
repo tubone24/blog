@@ -67,11 +67,11 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
   const getPlayPauseIcon = () => {
     switch (status) {
       case "loading":
-        return "icon-spinner";
+        return "⏳";
       case "playing":
-        return "icon-pause";
+        return "⏸";
       default:
-        return "icon-play";
+        return "▶";
     }
   };
 
@@ -109,7 +109,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
           aria-label={getPlayPauseLabel()}
           data-testid="play-pause-button"
         >
-          <span className={getPlayPauseIcon()} aria-hidden="true" />
+          <span aria-hidden="true">{getPlayPauseIcon()}</span>
         </button>
 
         {(status === "playing" || status === "paused") && (
@@ -120,7 +120,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
             aria-label="停止"
             data-testid="stop-button"
           >
-            <span className="icon-stop" aria-hidden="true" />
+            <span aria-hidden="true">⏹</span>
           </button>
         )}
 
