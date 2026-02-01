@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -184,9 +184,52 @@
 <a name='L119'></a><a href='#L119'>119</a>
 <a name='L120'></a><a href='#L120'>120</a>
 <a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,6 +268,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -317,11 +365,30 @@ import SEO from "@/components/SEO";
 import Header from "@/components/Header";
 import ShareBox from "@/components/ShareBox";
 import TimeToRead from "@/components/TimeToRead";
+import TextToSpeech from "@/components/TextToSpeech";
 &nbsp;
 import * as style from "./blog-post.module.scss";
 import RelatedPosts from "@/components/Relateds";
 &nbsp;
 import config from "@/config/index.json";
+&nbsp;
+// HTMLからプレーンテキストを抽出する関数
+const extractTextFromHtml = (html: string): string =&gt; {
+  return html
+    .replace(/&lt;code[\s\S]*?&lt;\/code&gt;/g, "") // コードブロック除去
+    .replace(/&lt;pre[\s\S]*?&lt;\/pre&gt;/g, "") // preブロック除去
+    .replace(/&lt;script[\s\S]*?&lt;\/script&gt;/g, "") // scriptタグ除去
+    .replace(/&lt;style[\s\S]*?&lt;\/style&gt;/g, "") // styleタグ除去
+    .replace(/&lt;[^&gt;]*&gt;/g, "") // HTMLタグ除去
+    .replace(/&amp;nbsp;/g, " ") // &amp;nbsp;をスペースに
+    .replace(/&amp;lt;/g, "&lt;") // エスケープ文字を変換
+    .replace(/&amp;gt;/g, "&gt;")
+    .replace(/&amp;amp;/g, "&amp;")
+    .replace(/&amp;quot;/g, '"')
+    .replace(/&amp;#39;/g, "'")
+    .replace(/\s+/g, " ") // 連続空白を整理
+    .trim();
+};
 &nbsp;
 type Props = {
   data: GatsbyTypes.BlogPostQueryQuery;
@@ -360,10 +427,15 @@ class BlogPost extends Component&lt;Props&gt; {
             style.content + " col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"
           }
         &gt;
-          &lt;TimeToRead
-            words={this.props.pageContext.words}
-            minutes={this.props.pageContext.minutes}
-          /&gt;
+          &lt;div className={style["article-meta"]}&gt;
+            &lt;TimeToRead
+              words={this.props.pageContext.words}
+              minutes={this.props.pageContext.minutes}
+            /&gt;
+            &lt;TextToSpeech
+              text={extractTextFromHtml(this.props.pageContext.repHtml)}
+            /&gt;
+          &lt;/div&gt;
           &lt;Content post={this.props.pageContext.repHtml} /&gt;
           &lt;RelatedPosts
             title={frontmatter?.title || <span class="branch-1 cbranch-no" title="branch not covered" >""}</span>
@@ -433,7 +505,7 @@ export default BlogPost;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-26T00:30:06.429Z
+                at 2026-02-01T10:27:13.135Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
