@@ -28,6 +28,7 @@ const query = `
               tags
               description
               headerImage
+              useAi
               year: date(formatString: "YYYY")
               month: date(formatString: "MM")
             }
@@ -52,6 +53,7 @@ type Node = {
       templateKey: string;
       year: string;
       month: string;
+      useAi?: boolean;
     };
     fields: {
       slug: string;
@@ -94,7 +96,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   edges.forEach(({ node }: Node, index: number) => {
     const { id, frontmatter, fields, html } = node;
-    const { slug, tags, templateKey, year, month } = frontmatter;
+    const { slug, tags, templateKey, year, month, useAi } = frontmatter;
 
     // tag
     if (tags) {
@@ -137,6 +139,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         repHtml,
         words,
         minutes,
+        useAi: useAi || false,
       },
     });
   });

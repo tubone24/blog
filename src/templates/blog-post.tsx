@@ -41,6 +41,7 @@ type Props = {
     words: number;
     minutes: number;
     repHtml: string;
+    useAi: boolean;
   };
 };
 
@@ -81,7 +82,10 @@ class BlogPost extends Component<Props> {
               text={extractTextFromHtml(this.props.pageContext.repHtml)}
             />
           </div>
-          <Content post={this.props.pageContext.repHtml} />
+          <Content
+            post={this.props.pageContext.repHtml}
+            useAi={this.props.pageContext.useAi}
+          />
           <RelatedPosts
             title={frontmatter?.title || ""}
             tags={frontmatter?.tags || []}

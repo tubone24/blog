@@ -189,6 +189,7 @@ module.exports = {
             },
           },
           "gatsby-remark-numbered-footnotes",
+          "gatsby-remark-mermaid",
           "gatsby-remark-prismjs-title",
           {
             resolve: "gatsby-remark-prismjs",

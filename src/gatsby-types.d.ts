@@ -942,6 +942,7 @@ type MarkdownRemarkFrontmatter = {
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly templateKey: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
+  readonly useAi: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -961,6 +962,7 @@ type MarkdownRemarkFrontmatterFieldSelector = {
   readonly tags: InputMaybe<FieldSelectorEnum>;
   readonly templateKey: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
+  readonly useAi: InputMaybe<FieldSelectorEnum>;
 };
 
 type MarkdownRemarkFrontmatterFilterInput = {
@@ -972,6 +974,7 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly templateKey: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
+  readonly useAi: InputMaybe<BooleanQueryOperatorInput>;
 };
 
 type MarkdownRemarkFrontmatterSortInput = {
@@ -983,6 +986,7 @@ type MarkdownRemarkFrontmatterSortInput = {
   readonly tags: InputMaybe<SortOrderEnum>;
   readonly templateKey: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
+  readonly useAi: InputMaybe<SortOrderEnum>;
 };
 
 type MarkdownRemarkGroupConnection = {
