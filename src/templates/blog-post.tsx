@@ -20,7 +20,10 @@ import config from "@/config/index.json";
 // HTMLからプレーンテキストを抽出する関数
 const extractTextFromHtml = (html: string): string => {
   return html
-    .replace(/<h2[^>]*>[\s\S]*?Table of Contents[\s\S]*?<\/h2>[\s\S]*?(?=<h2|$)/gi, "") // Table of Contentsセクション除去
+    .replace(
+      /<h2[^>]*>[\s\S]*?Table of Contents[\s\S]*?<\/h2>[\s\S]*?(?=<h2|$)/gi,
+      "",
+    ) // Table of Contentsセクション除去
     .replace(/<code[\s\S]*?<\/code>/g, "") // コードブロック除去
     .replace(/<pre[\s\S]*?<\/pre>/g, "") // preブロック除去
     .replace(/<script[\s\S]*?<\/script>/g, "") // scriptタグ除去
@@ -34,7 +37,7 @@ const extractTextFromHtml = (html: string): string => {
     .replace(/&#39;/g, "'")
     .replace(/\s+/g, " ") // 連続空白を整理
     .trim();
-};;
+};
 
 type Props = {
   data: GatsbyTypes.BlogPostQueryQuery;
