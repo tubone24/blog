@@ -189,23 +189,97 @@ Web Searchやfetchツールを使って、最新の情報を確認し、必要�
 
 ## サブエージェントによるコンテキスト制御
 
-ブログ執筆スキルとは別に、2つのサブエージェントも用意しています。
+ブログ執筆スキルとは別に、4つのサブエージェントを階層構造で用意しています。
 
 1つのエージェントだけでブログ記事を書かせると、Web記事をfetchした際の全データがコンテキストに乗ってしまいます。これではコンテキストウィンドウを早く消費してしまい、**記事の後半になるほど品質が低下する**という問題が起きます。そこで、特定の役割をサブエージェントに切り出すことで、メインエージェントのコンテキストを温存する設計にしています。
 
-### tech-term-researcher
+### サブエージェントの階層構造
 
-1つ目は技術用語調査用のサブエージェントです。
+サブエージェントは「コーディネーター」と「ワーカー」の2階層で構成しています。
 
-技術ブログでは、言及するツール名やサービス名に対して正確な公式リンクを貼る必要があります。しかし、1つ1つの用語についてWebSearchとWebFetchを繰り返すと、取得したWebページの内容がすべてコンテキストに蓄積されていきます。
+```mermaid
+flowchart TB
+    subgraph Main["メインエージェント（Opus）"]
+        M[ブログ執筆スキル]
+    end
 
-このサブエージェントは、技術用語のリストを受け取り、それぞれについて公式サイトや公式ドキュメントのURLを調査して返します。調査結果だけがメインエージェントに渡されるため、コンテキストの消費を抑えられます。
+    subgraph Coordinators["コーディネーター層"]
+        TTR[tech-term-researcher<br/>技術用語調査]
+        AR[article-reviewer<br/>記事レビュー]
+    end
 
-### article-reviewer
+    subgraph Workers["ワーカー層"]
+        TLW1[term-lookup-worker]
+        TLW2[term-lookup-worker]
+        TLW3[term-lookup-worker]
+        LCW1[link-checker-worker]
+        LCW2[link-checker-worker]
+        LCW3[link-checker-worker]
+    end
 
-2つ目は記事レビュー用のサブエージェントです。
+    M --> TTR
+    M --> AR
+    TTR --> TLW1
+    TTR --> TLW2
+    TTR --> TLW3
+    AR --> LCW1
+    AR --> LCW2
+    AR --> LCW3
+```
 
-こちらは、引用しているリンクが本当に公式ドキュメントなのか、記事で述べている技術的な内容が正確かどうかを検証します。ワークフローの最後のタイミングで、AI自らがこのサブエージェントを呼び出す形を取っています。
+この設計には3つの意図があります。
+
+1つ目は**コンテキストの分離**です。ワーカーがWebFetchで取得したHTMLコンテンツは、そのワーカーのコンテキスト内で処理され、要約結果だけが上位に返されます。メインエージェントには膨大なWebページの生データが流れ込まないため、コンテキストウィンドウを節約できます。
+
+2つ目は**並列処理による高速化**です。コーディネーターは複数のワーカーを同時に起動できます。10個の技術用語を調べる場合、順番に処理すると時間がかかりますが、並列起動すれば大幅に短縮できます。
+
+3つ目は**モデルの使い分けによるコスト最適化**です。コーディネーターには判断力が求められるためOpusを使用し、ワーカーは単純な調査タスクなのでSonnetやHaikuを使用しています。これにより、品質を維持しながらAPI費用を抑えられます。
+
+### tech-term-researcher と term-lookup-worker
+
+技術用語調査を担当するコーディネーターとワーカーのペアです。
+
+tech-term-researcherは、記事内で言及される技術用語のリストと**使用文脈**を受け取ります。使用文脈を渡すことで、単に公式URLを調べるだけでなく、記事内での用語の使い方が正確かどうかもチェックできます。
+
+```mermaid
+sequenceDiagram
+    participant M as メインエージェント
+    participant TTR as tech-term-researcher
+    participant TLW as term-lookup-worker
+
+    M->>TTR: 技術用語リスト + 使用文脈
+    TTR->>TLW: Claude Code調査依頼
+    TTR->>TLW: whisper.cpp調査依頼
+    TTR->>TLW: Raycast調査依頼
+    TLW-->>TTR: 公式URL + 正確性チェック結果
+    TTR-->>M: 集約結果（問題箇所をハイライト）
+```
+
+term-lookup-workerは、1つの技術用語について公式サイトを検索し、記事内の記述と公式情報を比較します。機能の誤解、名称の誤り、古い情報などを検出した場合は、具体的な修正提案を返します。
+
+### article-reviewer と link-checker-worker
+
+記事レビューを担当するコーディネーターとワーカーのペアです。
+
+article-reviewerは、完成した記事をSKILLルールに照らしてチェックし、記事内の全リンクを抽出してlink-checker-workerに検証を依頼します。
+
+```mermaid
+sequenceDiagram
+    participant M as メインエージェント
+    participant AR as article-reviewer
+    participant LCW as link-checker-worker
+
+    M->>AR: 記事ファイルパス
+    AR->>AR: SKILLルール遵守確認
+    AR->>AR: 記事内リンク抽出
+    AR->>LCW: URL1検証依頼
+    AR->>LCW: URL2検証依頼
+    AR->>LCW: URL3検証依頼
+    LCW-->>AR: ステータス + リダイレクト情報
+    AR-->>M: レビュー結果（違反箇所 + リンク検証結果）
+```
+
+link-checker-workerは、1つのURLについてアクセス可否とリダイレクトを確認します。403エラーが発生した場合は、agent-browserを使ってヘッドレスブラウザ経由でのアクセスも試みます。リンク先の内容がリンクテキストと一致しているかも確認し、不整合があれば報告します。
 
 レビュー結果として、SKILLルールの遵守状況、リンク検証結果、技術的正確性のチェック結果が返ってくるため、最終的な品質担保に役立っています。
 

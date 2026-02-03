@@ -37,6 +37,9 @@ WebFetchで403/401エラーが発生した場合：
 # agent-browserがインストールされていない場合は先にインストール
 yarn agent-browser:install
 
+# UserAgentを設定（ブロック回避のため）
+yarn agent-browser set headers '{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}'
+
 # ブラウザでURLを開いてスナップショット取得
 yarn agent-browser open [URL]
 yarn agent-browser snapshot
