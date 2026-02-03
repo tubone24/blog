@@ -1,5 +1,37 @@
 @import "../../styles/colors";
 
+.ai-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  margin: 0 0 24px;
+  background-color: #fff8e5;
+  border-left: 4px solid #f5a623;
+  border-radius: 4px;
+
+  .ai-disclaimer-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f5a623;
+    border-radius: 50%;
+  }
+
+  .ai-disclaimer-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b5900;
+  }
+}
+
 .content-white-inner {
   padding: 30px;
   background: white;

@@ -20,6 +20,10 @@ import config from "@/config/index.json";
 // HTMLからプレーンテキストを抽出する関数
 const extractTextFromHtml = (html: string): string => {
   return html
+    .replace(
+      /<h2[^>]*>[\s\S]*?Table of Contents[\s\S]*?<\/h2>[\s\S]*?(?=<h2|$)/gi,
+      "",
+    ) // Table of Contentsセクション除去
     .replace(/<code[\s\S]*?<\/code>/g, "") // コードブロック除去
     .replace(/<pre[\s\S]*?<\/pre>/g, "") // preブロック除去
     .replace(/<script[\s\S]*?<\/script>/g, "") // scriptタグ除去
@@ -41,6 +45,7 @@ type Props = {
     words: number;
     minutes: number;
     repHtml: string;
+    useAi: boolean;
   };
 };
 
@@ -81,7 +86,10 @@ class BlogPost extends Component<Props> {
               text={extractTextFromHtml(this.props.pageContext.repHtml)}
             />
           </div>
-          <Content post={this.props.pageContext.repHtml} />
+          <Content
+            post={this.props.pageContext.repHtml}
+            useAi={this.props.pageContext.useAi}
+          />
           <RelatedPosts
             title={frontmatter?.title || ""}
             tags={frontmatter?.tags || []}

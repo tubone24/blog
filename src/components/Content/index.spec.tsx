@@ -58,4 +58,30 @@ describe("Content", () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
+
+  it("should display AI disclaimer when useAi is true", () => {
+    const testPost = `<h2>test</h2>`;
+    render(<Content post={testPost} useAi={true} />);
+    expect(screen.getByText(/この記事は筆者/)).toBeInTheDocument();
+    expect(screen.getByText("tubone")).toHaveAttribute(
+      "href",
+      "https://portfolio.tubone-project24.xyz/",
+    );
+    expect(screen.getByText("whisper-realtime")).toHaveAttribute(
+      "href",
+      "https://github.com/tubone24/whisper-realtime",
+    );
+  });
+
+  it("should not display AI disclaimer when useAi is false", () => {
+    const testPost = `<h2>test</h2>`;
+    render(<Content post={testPost} useAi={false} />);
+    expect(screen.queryByText(/この記事は筆者/)).not.toBeInTheDocument();
+  });
+
+  it("should not display AI disclaimer when useAi is not provided", () => {
+    const testPost = `<h2>test</h2>`;
+    render(<Content post={testPost} />);
+    expect(screen.queryByText(/この記事は筆者/)).not.toBeInTheDocument();
+  });
 });

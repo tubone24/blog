@@ -54,6 +54,8 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           yarn global add snyk
+      - name: Install Playwright browsers
+        run: yarn playwright install chromium --with-deps
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}

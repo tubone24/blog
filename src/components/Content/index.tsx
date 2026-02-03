@@ -6,6 +6,7 @@ import * as style from "./index.module.scss";
 
 type Props = {
   post: string;
+  useAi?: boolean;
 };
 
 class Content extends Component<Props> {
@@ -44,14 +45,36 @@ class Content extends Component<Props> {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, useAi } = this.props;
     return (
       <>
-        <div
-          className={style.contentWhiteInner}
-          data-testid="innerHTML"
-          dangerouslySetInnerHTML={{ __html: post }}
-        />
+        <div className={style.contentWhiteInner} data-testid="innerHTML">
+          {useAi && (
+            <aside className={style.aiDisclaimer}>
+              <span className={style.aiDisclaimerIcon}>!</span>
+              <p className={style.aiDisclaimerText}>
+                この記事は筆者(
+                <a
+                  href="https://portfolio.tubone-project24.xyz/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  tubone
+                </a>
+                )が
+                <a
+                  href="https://github.com/tubone24/whisper-realtime"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  whisper-realtime
+                </a>
+                を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。
+              </p>
+            </aside>
+          )}
+          <div dangerouslySetInnerHTML={{ __html: post }} />
+        </div>
         <div className={style.contentWhiteInner}>
           <h2>tubone24にラーメンを食べさせよう！</h2>
           <p>ぽちっとな↓</p>

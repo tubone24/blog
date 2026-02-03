@@ -71,6 +71,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: yarn install --frozen-lockfile
+      - name: Install Playwright browsers
+        run: yarn playwright install chromium --with-deps
       - name: Test
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -244,6 +246,8 @@ jobs:
           cd functions/src
           npm install --os=linux --cpu=x64 --prefix ./ sharp
           ls node_modules/
+      - name: Install Playwright browsers
+        run: yarn playwright install chromium --with-deps
       - name: yarn build
         env:
           GATSBY_GITHUB_CLIENT_SECRET: ${{secrets.GATSBY_GITHUB_CLIENT_SECRET}}
@@ -322,6 +326,8 @@ jobs:
           node-version: 20.19.2
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Install Playwright browsers
+        run: yarn playwright install chromium --with-deps
       - name: build storybook
         run: yarn build-storybook
         env:
