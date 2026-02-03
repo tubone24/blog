@@ -113,9 +113,12 @@
     "memlab": "memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
     "memlab:serve": "URL=http://localhost:9000 memlab run --scenario test/memlab/testMemleak.js --work-dir test/memlab",
     "memlab:ci": "start-server-and-test build-serve:e2e tcp:9000 memlab:serve",
-    "memlab:tag": "memlab run --scenario test/memlab/testMemleakForTag.js --work-dir test/memlab"
+    "memlab:tag": "memlab run --scenario test/memlab/testMemleakForTag.js --work-dir test/memlab",
+    "agent-browser": "agent-browser",
+    "agent-browser:install": "agent-browser install"
   },
   "devDependencies": {
+    "agent-browser": "^0.1.0",
     "@babel/core": "7.24.4",
     "@babel/eslint-parser": "7.24.1",
     "@babel/helper-create-regexp-features-plugin": "7.24.7",

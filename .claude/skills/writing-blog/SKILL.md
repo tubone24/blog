@@ -225,10 +225,53 @@ AIが生成した文章にありがちな文体を避けるためのルール。
 
 ## サブエージェントの利用
 
-コンテキストウィンドウを効率的に使うため、以下の2つのサブエージェントを使用すること。
+コンテキストウィンドウを効率的に使うため、以下のサブエージェント構成を使用すること。
 
-- **tech-term-researcher**: 技術用語の調査（ワークフロー項目3で使用）
-- **article-reviewer**: 記事の品質チェックと引用リンク検証（ワークフロー項目9で使用）
+### コーディネーター（メインスキルから呼び出す）
+
+- **tech-term-researcher**: 技術用語調査のコーディネーター（ワークフロー項目3で使用）
+- **article-reviewer**: 記事レビューのコーディネーター（ワークフロー項目9で使用）
+
+### ワーカー（コーディネーターが並列起動する）
+
+- **term-lookup-worker**: 単一の技術用語を調査するワーカー
+- **link-checker-worker**: 単一のURLを検証するワーカー
+
+### 呼び出し方法
+
+Taskツールを使って呼び出す。技術用語調査の例：
+
+```
+Taskツール呼び出し:
+- subagent_type: tech-term-researcher
+- prompt: 以下の技術用語について調査してください: React, TypeScript, Astro
+```
+
+記事レビューの例：
+
+```
+Taskツール呼び出し:
+- subagent_type: article-reviewer
+- prompt: src/content/2026-02-03-example.md の記事をレビューしてください
+```
+
+### コンテキスト分離の仕組み
+
+1. メインスキル → コーディネーター（tech-term-researcher / article-reviewer）を呼び出し
+2. コーディネーター → 各用語/リンクごとにワーカーを並列起動
+3. ワーカーは独立したコンテキストで調査（WebFetch結果がメインに漏れない）
+4. コーディネーターは要約結果のみをメインスキルに返却
+
+### 403エラー時の対応
+
+ワーカーはWebFetchで403エラーが発生した場合、agent-browser経由でアクセスを試みる：
+
+```bash
+yarn agent-browser:install  # 初回のみ
+yarn agent-browser open [URL]
+yarn agent-browser snapshot
+yarn agent-browser close
+```
 
 サブエージェントの詳細は `.claude/agents/` を参照。
 
