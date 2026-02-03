@@ -55,7 +55,7 @@ Obsidianには[デイリーノート](https://publish.obsidian.md/help-ja/%E3%83
 
 そんななかで、[AquaVoice](https://withaqua.com/)という音声入力サービスが注目されていることを知りました。
 
-AquaVoiceは、音声入力に対して精度の高い日本語テキストを生成してくれるサービスです。料金体系は、無料のStarterプランで1,000語まで試用でき、本格的に使うならProプラン（$8/month）で無制限利用が可能となっています。日本語の認識精度は高く、カスタム辞書機能で専門用語にも対応できます（[AquaVoice 公式サイト](https://withaqua.com/)より）。
+AquaVoiceは、音声入力に対して精度の高い日本語テキストを生成してくれるサービスです。料金体系は、無料のStarterプランで1,000語まで試用でき、本格的に使うならProプラン（月額$9.99、年額$96で月あたり$8）で無制限利用が可能となっています。日本語の認識精度は高く、カスタム辞書機能で専門用語にも対応できます（[AquaVoice 公式サイト](https://withaqua.com/)より）。
 
 しかし、私が考えたのは別のアプローチでした。AquaVoiceはインターネット接続が必要なクラウドサービスであるため、入力した内容が外部に送信されることになります(これはブログ執筆の観点では気になりませんが、業務でプロンプトを音声で打つ際に問題になります)。また、継続的に利用するとなると費用もかかってきます。育休中でお金がないので、月額課金はできれば避けたいところです。
 
@@ -65,9 +65,9 @@ AquaVoiceは、音声入力に対して精度の高い日本語テキストを�
 
 そこで開発したのが[whisper-realtime](https://github.com/tubone24/whisper-realtime)です。
 
-whisper-realtimeは、[whisper.cpp](https://github.com/ggml-org/whisper.cpp)をベースにしたリアルタイム音声文字起こしツールです。whisper.cppは[OpenAI](https://openai.com/)のWhisperモデルをC/C++で実装したもので、[Apple Silicon](https://support.apple.com/ja-jp/116943)向けに最適化されています。[Metal](https://developer.apple.com/jp/metal/) GPUアクセラレーションや[Core ML](https://developer.apple.com/jp/machine-learning/core-ml/) / [Apple Neural Engine](https://github.com/hollance/neural-engine)対応により、ローカル環境でも高速な文字起こしが可能です。
+whisper-realtimeは、[whisper.cpp](https://github.com/ggml-org/whisper.cpp)をベースにしたリアルタイム音声文字起こしツールです。whisper.cppは[OpenAI](https://openai.com/)のWhisperモデルをC/C++で実装したもので、[Apple Silicon](https://support.apple.com/ja-jp/116943)向けに最適化されています。ローカル環境でも高速な文字起こしが可能です。
 
-マイクやシステム音声からのリアルタイム文字起こしが可能で、ライブテキスト更新と修正機能を備えています。話者識別機能により、複数人の会話でも誰が話しているかを判別できます。また、220以上の音韻パターンに基づくASR誤り訂正機能も搭載しており、文字起こしの精度を高めています。
+マイクやシステム音声からのリアルタイム文字起こしが可能で、ライブテキスト更新と修正機能を備えています。話者識別機能により、複数人の会話でも誰が話しているかを判別できます。また、独自に定義した220以上の音韻パターンを用いた後処理ベースのASR誤り訂正機能も搭載しており、文字起こしの精度を高めています。
 
 ### Macネイティブアプリとしての提供
 
@@ -174,7 +174,7 @@ AIが生成した文章にありがちな文体を避けるためのルールも
 
 見出しに絵文字や太字、コロンを使わないこと。文中で「実行します:」のようにコロンを使わないこと。過度な強調タグを避けること。そして「革新的な」「画期的な」「魔法のように」といったハイプ表現を避けること。
 
-これらのルールは[textlint-rule-preset-ai-and-anthropic](https://github.com/textlint-rule/textlint-rule-preset-ai-and-anthropic)というtextlintのルールセットを参考にしています。スキルの指示としても含めつつ、最終的にはtextlintでも機械的にチェックする二重のガードを設けています。
+これらのルールは[textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing)というtextlintのルールセットを参考にしています。スキルの指示としても含めつつ、最終的にはtextlintでも機械的にチェックする二重のガードを設けています。
 
 ### 参考文献の重視
 
