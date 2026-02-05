@@ -131,7 +131,7 @@ module.exports = {
               {
                 allMarkdownRemark(
                   sort: { frontmatter: { date: DESC } },
-                  limit: 50,
+                  limit: 100,
                 ) {
                   edges {
                     node {
