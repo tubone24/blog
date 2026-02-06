@@ -223,7 +223,7 @@
     "json5": "2.2.3",
     "highlight.js": "10.7.3",
     "postcss": "8.4.38",
-    "sharp": "0.34.1",
+    "sharp": "0.34.5",
     "webpack": "5.104.1",
     "yaml": "2.7.1",
     "micromatch": "4.0.8",
