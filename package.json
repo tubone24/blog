@@ -14,7 +14,7 @@
     "autocomplete.js": "0.38.1",
     "axios": "1.12.0",
     "babel-loader": "8.3.0",
-    "bootstrap": "5.3.3",
+    "bootstrap": "5.3.8",
     "dayjs": "1.11.10",
     "dotenv": "16.4.7",
     "gatsby": "5.15.0",
