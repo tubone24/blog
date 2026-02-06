@@ -144,7 +144,7 @@
     "@types/jest": "30.0.0",
     "@types/jest-axe": "3.5.9",
     "@types/lozad": "1.16.4",
-    "@types/node": "17.0.31",
+    "@types/node": "17.0.45",
     "@types/react-test-renderer": "18.3.1",
     "@types/react-transition-group": "4.4.12",
     "@types/responselike": "1.0.3",
