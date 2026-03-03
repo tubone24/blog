@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import "./index.scss";
 import ReactGA from "react-ga4";
-import type { SearchClient, SearchIndex } from "algoliasearch";
-import type { RequestOptions } from "@algolia/transporter";
-import type { SearchOptions } from "@algolia/client-search";
-
 // https://github.com/algolia/algoliasearch-client-javascript/issues/1152
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const source =
-  (index: SearchIndex, parameters: RequestOptions & SearchOptions) =>
+  (index: any, parameters: Record<string, unknown>) =>
   (query: string, cb: CallableFunction) =>
     index
       .search(query, parameters)
-      .then((res) => cb(res.hits, res))
-      .catch((err) => cb([], err));
+      .then((res: { hits: unknown[] }) => cb(res.hits, res))
+      .catch((err: unknown) => cb([], err));
 
 class SearchBox extends Component {
   async componentDidMount() {
@@ -26,7 +23,7 @@ class SearchBox extends Component {
       const autocompleteModule = await import("autocomplete.js");
       const autocomplete = autocompleteModule.default || autocompleteModule;
 
-      const client: SearchClient = algoliasearch(
+      const client = algoliasearch(
         import.meta.env.PUBLIC_ALGOLIA_APP_ID ||
           process.env.STORYBOOK_ALGOLIA_APP_ID,
         import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY ||
