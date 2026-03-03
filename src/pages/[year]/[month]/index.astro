@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Sidebar from '../../../components/Sidebar/index.tsx';
+import config from '../../../config/index.json';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const sorted = allPosts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+  const yearMonths = new Set<string>();
+  allPosts.forEach((post) => {
+    const d = new Date(post.data.date);
+    const year = d.getFullYear().toString();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    yearMonths.add(`${year}/${month}`);
+  });
+
+  return Array.from(yearMonths).map((ym) => {
+    const [year, month] = ym.split('/');
+    return {
+      params: { year, month },
+      props: {
+        year,
+        month,
+        posts: sorted.filter((p) => {
+          const d = new Date(p.data.date);
+          const y = d.getFullYear().toString();
+          const m = String(d.getMonth() + 1).padStart(2, '0');
+          return y === year && m === month;
+        }),
+        allPosts: sorted,
+      },
+    };
+  });
+}
+
+const { year, month, posts, allPosts } = Astro.props;
+
+const title = `${year}年${month}月の記事 (${posts.length}件)`;
+
+const latestPosts = allPosts.slice(0, 6).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+}));
+
+const allPostsForSidebar = allPosts.map((p) => ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
+---
+
+<Layout
+  title={title}
+  description={title}
+  canonicalUrl={`${config.siteUrl}/${year}/${month}/`}
+  noindex={true}
+>
+  <div class="container">
+    <div class="row">
+      <Sidebar
+        client:load
+        latestPosts={latestPosts}
+        allPosts={allPostsForSidebar}
+        totalCount={allPosts.length}
+      />
+      <div class="col order-2" style="padding:2rem;">
+        <h2>{title}</h2>
+        <ul>
+          {posts.map((post) => {
+            const url = post.slug;
+            const dateStr = new Date(post.data.date).toISOString().split('T')[0];
+            return (
+              <li key={post.id}>
+                {dateStr}&nbsp;&nbsp;
+                <a href={`/${url}/`}>{post.data.title}</a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div class="col-xl-2 col-lg-1 order-3"></div>
+    </div>
+  </div>
+</Layout>

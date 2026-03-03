@@ -1,23 +1,22 @@
 import React from "react";
-import { Link, navigate, withPrefix } from "gatsby";
 import ReactGA from "react-ga4";
 
 import "./index.scss";
 
 const NavItem = ({ url, name }: { url: string; name: string }) => (
-  <Link
+  <a
     className="nav-btn btn btn-link"
-    to={url}
+    href={url}
     onClick={() => {
       ReactGA.event({
         category: "User",
         action: `Click nav-menu: ${name}`,
       });
-      navigate(withPrefix(url));
+      window.location.href = url;
     }}
   >
     {name}
-  </Link>
+  </a>
 );
 
 export default NavItem;

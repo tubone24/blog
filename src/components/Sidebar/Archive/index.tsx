@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 
 import * as style from "./index.module.scss";
 import ReactGA from "react-ga4";
@@ -19,9 +18,9 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
         &nbsp;Archives
       </p>
       {yearList.map((year) => (
-        <Link
+        <a
           key={year}
-          to={withPrefix(`/${year}/`)}
+          href={`/${year}/`}
           title={`Articles written in ${year}`}
           onClick={() =>
             ReactGA.event({
@@ -31,7 +30,7 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
           }
         >
           {year}
-        </Link>
+        </a>
       ))}
     </div>
   );

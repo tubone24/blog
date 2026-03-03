@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Tag from '../components/Tag/index.tsx';
+import Sidebar from '../components/Sidebar/index.tsx';
+
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const mapping: { [key: string]: number } = {};
+allPosts.forEach((post) => {
+  post.data.tags?.forEach((name) => {
+    if (name) {
+      mapping[name] = (mapping[name] || 0) + 1;
+    }
+  });
+});
+
+const tags = Object.keys(mapping).sort((a, b) => mapping[b] - mapping[a]);
+
+const latestPosts = sorted.slice(0, 6).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+}));
+
+const allPostsForSidebar = sorted.map((p) => ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
+---
+
+<Layout
+  title="Tags"
+  description="Tags Page"
+  canonicalUrl="https://tubone-project24.xyz/tags/"
+  noindex={true}
+>
+  <div class="container">
+    <div class="row">
+      <Sidebar
+        client:load
+        latestPosts={latestPosts}
+        allPosts={allPostsForSidebar}
+        totalCount={sorted.length}
+      />
+      <div class="col order-2">
+        {tags.map((name) => (
+          <Tag client:load name={name} count={mapping[name]} />
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

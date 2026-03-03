@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Card from '../../../components/Card/index.tsx';
+import Sidebar from '../../../components/Sidebar/index.tsx';
+import config from '../../../config/index.json';
+
+export async function getStaticPaths() {
+  const POSTS_PER_PAGE = 10;
+  const allPosts = await getCollection('blog');
+  const sorted = allPosts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+  const totalPages = Math.ceil(sorted.length / POSTS_PER_PAGE);
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => {
+    const page = i + 2; // page 2, 3, ...
+    const start = (page - 1) * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+    return {
+      params: { page: String(page) },
+      props: {
+        pagePosts: sorted.slice(start, end),
+        page,
+        totalPages,
+        allPosts: sorted,
+      },
+    };
+  });
+}
+
+const { pagePosts, page, totalPages, allPosts } = Astro.props;
+
+const latestPosts = allPosts.slice(0, 6).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+  url: p.slug,
+}));
+
+const allPostsForSidebar = allPosts.map((p) => ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
+---
+
+<Layout title={config.siteTitle} description={config.description}>
+  <div class="container">
+    <div class="row homepage">
+      <Sidebar
+        client:load
+        latestPosts={latestPosts}
+        allPosts={allPostsForSidebar}
+        totalCount={allPosts.length}
+      />
+      <main class="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
+        {pagePosts.map((post, num) => {
+          const url = post.slug;
+          return (
+            <Card
+              client:load
+              title={post.data.title}
+              date={post.data.date.toISOString()}
+              url={`/${url}/`}
+              headerImage={post.data.headerImage}
+              description={post.data.description}
+              tags={post.data.tags}
+              index={num}
+            />
+          );
+        })}
+        <div class="row pager">
+          <div>
+            <a href={page === 2 ? '/' : `/pages/${page - 1}/`}>Previous</a>
+          </div>
+          <div class="pagenum">{`${page}/${totalPages}`}</div>
+          <div>
+            {page < totalPages ? (
+              <a href={`/pages/${page + 1}/`}>Next</a>
+            ) : (
+              <span class="pager-disabled">Next</span>
+            )}
+          </div>
+        </div>
+      </main>
+      <div class="col-xl-2 col-lg-1 order-3"></div>
+    </div>
+  </div>
+</Layout>

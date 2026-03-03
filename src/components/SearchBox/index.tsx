@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { navigate, withPrefix } from "gatsby";
 import "./index.scss";
 import ReactGA from "react-ga4";
-import {
-  SearchClient,
-  SearchIndex,
-} from "algoliasearch/dist/algoliasearch-lite";
-import { RequestOptions } from "@algolia/transporter";
-import { SearchOptions } from "@algolia/client-search";
+import type { SearchClient, SearchIndex } from "algoliasearch";
+import type { RequestOptions } from "@algolia/transporter";
+import type { SearchOptions } from "@algolia/client-search";
 
 let algoliasearch: CallableFunction;
 let autocomplete: CallableFunction;
@@ -20,12 +16,13 @@ if (typeof window !== "undefined") {
   // eslint-disable-next-line global-require
   autocomplete = require("autocomplete.js");
   client = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID || process.env.STORYBOOK_ALGOLIA_APP_ID,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY ||
+    import.meta.env.PUBLIC_ALGOLIA_APP_ID ||
+      process.env.STORYBOOK_ALGOLIA_APP_ID,
+    import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY ||
       process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY,
   );
   index = client.initIndex(
-    process.env.GATSBY_ALGOLIA_INDEX_NAME ||
+    import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME ||
       process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
       "posts",
   );
@@ -74,14 +71,14 @@ class SearchBox extends Component {
     ]).on(
       "autocomplete:selected",
       (event: { _args: { path: string }[] }, suggestion: { url: string }) => {
-        navigate(suggestion.url);
+        window.location.href = suggestion.url;
         ReactGA.event({
           category: "User",
           // eslint-disable-next-line no-underscore-dangle
           action: `Click Searchbox item: ${event._args[0].path}`,
         });
         // eslint-disable-next-line no-underscore-dangle
-        navigate(withPrefix(event._args[0].path));
+        window.location.href = event._args[0].path;
       },
     );
   }

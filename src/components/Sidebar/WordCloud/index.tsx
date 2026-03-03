@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 
 import * as style from "./index.module.scss";
 
@@ -12,7 +11,7 @@ const WordCloud = () => (
       <span className="icon-cloud" />
       &nbsp;WordCloud
     </p>
-    <Link to={withPrefix("about#wordcloud")}>
+    <a href="/about#wordcloud">
       <picture>
         <source
           className="lozad"
@@ -35,7 +34,7 @@ const WordCloud = () => (
           title="wordCloud"
         />
       </picture>
-    </Link>
+    </a>
   </div>
 );
 

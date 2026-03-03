@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Card from '../../../components/Card/index.tsx';
+import Sidebar from '../../../components/Sidebar/index.tsx';
+import config from '../../../config/index.json';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const sorted = allPosts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+  const tagSet = new Set<string>();
+  allPosts.forEach((post) => {
+    post.data.tags?.forEach((tag) => {
+      if (tag) tagSet.add(tag);
+    });
+  });
+
+  return Array.from(tagSet).map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: sorted.filter((p) => p.data.tags?.includes(tag)),
+      allPosts: sorted,
+    },
+  }));
+}
+
+const { tag, posts, allPosts } = Astro.props;
+
+const latestPosts = allPosts.slice(0, 6).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+}));
+
+const allPostsForSidebar = allPosts.map((p) => ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
+---
+
+<Layout
+  title={tag}
+  description={tag}
+  canonicalUrl={`${config.siteUrl}/tag/${tag}/`}
+  noindex={true}
+>
+  <div class="container">
+    <div class="row">
+      <Sidebar
+        client:load
+        latestPosts={latestPosts}
+        allPosts={allPostsForSidebar}
+        totalCount={allPosts.length}
+      />
+      <div class="col order-2">
+        <div class="col-12" style="font-size:1.5rem; font-weight:bold; margin-bottom:1rem;">
+          {posts.length}&nbsp;Articles in&nbsp;{tag}
+        </div>
+        {posts.map((post, index) => {
+          const url = post.slug;
+          return (
+            <Card
+              client:load
+              title={post.data.title}
+              date={post.data.date.toISOString()}
+              url={`/${url}/`}
+              headerImage={post.data.headerImage}
+              description={post.data.description}
+              tags={post.data.tags || []}
+              index={index}
+            />
+          );
+        })}
+      </div>
+      <div class="col-xl-2 col-lg-1 order-3"></div>
+    </div>
+  </div>
+</Layout>

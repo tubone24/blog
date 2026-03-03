@@ -1,5 +1,4 @@
 import React from "react";
-import { StaticQuery, graphql } from "gatsby";
 import ReactGA from "react-ga4";
 import lozad from "lozad";
 
@@ -35,26 +34,26 @@ const Icon = ({
   </a>
 );
 
-export type StaticQueryAllPost = {
-  readonly node: {
-    readonly frontmatter: GatsbyTypes.Maybe<
-      Pick<GatsbyTypes.MarkdownRemarkFrontmatter, "date" | "tags">
-    >;
-  };
+export type SidebarLatestPost = {
+  title: string;
+  slug: string;
+  date: string;
+  url?: string;
 };
 
-export type StaticQueryLatestPost = {
-  readonly node: GatsbyTypes.cardDataFragment;
+export type SidebarAllPost = {
+  date: string;
+  tags: string[];
 };
 
 export const Sidebar = ({
-  latestPosts,
-  totalCount,
-  allPosts,
+  latestPosts = [],
+  totalCount = 0,
+  allPosts = [],
 }: {
-  allPosts: ReadonlyArray<StaticQueryAllPost>;
+  allPosts: SidebarAllPost[];
   totalCount: number;
-  latestPosts: ReadonlyArray<StaticQueryLatestPost>;
+  latestPosts: SidebarLatestPost[];
 }) => {
   React.useEffect(() => {
     if (isBrowser()) {
@@ -71,11 +70,11 @@ export const Sidebar = ({
       ({
         node: {
           frontmatter: {
-            url: p.node.frontmatter?.url || "",
-            title: p.node.frontmatter?.title || "",
-            slug: p.node.frontmatter?.url,
+            url: p.url || p.slug || "",
+            title: p.title || "",
+            slug: p.url || p.slug,
           },
-          fields: { slug: p.node.fields?.slug || "" },
+          fields: { slug: p.slug || "" },
         },
       }) as LatestPostProps,
   );
@@ -84,8 +83,8 @@ export const Sidebar = ({
       ({
         node: {
           frontmatter: {
-            date: p.node.frontmatter?.date || "",
-            tags: p.node.frontmatter?.tags || [],
+            date: p.date || "",
+            tags: p.tags || [],
           },
         },
       }) as AllPost,
@@ -94,34 +93,30 @@ export const Sidebar = ({
     <header
       className={
         style.introHeader +
-        " site-heading text-center col-xl-2 col-lg-3 col-xs-12 order-lg-1"
+        " site-heading text-center col-xl-2 col-lg-3 col-12 order-lg-1"
       }
     >
       <div className={style.aboutMe}>
-        <a href="https://portfolio.tubone-project24.xyz/">
+        <a
+          href="https://portfolio.tubone-project24.xyz/"
+          onClick={() =>
+            ReactGA.event({
+              category: "User",
+              action: "push tubone Avatar",
+            })
+          }
+        >
           <picture>
             <source
               className={style.avatar}
               srcSet="/assets/avater.webp"
               type="image/webp"
-              onClick={() =>
-                ReactGA.event({
-                  category: "User",
-                  action: "push tubone Avatar",
-                })
-              }
             />
             <img
               className={style.avatar}
               src="/assets/avater.png"
               alt="tubone"
               decoding="async"
-              onClick={() =>
-                ReactGA.event({
-                  category: "User",
-                  action: "push tubone Avatar",
-                })
-              }
             />
           </picture>
         </a>
@@ -168,51 +163,4 @@ export const Sidebar = ({
   );
 };
 
-Sidebar.defaultProps = {
-  totalCount: 0,
-  latestPosts: [],
-};
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => (
-  <StaticQuery
-    query={graphql`
-      fragment cardData on MarkdownRemark {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          url: slug
-          date
-        }
-      }
-
-      query SidebarQuery {
-        all: allMarkdownRemark {
-          totalCount
-          allPosts: edges {
-            node {
-              frontmatter {
-                date
-                tags
-              }
-            }
-          }
-        }
-
-        limited: allMarkdownRemark(
-          sort: { frontmatter: { date: DESC } }
-          limit: 6
-        ) {
-          latestPosts: edges {
-            node {
-              ...cardData
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => <Sidebar {...data.all} {...data.limited} />}
-  />
-);
+export default Sidebar;

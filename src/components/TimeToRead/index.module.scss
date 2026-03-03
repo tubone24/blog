@@ -1,7 +1,9 @@
 @import "../../styles/colors";
 
 .countdown {
+  width: 100%;
   padding: 5px;
+  margin-bottom: 0.5rem;
   background: $main-green;
 
   b {

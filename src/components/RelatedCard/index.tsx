@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 
 import { parseImgur, SizeMapping } from "@/utils/images";
 
@@ -18,13 +17,13 @@ const CardHeader = ({
   image: string;
   title: string;
 }) => (
-  <Link to={url}>
+  <a href={url}>
     <span className="visually-hidden">{title}</span>
     <div
       className={style.wrapper + " lozad"}
       data-background-image={imageStyle(image)}
     />
-  </Link>
+  </a>
 );
 
 const RelatedCard = ({
@@ -44,7 +43,7 @@ const RelatedCard = ({
   description?: string;
 }) => (
   <div className="col-sm-12 pb-4">
-    <Link to={withPrefix(url)}>
+    <a href={url}>
       <div className={style.customCard}>
         <div className={style.data}>
           <div className={style.content}>
@@ -54,19 +53,15 @@ const RelatedCard = ({
                 <Tag name={name || ""} key={name} />
               ))}
             </div>
-            <CardHeader
-              url={withPrefix(url)}
-              image={headerImage}
-              title={title}
-            />
-            <Link to={withPrefix(url)}>
+            <CardHeader url={url} image={headerImage} title={title} />
+            <a href={url}>
               <h4 className={style.title}>{title}</h4>
-            </Link>
+            </a>
             <p>{description}</p>
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   </div>
 );
 

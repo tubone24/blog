@@ -1,6 +1,5 @@
 import React from "react";
 import ReactGA from "react-ga4";
-import { Link, withPrefix } from "gatsby";
 import * as style from "./index.module.scss";
 
 const Tag = ({
@@ -10,8 +9,8 @@ const Tag = ({
   name: string;
   count?: number | string;
 }) => (
-  <Link
-    to={withPrefix(`/tag/${name}`)}
+  <a
+    href={`/tag/${name}`}
     className={style.headerTag}
     title={name}
     onClick={() =>
@@ -21,7 +20,7 @@ const Tag = ({
     {name}
     &nbsp;
     {count}
-  </Link>
+  </a>
 );
 
 export default Tag;

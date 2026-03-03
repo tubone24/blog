@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card/index.tsx';
+import Sidebar from '../components/Sidebar/index.tsx';
+import config from '../config/index.json';
+import { parseDate } from '../utils/index';
+
+const POSTS_PER_PAGE = 10;
+
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const totalPages = Math.ceil(sorted.length / POSTS_PER_PAGE);
+const pagePosts = sorted.slice(0, POSTS_PER_PAGE);
+
+// Sidebar用データ
+const latestPosts = sorted.slice(0, 6).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+  url: p.slug,
+}));
+
+const allPostsForSidebar = sorted.map((p) => ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
+---
+
+<Layout
+  title={config.siteTitle}
+  description={config.description}
+  ogImage={config.defaultImage}
+  canonicalUrl={config.siteUrl}
+>
+  <div class="container">
+    <div class="row homepage">
+      <Sidebar
+        client:load
+        latestPosts={latestPosts}
+        allPosts={allPostsForSidebar}
+        totalCount={sorted.length}
+      />
+      <main class="col-xl-6 col-lg-7 col-md-12 col-12 order-2">
+        {pagePosts.map((post, num) => {
+          const url = post.slug;
+          return (
+            <Card
+              client:load
+              title={post.data.title}
+              date={post.data.date.toISOString()}
+              url={`/${url}/`}
+              headerImage={post.data.headerImage}
+              description={post.data.description}
+              tags={post.data.tags}
+              index={num}
+            />
+          );
+        })}
+        <div class="row pager">
+          <div>
+            <span class="pager-disabled">Previous</span>
+          </div>
+          <div class="pagenum">{`1/${totalPages}`}</div>
+          <div>
+            {totalPages > 1 && <a href="/pages/2/">Next</a>}
+          </div>
+        </div>
+      </main>
+      <div class="col-xl-2 col-lg-1 order-3"></div>
+    </div>
+  </div>
+</Layout>

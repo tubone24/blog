@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 
 import Tag from "@/components/Tag";
 import { AllPost } from "../entity";
@@ -23,12 +22,12 @@ const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
   const limitTags = tags.slice(0, 20);
   return (
     <div className="d-none d-lg-block information my-2">
-      <Link to={withPrefix("tags")} title="Tags">
+      <a href="/tags" title="Tags">
         <p>
           <span className="icon-tags" />
           &nbsp;{limitTags.length} / {tags.length} Tags
         </p>
-      </Link>
+      </a>
       {limitTags.map((item) => (
         <Tag name={item} key={item} count={mapping[item]} />
       ))}

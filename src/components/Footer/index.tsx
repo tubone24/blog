@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 import ExternalLink from "@/components/ExternalLink";
 import config from "@/config/index.json";
 
@@ -27,12 +26,12 @@ const Footer = () => (
             />
             &nbsp;
             <b>
-              <Link to={withPrefix("/")}>{config.siteTitle}</Link>
+              <a href="/">{config.siteTitle}</a>
               &nbsp;
             </b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            <Link to={withPrefix("/privacy-policies")}>Privacy Policies</Link>
+            <a href="/privacy-policies">Privacy Policies</a>
             &nbsp;&nbsp;&nbsp;
             <a href="/sitemap-index.xml" title="sitemap">
               Sitemap
