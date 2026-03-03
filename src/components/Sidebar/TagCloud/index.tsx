@@ -1,7 +1,7 @@
 import React from "react";
 
 import Tag from "@/components/Tag";
-import { AllPost } from "../entity";
+import type { AllPost } from "../entity";
 
 const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
   const mapping: { [key: string]: number } = {};

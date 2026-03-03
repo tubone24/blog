@@ -3,7 +3,7 @@ import React from "react";
 import * as style from "./index.module.scss";
 import ReactGA from "react-ga4";
 import dayjs from "dayjs";
-import { AllPost } from "../entity";
+import type { AllPost } from "../entity";
 
 const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   const yearList = Array.from(

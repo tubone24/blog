@@ -65,7 +65,7 @@ const allPostsForSidebar = allPosts.map((p) => ({
             const url = post.slug;
             const dateStr = new Date(post.data.date).toISOString().split('T')[0];
             return (
-              <li key={post.id}>
+              <li>
                 {dateStr}&nbsp;&nbsp;
                 <a href={`/${url}/`}>{post.data.title}</a>
               </li>

@@ -1,8 +1,9 @@
 import React from "react";
 import Archive from "../Archive";
-import { AllPost as AllPostProps } from "../entity";
+import type { AllPost as AllPostProps } from "../entity";
 import WordCloud from "../WordCloud";
-import LatestPost, { Post as LatestPostProps } from "../LatestPost";
+import LatestPost from "../LatestPost";
+import type { Post as LatestPostProps } from "../LatestPost";
 
 const Information = ({
   totalCount,

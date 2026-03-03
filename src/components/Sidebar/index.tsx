@@ -3,8 +3,8 @@ import ReactGA from "react-ga4";
 import lozad from "lozad";
 
 import Information from "./Information";
-import { Post as LatestPostProps } from "./LatestPost";
-import { AllPost } from "./entity";
+import type { Post as LatestPostProps } from "./LatestPost";
+import type { AllPost } from "./entity";
 import SearchBox from "@/components/SearchBox";
 import Subscription from "./Subscription";
 import TagCloud from "./TagCloud";
