@@ -54,7 +54,7 @@
     "develop:remote": "astro dev --port 8080 --host 0.0.0.0",
     "serve": "astro preview",
     "build-serve": "yarn build && yarn serve",
-    "build-serve:e2e": "NODE_ENV=development yarn build && NODE_ENV=development yarn serve",
+    "build-serve:e2e": "NODE_ENV=development yarn build && NODE_ENV=development astro preview --port 9000",
     "format": "eslint .",
     "format:fix": "eslint --fix",
     "format-style": "npx stylelint **/*.scss",

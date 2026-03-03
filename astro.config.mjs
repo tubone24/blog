@@ -9,6 +9,7 @@ import rehypeLazyImages from './src/lib/rehype-lazy-images.mjs';
 
 export default defineConfig({
   site: 'https://tubone-project24.xyz',
+  publicDir: 'static',
   integrations: [
     react(),
   ],
