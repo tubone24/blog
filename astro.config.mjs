@@ -22,7 +22,11 @@ export default defineConfig({
         localsConvention: 'camelCaseOnly',
       },
     },
+    ssr: {
+      noExternal: ['autocomplete.js'],
+    },
     optimizeDeps: {
+      include: ['algoliasearch/lite', 'autocomplete.js'],
       exclude: ['gatsby', 'gatsby-paginate', 'react-helmet-async'],
     },
   },
@@ -51,6 +55,10 @@ export default defineConfig({
       rehypeLazyImages,
     ],
     syntaxHighlight: false,
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
   },
   output: 'static',
 });

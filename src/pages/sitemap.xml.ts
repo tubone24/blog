@@ -38,7 +38,7 @@ export async function GET(_context: APIContext) {
     });
   });
   const tagUrls = Array.from(tagSet).map((tag) => ({
-    loc: `${SITE_URL}/tag/${xmlEscape(tag)}/`,
+    loc: `${SITE_URL}/tag/${encodeURIComponent(tag)}/`,
     lastmod: undefined,
     priority: "0.5",
     changefreq: "weekly",

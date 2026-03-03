@@ -6,7 +6,6 @@
 [![Release Version](https://release-badges-generator.vercel.app/api/releases.svg?user=tubone24&repo=blog&gradient=00ffff,8bd1fa)](https://github.com/tubone24/blog/releases/latest)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3751ef40-b145-4249-9657-39d3fb04ae81/deploy-status)](https://app.netlify.com/sites/pensive-lamport-5822d2/deploys)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
-[![Coverage Status](https://coveralls.io/repos/github/tubone24/blog/badge.svg?branch=master)](https://coveralls.io/github/tubone24/blog?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/tubone24/blog/badge)](https://www.codefactor.io/repository/github/tubone24/blog)
 [![storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://blog-storybook.netlify.app/)
 [![time tracker](https://wakatime.com/badge/github/tubone24/blog.svg)](https://wakatime.com/badge/github/tubone24/blog)
@@ -18,9 +17,11 @@
 
 ## What is this?
 
-This is tubone's Blog by Gatsby and Netlify.
+This is tubone's Blog built with **Astro 5** and deployed on Netlify.
 
 [https://tubone-project24.xyz/](https://tubone-project24.xyz/)
+
+> Migrated from Gatsby 5 to Astro 5 in March 2026.
 
 ## Preview
 
@@ -38,62 +39,79 @@ Width 400px
 
 <img src="https://github.com/tubone24/blog/blob/screenshot/docs/screenshot/master/screenshot-ubuntu-latest-400.png" width="200px" alt="mobile home" />
 
-### Templated by?
-
-[Gatsby Starter - Calpa's Blog](https://github.com/calpa/gatsby-starter-calpa-blog)
-
-Special, thanks!
-
 ## Features
 
 ### Structure
 
-- [Gatsby.js v4](https://www.gatsbyjs.com/gatsby-4/), Static site generating
-  - Use [Preact](https://preactjs.com/), faster than [React](https://ja.reactjs.org/)
-  - All Components writen by [TypeScript](https://www.typescriptlang.org/)
-  - Use [Bootstrap5](https://getbootstrap.jp/) for CSS Framework
-  - Use [Sass(Scss)](https://sass-lang.com/) and Scoped by CSS Modules
-  - All articles (Datasource) made by [Markdown](https://www.markdown.jp/what-is-markdown/) and save to this repository
-- For Search Engine Optimization, generate header meta tag and [OGP](https://www.popwebdesign.net/what-is-ogp.html)
-- High Performance, [purge CSS](https://purgecss.com/) to [Bootstrap5](https://getbootstrap.jp/), optimise SVG and minify HTML, CSS and JS
-- Use [Google Analytics v4](https://support.google.com/analytics/answer/10089681?hl=ja)
-- Site inner searching by [Algolia search](https://www.algolia.com/)
-- Code syntax highlighting by [Prism.js](https://prismjs.com/)
-- [PWA](https://developer.mozilla.org/ja/docs/Web/Progressive_web_apps) Support, and prefetch page-data.json
-- Deploy [Netlify](https://www.netlify.com/)
+- [Astro 5](https://astro.build/), Static site generating
+  - Use [React 18](https://react.dev/) via [@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/) for interactive components
+  - All Components written in [TypeScript](https://www.typescriptlang.org/)
+  - Use [Bootstrap 5](https://getbootstrap.jp/) for CSS Framework
+  - Use [Sass (SCSS)](https://sass-lang.com/) and Scoped by CSS Modules
+  - All articles managed by [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/) in Markdown
+- Markdown processing with rehype/remark plugins
+  - [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus) for code syntax highlighting
+  - [rehype-slug](https://github.com/rehypejs/rehype-slug) + [rehype-autolink-headings](https://github.com/rehypejs/rehype-autolink-headings) for heading anchors
+  - [rehype-external-links](https://github.com/rehypejs/rehype-external-links) for external link attributes
+  - [remark-toc](https://github.com/remarkjs/remark-toc) for table of contents generation
+  - Custom rehype plugin for lazy image loading
+- SEO: meta tags, [OGP](https://ogp.me/), Schema.org structured data
+- [Google Analytics v4](https://support.google.com/analytics/answer/10089681?hl=ja)
+- Site search by [Algolia](https://www.algolia.com/)
+- Deploy on [Netlify](https://www.netlify.com/)
   - Managed by [Terraform Cloud](https://cloud.hashicorp.com/products/terraform) for Netlify settings
 - Image hosted by [imgur](https://imgur.com)
-- [OGP](https://ogp.me/) is supported. Many sites display header images as OGP images, and Twitter card dynamically generates images highlighting article titles like [Zenn](https://zenn.dev/) or [Qiita](https://qiita.com/).
-- Use [Gitalk](https://gitalk.github.io/) for blog comment system
-- Icons used by [Fontawesome](https://fontawesome.com/), and optimised to [Icomoon](https://icomoon.io/)
-- Sitemap generate
-- RSS feed generate
-- Compliant with [a11y](https://waic.jp/docs/WCAG20/Overview.html), top page Lighthouse's accessibility score is 100!
-- Use [Sentry](https://sentry.io/welcome/) for detecting error and check performance
+- OGP with dynamic Twitter card image generation
+- [Gitalk](https://gitalk.github.io/) for blog comment system
+- Icons by [Fontawesome](https://fontawesome.com/), optimised with [Icomoon](https://icomoon.io/)
+- Custom sitemap generation (`src/pages/sitemap.xml.ts`)
+- RSS feed generation (`src/pages/rss.xml.ts`)
+- [Sentry](https://sentry.io/welcome/) for error detection and performance monitoring
+
+### Project Structure
+
+```text
+src/
+├── content/
+│   ├── config.ts          # Astro Content Collections config
+│   └── blog/              # Markdown articles
+├── layouts/
+│   └── Layout.astro       # Common layout with SEO
+├── pages/
+│   ├── index.astro        # Home
+│   ├── [...slug].astro    # Article pages
+│   ├── tags.astro         # Tag list
+│   ├── tag/[tag]/         # Tag filtered list
+│   ├── [year]/            # Yearly/monthly summary
+│   ├── pages/[page]/      # Pagination (/pages/2/ etc.)
+│   ├── about.astro
+│   ├── privacy-policies.astro
+│   ├── 404.astro
+│   ├── rss.xml.ts
+│   └── sitemap.xml.ts
+├── components/            # React components
+├── lib/                   # rehype plugins etc.
+└── styles/global.scss     # Bootstrap imports
+```
 
 ### For Developer
 
 - Use [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) for lint codes
-- Use [EditorConfig](https://editorconfig.org/) formatting and indent
-- Use [husky](https://typicode.github.io/husky/#/) run linter before git commit and push
-- Use [Jest](https://jestjs.io/ja/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for Unit and React Component testing
-- Use [Snapshot tests](https://storybook.js.org/docs/react/writing-tests/snapshot-testing) for Snapshot tests
+- Use [EditorConfig](https://editorconfig.org/) for formatting and indent
+- Use [husky](https://typicode.github.io/husky/#/) to run linter before git commit and push
+- Use [Jest](https://jestjs.io/ja/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for unit and component testing
 - Use [Cypress](https://www.cypress.io/) for End-To-End testing
 - Components managed by [Storybook](#storybook)
-  - Generate all preview-deploy and production-deploy
-- Each production-deploy is measured by [Lighthouse](#lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
-- unused dependencies check by [depcheck](https://www.npmjs.com/package/depcheck) in [depcheck_action](https://github.com/tubone24/depcheck_action)
+- Each production deploy is measured by [Lighthouse](#lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 - Detect vulnerability by [Snyk](https://app.snyk.io/)
-- Detect vulnerability by [OWASP ZAP](https://www.zaproxy.org/)
-- Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master.
+- Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master
 
 ### For contributor of articles
 
-- Post articles in `/src/content/*.md`, and Create [GitHub Pull Request](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to master branch
+- Post articles in `/src/content/blog/*.md`, and Create [GitHub Pull Request](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to master branch
   - Deploy netlify in preview environment and check your articles
-- Or use [Netlify CMS](https://www.netlifycms.org/) in `/admin/`
 - Use [textlint](#textlint) before merge master by GitHub Actions
 
 ```mermaid
@@ -110,7 +128,7 @@ Approved --->|Merge| DeployProduction
 
 ### Running at local
 
-Run **at local**, execute commands below, and access [http://localhost:8000](http://localhost:8000)
+Run **at local**, execute commands below, and access [http://localhost:4321](http://localhost:4321)
 
 ```sh
 yarn install
@@ -119,7 +137,7 @@ yarn start
 
 ### Build
 
-Or Build Artifact, execute commands below
+Build artifact, execute commands below. Output goes to `dist/` directory.
 
 ```sh
 yarn build
@@ -127,7 +145,7 @@ yarn build
 
 ### lint, format codes
 
-Fix your code format by [TSC](https://www.typescriptlang.org/docs/handbook/compiler-options.html), [ESLint](https://eslint.org/) and  [stylelint](https://stylelint.io/)
+Fix your code format by [TSC](https://www.typescriptlang.org/docs/handbook/compiler-options.html), [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/)
 
 ```sh
 yarn typecheck
@@ -145,11 +163,8 @@ yarn format-yml
 
 Testing React Component and Unit testing, execute commands below
 
-And also, you can test Storybook Snapshot test!
-
 ```sh
 yarn test
-yarn test:storybook
 yarn test:e2e
 ```
 
@@ -159,31 +174,15 @@ If you want to check testing coverage, execute commands below
 yarn test:cov
 ```
 
-And also, check your coverage report on PR with [Coveralls](https://coveralls.io/).
-
-[![Coverage Status](https://coveralls.io/repos/github/tubone24/blog/badge.svg?branch=master)](https://coveralls.io/github/tubone24/blog?branch=master)
-
-And more, you can check production test coverage report below.
-
-- jest test report
-  - <https://tubone24.github.io/blog/cov/index.html>
-- cypress e2e test report
-  - <https://tubone24.github.io/blog/e2e-cov/index.html>
-
 ### Cleaning
 
-If you error occurred on gatsby build, execute commands below
+If you encounter build errors, execute commands below
 
 ```sh
-$ yarn build
-....
-....
-Error loading a result for the page query in "/". Query was not run and no cached result was found.
-
-$ yarn clean
+yarn clean
 ```
 
-Also, you want to clean dependencies, execute commands below
+Also, to clean dependencies:
 
 ```sh
 yarn clean-all
@@ -191,7 +190,7 @@ yarn clean-all
 
 ### Update Browsers List
 
-This project use Browsers List, so you can update it
+This project uses Browsers List, so you can update it
 
 ```sh
 yarn browserslist:update
@@ -227,10 +226,6 @@ Or if you want to test against a specific URL, set an environment variable.
 URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
 ```
 
-And also, creating PR, you can check memory leak report via GitHub PR Comments.
-
-![memlab leaks report](https://i.imgur.com/JdjbTuo.png)
-
 ## Environment variables
 
 Copy `.env.example` to create the `.env` file
@@ -241,15 +236,15 @@ cp .env.example .env
 
 | Key                              | Description                                              | Default |
 |----------------------------------|----------------------------------------------------------|---------|
-| GATSBY_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       |
-| GATSBY_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       |
-| GATSBY_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   |
-| GATSBY_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       |
-| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's ADMIN API KEY, use index post content   | -       |
-| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's APP ID                                  | posts   |
-| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's index name                              | -       |
-| GATSBY_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
-| GATSBY_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
+| PUBLIC_ALGOLIA_ADMIN_API_KEY     | Algolia search's ADMIN API KEY, use index post content   | -       |
+| PUBLIC_ALGOLIA_APP_ID            | Algolia search's APP ID                                  | -       |
+| PUBLIC_ALGOLIA_INDEX_NAME        | Algolia search's index name                              | posts   |
+| PUBLIC_ALGOLIA_SEARCH_API_KEY    | Algolia search's search API KEY, use view search on site | -       |
+| STORYBOOK_ALGOLIA_APP_ID         | Algolia search's APP ID (for Storybook)                  | -       |
+| STORYBOOK_ALGOLIA_INDEX_NAME     | Algolia search's index name (for Storybook)              | posts   |
+| STORYBOOK_ALGOLIA_SEARCH_API_KEY | Algolia search's search API KEY (for Storybook)          | -       |
+| PUBLIC_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
+| PUBLIC_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
 | FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       |
 
 ## CI/CD
@@ -258,12 +253,6 @@ This repository uses [GitHub Actions](https://github.co.jp/features/actions) as 
 
 [![DeployToNetlifyPreview](https://github.com/tubone24/blog/workflows/DeployToNetlifyPreview/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPreview)
 [![DeployToNetlifyPRD](https://github.com/tubone24/blog/workflows/DeployToNetlifyPRD/badge.svg)](https://github.com/tubone24/blog/actions?query=workflow%3ADeployToNetlifyPRD)
-
-## Code with Codesandbox
-
-Use the button below to code with the blog system:
-
-[![Edit blog](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/tubone24/blog/tree/master/)
 
 ## Storybook
 
@@ -317,10 +306,6 @@ Use [Sentry](https://sentry.io/organizations/tubone-project24/projects/)
 
 There is a security risk of credentials getting into the code, but we use [Gitguardian](https://www.gitguardian.com/) to check each PR to make sure they are not mixed in.
 
-### API Based
-
-API request based security check is used by [Brightsec](https://brightsec.com/)
-
 ### static code analysis for vulnerability
 
 We use [Snyk](https://app.snyk.io/org/tubone24/project/f01f63e7-832e-45ca-a080-eb4d0da4b8e6) for static code analysis.
@@ -329,16 +314,6 @@ In addition to detecting vulnerabilities in the libraries used, we scan code and
 If you create PR, check security vulnerability for [snyk CLI](https://docs.snyk.io/snyk-cli) and push PR comment.
 
 ![snyk comments](https://i.imgur.com/fEL1cFj.png)
-
-### OWASP ZAP
-
-[OWASP ZAP](https://www.zaproxy.org/) [Full Scan](https://www.zaproxy.org/docs/docker/full-scan/) can be run securely against a locally built Docker container.
-
-The results can be viewed at the following URL
-
-<https://tubone24.github.io/blog/owasp/report.html>
-
-Full Scan of OWASP ZAP has a very long execution time, so manual execution with [workflow_dispatch](https://github.com/tubone24/blog/actions/workflows/owaspzap.yml) is recommended.
 
 ## CI Healthy
 

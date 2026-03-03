@@ -5,29 +5,6 @@ import type { SearchClient, SearchIndex } from "algoliasearch";
 import type { RequestOptions } from "@algolia/transporter";
 import type { SearchOptions } from "@algolia/client-search";
 
-let algoliasearch: CallableFunction;
-let autocomplete: CallableFunction;
-let client: SearchClient;
-let index: SearchIndex;
-
-if (typeof window !== "undefined") {
-  // eslint-disable-next-line global-require
-  algoliasearch = require("algoliasearch/lite");
-  // eslint-disable-next-line global-require
-  autocomplete = require("autocomplete.js");
-  client = algoliasearch(
-    import.meta.env.PUBLIC_ALGOLIA_APP_ID ||
-      process.env.STORYBOOK_ALGOLIA_APP_ID,
-    import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY ||
-      process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY,
-  );
-  index = client.initIndex(
-    import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME ||
-      process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
-      "posts",
-  );
-}
-
 // https://github.com/algolia/algoliasearch-client-javascript/issues/1152
 const source =
   (index: SearchIndex, parameters: RequestOptions & SearchOptions) =>
@@ -38,49 +15,71 @@ const source =
       .catch((err) => cb([], err));
 
 class SearchBox extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     if (typeof window === "undefined") {
       return;
     }
-    autocomplete("#algolia-search-input", { hint: false }, [
-      {
-        source: source(index, { hitsPerPage: 3 }),
-        displayKey: "title",
-        templates: {
-          suggestion({
-            _highlightResult: { title, description },
-          }: {
-            _highlightResult: {
-              title: {
-                value: string;
+
+    try {
+      const algoliasearchModule = await import("algoliasearch/lite");
+      const algoliasearch = algoliasearchModule.default || algoliasearchModule;
+      const autocompleteModule = await import("autocomplete.js");
+      const autocomplete = autocompleteModule.default || autocompleteModule;
+
+      const client: SearchClient = algoliasearch(
+        import.meta.env.PUBLIC_ALGOLIA_APP_ID ||
+          process.env.STORYBOOK_ALGOLIA_APP_ID,
+        import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY ||
+          process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY,
+      );
+      const index = client.initIndex(
+        import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME ||
+          process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
+          "posts",
+      );
+
+      autocomplete("#algolia-search-input", { hint: false }, [
+        {
+          source: source(index, { hitsPerPage: 3 }),
+          displayKey: "title",
+          templates: {
+            suggestion({
+              _highlightResult: { title, description },
+            }: {
+              _highlightResult: {
+                title: {
+                  value: string;
+                };
+                description: {
+                  value: string;
+                };
               };
-              description: {
-                value: string;
-              };
-            };
-          }) {
-            return `
-                <b><p class="title">${title.value}</p></b>
-                <p class="description">${description.value}</p>
-                `;
+            }) {
+              return `
+                  <b><p class="title">${title.value}</p></b>
+                  <p class="description">${description.value}</p>
+                  `;
+            },
+            footer:
+              '<div class="branding"><img src="https://i.imgur.com/HXG1uHY.png" alt="Powered by Algolia" decoding="async" /></div>',
           },
-          footer:
-            '<div class="branding"><img src="https://i.imgur.com/HXG1uHY.png" alt="Powered by Algolia" decoding="async" /></div>',
         },
-      },
-    ]).on(
-      "autocomplete:selected",
-      (event: { _args: { path: string }[] }, suggestion: { url: string }) => {
-        window.location.href = suggestion.url;
-        ReactGA.event({
-          category: "User",
+      ]).on(
+        "autocomplete:selected",
+        (event: { _args: { path: string }[] }, suggestion: { url: string }) => {
+          window.location.href = suggestion.url;
+          ReactGA.event({
+            category: "User",
+            // eslint-disable-next-line no-underscore-dangle
+            action: `Click Searchbox item: ${event._args[0].path}`,
+          });
           // eslint-disable-next-line no-underscore-dangle
-          action: `Click Searchbox item: ${event._args[0].path}`,
-        });
-        // eslint-disable-next-line no-underscore-dangle
-        window.location.href = event._args[0].path;
-      },
-    );
+          window.location.href = event._args[0].path;
+        },
+      );
+    } catch (err) {
+      console.error("Failed to initialize Algolia search:", err);
+    }
   }
 
   render() {
