@@ -25,6 +25,17 @@ const { post } = Astro.props;
 const { Content: PostContent } = await render(post);
 
 const rawText = post.body || '';
+const speechText = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`[^`]*`/g, '')
+  .replace(/<[^>]+>/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~>]/g, '')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim();
 const wordCount = rawText
   .replace(/```[\s\S]*?```/g, '')
   .replace(/`[^`]*`/g, '')
@@ -91,7 +102,7 @@ const allPostsForRelated = sorted.map((p) => ({
     />
     <main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
       <TimeToRead client:load words={wordCount} minutes={minutes} />
-      <TextToSpeech client:load text={rawText} />
+      <TextToSpeech client:load text={speechText} />
       {post.data.useAi && (
         <aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;">
           <p>この記事は筆者(<a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer">tubone</a>)が<a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer">whisper-realtime</a>を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。</p>
