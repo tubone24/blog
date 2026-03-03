@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import TagCloud from "./index";
-import { AllPost } from "@/components/Sidebar/entity";
+import type { AllPost } from "@/components/Sidebar/entity";
 
 describe("TagCloud", () => {
   const testAllPosts: AllPost[] = [

@@ -1,0 +1,133 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header/index.tsx';
+import ShareBox from '../components/ShareBox/index.tsx';
+import Sidebar from '../components/Sidebar/index.tsx';
+import RelatedPosts from '../components/Relateds/index.tsx';
+import TimeToRead from '../components/TimeToRead/index.tsx';
+import TextToSpeech from '../components/TextToSpeech/index.tsx';
+import config from '../config/index.json';
+import { parseDate } from '../utils/index';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => {
+    const slug = post.slug;
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { Content: PostContent } = await render(post);
+
+const rawText = post.body || '';
+const speechText = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`[^`]*`/g, '')
+  .replace(/<[^>]+>/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~>]/g, '')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim();
+const wordCount = rawText
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/`[^`]*`/g, '')
+  .replace(/[#*_\[\]()!]/g, '')
+  .replace(/\s+/g, '')
+  .length;
+const minutes = Math.ceil(wordCount / 400);
+
+const slug = post.slug;
+const shareURL = `${config.siteUrl}/${slug}/`;
+
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const latestPosts = sorted.slice(0, 6).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+  url: p.slug,
+}));
+
+const allPostsForSidebar = sorted.map((p) => ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
+
+const allPostsForRelated = sorted.map((p) => ({
+  title: p.data.title,
+  tags: p.data.tags || [],
+  date: p.data.date.toISOString(),
+  headerImage: p.data.headerImage,
+  slug: `/${p.slug}/`,
+}));
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description || ''}
+  ogImage={post.data.headerImage || config.defaultImage}
+  isPostPage={true}
+  isPost={true}
+  tag={post.data.tags?.[0] || ''}
+  canonicalUrl={shareURL}
+  datePublished={post.data.date.toISOString()}
+  dateModified={post.data.date.toISOString()}
+  keywords={post.data.tags || []}
+>
+  <div class="post row order-2">
+    <Header
+      client:load
+      img={post.data.headerImage || config.defaultImage}
+      title={post.data.title}
+      authorName={config.author}
+      authorImage={true}
+      subTitle={parseDate(post.data.date.toISOString())}
+    />
+    <Sidebar
+      client:load
+      latestPosts={latestPosts}
+      allPosts={allPostsForSidebar}
+      totalCount={sorted.length}
+    />
+    <main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
+      <TimeToRead client:load words={wordCount} minutes={minutes} />
+      <TextToSpeech client:load text={speechText} />
+      {post.data.useAi && (
+        <aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;">
+          <p>この記事は筆者(<a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer">tubone</a>)が<a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer">whisper-realtime</a>を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。</p>
+        </aside>
+      )}
+      <div class="content-white-inner">
+        <PostContent />
+      </div>
+      <div class="content-white-inner">
+        <h2>tubone24にラーメンを食べさせよう！</h2>
+        <p>ぽちっとな↓</p>
+        <a href="https://www.buymeacoffee.com/tubone24">
+          <img
+            src="https://img.buymeacoffee.com/button-api/?text=Buy me a ramen&emoji=🍜&slug=tubone24&button_colour=40DCA5&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+            alt="Buy me a ramen"
+          />
+        </a>
+      </div>
+      <RelatedPosts
+        client:load
+        title={post.data.title}
+        tags={post.data.tags || []}
+        allPosts={allPostsForRelated}
+      />
+    </main>
+    <ShareBox client:load url={shareURL} />
+  </div>
+</Layout>

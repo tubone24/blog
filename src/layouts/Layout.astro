@@ -1,0 +1,210 @@
+---
+import Navbar from '../components/Navbar/index.tsx';
+import Footer from '../components/Footer/index.tsx';
+import '../styles/global.scss';
+import config from '../config/index.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  isPostPage?: boolean;
+  canonicalUrl?: string;
+  isPost?: boolean;
+  tag?: string;
+  noindex?: boolean;
+  datePublished?: string;
+  dateModified?: string;
+  author?: string;
+  keywords?: string[];
+}
+
+const {
+  title = config.siteTitle,
+  description = config.description,
+  ogImage = config.defaultImage,
+  isPostPage = false,
+  canonicalUrl,
+  isPost = false,
+  tag = '',
+  noindex = false,
+  datePublished,
+  dateModified,
+  author = config.author,
+  keywords = [],
+} = Astro.props;
+
+const siteTitle = config.siteTitle;
+const url = canonicalUrl || `${config.siteUrl}${Astro.url.pathname}`;
+const pageTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const ogpImageLink = `https://tubone-project24.xyz/ogp.png?title=${encodeURI(title)}`;
+
+const japaneseKeywords = ['技術ブログ', 'プログラミング', '開発', 'エンジニアリング'];
+const allKeywords = [...keywords, ...japaneseKeywords, tag].filter(Boolean).join(', ');
+
+// Schema.org JSON-LD
+const schemaOrgList: object[] = [];
+
+// WebSite schema
+schemaOrgList.push({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${config.siteUrl}/#website`,
+  url: config.siteUrl,
+  name: config.siteTitle,
+  description: config.description,
+  publisher: { '@id': `${config.siteUrl}/#person` },
+  inLanguage: 'ja-JP',
+});
+
+// Person schema
+schemaOrgList.push({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${config.siteUrl}/#person`,
+  name: author || config.author,
+  url: `${config.siteUrl}/about`,
+  image: {
+    '@type': 'ImageObject',
+    '@id': `${config.siteUrl}/#personImage`,
+    url: `${config.siteUrl}/favicons/android-chrome-512x512.png`,
+    width: 512,
+    height: 512,
+    caption: config.author,
+  },
+  sameAs: ['https://github.com/tubone24', 'https://twitter.com/tubone24'],
+  jobTitle: 'Software Engineer',
+});
+
+if (isPost) {
+  // BreadcrumbList
+  schemaOrgList.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, item: { '@id': config.siteUrl, name: 'ホーム' } },
+      { '@type': 'ListItem', position: 2, item: { '@id': `${config.siteUrl}/tags`, name: 'タグ一覧' } },
+      { '@type': 'ListItem', position: 3, item: { '@id': `${config.siteUrl}/tag/${tag}`, name: tag } },
+      { '@type': 'ListItem', position: 4, name: title },
+    ],
+  });
+
+  // BlogPosting
+  schemaOrgList.push({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    url,
+    name: title,
+    headline: title,
+    description,
+    image: { '@type': 'ImageObject', url: ogImage, width: 1200, height: 630 },
+    datePublished: datePublished || new Date().toISOString(),
+    dateModified: dateModified || datePublished || new Date().toISOString(),
+    author: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
+    publisher: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
+    inLanguage: 'ja-JP',
+    keywords: tag,
+  });
+}
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+
+  {/* General tags */}
+  <meta name="description" content={description} />
+  <meta name="image" content={ogImage} />
+  <meta name="keywords" content={allKeywords} />
+  <meta name="author" content={author} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+
+  {/* カノニカルURL */}
+  <link rel="canonical" href={url} />
+
+  {/* 電話番号自動認識の無効化 */}
+  <meta name="format-detection" content="telephone=no" />
+
+  {/* Apple固有のメタタグ */}
+  <meta name="apple-mobile-web-app-title" content={title} />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  {/* Microsoft固有のメタタグ */}
+  <meta name="application-name" content={title} />
+  <meta name="msapplication-TileColor" content="#33b546" />
+  <meta name="msapplication-TileImage" content="/favicons/mstile-150x150.png" />
+
+  {/* Google Site Verification */}
+  <meta name="google-site-verification" content={config.googleSiteVerification} />
+
+  {/* Schema.org JSON-LD */}
+  <script type="application/ld+json" set:html={JSON.stringify(schemaOrgList)} />
+
+  {/* OpenGraph tags */}
+  <meta property="og:url" content={url} />
+  <meta property="og:site_name" content={config.siteTitle} />
+  <meta property="og:type" content={isPost ? 'article' : 'website'} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogpImageLink} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={title} />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="fb:app_id" content="280941406476272" />
+
+  {/* Article specific tags */}
+  {isPost && (
+    <>
+      <meta property="article:published_time" content={datePublished || new Date().toISOString()} />
+      <meta property="article:modified_time" content={dateModified || datePublished || new Date().toISOString()} />
+      <meta property="article:author" content={author} />
+      <meta property="article:section" content={tag} />
+      <meta property="article:tag" content={tag} />
+    </>
+  )}
+
+  {/* Twitter Card tags */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@tubone24" />
+  <meta name="twitter:creator" content="@tubone24" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogpImageLink} />
+  <meta name="twitter:image:alt" content={title} />
+
+  {/* Favicons */}
+  <link rel="icon" type="image/x-icon" href="/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  {/* RSS Feed */}
+  <link rel="alternate" type="application/rss+xml" title={config.siteTitle} href="/rss.xml" />
+
+  {/* Google Analytics */}
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CCJKJ2L8BY');
+  </script>
+  <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-CCJKJ2L8BY" async></script>
+</head>
+<body>
+  <Navbar client:load isPostPage={isPostPage} />
+  <slot />
+  <Footer client:load />
+  <script>
+    import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+  </script>
+</body>
+</html>

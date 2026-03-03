@@ -24,10 +24,7 @@ module.exports = {
     `.storybook`,
   ],
   modulePathIgnorePatterns: [`.storybook`],
-  transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`, `\\.svg`],
-  globals: {
-    __PATH_PREFIX__: ``,
-  },
+  transformIgnorePatterns: [`node_modules`, `\\.svg`],
   testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
   moduleFileExtensions: ["ts", "tsx", "js", "json"],
   collectCoverage: false,

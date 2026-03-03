@@ -1,6 +1,5 @@
 import React from "react";
 import ReactGA from "react-ga4";
-import { navigate, withPrefix } from "gatsby";
 
 import NavItem from "./NavItem";
 import ExternalLink from "@/components/ExternalLink";
@@ -29,7 +28,7 @@ const Navbar = ({ isPostPage = false }: { isPostPage?: boolean }) => (
             category: "User",
             action: "Click navbar logo",
           });
-          navigate(withPrefix("/"));
+          window.location.href = "/";
         }}
       >
         <img

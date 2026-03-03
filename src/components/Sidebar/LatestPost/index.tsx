@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 import ReactGA from "react-ga4";
 import * as style from "./index.module.scss";
 
@@ -30,13 +29,9 @@ const LatestPost = ({
       {totalCount}
     </p>
     {posts.map(({ node }) => (
-      <Link
-        to={withPrefix(
-          node.frontmatter.url || node.frontmatter.slug || node.fields.slug,
-        )}
-        key={withPrefix(
-          node.frontmatter.url || node.frontmatter.slug || node.fields.slug,
-        )}
+      <a
+        href={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
+        key={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}
         onClick={() =>
           ReactGA.event({
             category: "User",
@@ -45,7 +40,7 @@ const LatestPost = ({
         }
       >
         {node.frontmatter.title}
-      </Link>
+      </a>
     ))}
   </div>
 );

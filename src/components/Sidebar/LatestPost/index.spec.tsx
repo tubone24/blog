@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import LatestPost, { Post } from "./index";
+import LatestPost from "./index";
+import type { Post } from "./index";
 import { axe } from "jest-axe";
 import ReactGA from "react-ga4";
 import userEvent from "@testing-library/user-event";
@@ -16,7 +17,7 @@ describe("LatestPost", () => {
       },
     ];
     render(<LatestPost posts={posts} totalCount={1} />);
-    expect(screen.getByText("testTitle")).toHaveAttribute("href", "/testUrl");
+    expect(screen.getByText("testTitle")).toHaveAttribute("href", "testUrl");
   });
   it("has slug", async () => {
     const posts: Post[] = [
@@ -28,7 +29,7 @@ describe("LatestPost", () => {
       },
     ];
     render(<LatestPost posts={posts} totalCount={1} />);
-    expect(screen.getByText("testTitle")).toHaveAttribute("href", "/testSlug");
+    expect(screen.getByText("testTitle")).toHaveAttribute("href", "testSlug");
   });
   it("has fields slug", async () => {
     const posts: Post[] = [
@@ -42,7 +43,7 @@ describe("LatestPost", () => {
     render(<LatestPost posts={posts} totalCount={1} />);
     expect(screen.getByText("testTitle")).toHaveAttribute(
       "href",
-      "/testFieldsSlug",
+      "testFieldsSlug",
     );
   });
   it("total count", async () => {

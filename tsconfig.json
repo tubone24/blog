@@ -1,11 +1,13 @@
 {
-  "include": ["./src/**/*", "./gatsby/*"],
-  "exclude": ["**/*.stories.tsx", "**/*.stories.ts", ".storybook"],
+  "extends": "astro/tsconfigs/strict",
+  "include": ["./src/**/*"],
+  "exclude": ["**/*.stories.tsx", "**/*.stories.ts", ".storybook", "node_modules"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "es2017"],
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "strict": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -13,7 +15,7 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

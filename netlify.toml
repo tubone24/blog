@@ -1,15 +1,12 @@
 [build]
   functions = "functions/src"
-  publish = "public"
+  publish = "dist"
   command = "npm run build"
-  
+
   # Build environment
   [build.environment]
   NODE_VERSION = "18"
   NODE_OPTIONS = "--max-old-space-size=4096"
-
-[[plugins]]
-  package = "netlify-plugin-gatsby-cache"
 
 [functions]
   directory = "functions/src"
@@ -21,13 +18,6 @@
   to = "data:application/javascript,console.log('SW disabled')"
   status = 200
   headers = {Cache-Control = "public, max-age=0, must-revalidate"}
-
-# Fallback for pages when service worker fails
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["admin"]}
 
 # Handle 404s properly
 [[redirects]]

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: *
+Disallow: /admin
+
+User-agent: *
+Disallow: /preview/
+Sitemap: https://tubone-project24.xyz/sitemap-index.xml
+Host: https://tubone-project24.xyz

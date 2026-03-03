@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import Archive from "./index";
-import { AllPost } from "../entity";
+import type { AllPost } from "../entity";
 import { axe } from "jest-axe";
 import ReactGA from "react-ga4";
 import userEvent from "@testing-library/user-event";

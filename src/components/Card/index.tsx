@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, withPrefix } from "gatsby";
 
 import Tag from "@/components/Tag";
 
@@ -20,50 +19,18 @@ const CardHeader = ({
 }) => {
   const imageUrl = parseImgur(image, SizeMapping.large);
 
-  if (index > 1) {
-    return (
-      <Link to={url}>
-        <span className="visually-hidden">{title}</span>
-        <div
-          className={style.wrapper + " lozad"}
-          data-background-image={imageUrl}
-          aria-hidden="true"
-          data-testid="card-header"
-        />
-      </Link>
-    );
-  }
-
-  // For the first image (LCP), use img tag with eager loading and high priority
-  if (index === 0) {
-    return (
-      <Link to={url} className={style.imageLink}>
-        <span className="visually-hidden">{title}</span>
-        <img
-          src={imageUrl}
-          alt=""
-          className={style.wrapper}
-          loading="eager"
-          fetchPriority="high"
-          data-testid="card-header"
-        />
-      </Link>
-    );
-  }
-
-  // For other early images, keep the existing background-image approach
+  // 1枚目はeager loading（LCP）、2枚目以降はnative lazy loading
   return (
-    <Link to={url}>
+    <a href={url} className={index === 0 ? style.imageLink : undefined}>
       <span className="visually-hidden">{title}</span>
-      <div
+      <img
+        src={imageUrl}
+        alt=""
         className={style.wrapper}
-        style={{
-          backgroundImage: ` url(${imageUrl})`,
-        }}
-        aria-hidden="true"
+        loading={index === 0 ? "eager" : "lazy"}
         data-testid="card-header"
       />
-    </Link>
+    </a>
   );
 };
 
@@ -87,12 +54,7 @@ const Card = ({
   <div className="col-sm-12 pb-4" data-testid="card">
     <div className={style.customCard}>
       {headerImage && (
-        <CardHeader
-          url={withPrefix(url)}
-          image={headerImage}
-          title={title}
-          index={index}
-        />
+        <CardHeader url={url} image={headerImage} title={title} index={index} />
       )}
       <div className={style.data}>
         <div className={style.dataContent}>
@@ -102,9 +64,9 @@ const Card = ({
               <Tag name={name || ""} key={`${name}-${index}`} />
             ))}
           </div>
-          <Link to={withPrefix(url)}>
+          <a href={url}>
             <h3 className={style.title}>{title}</h3>
-          </Link>
+          </a>
           <p>{description}</p>
         </div>
       </div>

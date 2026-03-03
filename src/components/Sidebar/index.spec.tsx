@@ -41,25 +41,17 @@ jest.mock("./TagCloud", () => {
 describe("Sidebar", () => {
   const mockLatestPosts = [
     {
-      node: {
-        frontmatter: {
-          url: "/test-post-1",
-          title: "Test Post 1",
-          date: "2023-01-01",
-        },
-        fields: { slug: "/test-post-1" },
-      },
+      title: "Test Post 1",
+      slug: "/test-post-1",
+      date: "2023-01-01",
+      url: "/test-post-1",
     },
   ];
 
   const mockAllPosts = [
     {
-      node: {
-        frontmatter: {
-          date: "2023-01-01",
-          tags: ["react", "testing"],
-        },
-      },
+      date: "2023-01-01",
+      tags: ["react", "testing"],
     },
   ];
 
@@ -189,7 +181,7 @@ describe("Sidebar", () => {
     });
   });
 
-  it("triggers ReactGA event when source element is clicked", async () => {
+  it("triggers ReactGA event when picture link is clicked", async () => {
     const spyIsBrowser = jest.spyOn(utils, "isBrowser");
     spyIsBrowser.mockReturnValue(true);
 
@@ -202,9 +194,11 @@ describe("Sidebar", () => {
     );
 
     const mockReactGA = jest.spyOn(ReactGA, "event");
-    const sourceElement = container.querySelector("source") as HTMLElement;
+    const pictureLink = container.querySelector(
+      'a[href="https://portfolio.tubone-project24.xyz/"]',
+    ) as HTMLElement;
 
-    await userEvent.click(sourceElement);
+    await userEvent.click(pictureLink);
 
     expect(mockReactGA).toHaveBeenCalledWith({
       category: "User",

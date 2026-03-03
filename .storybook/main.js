@@ -43,15 +43,7 @@ module.exports = {
     config.module.rules.push({
       test: /\.module\.scss$/,
       use: [
-        {
-          loader: "style-loader",
-          options: {
-            modules: {
-              // for use CSS module in Storybook, namedExport is true.
-              namedExport: true,
-            },
-          },
-        },
+        "style-loader",
         {
           loader: "css-loader",
           options: {
