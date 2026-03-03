@@ -1,5 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card/index.tsx';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 5);
 ---
 
 <Layout
@@ -11,9 +18,30 @@ import Layout from '../layouts/Layout.astro';
     <div class="row">
       <div class="col" style="padding:4rem 2rem; text-align:center;">
         <h1>404 Not Found...</h1>
-        <h2>Anything else...?</h2>
         <p><a href="/">ホームに戻る</a></p>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h3 style="margin-bottom:1.5rem;">最近の記事</h3>
+      </div>
+      {latestPosts.map((post, index) => {
+        const url = post.slug;
+        return (
+          <div class="col-sm-12 pb-4">
+            <Card
+              client:load
+              title={post.data.title}
+              date={post.data.date.toISOString()}
+              url={`/${url}/`}
+              headerImage={post.data.headerImage}
+              description={post.data.description}
+              tags={post.data.tags || []}
+              index={index}
+            />
+          </div>
+        );
+      })}
     </div>
   </div>
 </Layout>

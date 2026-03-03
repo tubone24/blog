@@ -34,7 +34,9 @@ const {
   keywords = [],
 } = Astro.props;
 
+const siteTitle = config.siteTitle;
 const url = canonicalUrl || `${config.siteUrl}${Astro.url.pathname}`;
+const pageTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const ogpImageLink = `https://tubone-project24.xyz/ogp.png?title=${encodeURI(title)}`;
 
 const japaneseKeywords = ['技術ブログ', 'プログラミング', '開発', 'エンジニアリング'];
@@ -114,7 +116,7 @@ if (isPost) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
+  <title>{pageTitle}</title>
 
   {/* General tags */}
   <meta name="description" content={description} />

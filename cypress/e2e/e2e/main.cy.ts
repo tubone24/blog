@@ -15,7 +15,9 @@ describe("UI Test", () => {
     cy.location("href").should("include", "/tags");
     cy.contains("test 1").click();
     cy.location("href").should("include", "/tag/test");
-    cy.contains("このBlogテンプレートのテスト用投稿").click();
+    cy.contains("このBlogテンプレートのテスト用投稿")
+      .should("be.visible")
+      .click();
     cy.location("href").should("include", "/2011/08/30");
     cy.get("title").should(
       "have.text",
@@ -52,10 +54,17 @@ describe("Privacy Policy Page", () => {
 describe("404 Page", () => {
   // eslint-disable-next-line jest/expect-expect
   it("Invalid Page returns 404 site", () => {
-    cy.visit("/hogehogehogehogehoge", { failOnStatusCode: false }).injectAxe();
-    cy.get("button").contains("Preview").click();
+    cy.visit("/hogehogehogehogehoge", { failOnStatusCode: false });
+    // Astro devサーバーではエラーオーバーレイが表示される場合がある
+    // preview/build環境では直接404ページが表示される
+    cy.get("body").then(($body) => {
+      if ($body.find("vite-error-overlay").length > 0) {
+        // dev server: オーバーレイの中のリンクをクリック
+        cy.get("vite-error-overlay").shadow().find("a").contains("404").click();
+      }
+    });
     cy.get("h1").contains("404 Not Found...");
-    cy.get("h2").contains("Anything else...?");
+    cy.get("h3").contains("最近の記事");
   });
 });
 
