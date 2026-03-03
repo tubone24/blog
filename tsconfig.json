@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["./src/**/*", "./scripts/**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["**/*.stories.tsx", "**/*.stories.ts", ".storybook", "node_modules"],
   "compilerOptions": {
     "target": "esnext",
