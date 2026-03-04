@@ -25,6 +25,12 @@
   to = "/404.html"
   status = 404
 
+# Headers for sitemap.xml
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
 # Headers for llms.txt
 [[headers]]
   for = "/llms.txt"
