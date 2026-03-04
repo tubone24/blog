@@ -63,15 +63,12 @@ class SearchBox extends Component {
         },
       ]).on(
         "autocomplete:selected",
-        (event: { _args: { path: string }[] }, suggestion: { url: string }) => {
-          window.location.href = suggestion.url;
+        (_event: unknown, suggestion: { url: string; title: string }) => {
           ReactGA.event({
             category: "User",
-            // eslint-disable-next-line no-underscore-dangle
-            action: `Click Searchbox item: ${event._args[0].path}`,
+            action: `Click Searchbox item: ${suggestion.title}`,
           });
-          // eslint-disable-next-line no-underscore-dangle
-          window.location.href = event._args[0].path;
+          window.location.href = suggestion.url;
         },
       );
     } catch (err) {
