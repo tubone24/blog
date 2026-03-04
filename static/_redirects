@@ -2,6 +2,8 @@
 /rss/ /rss.xml 301
 /index.xml/ /rss.xml 301
 /sitemap/ /sitemap.xml 301
+/sitemap-index.xml /sitemap.xml 301
+/sitemap-0.xml /sitemap.xml 301
 /latest/meta-data/ / 301
 /.well-known/security.txt /well-known/security.txt 301
 /.well-known/humans.txt /well-known/humans.txt 301
