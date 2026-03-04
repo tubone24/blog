@@ -104,7 +104,6 @@ src/
 - Components managed by [Storybook](#storybook)
 - Each production deploy is measured by [Lighthouse](#lighthouse) and [reports](https://tubone24.github.io/blog/lh/report.html) are output
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
-- Detect browser's memory leaks by [memlab](https://github.com/facebookincubator/memlab)
 - Detect vulnerability by [Snyk](https://app.snyk.io/)
 - Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master
 
@@ -210,20 +209,6 @@ If you want to check storybook, execute commands below
 
 ```sh
 yarn storybook
-```
-
-### memlab
-
-If you want to detect browser's memory leaks, you can use memlab script below
-
-```sh
-yarn memlab
-```
-
-Or if you want to test against a specific URL, set an environment variable.
-
-```sh
-URL=https://63ad31c571f88e60f37399ec--pensive-lamport-5822d2.netlify.app yarn memlab
 ```
 
 ## Environment variables

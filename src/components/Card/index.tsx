@@ -28,7 +28,7 @@ const CardHeader = ({
         alt=""
         className={style.wrapper}
         loading={index === 0 ? "eager" : "lazy"}
-        fetchPriority={index === 0 ? "high" : "auto"}
+        {...{ fetchpriority: index === 0 ? "high" : "auto" }}
         data-testid="card-header"
       />
     </a>
