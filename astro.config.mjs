@@ -4,6 +4,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeMermaid from '@beoe/rehype-mermaid';
 import remarkToc from 'remark-toc';
 import rehypeLazyImages from './src/lib/rehype-lazy-images.mjs';
 import netlifyHeaders from './src/lib/astro-netlify-headers.mjs';
@@ -53,6 +54,7 @@ export default defineConfig({
         },
       }],
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      rehypeMermaid,
       [rehypePrismPlus, { ignoreMissing: true }],
       rehypeLazyImages,
     ],
