@@ -22,9 +22,6 @@ terraform:
   - changed-files:
     - any-glob-to-any-file: 'terraform/**/*'
 
-memlab:
-  - changed-files:
-    - any-glob-to-any-file: 'test/memlab/**/*'
 
 readme:
   - changed-files:
