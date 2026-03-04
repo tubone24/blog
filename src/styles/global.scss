@@ -1,4 +1,70 @@
 @import "bootstrap/scss/bootstrap";
+@import "prismjs/themes/prism-solarizedlight.css";
+
+// rehype-prism-plus: コード行スタイル
+.code-line {
+  display: block;
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: -16px;
+  margin-left: -16px;
+  border-left: 4px solid transparent;
+}
+
+.highlight-line {
+  background-color: rgb(55 65 81 / 15%);
+  border-left-color: #3b82f6;
+}
+
+// rehype-prism-plus: 行番号
+.line-number::before {
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: #9ca3af;
+  text-align: right;
+  content: attr(line);
+}
+
+// シェルプロンプト表示
+.shell-prompt {
+  color: #6c757d;
+  pointer-events: none;
+  user-select: none;
+}
+
+// oEmbed レスポンシブコンテナ
+.oembed-container {
+  position: relative;
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+.oembed-container iframe {
+  max-width: 100%;
+}
+
+// YouTube等のレスポンシブiframe
+.oembed-container.video {
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.oembed-container.video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// Twitter埋め込みの中央寄せ
+.twitter-tweet {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
 
 @font-face {
   font-family: icomoon;

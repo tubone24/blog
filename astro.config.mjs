@@ -6,6 +6,13 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeMermaid from '@beoe/rehype-mermaid';
 import remarkToc from 'remark-toc';
+import remarkEmbedderModule from '@remark-embedder/core';
+import oembedTransformerModule from '@remark-embedder/transformer-oembed';
+
+const remarkEmbedder = remarkEmbedderModule.default || remarkEmbedderModule;
+const oembedTransformer = oembedTransformerModule.default || oembedTransformerModule;
+import rehypeGatsbyCodeMeta from './src/lib/rehype-gatsby-code-meta.mjs';
+import rehypeShellPrompt from './src/lib/rehype-shell-prompt.mjs';
 import rehypeLazyImages from './src/lib/rehype-lazy-images.mjs';
 import netlifyHeaders from './src/lib/astro-netlify-headers.mjs';
 
@@ -35,6 +42,7 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [
+      [remarkEmbedder, { transformers: [oembedTransformer] }],
       [remarkToc, { heading: 'Table of Contents|toc|TOC|目次', maxDepth: 3 }],
     ],
     rehypePlugins: [
@@ -55,7 +63,9 @@ export default defineConfig({
       }],
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
       rehypeMermaid,
+      rehypeGatsbyCodeMeta,
       [rehypePrismPlus, { ignoreMissing: true }],
+      rehypeShellPrompt,
       rehypeLazyImages,
     ],
     syntaxHighlight: false,
