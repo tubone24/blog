@@ -12,7 +12,7 @@ services:
       - "-s"
       - "-l"
       - "9000"
-      - "public"
+      - "dist"
     ports:
       - "9000:9000" # yarn serve
       - "8000:8000" # yarn dev
