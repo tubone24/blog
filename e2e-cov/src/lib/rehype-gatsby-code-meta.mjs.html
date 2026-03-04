@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/ShareBox/index.tsx</title>
+    <title>Code coverage report for src/lib/rehype-gatsby-code-meta.mjs</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/ShareBox</a> index.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/lib</a> rehype-gatsby-code-meta.mjs</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -168,7 +168,31 @@
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -273,111 +297,159 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { visit } from 'unist-util-visit';
 &nbsp;
-import ReactGA from "react-ga4";
+/**
+ * Gatsby式コードフェンスメタデータをrehype-prism-plus互換形式に変換するrehypeプラグイン。
+ *
+ * markdownパーサーはinfo stringをスペースで分割するため:
+ *   `javascript{numberLines: 5}{3}` →
+ *     className: `language-javascript{numberLines:`, metastring: `5}{3}`
+ *
+ * このプラグインはクラス名の不完全な `{` とmetastringを結合し、
+ * 正しく解析してrehype-prism-plus互換形式に変換する。
+ */
+export default function rehypeGatsbyCodeMeta() {
+  return (tree) =&gt; {
+    visit(tree, 'element', (node) =&gt; {
+      if (node.tagName !== 'code') return;
 &nbsp;
-import * as style from "./index.module.scss";
+      const classNames = node.properties?.className || [];
+      let existingMeta = node.properties?.metastring || node.data?.meta || '';
+      let modified = false;
 &nbsp;
-const GotoTopButton = () =&gt; (
-  &lt;button
-    type="button"
-    className={style.shareButton + " " + style.top}
-    title="トップに戻る"
-    data-testid="GotoTopButton"
-    onClick={() =&gt; {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      ReactGA.event({
-        category: "User",
-        action: "Scroll to Top",
+      const newClassNames = classNames.map((cls) =&gt; {
+        if (typeof cls !== 'string') return cls;
+&nbsp;
+        // language-xxx{...} のパターンを検出
+        const braceIndex = cls.indexOf('{');
+        if (braceIndex === -1) return cls;
+&nbsp;
+        const langPart = cls.substring(0, braceIndex);
+        const trailingMeta = cls.substring(braceIndex);
+&nbsp;
+        // クラス名内の不完全な{...をmetastringと結合して完全なメタ文字列を復元
+        // 例: trailingMeta="{numberLines:" + existingMeta="5}{3}" → "{numberLines: 5}{3}"
+        let fullMeta;
+        if (!trailingMeta.endsWith('}') &amp;&amp; existingMeta) {
+          fullMeta = trailingMeta + ' ' + existingMeta;
+          existingMeta = ''; // 結合済みなので既存メタはクリア
+        } else {
+          fullMeta = trailingMeta;
+        }
+&nbsp;
+        // メタデータ部分を解析
+        parseGatsbyMeta(fullMeta, node);
+        modified = true;
+        return langPart;
       });
-    }}
-  &gt;
-    &lt;span className="icon-chevron-up" aria-hidden="true" /&gt;
-    &lt;span className="visually-hidden"&gt;トップに戻る&lt;/span&gt;
-  &lt;/button&gt;
-);
 &nbsp;
-const ShareBox = ({ url }: { url: string }) =&gt; (
-  &lt;div className={style.mShareBox} role="application" data-testid="share-box"&gt;
-    &lt;a
-      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURI(url)}`}
-      title="FacebookでShareする"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={style.shareButton}
-      data-testid="facebook-link"
-      onClick={() =&gt;
-        ReactGA.event({
-          category: "Share",
-          action: "Facebook Share",
-        })
-      }
-    &gt;
-      &lt;span className="icon-facebook" /&gt;
-    &lt;/a&gt;
-    &lt;a
-      href={`https://twitter.com/intent/tweet?text=LikeThis:&amp;url=${encodeURI(
-        url,
-      )}`}
-      title="TwitterでShareする"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={style.shareButton}
-      data-testid="twitter-link"
-      onClick={() =&gt;
-        ReactGA.event({
-          category: "Share",
-          action: "Twitter Share",
-        })
-      }
-    &gt;
-      &lt;span className="icon-twitter" /&gt;
-    &lt;/a&gt;
-    &lt;a
-      href={`http://getpocket.com/edit?url=${encodeURI(url)}`}
-      title="Pocketに追加する"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={style.shareButton}
-      data-testid="pocket-link"
-      onClick={() =&gt;
-        ReactGA.event({
-          category: "Share",
-          action: "Pocket Share",
-        })
-      }
-    &gt;
-      &lt;span className="icon-get-pocket" /&gt;
-    &lt;/a&gt;
-    &lt;a
-      href={`http://b.hatena.ne.jp/add?mode=confirm&amp;url=${encodeURI(url)}`}
-      className={style.shareButtonNoBorder}
-      data-hatena-bookmark-layout="vertical-normal"
-      data-hatena-bookmark-lang="ja"
-      title="このエントリーをはてなブックマークに追加"
-      data-testid="hatebu-link"
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={() =&gt;
-        ReactGA.event({
-          category: "Share",
-          action: "Hatebu Share",
-        })
-      }
-    &gt;
-      &lt;img
-        src="/assets/button-only@2x.png"
-        alt="hatena bookmark"
-        width="30"
-        height="30"
-      /&gt;
-    &lt;/a&gt;
-    &lt;GotoTopButton /&gt;
-  &lt;/div&gt;
-);
+      if (modified) {
+        node.properties.className = newClassNames;
 &nbsp;
-export default ShareBox;
+        // 残ったexistingMeta（結合されなかった場合）も処理
+        if (existingMeta) {
+          parseGatsbyMeta(existingMeta, node);
+        }
+&nbsp;
+        // 変換後のメタ文字列を構築
+        const newMeta = buildMetastring(node);
+        if (newMeta) {
+          node.properties.metastring = newMeta;
+          if (!node.data) node.data = {};
+          node.data.meta = newMeta;
+        }
+      }
+    });
+  };
+}
+&nbsp;
+/**
+ * Gatsby式メタデータ文字列を解析し、node上にメタ情報を蓄積
+ */
+function parseGatsbyMeta(metaPart, node) {
+  if (!node._gatsbyMeta) node._gatsbyMeta = { parts: [] };
+&nbsp;
+  // すべての {...} ブロックを抽出
+  const regex = /\{([^}]*)\}/g;
+  let match;
+&nbsp;
+  while ((match = regex.exec(metaPart)) !== null) {
+    const content = match[1].trim();
+&nbsp;
+    // {numberLines: N} → showLineNumbers=N
+    const numberLinesMatch = content.match(/^numberLines:\s*(\d+)$/);
+    if (numberLinesMatch) {
+      node._gatsbyMeta.parts.push(`showLineNumbers=${numberLinesMatch[1]}`);
+      continue;
+    }
+&nbsp;
+    // {numberLines: true} または {numberLines} → showLineNumbers
+    if (content === 'numberLines' || content === 'numberLines: true') {
+      node._gatsbyMeta.parts.push('showLineNumbers');
+      continue;
+    }
+&nbsp;
+    // {promptUser: name} → data属性に変換
+    const promptUserMatch = content.match(/^promptUser:\s*(.+)$/);
+    if (promptUserMatch) {
+      if (!node.properties) node.properties = {};
+      node.properties['data-prompt-user'] = promptUserMatch[1].trim();
+      continue;
+    }
+&nbsp;
+    // {promptHost: host} → data属性に変換
+    const promptHostMatch = content.match(/^promptHost:\s*(.+)$/);
+    if (promptHostMatch) {
+      if (!node.properties) node.properties = {};
+      node.properties['data-prompt-host'] = promptHostMatch[1].trim();
+      continue;
+    }
+&nbsp;
+    // {N} / {N,M-P} → 行ハイライト指定（そのまま保持）
+    if (/^[\d,\s-]+$/.test(content)) {
+      node._gatsbyMeta.parts.push(`{${content}}`);
+      continue;
+    }
+&nbsp;
+    // 不明なメタデータはそのまま保持
+    node._gatsbyMeta.parts.push(`{${content}}`);
+  }
+}
+&nbsp;
+/**
+ * 蓄積されたメタ情報からrehype-prism-plus互換のmetastringを構築
+ */
+function buildMetastring(node) {
+  if (!node._gatsbyMeta?.parts?.length) return '';
+  const result = node._gatsbyMeta.parts.join(' ');
+  delete node._gatsbyMeta;
+  return result;
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -387,14 +459,14 @@ export default ShareBox;
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2026-03-04T13:52:39.388Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     
