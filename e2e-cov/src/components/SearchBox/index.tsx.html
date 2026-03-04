@@ -165,15 +165,7 @@
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a>
-<a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,86 +270,82 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from "react";
 import "./index.scss";
 import ReactGA from "react-ga4";
-import type { SearchClient, SearchIndex } from "algoliasearch";
-import type { RequestOptions } from "@algolia/transporter";
-import type { SearchOptions } from "@algolia/client-search";
-&nbsp;
-let algoliasearch: CallableFunction;
-let autocomplete: CallableFunction;
-let client: SearchClient;
-let index: SearchIndex;
-&nbsp;
-if (typeof window !== "undefined") {
-  // eslint-disable-next-line global-require
-  algoliasearch = require("algoliasearch/lite");
-  // eslint-disable-next-line global-require
-  autocomplete = require("autocomplete.js");
-  client = algoliasearch(
-    import.meta.env.PUBLIC_ALGOLIA_APP_ID ||
-      process.env.STORYBOOK_ALGOLIA_APP_ID,
-    import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY ||
-      process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY,
-  );
-  index = client.initIndex(
-    import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME ||
-      process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
-      "posts",
-  );
-}
-&nbsp;
 // https://github.com/algolia/algoliasearch-client-javascript/issues/1152
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const source =
-  (index: SearchIndex, parameters: RequestOptions &amp; SearchOptions) =&gt;
+  (index: any, parameters: Record&lt;string, unknown&gt;) =&gt;
   (query: string, cb: CallableFunction) =&gt;
     index
       .search(query, parameters)
-      .then((res) =&gt; cb(res.hits, res))
-      .catch((err) =&gt; cb([], err));
+      .then((res: { hits: unknown[] }) =&gt; cb(res.hits, res))
+      .catch((err: unknown) =&gt; cb([], err));
 &nbsp;
 class SearchBox extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     if (typeof window === "undefined") {
       return;
     }
-    autocomplete("#algolia-search-input", { hint: false }, [
-      {
-        source: source(index, { hitsPerPage: 3 }),
-        displayKey: "title",
-        templates: {
-          suggestion({
-            _highlightResult: { title, description },
-          }: {
-            _highlightResult: {
-              title: {
-                value: string;
+&nbsp;
+    try {
+      const algoliasearchModule = await import("algoliasearch/lite");
+      const algoliasearch = algoliasearchModule.default || algoliasearchModule;
+      const autocompleteModule = await import("autocomplete.js");
+      const autocomplete = autocompleteModule.default || autocompleteModule;
+&nbsp;
+      const client = algoliasearch(
+        import.meta.env.PUBLIC_ALGOLIA_APP_ID ||
+          process.env.STORYBOOK_ALGOLIA_APP_ID,
+        import.meta.env.PUBLIC_ALGOLIA_SEARCH_API_KEY ||
+          process.env.STORYBOOK_ALGOLIA_SEARCH_API_KEY,
+      );
+      const index = client.initIndex(
+        import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME ||
+          process.env.STORYBOOK_ALGOLIA_INDEX_NAME ||
+          "posts",
+      );
+&nbsp;
+      autocomplete("#algolia-search-input", { hint: false }, [
+        {
+          source: source(index, { hitsPerPage: 3 }),
+          displayKey: "title",
+          templates: {
+            suggestion({
+              _highlightResult: { title, description },
+            }: {
+              _highlightResult: {
+                title: {
+                  value: string;
+                };
+                description: {
+                  value: string;
+                };
               };
-              description: {
-                value: string;
-              };
-            };
-          }) {
-            return `
-                &lt;b&gt;&lt;p class="title"&gt;${title.value}&lt;/p&gt;&lt;/b&gt;
-                &lt;p class="description"&gt;${description.value}&lt;/p&gt;
-                `;
+            }) {
+              return `
+                  &lt;b&gt;&lt;p class="title"&gt;${title.value}&lt;/p&gt;&lt;/b&gt;
+                  &lt;p class="description"&gt;${description.value}&lt;/p&gt;
+                  `;
+            },
+            footer:
+              '&lt;div class="branding"&gt;&lt;img src="https://i.imgur.com/HXG1uHY.png" alt="Powered by Algolia" decoding="async" /&gt;&lt;/div&gt;',
           },
-          footer:
-            '&lt;div class="branding"&gt;&lt;img src="https://i.imgur.com/HXG1uHY.png" alt="Powered by Algolia" decoding="async" /&gt;&lt;/div&gt;',
         },
-      },
-    ]).on(
-      "autocomplete:selected",
-      (event: { _args: { path: string }[] }, suggestion: { url: string }) =&gt; {
-        window.location.href = suggestion.url;
-        ReactGA.event({
-          category: "User",
+      ]).on(
+        "autocomplete:selected",
+        (event: { _args: { path: string }[] }, suggestion: { url: string }) =&gt; {
+          window.location.href = suggestion.url;
+          ReactGA.event({
+            category: "User",
+            // eslint-disable-next-line no-underscore-dangle
+            action: `Click Searchbox item: ${event._args[0].path}`,
+          });
           // eslint-disable-next-line no-underscore-dangle
-          action: `Click Searchbox item: ${event._args[0].path}`,
-        });
-        // eslint-disable-next-line no-underscore-dangle
-        window.location.href = event._args[0].path;
-      },
-    );
+          window.location.href = event._args[0].path;
+        },
+      );
+    } catch (err) {
+      console.error("Failed to initialize Algolia search:", err);
+    }
   }
 &nbsp;
   render() {
@@ -388,7 +376,7 @@ export default SearchBox;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-03T21:27:00.276Z
+                at 2026-03-04T00:31:02.176Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
