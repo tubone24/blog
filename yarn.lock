@@ -20892,10 +20892,10 @@ system-architecture@^0.1.0:
   resolved "https://registry.yarnpkg.com/system-architecture/-/system-architecture-0.1.0.tgz#71012b3ac141427d97c67c56bc7921af6bff122d"
   integrity sha512-ulAk51I9UVUyJgxlv9M6lFot2WP3e7t8Kz9+IS6D4rVba1tR9kON+Ey69f+1R4Q8cd45Lod6a4IcJIxnzGc/zA==
 
-systeminformation@5.27.14, systeminformation@^5.27.14:
-  version "5.27.14"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.27.14.tgz#9f2b181521c151dad4972d47936ebb49a3271e9d"
-  integrity sha512-3DoNDYSZBLxBwaJtQGWNpq0fonga/VZ47HY1+7/G3YoIPaPz93Df6egSzzTKbEMmlzUpy3eQ0nR9REuYIycXGg==
+systeminformation@5.31.0, systeminformation@^5.27.14:
+  version "5.31.0"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.31.0.tgz#fce21969b080e6971accf2d601b78f17271d7715"
+  integrity sha512-z5pjzvC8UnQJ/iu34z+mo3lAeMzTGdArjPQoG5uPyV5XY4BY+M6ZcRTl4XnZqudz6sP713LhWMKv6e0kGFGCgQ==
 
 table@^6.8.1:
   version "6.9.0"
