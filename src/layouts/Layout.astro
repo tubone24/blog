@@ -191,18 +191,18 @@ if (isPost) {
   <link rel="alternate" type="application/rss+xml" title={config.siteTitle} href="/rss.xml" />
 
   {/* Google Analytics */}
+  <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-CCJKJ2L8BY" async></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-CCJKJ2L8BY');
   </script>
-  <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-CCJKJ2L8BY" async></script>
 </head>
 <body>
   <Navbar client:load isPostPage={isPostPage} />
   <slot />
-  <Footer client:load />
+  <Footer client:idle />
   <script>
     import 'bootstrap/dist/js/bootstrap.bundle.min.js';
   </script>

@@ -1,3 +1,6 @@
+// autocomplete.js has no type declarations
+declare module "autocomplete.js";
+
 // SCSS + CSS Module + TypeScript
 declare module "*.scss" {
   const content: { [className: string]: string };

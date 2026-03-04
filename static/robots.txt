@@ -6,5 +6,5 @@ Disallow: /admin
 
 User-agent: *
 Disallow: /preview/
-Sitemap: https://tubone-project24.xyz/sitemap-index.xml
+Sitemap: https://tubone-project24.xyz/sitemap.xml
 Host: https://tubone-project24.xyz
