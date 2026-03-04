@@ -6,12 +6,14 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypePrismPlus from 'rehype-prism-plus';
 import remarkToc from 'remark-toc';
 import rehypeLazyImages from './src/lib/rehype-lazy-images.mjs';
+import netlifyHeaders from './src/lib/astro-netlify-headers.mjs';
 
 export default defineConfig({
   site: 'https://tubone-project24.xyz',
   publicDir: 'static',
   integrations: [
     react(),
+    netlifyHeaders(),
   ],
   vite: {
     css: {
