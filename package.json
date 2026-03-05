@@ -205,13 +205,15 @@
     "qs": "6.15.0",
     "serialize-javascript": "7.0.4",
     "h3": "1.15.5",
-    "tar": "7.5.9",
+    "tar": "7.5.10",
     "fastify": "5.7.4",
     "lodash": "4.17.23",
     "axios": "1.13.6",
     "markdown-it": "14.1.1",
     "lodash-es": "4.17.23",
-    "baseline-browser-mapping": "2.10.0"
+    "baseline-browser-mapping": "2.10.0",
+    "immutable": "4.3.8",
+    "svgo": "4.0.1"
   },
   "browserslist": [
     ">0.25% in JP",
