@@ -51,3 +51,6 @@ owasp/zap/zapHome/
 # Local Netlify folder
 .netlify
 dist
+
+# Astro
+.astro
