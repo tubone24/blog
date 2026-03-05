@@ -1,15 +1,6 @@
 name: Snyk
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - master
-    paths:
-      - functions/**
-      - src/**
-      - test/**
-      - terraform/**
-      - '!src/content/**'
 env:
   cache-version: v2
 
