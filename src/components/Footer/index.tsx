@@ -33,7 +33,7 @@ const Footer = () => (
             &nbsp;&nbsp;
             <a href="/privacy-policies">Privacy Policies</a>
             &nbsp;&nbsp;&nbsp;
-            <a href="/sitemap.xml" title="sitemap">
+            <a href="/sitemap-index.xml" title="sitemap">
               Sitemap
             </a>
           </p>

@@ -25,11 +25,26 @@
   to = "/404.html"
   status = 404
 
-# Headers for sitemap.xml
+# Headers for sitemap-index.xml
 [[headers]]
-  for = "/sitemap.xml"
+  for = "/sitemap-index.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Headers for sitemap-posts.xml
+[[headers]]
+  for = "/sitemap-posts.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+# Headers for sitemap-pages.xml
+[[headers]]
+  for = "/sitemap-pages.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
 
 # Headers for llms.txt
 [[headers]]

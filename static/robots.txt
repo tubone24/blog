@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /preview/
-Sitemap: https://tubone-project24.xyz/sitemap.xml
+Sitemap: https://tubone-project24.xyz/sitemap-index.xml
