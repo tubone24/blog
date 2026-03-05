@@ -147,6 +147,9 @@ if (isPost) {
   {/* Schema.org JSON-LD */}
   <script type="application/ld+json" set:html={JSON.stringify(schemaOrgList)} />
 
+  {/* Sitemap */}
+  <link rel="sitemap" type="application/xml" href="/sitemap-index.xml">
+
   {/* OpenGraph tags */}
   <meta property="og:url" content={url} />
   <meta property="og:site_name" content={config.siteTitle} />
@@ -183,8 +186,7 @@ if (isPost) {
   {/* Favicons */}
   <link rel="icon" type="image/x-icon" href="/favicons/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/android-chrome-32x32.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
 
   {/* RSS Feed */}
