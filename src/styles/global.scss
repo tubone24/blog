@@ -1,5 +1,5 @@
 @import "bootstrap/scss/bootstrap";
-@import "prismjs/themes/prism-solarizedlight.css";
+@import "prismjs/themes/prism-tomorrow.css";
 
 // rehype-prism-plus: コード行スタイル
 .code-line {
@@ -12,7 +12,7 @@
 }
 
 .highlight-line {
-  background-color: rgb(55 65 81 / 15%);
+  background-color: rgb(255 255 255 / 10%);
   border-left-color: #3b82f6;
 }
 
@@ -32,6 +32,93 @@
   color: #6c757d;
   pointer-events: none;
   user-select: none;
+}
+
+// ===== シェルコードブロック: ダークテーマ =====
+pre.shell-dark {
+  background-color: #1e1e1e !important;
+  border: 1px solid #333;
+  border-radius: 6px;
+
+  code {
+    color: #e0e0e0;
+    background: transparent !important;
+  }
+
+  .shell-prompt {
+    color: #56b6c2;
+  }
+
+  .shell-output {
+    color: #adb5bd;
+  }
+
+  .token.comment {
+    color: #adb5bd;
+  }
+
+  .token.string {
+    color: #98c379;
+  }
+
+  .token.keyword,
+  .token.builtin {
+    color: #c678dd;
+  }
+
+  .token.function {
+    color: #61afef;
+  }
+
+  .token.variable {
+    color: #e5c07b;
+  }
+
+  .token.operator,
+  .token.punctuation {
+    color: #abb2bf;
+  }
+
+  .token.number {
+    color: #d19a66;
+  }
+
+  .highlight-line {
+    background-color: rgb(255 255 255 / 10%);
+  }
+
+  .line-number::before {
+    color: #636d83;
+  }
+
+  .code-line {
+    border-left-color: transparent;
+  }
+}
+
+// ===== ファイルラベル =====
+pre[data-file] {
+  position: relative;
+  padding-top: 2.5em;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 10px;
+    font-family: SFMono-Regular, Consolas, "Roboto Mono", monospace;
+    font-size: 0.75em;
+    line-height: 1.6;
+    color: #adb5bd;
+    content: attr(data-file);
+    background-color: rgb(255 255 255 / 10%);
+    border-bottom-left-radius: 4px;
+  }
+}
+
+pre.shell-dark[data-file]::before {
+  color: #adb5bd;
+  background-color: rgb(255 255 255 / 10%);
 }
 
 // oEmbed レスポンシブコンテナ
@@ -499,10 +586,12 @@ h6 {
     background: #f1f8ff;
   }
 
+  /* stylelint-disable no-descending-specificity */
   code,
   pre {
     font-family: SFMono-Regular, Consolas, "Roboto Mono", "Courier New", "BIZ UDGothic", Meiryo, monospace;
   }
+  /* stylelint-enable no-descending-specificity */
 }
 
 // ページネーションスタイル（旧Gatsby index.module.scssから移植）

@@ -12,7 +12,7 @@ import { visit } from 'unist-util-visit';
  */
 export default function rehypeGatsbyCodeMeta() {
   return (tree) => {
-    visit(tree, 'element', (node) => {
+    visit(tree, 'element', (node, index, parent) => {
       if (node.tagName !== 'code') return;
 
       const classNames = node.properties?.className || [];
@@ -60,6 +60,12 @@ export default function rehypeGatsbyCodeMeta() {
           if (!node.data) node.data = {};
           node.data.meta = newMeta;
         }
+
+        // data-file 属性を <pre> 親要素にもコピー
+        if (node.properties?.['data-file'] && parent?.tagName === 'pre') {
+          if (!parent.properties) parent.properties = {};
+          parent.properties['data-file'] = node.properties['data-file'];
+        }
       }
     });
   };
@@ -104,6 +110,14 @@ function parseGatsbyMeta(metaPart, node) {
     if (promptHostMatch) {
       if (!node.properties) node.properties = {};
       node.properties['data-prompt-host'] = promptHostMatch[1].trim();
+      continue;
+    }
+
+    // {file: "path/to/file"} → data属性に変換
+    const fileMatch = content.match(/^file:\s*"([^"]+)"$/);
+    if (fileMatch) {
+      if (!node.properties) node.properties = {};
+      node.properties['data-file'] = fileMatch[1].trim();
       continue;
     }
 
