@@ -1,6 +1,15 @@
 @import "bootstrap/scss/bootstrap";
 @import "prismjs/themes/prism-tomorrow.css";
 
+// インラインcode（pre外のcode要素）
+:not(pre) > code {
+  padding: 2px 6px;
+  font-size: 0.875em;
+  color: #3a5169;
+  background-color: #f6f8fa;
+  border-radius: 4px;
+}
+
 // rehype-prism-plus: コード行スタイル
 .code-line {
   display: block;
@@ -99,17 +108,17 @@ pre.shell-dark {
 // ===== ファイルラベル =====
 pre[data-file] {
   position: relative;
-  padding-top: 2.5em;
 
   &::before {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 2px 10px;
+    padding: 1px 8px;
     font-family: SFMono-Regular, Consolas, "Roboto Mono", monospace;
-    font-size: 0.75em;
-    line-height: 1.6;
+    font-size: 0.7em;
+    line-height: 1.4;
     color: #adb5bd;
+    pointer-events: none;
     content: attr(data-file);
     background-color: rgb(255 255 255 / 10%);
     border-bottom-left-radius: 4px;
