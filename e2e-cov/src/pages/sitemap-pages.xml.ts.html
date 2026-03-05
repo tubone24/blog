@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/pages/index.astro</title>
+    <title>Code coverage report for src/pages/sitemap-pages.xml.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/pages</a> index.astro</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/pages</a> sitemap-pages.xml.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -121,25 +121,7 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,100 +179,64 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">---
-import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card/index.tsx';
-import Sidebar from '../components/Sidebar/index.tsx';
-import config from '../config/index.json';
-import { parseDate } from '../utils/index';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
+import { SITE_URL, formatDate } from "../utils/sitemap";
 &nbsp;
 const POSTS_PER_PAGE = 10;
 &nbsp;
-const allPosts = await getCollection('blog');
-const sorted = allPosts.sort(
-  (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+export async function GET(_context: APIContext) {
+  const posts = await getCollection("blog");
 &nbsp;
-const totalPages = Math.ceil(sorted.length / POSTS_PER_PAGE);
-const pagePosts = sorted.slice(0, POSTS_PER_PAGE);
+  // 新しい順にソート
+  const sorted = posts.sort(
+    (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  );
 &nbsp;
-// Sidebar用データ
-const latestPosts = sorted.slice(0, 6).map((p) =&gt; ({
-  title: p.data.title,
-  slug: p.slug,
-  date: p.data.date.toISOString(),
-  url: p.slug,
-}));
+  const totalPages = Math.ceil(sorted.length / POSTS_PER_PAGE);
+  const latestPostDate = formatDate(sorted[0].data.date);
 &nbsp;
-const allPostsForSidebar = sorted.map((p) =&gt; ({
-  date: p.data.date.toISOString(),
-  tags: p.data.tags || [],
-}));
----
+  const urls: string[] = [];
 &nbsp;
-&lt;Layout
-  title={config.siteTitle}
-  description={config.description}
-  ogImage={config.defaultImage}
-  canonicalUrl={config.siteUrl}
-&gt;
-  &lt;div class="container"&gt;
-    &lt;div class="row homepage"&gt;
-      &lt;Sidebar
-        client:load
-        latestPosts={latestPosts}
-        allPosts={allPostsForSidebar}
-        totalCount={sorted.length}
-      /&gt;
-      &lt;main class="col-xl-6 col-lg-7 col-md-12 col-12 order-2"&gt;
-        {pagePosts.map((post, num) =&gt; {
-          const url = post.slug;
-          return (
-            &lt;Card
-              client:load
-              title={post.data.title}
-              date={post.data.date.toISOString()}
-              url={`/${url}/`}
-              headerImage={post.data.headerImage}
-              description={post.data.description}
-              tags={post.data.tags}
-              index={num}
-            /&gt;
-          );
-        })}
-        &lt;div class="row pager"&gt;
-          &lt;div&gt;
-            &lt;span class="pager-disabled"&gt;Previous&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class="pagenum"&gt;{`1/${totalPages}`}&lt;/div&gt;
-          &lt;div&gt;
-            {totalPages &gt; 1 &amp;&amp; &lt;a href="/pages/2/"&gt;Next&lt;/a&gt;}
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/main&gt;
-      &lt;div class="col-xl-2 col-lg-1 order-3"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/Layout&gt;
+  // ホームページ（lastmod = 最新記事日）
+  urls.push(`  &lt;url&gt;
+    &lt;loc&gt;${SITE_URL}/&lt;/loc&gt;
+    &lt;lastmod&gt;${latestPostDate}&lt;/lastmod&gt;
+  &lt;/url&gt;`);
+&nbsp;
+  // ページネーション（/pages/2/ 〜 /pages/N/）
+  for (let page = 2; page &lt;= totalPages; page++) {
+    const start = (page - 1) * POSTS_PER_PAGE;
+    const pagePosts = sorted.slice(start, start + POSTS_PER_PAGE);
+    const pageLastmod =
+      pagePosts.length &gt; 0
+        ? formatDate(pagePosts[0].data.date)
+        : latestPostDate;
+    urls.push(`  &lt;url&gt;
+    &lt;loc&gt;${SITE_URL}/pages/${page}/&lt;/loc&gt;
+    &lt;lastmod&gt;${pageLastmod}&lt;/lastmod&gt;
+  &lt;/url&gt;`);
+  }
+&nbsp;
+  // about, privacy-policies（lastmod なし）
+  urls.push(`  &lt;url&gt;
+    &lt;loc&gt;${SITE_URL}/about/&lt;/loc&gt;
+  &lt;/url&gt;`);
+  urls.push(`  &lt;url&gt;
+    &lt;loc&gt;${SITE_URL}/privacy-policies/&lt;/loc&gt;
+  &lt;/url&gt;`);
+&nbsp;
+  const xml = `&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+${urls.join("\n")}
+&lt;/urlset&gt;`;
+&nbsp;
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+    },
+  });
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

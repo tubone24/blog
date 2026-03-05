@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/SearchBox/index.scss</title>
+    <title>Code coverage report for src/pages/sitemap-posts.xml.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/SearchBox</a> index.scss</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/pages</a> sitemap-posts.xml.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -96,13 +96,7 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -135,50 +129,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">.algolia-autocomplete {
-  width: 100%;
-}
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
+import { SITE_URL, xmlEscape, formatDate } from "../utils/sitemap";
 &nbsp;
-.algolia-autocomplete .aa-input,
-.algolia-autocomplete .aa-hint {
-  width: 100%;
-}
+export async function GET(_context: APIContext) {
+  const posts = await getCollection("blog");
 &nbsp;
-.algolia-autocomplete .aa-hint {
-  color: #999;
-}
+  // 新しい順にソート
+  const sorted = posts.sort(
+    (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  );
 &nbsp;
-.algolia-autocomplete .aa-dropdown-menu {
-  width: 100%;
-  background-color: #fff;
-  border: 1px solid #999;
-  border-top: none;
-}
+  const urlEntries = sorted
+    .map((post) =&gt; {
+      const lastmod = formatDate(post.data.date);
+      return `  &lt;url&gt;
+    &lt;loc&gt;${SITE_URL}/${xmlEscape(post.slug)}/&lt;/loc&gt;
+    &lt;lastmod&gt;${lastmod}&lt;/lastmod&gt;
+  &lt;/url&gt;`;
+    })
+    .join("\n");
 &nbsp;
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-  padding: 5px 4px;
-  cursor: pointer;
-}
+  const xml = `&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+${urlEntries}
+&lt;/urlset&gt;`;
 &nbsp;
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background-color: #b2d7ff;
-}
-&nbsp;
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-  font-style: normal;
-  font-weight: bold;
-}
-&nbsp;
-#algolia-search-input {
-  width: 100%;
-  padding-left: 10px;
-  border: none;
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+    },
+  });
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -189,14 +171,14 @@
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2026-03-05T07:14:37.741Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

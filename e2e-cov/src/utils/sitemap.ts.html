@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/content/config.ts</title>
+    <title>Code coverage report for src/utils/sitemap.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/content</a> config.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/utils</a> sitemap.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -78,8 +78,7 @@
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -94,23 +93,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { defineCollection, z } from "astro:content";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const SITE_URL = "https://tubone-project24.xyz";
 &nbsp;
-const blog = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    date: z.coerce.date(),
-    description: z.string().optional().default(""),
-    tags: z.array(z.string()).optional().default([]),
-    headerImage: z.string().optional().default(""),
-    templateKey: z.string().optional(),
-    useAi: z.boolean().optional().default(false),
-  }),
-});
+export function xmlEscape(str: string): string {
+  return str
+    .replace(/&amp;/g, "&amp;amp;")
+    .replace(/&lt;/g, "&amp;lt;")
+    .replace(/&gt;/g, "&amp;gt;")
+    .replace(/"/g, "&amp;quot;")
+    .replace(/'/g, "&amp;apos;");
+}
 &nbsp;
-export const collections = { blog };
+export function formatDate(date: Date | string): string {
+  const d = date instanceof Date ? date : new Date(date);
+  return d.toISOString().split("T")[0];
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
