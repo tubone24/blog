@@ -31,7 +31,7 @@ describe("UI Test", () => {
   });
   // eslint-disable-next-line jest/expect-expect
   it("Logo click and return home", () => {
-    cy.visit("/about");
+    cy.visit("/privacy-policies");
     cy.get("[data-testid=logo-img]").click();
     cy.location("href").should("include", "/");
   });
