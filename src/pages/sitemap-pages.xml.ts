@@ -37,10 +37,7 @@ export async function GET(_context: APIContext) {
   </url>`);
   }
 
-  // about, privacy-policies（lastmod なし）
-  urls.push(`  <url>
-    <loc>${SITE_URL}/about/</loc>
-  </url>`);
+  // privacy-policies（lastmod なし）
   urls.push(`  <url>
     <loc>${SITE_URL}/privacy-policies/</loc>
   </url>`);

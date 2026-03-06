@@ -87,12 +87,12 @@ describe("Layout", () => {
 
   it("uses pathname to determine non-post page when isPostPage is not provided", () => {
     const nonPostLocation = {
-      pathname: "/about",
+      pathname: "/tags",
     };
 
     const { getByTestId } = render(
       <Layout location={nonPostLocation}>
-        <div>About Content</div>
+        <div>Tags Content</div>
       </Layout>,
     );
 
