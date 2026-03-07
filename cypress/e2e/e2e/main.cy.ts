@@ -31,7 +31,7 @@ describe("UI Test", () => {
   });
   // eslint-disable-next-line jest/expect-expect
   it("Logo click and return home", () => {
-    cy.visit("/privacy-policies");
+    cy.visit("/privacy-policies/");
     cy.get("[data-testid=logo-img]").click();
     cy.location("href").should("include", "/");
   });
@@ -46,7 +46,7 @@ describe("UI Test", () => {
 describe("Privacy Policy Page", () => {
   // eslint-disable-next-line jest/expect-expect
   it("PrivacyPolicy", () => {
-    cy.visit("/privacy-policies");
+    cy.visit("/privacy-policies/");
     cy.get("h1").contains("プライバシーポリシー");
   });
 });
@@ -54,7 +54,7 @@ describe("Privacy Policy Page", () => {
 describe("404 Page", () => {
   // eslint-disable-next-line jest/expect-expect
   it("Invalid Page returns 404 site", () => {
-    cy.visit("/hogehogehogehogehoge", { failOnStatusCode: false });
+    cy.visit("/hogehogehogehogehoge/", { failOnStatusCode: false });
     // Astro devサーバーではエラーオーバーレイが表示される場合がある
     // preview/build環境では直接404ページが表示される
     cy.get("body").then(($body) => {

@@ -22,7 +22,7 @@ const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
   const limitTags = tags.slice(0, 20);
   return (
     <div className="d-none d-lg-block information my-2">
-      <a href="/tags" title="Tags">
+      <a href="/tags/" title="Tags">
         <p>
           <span className="icon-tags" />
           &nbsp;{limitTags.length} / {tags.length} Tags
