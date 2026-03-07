@@ -45,7 +45,8 @@ const wordCount = rawText
 const minutes = Math.ceil(wordCount / 400);
 
 const slug = post.slug;
-const shareURL = `${config.siteUrl}/${slug}/`;
+const siteUrlBase = config.siteUrl.replace(/\/$/, '');
+const shareURL = `${siteUrlBase}/${slug}/`;
 
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(

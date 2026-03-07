@@ -10,7 +10,7 @@ const Tag = ({
   count?: number | string;
 }) => (
   <a
-    href={`/tag/${name}`}
+    href={`/tag/${name}/`}
     className={style.headerTag}
     title={name}
     onClick={() =>

@@ -18,6 +18,7 @@ import netlifyHeaders from './src/lib/astro-netlify-headers.mjs';
 
 export default defineConfig({
   site: 'https://tubone-project24.xyz',
+  trailingSlash: 'always',
   publicDir: 'static',
   integrations: [
     react(),

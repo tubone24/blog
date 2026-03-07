@@ -35,7 +35,9 @@ const {
 } = Astro.props;
 
 const siteTitle = config.siteTitle;
-const url = canonicalUrl || `${config.siteUrl}${Astro.url.pathname}`;
+const siteUrlBase = config.siteUrl.replace(/\/$/, '');
+const rawUrl = canonicalUrl || `${siteUrlBase}${Astro.url.pathname}`;
+const url = rawUrl.endsWith('/') ? rawUrl : `${rawUrl}/`;
 const pageTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const ogpImageLink = `https://tubone-project24.xyz/ogp.png?title=${encodeURI(title)}`;
 
@@ -49,11 +51,11 @@ const schemaOrgList: object[] = [];
 schemaOrgList.push({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': `${config.siteUrl}/#website`,
+  '@id': `${siteUrlBase}/#website`,
   url: config.siteUrl,
   name: config.siteTitle,
   description: config.description,
-  publisher: { '@id': `${config.siteUrl}/#person` },
+  publisher: { '@id': `${siteUrlBase}/#person` },
   inLanguage: 'ja-JP',
 });
 
@@ -61,13 +63,13 @@ schemaOrgList.push({
 schemaOrgList.push({
   '@context': 'https://schema.org',
   '@type': 'Person',
-  '@id': `${config.siteUrl}/#person`,
+  '@id': `${siteUrlBase}/#person`,
   name: author || config.author,
   url: 'https://portfolio.tubone-project24.xyz',
   image: {
     '@type': 'ImageObject',
-    '@id': `${config.siteUrl}/#personImage`,
-    url: `${config.siteUrl}/favicons/android-chrome-512x512.png`,
+    '@id': `${siteUrlBase}/#personImage`,
+    url: `${siteUrlBase}/favicons/android-chrome-512x512.png`,
     width: 512,
     height: 512,
     caption: config.author,
@@ -84,8 +86,8 @@ if (isPost) {
     '@id': `${url}#breadcrumb`,
     itemListElement: [
       { '@type': 'ListItem', position: 1, item: { '@id': config.siteUrl, name: 'ホーム' } },
-      { '@type': 'ListItem', position: 2, item: { '@id': `${config.siteUrl}/tags`, name: 'タグ一覧' } },
-      { '@type': 'ListItem', position: 3, item: { '@id': `${config.siteUrl}/tag/${tag}`, name: tag } },
+      { '@type': 'ListItem', position: 2, item: { '@id': `${config.siteUrl}tags/`, name: 'タグ一覧' } },
+      { '@type': 'ListItem', position: 3, item: { '@id': `${config.siteUrl}tag/${encodeURIComponent(tag)}/`, name: tag } },
       { '@type': 'ListItem', position: 4, name: title },
     ],
   });
@@ -103,8 +105,8 @@ if (isPost) {
     image: { '@type': 'ImageObject', url: ogImage, width: 1200, height: 630 },
     datePublished: datePublished || new Date().toISOString(),
     dateModified: dateModified || datePublished || new Date().toISOString(),
-    author: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
-    publisher: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
+    author: { '@type': 'Person', '@id': `${siteUrlBase}/#person` },
+    publisher: { '@type': 'Person', '@id': `${siteUrlBase}/#person` },
     inLanguage: 'ja-JP',
     keywords: tag,
   });
