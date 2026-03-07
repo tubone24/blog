@@ -197,7 +197,7 @@
     "webpack": "5.105.4",
     "yaml": "2.8.2",
     "micromatch": "4.0.8",
-    "systeminformation": "5.31.2",
+    "systeminformation": "5.31.3",
     "node-forge": "1.3.3",
     "jws": "4.0.1",
     "cookie": "1.1.1",
