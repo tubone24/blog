@@ -35,7 +35,10 @@ const {
 } = Astro.props;
 
 const siteTitle = config.siteTitle;
-const url = canonicalUrl || `${config.siteUrl}${Astro.url.pathname}`;
+const siteUrlBase = config.siteUrl.replace(/\/$/, '');
+const rawUrl = canonicalUrl || `${siteUrlBase}${Astro.url.pathname}`;
+const cleanUrl = rawUrl.replace(/([^:]\/)\/+/g, '$1');
+const url = cleanUrl.endsWith('/') ? cleanUrl : `${cleanUrl}/`;
 const pageTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const ogpImageLink = `https://tubone-project24.xyz/ogp.png?title=${encodeURI(title)}`;
 
@@ -83,9 +86,9 @@ if (isPost) {
     '@type': 'BreadcrumbList',
     '@id': `${url}#breadcrumb`,
     itemListElement: [
-      { '@type': 'ListItem', position: 1, item: { '@id': config.siteUrl, name: 'ホーム' } },
-      { '@type': 'ListItem', position: 2, item: { '@id': `${config.siteUrl}/tags`, name: 'タグ一覧' } },
-      { '@type': 'ListItem', position: 3, item: { '@id': `${config.siteUrl}/tag/${tag}`, name: tag } },
+      { '@type': 'ListItem', position: 1, item: { '@id': `${siteUrlBase}/`, name: 'ホーム' } },
+      { '@type': 'ListItem', position: 2, item: { '@id': `${siteUrlBase}/tags/`, name: 'タグ一覧' } },
+      { '@type': 'ListItem', position: 3, item: { '@id': `${siteUrlBase}/tag/${tag}/`, name: tag } },
       { '@type': 'ListItem', position: 4, name: title },
     ],
   });

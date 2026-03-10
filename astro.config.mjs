@@ -75,4 +75,5 @@ export default defineConfig({
     defaultStrategy: 'hover',
   },
   output: 'static',
+  trailingSlash: 'always',
 });

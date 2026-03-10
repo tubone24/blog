@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Tag from '../components/Tag/index.tsx';
 import Sidebar from '../components/Sidebar/index.tsx';
+import config from '../config/index.json';
 
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(
@@ -35,7 +36,7 @@ const allPostsForSidebar = sorted.map((p) => ({
 <Layout
   title="Tags"
   description="Tags Page"
-  canonicalUrl="https://tubone-project24.xyz/tags/"
+  canonicalUrl={`${config.siteUrl}/tags/`}
   noindex={true}
 >
   <div class="container">
