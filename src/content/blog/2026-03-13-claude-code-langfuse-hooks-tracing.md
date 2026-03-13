@@ -20,6 +20,12 @@ useAi: true
 
 ```
 
+## 超結論
+
+この記事のすべては下記のシェルスクリプトである。
+
+<https://github.com/tubone24/claude-code-settings/blob/main/hooks/scripts/langfuse-logger.sh>
+
 ## はじめに
 
 [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)を毎日のように使っていると、ふと気になることってありませんか？
