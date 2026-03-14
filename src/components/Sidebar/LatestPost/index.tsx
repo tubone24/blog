@@ -25,8 +25,7 @@ const LatestPost = ({
   <div className={style.latestPost}>
     <div className={style.sectionHeader} data-testid="latestArticleCount">
       <span className="icon-newspaper-o" />
-      &nbsp;Recent posts
-      <span className={style.count}>6 / {totalCount}</span>
+      &nbsp;Recent posts <span className={style.count}>6 / {totalCount}</span>
     </div>
     {posts.map(({ node }) => (
       <a
