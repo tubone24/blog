@@ -1,8 +1,29 @@
 @import "../../../styles/colors";
 
 .archive {
+  padding: 16px 0;
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 0 8px 12px;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text;
+    border-left: 3px solid $primary;
+  }
+
   a {
-    display: block;
-    font-weight: bold;
+    display: inline-block;
+    padding: 4px 12px;
+    font-weight: 600;
+    color: $link-hover;
+    border-radius: 4px;
+
+    &:hover {
+      text-decoration: none;
+      background: $surface;
+    }
   }
 }

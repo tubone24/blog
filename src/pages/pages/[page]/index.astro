@@ -54,21 +54,21 @@ const allPostsForSidebar = allPosts.map((p) => ({
         totalCount={allPosts.length}
       />
       <main class="col-xl-6 col-lg-7 col-md-12 col-xs-12 order-2">
-        {pagePosts.map((post, num) => {
-          const url = post.slug;
-          return (
-            <Card
-              client:load
-              title={post.data.title}
-              date={post.data.date.toISOString()}
-              url={`/${url}/`}
-              headerImage={post.data.headerImage}
-              description={post.data.description}
-              tags={post.data.tags}
-              index={num}
-            />
-          );
-        })}
+          {pagePosts.map((post, num) => {
+            const url = post.slug;
+            return (
+              <Card
+                client:load
+                title={post.data.title}
+                date={post.data.date.toISOString()}
+                url={`/${url}/`}
+                headerImage={post.data.headerImage}
+                description={post.data.description}
+                tags={post.data.tags}
+                index={num}
+              />
+            );
+          })}
         <div class="row pager">
           <div>
             <a href={page === 2 ? '/' : `/pages/${page - 1}/`}>Previous</a>

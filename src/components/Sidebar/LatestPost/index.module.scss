@@ -1,14 +1,37 @@
 @import "../../../styles/colors";
 
 .latest-post {
+  padding: 16px 0;
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 0 8px 12px;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text;
+    border-left: 3px solid $primary;
+  }
+
+  .count {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: $text-muted;
+  }
+
   a {
     display: block;
-    margin: 5px 0;
-    color: $light-blue;
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    color: $link-hover;
     text-align: left;
+    border-radius: 4px;
 
     &:hover {
       text-decoration: none;
+      background: $surface;
     }
   }
 }

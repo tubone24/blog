@@ -67,11 +67,33 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
   const getPlayPauseIcon = () => {
     switch (status) {
       case "loading":
-        return "⏳";
+        return (
+          <svg
+            className={style.spinner}
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <circle cx="7" cy="7" r="5" opacity="0.3" />
+            <path d="M7 2a5 5 0 0 1 5 5" />
+          </svg>
+        );
       case "playing":
-        return "⏸";
+        return (
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+            <rect x="2" y="1.5" width="3.5" height="11" rx="0.5" />
+            <rect x="8.5" y="1.5" width="3.5" height="11" rx="0.5" />
+          </svg>
+        );
       default:
-        return "▶";
+        return (
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+            <path d="M3 1.5v11l9-5.5z" />
+          </svg>
+        );
     }
   };
 
@@ -109,7 +131,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
           aria-label={getPlayPauseLabel()}
           data-testid="play-pause-button"
         >
-          <span aria-hidden="true">{getPlayPauseIcon()}</span>
+          {getPlayPauseIcon()}
         </button>
 
         {(status === "playing" || status === "paused") && (
@@ -120,7 +142,15 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
             aria-label="停止"
             data-testid="stop-button"
           >
-            <span aria-hidden="true">⏹</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <rect x="2" y="2" width="10" height="10" rx="1" />
+            </svg>
           </button>
         )}
 

@@ -3,10 +3,15 @@
 // Base styles
 
 .custom-card {
-  transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+  border-radius: 12px;
+  transition:
+    box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 
   &:hover {
-    box-shadow: 0 0 30px 0 rgb(0 0 0 / 30%);
+    box-shadow: 0 8px 24px 0 rgb(0 0 0 / 15%);
+    transform: translateY(-2px);
   }
 }
 
@@ -18,16 +23,19 @@
 .content {
   position: relative;
   z-index: 1;
-  padding: 0.01em;
+  padding: 16px;
   background-color: #fff;
   background-image: $bg-backGround-pic;
 
   h4 {
-    margin: 10px !important;
+    margin: 8px 0 !important;
   }
 
   p {
-    color: $black;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.7;
+    color: $text-secondary;
   }
 
   > a {
@@ -38,18 +46,21 @@
 .stats {
   display: flex;
   flex-wrap: wrap;
+  gap: 6px;
   align-items: center;
 }
 
 .title {
   margin-top: 10px;
-  color: $light-blue;
+  color: $link-hover;
 }
 
 .date {
-  padding: 0.5em;
+  padding: 4px 10px;
+  font-size: 0.8rem;
   color: $white;
-  background-color: $bermuda;
+  background-color: $primary-deeper;
+  border-radius: 4px;
 
   span {
     display: block;

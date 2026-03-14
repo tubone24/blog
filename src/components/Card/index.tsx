@@ -52,7 +52,7 @@ const Card = ({
   tags: readonly (string | undefined)[];
   index: number;
 }) => (
-  <div className="col-sm-12 pb-4" data-testid="card">
+  <div className="col-sm-12 pb-5" data-testid="card">
     <div className={style.customCard}>
       {headerImage && (
         <CardHeader url={url} image={headerImage} title={title} index={index} />

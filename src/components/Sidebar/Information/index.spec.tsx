@@ -110,7 +110,7 @@ describe("Information", () => {
     );
 
     const hrs = container.querySelectorAll("hr");
-    expect(hrs).toHaveLength(4); // 4 hr elements between components
+    expect(hrs).toHaveLength(0);
   });
 
   it("should not have basic accessibility issues", async () => {

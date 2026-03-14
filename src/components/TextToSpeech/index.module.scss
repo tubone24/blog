@@ -4,11 +4,12 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 5px 10px;
-  margin-bottom: 0.5rem;
+  padding: 10px 16px;
+  margin-bottom: 0.75rem;
   background: $white;
-  border: 1px solid $gray;
-  border-radius: 4px;
+  border: 1px solid $border;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
 }
 
 .controls {
@@ -21,18 +22,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   color: $white;
   cursor: pointer;
-  background: $main-green;
+  background: $primary-deeper;
   border: none;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:focus {
-    outline: 2px solid $light-blue;
+    outline: 2px solid $link-hover;
     outline-offset: 2px;
   }
 
@@ -42,11 +46,14 @@
   }
 
   &:hover:not(:disabled) {
-    background: $main-green-dark;
+    background: $primary-dark;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    transform: scale(1.08);
   }
 
-  span {
-    font-size: 12px;
+  svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -54,18 +61,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 0;
-  color: $white;
+  color: $primary-deeper;
   cursor: pointer;
-  background: $pink;
-  border: none;
+  background: transparent;
+  border: 1.5px solid $primary-deeper;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:focus {
-    outline: 2px solid $light-blue;
+    outline: 2px solid $link-hover;
     outline-offset: 2px;
   }
 
@@ -75,11 +86,29 @@
   }
 
   &:hover:not(:disabled) {
-    background: $pink-dark;
+    color: $white;
+    background: $primary-deeper;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    transform: scale(1.08);
   }
 
-  span {
-    font-size: 12px;
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -93,7 +122,7 @@
 .rate-label {
   margin-bottom: 2px;
   font-size: 10px;
-  color: $light-black;
+  color: $text-secondary;
   white-space: nowrap;
 }
 
@@ -101,30 +130,30 @@
   width: 60px;
   height: 4px;
   cursor: pointer;
-  background: $gray;
+  background: $border;
   border-radius: 2px;
   appearance: none;
 
   &::-webkit-slider-thumb {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
-    background: $main-green;
+    background: $primary-deeper;
     border-radius: 50%;
     appearance: none;
   }
 
   &::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
-    background: $main-green;
+    background: $primary-deeper;
     border: none;
     border-radius: 50%;
   }
 
   &:focus {
-    outline: 2px solid $light-blue;
+    outline: 2px solid $link-hover;
     outline-offset: 2px;
   }
 }

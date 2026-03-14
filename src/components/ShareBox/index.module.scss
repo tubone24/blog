@@ -1,8 +1,11 @@
+@import "../../styles/colors";
+
 .m-share-box {
   position: fixed;
   inset: auto 0 0;
   z-index: 10;
   display: flex;
+  gap: 8px;
   justify-content: space-around;
   width: 100%;
   background: rgb(255 255 255 / 90%);
@@ -11,18 +14,18 @@
 .share-button {
   width: 2rem;
   height: 2rem;
-  margin: 0.4rem;
+  margin: 8px;
   font-size: 1rem;
   line-height: 2rem;
   text-align: center;
-  border: 1px solid #337ab7;
+  border: 1px solid $link-hover;
   border-radius: 50%;
 }
 
 .share-button-no-border {
   width: 2rem;
   height: 2rem;
-  margin: 0.4rem;
+  margin: 8px;
   font-size: 1rem;
   line-height: 2rem;
   text-align: center;
@@ -31,12 +34,12 @@
 .comment {
   padding-left: 0.15rem;
   line-height: 1.7rem;
-  color: #337ab7;
+  color: $link-hover;
 }
 
 .top {
   padding-left: 0.1rem;
   line-height: 1.7rem;
-  color: #337ab7;
+  color: $link-hover;
   background: transparent;
 }

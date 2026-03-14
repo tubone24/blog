@@ -2,6 +2,18 @@
 
 .wordcloud {
   width: 100%;
+  padding: 16px 0;
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 0 8px 12px;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text;
+    border-left: 3px solid $primary;
+  }
 
   img {
     width: 100%;

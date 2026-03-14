@@ -23,11 +23,10 @@ const LatestPost = ({
   totalCount: number;
 }) => (
   <div className={style.latestPost}>
-    <p data-testid="latestArticleCount">
+    <div className={style.sectionHeader} data-testid="latestArticleCount">
       <span className="icon-newspaper-o" />
-      &nbsp;Recent posts&nbsp;&nbsp;6&nbsp;/&nbsp;
-      {totalCount}
-    </p>
+      &nbsp;Recent posts <span className={style.count}>6 / {totalCount}</span>
+    </div>
     {posts.map(({ node }) => (
       <a
         href={node.frontmatter.url || node.frontmatter.slug || node.fields.slug}

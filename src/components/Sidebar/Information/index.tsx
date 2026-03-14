@@ -15,13 +15,9 @@ const Information = ({
   allPosts: AllPostProps[];
 }) => (
   <div className="d-none d-lg-block my-2">
-    <hr />
     <LatestPost posts={posts} totalCount={totalCount} />
-    <hr />
     <Archive allPosts={allPosts} />
-    <hr />
     <WordCloud />
-    <hr />
   </div>
 );
 

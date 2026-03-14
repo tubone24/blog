@@ -13,10 +13,10 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   ).sort((a, b) => (a < b ? 1 : -1));
   return (
     <div className={style.archive} data-testid="Archive">
-      <p>
+      <div className={style.sectionHeader}>
         <span className="icon-calendar" />
         &nbsp;Archives
-      </p>
+      </div>
       {yearList.map((year) => (
         <a
           key={year}
