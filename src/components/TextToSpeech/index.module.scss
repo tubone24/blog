@@ -7,7 +7,7 @@
   padding: 5px 10px;
   margin-bottom: 0.5rem;
   background: $white;
-  border: 1px solid $gray;
+  border: 1px solid $border;
   border-radius: 4px;
 }
 
@@ -26,13 +26,13 @@
   padding: 0;
   color: $white;
   cursor: pointer;
-  background: $main-green;
+  background: $primary;
   border: none;
   border-radius: 50%;
   transition: background-color 0.2s ease;
 
   &:focus {
-    outline: 2px solid $light-blue;
+    outline: 2px solid $link-hover;
     outline-offset: 2px;
   }
 
@@ -42,11 +42,12 @@
   }
 
   &:hover:not(:disabled) {
-    background: $main-green-dark;
+    background: $primary-dark;
   }
 
-  span {
-    font-size: 12px;
+  svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -65,7 +66,7 @@
   transition: background-color 0.2s ease;
 
   &:focus {
-    outline: 2px solid $light-blue;
+    outline: 2px solid $link-hover;
     outline-offset: 2px;
   }
 
@@ -78,8 +79,23 @@
     background: $pink-dark;
   }
 
-  span {
-    font-size: 12px;
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -93,7 +109,7 @@
 .rate-label {
   margin-bottom: 2px;
   font-size: 10px;
-  color: $light-black;
+  color: $text-secondary;
   white-space: nowrap;
 }
 
@@ -101,7 +117,7 @@
   width: 60px;
   height: 4px;
   cursor: pointer;
-  background: $gray;
+  background: $border;
   border-radius: 2px;
   appearance: none;
 
@@ -109,7 +125,7 @@
     width: 12px;
     height: 12px;
     cursor: pointer;
-    background: $main-green;
+    background: $primary;
     border-radius: 50%;
     appearance: none;
   }
@@ -118,13 +134,13 @@
     width: 12px;
     height: 12px;
     cursor: pointer;
-    background: $main-green;
+    background: $primary;
     border: none;
     border-radius: 50%;
   }
 
   &:focus {
-    outline: 2px solid $light-blue;
+    outline: 2px solid $link-hover;
     outline-offset: 2px;
   }
 }

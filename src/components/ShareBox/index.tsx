@@ -60,22 +60,6 @@ const ShareBox = ({ url }: { url: string }) => (
       <span className="icon-twitter" />
     </a>
     <a
-      href={`http://getpocket.com/edit?url=${encodeURI(url)}`}
-      title="Pocketに追加する"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={style.shareButton}
-      data-testid="pocket-link"
-      onClick={() =>
-        ReactGA.event({
-          category: "Share",
-          action: "Pocket Share",
-        })
-      }
-    >
-      <span className="icon-get-pocket" />
-    </a>
-    <a
       href={`http://b.hatena.ne.jp/add?mode=confirm&url=${encodeURI(url)}`}
       className={style.shareButtonNoBorder}
       data-hatena-bookmark-layout="vertical-normal"

@@ -6,16 +6,16 @@
   margin: 3px 4px;
   font-size: 12px;
   line-height: 1.4;
-  color: $tag-blue;
+  color: $link;
   text-decoration: none;
   white-space: nowrap;
-  background: $twilight-blue;
-  border: 1px solid $tag-blue;
+  background: $surface;
+  border: 1px solid $link;
   border-radius: 4px;
 
   &:hover {
     color: #fff;
     text-decoration: none;
-    background: $tag-blue;
+    background: $link;
   }
 }

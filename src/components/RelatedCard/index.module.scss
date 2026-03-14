@@ -27,7 +27,7 @@
   }
 
   p {
-    color: $black;
+    color: $text;
   }
 
   > a {
@@ -43,13 +43,13 @@
 
 .title {
   margin-top: 10px;
-  color: $light-blue;
+  color: $link-hover;
 }
 
 .date {
   padding: 0.5em;
   color: $white;
-  background-color: $bermuda;
+  background-color: $primary-deeper;
 
   span {
     display: block;

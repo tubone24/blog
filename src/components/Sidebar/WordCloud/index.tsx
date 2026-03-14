@@ -13,10 +13,10 @@ const WordCloud = () => {
 
   return (
     <div className={style.wordcloud}>
-      <p>
+      <div className={style.sectionHeader}>
         <span className="icon-cloud" />
         &nbsp;WordCloud
-      </p>
+      </div>
       <a
         href="#"
         role="button"

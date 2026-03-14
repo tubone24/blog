@@ -22,7 +22,7 @@
 .data-content {
   position: relative;
   z-index: 1;
-  padding: 1em;
+  padding: 16px;
   background-color: $white;
 }
 
@@ -40,14 +40,14 @@
   }
 
   p {
-    color: $black;
+    color: $text;
   }
 }
 
 .date {
-  padding: 0.8em;
+  padding: 12px;
   color: $white;
-  background-color: $bermuda;
+  background-color: $primary-deeper;
 
   span {
     display: block;
@@ -56,8 +56,8 @@
 }
 
 .title {
-  margin-top: 20px;
-  color: $light-blue;
+  margin-top: 24px;
+  color: $link-hover;
 }
 
 .wrapper {

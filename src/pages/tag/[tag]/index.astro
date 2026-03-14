@@ -60,21 +60,21 @@ const allPostsForSidebar = allPosts.map((p) => ({
         <div class="col-12" style="font-size:1.5rem; font-weight:bold; margin-bottom:1rem;">
           {posts.length}&nbsp;Articles in&nbsp;{tag}
         </div>
-        {posts.map((post, index) => {
-          const url = post.slug;
-          return (
-            <Card
-              client:load
-              title={post.data.title}
-              date={post.data.date.toISOString()}
-              url={`/${url}/`}
-              headerImage={post.data.headerImage}
-              description={post.data.description}
-              tags={post.data.tags || []}
-              index={index}
-            />
-          );
-        })}
+          {posts.map((post, index) => {
+            const url = post.slug;
+            return (
+              <Card
+                client:load
+                title={post.data.title}
+                date={post.data.date.toISOString()}
+                url={`/${url}/`}
+                headerImage={post.data.headerImage}
+                description={post.data.description}
+                tags={post.data.tags || []}
+                index={index}
+              />
+            );
+          })}
       </div>
       <div class="col-xl-2 col-lg-1 order-3"></div>
     </div>
