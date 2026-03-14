@@ -15,7 +15,7 @@ $link-hover: #337ab7;
 // === テキスト（3段階に統一） ===
 $text: #212529;
 $text-secondary: #555;
-$text-muted: #999;
+$text-muted: #767676; // WCAG AA準拠（4.54:1 on white）
 
 // === ボーダー ===
 $border: #d7d7d7;
