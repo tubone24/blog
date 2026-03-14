@@ -31,7 +31,7 @@ const Footer = () => (
             </b>
             2017-{new Date().getFullYear()}
             &nbsp;&nbsp;
-            <a href="/privacy-policies">Privacy Policies</a>
+            <a href="/privacy-policies/">Privacy Policies</a>
             &nbsp;&nbsp;&nbsp;
             <a href="/sitemap-index.xml" title="sitemap">
               Sitemap

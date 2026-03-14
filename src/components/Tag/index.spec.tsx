@@ -11,7 +11,7 @@ describe("Tag", () => {
   });
   it("Tag link is valid", async () => {
     render(<Tag count={1} name="test" />);
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/tag/test");
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/tag/test/");
   });
   it.skip("should not have basic accessibility issues", async () => {
     const { container } = render(<Tag count={1} name="test" />);

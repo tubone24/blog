@@ -74,5 +74,6 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'hover',
   },
+  trailingSlash: 'always',
   output: 'static',
 });
