@@ -4,6 +4,7 @@ import Header from '../components/Header/index.tsx';
 import Sidebar from '../components/Sidebar/index.tsx';
 import ShareBox from '../components/ShareBox/index.tsx';
 import { getCollection } from 'astro:content';
+import config from '../config/index.json';
 
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(
@@ -29,7 +30,7 @@ const allPostsForSidebar = sorted.map((p) => ({
   isPostPage={true}
   isPost={true}
   tag="privacy policies"
-  canonicalUrl="https://tubone-project24.xyz/privacy-policies"
+  canonicalUrl={`${config.siteUrl}/privacy-policies/`}
 >
   <div class="post row order-2">
     <Header
@@ -67,6 +68,6 @@ const allPostsForSidebar = sorted.map((p) => ({
         <p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
       </div>
     </main>
-    <ShareBox client:load url="https://tubone-project24.xyz/privacy-policies" />
+    <ShareBox client:load url={`${config.siteUrl}/privacy-policies/`} />
   </div>
 </Layout>

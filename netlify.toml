@@ -52,3 +52,24 @@
   [headers.values]
     X-Robots-Tag = "noindex"
     Content-Type = "text/plain; charset=utf-8"
+
+# Static assets long-term cache
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Deploy preview and branch deploy: prevent indexing
+# netlify.toml のコンテキスト内で [[headers]] は使えないため、
+# ビルドコマンドで _headers ファイルに追記する方式で対応
+[context.deploy-preview]
+  command = "npm run build && printf '\\n/*\\n  X-Robots-Tag: noindex, nofollow\\n' >> dist/_headers"
+
+[context.branch-deploy]
+  command = "npm run build && printf '\\n/*\\n  X-Robots-Tag: noindex, nofollow\\n' >> dist/_headers"
+
