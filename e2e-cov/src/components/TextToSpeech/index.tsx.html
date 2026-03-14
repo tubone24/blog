@@ -218,7 +218,67 @@
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
 <a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -442,11 +502,33 @@ const TextToSpeech: React.FC&lt;TextToSpeechProps&gt; = ({
   const getPlayPauseIcon = () =&gt; {
     switch (status) {
       case "loading":
-        return "⏳";
+        return (
+          &lt;svg
+            className={style.spinner}
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          &gt;
+            &lt;circle cx="7" cy="7" r="5" opacity="0.3" /&gt;
+            &lt;path d="M7 2a5 5 0 0 1 5 5" /&gt;
+          &lt;/svg&gt;
+        );
       case "playing":
-        return "⏸";
+        return (
+          &lt;svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"&gt;
+            &lt;rect x="2" y="1.5" width="3.5" height="11" rx="0.5" /&gt;
+            &lt;rect x="8.5" y="1.5" width="3.5" height="11" rx="0.5" /&gt;
+          &lt;/svg&gt;
+        );
       default:
-        return "▶";
+        return (
+          &lt;svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"&gt;
+            &lt;path d="M3 1.5v11l9-5.5z" /&gt;
+          &lt;/svg&gt;
+        );
     }
   };
 &nbsp;
@@ -484,7 +566,7 @@ const TextToSpeech: React.FC&lt;TextToSpeechProps&gt; = ({
           aria-label={getPlayPauseLabel()}
           data-testid="play-pause-button"
         &gt;
-          &lt;span aria-hidden="true"&gt;{getPlayPauseIcon()}&lt;/span&gt;
+          {getPlayPauseIcon()}
         &lt;/button&gt;
 &nbsp;
         {(status === "playing" || status === "paused") &amp;&amp; (
@@ -495,7 +577,15 @@ const TextToSpeech: React.FC&lt;TextToSpeechProps&gt; = ({
             aria-label="停止"
             data-testid="stop-button"
           &gt;
-            &lt;span aria-hidden="true"&gt;⏹&lt;/span&gt;
+            &lt;svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="currentColor"
+              aria-hidden="true"
+            &gt;
+              &lt;rect x="2" y="2" width="10" height="10" rx="1" /&gt;
+            &lt;/svg&gt;
           &lt;/button&gt;
         )}
 &nbsp;
@@ -535,7 +625,7 @@ export default TextToSpeech;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-13T10:12:46.964Z
+                at 2026-03-14T07:18:42.581Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
