@@ -34,7 +34,7 @@
   margin: 0 0 0.75rem;
   font-size: 1.7rem;
   line-height: 1.875rem;
-  color: white; // TODO: Auto change color by detect background color
+  color: white;
   text-shadow:
     1px 1.5px 0 #19a200,
     -1px -0.5px 0 #19a200,
@@ -48,6 +48,14 @@
   // Medium devices (tablets, less than 992px)
   @media (max-width: 991.98px) {
     padding-top: 1.5rem;
+  }
+
+  // PC・タブレット: フォント強化で背景に負けない
+  @media (min-width: 768px) {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
   }
 }
 
@@ -96,12 +104,28 @@
 
 .author-name {
   margin-right: 0.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
 }
 
 // For PC
 @media (min-width: 992px) {
   .u-subtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+}
+
+// For Tablet (subtitle)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .u-subtitle {
     font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
   }
 }
 
