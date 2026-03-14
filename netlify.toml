@@ -52,3 +52,17 @@
   [headers.values]
     X-Robots-Tag = "noindex"
     Content-Type = "text/plain; charset=utf-8"
+
+# Deploy Preview: noindex to prevent duplicate content indexing
+[context.deploy-preview]
+  [[context.deploy-preview.headers]]
+    for = "/*"
+    [context.deploy-preview.headers.values]
+      X-Robots-Tag = "noindex"
+
+# Branch Deploy: noindex to prevent duplicate content indexing
+[context.branch-deploy]
+  [[context.branch-deploy.headers]]
+    for = "/*"
+    [context.branch-deploy.headers.values]
+      X-Robots-Tag = "noindex"

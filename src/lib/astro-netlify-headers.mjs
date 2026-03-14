@@ -30,9 +30,11 @@ function buildHeaders() {
       path: '/*',
       headers: [
         'X-Frame-Options: DENY',
-        'X-XSS-Protection: 1; mode=block',
+        'X-XSS-Protection: 0',
         'X-Content-Type-Options: nosniff',
         'Referrer-Policy: same-origin',
+        'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
+        'Permissions-Policy: camera=(), microphone=(), geolocation=()',
       ],
     },
     // HTML files - no cache
