@@ -100,6 +100,7 @@ const allPostsForRelated = sorted.map((p) => ({
   dateModified={(post.data.updatedDate || post.data.date).toISOString()}
   keywords={post.data.tags || []}
   faq={post.data.faq || []}
+  noindex={post.data.noindex}
 >
   <div class="post row order-2">
     <Header
@@ -146,4 +147,69 @@ const allPostsForRelated = sorted.map((p) => ({
     </main>
     <ShareBox client:visible url={shareURL} />
   </div>
+  <script is:inline>
+    function initAltBadges() {
+      var containers = document.querySelectorAll('.content-white-inner');
+      for (var i = 0; i < containers.length; i++) {
+        var images = containers[i].querySelectorAll('img');
+        for (var j = 0; j < images.length; j++) {
+          var img = images[j];
+          var alt = img.getAttribute('alt');
+          if (!alt || alt.trim() === '') continue;
+          if (img.closest('a[href*="buymeacoffee"]')) continue;
+          if (img.parentElement && img.parentElement.classList.contains('alt-badge-figure')) continue;
+
+          var figure = document.createElement('figure');
+          figure.className = 'alt-badge-figure';
+          img.parentNode.insertBefore(figure, img);
+          figure.appendChild(img);
+
+          var btn = document.createElement('button');
+          btn.className = 'alt-badge-btn';
+          btn.type = 'button';
+          btn.setAttribute('aria-label', '画像の説明テキストを表示');
+          btn.textContent = 'ALT';
+          figure.appendChild(btn);
+
+          var dialog = document.createElement('dialog');
+          dialog.className = 'alt-badge-dialog';
+          var textP = document.createElement('p');
+          textP.className = 'alt-badge-dialog__text';
+          textP.textContent = alt;
+          dialog.appendChild(textP);
+          var form = document.createElement('form');
+          form.method = 'dialog';
+          var closeBtn = document.createElement('button');
+          closeBtn.type = 'submit';
+          closeBtn.className = 'alt-badge-dialog__close';
+          closeBtn.textContent = '閉じる';
+          form.appendChild(closeBtn);
+          dialog.appendChild(form);
+          figure.appendChild(dialog);
+        }
+      }
+    }
+
+    // Event delegation for ALT badge clicks
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.alt-badge-btn');
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var dialog = btn.parentElement.querySelector('.alt-badge-dialog');
+        if (dialog) {
+          dialog.showModal();
+        }
+        return;
+      }
+    });
+
+    // Run badge creation after content is rendered
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAltBadges);
+    } else {
+      initAltBadges();
+    }
+    setTimeout(initAltBadges, 2000);
+  </script>
 </Layout>

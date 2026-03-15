@@ -640,6 +640,84 @@ h6 {
   /* stylelint-enable no-descending-specificity */
 }
 
+// ===== ALT Badge =====
+.content-white-inner {
+  .alt-badge-figure {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+
+    img {
+      display: block;
+    }
+  }
+
+  .alt-badge-btn {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    z-index: 1;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #fff;
+    cursor: pointer;
+    background: rgb(0 0 0 / 65%);
+    border: 1px solid rgb(255 255 255 / 30%);
+    border-radius: 4px;
+    transition: background 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: rgb(0 0 0 / 85%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid #4a90d9;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// alt-badge-dialog はグローバルに（content-white-inner外に出る可能性あり）
+.alt-badge-dialog {
+  width: 90%;
+  max-width: 480px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 15%);
+
+  &::backdrop {
+    background: rgb(0 0 0 / 40%);
+  }
+
+  &__text {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  &__close {
+    display: block;
+    padding: 6px 16px;
+    margin-left: auto;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    background: #333;
+    border: none;
+    border-radius: 4px;
+
+    &:hover {
+      background: #555;
+    }
+  }
+}
+
 // ページネーションスタイル（旧Gatsby index.module.scssから移植）
 /* stylelint-disable no-descending-specificity */
 .pager {

@@ -2,7 +2,7 @@
 slug: 2021/07/21/motion-ir
 title: 赤外線付きカメラモジュールとmotionを古いラズパイにつけてSlackと連動した監視システムを作ろう
 date: 2021-07-21T10:08:14.329Z
-description: ラズパイが家に溢れてもったいないので赤外線付きカメラモジュールとmotionを古いラズパイにつけてSlackと連動した監視システムを作ることにしました
+description: "余ったRaspberry Piと赤外線カメラモジュールを使い、motionで動体検知してSlackに画像・動画を自動通知する監視カメラシステムの構築手順。V4L2ドライバの設定やmotion.confの詳細解説も掲載しています。"
 tags:
   - RaspberryPi
   - motion
@@ -25,7 +25,7 @@ templateKey: blog-post
 
 ラズパイって結構直近の進化がすごくて、性能が上がったから買ってみよう！とか、液晶モジュール付けてしまったから特に使ってないけど外すのめんどくさいしそのままにしておこうとか、そういった感じで眠ったラズパイが何種類かあります。
 
-で、こいつらを眠らせておいても仕方がないので、早速こちらを使って何かHomeIoTチックなことをやってみたいと想います。
+で、こいつらを眠らせておいても仕方がないので、早速こちらを使って何かHomeIoTチックなことをやってみたいと想います。以前も[ラズパイを使って植物の水やり監視システムを作った](/2020/05/10/plant-check/)ことがありますし、[電子ペーパーでカレンダーを作る](/2021/07/26/calendar/)のにも活用しています。
 
 ## 監視カメラ
 
@@ -45,13 +45,13 @@ templateKey: blog-post
 
 組み立て方も簡単で、カメラ部分に赤外線センサーをねじ止めし、ラズパイのカメラモジュールに差し込むだけです。
 
-![inmf](https://i.imgur.com/JaW3aQ0l.jpg)
+![赤外線カメラモジュールをRaspberry Piに組み立てた状態](https://i.imgur.com/JaW3aQ0l.jpg)
 
 組み立てると上のようになります。
 
 私の用意していたラズパイがWifi非対応の超古いタイプ[Raspberry Pi B+](https://jp.rs-online.com/web/p/raspberry-pi/8111284/)だったので有線LANを引きまして、高さが足りないのでiPadminiの箱の上にガムテープで固定するという何とも残念な仕上がりですが、とりあえず装着完了。
 
-![img](https://i.imgur.com/Eda8D6Il.jpg)
+![iPadminiの箱の上にガムテープで固定したラズパイ監視カメラ](https://i.imgur.com/Eda8D6Il.jpg)
 
 試しにカメラが使えるか、テストしてみます。
 
@@ -59,7 +59,7 @@ templateKey: blog-post
 raspistill -o test.jpg
 ```
 
-![img](https://i.imgur.com/YOUDPIcl.jpg)
+![赤外線カメラで撮影したテスト写真](https://i.imgur.com/YOUDPIcl.jpg)
 
 無事写真が撮れました。色味がちょっと変なのは赤外線だから仕方ありませんね。
 
@@ -214,7 +214,7 @@ on_camera_lost "/usr/bin/python3 /home/pi/motion/notify_camera_lost.py" # カメ
 
 動画だけの配信でもいいかもしれませんが、モバイルSlackだと、動画の場合プレビューがされないので画像も送信することにします。
 
-![md](https://i.imgur.com/IEF2Q1Rl.png)
+![モバイルSlackでは動画のプレビューが表示されない例](https://i.imgur.com/IEF2Q1Rl.png)
 
 ## Stream配信
 
@@ -222,7 +222,7 @@ motion.confで**stream_localhost off**とすることで、他の端末からス
 
 我が家はOpenVPNでイントラ接続が可能になってます。
 
-![img](https://i.imgur.com/MbyFzmel.png)
+![motionのストリーム配信をブラウザで視聴している画面](https://i.imgur.com/MbyFzmel.png)
 
 ## 動画をSlackに投稿
 
@@ -303,7 +303,7 @@ requests.post(WEB_HOOK_URL, data = json.dumps({
 
 ## できた！
 
-![img](https://i.imgur.com/m5HEdzHl.png)
+![動体検知時にSlackに通知された画像と動画の投稿画面](https://i.imgur.com/m5HEdzHl.png)
 
 このように監視カメラで動体検知をするとSlackに通知が飛び、画像と動画が確認できるようになりました。
 
@@ -319,7 +319,7 @@ motion起動から3～4時間すると、カメラモジュールがハングっ
 
 こちらもスクリプトは割愛しますが、incoming webhookでカメラモジュールのハングを通知する仕組みです。
 
-![img](https://i.imgur.com/tpdlfLfl.png)
+![カメラモジュールのハング検知がSlackに通知された画面](https://i.imgur.com/tpdlfLfl.png)
 
 うまく検知できてますね。
 
@@ -332,5 +332,5 @@ Slackで通知を受け取ることでますます再現性が高いことがわ
 
 ## 結論
 
-とりあえず監視カメラが自作できたのでラズパイ有効活用は成功ではないでしょうか？
+とりあえず監視カメラが自作できたのでラズパイ有効活用は成功ではないでしょうか？なお、ラズパイが不安定になる場合は[Raspberry Piを定期的に再起動させる](/2023/01/18/reboot-linux/)方法も参考にしてみてください。
 

@@ -2,8 +2,7 @@
 slug: 2021/07/28/deno-slack
 title: Denoを使ってGraphQLを叩きながらSlackに投稿する
 date: 2021-07-27T15:07:09.874Z
-description: |
-  以前Deno化を断念したSlackアップロードスクリプトをDeno化したというお話し。
+description: "Node.jsで書いたSlack投稿スクリプトをDenoに移行し、TypeScript化した実践記録。Hasura CloudのGraphQLからデータ取得してSlackに通知する処理を、Denoのfetchやtop-level awaitを活用して書き直す方法を解説します。"
 tags:
   - Deno
   - GraphQL
@@ -21,7 +20,7 @@ templateKey: blog-post
 
 ### スクリプトのTypeScript化
 
-前回[Hasura CloudのGraphQLが便利すぎた話](https://tubone-project24.xyz/2021/07/27/hasura-graphql#%E5%8F%8D%E7%9C%81)の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
+前回[Hasura CloudのGraphQLが便利すぎた話](/2021/07/27/hasura-graphql/)の記事の最後の方でSlackにダッシュボードの情報をあげるスクリプトを作って定期的に実行させることをしました。
 
 がしかし、あろうことかスクリプトは**TypeScript**じゃなく、**JavaScript(ES module)**でした。
 
@@ -152,6 +151,6 @@ await fetch(slackWebhookUrl, {method: 'POST', headers: slackHeaders, body: JSON.
 
 ## 結論
 
-使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います!!!！
+使いどころはまだ限られる気もしますが、徐々にDenoに慣れていこうと思います!!!！後日、[妻のためにアイドル情報をSlack通知するシステム](/2024/02/28/idol-update-slack-notification-for-wife/)でもDenoを活用しています。また、同じくSlack通知の仕組みとしては[完全無料でRSSをSlackに投稿するシステム](/2021/06/25/tech-blog-spider/)もあわせてご覧ください。
 
 

@@ -2,7 +2,7 @@
 slug: 2019/11/26/go-lambda
 title: GoでAWS Lambdaを動かして、GitHubAPIv4(GraphQL)を叩いてみた感想
 date: 2019-11-26T11:31:35.438Z
-description: 急遽Goで開発することになったので慌てて技術検証の巻
+description: "GoでAWS Lambdaを実装し、GitHub API v4(GraphQL)からリポジトリの使用言語一覧を取得する方法を解説。shurcooL/githubv4クライアントの使い方、Go構造体でのGraphQLクエリ定義、Lambda用ビルドとデプロイ手順を紹介します。"
 tags:
   - Go
   - Lambda
@@ -24,14 +24,14 @@ templateKey: blog-post
 
 ## AWS LambdaがGoで動くことを知ってますか？
 
-![img](https://i.imgur.com/h1EK5QS.png)
+![AWS LambdaとGoのロゴを組み合わせたヘッダー画像](https://i.imgur.com/h1EK5QS.png)
 
 知っている人も多いと思いますが、2017年のre:Invent 2017(AWSのカンファレンスイベント)でLambdaに関するアップデートのなかでGoで動くようになったよ～というのがありました。[［速報］AWS Lambdaが機能強化。.NETとGo言語をサポート、サーバレスアプリケーションのリポジトリも登場。AWS re:Invent 2017
 ](https://www.publickey1.jp/blog/17/aws_lambdanetgoaws_reinvent_2017.html)
 
 ![img](https://www.publickey1.jp/2017/lambda01.gif)
 
-Lambda自体は、裏側の基盤に[AWS Firecracker](https://aws.amazon.com/jp/blogs/news/firecracker-lightweight-virtualization-for-serverless-computing/)を導入したことがきっかけで、集約化と安全性がめちゃんこあがったので、タイムアウトが長くなったり、カスタムランタイムに対応したりと一気に進化したイメージがありましたが、いまだにPythonか、Node.jsで書くかしかして無かったです。（怠け）
+Lambda自体は、裏側の基盤に[AWS Firecracker](https://aws.amazon.com/jp/blogs/news/firecracker-lightweight-virtualization-for-serverless-computing/)を導入したことがきっかけで、集約化と安全性がめちゃんこあがったので、タイムアウトが長くなったり、カスタムランタイムに対応したりと一気に進化したイメージがありましたが、いまだにPythonか、Node.jsで書くかしかして無かったです。（怠け）その後、[AWS X-RayでLambdaをトレースしてDatadog APMに連携する](/2020/1/20/x-ray-datadog/)方法にも取り組んでいます。
 
 ~~どこかでFirecrackerをいじりたいですね。~~
 
@@ -41,7 +41,7 @@ Lambda自体は、裏側の基盤に[AWS Firecracker](https://aws.amazon.com/jp/
 
 今回はお勉強というか、感触をつかむためにやるだけなのでちゃんとしたサービスは作りません。
 
-別件で**GitHub API（GraphQL）**を触る必要もあったのでまとめてやってしまいます。
+別件で**GitHub API（GraphQL）**を触る必要もあったのでまとめてやってしまいます。GraphQLの活用としては後に[PythonでGitHub API v4を使ったリリース実績取得](/2019/12/16/python-auto/)にも取り組んでいます。
 
 ### やること
 
@@ -150,7 +150,7 @@ Goはまぎれもなくサーバーサイドな言語なのでどちらかとい
 
 [New personal access token](https://github.com/settings/tokens/new)から発行できます。発行しておきましょう。shurcooL/githubv4でも使います。
 
-![img](https://i.imgur.com/k926T60.png)
+![GitHubのPersonal access tokens発行画面でスコープを選択している様子](https://i.imgur.com/k926T60.png)
 
 shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClientやAuthをすませた後、**GraphQLのクエリ**を**Goの構造体**として定義して投げつければよいです。
 
@@ -350,13 +350,13 @@ GOOS=linux go build main.go
 
 Lambdaのテスト実行をしてみます。
 
-![img](https://i.imgur.com/HBHjuZk.png)
+![Lambdaのテスト実行結果にGitHubリポジトリの使用言語一覧が表示されている](https://i.imgur.com/HBHjuZk.png)
 
 無事、GitHubの私のレポジトリ群の言語一覧が取れました。
 
 printしているものはCloudwatchにも出てきていました。(goのlogを使ってもきちんとCWにログ出るそうです。)
 
-![img](https://i.imgur.com/DDLSLo4.png)
+![CloudWatch LogsにGoのLambda実行ログが出力されている画面](https://i.imgur.com/DDLSLo4.png)
 
 ひとまず完成っぽいです。
 

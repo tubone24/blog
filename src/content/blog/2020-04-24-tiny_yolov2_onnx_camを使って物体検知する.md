@@ -2,7 +2,7 @@
 slug: 2020/04/24/jetson-nano
 title: tiny_yolov2_onnx_camを使って物体検知する
 date: 2020-04-24T11:28:14.315Z
-description: tiny_yolov2_onnx_camを使って物体検知する
+description: "Jetson Nanoにtiny_yolov2_onnx_camをインストールし、カメラ映像からリアルタイム物体検知を行う手順を解説します。依存パッケージの導入からCythonのセットアップ、ONNX→TensorRT変換まで、つまづきやすいポイントも含めて紹介します。"
 tags:
   - 機械学習
   - 物体検知
@@ -11,7 +11,7 @@ templateKey: blog-post
 ---
 こんにちは。
 
-Jetson nanoを使って、物体検知をしてみます。
+[先日購入したJetson nano](/2020/04/21/jetson-nano/)を使って、物体検知をしてみます。
 
 物体検知には[tiny_yolov2_onnx_cam](https://github.com/tsutof/tiny_yolov2_onnx_cam)を使います。
 
@@ -97,7 +97,7 @@ $ sudo jetson_clocks
 
 Raspberry PIのカメラをぶっ刺したので**--camera -1**を引数にします。
 
-![img](https://i.imgur.com/gWqd2xb.jpg)
+![Jetson NanoにRaspberry Pi互換カメラモジュールを接続した様子](https://i.imgur.com/gWqd2xb.jpg)
 
 ```
 $ python3 tiny_yolov2_onnx_cam.py --camera -1
@@ -105,6 +105,6 @@ $ python3 tiny_yolov2_onnx_cam.py --camera -1
 
 ONNX形式からTensorRTに変換するので初回起動は時間かかります。
 
-しばらくするとカメラが起動し、物体検知が始まります。
+しばらくするとカメラが起動し、物体検知が始まります。次のステップとして[SainSmart IMX219でアニメ風自撮り動画を作る](/2020/04/27/anime-face/)のも面白いです。
 
-![img](https://i.imgur.com/jzkNhR6.jpg)
+![tiny_yolov2_onnx_camで物体を検知しバウンディングボックスが表示された画面](https://i.imgur.com/jzkNhR6.jpg)

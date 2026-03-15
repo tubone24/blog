@@ -2,7 +2,7 @@
 slug: 2021/11/21/depcheck
 title: depcheckをGitHub Actionで使い、PRコメントに結果を出力させる
 date: 2021-11-21T11:16:54.648Z
-description: depcheckを使うと、package.jsonで定義されたライブラリがコードで使われているかどうかを確認することができます。確認の結果は、以下の例のように、GitHub Actions の実行時に PR コメントでユーザーに通知することができます。
+description: "depcheckでpackage.jsonの未使用ライブラリを検出し、GitHub ActionsでPRコメントに自動出力するActionを自作。node_modulesの肥大化対策として、CIに組み込んで依存関係を継続的にチェックする方法を紹介します。"
 tags:
   - JavaScript
   - depcheck
@@ -22,7 +22,7 @@ package.jsonはNodeのつらいところ。
 
 JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode.js Package Manager、いわゆるnpmはしばしばライブラリサイズが大きくなりがちなことが問題になります。
 
-![img](https://i.imgur.com/yxDDBOX.jpg)
+![node_modulesの容量がブラックホールに例えられるネットミーム](https://i.imgur.com/yxDDBOX.jpg)
 
 もちろんこちらの問題はさまざまな議論が尽くされているわけですし、今更どうこう言うつもりはないです。
 
@@ -100,7 +100,7 @@ Missing dependencies
 
 そしてその結果を通知してくれたらさらにうれしいですよね。
 
-そこで、GitHub Actionsを作りました。
+そこで、[以前からGitHub Actionsを活用している](/2019/09/02/github-action/)経験を活かして、GitHub Actionsを作りました。
 
 <https://github.com/marketplace/actions/depcheck-action-with-pr>
 
@@ -144,7 +144,7 @@ on:
 
 そうすれば、PRコメントとして結果が出力されます。
 
-![img](https://i.imgur.com/x0HzZEF.png)
+![depcheck ActionによるPRコメントへの未使用ライブラリ一覧出力結果](https://i.imgur.com/x0HzZEF.png)
 
 - Unused dependenciesセクションは、package.jsonのdependenciesで定義されたライブラリが、.js、.ts、.jsx、.tsx、.coffee、.sass、.SCSS、.vueの各ファイルで使用されていないことを示しています。
 - Unused devDpendenciesセクションは、package.jsonのdevDependenciesで定義されたライブラリが各ファイルに存在しないことを示しています。
@@ -154,7 +154,7 @@ on:
 
 自分が欲してたものなのでサクッと作ってみたが、めんどくさかったので[GitHub ActionsはDockerで作ってしまった](https://docs.github.com/ja/actions/creating-actions/creating-a-docker-container-action)ので、主にスピード面で課題があります。
 
-一応、base imageを作って高速化はしてますが、Full JavaScriptで作って、もっと丁寧に作ってもよかったと大後悔。
+一応、base imageを作って高速化はしてますが、Full JavaScriptで作って、もっと丁寧に作ってもよかったと大後悔。なお、同じくGitHub Actionsを活用した仕組みとしては、[GitHub JavaScript Actionでrelease更新を行う](/2020/08/14/github-action/)記事や、[ブログにtextlintを導入した](/2022/4/22/textlint/)記事もあわせてご覧ください。
 
 
 

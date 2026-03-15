@@ -3,7 +3,7 @@ id: ""
 slug: 2022/04/09/lambda-urls
 title: AWS Lambda Function URLsがリリースされたのでタイムアウトの挙動を確かめてみる
 date: 2022-04-09T02:50:46.360Z
-description: AWS Lambda Function URLsがリリースされ、ますますLambdaが便利になりますが、何に使おっか..という意見もちらほら？
+description: "AWS Lambda Function URLsを使ってHTTPSエンドポイントを構築する方法と、API Gatewayとの違いを実際に検証しました。30秒タイムアウト制限の回避やIAM認証の挙動など、実運用で気になるポイントを詳しく解説します。"
 tags:
   - AWS
   - Lambda
@@ -24,13 +24,13 @@ templateKey: blog-post
 
 今まではLambdaを使ってHTTPのエンドポイントを作る際は[Amazon API Gateway](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/services-apigateway.html)と組み合わせて作るか[アプリケーションロードバランサー(ALB)のターゲットにAWS Lambdaを選ぶ](https://aws.amazon.com/jp/blogs/news/lambda-functions-as-targets-for-application-load-balancers/)かいずれかが必要でした。
 
-今回のアップデートでAWS Lambdaサービスの組み込み機能として、HTTPSエンドポイントをLambda単体で作成できるのでLambdaでAPIを作ったりWebhookの連携先として機能させる際にAPI Gatewayなどをかませる必要がなくなり便利かと思います。
+今回のアップデートでAWS Lambdaサービスの組み込み機能として、HTTPSエンドポイントをLambda単体で作成できるのでLambdaでAPIを作ったりWebhookの連携先として機能させる際にAPI Gatewayなどをかませる必要がなくなり便利かと思います。以前[GoでAWS Lambdaを動かした](/2019/11/26/go-lambda)記事でも触れましたが、Lambdaの使い勝手はどんどん良くなっていますね。
 
 ## 使ってみる
 
 使い方は超簡単でLambdaを作る際に関数を作る際に関数URLを有効化にしてあげるだけです。
 
-![コンソール](https://i.imgur.com/tD6NepW.png)
+![Lambda関数作成画面で関数URLを有効化するチェックボックスを表示したAWSコンソール](https://i.imgur.com/tD6NepW.png)
 
 後々の検証のため次のようなコードをデプロイしてみます。
 
@@ -56,7 +56,7 @@ exports.handler = async (event) => {
 };
 ```
 
-![lambda概要](https://i.imgur.com/Fe6zbrS.png)
+![Lambda関数の概要画面に表示された関数URLのエンドポイント](https://i.imgur.com/Fe6zbrS.png)
 
 デプロイできると関数URLが発行されます。
 
@@ -64,7 +64,7 @@ https://{url-id}.lambda-url-region.on.awsという不思議なTLDのURLができ
 
 こちらにアクセスしてみると、
 
-![ブラウザアクセス](https://i.imgur.com/OaIFZxx.png)
+![ブラウザからLambda Function URLにアクセスしてレスポンスが返ってきた画面](https://i.imgur.com/OaIFZxx.png)
 
 確かにちゃんと関数が実行されてレスポンスが返ってきました！
 
@@ -184,21 +184,21 @@ returnの手前でsleep(setTimeout)を入れてます。そしてクエリパラ
 
 sleepを1000にすれば1秒待ってレスポンスが返ってきます。
 
-![1秒](https://i.imgur.com/V6AQ1kl.png)
+![sleepパラメータを1000msに設定して1秒後にレスポンスが返ってきた結果](https://i.imgur.com/V6AQ1kl.png)
 
 では、API Gatewayのタイムアウトの30秒に設定してみましょう。(Lambdaのタイムアウトは2分にしてます)
 
-![30秒](https://i.imgur.com/Jh9cixG.png)
+![sleepを30秒に設定してもタイムアウトせずレスポンスが返ってきた結果](https://i.imgur.com/Jh9cixG.png)
 
 タイムアウトしませんでした!!ではLambdaのタイムアウトまで引き延ばしてみましょう！
 
-![タイムアウト](https://i.imgur.com/UCbN8Df.png)
+![Lambdaのタイムアウト値を超えた場合にInternal Server Errorが返された結果](https://i.imgur.com/UCbN8Df.png)
 
 Internal Server Errorしました。これは直感的でいいですね。
 
 ## 結論
 
-Lambdaライフを楽しみましょう！
+Lambdaライフを楽しみましょう！ちなみに[Lambda Container Image Supportを使ってSeleniumを動かす](/2020/12/25/selenium-lambda-container/)構成もおすすめです。
 
 
 

@@ -2,7 +2,7 @@
 slug: 2019/12/04/nuxt-toast
 title: Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
 date: 2019-12-04T23:43:19.895Z
-description: Nuxt.jsのわかりにくい機能の一つ、modulesを使ってみます。
+description: "Nuxt.jsのmodulesをVue Composition APIで利用する方法を@nuxtjs/toastを例に詳しく解説。ClassAPIとの書き方の違いや、setup内でContextからモジュールにアクセスする実装パターン、エラーハンドリングとの組み合わせ方を紹介します。"
 tags:
   - JavaScript
   - TypeScript
@@ -40,7 +40,7 @@ templateKey: blog-post
 
 [該当のComponent](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client/blob/master/components/FileList.vue#L28)
 
-![img](https://i.imgur.com/29nafu5.png)
+![ebook-homebrew-nuxtアプリでtoastを表示した画面](https://i.imgur.com/29nafu5.png)
 
 ## そもそもCompositionAPIとは？
 
@@ -357,3 +357,5 @@ toastの利用側のコンポーネントではsetup内で使います。
 ## 結論
 
 むずかしい。
+
+この実装をさらに改善するために、[Global Optionを使ってtoast設定を共通化する方法](/2019/12/08/nuxtjs-toast-module/)も書きました。また、[Composition APIでVuexのStateをReactiveに使う方法](/2019/12/09/nuxt-composition-vuex/)もあわせてご覧ください。

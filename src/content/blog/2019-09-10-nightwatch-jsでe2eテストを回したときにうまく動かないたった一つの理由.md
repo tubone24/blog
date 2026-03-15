@@ -2,7 +2,7 @@
 slug: 2019/09/10/nightwatchjs-chromedriver
 title: Nightwatch.jsでE2Eテストを回したときにうまく動かないたった一つの理由
 date: 2019-09-10T13:00:00.411Z
-description: ChromeDriverがGoogleChrome v76 に対応していないらしい。の続編
+description: "Nightwatch.jsのE2Eテストが動かない原因はnode_modules内のChromeDriverにあった。vue-cliが依存するChromeDriverのバージョン不一致を特定し、CircleCIのDockerイメージ上で解決するまでの調査過程と対処法を詳しく解説します。"
 tags:
   - 自動テスト
   - E2Eテスト
@@ -13,7 +13,7 @@ templateKey: blog-post
 ---
 エラーをよく読もう・・
 
-前回書いた記事[ChromeDriverがGoogleChrome v76 に対応していないらしい。](https://tubone-project24.xyz/2019-09-03-chromedriver)の解決編です。
+前回書いた記事[ChromeDriverがGoogleChrome v76 に対応していないらしい。](/2019/09/03/chromedriver/)の解決編です。
 
 出てくるエラーでググってもそれっぽいものが出てこないので苦しい戦いでしたが、
 
@@ -167,11 +167,11 @@ CircleCIのconfig.ymlを次のように変えました。
 
 直ったのでOKです。
 
-![Img](https://i.imgur.com/71HlXYT.png)
+![CircleCIのテストが成功した画面：E2Eテストがすべてパスしている](https://i.imgur.com/71HlXYT.png)
 
 久しぶりにsuccessを見た・・。
 
-![Img](https://i.imgur.com/FYjENBL.png)
+![CircleCIのビルド成功のサマリ画面：久しぶりのグリーン表示](https://i.imgur.com/FYjENBL.png)
 
 ## あとがき
 
@@ -188,4 +188,4 @@ Nightwatch.jsの動きが気になったのでもう少し深く見ていくとN
 `でしたので、もしかしたらnpm updateするだけでよかったのかもしれません。
 
 一応、依存パッケージのアップデートはCI契機([Dependabot Preview
-](https://github.com/marketplace/dependabot-preview))で動かすようにしていたのがあだになったかもしれませんねー。
+](https://github.com/marketplace/dependabot-preview))で動かすようにしていたのがあだになったかもしれませんねー。なお、フロントエンドのエラー監視には[Sentryを導入してリアルタイムにエラーを検知する](/2019/09/22/sentry/)仕組みも取り入れています。

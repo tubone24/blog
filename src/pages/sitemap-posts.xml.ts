@@ -11,6 +11,7 @@ export async function GET(_context: APIContext) {
   );
 
   const urlEntries = sorted
+    .filter((post) => !post.data.noindex)
     .map((post) => {
       const lastmod = formatDate(post.data.date);
       return `  <url>

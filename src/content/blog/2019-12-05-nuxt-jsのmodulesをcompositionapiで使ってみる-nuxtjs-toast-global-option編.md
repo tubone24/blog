@@ -2,7 +2,7 @@
 slug: 2019/12/08/nuxtjs-toast-module
 title: Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast Global Option編)
 date: 2019-12-08T04:16:00.000Z
-description: Nuxt.jsのmodulesでGlobal Optionを使ってみます。
+description: "Nuxt.jsの@nuxtjs/toastモジュールでGlobal OptionとRegister機能を活用し、toast設定を共通化する方法を解説。nuxt.config.tsでの一括設定やtoast.global呼び出しにより、コンポーネント側のコードを大幅に簡潔にできます。"
 tags:
   - JavaScript
   - TypeScript
@@ -15,8 +15,7 @@ templateKey: blog-post
 ---
 前回の続きです。
 
-前回[Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)
-](https://tubone-project24.xyz/2019/12/04/nuxt-toast)ではNuxt.jsのmodulesを使ってtoastを出してみました。
+前回[Nuxt.jsのmodulesをCompositionAPIで使ってみる(@nuxtjs/toast編)](/2019/12/04/nuxt-toast/)ではNuxt.jsのmodulesを使ってtoastを出してみました。
 
 ただ、前回の実装だとどこからともなく、
 
@@ -154,10 +153,12 @@ const doDownload = async (filePath: string): Promise<void> => {
 
 とtoastのインスタンスに対して**global.name**と宣言するだけで使えちゃいます!!
 
-![img](https://i.imgur.com/29nafu5.png)
+![Global Optionを使ったtoast表示の画面（見た目は前回と同じ）](https://i.imgur.com/29nafu5.png)
 
 当然、見た目は同じですね。
 
 ## 結論
 
 modulesのglobal optionsをつかうことによりコードの見通しが良くなった気がします。
+
+Nuxt.js + Composition APIの連携をさらに深掘りしたい方は、[VuexのStateをReactiveに使う方法](/2019/12/09/nuxt-composition-vuex/)や[particles-bg-vueを使ったパーティクル背景の実装](/2019/12/02/particles-bg-vue/)もご参照ください。

@@ -2,7 +2,7 @@
 slug: 2020/12/25/selenium-lambda-container
 title: Lambda – Container Image Supportを使ってAlpineからSeleniumが動くコンテナを作ってTerraformで当てる
 date: 2020-12-25T14:58:26.302Z
-description: 最近サポートされたLambdaのContainer Image Supportを使って、Seleniumを動かしてみます。ついでにTerraform化します。
+description: "AWS LambdaのContainer Image Supportを使い、AlpineベースのDockerイメージでSeleniumを動かす方法を解説。RICのインストール、日本語フォント豆腐問題の解消、Lambda in VPCでのIP固定化、Terraformによるインフラ構築まで一連の手順を紹介します。"
 tags:
   - AWS
   - Lambda
@@ -23,13 +23,13 @@ templateKey: blog-post
 
 12/1 **[Lambda – Container Image Support](https://aws.amazon.com/jp/blogs/aws/new-for-aws-lambda-container-image-support/)**が発表されました。
 
-![img](https://i.imgur.com/ZWIqgQZ.png)
+![Lambda作成画面でContainer Imageオプションが表示されている画面](https://i.imgur.com/ZWIqgQZ.png)
 
 Lambda作成画面にもContainer Imageが出てきております。
 
 発表当初はあまり注目してなかったのですがとある思いつきをしました。
 
-**Selenium載っける運用なら案外使い勝手いいかもしれない？**と。
+**Selenium載っける運用なら案外使い勝手いいかもしれない？**と。以前[AWS X-RayでLambdaのトレース](/2020/1/20/x-ray-datadog/)をした経験もあるので、Lambdaの活用には期待が持てます。
 
 ## Container Image Supportで何がうれしいの?
 
@@ -62,7 +62,7 @@ LambdaでSeleniumを動かすと言えばつい最近まで[serverless-chrome](h
 
 じゃあ、Slack APIとか使って、相互投稿とかして解決すればいいじゃんとなりそうですが、一部のWorkSpaceはセキュリティの観点から外部連携が禁止とのこと。なんじゃそりゃ...。
 
-![img](https://i.imgur.com/odKSxHU.png)
+![Slack外部連携禁止で困っているイメージ](https://i.imgur.com/odKSxHU.png)
 
 そこで、セキュア(笑)なSlackのスクリーンショットを取り、普段使っているSlackへ投稿する仕組みにすれば、少なくとも連絡はしたようなものなので、まぁ楽でしょう！ということで作っていきます。
 
@@ -232,7 +232,7 @@ selenium   latest           04304fcd4549   18 minutes ago   846MB
 
 さて、Seleniumを使うときつきまとうのはフォント**豆腐**問題です。
 
-![img](https://i.imgur.com/tjIJUBn.jpg)
+![日本語フォントが豆腐（□）になっている画面の例](https://i.imgur.com/tjIJUBn.jpg)
 
 日本語のようにASCII文字では表現できない文字は、対応するフォントがインストールされていないと文字の代わりに小さい四角(□)、通称**豆腐**が表示されることがあります。麻雀の白ではないですよ。というより豆腐という日本語が世界語になっているのはすごいですね。
 
@@ -391,11 +391,11 @@ def handler(event, context):
 
 まずはログインページアクセスですが、これはブラウザでhttps://slack-workspace-url.slack.comにアクセスしますと、Eメールとパスワードを聞かれるフォームが出てきます。
 
-![img](https://i.imgur.com/LaMP20t.png)
+![Slackのログイン画面：メールアドレスとパスワードの入力フォーム](https://i.imgur.com/LaMP20t.png)
 
 こちら確認してみると、Elementのidがそれぞれ、email, passwordとなっております。また、Sign inボタンはID signin_btnとなっております。ありがたいですね。
 
-![img](https://i.imgur.com/S8orasB.png)
+![Slackログインフォームのhtml要素検証：email・password・signin_btnのID確認](https://i.imgur.com/S8orasB.png)
 
 ということで、idがemailのElementが描画されたらEメール、パスワードを入力し、ボチッとSign inボタンをクリックします。
 
@@ -456,11 +456,11 @@ print(d.save_screenshot("/tmp/screen.png"))
 
 Slack Appを作ったらSlackAPIのOAuth&Permissionsから確認できます。
 
-![img](https://i.imgur.com/Tt6avAl.png)
+![Slack APIのOAuth & Permissionsページでトークンを確認する画面](https://i.imgur.com/Tt6avAl.png)
 
 Permissionsは[channels:join](https://api.slack.com/scopes/channels:join)、[chat:write](https://api.slack.com/scopes/chat:write)、[chat:write.public](https://api.slack.com/scopes/chat:write.public)、[files:write](https://api.slack.com/scopes/files:write)があれば十分だと思います。
 
-![img](https://i.imgur.com/0O9dgma.png)
+![Slack Appのスコープ設定画面：channels:join、chat:write等のPermissions](https://i.imgur.com/0O9dgma.png)
 
 ```python
         url = "https://slack.com/api/files.upload"
@@ -477,13 +477,13 @@ Permissionsは[channels:join](https://api.slack.com/scopes/channels:join)、[cha
 
 ほとんどモザイクで申し訳ないですが、きっちりSlackにスクリーンショットを投稿できました。
 
-![img](https://i.imgur.com/oHtRLCO.png)
+![Slackにスクリーンショットが投稿された画面（モザイク処理済み）](https://i.imgur.com/oHtRLCO.png)
 
 ## 一部フォントが豆腐のままになる
 
 確かにうまく言ったのですが、Noto fontsを入れているにも関わらず一部フォントが豆腐のままになってしまう事象が起きてしまいました。
 
-![img](https://i.imgur.com/QxSsfqy.png)
+![Noto Fonts導入後も一部の日本語が豆腐のまま表示されているスクリーンショット](https://i.imgur.com/QxSsfqy.png)
 
 ~~12/24なにがあるんでしょうねぇ...~~
 
@@ -523,11 +523,11 @@ RUN fc-cache -fv
 
 もう1つ問題になったのは、LambdaのグローバルIPを固定化していなかったため、変なIPアドレスからログインを実行したという警告がでてしまうことです。
 
-![img](https://i.imgur.com/dmGb7V6.png)
+![Slackから不審なIPアドレスでのサインイン警告メールが届いた画面](https://i.imgur.com/dmGb7V6.png)
 
 こちらは解決法があり、要は**Lambda in VPC**にしてNatGatewayにEIPを当てて、固定IPからインターネットアクセスをさせてあげればいいわけです。
 
-![img](https://i.imgur.com/GPamgYL.png)
+![Lambda in VPCでNAT GatewayにEIPを割り当てる構成図](https://i.imgur.com/GPamgYL.png)
 
 Container Image Supportとはいえ、ここらへんの仕組みはいつも使っているLambdaなので簡単に実現できました。
 
@@ -551,7 +551,7 @@ aws ecr describe-images --repository-name selenium --image-ids imageTag=latest |
 
 [IntellJ HashiCorp Terraform / HCL language support](https://plugins.jetbrains.com/plugin/7808-hashicorp-terraform--hcl-language-support)を使っているとhandlerとruntimeオプションが無いよ！と怒られてしまいますが、構わず不要で大丈夫です。
 
-![img](https://i.imgur.com/cxxcBx0.png)
+![IntelliJ IDEAでhandlerとruntimeが未設定の警告が表示されているTerraformコード](https://i.imgur.com/cxxcBx0.png)
 
 ## 完成
 
@@ -559,4 +559,4 @@ aws ecr describe-images --repository-name selenium --image-ids imageTag=latest |
 
 <https://github.com/tubone24/lambda_container_support_with_selenium>
 
-いろんな技術でうまく行かないことが多かったですが、やりたかったことが無事できました。
+いろんな技術でうまく行かないことが多かったですが、やりたかったことが無事できました。Lambda Function URLsなど、Lambdaの活用方法は[こちらの記事](/2022/04/09/lambda-urls/)でも紹介しています。

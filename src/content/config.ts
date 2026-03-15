@@ -20,6 +20,7 @@ const blog = defineCollection({
       .default([]),
     templateKey: z.string().optional(),
     useAi: z.boolean().optional().default(false),
+    noindex: z.boolean().optional().default(false),
   }),
 });
 

@@ -2,7 +2,7 @@
 slug: 2026/02/03/whisper-realtime-claude-code-blog-writing
 title: "whisper-realtimeとClaude Codeで実現する音声入力ブログ執筆"
 date: 2026-02-03
-description: 育休中でも技術アウトプットを続けたい。whisper-realtimeとClaude Codeを組み合わせた音声入力ブログ執筆ワークフローを紹介します。
+description: "育休中でもブログを書き続けたい。自作のローカル音声文字起こしツールwhisper-realtimeとClaude Codeのスキル・サブエージェント機能を組み合わせて、音声入力からブログ記事を自動構成・執筆するワークフローを構築しました。textlintによる品質チェックまで含めた実践的な手法を紹介します。"
 tags:
   - whisper
   - Claude Code
@@ -309,6 +309,6 @@ XやZennを見ると、多くのエンジニアがアウトプットを続けて
 
 実際にこの記事自体がこのワークフローで書かれているわけですが、思った以上に自然な文章になったのではないかと感じています。もちろん、AIが書いた部分と私が話した内容の境界は曖昧ですし、完璧なワークフローとは言えません。それでも、**PCに長時間向き合えない状況でもブログを書き続けることができるようになった**のは大きな収穫です。
 
-今後もスキルの改善やサブエージェントの活用など、より私らしい文章が書けるようなチューニングを続けていきたいと思います。
+今後もスキルの改善やサブエージェントの活用など、より私らしい文章が書けるようなチューニングを続けていきたいと思います。Claude Codeの活用については、[Remote ControlとSlack通知を組み合わせた仕組み](/2026/03/05/claude-code-remote-control-slack-notification/)や[HooksとLangfuseでコーディングエージェントの動きを可視化する方法](/2026/03/13/claude-code-langfuse-hooks-tracing/)も紹介しています。
 
 音声入力でブログが書けそうな予感がするこの頃です。

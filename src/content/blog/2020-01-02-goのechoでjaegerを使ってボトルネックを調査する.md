@@ -2,7 +2,7 @@
 slug: 2019/1/3/go-jaeger
 title: GoのEchoでJaegerを使ってボトルネックを調査する
 date: 2020-01-03T08:07:30.122Z
-description: GoのEchoでJaegerを使ってボトルネックを調査します。
+description: "GoのWebフレームワークEchoにJaeger分散トレーシングを導入してAPIのボトルネックを調査する方法を解説。echo-contribのjaegertracing設定、child spanによる詳細計測、Docker上でのJaeger UIの起動手順まで実践的に紹介します"
 tags:
   - Go
   - Echo
@@ -23,7 +23,7 @@ Goの勉強をしておかないと社内でニートになってしまうので
 
 ## そもそもEchoとは？
 
-![img](https://i.imgur.com/3ZjGzeX.png)
+![Echo公式サイトのトップページ](https://i.imgur.com/3ZjGzeX.png)
 
 EchoとはGoのWAF(Web Framework)です。
 
@@ -35,7 +35,7 @@ EchoとはGoのWAF(Web Framework)です。
 
 Goのなかでもパフォーマンスがいいと言われている[Gin](https://gin-gonic.com/)に比べても**十分な速度がでている**ことが公式のGitHubにのってました。
 
-![img](https://camo.githubusercontent.com/d8800e2ee37115207efc1f3e937a28fb49d90e22/68747470733a2f2f692e696d6775722e636f6d2f49333256644d4a2e706e67)
+![EchoとGinのベンチマーク比較グラフ](https://camo.githubusercontent.com/d8800e2ee37115207efc1f3e937a28fb49d90e22/68747470733a2f2f692e696d6775722e636f6d2f49333256644d4a2e706e67)
 
 Ginより早いならEcho使っておけばええんや！と思いますが、
 
@@ -59,7 +59,7 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 [jeager](https://www.jaegertracing.io/docs/1.16/)は[Uber Technologies Inc.](https://uber.github.io/#/)が**OSS**として公開した**分散トレーシングシステム**です。
 
-![img](https://i.imgur.com/69WEZfu.png)
+![Jaeger公式サイトのロゴとトップページ](https://i.imgur.com/69WEZfu.png)
 
 マイクロサービスなアーキテクチャを横串で監視できる強みと**Go, Java, Node, Python, C++** でクライアントが提供されていることが魅力です。
 
@@ -168,23 +168,23 @@ go run main.go
 
 APIをコールしてみるとTracingされているのがわかります。
 
-![img](https://i.imgur.com/CRKvFq6.png)
+![Jaeger UIでのトレーシング結果一覧画面](https://i.imgur.com/CRKvFq6.png)
 
 **/get/:username**というAPIのコールも出ています。
 
-![img](https://i.imgur.com/1uQdmdX.png)
+![Jaeger UIで/get/:username APIコールのトレース詳細](https://i.imgur.com/1uQdmdX.png)
 
 こまかく見ていきますと、:usernameはpath parameterなのですが、APIコール時に**tubone24**というユーザー名を設定しコールしたことがわかります。
 
 **1.04sかかってますね・・・。**
 
-![img](https://i.imgur.com/c0y81lE.png)
+![APIコールのレスポンスタイム1.04秒の詳細トレース](https://i.imgur.com/c0y81lE.png)
 
 また、childspanも無事記録してます。
 
-![img](https://i.imgur.com/1uQdmdX.png)
+![Jaeger UIでchild spanの記録を確認する画面](https://i.imgur.com/1uQdmdX.png)
 
-![img](https://i.imgur.com/dh3WfC2.png)
+![child spanの詳細でGitHub APIコールが0.48msと表示されている画面](https://i.imgur.com/dh3WfC2.png)
 
 どうやらバックエンド(GitHub)へのコールはそこまで**0.48ms**とそこまで遅くはないみたいです。
 
@@ -192,4 +192,4 @@ APIをコールしてみるとTracingされているのがわかります。
 
 ## 結論
 
-jaegerでトレーシングが簡単にできましたが、ボトルネック発見は難しいということがよくわかりました。
+jaegerでトレーシングが簡単にできましたが、ボトルネック発見は難しいということがよくわかりました。AWSのトレーシングサービスに興味がある方は[AWS X-RayでLambdaのトレースをしつつ、Datadog APMに連携する](/2020/1/20/x-ray-datadog/)もぜひご覧ください。また、GoでのAWS Lambda活用については[GoでAWS Lambdaを動かしてGitHub API v4を叩く](/2019/11/26/go-lambda/)も参考になります。

@@ -2,7 +2,7 @@
 slug: 2019/09/20/gitpitch
 title: GitPitchを使ってMarkdownからプレゼンテーションを作ってBadgeをレポジトリに貼る
 date: 2019-09-19T15:26:30.987Z
-description: GitPitchを使ってMarkdownからプレゼンテーションを作ってBadgeをレポジトリに貼る
+description: "GitPitchを使ってMarkdownからおしゃれなプレゼンテーションを作成する方法を紹介。Azusa Colorsを参考にした配色設定、背景画像やフォントのカスタマイズ、GitHub BadgeのREADMEへの貼り方まで、実例付きで解説します。"
 tags:
   - GitPitch
   - GitHub
@@ -265,7 +265,7 @@ transition: concave
 ---?color=#B867C6
 ```
 
-![Img](https://i.imgur.com/tJFkIB5.png)
+![GitPitchスライドの背景色をパープルに変更した表示例](https://i.imgur.com/tJFkIB5.png)
 
 ### 背景に画像をつける
 
@@ -275,7 +275,7 @@ transition: concave
 ---?image=assets/gitpitch/img/journey.jpg
 ```
 
-![Img](https://i.imgur.com/UE6a3e1.png)
+![GitPitchスライドに背景画像を設定した表示例](https://i.imgur.com/UE6a3e1.png)
 
 ### フォント、色などを変える
 
@@ -287,7 +287,7 @@ Ebook Homebrew's journey is not over yet..
 @snapend
 ```
 
-![Img](https://i.imgur.com/YlJxm1U.png)
+![GitPitchのsnapでフォントとスタイルをカスタマイズしたスライド例](https://i.imgur.com/YlJxm1U.png)
 
 ### 引用文
 
@@ -303,8 +303,8 @@ hogeが引用文、fugaが人となります。
 @quote[I want to learn more!](tubone)
 ```
 
-![Img](https://i.imgur.com/v9iyA2y.png)
+![GitPitchのquote機能で引用文を表示したスライド例](https://i.imgur.com/v9iyA2y.png)
 
 ## 結論
 
-そのままのMarkdownでもそれなりなプレゼンテーションができますが、カスタマイズも結構できます。LT用に作ってみようかなぁ・・。
+そのままのMarkdownでもそれなりなプレゼンテーションができますが、カスタマイズも結構できます。LT用に作ってみようかなぁ・・。GitHubのレポジトリをもっと充実させたい方は[GitHub ProfileにREADMEをつける方法](/2020/07/12/github-profile/)も参考にしてみてください。Badgeを増やしたい方には[GitHub Actionで簡単にCIを組む方法](/2019/09/02/github-action/)もおすすめです。

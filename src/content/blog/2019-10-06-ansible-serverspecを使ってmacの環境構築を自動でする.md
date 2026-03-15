@@ -2,7 +2,7 @@
 slug: 2019/10/6/mac-auto-setup
 title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Ansible編)
 date: 2019-10-06T02:20:10.067Z
-description: Ansible + Serverspecを使ってMacの環境構築を自動でします
+description: "AnsibleでMacの開発環境構築を自動化する方法をInventory・Role・Playbookの設定手順に沿って解説。Homebrewモジュールによるパッケージ管理、lineinfile/blockinfileでのPATH設定、Makefileによる一発実行まで紹介します。"
 tags:
   - Auto Provisioning
   - Ansible
@@ -25,7 +25,7 @@ templateKey: blog-post
 
 ## Ansible
 
-![Img](https://i.imgur.com/oBucHNe.png)
+![Ansibleの公式ロゴ](https://i.imgur.com/oBucHNe.png)
 
 Ansibleとは**Python**製の**OSS構成管理ツール**です。
 
@@ -309,8 +309,8 @@ make setup TARGET=mac
 
 ## 結論
 
-長くなったのでServerspecは次項で話します。
+長くなったので[Serverspecは次項](/2019/10/08/serverspec/)で話します。
 
 Ansibleはディレクトリが複雑なイメージがありますが、意味を理解すれば簡単です。
 
-みなさまもMacの構成管理にトライしてみてください。
+みなさまもMacの構成管理にトライしてみてください。さらに[Azure DevOps Build PipelineでCI化する方法](/2019/10/11/azure-dev-pipeline/)も後続の記事で紹介しています。
