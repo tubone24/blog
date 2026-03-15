@@ -48,7 +48,7 @@ const allPostsForSidebar = allPosts.map((p) => ({
   <div class="container">
     <div class="row homepage">
       <Sidebar
-        client:load
+        client:idle
         latestPosts={latestPosts}
         allPosts={allPostsForSidebar}
         totalCount={allPosts.length}
@@ -58,7 +58,7 @@ const allPostsForSidebar = allPosts.map((p) => ({
             const url = post.slug;
             return (
               <Card
-                client:load
+                client:idle
                 title={post.data.title}
                 date={post.data.date.toISOString()}
                 url={`/${url}/`}
