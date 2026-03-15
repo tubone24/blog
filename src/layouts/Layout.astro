@@ -57,14 +57,6 @@ schemaOrgList.push({
   description: config.description,
   publisher: { '@id': `${config.siteUrl}/#person` },
   inLanguage: 'ja-JP',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${config.siteUrl}/?search={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
 });
 
 // Person schema
