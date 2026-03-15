@@ -47,6 +47,21 @@ const minutes = Math.ceil(wordCount / 400);
 const slug = post.slug;
 const shareURL = `${config.siteUrl}/${slug}/`;
 
+// descriptionフォールバック: frontmatterにdescriptionがない場合、記事本文の冒頭から自動生成
+const fallbackDescription = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`([^`]*)`/g, '$1')
+  .replace(/<[^>]+>/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~>|]/g, '')
+  .replace(/\n+/g, ' ')
+  .trim()
+  .slice(0, 120);
+const postDescription = post.data.description || `${fallbackDescription}...`;
+
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
@@ -75,7 +90,7 @@ const allPostsForRelated = sorted.map((p) => ({
 
 <Layout
   title={post.data.title}
-  description={post.data.description || ''}
+  description={postDescription}
   ogImage={post.data.headerImage || config.defaultImage}
   isPostPage={true}
   isPost={true}
