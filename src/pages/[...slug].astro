@@ -118,7 +118,7 @@ const allPostsForRelated = sorted.map((p) => ({
     />
     <main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
       <TimeToRead client:idle words={wordCount} minutes={minutes} />
-      <TextToSpeech client:visible text={speechText} />
+      <TextToSpeech client:idle text={speechText} />
       {post.data.useAi && (
         <aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;">
           <p>この記事は筆者(<a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;">tubone</a>)が<a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;">whisper-realtime</a>を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。</p>
@@ -138,7 +138,7 @@ const allPostsForRelated = sorted.map((p) => ({
         </a>
       </div>
       <RelatedPosts
-        client:visible
+        client:idle
         title={post.data.title}
         tags={post.data.tags || []}
         allPosts={allPostsForRelated}
