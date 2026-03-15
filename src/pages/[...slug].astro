@@ -47,6 +47,21 @@ const minutes = Math.ceil(wordCount / 400);
 const slug = post.slug;
 const shareURL = `${config.siteUrl}/${slug}/`;
 
+// descriptionフォールバック: frontmatterにdescriptionがない場合、記事本文の冒頭から自動生成
+const fallbackDescription = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`([^`]*)`/g, '$1')
+  .replace(/<[^>]+>/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~>|]/g, '')
+  .replace(/\n+/g, ' ')
+  .trim()
+  .slice(0, 120);
+const postDescription = post.data.description || `${fallbackDescription}...`;
+
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
@@ -75,19 +90,20 @@ const allPostsForRelated = sorted.map((p) => ({
 
 <Layout
   title={post.data.title}
-  description={post.data.description || ''}
+  description={postDescription}
   ogImage={post.data.headerImage || config.defaultImage}
   isPostPage={true}
   isPost={true}
   tag={post.data.tags?.[0] || ''}
   canonicalUrl={shareURL}
   datePublished={post.data.date.toISOString()}
-  dateModified={post.data.date.toISOString()}
+  dateModified={(post.data.updatedDate || post.data.date).toISOString()}
   keywords={post.data.tags || []}
+  faq={post.data.faq || []}
 >
   <div class="post row order-2">
     <Header
-      client:load
+      client:idle
       img={post.data.headerImage || config.defaultImage}
       title={post.data.title}
       authorName={config.author}
@@ -95,14 +111,14 @@ const allPostsForRelated = sorted.map((p) => ({
       subTitle={parseDate(post.data.date.toISOString())}
     />
     <Sidebar
-      client:load
+      client:visible
       latestPosts={latestPosts}
       allPosts={allPostsForSidebar}
       totalCount={sorted.length}
     />
     <main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
-      <TimeToRead client:load words={wordCount} minutes={minutes} />
-      <TextToSpeech client:load text={speechText} />
+      <TimeToRead client:idle words={wordCount} minutes={minutes} />
+      <TextToSpeech client:idle text={speechText} />
       {post.data.useAi && (
         <aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;">
           <p>この記事は筆者(<a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;">tubone</a>)が<a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;">whisper-realtime</a>を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。</p>
@@ -122,12 +138,12 @@ const allPostsForRelated = sorted.map((p) => ({
         </a>
       </div>
       <RelatedPosts
-        client:load
+        client:idle
         title={post.data.title}
         tags={post.data.tags || []}
         allPosts={allPostsForRelated}
       />
     </main>
-    <ShareBox client:load url={shareURL} />
+    <ShareBox client:visible url={shareURL} />
   </div>
 </Layout>

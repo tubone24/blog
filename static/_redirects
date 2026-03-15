@@ -7,6 +7,40 @@
 /.well-known/security.txt /well-known/security.txt 301
 /.well-known/humans.txt /well-known/humans.txt 301
 /humans.txt /well-known/humans.txt 301
+# slug修正リダイレクト（重複slug解消）
+/2026/02/21/levtech-freelance-blog-featured/ /2026/02/21/aws-mcp-practical-guide-review/ 301
+/2026/02/21/levtech-freelance-blog-featured /2026/02/21/aws-mcp-practical-guide-review/ 301
+
+# slug形式統一リダイレクト（YYYY-MM-DD → YYYY/MM/DD）
+/2023-05-04/nfc-business-cart/ /2023/05/04/nfc-business-cart/ 301
+/2023-05-04/nfc-business-cart /2023/05/04/nfc-business-cart/ 301
+/2024-02-28/idol-update-slack-notification-for-wife/ /2024/02/28/idol-update-slack-notification-for-wife/ 301
+/2024-02-28/idol-update-slack-notification-for-wife /2024/02/28/idol-update-slack-notification-for-wife/ 301
+/2024-12-05/cost-effective-company-name-suggestion-feature/ /2024/12/05/cost-effective-company-name-suggestion-feature/ 301
+/2024-12-05/cost-effective-company-name-suggestion-feature /2024/12/05/cost-effective-company-name-suggestion-feature/ 301
+/2024-12-30/building-langfuse-v3-with-aws-managed-services/ /2024/12/30/building-langfuse-v3-with-aws-managed-services/ 301
+/2024-12-30/building-langfuse-v3-with-aws-managed-services /2024/12/30/building-langfuse-v3-with-aws-managed-services/ 301
+/2025-02-16/cost-effective-langfuse-v3-deployment/ /2025/02/16/cost-effective-langfuse-v3-deployment/ 301
+/2025-02-16/cost-effective-langfuse-v3-deployment /2025/02/16/cost-effective-langfuse-v3-deployment/ 301
+/2025-02-24/celery-monitoring-with-beat-and-cloudwatch/ /2025/02/24/celery-monitoring-with-beat-and-cloudwatch/ 301
+/2025-02-24/celery-monitoring-with-beat-and-cloudwatch /2025/02/24/celery-monitoring-with-beat-and-cloudwatch/ 301
+/2025-10-29/introduction-to-ap2/ /2025/10/29/introduction-to-ap2/ 301
+/2025-10-29/introduction-to-ap2 /2025/10/29/introduction-to-ap2/ 301
+/2019-09-01-netlify-and-gatsby/ /2019/09/01/netlify-and-gatsby/ 301
+/2019-09-01-netlify-and-gatsby /2019/09/01/netlify-and-gatsby/ 301
+/2019-09-02-github-action/ /2019/09/02/github-action/ 301
+/2019-09-02-github-action /2019/09/02/github-action/ 301
+/2019-09-03-chromedriver/ /2019/09/03/chromedriver/ 301
+/2019-09-03-chromedriver /2019/09/03/chromedriver/ 301
+/2019-09-08-metasploitable-hyperv/ /2019/09/08/metasploitable-hyperv/ 301
+/2019-09-08-metasploitable-hyperv /2019/09/08/metasploitable-hyperv/ 301
+/2019-09-10-nightwatchjs-chromedriver/ /2019/09/10/nightwatchjs-chromedriver/ 301
+/2019-09-10-nightwatchjs-chromedriver /2019/09/10/nightwatchjs-chromedriver/ 301
+/2019-09-12-particles-js/ /2019/09/12/particles-js/ 301
+/2019-09-12-particles-js /2019/09/12/particles-js/ 301
+/2023-01-15/2023-goals-and-objectives/ /2023/01/15/2023-goals-and-objectives/ 301
+/2023-01-15/2023-goals-and-objectives /2023/01/15/2023-goals-and-objectives/ 301
+
 /ogp.png /.netlify/functions/ogp 200
 https://blog.tubone-project24.xyz/* https://tubone-project24.xyz/:splat 301!
 http://blog.tubone-project24.xyz/* https://tubone-project24.xyz/:splat 301!

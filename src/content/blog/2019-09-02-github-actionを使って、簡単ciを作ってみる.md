@@ -1,5 +1,5 @@
 ---
-slug: 2019-09-02-github-action
+slug: 2019/09/02/github-action
 title: Github Actionを使って、簡単CIを作ってみる
 date: 2019-09-02T11:33:53.870Z
 description: 最近Github Actionを使って簡単CIを作ってみました。

@@ -17,6 +17,7 @@ interface Props {
   dateModified?: string;
   author?: string;
   keywords?: string[];
+  faq?: { question: string; answer: string }[];
 }
 
 const {
@@ -32,6 +33,7 @@ const {
   dateModified,
   author = config.author,
   keywords = [],
+  faq = [],
 } = Astro.props;
 
 const siteTitle = config.siteTitle;
@@ -50,7 +52,7 @@ schemaOrgList.push({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   '@id': `${config.siteUrl}/#website`,
-  url: config.siteUrl,
+  url: `${config.siteUrl}/`,
   name: config.siteTitle,
   description: config.description,
   publisher: { '@id': `${config.siteUrl}/#person` },
@@ -74,6 +76,8 @@ schemaOrgList.push({
   },
   sameAs: ['https://github.com/tubone24', 'https://twitter.com/tubone24'],
   jobTitle: 'Software Engineer',
+  knowsAbout: ['Python', 'TypeScript', 'AWS', 'React', 'DevOps', 'Machine Learning', 'Infrastructure'],
+  description: 'tubone24はPythonやTypeScriptを中心に、AWS・DevOps・機械学習など幅広い技術領域で活動するソフトウェアエンジニアです。',
 });
 
 if (isPost) {
@@ -109,6 +113,22 @@ if (isPost) {
     keywords: tag,
   });
 }
+
+// FAQPage schema
+if (faq && faq.length > 0) {
+  schemaOrgList.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  });
+}
 ---
 
 <!DOCTYPE html>
@@ -123,10 +143,16 @@ if (isPost) {
   <meta name="image" content={ogImage} />
   <meta name="keywords" content={allKeywords} />
   <meta name="author" content={author} />
-  {noindex && <meta name="robots" content="noindex, follow" />}
+  {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="max-image-preview:large" />}
 
   {/* カノニカルURL */}
   <link rel="canonical" href={url} />
+
+  {/* Preconnect hints */}
+  <link rel="preconnect" href="https://i.imgur.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://i.imgur.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
   {/* 電話番号自動認識の無効化 */}
   <meta name="format-detection" content="telephone=no" />
@@ -202,7 +228,7 @@ if (isPost) {
   </script>
 </head>
 <body>
-  <Navbar client:load isPostPage={isPostPage} />
+  <Navbar client:idle isPostPage={isPostPage} />
   <slot />
   <Footer client:idle />
   <script>

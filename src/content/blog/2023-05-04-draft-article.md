@@ -1,5 +1,5 @@
 ---
-slug: 2023-05-04/nfc-business-cart
+slug: 2023/05/04/nfc-business-cart
 title: "NFCタグを使ったデジタル名刺をPageCryptを使って作ってみた"
 date: 2023-05-04T05:01:23+0000
 description: NFCタグを使ったデジタル名刺をPageCryptを使って作ってみたお話

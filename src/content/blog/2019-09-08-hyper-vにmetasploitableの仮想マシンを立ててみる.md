@@ -1,5 +1,5 @@
 ---
-slug: 2019-09-08-metasploitable-hyperv
+slug: 2019/09/08/metasploitable-hyperv
 title: Hyper-vにMetasploitableの仮想マシンを立ててみる
 date: 2019-09-08T12:55:31.132Z
 description: Hyper-vにMetasploitableの仮想マシンを立ててみる
