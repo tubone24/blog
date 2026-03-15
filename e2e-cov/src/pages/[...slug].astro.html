@@ -196,7 +196,39 @@
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,6 +410,21 @@ const minutes = Math.ceil(wordCount / 400);
 const slug = post.slug;
 const shareURL = `${config.siteUrl}/${slug}/`;
 &nbsp;
+// descriptionフォールバック: frontmatterにdescriptionがない場合、記事本文の冒頭から自動生成
+const fallbackDescription = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`([^`]*)`/g, '$1')
+  .replace(/&lt;[^&gt;]+&gt;/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~&gt;|]/g, '')
+  .replace(/\n+/g, ' ')
+  .trim()
+  .slice(0, 120);
+const postDescription = post.data.description || `${fallbackDescription}...`;
+&nbsp;
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(
   (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
@@ -406,19 +453,20 @@ const allPostsForRelated = sorted.map((p) =&gt; ({
 &nbsp;
 &lt;Layout
   title={post.data.title}
-  description={post.data.description || ''}
+  description={postDescription}
   ogImage={post.data.headerImage || config.defaultImage}
   isPostPage={true}
   isPost={true}
   tag={post.data.tags?.[0] || ''}
   canonicalUrl={shareURL}
   datePublished={post.data.date.toISOString()}
-  dateModified={post.data.date.toISOString()}
+  dateModified={(post.data.updatedDate || post.data.date).toISOString()}
   keywords={post.data.tags || []}
+  faq={post.data.faq || []}
 &gt;
   &lt;div class="post row order-2"&gt;
     &lt;Header
-      client:load
+      client:idle
       img={post.data.headerImage || config.defaultImage}
       title={post.data.title}
       authorName={config.author}
@@ -426,14 +474,14 @@ const allPostsForRelated = sorted.map((p) =&gt; ({
       subTitle={parseDate(post.data.date.toISOString())}
     /&gt;
     &lt;Sidebar
-      client:load
+      client:visible
       latestPosts={latestPosts}
       allPosts={allPostsForSidebar}
       totalCount={sorted.length}
     /&gt;
     &lt;main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"&gt;
-      &lt;TimeToRead client:load words={wordCount} minutes={minutes} /&gt;
-      &lt;TextToSpeech client:load text={speechText} /&gt;
+      &lt;TimeToRead client:idle words={wordCount} minutes={minutes} /&gt;
+      &lt;TextToSpeech client:idle text={speechText} /&gt;
       {post.data.useAi &amp;&amp; (
         &lt;aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;"&gt;
           &lt;p&gt;この記事は筆者(&lt;a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;"&gt;tubone&lt;/a&gt;)が&lt;a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;"&gt;whisper-realtime&lt;/a&gt;を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。&lt;/p&gt;
@@ -453,13 +501,13 @@ const allPostsForRelated = sorted.map((p) =&gt; ({
         &lt;/a&gt;
       &lt;/div&gt;
       &lt;RelatedPosts
-        client:load
+        client:idle
         title={post.data.title}
         tags={post.data.tags || []}
         allPosts={allPostsForRelated}
       /&gt;
     &lt;/main&gt;
-    &lt;ShareBox client:load url={shareURL} /&gt;
+    &lt;ShareBox client:visible url={shareURL} /&gt;
   &lt;/div&gt;
 &lt;/Layout&gt;
 &nbsp;</pre></td></tr></table></pre>
@@ -469,7 +517,7 @@ const allPostsForRelated = sorted.map((p) =&gt; ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-14T09:02:03.766Z
+                at 2026-03-15T01:06:27.688Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

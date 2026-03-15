@@ -275,7 +275,59 @@
 <a name='L210'></a><a href='#L210'>210</a>
 <a name='L211'></a><a href='#L211'>211</a>
 <a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -506,6 +558,7 @@ interface Props {
   dateModified?: string;
   author?: string;
   keywords?: string[];
+  faq?: { question: string; answer: string }[];
 }
 &nbsp;
 const {
@@ -521,6 +574,7 @@ const {
   dateModified,
   author = config.author,
   keywords = [],
+  faq = [],
 } = Astro.props;
 &nbsp;
 const siteTitle = config.siteTitle;
@@ -539,7 +593,7 @@ schemaOrgList.push({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   '@id': `${config.siteUrl}/#website`,
-  url: config.siteUrl,
+  url: `${config.siteUrl}/`,
   name: config.siteTitle,
   description: config.description,
   publisher: { '@id': `${config.siteUrl}/#person` },
@@ -563,6 +617,8 @@ schemaOrgList.push({
   },
   sameAs: ['https://github.com/tubone24', 'https://twitter.com/tubone24'],
   jobTitle: 'Software Engineer',
+  knowsAbout: ['Python', 'TypeScript', 'AWS', 'React', 'DevOps', 'Machine Learning', 'Infrastructure'],
+  description: 'tubone24はPythonやTypeScriptを中心に、AWS・DevOps・機械学習など幅広い技術領域で活動するソフトウェアエンジニアです。',
 });
 &nbsp;
 if (isPost) {
@@ -598,6 +654,22 @@ if (isPost) {
     keywords: tag,
   });
 }
+&nbsp;
+// FAQPage schema
+if (faq &amp;&amp; faq.length &gt; 0) {
+  schemaOrgList.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) =&gt; ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  });
+}
 ---
 &nbsp;
 &lt;!DOCTYPE html&gt;
@@ -612,10 +684,16 @@ if (isPost) {
   &lt;meta name="image" content={ogImage} /&gt;
   &lt;meta name="keywords" content={allKeywords} /&gt;
   &lt;meta name="author" content={author} /&gt;
-  {noindex &amp;&amp; &lt;meta name="robots" content="noindex, follow" /&gt;}
+  {noindex ? &lt;meta name="robots" content="noindex, follow" /&gt; : &lt;meta name="robots" content="max-image-preview:large" /&gt;}
 &nbsp;
   {/* カノニカルURL */}
   &lt;link rel="canonical" href={url} /&gt;
+&nbsp;
+  {/* Preconnect hints */}
+  &lt;link rel="preconnect" href="https://i.imgur.com" /&gt;
+  &lt;link rel="preconnect" href="https://www.googletagmanager.com" /&gt;
+  &lt;link rel="dns-prefetch" href="https://i.imgur.com" /&gt;
+  &lt;link rel="dns-prefetch" href="https://www.googletagmanager.com" /&gt;
 &nbsp;
   {/* 電話番号自動認識の無効化 */}
   &lt;meta name="format-detection" content="telephone=no" /&gt;
@@ -691,7 +769,7 @@ if (isPost) {
   &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;Navbar client:load isPostPage={isPostPage} /&gt;
+  &lt;Navbar client:idle isPostPage={isPostPage} /&gt;
   &lt;slot /&gt;
   &lt;Footer client:idle /&gt;
   &lt;script&gt;
@@ -706,7 +784,7 @@ if (isPost) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-14T09:02:03.766Z
+                at 2026-03-15T01:06:27.688Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
