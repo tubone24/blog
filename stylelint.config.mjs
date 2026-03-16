@@ -11,5 +11,6 @@ export default {
     "scss/at-rule-no-unknown": true,
     "declaration-property-value-no-unknown": null,
     "nesting-selector-no-missing-scoping-root": null,
+    "import-notation": "string",
   },
 };
