@@ -23,7 +23,7 @@ describe("Card", () => {
     expect(screen.getByTestId("card")).toHaveTextContent("hogehogehogehoge");
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "src",
-      "https://example.com/testl.png",
+      "https://example.com/test-640.png",
     );
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "loading",
@@ -50,7 +50,7 @@ describe("Card", () => {
     // For index === 0, eager loading is applied (LCP optimization)
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "src",
-      "https://example.com/testl.png",
+      "https://example.com/test-640.png",
     );
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "loading",
@@ -75,7 +75,7 @@ describe("Card", () => {
     expect(screen.queryByText("testTag2")).not.toBeInTheDocument();
     expect(screen.getByTestId("card-header")).toHaveAttribute(
       "src",
-      "https://example.com/testl.png",
+      "https://example.com/test-640.png",
     );
   });
   it("should not have basic accessibility issues", async () => {
