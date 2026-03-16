@@ -15,8 +15,8 @@
 // Base styles
 
 .data {
-  transition: transform 0.3s;
   transform: translateY(0);
+  transition: transform 0.3s;
 }
 
 .data-content {
@@ -84,7 +84,7 @@
   background-size: cover;
   transition: all 0.5s ease 0s;
 
-  @media (min-width: 576px) {
+  @media (width >= 576px) {
     min-height: 16rem;
   }
 
@@ -101,7 +101,7 @@ img.wrapper {
   object-fit: cover;
   object-position: center;
 
-  @media (min-width: 576px) {
+  @media (width >= 576px) {
     height: 16rem;
   }
 }

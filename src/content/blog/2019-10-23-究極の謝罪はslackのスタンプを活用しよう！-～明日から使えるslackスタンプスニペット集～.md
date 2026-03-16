@@ -2,7 +2,7 @@
 slug: 2019/10/23/slack-stamp
 title: 究極の謝罪はSlackのスタンプを活用しよう！ ～明日から使えるSlackスタンプスニペット集～
 date: 2019-10-23T13:54:39.018Z
-description: Slackのスタンプを使って究極の謝罪をします
+description: "Slackの絵文字スタンプを組み合わせて「謝罪ピラミッド」「インベーダゲーム」「福笑い」などのユニークな表現を作るスニペット集。コピペですぐ使えるSlackスタンプアートで、チームのコミュニケーションを楽しくする方法を紹介します。"
 tags:
   - Slack
   - Stamp
@@ -47,7 +47,7 @@ Slackにはスタンプ機能があり、回りくどい文章を書かずに感
 
 たまにはアーケードゲームに打ち込みたいもの。
 
-![img](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/invador.png)
+![Slackスタンプで再現したインベーダーゲームの見た目](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/invador.png)
 
 ```text
 :space_invader: :space_invader: :space_invader: :space_invader: :space_invader:
@@ -68,7 +68,7 @@ Slackのスタンプになぜ顔のパーツがあるか、考えた結果思い
 
 正月にやろう！
 
-![img](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/hukuwarai.png)
+![Slackスタンプの目・鼻・口パーツで作った福笑い](https://raw.githubusercontent.com/tubone24/markdown-memo/master/src/loose/hukuwarai.png)
 
 ```text
 :eye:   :eye: 
@@ -90,4 +90,4 @@ Slackのスタンプになぜ顔のパーツがあるか、考えた結果思い
 
 <https://note.tubone-project24.xyz/loose/slack-stamp-snipet.html#%E8%AC%9D%E7%BD%AA%E3%83%94%E3%83%A9%E3%83%9F%E3%83%83%E3%83%89>
 
-みんなもSlackスタンプ生活、始めよう！
+みんなもSlackスタンプ生活、始めよう！Slackの活用方法としては、[GASとSlackAPIを使ったWebスクリーンショット自動投稿](/2019/10/24/gas-webscreenshot/)や[RSSをSlackに自動投稿するシステム](/2021/06/25/tech-blog-spider/)なども作っています。

@@ -2,8 +2,7 @@
 slug: 2022/03/20/k6-with-typescript
 title: 負荷テストツールK6をTypeScript+Dockerで動かすためのテンプレートを作る
 date: 2022-03-20T08:33:17.597Z
-description: 高機能なgo製負荷テストツールK6を使って負荷テストを実施する際に環境づくりがめんどくさいのでDocker
-  compose化し、さらにシナリオファイルをTypeScriptで実装できるようにすることでテストシナリオを簡単に実装できるようにしたよ、というお話です。
+description: "Go製負荷テストツールK6の環境をDocker Composeで構築し、テストシナリオをTypeScriptで記述できるテンプレートの作り方を解説します。Grafanaによる結果可視化やGitHub Actionsへの組み込み手順も紹介します。"
 tags:
   - k6
   - 負荷試験
@@ -26,7 +25,7 @@ templateKey: blog-post
 
 以前はloadimpactと呼ばれていました。こちらのほうが馴染みある人が多いのではないでしょうか？また、K6のクラウド版を使ったことありますー！という方もいらっしゃるのではないでしょうか？
 
-私個人としては、この手の負荷試験ツールは長らく[Locust](https://locust.io/)を愛用してきてそれなりに複雑なテストシナリオを作ってきた経験もあるのですが、時代の流れ的にこっちのほうがいいのではないかと思い浮気することにしました。
+私個人としては、この手の負荷試験ツールは長らく[Locust](https://locust.io/)を愛用してきて（[以前Elixirで負荷試験ツールを作った](/2020/1/24/elixir-loadtest)経験もあります）それなりに複雑なテストシナリオを作ってきた経験もあるのですが、時代の流れ的にこっちのほうがいいのではないかと思い浮気することにしました。
 
 ## 使い心地
 
@@ -125,7 +124,7 @@ networks:
 
 これで、<https://localhost:3000>にアクセスすることで**実行結果を可視化**できるようになりました。
 
-![grafana](https://i.imgur.com/sX5HtCG.png)
+![Grafanaダッシュボードに表示されたK6負荷テストの実行結果グラフ](https://i.imgur.com/sX5HtCG.png)
 
 ### TypeScriptでテストシナリオを書けるようにする
 
@@ -289,7 +288,7 @@ start": "sh -c \"webpack && docker compose run k6 run --compatibility-mode=base 
 
 ## GitHub Actionsに組み込んでみる
 
-最後にGitHub Actionsに組み込んでみることにします。
+最後に[GitHub Actions](/2019/09/02/github-action)に組み込んでみることにします。
 
 とはいってもGitHub Actionsは普通にdocker composeできるのであまり気にするところはなさそうです。
 

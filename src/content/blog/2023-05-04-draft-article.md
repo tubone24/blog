@@ -2,7 +2,7 @@
 slug: 2023/05/04/nfc-business-cart
 title: "NFCタグを使ったデジタル名刺をPageCryptを使って作ってみた"
 date: 2023-05-04T05:01:23+0000
-description: NFCタグを使ったデジタル名刺をPageCryptを使って作ってみたお話
+description: "NFCタグとPageCrypt（AES256暗号化）を組み合わせたデジタル名刺の作り方を解説。AstroでペライチHTMLをビルドし、Renderにホスティングすることでスマホをかざすだけでアクセスできる電子名刺を実現します"
 tags:
   - JavaScript
   - Astro
@@ -28,9 +28,9 @@ templateKey: blog-post
 
 こんな感じの構成にしてみました。
 
-![img](https://i.imgur.com/Br1vCID.png)
+![NFCタグ・Astro・PageCrypt・Renderを組み合わせたデジタル名刺の構成図](https://i.imgur.com/Br1vCID.png)
 
-まず、デジタル名刺ページは[Astro](https://docs.astro.build/ja/getting-started/)を使って作成をしております。ペライチのHTMLをビルドする形になります。
+まず、デジタル名刺ページは[Astro](https://docs.astro.build/ja/getting-started/)を使って作成をしております。ペライチのHTMLをビルドする形になります。ちなみに[このブログ自体もGatsby.jsで構築](/2023/01/01/this-blog)しており、静的サイトジェネレーターには馴染みがあります。
 
 その後、[pagecrypt](https://www.maxlaumeister.com/pagecrypt/)を使って、HTMLを暗号化します。
 
@@ -45,15 +45,15 @@ pagecryptは大変優秀で、
 
 (ただし、後者のアクセスはGETリクエストのURLを中間経路でダッシュされる可能性があるので、機微情報を扱う際はおすすめしません。)
 
-![img](https://i.imgur.com/1Oh9APi.png)
+![PageCryptのパスワード入力フォームが表示された暗号化済みHTMLページ](https://i.imgur.com/1Oh9APi.png)
 
 NFCタグにはパスワード付きURLを仕込んでおくことで、実質NFCタグ経由じゃないと名刺サイトにアクセスできなくする、という対応が可能となります。
 
-ホスティングの基盤は[render](https://render.com/)を使ってます。
+ホスティングの基盤は[render](https://render.com/)を使ってます。[このブログではNetlifyを使ってGitHub Actions経由でデプロイ](/2021/02/13/netlify-github-action)していますが、今回はrender+NFCという構成にしてみました。
 
 ## デモ
 
 この用にNFCタグにスマートフォンをかざすだけで、デジタル名刺サイトにアクセスができました！
 
-![img](https://i.imgur.com/K4G7266.gif)
+![スマートフォンをNFCタグにかざしてデジタル名刺サイトにアクセスするデモ動画](https://i.imgur.com/K4G7266.gif)
 

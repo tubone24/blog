@@ -2,7 +2,7 @@
 slug: 2025/02/24/celery-monitoring-with-beat-and-cloudwatch
 title: "Celery Beat + Cloudwatch metricsで作るCelery監視"
 date: 2025-02-24T08:52:25+0000
-description: Celery Beat + Cloudwatch metricsで作るCelery監視
+description: "Flowerを使わずにCeleryの監視を実現する方法を解説します。Celery BeatとControl InspectでWorkerの状態を定期取得し、Amazon CloudWatch metricsへ送信することで、アラート設定やECS Auto Scalingまで一気通貫で構築できる実践的な監視手法を紹介します。"
 tags:
   - AWS
   - Celery
@@ -68,13 +68,13 @@ result = add.delay(4, 5).get()
 
 例えば[FastAPI](https://fastapi.tiangolo.com/ja/)と絡めた動きとしては、以下の図のようになります。
 
-![img](https://i.imgur.com/vFkl2kl.png)
+![FastAPIとCelery Worker間のBroker・Result Backendを介した処理フロー図](https://i.imgur.com/vFkl2kl.png)
 
 BrokerとResult Backendは、例えば[RabbitMQ](https://www.rabbitmq.com/)、[MongoDB](https://www.mongodb.com/)などそれぞれPub/Sub、データベースの専用の製品で構成できますが、[Redis](https://redis.io/)で両方を兼ねて構成できます。
 
 ちなみにAWSでCeleryを絡めた構成をつくるならこのような形で構成されることが多いです。
 
-![img](https://i.imgur.com/w00OL0K.png)
+![AWSでのCelery構成例（ECS・SQS・ElastiCache・DynamoDBを用いた構成図）](https://i.imgur.com/w00OL0K.png)
 
 ## Celeryの監視困ってませんか？
 
@@ -84,13 +84,13 @@ Celeryを使っていると、**タスクがどれくらい進んでいるのか
 
 よく紹介される方法としては、[Flower](https://flower.readthedocs.io/en/latest/)を使う方法があります。
 
-![img](https://i.imgur.com/kdNrqwz.png)
+![FlowerのWeb UIでCeleryタスクの状態をリアルタイム表示している画面](https://i.imgur.com/kdNrqwz.png)
 
 Flowerは、Celeryのタスクの状態を見るためのWebベースのツールで、上記のようにタスクの状態をリアルタイムで確認できます。
 
 加えて、 **/metrics**エンドポイントを使って[Prometheus](https://prometheus.io/)などの監視ツールと連携することで、Celery Workerのメトリクスを取得できます。
 
-一般的にCeleryの監視といえばFlowerが有名ですが、開発用用途を除き**リアルタイムでのタスクの可視化**だけ実施していてもあまり意味はなく、Flower + Prometheus + [Grafana](https://grafana.com/ja/)などの組み合わせで**時系列の可視化**、[AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/)を入れてアラートの発報をすることが多いです。
+一般的にCeleryの監視といえばFlowerが有名ですが、開発用用途を除き**リアルタイムでのタスクの可視化**だけ実施していてもあまり意味はなく、Flower + Prometheus + [Grafana](https://grafana.com/ja/)などの組み合わせで**時系列の可視化**、[AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/)を入れてアラートの発報をすることが多いです。Grafanaを使った監視については、以前[Grafana World Pingを活用した死活監視の記事](/2017/06/16/grafana/)でも紹介しています。
 
 専用にPrometheusなどの監視ツール一式を立てるのは、ちょっと面倒ですよね。
 
@@ -104,7 +104,7 @@ Flowerを使わずに、Celery Beatで定期的にタスクの状態を取得し
 
 [Celery Beat](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html#introduction)は、Celeryの**スケジューラー**です。Celery Beatを使うと、登録しているタスクを定期的に実行できます。
 
-![img](https://i.imgur.com/6TIgeYT.png)
+![Celery BeatがWorkerとは別プロセスで定期的にタスクをスケジューリングする構成図](https://i.imgur.com/6TIgeYT.png)
 
 Celery Beatは、Celery Workerとは**別のプロセス**として動作し、（同じプロセスで実行可能ですが本番ではおすすめできません）Celery Workerがタスクを実行するのに対して、Celery Beatは**タスクのスケジューリング**を行ないます。
 
@@ -263,7 +263,7 @@ Workerの名前は、ホスト名やプロセスIDなどで決まってしまう
 
 Cloudwatch metricsで確認すると、次のように正しくメトリクスが送信されていることが確認できます。
 
-![img](https://i.imgur.com/ndDxoTD.png)
+![CloudWatch metricsのコンソールでCeleryMetrics名前空間のメトリクスが表示されている画面](https://i.imgur.com/ndDxoTD.png)
 
 ## アラートとECSのAWS Application Auto Scaling
 
@@ -377,7 +377,7 @@ resource "aws_sns_topic" "alert" {
 }
 ```
 
-さらにECS serviceは[AWS Application Auto Scaling](https://docs.aws.amazon.com/ja_jp/autoscaling/application/userguide/what-is-application-auto-scaling.html)を使って、**Celery WorkerのAutoScaring**を行なうこともできます。
+さらにECS serviceは[AWS Application Auto Scaling](https://docs.aws.amazon.com/ja_jp/autoscaling/application/userguide/what-is-application-auto-scaling.html)を使って、**Celery WorkerのAutoScaring**を行なうこともできます。AWSのLambdaやECSを活用した構成パターンについては、以前[Lambda Container Image Supportの記事](/2020/12/25/selenium-lambda-container/)でも[Terraform](/2020/12/25/selenium-lambda-container/)を使ったインフラ構築を紹介しています。
 
 ```hcl
 resource "aws_appautoscaling_target" "ecs_target_worker" {
@@ -439,7 +439,7 @@ resource "aws_cloudwatch_metric_alarm" "celery_active_tasks" {
 
 構成図にするとこのような形です。
 
-![img](https://i.imgur.com/I26bo16.png)
+![Celery Beat・Control Inspect・CloudWatch・ECS Auto Scalingを組み合わせた監視全体構成図](https://i.imgur.com/I26bo16.png)
 
 ## 結論
 

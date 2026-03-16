@@ -14,6 +14,7 @@ const oembedTransformer = oembedTransformerModule.default || oembedTransformerMo
 import rehypeGatsbyCodeMeta from './src/lib/rehype-gatsby-code-meta.mjs';
 import rehypeShellPrompt from './src/lib/rehype-shell-prompt.mjs';
 import rehypeLazyImages from './src/lib/rehype-lazy-images.mjs';
+import rehypeAltBadge from './src/lib/rehype-alt-badge.mjs';
 import netlifyHeaders from './src/lib/astro-netlify-headers.mjs';
 
 export default defineConfig({
@@ -67,6 +68,7 @@ export default defineConfig({
       [rehypePrismPlus, { ignoreMissing: true }],
       rehypeShellPrompt,
       rehypeLazyImages,
+      rehypeAltBadge,
     ],
     syntaxHighlight: false,
   },

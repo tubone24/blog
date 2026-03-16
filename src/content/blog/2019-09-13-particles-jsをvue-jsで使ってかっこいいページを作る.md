@@ -2,7 +2,7 @@
 slug: 2019/09/12/particles-js
 title: particles.jsをVue.jsで使ってかっこいいページを作る
 date: 2019-09-12T14:57:14.492Z
-description: particles.jsをVue.jsで使う方法
+description: "Vue.jsでparticles.jsを手軽に導入してかっこいいパーティクルエフェクトを実装する方法を紹介。vue-particlesのインストールからmain.tsでの設定、CSSによるz-indexの調整まで、コード例付きでわかりやすく解説します。"
 tags:
   - JavaScript
   - Vue.js
@@ -12,7 +12,7 @@ templateKey: blog-post
 ---
 とりあえずかっこよくしたい。
 
-とりあえず作ったWebページをかっこよくしたいと思い手軽に使えるparticles.jsをVue.jsで使ってみます。
+とりあえず作ったWebページをかっこよくしたいと思い手軽に使えるparticles.jsをVue.jsで使ってみます。後に[Nuxt.jsでparticles-bg-vueを使う](/2019/12/02/particles-bg-vue/)方法も紹介しているので、Nuxt.jsユーザーの方はそちらもどうぞ。
 
 ## Table of Contents
 
@@ -102,7 +102,7 @@ z-indexを-999にしました。こうすることでほかのコンポーネン
 
 ## 完成！
 
-これでかっこよいサイトになりました。
+これでかっこよいサイトになりました。このVue.jsプロジェクトでは[Sentryを使ったフロントエンドのエラー監視](/2019/09/22/sentry/)も導入しています。
 
 
-![Img](https://i.imgur.com/CafEJCU.png)
+![vue-particlesで作成したパーティクルエフェクト付きWebページの完成画面](https://i.imgur.com/CafEJCU.png)

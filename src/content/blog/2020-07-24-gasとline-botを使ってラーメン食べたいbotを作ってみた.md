@@ -2,7 +2,7 @@
 slug: 2020/07/25/gas-bot
 title: 4連休を使ってGASとLINE BOTとFirebaseを使ってラーメン食べたいBOTを作ってみた
 date: 2020-07-24T15:49:47.993Z
-description: GASとLINE BOTを使ってラーメン食べたいBOTを作ってみた
+description: "Google Apps Script（GAS）とLINE Messaging APIを使い、位置情報から近くのラーメン屋を検索するLINE BOTの作り方を解説。ぐるなびAPIとホットペッパーAPIの併用、Firebaseとの連携、TypeScript＋Claspでの開発手法を紹介します。"
 tags:
   - GAS
   - LINEBOT
@@ -11,7 +11,7 @@ templateKey: blog-post
 ---
 4連休、StayHomeが叫ばれる中、ラーメンが食べたくなったので、LINEBOTを含めたラーメンソリューションを作ってみました。
 
-![img](https://i.imgur.com/aFfsvoe.gif)
+![ラーメンBOTが位置情報から近くのラーメン屋を検索するデモ動画](https://i.imgur.com/aFfsvoe.gif)
 
 ## Table of Contents
 
@@ -53,13 +53,13 @@ https://youtu.be/Lk3MZrxXswY
 
 ### ワイヤーフレーム
 
-![img](https://i.imgur.com/KUqm5Qs.png)
+![ラーメンBOTのワイヤーフレーム：位置情報送信からカルーセル表示までの画面遷移](https://i.imgur.com/KUqm5Qs.png)
 
 雑ですが作ってみました。位置情報を送ると、近くのラーメン屋を検索してカルーセルで紹介します。
 
 また、ラーメン評価ボタンを付けて、クリックするとFirebaseで作ったフロントに飛んで星をつけることができます。
 
-![img](https://i.imgur.com/ibZirgX.png)
+![ラーメン評価画面のワイヤーフレーム：星をつけてレビューするフロント画面](https://i.imgur.com/ibZirgX.png)
 
 なので、LINEBOTを基軸にサービスを組みますが、今回はバックエンド処理がLINEの[MessagingAPI](https://developers.line.biz/ja/reference/messaging-api/)のWebhookで起動し、返信を返す機能なのでBOT部分はGASのdoPostを使って作ります。
 
@@ -69,10 +69,9 @@ https://youtu.be/Lk3MZrxXswY
 
 さて、GASが今回も出てきました。GAS大好きすぎるマンですね。すみません。
 
-GASとはGoogle Apps Scriptsのことで詳しくは過去ブログ[Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮る
-](https://tubone-project24.xyz/2019/10/24/gas-webscreenshot#google-apps-scriptgas%E3%81%A8%E3%81%AF%EF%BC%9F)をご確認いただければと思います。
+GASとはGoogle Apps Scriptsのことで詳しくは過去ブログ[Google Apps Script(GAS)とAPI FLASHとSlackAPIをClaspとJestとGitHub Actionで調理して定期的にWebページのスクリーンショットを撮る](/2019/10/24/gas-webscreenshot/)をご確認いただければと思います。
 
-今回もTypeScript + Claspで開発していき、GitHub Actionsでデプロイまで完了するCI/CDを構築していきたいと思います。
+今回もTypeScript + Claspで開発していき、[GitHub Actions](/2019/09/02/github-action/)でデプロイまで完了するCI/CDを構築していきたいと思います。
 
 ## GASで詰まったところ
 
@@ -208,7 +207,7 @@ LINEのMessagingAPIではユーザーが位置情報を送ると、設定したW
 
 一応画像がない場合はいらすとやさんにあった、
 
-![img](https://i.imgur.com/DxiGaAr.jpg)
+![いらすとやのラーメンイラスト（画像未登録時の代替画像）](https://i.imgur.com/DxiGaAr.jpg)
 
 で置き換えるようにしましたがそれにしても悲しいので、少し工夫したいと思います。
 
@@ -361,7 +360,7 @@ export class FirestoreService {
 
 また、GASからlibraryを使う方法は簡単でGAS画面で**リソース=>ライブラリ**から**1VUSl4b1r1eoNcRWotZM3e87ygkxvXltOgyDZhixqncz9lQ3MjfT1iKFw**をAdd a libraryします。
 
-![img](https://i.imgur.com/pdgBiAu.png)
+![GASのリソース画面でFirestoreAppライブラリを追加する設定画面](https://i.imgur.com/pdgBiAu.png)
 
 ここで注意として指定するバージョンは最新にしないことです。
 

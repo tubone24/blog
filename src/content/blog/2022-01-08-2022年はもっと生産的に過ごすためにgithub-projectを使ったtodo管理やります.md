@@ -2,7 +2,7 @@
 slug: 2022/01/08/personal-task
 title: 2022年はもっと生産的に過ごすためにGitHub Projectを使ったToDo管理やります!!!
 date: 2022-01-08T09:06:06.213Z
-description: GitHub Projectを使ったToDo管理でちょっとカスタマイズすることで大幅に使いやすくなったのでそのご紹介。
+description: "GitHub ProjectとGitHub Actionsを組み合わせて個人ToDo管理を構築。Issue自動紐づけ、ラベルによる期日Milestone自動生成、Slack日報リマインダーなど5つのカスタマイズで生産性を向上させる実践手法を紹介します。"
 tags:
   - GitHub
   - GitHubActions
@@ -62,13 +62,13 @@ templateKey: blog-post
 
 **そのままでは使い勝手が悪すぎます。**
 
-が、GitHub Projectには**GitHub Actions**という最強のCIがついてますのでこちらを使うことで劇的に使いやすいToDoアプリになります。
+が、GitHub Projectには**[GitHub Actions](/2019/09/02/github-action/)**という最強のCIがついてますのでこちらを使うことで劇的に使いやすいToDoアプリになります。
 
 まず、GitHub Projectはパソコンでもスマートフォンでも利用可能なので、何も実装しなくても **1. パソコンでもスマートフォンでも使える** はクリアとなります。ありがたい。
 
 今回はGitHub Issueを基軸に運用したいのでProjectのテンプレートは[Automated Kanban](https://docs.github.com/ja/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards#templates-for-project-boards)を選択しました。これで、**Issueがクローズされた際にProject側でもタスクを勝手にDone**にしてくれます。
 
-![img](https://i.imgur.com/fWMy7hV.png)
+![GitHub ProjectのAutomated Kanbanボードの初期画面](https://i.imgur.com/fWMy7hV.png)
 
 ## カスタマイズ1 IssueとProjectを自動で紐づける
 
@@ -109,11 +109,11 @@ GitHub Issues, Projectには[Label](https://docs.github.com/ja/issues/using-labe
 
 よく、BugとかFeatureとかついているあれです。
 
-![label](https://i.imgur.com/zeWmlIk.png)
+![GitHub IssuesのLabel一覧画面（Bug, Featureなど）](https://i.imgur.com/zeWmlIk.png)
 
 これをToDoに活用することでToDo管理をやりやすくします。
 
-![img](https://i.imgur.com/RsOQAlV.png)
+![カスタマイズしたToDo用ラベル（優先度・場所カテゴリ）の設定画面](https://i.imgur.com/RsOQAlV.png)
 
 このようにLabel管理することで、タスクの優先度や作業場所のカテゴライズを行ないやすくできました！
 
@@ -123,7 +123,7 @@ GitHub Issues, Projectには[Label](https://docs.github.com/ja/issues/using-labe
 
 一応Milestoneという機能を使ってリリース日を設定し、そちらにIssueを紐づけることでプロジェクト管理ができるようになっておりますが、**Milestoneを毎回作って紐づける**のはとても大変です。(やはりGitHub ActionsでToDo管理は無理があったと感じざるを得ません。)
 
-![img](https://i.imgur.com/ZXzTyx3.png)
+![GitHub IssuesにMilestoneで期日を設定した画面](https://i.imgur.com/ZXzTyx3.png)
 
 Milestoneを設定さえすれば、期日表示ができますし後々実施しようと思っているリマインダーにも活用できそうです。
 
@@ -387,16 +387,16 @@ requests.post(SLACK_WEB_HOOK, json.dumps(payload))
 
 GitHubにpushすることでMarkdownとして日報を管理します。
 
-![img](https://i.imgur.com/KXALJYW.png)
+![GitHubリポジトリに自動pushされた日報Markdownファイル](https://i.imgur.com/KXALJYW.png)
 
 また、Slackへのリマインダーも実施します。
 
-![img](https://i.imgur.com/4petOz9.png)
+![Slackに自動投稿された日報とリマインダーの通知画面](https://i.imgur.com/4petOz9.png)
 
 これで日報&リマインダー機能もできました。
 
 ## まとめ
 
-![img](https://i.imgur.com/LnpjYNN.png)
+![GitHub Project ToDo管理の完成したカンバンボード全体像](https://i.imgur.com/LnpjYNN.png)
 
-これで快適にToDoを記載できるようになったのですが、肝心なToDoがあまりないのでこの仕組みをいつまで使い続けるのか不安になってきました。
+これで快適にToDoを記載できるようになったのですが、肝心なToDoがあまりないのでこの仕組みをいつまで使い続けるのか不安になってきました。GitHub Actionsの活用例としては、[depcheckでPRコメントに未使用ライブラリを出力させる](/2021/11/21/depcheck/)仕組みもおすすめです。

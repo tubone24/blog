@@ -2,7 +2,7 @@
 slug: 2021/12/31/blog-bootstrap
 title: 今年も最後だからBlogのBootstrap v3を何とかする
 date: 2021-12-31T07:09:52.428Z
-description: 長らくBlogのスタイルを支えてきたBootstrap v3が技術負債になってしまっていたのでとりあえずBootstrap v5にしたお話。
+description: "Gatsby.jsブログのBootstrap v3をv5に移行した年末リライト記録。Tailwind CSS導入を断念した経緯、jQuery依存の解消、gatsby-plugin-purgecssによるCSS最適化、Lighthouseスコア改善まで実践的なノウハウをまとめました。"
 tags:
   - JavaScript
   - BootStrap
@@ -22,7 +22,7 @@ templateKey: blog-post
 
 ということで、長らく超技術負債となってしまっていた**このブログ**をなんとかします。
 
-このブログは、Gatsby.jsをGitHub ActionsでビルドしてNetlifyにデプロイして作られているのですが、CSSフレームワークは**Bootstrap v3.5.1**を使って作られていました。
+このブログは、[Gatsby.jsとNetlifyで構築した](/2019/09/01/netlify-and-gatsby/)もので、GitHub ActionsでビルドしてNetlifyにデプロイして作られているのですが、CSSフレームワークは**Bootstrap v3.5.1**を使って作られていました。
 
 さすがに[2019年にサポート対象外](https://blog.getbootstrap.com/2019/07/24/lts-plan/)となっているフレームワークを使い続けるのはどうかと思っておりましたが、別に動いているしいいかと思い放置していました。
 
@@ -221,15 +221,15 @@ Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgeCSS](https://www.gatsbyjs.com/p
 
 ちなみに、Purgeの効果あってかわかりませんが、Lighthouseのパフォーマンススコアは次のとおりでした。
 
-![lighthouse](https://i.imgur.com/FX0kdBo.png)
+![Bootstrap v5移行後のLighthouseパフォーマンススコア](https://i.imgur.com/FX0kdBo.png)
 
-みなさまこのブログは **なんでTypeScriptでリライトしないのか？** という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。
+みなさまこのブログは **なんでTypeScriptでリライトしないのか？** という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。このブログの全体構成については[2023年版このブログを支える技術](/2023/01/01/this-blog/)でも詳しく解説しています。
  
 ## 最後に
 
 本年もお世話になりました。来年もよろしくおねがいします!!!
 
-![tora](https://i.imgur.com/mwxtvWim.png)
+![2022年寅年の年賀イラスト](https://i.imgur.com/mwxtvWim.png)
 
 
 

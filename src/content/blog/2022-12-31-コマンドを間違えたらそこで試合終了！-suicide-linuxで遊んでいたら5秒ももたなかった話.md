@@ -2,7 +2,7 @@
 slug: 2022/12/31/suicide-linux
 title: コマンドを間違えたらそこで試合終了！ Suicide Linuxで遊んでいたら5秒ももたなかった話
 date: 2022-12-31T11:35:30.963Z
-description: suicide-linux厳しすぎワロタ
+description: "コマンドをタイポするとrm -rfが実行されるSuicide LinuxをDockerで試してみた体験記です。llコマンドで即死した話に加え、bashのcommand_not_found_handleの仕組みやANSIエスケープコードによるプロンプト制御も解説します。"
 tags:
   - suicide-linux
   - typo
@@ -60,7 +60,7 @@ zsh: command not found: sl
 
 **私はあります。**
 
-というより、私の使っているzshの拡張機能でタイポの可能性のあるコマンドが実行された場合、
+というより、私が普段[WezTermで使っている](/2022/08/29/wezterm/)zshの拡張機能でタイポの可能性のあるコマンドが実行された場合、
 
 ```
 ls is correct? [Yes, No, Abort, Edit]:
@@ -86,7 +86,7 @@ docker run --rm -it tiagoad/suicide-linux
 ll
 ```
 
-![no](https://i.imgur.com/t0rrElc.png)
+![llコマンドを実行した直後にrm -rfが発動しSuicide Linuxが破壊された画面](https://i.imgur.com/t0rrElc.png)
 
 Noooooo!!!
 
@@ -164,6 +164,6 @@ function __sl_set_ps1 {
 
 ## まとめ
 
-結論非常にくだらないネタLinuxでしたが、実はbashのお勉強にもなって面白かった、という結論でした〜。
+結論非常にくだらないネタLinuxでしたが、実はbashのお勉強にもなって面白かった、という結論でした〜。ターミナル関連では[iTerm2からWezTermへの移行記事](/2022/08/29/wezterm/)もぜひご覧ください。
 
 良いお年を。

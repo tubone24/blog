@@ -349,7 +349,7 @@ pre.shell-dark[data-file]::before {
   font-feature-settings: "kern", "liga", "clig", "calt", "palt";
   font-kerning: normal;
   line-height: inherit;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 a {
@@ -375,7 +375,6 @@ body {
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
 }
 
@@ -396,7 +395,7 @@ body {
 
 // 記事ページのラッパースタイル（旧Gatsby blog-post.module.scssから移植）
 .post {
-  @media screen and (max-width: 990px) {
+  @media screen and (width <= 990px) {
     padding: 8px 24px;
   }
 
@@ -410,7 +409,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    @media screen and (min-width: 990px) {
+    @media screen and (width >= 990px) {
       margin-left: 1.5rem;
     }
   }
@@ -617,8 +616,8 @@ h6 {
     width: 150px;
     padding: 12px;
     font-weight: bold;
-    color: #fff;
     vertical-align: top;
+    color: #fff;
     background: #3f3f3f;
   }
 
@@ -638,6 +637,82 @@ h6 {
     font-family: SFMono-Regular, Consolas, "Roboto Mono", "Courier New", "BIZ UDGothic", Meiryo, monospace;
   }
   /* stylelint-enable no-descending-specificity */
+
+  // ===== ALT Badge =====
+  .alt-badge-figure {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+
+    img {
+      display: block;
+    }
+  }
+
+  .alt-badge-btn {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    z-index: 1;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #fff;
+    cursor: pointer;
+    background: rgb(0 0 0 / 65%);
+    border: 1px solid rgb(255 255 255 / 30%);
+    border-radius: 4px;
+    transition: background 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: rgb(0 0 0 / 85%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid #4a90d9;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// alt-badge-dialog はグローバルに（content-white-inner外に出る可能性あり）
+.alt-badge-dialog {
+  width: 90%;
+  max-width: 480px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 15%);
+
+  &::backdrop {
+    background: rgb(0 0 0 / 40%);
+  }
+
+  &__text {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  &__close {
+    display: block;
+    padding: 6px 16px;
+    margin-left: auto;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    background: #333;
+    border: none;
+    border-radius: 4px;
+
+    &:hover {
+      background: #555;
+    }
+  }
 }
 
 // ページネーションスタイル（旧Gatsby index.module.scssから移植）

@@ -2,7 +2,7 @@
 slug: 2019/09/02/github-action
 title: Github Actionを使って、簡単CIを作ってみる
 date: 2019-09-02T11:33:53.870Z
-description: 最近Github Actionを使って簡単CIを作ってみました。
+description: "GitHub Actionを使ったCI環境の構築手順を紹介。YAMLでのWorkflow定義、PythonのPytestによるMatrixテスト、Trigger設定など、GitHub純正CIの基本的な使い方を実例付きで解説します。"
 tags:
   - GitHub
   - GitHubAction
@@ -37,7 +37,7 @@ GitHub Action自体はまだプレビュー版ですので、[こちらのサイ
 無事利用できるようになりますと、レポジトリにActionボタンが
 出てきます。
 
-![Img](https://i.imgur.com/ZYya5eA.png)
+![GitHubレポジトリにActionボタンが表示されている画面](https://i.imgur.com/ZYya5eA.png)
 
 ## Workflowを設定する
 
@@ -153,14 +153,14 @@ StepはほかのCIと同じような感じで設定します。
 
 無事PushでCIが動くと各push、PRごとにActionに結果がでます。
 
-![Img](https://i.imgur.com/dVJdYdh.png)
+![GitHub ActionのCI実行結果一覧：各PushやPRごとにActionの結果が表示されている](https://i.imgur.com/dVJdYdh.png)
 
 さらに、実行ログも確認できます。
 
 もう普通のCIですね。
 
-![Img](https://i.imgur.com/6T4kjdf.png)
+![GitHub Actionの実行ログ詳細画面：各Stepの実行状況が確認できる](https://i.imgur.com/6T4kjdf.png)
 
 ## 結論
 
-GitHub Actionを使えば、めんどっちいCIサーバー連携も不要で楽々です。
+GitHub Actionを使えば、めんどっちいCIサーバー連携も不要で楽々です。GitHub Actionの活用例として、[GitHub JavaScript Actionを使ったRelease自動化](/2020/08/14/github-action/)や、[depcheckをGitHub Actionで使ってPRコメントに結果を出力する](/2021/11/21/depcheck/)方法も紹介していますので参考にどうぞ。

@@ -2,7 +2,7 @@
 slug: 2019/10/11/azure-dev-pipeline
 title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Azure DevOps Build Pipeline編)
 date: 2019-10-10T15:04:39.398Z
-description: Ansible + Serverspecを使ってMacの環境構築を自動化し、Azure DevOps Build PipelineでCIを回します。
+description: "Mac環境構築のAnsible+ServerspecワークフローをクリーンなmacOS環境で検証するため、Azure DevOps Build PipelineでCI化する手順を解説。無料でmacOSイメージが使えるCIの選定理由やYAML定義の書き方を紹介します。"
 tags:
   - Auto Provisioning
   - Ansible
@@ -14,7 +14,7 @@ templateKey: blog-post
 ---
 CIで回そう！
 
-前回まででついにAnsible + ServerspecでMacの構成管理ができたわけですが、まだ残ってることがあります。
+[前回までで](/2019/10/08/serverspec/)ついに[Ansible](/2019/10/6/mac-auto-setup/) + ServerspecでMacの構成管理ができたわけですが、まだ残ってることがあります。
 
 それが**CIにのせる**ことです。
 
@@ -50,7 +50,7 @@ MacOS Xが無料で使えるCIはいくつかあるのですが、今回はAzure
 
 選定の理由はUIがかっこよくて見やすいのと、
 
-![Img](https://i.imgur.com/5ckVCUf.png)
+![Azure DevOps Build Pipelineの見やすいUI画面](https://i.imgur.com/5ckVCUf.png)
 
 ```yaml
 - task: UseRubyVersion@0
@@ -113,7 +113,7 @@ jobs:
 
 ScriptにMakefileで定義したコマンドを入れているだけです。
 
-![img](https://i.imgur.com/ZpMjdsY.png)
+![Azure DevOps Build PipelineでAnsibleとServerspecのCIが成功した結果画面](https://i.imgur.com/ZpMjdsY.png)
 
 無事CIが通りました！
 

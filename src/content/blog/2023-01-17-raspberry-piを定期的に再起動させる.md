@@ -2,7 +2,7 @@
 slug: 2023/01/18/reboot-linux
 title: Raspberry Piを定期的に再起動させる
 date: 2023-01-17T15:52:28.580Z
-description: Raspberry Piを定期的に再起動させる
+description: "古いRaspberry PiでWi-Fiドングルが認識されなくなる問題をcrontabによる定期再起動で解決し、再起動時にIPアドレスをSlack通知するPythonスクリプトの実装方法を紹介します"
 tags:
   - RaspberryPi
   - cron
@@ -22,7 +22,7 @@ templateKey: blog-post
 
 ## Raspberry PIのWifiドングルが定期的に使えなくなる。
 
-今使っているRaspberry PIがめちゃくちゃ古くて、Wi-Fiに対応してない機種なので、USBのWi-Fiドングルを指して使っているのですが、こいつがしばらく起動しているとRaspberry PIから認識されなくなってしまう問題が発生しております。
+今使っているRaspberry PIがめちゃくちゃ古くて、Wi-Fiに対応してない機種なので、USBのWi-Fiドングルを指して使っているのですが、こいつがしばらく起動しているとRaspberry PIから認識されなくなってしまう問題が発生しております。このラズパイは[植物の水やり監視システム](/2020/05/10/plant-check)や[赤外線カメラを使った監視システム](/2021/07/21/motion-ir)でも活躍している子です。
 
 [TP-Link Wi-Fi 無線LAN 子機 11n/11g/b デュアルモード対応モデル 英語パッケージ TL-WN725N(EU)](https://www.amazon.co.jp/dp/B008IFXQFU?ref=ppx_pop_dt_b_product_details&th=1)
 
@@ -44,7 +44,7 @@ root権限でcrontabを開き、 **/sbin/reboot**を実行するだけです。
 
 ## 再起動時に起動したよ的なSlackをあげる
 
-念の為、再起動したRaspberry PIから通知がほしいのでSlack通知を設定します。
+念の為、再起動したRaspberry PIから通知がほしいのでSlack通知を設定します。Slack通知は[DenoでGraphQLを叩きながらSlackに投稿する](/2021/07/28/deno-slack)でも活用しており、ラズパイの運用には欠かせない仕組みです。
 
 また、Slack通知時SSHで今後Raspberry PIにログインするときに困らないように割り当てられたIPアドレスも一緒に通知します。
 
@@ -88,6 +88,6 @@ pip3 install netifaces==0.11.0
 
 ## 結果
 
-![reboot](https://i.imgur.com/oEMLAHF.png)
+![Slackに再起動通知とIPアドレスが投稿された画面](https://i.imgur.com/oEMLAHF.png)
 
 こんな感じで定期的に(1日1回)再起動が実施されIPアドレスの通知もSlackにしてくれます。

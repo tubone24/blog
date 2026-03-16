@@ -2,7 +2,7 @@
 slug: 2021/03/07/react-hook-form
 title: React Hook FormとGetform.ioを使って、お問い合わせフォームを作ろう！
 date: 2021-03-07T13:03:39.605Z
-description: 最近人気のReact Hook FormをGetform.ioと組み合わせてお問い合わせフォームを作りましょう。
+description: "React Hook FormとGetform.ioを組み合わせたお問い合わせフォームの実装方法を解説。useFormによるバリデーション、handleSubmitでのフォーム送信、FormDataを使ったGetform.ioへのPOST処理など、実コード付きで具体的に紹介します。"
 tags:
   - JavaScript
   - React
@@ -25,7 +25,7 @@ templateKey: blog-post
 
 最近トレンドに乗っかってきた、**Form**を**React Hooks**で簡単に作ることのできる代物です。
 
-![img](https://i.imgur.com/2dqEW7L.png)
+![React Hook Formの公式サイトトップページ](https://i.imgur.com/2dqEW7L.png)
 
 特徴として、Hooksを使って簡単にFormが作れる、そして再レンダリングが最小限に抑えられているのでパフォーマンスも高い、らしいです。
 
@@ -33,17 +33,17 @@ templateKey: blog-post
 
 [Getform.io](https://getform.io/)はフォームのバックエンドを提供するすばらしいサービスです。
 
-詳しくは[こちらの過去記事](https://tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)をご確認いただければと思います。
+詳しくは[NetlifyビルドをGitHub Actionsに移行した記事](/2021/02/13/netlify-github-action/)をご確認いただければと思います。
 
 ## React Hook Form + Getform.io
 
 **合体！**
 
-![img](https://i.imgur.com/FzX8di6.jpg)
+![2つの技術が合体するイメージ画像](https://i.imgur.com/FzX8di6.jpg)
 
 だめ～となるかと思いましたがうまいことできました。
 
-![img](https://i.imgur.com/yYJBK98.jpg)
+![合体成功のイメージ画像](https://i.imgur.com/yYJBK98.jpg)
 
 今回はこちらの2技術を使って、お問い合わせフォームを作っていきます。
 
@@ -170,7 +170,7 @@ const { register, handleSubmit, errors } = useForm<Inputs>();
 
 ### Submit
 
-そして肝心な送信(Submit)部分ですがこちらは[前記事](https://tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)とほぼ同じように**onSubmit**に合わせて処理する関数を用意して、formの**onsubmit属性**に渡してあげればいいだけです。
+そして肝心な送信(Submit)部分ですがこちらは[前記事](/2021/02/13/netlify-github-action/)とほぼ同じように**onSubmit**に合わせて処理する関数を用意して、formの**onsubmit属性**に渡してあげればいいだけです。
 
 ........いいだけですが1つ注意として、渡す際に**handleSubmit**で関数をラップしないと、form情報がうまく取れない、ということです。忘れずに設定してくださいませ。
 
@@ -296,7 +296,7 @@ Form部分をすべて実装するとこんな感じです。
 
 もう完成です。実に簡単ですね。
 
-React Hook Formを使わないと、[前記事](https://tubone-project24.xyz/2021/02/13/netlify-github-action#getformio)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
+React Hook Formを使わないと、[前記事](/2021/02/13/netlify-github-action/)のように、formのonChangeのたびに、setStateしなきゃいけないのですが、すっきり実装できました。
 
 React Hook Formを使わない場合、
 
@@ -322,7 +322,7 @@ React Hook Formを使わない場合、
 
 出来上がりはただのFormですのでかっこいいCSSを当ててくださいね。
 
-![img](https://i.imgur.com/DsrFLOE.png)
+![React Hook FormとGetform.ioで作成したお問い合わせフォームの完成画面](https://i.imgur.com/DsrFLOE.png)
 
 ## 結論
 

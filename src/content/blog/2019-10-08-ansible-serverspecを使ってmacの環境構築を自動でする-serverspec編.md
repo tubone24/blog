@@ -2,7 +2,7 @@
 slug: 2019/10/08/serverspec
 title: Ansible + Serverspecを使ってMacの環境構築を自動でする (Serverspec編)
 date: 2019-10-09T11:34:59.707Z
-description: Ansible + Serverspecを使ってMacの環境構築を自動でします。
+description: "Ansibleで構築したMac環境をServerspecで自動テストする方法を解説。RSpecベースのテストコード作成手順、パッケージインストール確認・コマンド結果検証・ファイル内容チェックの具体例をコード付きで紹介します。"
 tags:
   - Auto Provisioning
   - Ansible
@@ -13,7 +13,7 @@ templateKey: blog-post
 ---
 Serverspecで構築した環境を確認したい!!
 
-前回、Ansibleを使って、Macの環境を構築しました。一部べきとう性が保てない箇所があったりしたので、正しく設定値が入っているかServerspecを使ってMacの状態を確認していきます。
+[前回はAnsibleを使ってMacの環境を構築しました](/2019/10/6/mac-auto-setup/)。一部べきとう性が保てない箇所があったりしたので、正しく設定値が入っているかServerspecを使ってMacの状態を確認していきます。
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ Serverspecで構築した環境を確認したい!!
 
 ## Serverspecとは
 
-![Img](https://i.imgur.com/E3tw8J2.png)
+![Serverspecの公式ロゴ](https://i.imgur.com/E3tw8J2.png)
 
 Serverspecとはサーバーの自動テストツールです。
 
@@ -234,4 +234,4 @@ check:
 
 Macの構成管理をAnsibleで行ない確認をServerspecで行なうところまで無事できました！
 
-次回はもうすることないかと思いきや、こいつをCIにのっけてみようかと思います!!
+次回は[Azure DevOps Build PipelineでCIにのっけてみようかと思います](/2019/10/11/azure-dev-pipeline/)!!
