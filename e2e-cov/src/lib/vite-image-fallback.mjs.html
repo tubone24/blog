@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/pages/sitemap-posts.xml.ts</title>
+    <title>Code coverage report for src/lib/vite-image-fallback.mjs</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/pages</a> sitemap-posts.xml.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/lib</a> vite-image-fallback.mjs</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -97,7 +97,24 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,39 +148,73 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getCollection } from "astro:content";
-import type { APIContext } from "astro";
-import { SITE_URL, xmlEscape, formatDate } from "../utils/sitemap";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 &nbsp;
-export async function GET(_context: APIContext) {
-  const posts = await getCollection("blog");
+/**
+ * Vite plugin that provides fallback for image variants during development.
+ * In production, resized (-640) and WebP variants exist in dist/.
+ * In dev mode, only originals exist in static/, so this middleware
+ * transparently serves the original when a variant is requested.
+ */
+export default function imageVariantFallback() {
+  return {
+    name: 'vite-image-variant-fallback',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) =&gt; {
+        if (!req.url || !req.url.startsWith('/images/blog/')) {
+          return next();
+        }
 &nbsp;
-  // 新しい順にソート
-  const sorted = posts.sort(
-    (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-  );
+        const staticDir = join(process.cwd(), 'static');
+        const filePath = join(staticDir, req.url);
 &nbsp;
-  const urlEntries = sorted
-    .filter((post) =&gt; !post.data.noindex)
-    .map((post) =&gt; {
-      const lastmod = formatDate(post.data.date);
-      return `  &lt;url&gt;
-    &lt;loc&gt;${SITE_URL}/${xmlEscape(post.slug)}/&lt;/loc&gt;
-    &lt;lastmod&gt;${lastmod}&lt;/lastmod&gt;
-  &lt;/url&gt;`;
-    })
-    .join("\n");
+        // If the requested file exists, serve it normally
+        if (existsSync(filePath)) {
+          return next();
+        }
 &nbsp;
-  const xml = `&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
-${urlEntries}
-&lt;/urlset&gt;`;
+        // Try stripping -640 suffix
+        let fallbackUrl = req.url.replace(/-640/, '');
 &nbsp;
-  return new Response(xml, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8",
+        // Try converting .webp to original format
+        if (fallbackUrl.endsWith('.webp')) {
+          for (const ext of ['.png', '.jpg', '.jpeg']) {
+            const tryUrl = fallbackUrl.replace(/\.webp$/, ext);
+            if (existsSync(join(staticDir, tryUrl))) {
+              req.url = tryUrl;
+              return next();
+            }
+          }
+        }
+&nbsp;
+        // Try the fallback without -640
+        if (existsSync(join(staticDir, fallbackUrl))) {
+          req.url = fallbackUrl;
+          return next();
+        }
+&nbsp;
+        next();
+      });
     },
-  });
+  };
 }
 &nbsp;</pre></td></tr></table></pre>
 

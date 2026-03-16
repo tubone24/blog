@@ -118,17 +118,7 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,23 +173,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// s = Small Square (90×90)
-// b = Big Square (160×160)
-// t = Small Thumbnail (160×160)
-// m = Medium Thumbnail (320×320)
-// l = Large Thumbnail (640×640)
-// h = Huge Thumbnail (1024×1024)
-const defaultPicture = "M795H8A.jpg";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const defaultPicture = "/images/blog/M795H8A.jpg";
 &nbsp;
 export enum SizeMapping {
   smallSquare = "s",
@@ -210,54 +184,50 @@ export enum SizeMapping {
   huge = "h",
 }
 &nbsp;
-export const parseImgur = (
+/**
+ * Parse image path and return the appropriate size variant.
+ * Works with local paths like '/images/blog/ABC123.png'
+ *
+ * For large size: returns '{id}-640.{ext}' (640px width)
+ * For other sizes or GIF: returns original path unchanged
+ * GIF images are never resized.
+ */
+export const parseImage = (
   rawImage: string,
   size: SizeMapping = SizeMapping.large,
-) =&gt; {
+): string =&gt; {
   if (!rawImage) {
-    return `https://i.imgur.com/${defaultPicture}`;
+    return defaultPicture;
   }
 &nbsp;
-  // Don't resize the gif image
-  // as there is a transparent bug in imgur
-  if (rawImage.match("gif")) {
-    // Prevent double http url
-    if (rawImage.match("http")) {
-      return rawImage;
-    }
-    return `https://i.imgur.com/${rawImage}`;
-  }
-  let mappedSize: string;
-  switch (size) {
-    case SizeMapping.smallSquare:
-      mappedSize = SizeMapping.smallSquare;
-      break;
-    case SizeMapping.bigSquare:
-      mappedSize = SizeMapping.bigSquare;
-      break;
-    case SizeMapping.small:
-      mappedSize = SizeMapping.small;
-      break;
-    case SizeMapping.medium:
-      mappedSize = SizeMapping.medium;
-      break;
-    case SizeMapping.large:
-      mappedSize = SizeMapping.large;
-      break;
-    case SizeMapping.huge:
-      mappedSize = SizeMapping.huge;
-      break;
-    default:
-      mappedSize = "";
+  // Don't resize GIF images
+  if (rawImage.match(/\.gif$/i)) {
+    return rawImage;
   }
 &nbsp;
-  const resizedImage = rawImage.replace(/(.*)\.(.*)/, `$1${mappedSize}.$2`);
-  // Prevent double http url
-  if (resizedImage.match("http")) {
-    return resizedImage;
+  // For large size, return 640px variant
+  if (size === SizeMapping.large) {
+    return rawImage.replace(/\.([^.]+)$/, "-640.$1");
   }
-  return `https://i.imgur.com/${resizedImage}`;
+&nbsp;
+  // For other sizes, return original (local hosting doesn't need multiple sizes)
+  return rawImage;
 };
+&nbsp;
+/**
+ * Get WebP URL for a given image path.
+ * Returns the .webp version of .png/.jpg/.jpeg images.
+ * GIF images return the original path.
+ */
+export const getWebPUrl = (imagePath: string): string | null =&gt; {
+  if (!imagePath || imagePath.match(/\.gif$/i)) {
+    return null;
+  }
+  return imagePath.replace(/\.(png|jpe?g)$/i, ".webp");
+};
+&nbsp;
+// Backward compatibility alias
+export const parseImgur = parseImage;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -265,7 +235,7 @@ export const parseImgur = (
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-16T02:12:51.362Z
+                at 2026-03-16T03:36:17.246Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
