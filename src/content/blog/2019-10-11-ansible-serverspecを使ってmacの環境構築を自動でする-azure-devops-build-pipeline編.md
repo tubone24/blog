@@ -9,7 +9,7 @@ tags:
   - Serverspec
   - Mac
   - Azure Devops Build Pipeline
-headerImage: 'https://i.imgur.com/9iGRHft.png'
+headerImage: '/images/blog/9iGRHft.png'
 templateKey: blog-post
 ---
 CIで回そう！
@@ -50,7 +50,7 @@ MacOS Xが無料で使えるCIはいくつかあるのですが、今回はAzure
 
 選定の理由はUIがかっこよくて見やすいのと、
 
-![Azure DevOps Build Pipelineの見やすいUI画面](https://i.imgur.com/5ckVCUf.png)
+![Azure DevOps Build Pipelineの見やすいUI画面](/images/blog/5ckVCUf.png)
 
 ```yaml
 - task: UseRubyVersion@0
@@ -113,7 +113,7 @@ jobs:
 
 ScriptにMakefileで定義したコマンドを入れているだけです。
 
-![Azure DevOps Build PipelineでAnsibleとServerspecのCIが成功した結果画面](https://i.imgur.com/ZpMjdsY.png)
+![Azure DevOps Build PipelineでAnsibleとServerspecのCIが成功した結果画面](/images/blog/ZpMjdsY.png)
 
 無事CIが通りました！
 

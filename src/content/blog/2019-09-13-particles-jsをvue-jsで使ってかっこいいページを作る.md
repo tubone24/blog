@@ -7,7 +7,7 @@ tags:
   - JavaScript
   - Vue.js
   - particle.js
-headerImage: 'https://i.imgur.com/CafEJCU.png'
+headerImage: '/images/blog/CafEJCU.png'
 templateKey: blog-post
 ---
 とりあえずかっこよくしたい。
@@ -105,4 +105,4 @@ z-indexを-999にしました。こうすることでほかのコンポーネン
 これでかっこよいサイトになりました。このVue.jsプロジェクトでは[Sentryを使ったフロントエンドのエラー監視](/2019/09/22/sentry/)も導入しています。
 
 
-![vue-particlesで作成したパーティクルエフェクト付きWebページの完成画面](https://i.imgur.com/CafEJCU.png)
+![vue-particlesで作成したパーティクルエフェクト付きWebページの完成画面](/images/blog/CafEJCU.png)

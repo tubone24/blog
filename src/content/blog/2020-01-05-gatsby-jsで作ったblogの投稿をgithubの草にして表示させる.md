@@ -8,7 +8,7 @@ tags:
   - Gatsby.js
   - React
   - React Calendar Heatmap
-headerImage: 'https://i.imgur.com/o6tnakg.png'
+headerImage: '/images/blog/o6tnakg.png'
 templateKey: blog-post
 ---
 自分のブログのRecent post欄に、面白い工夫をしてみたいと思い実装してみました。
@@ -29,7 +29,7 @@ Theme Demoページは[こちら](https://blinkfox.github.io/)
 
 Themeのなかで特にかっこいいなぁと思ったのは、Blogの投稿日、投稿数に応じてGitHubの草(Heatmap)を表現するところです。
 
-![hexo-theme-materyのデモページに表示されたGitHub風ヒートマップ](https://i.imgur.com/X2ehG18.png)
+![hexo-theme-materyのデモページに表示されたGitHub風ヒートマップ](/images/blog/X2ehG18.png)
 
 ~~Demoページは全然草生えてませんが・・・。~~
 
@@ -284,7 +284,7 @@ Reactではcomponentが複数要素を返すことが基本的にはできない
 
 作ったComponentをサイドバーに導入してみました。
 
-![サイドバーに導入したブログ投稿ヒートマップの表示結果](https://i.imgur.com/pxHQuYf.png)
+![サイドバーに導入したブログ投稿ヒートマップの表示結果](/images/blog/pxHQuYf.png)
 
 お、なかなかいい感じ。
 

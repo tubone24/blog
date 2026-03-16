@@ -8,7 +8,7 @@ tags:
   - Sentry
   - Tracing
   - Session Replay
-headerImage: https://i.imgur.com/pioUHQ4.png
+headerImage: /images/blog/pioUHQ4.png
 templateKey: blog-post
 ---
 ## Table of Contents
@@ -47,19 +47,19 @@ templateKey: blog-post
 
 https://www.youtube.com/watch?v=sZwMmiwBwho&t=533s&ab_channel=Sentry
 
-![Sentry Session Replayの公式デモでポケモン捕獲アプリのエラーを確認している画面](https://i.imgur.com/og3l3dy.png)
+![Sentry Session Replayの公式デモでポケモン捕獲アプリのエラーを確認している画面](/images/blog/og3l3dy.png)
 
 動画のなかではとあるユーザーがミュウを捕まえたときにundefinedに対してmapを処理する処理が入ってしまったようで**画面がホワイトアウト**してしまうエラーが発生ししてましたが、通常のトレーシングだとその耐意見がわかりにくいのでエラーの重要性がわからないということが問題になってました。
 
-![通常のトレーシングだとエラーの重要性がわかりにくい問題の説明](https://i.imgur.com/s3r6CdD.png)
+![通常のトレーシングだとエラーの重要性がわかりにくい問題の説明](/images/blog/s3r6CdD.png)
 
 **Session Replay**を使うと**ユーザーのインタラクションが動画**で再現できるので体験が追いやすいとのこと。
 
-![Session Replayでユーザーのインタラクションが動画で再現されている画面](https://i.imgur.com/ZG3GBdw.png)
+![Session Replayでユーザーのインタラクションが動画で再現されている画面](/images/blog/ZG3GBdw.png)
 
 Networkやconsole logも確認できるのでまるでローカルでDevtoolsを開いてデバッグしているかの如く、確認ができることをデモってました。
 
-![Session ReplayでNetworkリクエストとConsoleログが確認できるDevtools風の画面](https://i.imgur.com/zr3fCX6.png)
+![Session ReplayでNetworkリクエストとConsoleログが確認できるDevtools風の画面](/images/blog/zr3fCX6.png)
 
 ユーザーの名前などセンシティブな情報にはSentry側で自動でマスキングもしてくれるようです。安心してプロダクトに導入できそうです。
 
@@ -67,11 +67,11 @@ Networkやconsole logも確認できるのでまるでローカルでDevtoolsを
 
 自分のSentryアカウントはBeta版でSession Replayが使える状態になっていたので早速使ってみます。
 
-![SentryアカウントでSession ReplayのBeta版が有効になっている設定画面](https://i.imgur.com/VZ1rCxu.png)
+![SentryアカウントでSession ReplayのBeta版が有効になっている設定画面](/images/blog/VZ1rCxu.png)
 
 このブログは[Gatsby.js](https://www.gatsbyjs.com/)でできているので[React版のSentry](https://docs.sentry.io/platforms/javascript/guides/react/)でReplay機能が使えそうですが、自分の場合、browser処理をjsxで書かず、後述するgatsby-browser.jsで自前で[@sentry/browser](https://www.npmjs.com/package/@sentry/browser)で実装しているので[@sentry/browser](https://www.npmjs.com/package/@sentry/browser)で実装していきます。
 
-![Session Replayの導入手順でSDKのバージョン要件が表示されている画面](https://i.imgur.com/GsVnFR4.png)
+![Session Replayの導入手順でSDKのバージョン要件が表示されている画面](/images/blog/GsVnFR4.png)
 
 利用に特に追加のライブラリのインストールはいりませんが、 [@sentry/browser](https://www.npmjs.com/package/@sentry/browser)を最低**7.27.0**以上にアップグレードする必要がありそうです。
 
@@ -113,21 +113,21 @@ import { Integrations } from "@sentry/tracing";
 
 特にブログをいじっていて自分の環境でエラーがでなかったので、(~~優秀~~)しばらくガチャガチャしていたら**サンプリング**の方でReplayになにか入ってきました。わくわく。
 
-![Session Replayの一覧画面にサンプリングされたリプレイが表示されている](https://i.imgur.com/UdSz3qc.png)
+![Session Replayの一覧画面にサンプリングされたリプレイが表示されている](/images/blog/UdSz3qc.png)
 
 おお〜！[こいつ・・・動くぞ！](https://dic.nicovideo.jp/a/%E3%81%93%E3%81%84%E3%81%A4%E3%83%BB%E3%83%BB%E3%83%BB%E5%8B%95%E3%81%8F%E3%81%9E%21)
 
-![実際のブログでSession Replayがユーザー操作を動画再現しているデモ](https://i.imgur.com/ajPwE2R.gif)
+![実際のブログでSession Replayがユーザー操作を動画再現しているデモ](/images/blog/ajPwE2R.gif)
 
 特にエラーが出てないのでただのサンプリング結果ですが、確かにユーザーの操作が手にとるように動画でわかります。これはすごいっすね。
 
-![Session Replayの詳細画面でユーザー操作のタイムラインが表示されている](https://i.imgur.com/pioUHQ4.png)
+![Session Replayの詳細画面でユーザー操作のタイムラインが表示されている](/images/blog/pioUHQ4.png)
 
 Console、Networkも見てみました。
 
 ただのSSGの画面なので画面遷移時のリクエストしかでてませんね...。もうちょっとバックエンドと通信するようなアプリケーションだときっと楽しそうです。
 
-![Session ReplayのNetworkタブでSSGページ遷移時のリクエストを確認している画面](https://i.imgur.com/THPTtHj.png)
+![Session ReplayのNetworkタブでSSGページ遷移時のリクエストを確認している画面](/images/blog/THPTtHj.png)
 
 いいな〜と思った機能でどうやらヒープメモリも取ることができるっぽいです。
 
@@ -135,7 +135,7 @@ Console、Networkも見てみました。
 
 （このブログmemlabをCIで実行しているので、結果と比較しながらメモリリークを対応する、みたいな記事書きたいですね！）
 
-![Session Replayでヒープメモリの推移グラフが表示されている画面](https://i.imgur.com/OjIozWD.png)
+![Session Replayでヒープメモリの推移グラフが表示されている画面](/images/blog/OjIozWD.png)
 
 ## 気になったこと
 
@@ -143,7 +143,7 @@ Console、Networkも見てみました。
 
 別にブログなので公開情報ばっかりなんですけどね...。
 
-![日本語テキストがすべてマスキングされてしまっているSession Replay画面](https://i.imgur.com/WPkRn1L.png)
+![日本語テキストがすべてマスキングされてしまっているSession Replay画面](/images/blog/WPkRn1L.png)
 
 これはどういった挙動なのかわかっていないので今後調査していきたいと思います。
 

@@ -10,7 +10,7 @@ tags:
   - Vue.js
   - CompositionAPI
   - toast
-headerImage: 'https://i.imgur.com/29nafu5.png'
+headerImage: '/images/blog/29nafu5.png'
 templateKey: blog-post
 ---
 前回の続きです。
@@ -153,7 +153,7 @@ const doDownload = async (filePath: string): Promise<void> => {
 
 とtoastのインスタンスに対して**global.name**と宣言するだけで使えちゃいます!!
 
-![Global Optionを使ったtoast表示の画面（見た目は前回と同じ）](https://i.imgur.com/29nafu5.png)
+![Global Optionを使ったtoast表示の画面（見た目は前回と同じ）](/images/blog/29nafu5.png)
 
 当然、見た目は同じですね。
 

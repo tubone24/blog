@@ -6,12 +6,12 @@ description: "NVIDIA Jetson Nano開発者キットを購入し、ケースとフ
 tags:
   - 機械学習
   - Jetson Nano
-headerImage: 'https://i.imgur.com/TZupazY.jpg'
+headerImage: '/images/blog/TZupazY.jpg'
 templateKey: blog-post
 ---
 ただの報告なのですが、
 
-![Jetson Nano開発者キットの外観写真](https://i.imgur.com/TZupazY.jpg)
+![Jetson Nano開発者キットの外観写真](/images/blog/TZupazY.jpg)
 
 買ってしまいました。 [JETSON NANO 開発者キット](https://www.nvidia.com/ja-jp/autonomous-machines/embedded-systems/jetson-nano-developer-kit/)
 
@@ -19,17 +19,17 @@ templateKey: blog-post
 
 ケースとファンも購入し、
 
-![Jetson Nanoにケースとファンを取り付けている途中の様子](https://i.imgur.com/CrVLMjH.jpg)
+![Jetson Nanoにケースとファンを取り付けている途中の様子](/images/blog/CrVLMjH.jpg)
 
 こうしてみると、タワーPC組み立ててる感ありますがUSBの大きさをみていただければいかに小さいかわかるかと思います。
 
-![ケースに収めたJetson Nanoの完成形](https://i.imgur.com/BwCzRZx.jpg)
+![ケースに収めたJetson Nanoの完成形](/images/blog/BwCzRZx.jpg)
 
 ケースに入れると様になりますね！
 
 OSをインストールして電源を入れてみました。
 
-![Jetson NanoにOSをインストールしてデスクトップが起動した画面](https://i.imgur.com/nVU885s.jpg)
+![Jetson NanoにOSをインストールしてデスクトップが起動した画面](/images/blog/nVU885s.jpg)
 
 動いた!!!
 

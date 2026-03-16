@@ -7,7 +7,7 @@ tags:
   - AWS
   - Celery
   - Cloudwatch
-headerImage: https://i.imgur.com/I26bo16.png
+headerImage: /images/blog/I26bo16.png
 templateKey: blog-post
 ---
 
@@ -68,13 +68,13 @@ result = add.delay(4, 5).get()
 
 例えば[FastAPI](https://fastapi.tiangolo.com/ja/)と絡めた動きとしては、以下の図のようになります。
 
-![FastAPIとCelery Worker間のBroker・Result Backendを介した処理フロー図](https://i.imgur.com/vFkl2kl.png)
+![FastAPIとCelery Worker間のBroker・Result Backendを介した処理フロー図](/images/blog/vFkl2kl.png)
 
 BrokerとResult Backendは、例えば[RabbitMQ](https://www.rabbitmq.com/)、[MongoDB](https://www.mongodb.com/)などそれぞれPub/Sub、データベースの専用の製品で構成できますが、[Redis](https://redis.io/)で両方を兼ねて構成できます。
 
 ちなみにAWSでCeleryを絡めた構成をつくるならこのような形で構成されることが多いです。
 
-![AWSでのCelery構成例（ECS・SQS・ElastiCache・DynamoDBを用いた構成図）](https://i.imgur.com/w00OL0K.png)
+![AWSでのCelery構成例（ECS・SQS・ElastiCache・DynamoDBを用いた構成図）](/images/blog/w00OL0K.png)
 
 ## Celeryの監視困ってませんか？
 
@@ -84,7 +84,7 @@ Celeryを使っていると、**タスクがどれくらい進んでいるのか
 
 よく紹介される方法としては、[Flower](https://flower.readthedocs.io/en/latest/)を使う方法があります。
 
-![FlowerのWeb UIでCeleryタスクの状態をリアルタイム表示している画面](https://i.imgur.com/kdNrqwz.png)
+![FlowerのWeb UIでCeleryタスクの状態をリアルタイム表示している画面](/images/blog/kdNrqwz.png)
 
 Flowerは、Celeryのタスクの状態を見るためのWebベースのツールで、上記のようにタスクの状態をリアルタイムで確認できます。
 
@@ -104,7 +104,7 @@ Flowerを使わずに、Celery Beatで定期的にタスクの状態を取得し
 
 [Celery Beat](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html#introduction)は、Celeryの**スケジューラー**です。Celery Beatを使うと、登録しているタスクを定期的に実行できます。
 
-![Celery BeatがWorkerとは別プロセスで定期的にタスクをスケジューリングする構成図](https://i.imgur.com/6TIgeYT.png)
+![Celery BeatがWorkerとは別プロセスで定期的にタスクをスケジューリングする構成図](/images/blog/6TIgeYT.png)
 
 Celery Beatは、Celery Workerとは**別のプロセス**として動作し、（同じプロセスで実行可能ですが本番ではおすすめできません）Celery Workerがタスクを実行するのに対して、Celery Beatは**タスクのスケジューリング**を行ないます。
 
@@ -263,7 +263,7 @@ Workerの名前は、ホスト名やプロセスIDなどで決まってしまう
 
 Cloudwatch metricsで確認すると、次のように正しくメトリクスが送信されていることが確認できます。
 
-![CloudWatch metricsのコンソールでCeleryMetrics名前空間のメトリクスが表示されている画面](https://i.imgur.com/ndDxoTD.png)
+![CloudWatch metricsのコンソールでCeleryMetrics名前空間のメトリクスが表示されている画面](/images/blog/ndDxoTD.png)
 
 ## アラートとECSのAWS Application Auto Scaling
 
@@ -439,7 +439,7 @@ resource "aws_cloudwatch_metric_alarm" "celery_active_tasks" {
 
 構成図にするとこのような形です。
 
-![Celery Beat・Control Inspect・CloudWatch・ECS Auto Scalingを組み合わせた監視全体構成図](https://i.imgur.com/I26bo16.png)
+![Celery Beat・Control Inspect・CloudWatch・ECS Auto Scalingを組み合わせた監視全体構成図](/images/blog/I26bo16.png)
 
 ## 結論
 

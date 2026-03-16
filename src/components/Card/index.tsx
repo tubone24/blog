@@ -2,7 +2,7 @@ import React from "react";
 
 import Tag from "@/components/Tag";
 
-import { parseImgur, SizeMapping } from "@/utils/images";
+import { parseImage, getWebPUrl, SizeMapping } from "@/utils/images";
 
 import * as style from "./index.module.scss";
 
@@ -17,20 +17,24 @@ const CardHeader = ({
   title: string;
   index: number;
 }) => {
-  const imageUrl = parseImgur(image, SizeMapping.large);
+  const imageUrl = parseImage(image, SizeMapping.large);
+  const webpUrl = getWebPUrl(imageUrl);
 
   // 1枚目はeager loading（LCP）、2枚目以降はnative lazy loading
   return (
     <a href={url} className={index === 0 ? style.imageLink : undefined}>
       <span className="visually-hidden">{title}</span>
-      <img
-        src={imageUrl}
-        alt=""
-        className={style.wrapper}
-        loading={index === 0 ? "eager" : "lazy"}
-        {...{ fetchpriority: index === 0 ? "high" : "auto" }}
-        data-testid="card-header"
-      />
+      <picture>
+        {webpUrl && <source srcSet={webpUrl} type="image/webp" />}
+        <img
+          src={imageUrl}
+          alt=""
+          className={style.wrapper}
+          loading={index === 0 ? "eager" : "lazy"}
+          {...{ fetchpriority: index === 0 ? "high" : "auto" }}
+          data-testid="card-header"
+        />
+      </picture>
     </a>
   );
 };

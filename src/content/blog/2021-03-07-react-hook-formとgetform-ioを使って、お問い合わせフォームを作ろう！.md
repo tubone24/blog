@@ -7,7 +7,7 @@ tags:
   - JavaScript
   - React
   - getform.io
-headerImage: https://i.imgur.com/DsrFLOE.png
+headerImage: /images/blog/DsrFLOE.png
 templateKey: blog-post
 ---
 [React Hook Form](https://react-hook-form.com/jp/)が便利らしいと聞いたので使ってみることにしました。
@@ -25,7 +25,7 @@ templateKey: blog-post
 
 最近トレンドに乗っかってきた、**Form**を**React Hooks**で簡単に作ることのできる代物です。
 
-![React Hook Formの公式サイトトップページ](https://i.imgur.com/2dqEW7L.png)
+![React Hook Formの公式サイトトップページ](/images/blog/2dqEW7L.png)
 
 特徴として、Hooksを使って簡単にFormが作れる、そして再レンダリングが最小限に抑えられているのでパフォーマンスも高い、らしいです。
 
@@ -39,11 +39,11 @@ templateKey: blog-post
 
 **合体！**
 
-![2つの技術が合体するイメージ画像](https://i.imgur.com/FzX8di6.jpg)
+![2つの技術が合体するイメージ画像](/images/blog/FzX8di6.jpg)
 
 だめ～となるかと思いましたがうまいことできました。
 
-![合体成功のイメージ画像](https://i.imgur.com/yYJBK98.jpg)
+![合体成功のイメージ画像](/images/blog/yYJBK98.jpg)
 
 今回はこちらの2技術を使って、お問い合わせフォームを作っていきます。
 
@@ -322,7 +322,7 @@ React Hook Formを使わない場合、
 
 出来上がりはただのFormですのでかっこいいCSSを当ててくださいね。
 
-![React Hook FormとGetform.ioで作成したお問い合わせフォームの完成画面](https://i.imgur.com/DsrFLOE.png)
+![React Hook FormとGetform.ioで作成したお問い合わせフォームの完成画面](/images/blog/DsrFLOE.png)
 
 ## 結論
 

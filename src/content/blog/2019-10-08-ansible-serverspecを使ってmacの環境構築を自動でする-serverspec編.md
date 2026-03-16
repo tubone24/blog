@@ -8,7 +8,7 @@ tags:
   - Ansible
   - Serverspec
   - Mac
-headerImage: 'https://i.imgur.com/9iGRHft.png'
+headerImage: '/images/blog/9iGRHft.png'
 templateKey: blog-post
 ---
 Serverspecで構築した環境を確認したい!!
@@ -23,7 +23,7 @@ Serverspecで構築した環境を確認したい!!
 
 ## Serverspecとは
 
-![Serverspecの公式ロゴ](https://i.imgur.com/E3tw8J2.png)
+![Serverspecの公式ロゴ](/images/blog/E3tw8J2.png)
 
 Serverspecとはサーバーの自動テストツールです。
 

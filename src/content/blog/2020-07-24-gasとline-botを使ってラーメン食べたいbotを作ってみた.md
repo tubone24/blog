@@ -6,12 +6,12 @@ description: "Google Apps Script（GAS）とLINE Messaging APIを使い、位置
 tags:
   - GAS
   - LINEBOT
-headerImage: https://i.imgur.com/aFfsvoe.gif
+headerImage: /images/blog/aFfsvoe.gif
 templateKey: blog-post
 ---
 4連休、StayHomeが叫ばれる中、ラーメンが食べたくなったので、LINEBOTを含めたラーメンソリューションを作ってみました。
 
-![ラーメンBOTが位置情報から近くのラーメン屋を検索するデモ動画](https://i.imgur.com/aFfsvoe.gif)
+![ラーメンBOTが位置情報から近くのラーメン屋を検索するデモ動画](/images/blog/aFfsvoe.gif)
 
 ## Table of Contents
 
@@ -53,13 +53,13 @@ https://youtu.be/Lk3MZrxXswY
 
 ### ワイヤーフレーム
 
-![ラーメンBOTのワイヤーフレーム：位置情報送信からカルーセル表示までの画面遷移](https://i.imgur.com/KUqm5Qs.png)
+![ラーメンBOTのワイヤーフレーム：位置情報送信からカルーセル表示までの画面遷移](/images/blog/KUqm5Qs.png)
 
 雑ですが作ってみました。位置情報を送ると、近くのラーメン屋を検索してカルーセルで紹介します。
 
 また、ラーメン評価ボタンを付けて、クリックするとFirebaseで作ったフロントに飛んで星をつけることができます。
 
-![ラーメン評価画面のワイヤーフレーム：星をつけてレビューするフロント画面](https://i.imgur.com/ibZirgX.png)
+![ラーメン評価画面のワイヤーフレーム：星をつけてレビューするフロント画面](/images/blog/ibZirgX.png)
 
 なので、LINEBOTを基軸にサービスを組みますが、今回はバックエンド処理がLINEの[MessagingAPI](https://developers.line.biz/ja/reference/messaging-api/)のWebhookで起動し、返信を返す機能なのでBOT部分はGASのdoPostを使って作ります。
 
@@ -207,7 +207,7 @@ LINEのMessagingAPIではユーザーが位置情報を送ると、設定したW
 
 一応画像がない場合はいらすとやさんにあった、
 
-![いらすとやのラーメンイラスト（画像未登録時の代替画像）](https://i.imgur.com/DxiGaAr.jpg)
+![いらすとやのラーメンイラスト（画像未登録時の代替画像）](/images/blog/DxiGaAr.jpg)
 
 で置き換えるようにしましたがそれにしても悲しいので、少し工夫したいと思います。
 
@@ -360,7 +360,7 @@ export class FirestoreService {
 
 また、GASからlibraryを使う方法は簡単でGAS画面で**リソース=>ライブラリ**から**1VUSl4b1r1eoNcRWotZM3e87ygkxvXltOgyDZhixqncz9lQ3MjfT1iKFw**をAdd a libraryします。
 
-![GASのリソース画面でFirestoreAppライブラリを追加する設定画面](https://i.imgur.com/pdgBiAu.png)
+![GASのリソース画面でFirestoreAppライブラリを追加する設定画面](/images/blog/pdgBiAu.png)
 
 ここで注意として指定するバージョンは最新にしないことです。
 

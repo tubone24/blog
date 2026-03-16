@@ -8,7 +8,7 @@ tags:
   - cron
   - reboot
   - Slack
-headerImage: https://i.imgur.com/oEMLAHF.png
+headerImage: /images/blog/oEMLAHF.png
 templateKey: blog-post
 ---
 
@@ -88,6 +88,6 @@ pip3 install netifaces==0.11.0
 
 ## 結果
 
-![Slackに再起動通知とIPアドレスが投稿された画面](https://i.imgur.com/oEMLAHF.png)
+![Slackに再起動通知とIPアドレスが投稿された画面](/images/blog/oEMLAHF.png)
 
 こんな感じで定期的に(1日1回)再起動が実施されIPアドレスの通知もSlackにしてくれます。

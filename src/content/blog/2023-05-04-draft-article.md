@@ -8,7 +8,7 @@ tags:
   - Astro
   - Pagecrypt
   - Render
-headerImage: https://i.imgur.com/K4G7266.gif
+headerImage: /images/blog/K4G7266.gif
 templateKey: blog-post
 ---
 
@@ -28,7 +28,7 @@ templateKey: blog-post
 
 こんな感じの構成にしてみました。
 
-![NFCタグ・Astro・PageCrypt・Renderを組み合わせたデジタル名刺の構成図](https://i.imgur.com/Br1vCID.png)
+![NFCタグ・Astro・PageCrypt・Renderを組み合わせたデジタル名刺の構成図](/images/blog/Br1vCID.png)
 
 まず、デジタル名刺ページは[Astro](https://docs.astro.build/ja/getting-started/)を使って作成をしております。ペライチのHTMLをビルドする形になります。ちなみに[このブログ自体もGatsby.jsで構築](/2023/01/01/this-blog)しており、静的サイトジェネレーターには馴染みがあります。
 
@@ -45,7 +45,7 @@ pagecryptは大変優秀で、
 
 (ただし、後者のアクセスはGETリクエストのURLを中間経路でダッシュされる可能性があるので、機微情報を扱う際はおすすめしません。)
 
-![PageCryptのパスワード入力フォームが表示された暗号化済みHTMLページ](https://i.imgur.com/1Oh9APi.png)
+![PageCryptのパスワード入力フォームが表示された暗号化済みHTMLページ](/images/blog/1Oh9APi.png)
 
 NFCタグにはパスワード付きURLを仕込んでおくことで、実質NFCタグ経由じゃないと名刺サイトにアクセスできなくする、という対応が可能となります。
 
@@ -55,5 +55,5 @@ NFCタグにはパスワード付きURLを仕込んでおくことで、実質NF
 
 この用にNFCタグにスマートフォンをかざすだけで、デジタル名刺サイトにアクセスができました！
 
-![スマートフォンをNFCタグにかざしてデジタル名刺サイトにアクセスするデモ動画](https://i.imgur.com/K4G7266.gif)
+![スマートフォンをNFCタグにかざしてデジタル名刺サイトにアクセスするデモ動画](/images/blog/K4G7266.gif)
 

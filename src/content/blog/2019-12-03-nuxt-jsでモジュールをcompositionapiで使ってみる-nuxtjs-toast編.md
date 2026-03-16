@@ -11,7 +11,7 @@ tags:
   - modules
   - toast
   - CompositionAPI
-headerImage: 'https://i.imgur.com/29nafu5.png'
+headerImage: '/images/blog/29nafu5.png'
 templateKey: blog-post
 ---
 わからん。
@@ -40,7 +40,7 @@ templateKey: blog-post
 
 [該当のComponent](https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client/blob/master/components/FileList.vue#L28)
 
-![ebook-homebrew-nuxtアプリでtoastを表示した画面](https://i.imgur.com/29nafu5.png)
+![ebook-homebrew-nuxtアプリでtoastを表示した画面](/images/blog/29nafu5.png)
 
 ## そもそもCompositionAPIとは？
 

@@ -14,8 +14,10 @@ const oembedTransformer = oembedTransformerModule.default || oembedTransformerMo
 import rehypeGatsbyCodeMeta from './src/lib/rehype-gatsby-code-meta.mjs';
 import rehypeShellPrompt from './src/lib/rehype-shell-prompt.mjs';
 import rehypeLazyImages from './src/lib/rehype-lazy-images.mjs';
+import rehypePictureImages from './src/lib/rehype-picture-images.mjs';
 import rehypeAltBadge from './src/lib/rehype-alt-badge.mjs';
 import netlifyHeaders from './src/lib/astro-netlify-headers.mjs';
+import imageVariantFallback from './src/lib/vite-image-fallback.mjs';
 
 export default defineConfig({
   site: 'https://tubone-project24.xyz',
@@ -25,6 +27,7 @@ export default defineConfig({
     netlifyHeaders(),
   ],
   vite: {
+    plugins: [imageVariantFallback()],
     css: {
       preprocessorOptions: {
         scss: {},
@@ -68,6 +71,7 @@ export default defineConfig({
       [rehypePrismPlus, { ignoreMissing: true }],
       rehypeShellPrompt,
       rehypeLazyImages,
+      rehypePictureImages,
       rehypeAltBadge,
     ],
     syntaxHighlight: false,

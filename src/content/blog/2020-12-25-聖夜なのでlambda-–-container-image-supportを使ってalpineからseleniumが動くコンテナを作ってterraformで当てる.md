@@ -8,7 +8,7 @@ tags:
   - Lambda
   - Selenium
   - Terraform
-headerImage: https://i.imgur.com/dmGb7V6.png
+headerImage: /images/blog/dmGb7V6.png
 templateKey: blog-post
 ---
 寂しいクリスマスです。
@@ -23,7 +23,7 @@ templateKey: blog-post
 
 12/1 **[Lambda – Container Image Support](https://aws.amazon.com/jp/blogs/aws/new-for-aws-lambda-container-image-support/)**が発表されました。
 
-![Lambda作成画面でContainer Imageオプションが表示されている画面](https://i.imgur.com/ZWIqgQZ.png)
+![Lambda作成画面でContainer Imageオプションが表示されている画面](/images/blog/ZWIqgQZ.png)
 
 Lambda作成画面にもContainer Imageが出てきております。
 
@@ -62,7 +62,7 @@ LambdaでSeleniumを動かすと言えばつい最近まで[serverless-chrome](h
 
 じゃあ、Slack APIとか使って、相互投稿とかして解決すればいいじゃんとなりそうですが、一部のWorkSpaceはセキュリティの観点から外部連携が禁止とのこと。なんじゃそりゃ...。
 
-![Slack外部連携禁止で困っているイメージ](https://i.imgur.com/odKSxHU.png)
+![Slack外部連携禁止で困っているイメージ](/images/blog/odKSxHU.png)
 
 そこで、セキュア(笑)なSlackのスクリーンショットを取り、普段使っているSlackへ投稿する仕組みにすれば、少なくとも連絡はしたようなものなので、まぁ楽でしょう！ということで作っていきます。
 
@@ -232,7 +232,7 @@ selenium   latest           04304fcd4549   18 minutes ago   846MB
 
 さて、Seleniumを使うときつきまとうのはフォント**豆腐**問題です。
 
-![日本語フォントが豆腐（□）になっている画面の例](https://i.imgur.com/tjIJUBn.jpg)
+![日本語フォントが豆腐（□）になっている画面の例](/images/blog/tjIJUBn.jpg)
 
 日本語のようにASCII文字では表現できない文字は、対応するフォントがインストールされていないと文字の代わりに小さい四角(□)、通称**豆腐**が表示されることがあります。麻雀の白ではないですよ。というより豆腐という日本語が世界語になっているのはすごいですね。
 
@@ -391,11 +391,11 @@ def handler(event, context):
 
 まずはログインページアクセスですが、これはブラウザでhttps://slack-workspace-url.slack.comにアクセスしますと、Eメールとパスワードを聞かれるフォームが出てきます。
 
-![Slackのログイン画面：メールアドレスとパスワードの入力フォーム](https://i.imgur.com/LaMP20t.png)
+![Slackのログイン画面：メールアドレスとパスワードの入力フォーム](/images/blog/LaMP20t.png)
 
 こちら確認してみると、Elementのidがそれぞれ、email, passwordとなっております。また、Sign inボタンはID signin_btnとなっております。ありがたいですね。
 
-![Slackログインフォームのhtml要素検証：email・password・signin_btnのID確認](https://i.imgur.com/S8orasB.png)
+![Slackログインフォームのhtml要素検証：email・password・signin_btnのID確認](/images/blog/S8orasB.png)
 
 ということで、idがemailのElementが描画されたらEメール、パスワードを入力し、ボチッとSign inボタンをクリックします。
 
@@ -456,11 +456,11 @@ print(d.save_screenshot("/tmp/screen.png"))
 
 Slack Appを作ったらSlackAPIのOAuth&Permissionsから確認できます。
 
-![Slack APIのOAuth & Permissionsページでトークンを確認する画面](https://i.imgur.com/Tt6avAl.png)
+![Slack APIのOAuth & Permissionsページでトークンを確認する画面](/images/blog/Tt6avAl.png)
 
 Permissionsは[channels:join](https://api.slack.com/scopes/channels:join)、[chat:write](https://api.slack.com/scopes/chat:write)、[chat:write.public](https://api.slack.com/scopes/chat:write.public)、[files:write](https://api.slack.com/scopes/files:write)があれば十分だと思います。
 
-![Slack Appのスコープ設定画面：channels:join、chat:write等のPermissions](https://i.imgur.com/0O9dgma.png)
+![Slack Appのスコープ設定画面：channels:join、chat:write等のPermissions](/images/blog/0O9dgma.png)
 
 ```python
         url = "https://slack.com/api/files.upload"
@@ -477,13 +477,13 @@ Permissionsは[channels:join](https://api.slack.com/scopes/channels:join)、[cha
 
 ほとんどモザイクで申し訳ないですが、きっちりSlackにスクリーンショットを投稿できました。
 
-![Slackにスクリーンショットが投稿された画面（モザイク処理済み）](https://i.imgur.com/oHtRLCO.png)
+![Slackにスクリーンショットが投稿された画面（モザイク処理済み）](/images/blog/oHtRLCO.png)
 
 ## 一部フォントが豆腐のままになる
 
 確かにうまく言ったのですが、Noto fontsを入れているにも関わらず一部フォントが豆腐のままになってしまう事象が起きてしまいました。
 
-![Noto Fonts導入後も一部の日本語が豆腐のまま表示されているスクリーンショット](https://i.imgur.com/QxSsfqy.png)
+![Noto Fonts導入後も一部の日本語が豆腐のまま表示されているスクリーンショット](/images/blog/QxSsfqy.png)
 
 ~~12/24なにがあるんでしょうねぇ...~~
 
@@ -523,11 +523,11 @@ RUN fc-cache -fv
 
 もう1つ問題になったのは、LambdaのグローバルIPを固定化していなかったため、変なIPアドレスからログインを実行したという警告がでてしまうことです。
 
-![Slackから不審なIPアドレスでのサインイン警告メールが届いた画面](https://i.imgur.com/dmGb7V6.png)
+![Slackから不審なIPアドレスでのサインイン警告メールが届いた画面](/images/blog/dmGb7V6.png)
 
 こちらは解決法があり、要は**Lambda in VPC**にしてNatGatewayにEIPを当てて、固定IPからインターネットアクセスをさせてあげればいいわけです。
 
-![Lambda in VPCでNAT GatewayにEIPを割り当てる構成図](https://i.imgur.com/GPamgYL.png)
+![Lambda in VPCでNAT GatewayにEIPを割り当てる構成図](/images/blog/GPamgYL.png)
 
 Container Image Supportとはいえ、ここらへんの仕組みはいつも使っているLambdaなので簡単に実現できました。
 
@@ -551,7 +551,7 @@ aws ecr describe-images --repository-name selenium --image-ids imageTag=latest |
 
 [IntellJ HashiCorp Terraform / HCL language support](https://plugins.jetbrains.com/plugin/7808-hashicorp-terraform--hcl-language-support)を使っているとhandlerとruntimeオプションが無いよ！と怒られてしまいますが、構わず不要で大丈夫です。
 
-![IntelliJ IDEAでhandlerとruntimeが未設定の警告が表示されているTerraformコード](https://i.imgur.com/cxxcBx0.png)
+![IntelliJ IDEAでhandlerとruntimeが未設定の警告が表示されているTerraformコード](/images/blog/cxxcBx0.png)
 
 ## 完成
 

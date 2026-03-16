@@ -15,7 +15,7 @@ tags:
   - Jest
   - 自動テスト
   - Unit Test
-headerImage: 'https://i.imgur.com/QCjxEBN.png'
+headerImage: '/images/blog/QCjxEBN.png'
 templateKey: blog-post
 ---
 タイトル長い。
@@ -133,7 +133,7 @@ GASの場合APIのコールには**URLFetchApp**が利用できます。
 
 URLFetchAppはもちろんGAS専用のAPIですが、TypeSciptのLintがちゃんと利くのが何気にすごいと思いました。
 
-![TypeScriptでURLFetchAppのLint補完が効いているエディタ画面](https://i.imgur.com/gul9s4W.png)
+![TypeScriptでURLFetchAppのLint補完が効いているエディタ画面](/images/blog/gul9s4W.png)
 
 ## Slackのサービス層
 
@@ -207,7 +207,7 @@ clasp push
 
 clasp loginをローカル上で実施したときに取得できるトークンがclasprc.jsonに出力されているので、こちらをGitHub ActionのSecret機能で渡してあげます。
 
-![GitHub ActionのSecret設定画面でClaspトークンを登録している様子](https://i.imgur.com/ogQ4ILr.png)
+![GitHub ActionのSecret設定画面でClaspトークンを登録している様子](/images/blog/ogQ4ILr.png)
 
 あとは、testが通ったらclasp loginして、build, deployする定義をかけばよいです。
 

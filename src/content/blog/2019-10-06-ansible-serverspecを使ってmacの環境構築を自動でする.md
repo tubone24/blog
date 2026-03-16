@@ -8,7 +8,7 @@ tags:
   - Ansible
   - Serverspec
   - Mac
-headerImage: 'https://i.imgur.com/9iGRHft.png'
+headerImage: '/images/blog/9iGRHft.png'
 templateKey: blog-post
 ---
 毎回Macの環境構築めんどくさい。
@@ -25,7 +25,7 @@ templateKey: blog-post
 
 ## Ansible
 
-![Ansibleの公式ロゴ](https://i.imgur.com/oBucHNe.png)
+![Ansibleの公式ロゴ](/images/blog/oBucHNe.png)
 
 Ansibleとは**Python**製の**OSS構成管理ツール**です。
 

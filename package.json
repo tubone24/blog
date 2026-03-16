@@ -49,8 +49,8 @@
   "main": "n/a",
   "scripts": {
     "start": "astro dev",
-    "build": "astro build",
-    "build:nocache": "astro build",
+    "build": "astro build && node scripts/generate-image-variants.mjs",
+    "build:nocache": "astro build && node scripts/generate-image-variants.mjs",
     "develop": "astro dev",
     "develop:e2e": "NODE_ENV=development astro dev",
     "develop:remote": "astro dev --port 8080 --host 0.0.0.0",

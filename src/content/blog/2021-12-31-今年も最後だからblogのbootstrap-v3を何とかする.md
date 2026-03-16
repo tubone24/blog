@@ -7,7 +7,7 @@ tags:
   - JavaScript
   - BootStrap
   - 年越し
-headerImage: https://i.imgur.com/nVO9loz.png
+headerImage: /images/blog/nVO9loz.png
 templateKey: blog-post
 ---
 年末ですね。
@@ -176,7 +176,7 @@ Columnの順番を制御できるOrderについて今までは無邪気にorder-
 
 といういらない変更が入っていたので、こちらは**global.sCSS**でnoneを上書きします。
     
-![underlineがつく](https://i.imgur.com/RRvEIHy.png)
+![underlineがつく](/images/blog/RRvEIHy.png)
 
 ```css
 a {
@@ -221,7 +221,7 @@ Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgeCSS](https://www.gatsbyjs.com/p
 
 ちなみに、Purgeの効果あってかわかりませんが、Lighthouseのパフォーマンススコアは次のとおりでした。
 
-![Bootstrap v5移行後のLighthouseパフォーマンススコア](https://i.imgur.com/FX0kdBo.png)
+![Bootstrap v5移行後のLighthouseパフォーマンススコア](/images/blog/FX0kdBo.png)
 
 みなさまこのブログは **なんでTypeScriptでリライトしないのか？** という疑問があると思うのですが、それもこのBootstrap問題がちょっと絡んでいるので、この際頑張ってTypeScript化しようかなと思ってます。このブログの全体構成については[2023年版このブログを支える技術](/2023/01/01/this-blog/)でも詳しく解説しています。
  
@@ -229,7 +229,7 @@ Gatsby.jsではCSSのPurgeに[gatsby-plugin-purgeCSS](https://www.gatsbyjs.com/p
 
 本年もお世話になりました。来年もよろしくおねがいします!!!
 
-![2022年寅年の年賀イラスト](https://i.imgur.com/mwxtvWim.png)
+![2022年寅年の年賀イラスト](/images/blog/mwxtvWi.png)
 
 
 

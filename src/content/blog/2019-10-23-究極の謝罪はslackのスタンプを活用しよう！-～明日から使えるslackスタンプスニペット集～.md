@@ -7,7 +7,7 @@ tags:
   - Slack
   - Stamp
   - ぼやき
-headerImage: 'https://i.imgur.com/lYpsth4.png'
+headerImage: '/images/blog/lYpsth4.png'
 templateKey: blog-post
 ---
 
