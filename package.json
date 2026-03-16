@@ -20,7 +20,7 @@
     "autocomplete.js": "0.38.1",
     "axios": "1.13.6",
     "babel-loader": "8.3.0",
-    "bootstrap": "5.3.3",
+    "bootstrap": "5.3.8",
     "dayjs": "1.11.20",
     "dotenv": "16.4.7",
     "gray-matter": "4.0.3",
