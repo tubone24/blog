@@ -60,7 +60,7 @@ Width 400px
 - Site search by [Algolia](https://www.algolia.com/)
 - Deploy on [Netlify](https://www.netlify.com/)
   - Managed by [Terraform Cloud](https://cloud.hashicorp.com/products/terraform) for Netlify settings
-- Image hosted by [imgur](https://imgur.com)
+- Images self-hosted in `static/images/blog/` with automatic WebP conversion and resizing
 - OGP with dynamic Twitter card image generation
 - [Gitalk](https://gitalk.github.io/) for blog comment system
 - Icons by [Fontawesome](https://fontawesome.com/), optimised with [Icomoon](https://icomoon.io/)
@@ -106,6 +106,39 @@ src/
 - Update dependencies by [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate/)
 - Detect vulnerability by [Snyk](https://app.snyk.io/)
 - Capture [some width screenshots](https://github.com/tubone24/blog/tree/screenshot) every PR and push master
+
+### Images
+
+Original blog images are stored in `static/images/blog/`. During build, optimized variants are generated into `dist/images/blog/` (keeping `static/` clean):
+
+- `{name}-640.{ext}` — 640px width resized version
+- `{name}-640.webp` — 640px width WebP version
+- `{name}.webp` — Original size WebP version
+
+GIF images are kept as-is (no resizing or WebP conversion).
+
+#### Adding images for a new article
+
+1. Place your image files in `static/images/blog/` (PNG, JPG, or GIF)
+2. Reference them in your Markdown using the path `/images/blog/{filename}`:
+
+```markdown
+---
+headerImage: /images/blog/my-image.png
+---
+
+![Alt text](/images/blog/my-image.png)
+```
+
+1. The build process (`yarn build`) automatically generates resized and WebP variants into `dist/`
+2. In the rendered HTML, `<img>` tags for PNG/JPG images are automatically wrapped in `<picture>` elements with WebP `<source>` for modern browser optimization
+3. During `yarn dev`, a Vite middleware transparently serves the original image when a variant is requested
+
+#### Image utilities
+
+- `scripts/generate-image-variants.mjs` — Generates resized and WebP variants (runs automatically after `astro build`)
+- `scripts/download-imgur.mjs` — One-time migration script (downloads images from imgur)
+- `scripts/replace-imgur-urls.mjs` — One-time migration script (replaces imgur URLs in Markdown)
 
 ### For contributor of articles
 
@@ -245,19 +278,19 @@ The components used in my blog are managed using Storybook.
 
 <https://blog-storybook.netlify.app/>
 
-![storybook](https://i.imgur.com/I5euw3q.png)
+![storybook](docs/images/storybook.png)
 
 ## Lighthouse
 
 After production deploy, Run and report Lighthouse.
 
-![lighthouse](https://i.imgur.com/NG260hR.png)
+![lighthouse](docs/images/lighthouse.png)
 
 <https://tubone24.github.io/blog/lh/report.html>
 
 Also, create PR, Check Lighthouse score via [pagespeedapi.runpagespeed](https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed) and Comment your PR.
 
-![lighthouseScoreWithGitHubComments](https://i.imgur.com/LZmrqgS.png)
+![lighthouseScoreWithGitHubComments](docs/images/lighthouse-pr-comment.png)
 
 ## Deploy at Netlify
 
@@ -298,7 +331,7 @@ In addition to detecting vulnerabilities in the libraries used, we scan code and
 
 If you create PR, check security vulnerability for [snyk CLI](https://docs.snyk.io/snyk-cli) and push PR comment.
 
-![snyk comments](https://i.imgur.com/fEL1cFj.png)
+![snyk comments](docs/images/snyk-comment.png)
 
 ## CI Healthy
 

@@ -7,7 +7,7 @@ tags:
   - JavaScript
   - depcheck
   - GitHub
-headerImage: https://i.imgur.com/x0HzZEF.png
+headerImage: /images/blog/x0HzZEF.png
 templateKey: blog-post
 ---
 package.jsonはNodeのつらいところ。
@@ -22,7 +22,7 @@ package.jsonはNodeのつらいところ。
 
 JavaScriptやTypeScriptでのシステム開発に必要不可欠なNode.js Package Manager、いわゆるnpmはしばしばライブラリサイズが大きくなりがちなことが問題になります。
 
-![node_modulesの容量がブラックホールに例えられるネットミーム](https://i.imgur.com/yxDDBOX.jpg)
+![node_modulesの容量がブラックホールに例えられるネットミーム](/images/blog/yxDDBOX.jpg)
 
 もちろんこちらの問題はさまざまな議論が尽くされているわけですし、今更どうこう言うつもりはないです。
 
@@ -144,7 +144,7 @@ on:
 
 そうすれば、PRコメントとして結果が出力されます。
 
-![depcheck ActionによるPRコメントへの未使用ライブラリ一覧出力結果](https://i.imgur.com/x0HzZEF.png)
+![depcheck ActionによるPRコメントへの未使用ライブラリ一覧出力結果](/images/blog/x0HzZEF.png)
 
 - Unused dependenciesセクションは、package.jsonのdependenciesで定義されたライブラリが、.js、.ts、.jsx、.tsx、.coffee、.sass、.SCSS、.vueの各ファイルで使用されていないことを示しています。
 - Unused devDpendenciesセクションは、package.jsonのdevDependenciesで定義されたライブラリが各ファイルに存在しないことを示しています。

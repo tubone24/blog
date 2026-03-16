@@ -58,6 +58,10 @@ function buildHeaders() {
       headers: ['Cache-Control: public, max-age=31536000, immutable'],
     },
     {
+      path: '/images/*',
+      headers: ['Cache-Control: public, max-age=31536000, immutable'],
+    },
+    {
       path: '/assets/*',
       headers: ['Cache-Control: public, max-age=31536000, immutable'],
     },

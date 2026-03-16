@@ -8,7 +8,7 @@ tags:
   - Claude Code
   - AI
   - 音声入力
-headerImage: https://i.imgur.com/8kPDT6r.png
+headerImage: /images/blog/8kPDT6r.png
 templateKey: blog-post
 useAi: true
 ---
@@ -77,7 +77,7 @@ whisper-realtimeはコマンドラインツールとしてだけでなく、**Ma
 
 また、WhisperMenuBarという[Swift](https://www.swift.org/)製のメニューバーアプリも用意しており、F9ホットキーで即座に音声入力を開始し、結果を自動的にクリップボードへコピーする機能を提供しています。
 
-![WhisperMenuBarのスクリーンショット](https://i.imgur.com/8kPDT6r.png)
+![WhisperMenuBarのスクリーンショット](/images/blog/8kPDT6r.png)
 
 ## 音声入力からブログ執筆への応用
 

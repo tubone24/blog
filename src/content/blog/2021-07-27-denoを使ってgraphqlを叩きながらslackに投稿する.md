@@ -7,7 +7,7 @@ tags:
   - Deno
   - GraphQL
   - Slack
-headerImage: https://i.imgur.com/iXpteuJ.jpg
+headerImage: /images/blog/iXpteuJ.jpg
 templateKey: blog-post
 ---
 体重が落ちてきました！

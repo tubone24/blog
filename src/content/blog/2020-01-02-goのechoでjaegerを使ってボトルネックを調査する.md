@@ -8,7 +8,7 @@ tags:
   - Echo
   - Jaeger
   - ボトルネック調査
-headerImage: 'https://i.imgur.com/69WEZfu.png'
+headerImage: '/images/blog/69WEZfu.png'
 templateKey: blog-post
 ---
 Goの勉強をしておかないと社内でニートになってしまうので、お勉強を兼ねてGoのWebフレームワークのEchoを使ったアプリケーションを作成中です。
@@ -23,7 +23,7 @@ Goの勉強をしておかないと社内でニートになってしまうので
 
 ## そもそもEchoとは？
 
-![Echo公式サイトのトップページ](https://i.imgur.com/3ZjGzeX.png)
+![Echo公式サイトのトップページ](/images/blog/3ZjGzeX.png)
 
 EchoとはGoのWAF(Web Framework)です。
 
@@ -59,7 +59,7 @@ Ginの方はドキュメントに[DISQUS](https://disqus.com/)のコメント欄
 
 [jeager](https://www.jaegertracing.io/docs/1.16/)は[Uber Technologies Inc.](https://uber.github.io/#/)が**OSS**として公開した**分散トレーシングシステム**です。
 
-![Jaeger公式サイトのロゴとトップページ](https://i.imgur.com/69WEZfu.png)
+![Jaeger公式サイトのロゴとトップページ](/images/blog/69WEZfu.png)
 
 マイクロサービスなアーキテクチャを横串で監視できる強みと**Go, Java, Node, Python, C++** でクライアントが提供されていることが魅力です。
 
@@ -168,23 +168,23 @@ go run main.go
 
 APIをコールしてみるとTracingされているのがわかります。
 
-![Jaeger UIでのトレーシング結果一覧画面](https://i.imgur.com/CRKvFq6.png)
+![Jaeger UIでのトレーシング結果一覧画面](/images/blog/CRKvFq6.png)
 
 **/get/:username**というAPIのコールも出ています。
 
-![Jaeger UIで/get/:username APIコールのトレース詳細](https://i.imgur.com/1uQdmdX.png)
+![Jaeger UIで/get/:username APIコールのトレース詳細](/images/blog/1uQdmdX.png)
 
 こまかく見ていきますと、:usernameはpath parameterなのですが、APIコール時に**tubone24**というユーザー名を設定しコールしたことがわかります。
 
 **1.04sかかってますね・・・。**
 
-![APIコールのレスポンスタイム1.04秒の詳細トレース](https://i.imgur.com/c0y81lE.png)
+![APIコールのレスポンスタイム1.04秒の詳細トレース](/images/blog/c0y81lE.png)
 
 また、childspanも無事記録してます。
 
-![Jaeger UIでchild spanの記録を確認する画面](https://i.imgur.com/1uQdmdX.png)
+![Jaeger UIでchild spanの記録を確認する画面](/images/blog/1uQdmdX.png)
 
-![child spanの詳細でGitHub APIコールが0.48msと表示されている画面](https://i.imgur.com/dh3WfC2.png)
+![child spanの詳細でGitHub APIコールが0.48msと表示されている画面](/images/blog/dh3WfC2.png)
 
 どうやらバックエンド(GitHub)へのコールはそこまで**0.48ms**とそこまで遅くはないみたいです。
 

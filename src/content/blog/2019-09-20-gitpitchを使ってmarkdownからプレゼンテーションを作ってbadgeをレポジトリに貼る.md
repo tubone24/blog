@@ -8,7 +8,7 @@ tags:
   - GitHub
   - GitHub Badges
   - Azusa Colors
-headerImage: 'https://i.imgur.com/CBPn3gW.png'
+headerImage: '/images/blog/CBPn3gW.png'
 templateKey: blog-post
 ---
 とりあえずBadge増やしたい.
@@ -265,7 +265,7 @@ transition: concave
 ---?color=#B867C6
 ```
 
-![GitPitchスライドの背景色をパープルに変更した表示例](https://i.imgur.com/tJFkIB5.png)
+![GitPitchスライドの背景色をパープルに変更した表示例](/images/blog/tJFkIB5.png)
 
 ### 背景に画像をつける
 
@@ -275,7 +275,7 @@ transition: concave
 ---?image=assets/gitpitch/img/journey.jpg
 ```
 
-![GitPitchスライドに背景画像を設定した表示例](https://i.imgur.com/UE6a3e1.png)
+![GitPitchスライドに背景画像を設定した表示例](/images/blog/UE6a3e1.png)
 
 ### フォント、色などを変える
 
@@ -287,7 +287,7 @@ Ebook Homebrew's journey is not over yet..
 @snapend
 ```
 
-![GitPitchのsnapでフォントとスタイルをカスタマイズしたスライド例](https://i.imgur.com/YlJxm1U.png)
+![GitPitchのsnapでフォントとスタイルをカスタマイズしたスライド例](/images/blog/YlJxm1U.png)
 
 ### 引用文
 
@@ -303,7 +303,7 @@ hogeが引用文、fugaが人となります。
 @quote[I want to learn more!](tubone)
 ```
 
-![GitPitchのquote機能で引用文を表示したスライド例](https://i.imgur.com/v9iyA2y.png)
+![GitPitchのquote機能で引用文を表示したスライド例](/images/blog/v9iyA2y.png)
 
 ## 結論
 

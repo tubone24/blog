@@ -8,7 +8,7 @@ tags:
   - E2Eテスト
   - ChromeDriver
   - Nightwatch.js
-headerImage: 'https://i.imgur.com/MyBxJCZ.png'
+headerImage: '/images/blog/MyBxJCZ.png'
 templateKey: blog-post
 ---
 エラーをよく読もう・・
@@ -167,11 +167,11 @@ CircleCIのconfig.ymlを次のように変えました。
 
 直ったのでOKです。
 
-![CircleCIのテストが成功した画面：E2Eテストがすべてパスしている](https://i.imgur.com/71HlXYT.png)
+![CircleCIのテストが成功した画面：E2Eテストがすべてパスしている](/images/blog/71HlXYT.png)
 
 久しぶりにsuccessを見た・・。
 
-![CircleCIのビルド成功のサマリ画面：久しぶりのグリーン表示](https://i.imgur.com/FYjENBL.png)
+![CircleCIのビルド成功のサマリ画面：久しぶりのグリーン表示](/images/blog/FYjENBL.png)
 
 ## あとがき
 

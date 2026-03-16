@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  img: "https://i.imgur.com/6B7WC7D.jpg",
+  img: "/images/blog/6B7WC7D.jpg",
   title: "テストテストテストテストテスト",
   subTitle: "2022/04/25",
   authorImage: true,

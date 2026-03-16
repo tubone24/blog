@@ -1,12 +1,12 @@
 import React from "react";
 
-import { parseImgur, SizeMapping } from "@/utils/images";
+import { parseImage, SizeMapping } from "@/utils/images";
 
 import * as style from "./index.module.scss";
 import Tag from "@/components/Tag";
 
 const imageStyle = (headerImage: string) =>
-  `${parseImgur(headerImage, SizeMapping.large)}`;
+  `${parseImage(headerImage, SizeMapping.large)}`;
 
 const CardHeader = ({
   url,

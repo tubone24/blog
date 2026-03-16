@@ -8,7 +8,7 @@ tags:
   - Next.js
   - Vercel
   - Recoil
-headerImage: https://i.imgur.com/XblRysI.png
+headerImage: /images/blog/XblRysI.png
 templateKey: blog-post
 ---
 腰が痛い.
@@ -23,7 +23,7 @@ templateKey: blog-post
 
 AWSを使ったことのある人ならばわかると思いますが、公式がAWSの障害情報を掲載する[AWS Service Health Dashboard](https://status.aws.amazon.com/)があまり使いやすくないです。
 
-![AWS Service Health Dashboardの画面：リージョン別のステータス一覧](https://i.imgur.com/XghDulZ.png)
+![AWS Service Health Dashboardの画面：リージョン別のステータス一覧](/images/blog/XghDulZ.png)
 
 それぞれのリージョンの障害がRSSで配信される形式になっているのですが、わざわざRSSを登録するのもめんどくさい。Slackとかの連携に乗っけるのもそれはそれで便利なのですが、そもそもSlackを見ていないほかの人でも障害情報を共有したいです。
 
@@ -437,9 +437,9 @@ export const AlertPerRegion = (): JSX.Element => {
 
 
 
-![AWS障害可視化画面：リージョン別やサービス別のグラフ選択画面](https://i.imgur.com/tfnpq4w.png)
+![AWS障害可視化画面：リージョン別やサービス別のグラフ選択画面](/images/blog/tfnpq4w.png)
 
-![Chart.jsで描画されたリージョン別障害件数の棒グラフ](https://i.imgur.com/hpJ70fR.png)
+![Chart.jsで描画されたリージョン別障害件数の棒グラフ](/images/blog/hpJ70fR.png)
 
 
 

@@ -8,7 +8,7 @@ tags:
   - 負荷試験
   - Docker
   - TypeScript
-headerImage: https://i.imgur.com/YUFdeQr.png
+headerImage: /images/blog/YUFdeQr.png
 templateKey: blog-post
 ---
 暖かくなったと思ったら寒くなりましたね。
@@ -124,7 +124,7 @@ networks:
 
 これで、<https://localhost:3000>にアクセスすることで**実行結果を可視化**できるようになりました。
 
-![Grafanaダッシュボードに表示されたK6負荷テストの実行結果グラフ](https://i.imgur.com/sX5HtCG.png)
+![Grafanaダッシュボードに表示されたK6負荷テストの実行結果グラフ](/images/blog/sX5HtCG.png)
 
 ### TypeScriptでテストシナリオを書けるようにする
 

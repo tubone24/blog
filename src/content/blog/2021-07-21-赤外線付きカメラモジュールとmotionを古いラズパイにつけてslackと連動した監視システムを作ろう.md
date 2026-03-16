@@ -8,7 +8,7 @@ tags:
   - motion
   - 監視カメラ
   - Slack
-headerImage: https://i.imgur.com/JaW3aQ0.jpg
+headerImage: /images/blog/JaW3aQ0.jpg
 templateKey: blog-post
 ---
 作ってみよう！
@@ -45,13 +45,13 @@ templateKey: blog-post
 
 組み立て方も簡単で、カメラ部分に赤外線センサーをねじ止めし、ラズパイのカメラモジュールに差し込むだけです。
 
-![赤外線カメラモジュールをRaspberry Piに組み立てた状態](https://i.imgur.com/JaW3aQ0l.jpg)
+![赤外線カメラモジュールをRaspberry Piに組み立てた状態](/images/blog/JaW3aQ0.jpg)
 
 組み立てると上のようになります。
 
 私の用意していたラズパイがWifi非対応の超古いタイプ[Raspberry Pi B+](https://jp.rs-online.com/web/p/raspberry-pi/8111284/)だったので有線LANを引きまして、高さが足りないのでiPadminiの箱の上にガムテープで固定するという何とも残念な仕上がりですが、とりあえず装着完了。
 
-![iPadminiの箱の上にガムテープで固定したラズパイ監視カメラ](https://i.imgur.com/Eda8D6Il.jpg)
+![iPadminiの箱の上にガムテープで固定したラズパイ監視カメラ](/images/blog/Eda8D6I.jpg)
 
 試しにカメラが使えるか、テストしてみます。
 
@@ -59,7 +59,7 @@ templateKey: blog-post
 raspistill -o test.jpg
 ```
 
-![赤外線カメラで撮影したテスト写真](https://i.imgur.com/YOUDPIcl.jpg)
+![赤外線カメラで撮影したテスト写真](/images/blog/YOUDPIc.jpg)
 
 無事写真が撮れました。色味がちょっと変なのは赤外線だから仕方ありませんね。
 
@@ -214,7 +214,7 @@ on_camera_lost "/usr/bin/python3 /home/pi/motion/notify_camera_lost.py" # カメ
 
 動画だけの配信でもいいかもしれませんが、モバイルSlackだと、動画の場合プレビューがされないので画像も送信することにします。
 
-![モバイルSlackでは動画のプレビューが表示されない例](https://i.imgur.com/IEF2Q1Rl.png)
+![モバイルSlackでは動画のプレビューが表示されない例](/images/blog/IEF2Q1R.png)
 
 ## Stream配信
 
@@ -222,7 +222,7 @@ motion.confで**stream_localhost off**とすることで、他の端末からス
 
 我が家はOpenVPNでイントラ接続が可能になってます。
 
-![motionのストリーム配信をブラウザで視聴している画面](https://i.imgur.com/MbyFzmel.png)
+![motionのストリーム配信をブラウザで視聴している画面](/images/blog/MbyFzme.png)
 
 ## 動画をSlackに投稿
 
@@ -303,7 +303,7 @@ requests.post(WEB_HOOK_URL, data = json.dumps({
 
 ## できた！
 
-![動体検知時にSlackに通知された画像と動画の投稿画面](https://i.imgur.com/m5HEdzHl.png)
+![動体検知時にSlackに通知された画像と動画の投稿画面](/images/blog/m5HEdzH.png)
 
 このように監視カメラで動体検知をするとSlackに通知が飛び、画像と動画が確認できるようになりました。
 
@@ -319,7 +319,7 @@ motion起動から3～4時間すると、カメラモジュールがハングっ
 
 こちらもスクリプトは割愛しますが、incoming webhookでカメラモジュールのハングを通知する仕組みです。
 
-![カメラモジュールのハング検知がSlackに通知された画面](https://i.imgur.com/tpdlfLfl.png)
+![カメラモジュールのハング検知がSlackに通知された画面](/images/blog/tpdlfLf.png)
 
 うまく検知できてますね。
 

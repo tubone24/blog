@@ -1,10 +1,4 @@
-// s = Small Square (90×90)
-// b = Big Square (160×160)
-// t = Small Thumbnail (160×160)
-// m = Medium Thumbnail (320×320)
-// l = Large Thumbnail (640×640)
-// h = Huge Thumbnail (1024×1024)
-const defaultPicture = "M795H8A.jpg";
+const defaultPicture = "/images/blog/M795H8A.jpg";
 
 export enum SizeMapping {
   smallSquare = "s",
@@ -15,51 +9,47 @@ export enum SizeMapping {
   huge = "h",
 }
 
-export const parseImgur = (
+/**
+ * Parse image path and return the appropriate size variant.
+ * Works with local paths like '/images/blog/ABC123.png'
+ *
+ * For large size: returns '{id}-640.{ext}' (640px width)
+ * For other sizes or GIF: returns original path unchanged
+ * GIF images are never resized.
+ */
+export const parseImage = (
   rawImage: string,
   size: SizeMapping = SizeMapping.large,
-) => {
+): string => {
   if (!rawImage) {
-    return `https://i.imgur.com/${defaultPicture}`;
+    return defaultPicture;
   }
 
-  // Don't resize the gif image
-  // as there is a transparent bug in imgur
-  if (rawImage.match("gif")) {
-    // Prevent double http url
-    if (rawImage.match("http")) {
-      return rawImage;
-    }
-    return `https://i.imgur.com/${rawImage}`;
-  }
-  let mappedSize: string;
-  switch (size) {
-    case SizeMapping.smallSquare:
-      mappedSize = SizeMapping.smallSquare;
-      break;
-    case SizeMapping.bigSquare:
-      mappedSize = SizeMapping.bigSquare;
-      break;
-    case SizeMapping.small:
-      mappedSize = SizeMapping.small;
-      break;
-    case SizeMapping.medium:
-      mappedSize = SizeMapping.medium;
-      break;
-    case SizeMapping.large:
-      mappedSize = SizeMapping.large;
-      break;
-    case SizeMapping.huge:
-      mappedSize = SizeMapping.huge;
-      break;
-    default:
-      mappedSize = "";
+  // Don't resize GIF images
+  if (rawImage.match(/\.gif$/i)) {
+    return rawImage;
   }
 
-  const resizedImage = rawImage.replace(/(.*)\.(.*)/, `$1${mappedSize}.$2`);
-  // Prevent double http url
-  if (resizedImage.match("http")) {
-    return resizedImage;
+  // For large size, return 640px variant
+  if (size === SizeMapping.large) {
+    return rawImage.replace(/\.([^.]+)$/, "-640.$1");
   }
-  return `https://i.imgur.com/${resizedImage}`;
+
+  // For other sizes, return original (local hosting doesn't need multiple sizes)
+  return rawImage;
 };
+
+/**
+ * Get WebP URL for a given image path.
+ * Returns the .webp version of .png/.jpg/.jpeg images.
+ * GIF images return the original path.
+ */
+export const getWebPUrl = (imagePath: string): string | null => {
+  if (!imagePath || imagePath.match(/\.gif$/i)) {
+    return null;
+  }
+  return imagePath.replace(/\.(png|jpe?g)$/i, ".webp");
+};
+
+// Backward compatibility alias
+export const parseImgur = parseImage;

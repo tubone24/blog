@@ -7,7 +7,7 @@ tags:
   - 機械学習
   - Jetson nano
   - SainSmart IMX219
-headerImage: https://i.imgur.com/lPOtTYa.png
+headerImage: /images/blog/lPOtTYa.png
 templateKey: blog-post
 ---
 [ディープラーニングで自撮り画像をアニメ画像に画風変換する方法](https://qiita.com/karaage0703/items/221f96436c32f6f405c7)を参考にJetson nanoでアニメ風自撮り画像を作ってみましたが、使っているカメラの互換性問題で少し躓いたので、修正してトライしたよ。というお話です。
@@ -22,17 +22,17 @@ templateKey: blog-post
 
 Jetson nanoには**Raspberry pi**互換のカメラモジュールV2(MIPI CSI-2)が使えます。
 
-![Jetson Nanoのインターフェース図でカメラモジュールコネクタの位置を示す](https://i.imgur.com/xrDd4y5.png)
+![Jetson Nanoのインターフェース図でカメラモジュールコネクタの位置を示す](/images/blog/xrDd4y5.png)
 
 ⑨がモジュールのコネクタとなります。
 
-![ケースに入れたJetson NanoにMIPI CSI-2カメラモジュールを接続した状態](https://i.imgur.com/AZAkt7z.jpg)
+![ケースに入れたJetson NanoにMIPI CSI-2カメラモジュールを接続した状態](/images/blog/AZAkt7z.jpg)
 
 私のJetson nanoもケースに入れちゃってよく見えませんですみませんが、カメラモジュールにMIPI CSI-2互換のカメラが刺さってます。
 
 ラズパイ公式のカメラモジュール[Raspberry Pi Camera Module V2 カメラモジュール (Daylight - element14)](https://amzn.to/3l0rQNC)を使うのが無難かな？と思いましたが、今回はちょっとだけ安かった[SainSmart IMX219 AIカメラモジュールNVIDIA Jetson Nanoボード用8MPセンサー77度FoV](https://amzn.to/3y9fBlB)を使ってみました。
 
-![SainSmart IMX219カメラモジュールの外観写真](https://i.imgur.com/gWqd2xb.jpg)
+![SainSmart IMX219カメラモジュールの外観写真](/images/blog/gWqd2xb.jpg)
 
 こちら、[ディープラーニングで自撮り画像をアニメ画像に画風変換する方法](https://qiita.com/karaage0703/items/221f96436c32f6f405c7)で紹介されているところから若干コードを工夫する必要がありましたのでご紹介します。[先日の物体検知](/2020/04/24/jetson-nano/)でも使ったカメラですが、設定が少し異なります。
 
@@ -71,8 +71,8 @@ $ python3 selfie2anime_movie.py --light=True -d='jetson_nano_raspi_cam'
 
 カメラで私の顔を認識してみたところ、私の顔が可愛くないキャラクターに変換されました。
 
-![UGATITで自撮り画像がアニメ風キャラクターに変換された結果の画面](https://i.imgur.com/lPOtTYa.png)
+![UGATITで自撮り画像がアニメ風キャラクターに変換された結果の画面](/images/blog/lPOtTYa.png)
 
 ちょっともたつきますが、ちゃんとリアルタイムに処理しているようです。[StyleGAN2でアニメキャラを生成する](/2020/05/03/stylegan2-anime/)のもおすすめです。
 
-![UGATITによるリアルタイムアニメ風変換の動作GIF](https://i.imgur.com/pFHv6zC.gif)
+![UGATITによるリアルタイムアニメ風変換の動作GIF](/images/blog/pFHv6zC.gif)

@@ -7,7 +7,7 @@ tags:
   - サーバー
   - Python
   - SSH
-headerImage: https://i.imgur.com/qBFYNb6.png
+headerImage: /images/blog/qBFYNb6.png
 templateKey: blog-post
 ---
 PCの入れ替えのたびにSSH Configとその鍵の扱いに困るので作ってみました。
@@ -191,7 +191,7 @@ Pythonの暗号化ライブラリといえばpycryptoが有名ですが、こち
 
 そもそも暗号利用モードってなに？という人は下の画像を見てみてください。
 
-![AES暗号利用モードの比較図：ECBモードとCBCモードの違い](https://i.imgur.com/OrwJJwp.jpg)
+![AES暗号利用モードの比較図：ECBモードとCBCモードの違い](/images/blog/OrwJJwp.jpg)
 
 通常暗号化というものはとある文字列（バイト列）を別の文字列（バイト列）に変換するものなので、暗号化結果の出現度合いによってその全容がわかってしまってはいけません。
 
@@ -201,13 +201,13 @@ Pythonの暗号化ライブラリといえばpycryptoが有名ですが、こち
 
 ちょっと古い内容かつ厳密にはブロック暗号ではないですが、エニグマ暗号も出現する文字のパターンから平文への頻度分析から判断されないように単純な換字式暗号を用いず、入力ごとに換字表が入れ替わるローターを仕込んで対策してました。ちょっと仕組みはCBCと比べるとあっさりしてますが、まぁやりたいことは似たような感じですね。
 
-![エニグマ暗号機の写真](https://i.imgur.com/LNR7N4P.jpg)
+![エニグマ暗号機の写真](/images/blog/LNR7N4P.jpg)
 
 さて、話を戻します。
 
 EAXモード[EAXモード（encrypt-then-authenticat-then-translate）](https://en.wikipedia.org/wiki/EAX_mode)は、暗号ブロック暗号の動作モードの1つで、メッセージの認証（完全性）と秘匿性を同時に提供するように設計されたモードで、いわゆる**Authenticated Encryption with Associated Data (AEAD) アルゴリズム**となっております。
 
-![EAXモードの2パス方式を示すフロー図](https://i.imgur.com/bbXnZFo.png)
+![EAXモードの2パス方式を示すフロー図](/images/blog/bbXnZFo.png)
 
 上の図のように、ブロックを暗号化をする1パスとブロックごとの真正性を実現するための1パスの2パス方式を採用することが特徴です。
 
@@ -215,7 +215,7 @@ EAXモード[EAXモード（encrypt-then-authenticat-then-translate）](https://
 
 EAXモードでは完全性と秘匿性の担保を1つの暗号化フローのなかで実現し、効率よく両方を担保しているとのこと。
 
-![EAXモードによる暗号化と認証の統合フロー図](https://i.imgur.com/bbXnZFo.png)
+![EAXモードによる暗号化と認証の統合フロー図](/images/blog/bbXnZFo.png)
 
 とは言ってもPycryptodomeではmodeをEAXにするだけで簡単に使えるので細かく考える必要はなさそうです。
 

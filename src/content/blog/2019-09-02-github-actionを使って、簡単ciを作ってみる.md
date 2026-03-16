@@ -7,7 +7,7 @@ tags:
   - GitHub
   - GitHubAction
   - CI
-headerImage: 'https://i.imgur.com/6T4kjdf.png'
+headerImage: '/images/blog/6T4kjdf.png'
 templateKey: blog-post
 ---
 
@@ -37,7 +37,7 @@ GitHub Action自体はまだプレビュー版ですので、[こちらのサイ
 無事利用できるようになりますと、レポジトリにActionボタンが
 出てきます。
 
-![GitHubレポジトリにActionボタンが表示されている画面](https://i.imgur.com/ZYya5eA.png)
+![GitHubレポジトリにActionボタンが表示されている画面](/images/blog/ZYya5eA.png)
 
 ## Workflowを設定する
 
@@ -153,13 +153,13 @@ StepはほかのCIと同じような感じで設定します。
 
 無事PushでCIが動くと各push、PRごとにActionに結果がでます。
 
-![GitHub ActionのCI実行結果一覧：各PushやPRごとにActionの結果が表示されている](https://i.imgur.com/dVJdYdh.png)
+![GitHub ActionのCI実行結果一覧：各PushやPRごとにActionの結果が表示されている](/images/blog/dVJdYdh.png)
 
 さらに、実行ログも確認できます。
 
 もう普通のCIですね。
 
-![GitHub Actionの実行ログ詳細画面：各Stepの実行状況が確認できる](https://i.imgur.com/6T4kjdf.png)
+![GitHub Actionの実行ログ詳細画面：各Stepの実行状況が確認できる](/images/blog/6T4kjdf.png)
 
 ## 結論
 

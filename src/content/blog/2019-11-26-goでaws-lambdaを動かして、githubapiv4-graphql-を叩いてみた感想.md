@@ -9,7 +9,7 @@ tags:
   - AWS
   - GraphQL
   - GitHub
-headerImage: 'https://i.imgur.com/h1EK5QS.png'
+headerImage: '/images/blog/h1EK5QS.png'
 templateKey: blog-post
 ---
 やらねば。（風立ちぬ）
@@ -24,7 +24,7 @@ templateKey: blog-post
 
 ## AWS LambdaがGoで動くことを知ってますか？
 
-![AWS LambdaとGoのロゴを組み合わせたヘッダー画像](https://i.imgur.com/h1EK5QS.png)
+![AWS LambdaとGoのロゴを組み合わせたヘッダー画像](/images/blog/h1EK5QS.png)
 
 知っている人も多いと思いますが、2017年のre:Invent 2017(AWSのカンファレンスイベント)でLambdaに関するアップデートのなかでGoで動くようになったよ～というのがありました。[［速報］AWS Lambdaが機能強化。.NETとGo言語をサポート、サーバレスアプリケーションのリポジトリも登場。AWS re:Invent 2017
 ](https://www.publickey1.jp/blog/17/aws_lambdanetgoaws_reinvent_2017.html)
@@ -150,7 +150,7 @@ Goはまぎれもなくサーバーサイドな言語なのでどちらかとい
 
 [New personal access token](https://github.com/settings/tokens/new)から発行できます。発行しておきましょう。shurcooL/githubv4でも使います。
 
-![GitHubのPersonal access tokens発行画面でスコープを選択している様子](https://i.imgur.com/k926T60.png)
+![GitHubのPersonal access tokens発行画面でスコープを選択している様子](/images/blog/k926T60.png)
 
 shurcooL/githubv4自体の使い方はそこまで難しくなく、HttpClientやAuthをすませた後、**GraphQLのクエリ**を**Goの構造体**として定義して投げつければよいです。
 
@@ -350,13 +350,13 @@ GOOS=linux go build main.go
 
 Lambdaのテスト実行をしてみます。
 
-![Lambdaのテスト実行結果にGitHubリポジトリの使用言語一覧が表示されている](https://i.imgur.com/HBHjuZk.png)
+![Lambdaのテスト実行結果にGitHubリポジトリの使用言語一覧が表示されている](/images/blog/HBHjuZk.png)
 
 無事、GitHubの私のレポジトリ群の言語一覧が取れました。
 
 printしているものはCloudwatchにも出てきていました。(goのlogを使ってもきちんとCWにログ出るそうです。)
 
-![CloudWatch LogsにGoのLambda実行ログが出力されている画面](https://i.imgur.com/DDLSLo4.png)
+![CloudWatch LogsにGoのLambda実行ログが出力されている画面](/images/blog/DDLSLo4.png)
 
 ひとまず完成っぽいです。
 

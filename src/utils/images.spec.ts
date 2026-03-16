@@ -1,68 +1,73 @@
-import { parseImgur, SizeMapping } from "./images";
+import { parseImage, parseImgur, getWebPUrl, SizeMapping } from "./images";
 
 describe("Images", () => {
-  describe("parseImgur", () => {
-    it("default jpg is Large", () => {
-      expect(parseImgur("testImage.jpg")).toBe(
-        "https://i.imgur.com/testImagel.jpg",
+  describe("parseImage", () => {
+    it("default jpg uses 640px variant", () => {
+      expect(parseImage("/images/blog/testImage.jpg")).toBe(
+        "/images/blog/testImage-640.jpg",
       );
     });
-    it("default png is Large", () => {
-      expect(parseImgur("testImage.png")).toBe(
-        "https://i.imgur.com/testImagel.png",
+    it("default png uses 640px variant", () => {
+      expect(parseImage("/images/blog/testImage.png")).toBe(
+        "/images/blog/testImage-640.png",
       );
     });
-    it("default gif is Large", () => {
-      expect(parseImgur("testImage.gif")).toBe(
-        "https://i.imgur.com/testImage.gif",
+    it("GIF is not resized", () => {
+      expect(parseImage("/images/blog/testImage.gif")).toBe(
+        "/images/blog/testImage.gif",
       );
     });
-    it("http URL don't duplicate", () => {
-      expect(parseImgur("https://i.imgur.com/testImage.png")).toBe(
-        "https://i.imgur.com/testImagel.png",
+    it("large size returns 640px variant", () => {
+      expect(parseImage("/images/blog/testImage.png", SizeMapping.large)).toBe(
+        "/images/blog/testImage-640.png",
       );
     });
-    it("Small", () => {
-      expect(parseImgur("testImage.png", SizeMapping.small)).toBe(
-        "https://i.imgur.com/testImaget.png",
+    it("medium returns original", () => {
+      expect(parseImage("/images/blog/testImage.png", SizeMapping.medium)).toBe(
+        "/images/blog/testImage.png",
       );
     });
-    it("Medium", () => {
-      expect(parseImgur("testImage.png", SizeMapping.medium)).toBe(
-        "https://i.imgur.com/testImagem.png",
+    it("small returns original", () => {
+      expect(parseImage("/images/blog/testImage.png", SizeMapping.small)).toBe(
+        "/images/blog/testImage.png",
       );
     });
-    it("Large", () => {
-      expect(parseImgur("testImage.png", SizeMapping.large)).toBe(
-        "https://i.imgur.com/testImagel.png",
+    it("huge returns original", () => {
+      expect(parseImage("/images/blog/testImage.png", SizeMapping.huge)).toBe(
+        "/images/blog/testImage.png",
       );
     });
-    it("Huge", () => {
-      expect(parseImgur("testImage.png", SizeMapping.huge)).toBe(
-        "https://i.imgur.com/testImageh.png",
+    it("empty string returns default image", () => {
+      expect(parseImage("")).toBe("/images/blog/M795H8A.jpg");
+    });
+  });
+
+  describe("parseImgur (backward compat)", () => {
+    it("is an alias for parseImage", () => {
+      expect(parseImgur).toBe(parseImage);
+    });
+  });
+
+  describe("getWebPUrl", () => {
+    it("converts .png to .webp", () => {
+      expect(getWebPUrl("/images/blog/test.png")).toBe(
+        "/images/blog/test.webp",
       );
     });
-    it("BigSquare", () => {
-      expect(parseImgur("testImage.png", SizeMapping.bigSquare)).toBe(
-        "https://i.imgur.com/testImageb.png",
+    it("converts .jpg to .webp", () => {
+      expect(getWebPUrl("/images/blog/test.jpg")).toBe(
+        "/images/blog/test.webp",
       );
     });
-    it("SmallSquare", () => {
-      expect(parseImgur("testImage.png", SizeMapping.smallSquare)).toBe(
-        "https://i.imgur.com/testImages.png",
-      );
+    it("returns null for GIF", () => {
+      expect(getWebPUrl("/images/blog/test.gif")).toBeNull();
     });
-    it("Default Image is M795H8A.jpg", () => {
-      expect(parseImgur("")).toBe("https://i.imgur.com/M795H8A.jpg");
+    it("returns null for empty string", () => {
+      expect(getWebPUrl("")).toBeNull();
     });
-    it("gif Prevent double http url", () => {
-      expect(parseImgur("http://i.imgur.com/testImages.gif")).toBe(
-        "http://i.imgur.com/testImages.gif",
-      );
-    });
-    it("Invalid mapped size", () => {
-      expect(parseImgur("testImages.png", "invalid!!!" as SizeMapping)).toBe(
-        "https://i.imgur.com/testImages.png",
+    it("converts -640.png to -640.webp", () => {
+      expect(getWebPUrl("/images/blog/test-640.png")).toBe(
+        "/images/blog/test-640.webp",
       );
     });
   });

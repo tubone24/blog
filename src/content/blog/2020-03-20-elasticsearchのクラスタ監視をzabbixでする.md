@@ -7,7 +7,7 @@ tags:
   - Zabbix
   - Elasticsearch
   - forecast
-headerImage: 'https://i.imgur.com/tE9cC6Q.png'
+headerImage: '/images/blog/tE9cC6Q.png'
 templateKey: blog-post
 ---
 ZabbixでElasticsearchのクラスタを監視したい、したくない？
@@ -40,21 +40,21 @@ $ chmod 751 /usr/lib/zabbix/externalscripts/elastic.sh
 
 Zabbix画面の設定のテンプレートから[elasticsearch_zab.xml](https://github.com/tubone24/Elastic_zab/blob/master/elasticsearch_zab.xml)をインポートします。
 
-![Zabbixのテンプレートインポート画面でXMLファイルを選択](https://i.imgur.com/cTG62da.png)
+![Zabbixのテンプレートインポート画面でXMLファイルを選択](/images/blog/cTG62da.png)
 
 うまくインストールできれば、テンプレート一覧にElastic clusterが出現します。
 
-![テンプレート一覧にElastic clusterが表示された画面](https://i.imgur.com/mzeLWwv.png)
+![テンプレート一覧にElastic clusterが表示された画面](/images/blog/mzeLWwv.png)
 
 ## Elasticsearchのノードにテンプレートを当てる
 
 Elasticsearchのノードにテンプレートを当てます。
 
-![Elasticsearchノードにテンプレートを適用する設定画面](https://i.imgur.com/zpTarcD.png)
+![Elasticsearchノードにテンプレートを適用する設定画面](/images/blog/zpTarcD.png)
 
 合わせて、ElasticsearchのIPとポートをマクロで設定しておきます。
 
-![ZabbixマクロでElasticsearchのIPとポートを設定する画面](https://i.imgur.com/Vw5bbsA.png)
+![ZabbixマクロでElasticsearchのIPとポートを設定する画面](/images/blog/Vw5bbsA.png)
 
 設定するマクロは以下の2つです。
 
@@ -66,7 +66,7 @@ Elasticsearchのノードにテンプレートを当てます。
 
 うまく監視できるとこんなグラフができます。
 
-![ZabbixでElasticsearchクラスタの監視グラフが表示された画面](https://i.imgur.com/tE9cC6Q.png)
+![ZabbixでElasticsearchクラスタの監視グラフが表示された画面](/images/blog/tE9cC6Q.png)
 
 ## おまけ Zabbixの予測関数を使ってみた
 
@@ -76,6 +76,6 @@ Elasticsearchのノードにテンプレートを当てます。
 
 予測値はトリガー設定していないのでお好みでトリガーを設定するのもいいのではないでしょうか。
 
-![Zabbixのforecast関数を使った予測値グラフの表示例](https://i.imgur.com/ylKkzK6.png)
+![Zabbixのforecast関数を使った予測値グラフの表示例](/images/blog/ylKkzK6.png)
 
 こんな感じで計算アイテムで簡単に実装できるのが魅力ですね。監視ツールとしては他にも[Grafana World Pingを使った死活監視](/2017/06/16/grafana/)を試したり、[AWS X-RayとDatadog APMを連携した分散トレーシング](/2020/1/20/x-ray-datadog/)にも取り組んでいます。Elasticsearchの活用では[企業名サジェスト機能の開発](/2024/12/05/cost-effective-company-name-suggestion-feature/)もご覧ください。

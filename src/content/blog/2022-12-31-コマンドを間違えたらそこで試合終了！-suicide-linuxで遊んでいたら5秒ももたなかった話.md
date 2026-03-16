@@ -6,7 +6,7 @@ description: "コマンドをタイポするとrm -rfが実行されるSuicide L
 tags:
   - suicide-linux
   - typo
-headerImage: https://i.imgur.com/t0rrElc.png
+headerImage: /images/blog/t0rrElc.png
 templateKey: blog-post
 ---
 
@@ -86,7 +86,7 @@ docker run --rm -it tiagoad/suicide-linux
 ll
 ```
 
-![llコマンドを実行した直後にrm -rfが発動しSuicide Linuxが破壊された画面](https://i.imgur.com/t0rrElc.png)
+![llコマンドを実行した直後にrm -rfが発動しSuicide Linuxが破壊された画面](/images/blog/t0rrElc.png)
 
 Noooooo!!!
 
