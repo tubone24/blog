@@ -58,7 +58,7 @@ class SearchBox extends Component {
                   `;
             },
             footer:
-              '<div class="branding"><img src="/images/blog/HXG1uHY.png" alt="Powered by Algolia" decoding="async" /></div>',
+              '<div class="branding"><img src="/images/blog/algolia-logo.svg" alt="Powered by Algolia" decoding="async" /></div>',
           },
         },
       ]).on(
