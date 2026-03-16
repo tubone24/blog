@@ -1,14 +1,14 @@
-@import "../../styles/colors";
+@import url("../../styles/colors");
 
 .img-container {
   $height: 500px;
   $width: 1920px;
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     min-height: $height;
   }
 
-  @media (max-width: 767.98px) {
+  @media (width <= 767.98px) {
     background-size: cover;
   }
 
@@ -25,7 +25,7 @@
   background-size: cover;
 
   // For Tablet
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     justify-content: center;
   }
 }
@@ -46,12 +46,12 @@
     1px 0 0 #19a200;
 
   // Medium devices (tablets, less than 992px)
-  @media (max-width: 991.98px) {
+  @media (width <= 991.98px) {
     padding-top: 1.5rem;
   }
 
   // PC・タブレット: フォント強化で背景に負けない
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 1.4;
@@ -72,7 +72,7 @@
     1px 0 0 #19a200;
 
   // Medium devices (tablets, less than 992px)
-  @media (max-width: 991.98px) {
+  @media (width <= 991.98px) {
     display: flex;
     align-self: flex-end;
     justify-content: center;
@@ -84,13 +84,13 @@
 }
 
 .m-left {
-  @media (max-width: 991.98px) {
+  @media (width <= 991.98px) {
     margin-right: auto;
   }
 }
 
 .text {
-  @media (max-width: 991.98px) {
+  @media (width <= 991.98px) {
     margin-right: 0.5rem;
   }
 }
@@ -105,14 +105,14 @@
 .author-name {
   margin-right: 0.5rem;
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     font-size: 1.1rem;
     font-weight: 600;
   }
 }
 
 // For PC
-@media (min-width: 992px) {
+@media (width >= 992px) {
   .u-subtitle {
     font-size: 1.15rem;
     font-weight: 600;
@@ -121,7 +121,7 @@
 }
 
 // For Tablet (subtitle)
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (width >= 768px) and (width <= 991.98px) {
   .u-subtitle {
     font-size: 1rem;
     font-weight: 600;
@@ -130,7 +130,7 @@
 }
 
 // For Tablet
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (width >= 768px) and (width <= 991.98px) {
   .u-subtitle {
     align-self: center;
     width: auto;

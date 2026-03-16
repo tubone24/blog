@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@import url("../../styles/colors");
 
 // Base styles
 
@@ -16,8 +16,8 @@
 }
 
 .data {
-  transition: transform 0.3s;
   transform: translateY(0);
+  transition: transform 0.3s;
 }
 
 .content {
@@ -78,7 +78,7 @@
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   transition: all 0.5s ease 0s;
 
-  @media (min-width: 576px) {
+  @media (width >= 576px) {
     min-height: 5rem;
   }
 

@@ -1,6 +1,6 @@
-@import "bootstrap/scss/bootstrap";
-@import "prismjs/themes/prism-tomorrow.css";
-@import "colors";
+@import url("bootstrap/scss/bootstrap");
+@import url("prismjs/themes/prism-tomorrow.css");
+@import url("colors");
 
 // インラインcode（pre外のcode要素）
 :not(pre) > code {
@@ -349,7 +349,7 @@ pre.shell-dark[data-file]::before {
   font-feature-settings: "kern", "liga", "clig", "calt", "palt";
   font-kerning: normal;
   line-height: inherit;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 a {
@@ -375,7 +375,6 @@ body {
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
 }
 
@@ -396,7 +395,7 @@ body {
 
 // 記事ページのラッパースタイル（旧Gatsby blog-post.module.scssから移植）
 .post {
-  @media screen and (max-width: 990px) {
+  @media screen and (width <= 990px) {
     padding: 8px 24px;
   }
 
@@ -410,7 +409,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    @media screen and (min-width: 990px) {
+    @media screen and (width >= 990px) {
       margin-left: 1.5rem;
     }
   }
@@ -617,8 +616,8 @@ h6 {
     width: 150px;
     padding: 12px;
     font-weight: bold;
-    color: #fff;
     vertical-align: top;
+    color: #fff;
     background: #3f3f3f;
   }
 
@@ -638,10 +637,8 @@ h6 {
     font-family: SFMono-Regular, Consolas, "Roboto Mono", "Courier New", "BIZ UDGothic", Meiryo, monospace;
   }
   /* stylelint-enable no-descending-specificity */
-}
 
-// ===== ALT Badge =====
-.content-white-inner {
+  // ===== ALT Badge =====
   .alt-badge-figure {
     position: relative;
     display: inline-block;

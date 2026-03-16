@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@import url("../../styles/colors");
 
 .intro-header {
   height: 100%;
@@ -8,7 +8,7 @@
   background: $white;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 
-  @media (max-width: 992px) {
+  @media (width <= 992px) {
     margin-right: 0;
     margin-bottom: 16px;
   }

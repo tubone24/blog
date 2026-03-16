@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@import url("../../styles/colors");
 
 .text-to-speech {
   display: flex;
@@ -129,18 +129,18 @@
 .rate-slider {
   width: 60px;
   height: 4px;
+  appearance: none;
   cursor: pointer;
   background: $border;
   border-radius: 2px;
-  appearance: none;
 
   &::-webkit-slider-thumb {
     width: 14px;
     height: 14px;
+    appearance: none;
     cursor: pointer;
     background: $primary-deeper;
     border-radius: 50%;
-    appearance: none;
   }
 
   &::-moz-range-thumb {
@@ -168,7 +168,7 @@
 }
 
 // レスポンシブ対応
-@media screen and (max-width: 576px) {
+@media screen and (width <= 576px) {
   .text-to-speech {
     justify-content: center;
     width: 100%;
