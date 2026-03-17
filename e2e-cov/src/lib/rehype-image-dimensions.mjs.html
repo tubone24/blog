@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/pages/privacy-policies.astro</title>
+    <title>Code coverage report for src/lib/rehype-image-dimensions.mjs</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/pages</a> privacy-policies.astro</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/lib</a> rehype-image-dimensions.mjs</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -135,7 +135,18 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,78 +218,100 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header/index.tsx';
-import Sidebar from '../components/Sidebar/index.tsx';
-import ShareBox from '../components/ShareBox/index.tsx';
-import { getCollection } from 'astro:content';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { visit } from 'unist-util-visit';
+import sharp from 'sharp';
+import path from 'node:path';
+import { existsSync } from 'node:fs';
 &nbsp;
-const allPosts = await getCollection('blog');
-const sorted = allPosts.sort(
-  (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+/** In-memory cache: imagePath -&gt; { width, height } */
+const dimensionCache = new Map();
 &nbsp;
-const latestPosts = sorted.slice(0, 6).map((p) =&gt; ({
-  title: p.data.title,
-  slug: p.slug,
-  date: p.data.date.toISOString(),
-}));
+/**
+ * Resolve a local src (e.g. `/images/blog/foo.png`) to an absolute file path.
+ */
+function resolveImagePath(src) {
+  return path.join(process.cwd(), 'static', src);
+}
 &nbsp;
-const allPostsForSidebar = sorted.map((p) =&gt; ({
-  date: p.data.date.toISOString(),
-  tags: p.data.tags || [],
-}));
----
+/**
+ * Get image dimensions via sharp, with caching.
+ * Returns { width, height } or null on failure.
+ */
+async function getImageDimensions(filePath) {
+  if (dimensionCache.has(filePath)) {
+    return dimensionCache.get(filePath);
+  }
 &nbsp;
-&lt;Layout
-  title="プライバシーポリシー"
-  description="プライバシーポリシー"
-  ogImage="/images/blog/FyHE8bb.png"
-  isPostPage={true}
-  isPost={true}
-  tag="privacy policies"
-  canonicalUrl="https://tubone-project24.xyz/privacy-policies/"
-&gt;
-  &lt;div class="post row order-2"&gt;
-    &lt;Header
-      client:load
-      img="/images/blog/FyHE8bb.png"
-      title="プライバシーポリシー"
-      authorName="tubone"
-      authorImage={true}
-      subTitle="20xx/xx/xx"
-    /&gt;
-    &lt;Sidebar
-      client:load
-      latestPosts={latestPosts}
-      allPosts={allPostsForSidebar}
-      totalCount={sorted.length}
-    /&gt;
-    &lt;main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"&gt;
-      &lt;div class="content-white-inner"&gt;
-        &lt;h1&gt;プライバシーポリシー&lt;/h1&gt;
-        &lt;img src="/images/blog/FyHE8bb.png" alt="key" title="key" /&gt;
-        &lt;h2&gt;私たちについて&lt;/h2&gt;
-        &lt;p&gt;私たちのサイトアドレスは&lt;b&gt;https://tubone-project24.xyz&lt;/b&gt;です。&lt;/p&gt;
-        &lt;h2&gt;このサイトが収集する個人データと収集の理由&lt;/h2&gt;
-        &lt;h3&gt;他サイトからの埋め込みコンテンツ&lt;/h3&gt;
-        &lt;p&gt;このサイトの投稿には埋め込みコンテンツ (動画、画像、投稿など) が含まれます。他サイトからの埋め込みコンテンツは、訪問者がそのサイトを訪れた場合とまったく同じように振る舞います。&lt;/p&gt;
-        &lt;p&gt;これらのサイトは、あなたのデータの収集、Cookie の使用、サードパーティによる追加トラッキングの埋め込み、埋め込みコンテンツとのやりとりの監視を行うことがあります。アカウントを使ってそのサイトにログイン中の場合、埋め込みコンテンツとのやりとりのトラッキングも含まれます。&lt;/p&gt;
-        &lt;h3&gt;アナリティクス&lt;/h3&gt;
-        &lt;p&gt;このサイトではサービス向上のためGoogle, Inc.のGoogle Analyticsを利用して訪問者の分析を行っております。&lt;/p&gt;
-        &lt;p&gt;Cookie情報を利用し、IPアドレス等のユーザ様情報の一部が、Google, Inc.に収集される可能性があります。&lt;/p&gt;
-        &lt;p&gt;サイト利用状況の分析、セキュリティ、その他のサービスの提供目的に限りこれを使用します。利用者は、本サイトを利用することで、上記方法および目的においてGoogleが行うこうしたデータ処理につき許可を与えたものとみなします。※なお、「Cookie」は、ユーザー側のブラウザ操作により拒否することも可能です。この規約に関して、詳しくは&lt;a href="https://marketingplatform.google.com/about/analytics/terms/jp/"&gt;Google アナリティクス利用規約&lt;/a&gt;を参照してください。&lt;/p&gt;
-        &lt;h2&gt;免責事項&lt;/h2&gt;
-        &lt;p&gt;当サイトで掲載している画像の著作権・肖像権等は各権利所有者に帰属致します。権利を侵害する目的ではございません。記事の内容や掲載画像等に問題がございましたら、各権利所有者様本人が&lt;a href="https://portfolio.tubone-project24.xyz/#contact"&gt;コンタクトフォーム&lt;/a&gt;からご連絡ください。確認後、対応させて頂きます。&lt;/p&gt;
-        &lt;p&gt;当サイトからリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任を負いません。&lt;/p&gt;
-        &lt;p&gt;当サイトのコンテンツ・情報につきまして、可能な限り正確な情報を掲載するよう努めておりますが、誤情報が入り込んだり、情報が古くなっていることもございます。&lt;/p&gt;
-        &lt;p&gt;当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/main&gt;
-    &lt;ShareBox client:load url="https://tubone-project24.xyz/privacy-policies/" /&gt;
-  &lt;/div&gt;
-&lt;/Layout&gt;
+  try {
+    const metadata = await sharp(filePath).metadata();
+    const dims = { width: metadata.width, height: metadata.height };
+    dimensionCache.set(filePath, dims);
+    return dims;
+  } catch (err) {
+    // Cache the failure too so we don't retry
+    dimensionCache.set(filePath, null);
+    return null;
+  }
+}
+&nbsp;
+export default function rehypeImageDimensions() {
+  return async (tree) =&gt; {
+    const imageNodes = [];
+&nbsp;
+    visit(tree, 'element', (node) =&gt; {
+      if (node.tagName !== 'img') return;
+&nbsp;
+      const src = node.properties?.src;
+      if (!src) return;
+&nbsp;
+      // Only process local images starting with /images/
+      if (!src.startsWith('/images/')) return;
+&nbsp;
+      // Skip if width and height are already set
+      if (node.properties.width &amp;&amp; node.properties.height) return;
+&nbsp;
+      imageNodes.push(node);
+    });
+&nbsp;
+    // Process all images in parallel
+    await Promise.all(
+      imageNodes.map(async (node) =&gt; {
+        const src = node.properties.src;
+        const filePath = resolveImagePath(src);
+&nbsp;
+        if (!existsSync(filePath)) {
+          console.warn(
+            `[rehype-image-dimensions] File not found, skipping: ${filePath}`
+          );
+          return;
+        }
+&nbsp;
+        const dims = await getImageDimensions(filePath);
+&nbsp;
+        if (!dims || !dims.width || !dims.height) {
+          console.warn(
+            `[rehype-image-dimensions] Could not read dimensions, skipping: ${filePath}`
+          );
+          return;
+        }
+&nbsp;
+        node.properties.width = String(dims.width);
+        node.properties.height = String(dims.height);
+      })
+    );
+  };
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
