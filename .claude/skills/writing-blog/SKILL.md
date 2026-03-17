@@ -35,7 +35,7 @@ model: opus
 ## ルール
 
 - 作成するブログ記事は以下のディレクトリにFront Matter付きMarkdown形式で保存すること
-  - src/content/YYYY-MM-DD-title.md (それぞれの値はFront Matterのdateやtitleに合わせること)
+  - src/content/blog/YYYY-MM-DD-title.md (それぞれの値はFront Matterのdateやtitleに合わせること)
 - Front Matterには以下の項目を必ず含めること
   - slug: 記事URLのスラッグ（例: 2025/01/01/example-article）
     - 必ずYYYY/MM/DD/slug形式にすること
@@ -250,7 +250,7 @@ AIが生成した文章にありがちな文体を避けるためのルール。
 
 過去記事はライティングスタイルや情報の粒度感の参考になります。次のディレクトリにMarkdown形式でありますので必ず参照してください。
 
-- src/content/YYYY-MM-DD-*.md
+- src/content/blog/YYYY-MM-DD-*.md
 
 特に以下の点を過去記事から学ぶこと:
 

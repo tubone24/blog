@@ -5,6 +5,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeMermaid from "@beoe/rehype-mermaid";
+import remarkDirective from "remark-directive";
+import remarkGithubCard from "./src/lib/remark-github-card.mjs";
 import remarkToc from "remark-toc";
 import remarkEmbedderModule from "@remark-embedder/core";
 import oembedTransformerModule from "@remark-embedder/transformer-oembed";
@@ -74,6 +76,8 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [
+      remarkDirective,
+      remarkGithubCard,
       [
         remarkEmbedder,
         {
