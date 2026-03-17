@@ -21,6 +21,32 @@ const remarkEmbedder = remarkEmbedderModule.default || remarkEmbedderModule;
 const oembedTransformer =
   oembedTransformerModule.default || oembedTransformerModule;
 
+const retryableOembedTransformer = {
+  name: "retryable-oembed",
+  shouldTransform(url) {
+    return oembedTransformer.shouldTransform(url);
+  },
+  async getHTML(url, config) {
+    const maxRetries = 3;
+    let lastError;
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        return await oembedTransformer.getHTML(url, config);
+      } catch (error) {
+        lastError = error;
+        if (attempt < maxRetries - 1) {
+          const delay = Math.pow(2, attempt) * 1000;
+          console.warn(
+            `remark-embedder: retry ${attempt + 1}/${maxRetries} for ${url} in ${delay}ms`,
+          );
+          await new Promise((r) => setTimeout(r, delay));
+        }
+      }
+    }
+    throw lastError;
+  },
+};
+
 export default defineConfig({
   site: "https://tubone-project24.xyz",
   publicDir: "static",
@@ -48,7 +74,18 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [
-      [remarkEmbedder, { transformers: [oembedTransformer] }],
+      [
+        remarkEmbedder,
+        {
+          transformers: [retryableOembedTransformer],
+          handleError({ error, url }) {
+            console.error(
+              `remark-embedder: all retries failed for ${url}: ${error.message}`,
+            );
+            return `<a href="${url}">${url}</a>`;
+          },
+        },
+      ],
       [remarkToc, { heading: "Table of Contents|toc|TOC|目次", maxDepth: 3 }],
     ],
     rehypePlugins: [
