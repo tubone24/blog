@@ -45,6 +45,8 @@ const WordCloud = () => {
             data-src="https://raw.githubusercontent.com/tubone24/auto_tweet_wordcloud/master/word_cloud_blog.png"
             alt="wordCloud"
             title="wordCloud"
+            width="800"
+            height="400"
           />
         </picture>
       </a>

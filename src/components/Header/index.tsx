@@ -49,7 +49,7 @@ const Header = ({
                   className={style.authorImage}
                   src="/assets/avater.png"
                   alt={authorName}
-                  fetchPriority="high"
+                  {...{ fetchpriority: "high" }}
                   onClick={() =>
                     ReactGA.event({
                       category: "User",
