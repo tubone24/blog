@@ -152,6 +152,9 @@ if (faq && faq.length > 0) {
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+  {/* LCP image preload for post pages */}
+  {isPost && ogImage && <link rel="preload" as="image" href={ogImage} fetchpriority="high" />}
+
   {/* 電話番号自動認識の無効化 */}
   <meta name="format-detection" content="telephone=no" />
 

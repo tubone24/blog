@@ -117,7 +117,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
 
   return (
     <div
-      className={style["text-to-speech"]}
+      className={style.textToSpeech}
       role="region"
       aria-label={ariaLabel}
       data-testid="text-to-speech"
@@ -125,7 +125,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
       <div className={style.controls}>
         <button
           type="button"
-          className={style["play-button"]}
+          className={style.playButton}
           onClick={handlePlayPause}
           disabled={status === "loading"}
           aria-label={getPlayPauseLabel()}
@@ -137,7 +137,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         {(status === "playing" || status === "paused") && (
           <button
             type="button"
-            className={style["stop-button"]}
+            className={style.stopButton}
             onClick={handleStop}
             aria-label="停止"
             data-testid="stop-button"
@@ -154,8 +154,8 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
           </button>
         )}
 
-        <div className={style["rate-control"]}>
-          <label htmlFor="speech-rate" className={style["rate-label"]}>
+        <div className={style.rateControl}>
+          <label htmlFor="speech-rate" className={style.rateLabel}>
             速度: {rate.toFixed(1)}x
           </label>
           <input
@@ -166,7 +166,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
             step="0.1"
             value={rate}
             onChange={handleRateChange}
-            className={style["rate-slider"]}
+            className={style.rateSlider}
             aria-label="読み上げ速度"
             data-testid="rate-slider"
           />

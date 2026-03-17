@@ -1,8 +1,9 @@
 @import "../../styles/colors";
 
 .header-tag {
-  display: inline-block;
-  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
   margin: 3px 4px;
   font-size: 12px;
   line-height: 1.4;

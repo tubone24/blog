@@ -453,6 +453,7 @@ h6 {
   img {
     max-width: 100%;
     height: auto;
+    cursor: zoom-in;
   }
 
   a {
@@ -712,6 +713,60 @@ h6 {
     &:hover {
       background: #555;
     }
+  }
+}
+
+// ===== Content Image Lightbox =====
+.content-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: rgb(0 0 0 / 80%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &--visible {
+    opacity: 1;
+  }
+}
+
+.content-lightbox-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  img {
+    max-width: 90vw;
+    max-height: 85vh;
+    cursor: zoom-out;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+}
+
+.content-lightbox-close {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  padding: 0 4px;
+  font-size: 32px;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+
+  &:hover {
+    color: #ccc;
   }
 }
 

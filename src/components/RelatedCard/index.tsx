@@ -55,7 +55,7 @@ const RelatedCard = ({
             </div>
             <CardHeader url={url} image={headerImage} title={title} />
             <a href={url}>
-              <h4 className={style.title}>{title}</h4>
+              <h3 className={style.title}>{title}</h3>
             </a>
             <p>{description}</p>
           </div>

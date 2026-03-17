@@ -122,7 +122,7 @@ const allPostsForRelated = sorted.map((p) => ({
       <TextToSpeech client:idle text={speechText} />
       {post.data.useAi && (
         <aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;">
-          <p>この記事は筆者(<a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;">tubone</a>)が<a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer" style="color:#0a58ca;">whisper-realtime</a>を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。</p>
+          <p>この記事は筆者(<a href="https://portfolio.tubone-project24.xyz/" target="_blank" rel="noopener noreferrer" style="color:#0a58ca; text-decoration:underline;">tubone</a>)が<a href="https://github.com/tubone24/whisper-realtime" target="_blank" rel="noopener noreferrer" style="color:#0a58ca; text-decoration:underline;">whisper-realtime</a>を利用し文字起こしした内容をもとにAIにて記事の執筆を実施したものです。</p>
         </aside>
       )}
       <div class="content-white-inner">
@@ -135,6 +135,10 @@ const allPostsForRelated = sorted.map((p) => ({
           <img
             src="https://img.buymeacoffee.com/button-api/?text=Buy me a ramen&emoji=🍜&slug=tubone24&button_colour=40DCA5&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
             alt="Buy me a ramen"
+            width="217"
+            height="60"
+            loading="lazy"
+            decoding="async"
           />
         </a>
       </div>
@@ -211,5 +215,82 @@ const allPostsForRelated = sorted.map((p) => ({
       initAltBadges();
     }
     setTimeout(initAltBadges, 2000);
+  </script>
+  <script is:inline>
+    // ===== Content Image Lightbox =====
+    function openLightbox(imgSrc, imgAlt) {
+      var existing = document.querySelector('.content-lightbox');
+      if (existing) existing.remove();
+
+      var overlay = document.createElement('div');
+      overlay.className = 'content-lightbox';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-label', '画像プレビュー');
+
+      var inner = document.createElement('div');
+      inner.className = 'content-lightbox-inner';
+
+      var closeBtn = document.createElement('button');
+      closeBtn.className = 'content-lightbox-close';
+      closeBtn.setAttribute('aria-label', '閉じる');
+      closeBtn.textContent = '\u00d7';
+      closeBtn.addEventListener('click', function() { closeLightbox(); });
+
+      var img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = imgAlt || '';
+      img.addEventListener('click', function() { closeLightbox(); });
+
+      inner.appendChild(closeBtn);
+      inner.appendChild(img);
+      overlay.appendChild(inner);
+      document.body.appendChild(overlay);
+
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+
+      // Fade in
+      requestAnimationFrame(function() {
+        overlay.classList.add('content-lightbox--visible');
+      });
+
+      // Close on overlay click (not on inner content)
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeLightbox();
+      });
+    }
+
+    function closeLightbox() {
+      var overlay = document.querySelector('.content-lightbox');
+      if (!overlay) return;
+      overlay.classList.remove('content-lightbox--visible');
+      setTimeout(function() {
+        overlay.remove();
+        document.body.style.overflow = '';
+      }, 200);
+    }
+
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Delegate click on content images
+    document.addEventListener('click', function(e) {
+      var img = e.target.closest('.content-white-inner img');
+      if (!img) return;
+      // Skip non-content images (buymeacoffee etc.)
+      if (img.closest('a[href*="buymeacoffee"]')) return;
+      // Skip ALT badge buttons
+      if (e.target.closest('.alt-badge-btn')) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Use the original (non-resized) image for high quality
+      var src = img.getAttribute('src') || '';
+      src = src.replace(/-640(\.\w+)$/, '$1');
+      openLightbox(src, img.getAttribute('alt'));
+    });
   </script>
 </Layout>
