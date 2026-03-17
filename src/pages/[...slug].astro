@@ -216,4 +216,81 @@ const allPostsForRelated = sorted.map((p) => ({
     }
     setTimeout(initAltBadges, 2000);
   </script>
+  <script is:inline>
+    // ===== Content Image Lightbox =====
+    function openLightbox(imgSrc, imgAlt) {
+      var existing = document.querySelector('.content-lightbox');
+      if (existing) existing.remove();
+
+      var overlay = document.createElement('div');
+      overlay.className = 'content-lightbox';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-label', '画像プレビュー');
+
+      var inner = document.createElement('div');
+      inner.className = 'content-lightbox-inner';
+
+      var closeBtn = document.createElement('button');
+      closeBtn.className = 'content-lightbox-close';
+      closeBtn.setAttribute('aria-label', '閉じる');
+      closeBtn.textContent = '\u00d7';
+      closeBtn.addEventListener('click', function() { closeLightbox(); });
+
+      var img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = imgAlt || '';
+      img.addEventListener('click', function() { closeLightbox(); });
+
+      inner.appendChild(closeBtn);
+      inner.appendChild(img);
+      overlay.appendChild(inner);
+      document.body.appendChild(overlay);
+
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+
+      // Fade in
+      requestAnimationFrame(function() {
+        overlay.classList.add('content-lightbox--visible');
+      });
+
+      // Close on overlay click (not on inner content)
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeLightbox();
+      });
+    }
+
+    function closeLightbox() {
+      var overlay = document.querySelector('.content-lightbox');
+      if (!overlay) return;
+      overlay.classList.remove('content-lightbox--visible');
+      setTimeout(function() {
+        overlay.remove();
+        document.body.style.overflow = '';
+      }, 200);
+    }
+
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Delegate click on content images
+    document.addEventListener('click', function(e) {
+      var img = e.target.closest('.content-white-inner img');
+      if (!img) return;
+      // Skip non-content images (buymeacoffee etc.)
+      if (img.closest('a[href*="buymeacoffee"]')) return;
+      // Skip ALT badge buttons
+      if (e.target.closest('.alt-badge-btn')) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Use the original (non-resized) image for high quality
+      var src = img.getAttribute('src') || '';
+      src = src.replace(/-640(\.\w+)$/, '$1');
+      openLightbox(src, img.getAttribute('alt'));
+    });
+  </script>
 </Layout>
