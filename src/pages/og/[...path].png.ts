@@ -90,7 +90,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export async function GET({ props }: APIContext) {
   const png = await generateOgImage(props.title as string);
-  return new Response(png, {
+  return new Response(Buffer.from(png), {
     headers: { "Content-Type": "image/png" },
   });
 }
