@@ -1,6 +1,6 @@
 import type { APIContext, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import { generateOgImage } from "../../lib/og-image";
+import { generateOgImage, generateOgImageForIndex } from "../../lib/og-image";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("blog");
@@ -88,8 +88,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export async function GET({ props }: APIContext) {
-  const png = await generateOgImage(props.title as string);
+export async function GET({ props, params }: APIContext) {
+  const png =
+    params.path === "index"
+      ? await generateOgImageForIndex()
+      : await generateOgImage(props.title as string);
   const body = png.buffer.slice(
     png.byteOffset,
     png.byteOffset + png.byteLength,
