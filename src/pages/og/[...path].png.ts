@@ -93,7 +93,7 @@ export async function GET({ props }: APIContext) {
   const body = png.buffer.slice(
     png.byteOffset,
     png.byteOffset + png.byteLength,
-  );
+  ) as ArrayBuffer;
   return new Response(body, {
     headers: { "Content-Type": "image/png" },
   });
