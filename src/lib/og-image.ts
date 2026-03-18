@@ -38,7 +38,7 @@ export async function generateOgImage(title: string): Promise<Uint8Array> {
             display: "flex",
             flexDirection: "column" as const,
             justifyContent: "space-between",
-            padding: "90px 80px 80px",
+            padding: "90px 80px 100px",
             position: "relative" as const,
           },
           children: [
@@ -132,6 +132,115 @@ export async function generateOgImage(title: string): Promise<Uint8Array> {
   };
 
   // satoriの型定義はReactNodeを要求するが、実際にはelement treeオブジェクトを受け付ける
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const svg = await satori(element as any, {
+    width: 1200,
+    height: 630,
+    fonts: [
+      {
+        name: "KaiseiTokumin",
+        data: fontData,
+        weight: 700,
+        style: "normal",
+      },
+    ],
+  });
+
+  const resvg = new Resvg(svg);
+  const pngData = resvg.render();
+  const pngBuffer = pngData.asPng();
+
+  return new Uint8Array(pngBuffer);
+}
+
+export async function generateOgImageForIndex(): Promise<Uint8Array> {
+  const element = {
+    type: "div",
+    props: {
+      style: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#8af18a",
+      },
+      children: {
+        type: "div",
+        props: {
+          style: {
+            width: "1110px",
+            height: "540px",
+            backgroundColor: "#F6FAFD",
+            borderRadius: "40px",
+            boxShadow: "2.4px 2.4px 4.1px rgba(0, 0, 0, 0.1)",
+            display: "flex",
+            flexDirection: "column" as const,
+            justifyContent: "space-between",
+            padding: "90px 80px 100px",
+          },
+          children: [
+            // ロゴを中央に大きく表示
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flex: "1",
+                  width: "100%",
+                },
+                children: {
+                  type: "img",
+                  props: {
+                    src: logoBase64,
+                    width: 540,
+                    height: 180,
+                  },
+                },
+              },
+            },
+            // フッターエリア（アイコン + 著者名）
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                },
+                children: [
+                  {
+                    type: "img",
+                    props: {
+                      src: iconBase64,
+                      width: 100,
+                      height: 100,
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        color: "#aaa",
+                        fontSize: "48px",
+                        fontFamily: "KaiseiTokumin",
+                        fontWeight: 700,
+                      },
+                      children: "by tubone24",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    },
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const svg = await satori(element as any, {
     width: 1200,
