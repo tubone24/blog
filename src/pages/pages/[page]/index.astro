@@ -44,7 +44,7 @@ const allPostsForSidebar = allPosts.map((p) => ({
 }));
 ---
 
-<Layout title={config.siteTitle} description={config.description} noindex={true}>
+<Layout title={config.siteTitle} description={config.description} ogpPath={`/og/pages/${page}.png`} noindex={true}>
   <div class="container">
     <div class="row homepage">
       <Sidebar
