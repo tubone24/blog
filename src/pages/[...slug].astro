@@ -92,6 +92,7 @@ const allPostsForRelated = sorted.map((p) => ({
   title={post.data.title}
   description={postDescription}
   ogImage={post.data.headerImage || config.defaultImage}
+  ogpPath={`/og/${slug}.png`}
   isPostPage={true}
   isPost={true}
   tag={post.data.tags?.[0] || ''}

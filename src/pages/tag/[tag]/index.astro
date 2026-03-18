@@ -45,6 +45,7 @@ const allPostsForSidebar = allPosts.map((p) => ({
 <Layout
   title={tag}
   description={tag}
+  ogpPath={`/og/tag/${tag}.png`}
   canonicalUrl={`${config.siteUrl}/tag/${tag}/`}
   noindex={true}
 >
