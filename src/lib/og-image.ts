@@ -25,112 +25,109 @@ export async function generateOgImage(title: string): Promise<Uint8Array> {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#8af18a",
-        position: "relative" as const,
       },
-      children: [
-        // ロゴ（左上に配置）
-        {
-          type: "img",
-          props: {
-            src: logoBase64,
-            width: 120,
-            height: 40,
-            style: {
-              position: "absolute" as const,
-              top: "18px",
-              left: "20px",
-            },
+      children: {
+        type: "div",
+        props: {
+          style: {
+            width: "1110px",
+            height: "540px",
+            backgroundColor: "#F6FAFD",
+            borderRadius: "40px",
+            boxShadow: "2.4px 2.4px 4.1px rgba(0, 0, 0, 0.1)",
+            display: "flex",
+            flexDirection: "column" as const,
+            justifyContent: "space-between",
+            padding: "90px 80px 80px",
+            position: "relative" as const,
           },
-        },
-        {
-          type: "div",
-          props: {
-            style: {
-              width: "1110px",
-              height: "540px",
-              backgroundColor: "#F6FAFD",
-              borderRadius: "40px",
-              boxShadow: "2.4px 2.4px 4.1px rgba(0, 0, 0, 0.1)",
-              display: "flex",
-              flexDirection: "column" as const,
-              justifyContent: "space-between",
-              padding: "60px 80px",
-              position: "relative" as const,
+          children: [
+            // ロゴ（カード内側の左上に配置）
+            {
+              type: "img",
+              props: {
+                src: logoBase64,
+                width: 120,
+                height: 40,
+                style: {
+                  position: "absolute" as const,
+                  top: "24px",
+                  left: "30px",
+                },
+              },
             },
-            children: [
-              // タイトルテキスト
-              {
-                type: "div",
-                props: {
-                  style: {
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flex: "1",
-                    width: "100%",
-                    paddingBottom: "20px",
+            // タイトルテキスト
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flex: "1",
+                  width: "100%",
+                  paddingBottom: "20px",
+                },
+                children: {
+                  type: "div",
+                  props: {
+                    style: {
+                      color: "#555",
+                      fontSize: "64px",
+                      fontFamily: "KaiseiTokumin",
+                      fontWeight: 700,
+                      textAlign: "center" as const,
+                      lineHeight: 1.4,
+                      overflow: "hidden",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: "vertical" as const,
+                      wordBreak: "break-word" as const,
+                    },
+                    children: title,
                   },
-                  children: {
+                },
+              },
+            },
+            // フッターエリア（アイコン + 著者名）
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                },
+                children: [
+                  // アイコン画像
+                  {
+                    type: "img",
+                    props: {
+                      src: iconBase64,
+                      width: 100,
+                      height: 100,
+                    },
+                  },
+                  // 著者名
+                  {
                     type: "div",
                     props: {
                       style: {
-                        color: "#555",
-                        fontSize: "64px",
+                        color: "#aaa",
+                        fontSize: "48px",
                         fontFamily: "KaiseiTokumin",
                         fontWeight: 700,
-                        textAlign: "center" as const,
-                        lineHeight: 1.4,
-                        overflow: "hidden",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: "vertical" as const,
-                        wordBreak: "break-word" as const,
                       },
-                      children: title,
+                      children: "by tubone24",
                     },
                   },
-                },
+                ],
               },
-              // フッターエリア（アイコン + 著者名）
-              {
-                type: "div",
-                props: {
-                  style: {
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  },
-                  children: [
-                    // アイコン画像
-                    {
-                      type: "img",
-                      props: {
-                        src: iconBase64,
-                        width: 100,
-                        height: 100,
-                      },
-                    },
-                    // 著者名
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          color: "#aaa",
-                          fontSize: "48px",
-                          fontFamily: "KaiseiTokumin",
-                          fontWeight: 700,
-                        },
-                        children: "by tubone24",
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
+            },
+          ],
         },
-      ],
+      },
     },
   };
 
