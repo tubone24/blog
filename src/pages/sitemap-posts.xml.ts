@@ -13,7 +13,7 @@ export async function GET(_context: APIContext) {
   const urlEntries = sorted
     .filter((post) => !post.data.noindex)
     .map((post) => {
-      const lastmod = formatDate(post.data.date);
+      const lastmod = formatDate(post.data.updatedDate || post.data.date);
       return `  <url>
     <loc>${SITE_URL}/${xmlEscape(post.slug)}/</loc>
     <lastmod>${lastmod}</lastmod>

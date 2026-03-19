@@ -20,6 +20,12 @@ export async function GET(_context: APIContext) {
     <lastmod>${latestPostDate}</lastmod>
   </url>`);
 
+  // About ページ
+  urls.push(`  <url>
+    <loc>${SITE_URL}/about/</loc>
+    <lastmod>${latestPostDate}</lastmod>
+  </url>`);
+
   // ページネーションはnoindex設定のためサイトマップから除外
 
   // privacy-policies（lastmod なし）

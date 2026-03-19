@@ -1,0 +1,428 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About - tubone24"
+  description="tubone24（Yu Otsubo）のプロフィール。AIエージェント開発、Webアプリケーション開発、クラウドインフラストラクチャのソフトウェアエンジニア。"
+  ogpPath="/og/about.png"
+  canonicalUrl="https://tubone-project24.xyz/about/"
+  isPostPage={true}
+>
+  <div class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+
+        <!-- プロフィールセクション -->
+        <section class="content-white-inner about-section">
+          <div class="profile-header">
+            <picture>
+              <source srcset="/assets/avater.webp" type="image/webp" />
+              <img
+                src="/assets/avater.png"
+                alt="tubone24のアバター"
+                class="profile-avatar"
+                width="160"
+                height="160"
+                loading="eager"
+              />
+            </picture>
+            <div class="profile-info">
+              <h1>Yu Otsubo <span class="profile-handle">(tubone24)</span></h1>
+              <p class="profile-role">Software Engineer</p>
+            </div>
+          </div>
+          <p class="profile-bio">
+            AIエージェント開発、Webアプリケーション開発、クラウドインフラに関する技術を探求するソフトウェアエンジニアです。
+            日々の開発で得た学びや発見を、技術ブログ「tubone BOYAKI」を通じて共有しています。
+            新しい技術に触れることが好きで、実際に手を動かして検証したことを中心に記事を書いています。
+          </p>
+        </section>
+
+        <!-- ターミナル風プロフィールカード -->
+        <section class="content-white-inner about-section">
+          <h2>Profile Card</h2>
+          <div class="terminal-card" id="terminal-card">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">tubone24 — profile</span>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+              <div class="terminal-line"><span class="t-gray">$</span> <span class="t-green">npx</span> <span class="t-white">tubone24</span></div>
+              <div class="terminal-line">&nbsp;</div>
+              <div class="terminal-line">               <span class="t-white-bold">Yu Otsubo</span> / <span class="t-white">tubone24</span></div>
+              <div class="terminal-line">&nbsp;</div>
+              <div class="terminal-line">       <span class="t-label">Work:</span>  <span class="t-white">Software Engineer</span><span class="t-cyan">@</span><span class="t-green-bright">KAG</span></div>
+              <div class="terminal-line">   <span class="t-label">Expertise:</span>  <span class="t-white">AI Agent, Web Dev, Cloud Infra, DevOps, Python</span></div>
+              <div class="terminal-line">&nbsp;</div>
+              <div class="terminal-line">    <span class="t-label">Twitter:</span>  <a href="https://twitter.com/tubone24" target="_blank" rel="noopener noreferrer" class="t-gray">https://twitter.com/</a><a href="https://twitter.com/tubone24" target="_blank" rel="noopener noreferrer" class="t-cyan">tubone24</a></div>
+              <div class="terminal-line">   <span class="t-label">Facebook:</span>  <a href="https://facebook.com/yu.otsubo" target="_blank" rel="noopener noreferrer" class="t-gray">https://facebook.com/</a><a href="https://facebook.com/yu.otsubo" target="_blank" rel="noopener noreferrer" class="t-blue">yu.otsubo</a></div>
+              <div class="terminal-line">  <span class="t-label">Instagram:</span>  <a href="https://www.instagram.com/mugimugi.cutedog/" target="_blank" rel="noopener noreferrer" class="t-gray">https://instagram.com/</a><a href="https://www.instagram.com/mugimugi.cutedog/" target="_blank" rel="noopener noreferrer" class="t-magenta">mugimugi.cutedog</a></div>
+              <div class="terminal-line">     <span class="t-label">GitHub:</span>  <a href="https://github.com/tubone24" target="_blank" rel="noopener noreferrer" class="t-gray">https://github.com/</a><a href="https://github.com/tubone24" target="_blank" rel="noopener noreferrer" class="t-green">tubone24</a></div>
+              <div class="terminal-line">  <span class="t-label">Portfolio:</span>  <a href="https://portfolio.tubone-project24.xyz" target="_blank" rel="noopener noreferrer" class="t-cyan">https://portfolio.tubone-project24.xyz</a></div>
+              <div class="terminal-line">       <span class="t-label">Blog:</span>  <a href="https://tubone-project24.xyz" target="_blank" rel="noopener noreferrer" class="t-cyan">https://tubone-project24.xyz</a></div>
+              <div class="terminal-line">    <span class="t-label">Contact:</span>  <a href="https://portfolio.tubone-project24.xyz/#contact" target="_blank" rel="noopener noreferrer" class="t-cyan">https://portfolio.tubone-project24.xyz/#contact</a></div>
+              <div class="terminal-line">&nbsp;</div>
+              <div class="terminal-line">       <span class="t-label">Card:</span>  <span class="t-red">npx</span> <span class="t-white">tubone24</span></div>
+              <div class="terminal-cursor" id="terminal-cursor">▊</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 著書セクション -->
+        <section class="content-white-inner about-section">
+          <h2>著書</h2>
+          <div class="books-grid">
+            <div class="book-item">
+              <img src="/images/books/yasashii-mcp.jpeg" alt="やさしいMCP入門 書影" width="180" height="255" loading="lazy" class="book-cover" />
+              <div class="book-info">
+                <h3>やさしいMCP入門</h3>
+                <p class="book-description">Model Context Protocol（MCP）の基礎から実践までを解説した入門書。</p>
+              </div>
+            </div>
+            <div class="book-item">
+              <img src="/images/books/ai-agent-dev.jpeg" alt="AIエージェント開発/運用入門 書影" width="180" height="255" loading="lazy" class="book-cover" />
+              <div class="book-info">
+                <h3>AIエージェント開発/運用入門</h3>
+                <p class="book-description">AIエージェントの設計・開発・運用に関する実践的なガイドブック。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- むぎ（愛犬）紹介セクション -->
+        <section class="content-white-inner about-section">
+          <h2>むぎ（愛犬）</h2>
+          <div class="mugi-section">
+            <img src="/images/mugi/IMG_0166.jpg" alt="むぎ" width="240" height="240" loading="lazy" class="mugi-photo" />
+            <div class="mugi-info">
+              <p>
+                むぎはtubone24の愛犬です。日々の癒しを与えてくれる大切な家族の一員。
+                むぎの日常はInstagramで公開しています。
+              </p>
+              <a href="https://www.instagram.com/mugimugi.cutedog/" target="_blank" rel="noopener noreferrer" class="mugi-instagram-link">
+                @mugimugi.cutedog on Instagram
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-section {
+    margin-bottom: 2rem;
+    padding: 2rem;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-avatar {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border: 3px solid #e0e0e0;
+  }
+
+  .profile-info h1 {
+    margin-bottom: 0.25rem;
+    font-size: 1.75rem;
+  }
+
+  .profile-handle {
+    color: #6c757d;
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+
+  .profile-role {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+
+  .profile-bio {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #33b546;
+  }
+
+  /* ターミナル風プロフィールカード */
+  .terminal-card {
+    background: #1e1e1e;
+    border: 2px solid #33b546;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+  }
+
+  .terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .terminal-dot.red { background: #ff5f56; }
+  .terminal-dot.yellow { background: #ffbd2e; }
+  .terminal-dot.green { background: #27c93f; }
+
+  .terminal-title {
+    color: #999;
+    font-size: 0.8rem;
+    margin-left: 8px;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    margin: 0;
+    color: #d4d4d4;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    background: transparent;
+    border: none;
+    font-family: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+    white-space: pre;
+  }
+
+  .terminal-line {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .terminal-line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .terminal-cursor {
+    display: inline-block;
+    color: #33b546;
+    animation: blink 0.8s step-end infinite;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .t-white-bold { color: #fff; font-weight: bold; }
+  .t-white { color: #e0e0e0; }
+  .t-label { color: #fff; font-weight: bold; }
+  .t-cyan { color: #56b6c2; }
+  .t-cyan a, a.t-cyan { color: #56b6c2; text-decoration: none; }
+  .t-cyan a:hover, a.t-cyan:hover { text-decoration: underline; }
+  .t-green-bright { color: #98c379; }
+  .t-green { color: #98c379; }
+  .t-green a, a.t-green { color: #98c379; text-decoration: none; }
+  .t-green a:hover, a.t-green:hover { text-decoration: underline; }
+  .t-blue { color: #61afef; }
+  .t-blue a, a.t-blue { color: #61afef; text-decoration: none; }
+  .t-blue a:hover, a.t-blue:hover { text-decoration: underline; }
+  .t-magenta { color: #c678dd; }
+  .t-magenta a, a.t-magenta { color: #c678dd; text-decoration: none; }
+  .t-magenta a:hover, a.t-magenta:hover { text-decoration: underline; }
+  .t-gray { color: #7f8c8d; }
+  .t-gray a, a.t-gray { color: #7f8c8d; text-decoration: none; }
+  .t-red { color: #e06c75; }
+
+  /* 著書セクション */
+  .books-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .book-item {
+    display: flex;
+    gap: 1.25rem;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .book-cover {
+    width: 180px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    object-fit: cover;
+    background: #f0f0f0;
+  }
+
+  .book-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .book-info .book-description {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* むぎ（愛犬）セクション */
+  .mugi-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .mugi-photo {
+    width: 240px;
+    height: 240px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #f0f0f0;
+    border: 3px solid #e0e0e0;
+  }
+
+  .mugi-info {
+    flex: 1;
+  }
+
+  .mugi-info p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .mugi-instagram-link {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.2s;
+  }
+
+  .mugi-instagram-link:hover {
+    opacity: 0.85;
+    color: #fff;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 576px) {
+    .profile-header {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+    }
+
+    .profile-info h1 {
+      font-size: 1.4rem;
+    }
+
+    .about-section {
+      padding: 1.25rem;
+    }
+
+    .terminal-body {
+      font-size: 0.7rem;
+      padding: 1rem;
+    }
+
+    .books-grid {
+      flex-direction: column;
+    }
+
+    .book-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .mugi-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .mugi-photo {
+      width: 200px;
+      height: 200px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    var card = document.getElementById('terminal-card');
+    if (!card) return;
+
+    var lines = card.querySelectorAll('.terminal-line');
+    var cursor = document.getElementById('terminal-cursor');
+    var animated = false;
+
+    function animateLines() {
+      if (animated) return;
+      animated = true;
+      var delay = 0;
+      for (var i = 0; i < lines.length; i++) {
+        (function(line, d) {
+          setTimeout(function() {
+            line.classList.add('visible');
+          }, d);
+        })(lines[i], delay);
+        // 空行は短め、内容行はやや長め
+        delay += lines[i].textContent.trim() === '' ? 40 : 80;
+      }
+      // アニメーション完了後にカーソル点滅を3秒後に消す
+      setTimeout(function() {
+        if (cursor) cursor.style.display = 'none';
+      }, delay + 3000);
+    }
+
+    // IntersectionObserverでスクロールしてカードが見えたら発火
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            animateLines();
+            observer.unobserve(card);
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(card);
+    } else {
+      // フォールバック: 即時表示
+      animateLines();
+    }
+  })();
+</script>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  tag?: string;
+  title: string;
+}
+
+const { tag, title } = Astro.props;
+---
+
+<nav aria-label="パンくずリスト" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="/">ホーム</a>
+    </li>
+    {tag && (
+      <li class="breadcrumb-item">
+        <a href={`/tag/${tag}/`}>{tag}</a>
+      </li>
+    )}
+    <li class="breadcrumb-item active" aria-current="page">
+      {title}
+    </li>
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb-nav {
+    padding: 0.75rem 0;
+    margin-bottom: 0;
+  }
+  .breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  .breadcrumb-item {
+    color: #6c757d;
+  }
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    padding: 0 0.5rem;
+    color: #adb5bd;
+  }
+  .breadcrumb-item a {
+    color: #0a58ca;
+    text-decoration: none;
+  }
+  .breadcrumb-item a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumb-item.active {
+    color: #495057;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+  }
+</style>

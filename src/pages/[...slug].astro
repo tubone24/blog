@@ -7,6 +7,8 @@ import Sidebar from '../components/Sidebar/index.tsx';
 import RelatedPosts from '../components/Relateds/index.tsx';
 import TimeToRead from '../components/TimeToRead/index.tsx';
 import TextToSpeech from '../components/TextToSpeech/index.tsx';
+import AuthorBio from '../components/AuthorBio/index.tsx';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import config from '../config/index.json';
 import { parseDate } from '../utils/index';
 
@@ -119,6 +121,7 @@ const allPostsForRelated = sorted.map((p) => ({
       totalCount={sorted.length}
     />
     <main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
+      <Breadcrumb tag={post.data.tags?.[0] || ''} title={post.data.title} />
       <TimeToRead client:idle words={wordCount} minutes={minutes} />
       <TextToSpeech client:idle text={speechText} />
       {post.data.useAi && (
@@ -143,6 +146,7 @@ const allPostsForRelated = sorted.map((p) => ({
           />
         </a>
       </div>
+      <AuthorBio client:idle />
       <RelatedPosts
         client:idle
         title={post.data.title}

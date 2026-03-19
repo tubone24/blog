@@ -7,7 +7,7 @@ export async function GET(_context: APIContext) {
 
   // 全記事中の最新日付を取得
   const latestDate = posts.reduce((latest, post) => {
-    const d = new Date(post.data.date);
+    const d = new Date(post.data.updatedDate || post.data.date);
     return d > latest ? d : latest;
   }, new Date(0));
 
