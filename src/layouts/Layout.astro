@@ -147,7 +147,7 @@ if (faq && faq.length > 0) {
   <meta name="image" content={ogImage} />
   <meta name="keywords" content={allKeywords} />
   <meta name="author" content={author} />
-  {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="max-image-preview:large" />}
+  {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
 
   {/* カノニカルURL */}
   <link rel="canonical" href={url} />

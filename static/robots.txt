@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /preview/
+Disallow: /ads.txt
 Sitemap: https://tubone-project24.xyz/sitemap-index.xml
