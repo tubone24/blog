@@ -1,4 +1,5 @@
 import React from "react";
+import { Newspaper } from "lucide-react";
 import lozad from "lozad";
 import RelatedCard from "@/components/RelatedCard";
 
@@ -51,7 +52,7 @@ const RelatedPosts = ({
   return (
     <div className={style.relatedPosts}>
       <h2>
-        <span className="icon-newspaper-o" />
+        <Newspaper size={18} aria-hidden="true" />
         &nbsp;Related Posts
       </h2>
       {relatedPosts.map((post) => (

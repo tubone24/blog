@@ -1,5 +1,6 @@
 import React from "react";
 import ReactGA from "react-ga4";
+import { Rss } from "lucide-react";
 
 import * as style from "./index.module.scss";
 
@@ -14,9 +15,7 @@ const Subscription = () => (
       }
     >
       SUBSCRIBE RSS&nbsp;
-      <span className="fa-layers fa-fw fa-1x">
-        <span className="icon-rss" />
-      </span>
+      <Rss size={14} aria-hidden="true" />
     </a>
   </div>
 );

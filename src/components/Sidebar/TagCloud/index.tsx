@@ -1,4 +1,5 @@
 import React from "react";
+import { Tags } from "lucide-react";
 
 import Tag from "@/components/Tag";
 import type { AllPost } from "../entity";
@@ -24,7 +25,7 @@ const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
     <div className="d-none d-lg-block information my-2">
       <a href="/tags/" title="Tags">
         <p>
-          <span className="icon-tags" />
+          <Tags size={16} aria-hidden="true" />
           &nbsp;{limitTags.length} / {tags.length} Tags
         </p>
       </a>

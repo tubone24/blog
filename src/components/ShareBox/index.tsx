@@ -2,6 +2,9 @@ import React from "react";
 
 import ReactGA from "react-ga4";
 
+import { ChevronUp } from "lucide-react";
+import { FacebookIcon, XIcon, HatenaBookmarkIcon } from "@/icons/BrandIcons";
+
 import * as style from "./index.module.scss";
 
 const GotoTopButton = () => (
@@ -18,7 +21,7 @@ const GotoTopButton = () => (
       });
     }}
   >
-    <span className="icon-chevron-up" aria-hidden="true" />
+    <ChevronUp size={20} aria-hidden="true" />
     <span className="visually-hidden">トップに戻る</span>
   </button>
 );
@@ -39,25 +42,23 @@ const ShareBox = ({ url }: { url: string }) => (
         })
       }
     >
-      <span className="icon-facebook" />
+      <FacebookIcon size={20} />
     </a>
     <a
-      href={`https://twitter.com/intent/tweet?text=LikeThis:&url=${encodeURI(
-        url,
-      )}`}
-      title="TwitterでShareする"
+      href={`https://x.com/intent/post?text=LikeThis:&url=${encodeURI(url)}`}
+      title="XでShareする"
       target="_blank"
       rel="noopener noreferrer"
       className={style.shareButton}
-      data-testid="twitter-link"
+      data-testid="x-link"
       onClick={() =>
         ReactGA.event({
           category: "Share",
-          action: "Twitter Share",
+          action: "X Share",
         })
       }
     >
-      <span className="icon-twitter" />
+      <XIcon size={20} />
     </a>
     <a
       href={`http://b.hatena.ne.jp/add?mode=confirm&url=${encodeURI(url)}`}
@@ -75,12 +76,7 @@ const ShareBox = ({ url }: { url: string }) => (
         })
       }
     >
-      <img
-        src="/assets/button-only@2x.png"
-        alt="hatena bookmark"
-        width="30"
-        height="30"
-      />
+      <HatenaBookmarkIcon size={24} />
     </a>
     <GotoTopButton />
   </div>

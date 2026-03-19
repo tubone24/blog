@@ -92,9 +92,9 @@ describe("SearchBox", () => {
     const label = screen.getByLabelText("SearchBox");
     expect(label).toBeInTheDocument();
 
-    // Check that the icon span exists within the label
-    const iconSpan = container.querySelector(".icon-search");
-    expect(iconSpan).toBeInTheDocument();
+    // Check that the SVG icon exists within the label
+    const svgIcon = container.querySelector("svg");
+    expect(svgIcon).toBeInTheDocument();
   });
 
   it("renders input with correct placeholder", () => {

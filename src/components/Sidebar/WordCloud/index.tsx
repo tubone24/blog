@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Cloud } from "lucide-react";
 
 import * as style from "./index.module.scss";
 
@@ -14,7 +15,7 @@ const WordCloud = () => {
   return (
     <div className={style.wordcloud}>
       <div className={style.sectionHeader}>
-        <span className="icon-cloud" />
+        <Cloud size={16} aria-hidden="true" />
         &nbsp;WordCloud
       </div>
       <a

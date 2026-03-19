@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Search } from "lucide-react";
 import "./index.scss";
 import ReactGA from "react-ga4";
 // https://github.com/algolia/algoliasearch-client-javascript/issues/1152
@@ -81,7 +82,7 @@ class SearchBox extends Component {
       <div>
         <p>
           <label htmlFor="algolia-search-input">
-            <span className="icon-search" />
+            <Search size={16} aria-hidden="true" />
             &nbsp;SearchBox
           </label>
         </p>
