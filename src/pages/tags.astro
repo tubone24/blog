@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Tag from '../components/Tag/index.tsx';
 import Sidebar from '../components/Sidebar/index.tsx';
+import config from '../config/index.json';
 
 const allPosts = await getCollection('blog');
 const sorted = allPosts.sort(
@@ -33,11 +34,11 @@ const allPostsForSidebar = sorted.map((p) => ({
 ---
 
 <Layout
-  title="Tags"
-  description="Tags Page"
+  title={`タグ一覧 | ${config.siteTitle}`}
+  description={`${config.siteTitle}の全${tags.length}カテゴリからプログラミング・インフラ・DevOps等の技術記事を探せます。`}
   ogpPath="/og/tags.png"
   canonicalUrl="https://tubone-project24.xyz/tags/"
-  noindex={true}
+  noindex={false}
 >
   <div class="container">
     <div class="row">

@@ -1,5 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import config from '../config/index.json';
+
+const profilePageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': `${config.siteUrl}/about/#profilepage`,
+  mainEntity: { '@id': `${config.siteUrl}/#person` },
+  dateCreated: '2019-09-01',
+  dateModified: '2026-03-20',
+  name: 'About - tubone24',
+  description: 'tubone24（Yu Otsubo）のプロフィール。AIエージェント開発、Webアプリケーション開発、クラウドインフラストラクチャのソフトウェアエンジニア。',
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, item: { '@id': config.siteUrl, name: 'ホーム' } },
+      { '@type': 'ListItem', position: 2, name: 'About' },
+    ],
+  },
+};
 ---
 
 <Layout
@@ -9,6 +28,7 @@ import Layout from '../layouts/Layout.astro';
   canonicalUrl="https://tubone-project24.xyz/about/"
   isPostPage={true}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />
   <div class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12">
@@ -133,6 +153,7 @@ import Layout from '../layouts/Layout.astro';
     height: 160px;
     object-fit: cover;
     border: 3px solid #e0e0e0;
+    cursor: default;
   }
 
   .profile-info h1 {
@@ -322,7 +343,7 @@ import Layout from '../layouts/Layout.astro';
     padding: 0.5rem 1.25rem;
     background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     color: #fff;
-    border-radius: 6px;
+    border-radius: 12px;
     text-decoration: none;
     font-weight: bold;
     transition: opacity 0.2s;
@@ -381,6 +402,137 @@ import Layout from '../layouts/Layout.astro';
   }
 </style>
 
+<script is:inline>
+  function initAltBadges() {
+    var containers = document.querySelectorAll('.content-white-inner');
+    for (var i = 0; i < containers.length; i++) {
+      var images = containers[i].querySelectorAll('img');
+      for (var j = 0; j < images.length; j++) {
+        var img = images[j];
+        var alt = img.getAttribute('alt');
+        if (!alt || alt.trim() === '') continue;
+        if (img.classList.contains('profile-avatar')) continue;
+        if (img.parentElement && img.parentElement.classList.contains('alt-badge-figure')) continue;
+
+        var figure = document.createElement('figure');
+        figure.className = 'alt-badge-figure';
+        img.parentNode.insertBefore(figure, img);
+        figure.appendChild(img);
+
+        var btn = document.createElement('button');
+        btn.className = 'alt-badge-btn';
+        btn.type = 'button';
+        btn.setAttribute('aria-label', '画像の説明テキストを表示');
+        btn.textContent = 'ALT';
+        figure.appendChild(btn);
+
+        var dialog = document.createElement('dialog');
+        dialog.className = 'alt-badge-dialog';
+        var textP = document.createElement('p');
+        textP.className = 'alt-badge-dialog__text';
+        textP.textContent = alt;
+        dialog.appendChild(textP);
+        var form = document.createElement('form');
+        form.method = 'dialog';
+        var closeBtn = document.createElement('button');
+        closeBtn.type = 'submit';
+        closeBtn.className = 'alt-badge-dialog__close';
+        closeBtn.textContent = '閉じる';
+        form.appendChild(closeBtn);
+        dialog.appendChild(form);
+        figure.appendChild(dialog);
+      }
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.alt-badge-btn');
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var dialog = btn.parentElement.querySelector('.alt-badge-dialog');
+      if (dialog) {
+        dialog.showModal();
+      }
+      return;
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAltBadges);
+  } else {
+    initAltBadges();
+  }
+  setTimeout(initAltBadges, 2000);
+</script>
+<script is:inline>
+  function openLightbox(imgSrc, imgAlt) {
+    var existing = document.querySelector('.content-lightbox');
+    if (existing) existing.remove();
+
+    var overlay = document.createElement('div');
+    overlay.className = 'content-lightbox';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-label', '画像プレビュー');
+
+    var inner = document.createElement('div');
+    inner.className = 'content-lightbox-inner';
+
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'content-lightbox-close';
+    closeBtn.setAttribute('aria-label', '閉じる');
+    closeBtn.textContent = '\u00d7';
+    closeBtn.addEventListener('click', function() { closeLightbox(); });
+
+    var img = document.createElement('img');
+    img.src = imgSrc;
+    img.alt = imgAlt || '';
+    img.addEventListener('click', function() { closeLightbox(); });
+
+    inner.appendChild(closeBtn);
+    inner.appendChild(img);
+    overlay.appendChild(inner);
+    document.body.appendChild(overlay);
+
+    document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(function() {
+      overlay.classList.add('content-lightbox--visible');
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeLightbox();
+    });
+  }
+
+  function closeLightbox() {
+    var overlay = document.querySelector('.content-lightbox');
+    if (!overlay) return;
+    overlay.classList.remove('content-lightbox--visible');
+    setTimeout(function() {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }, 200);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  document.addEventListener('click', function(e) {
+    var img = e.target.closest('.content-white-inner img');
+    if (!img) return;
+    if (img.classList.contains('profile-avatar')) return;
+    if (e.target.closest('.alt-badge-btn')) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    var src = img.getAttribute('src') || '';
+    src = src.replace(/-640(\.\w+)$/, '$1');
+    openLightbox(src, img.getAttribute('alt'));
+  });
+</script>
 <script is:inline>
   (function() {
     var card = document.getElementById('terminal-card');

@@ -43,11 +43,11 @@ const allPostsForSidebar = allPosts.map((p) => ({
 ---
 
 <Layout
-  title={tag}
-  description={tag}
+  title={`${tag}に関する記事一覧 | ${config.siteTitle}`}
+  description={`${tag}に関連する技術記事を${posts.length}件掲載。${tag}の実践的な知見・チュートリアル・Tips をまとめています。`}
   ogpPath={`/og/tag/${tag}.png`}
   canonicalUrl={`${config.siteUrl}/tag/${tag}/`}
-  noindex={true}
+  noindex={posts.length < 3}
 >
   <div class="container">
     <div class="row">
