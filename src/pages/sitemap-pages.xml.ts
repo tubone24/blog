@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIContext } from "astro";
-import { SITE_URL, formatDate } from "../utils/sitemap";
+import { SITE_URL, formatDate, xmlEscape } from "../utils/sitemap";
 
 export async function GET(_context: APIContext) {
   const posts = await getCollection("blog");
@@ -25,6 +25,29 @@ export async function GET(_context: APIContext) {
     <loc>${SITE_URL}/about/</loc>
     <lastmod>${latestPostDate}</lastmod>
   </url>`);
+
+  // タグ一覧ページ
+  urls.push(`  <url>
+    <loc>${SITE_URL}/tags/</loc>
+    <lastmod>${latestPostDate}</lastmod>
+  </url>`);
+
+  // タグ別ページ（記事3件以上のタグのみ）
+  const tagCount: { [key: string]: number } = {};
+  sorted.forEach((post) => {
+    post.data.tags?.forEach((tag) => {
+      if (tag) tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+  });
+
+  Object.entries(tagCount)
+    .filter(([, count]) => count >= 3)
+    .forEach(([tag]) => {
+      urls.push(`  <url>
+    <loc>${SITE_URL}/tag/${xmlEscape(tag)}/</loc>
+    <lastmod>${latestPostDate}</lastmod>
+  </url>`);
+    });
 
   // ページネーションはnoindex設定のためサイトマップから除外
 

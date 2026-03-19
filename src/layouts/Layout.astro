@@ -19,6 +19,7 @@ interface Props {
   author?: string;
   keywords?: string[];
   faq?: { question: string; answer: string }[];
+  wordCount?: number;
 }
 
 const {
@@ -36,6 +37,7 @@ const {
   author = config.author,
   keywords = [],
   faq = [],
+  wordCount,
 } = Astro.props;
 
 const siteTitle = config.siteTitle;
@@ -99,7 +101,7 @@ if (isPost) {
   });
 
   // BlogPosting
-  schemaOrgList.push({
+  const blogPosting: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     '@id': `${url}#article`,
@@ -115,7 +117,16 @@ if (isPost) {
     publisher: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
     inLanguage: 'ja-JP',
     keywords: tag,
-  });
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['.content-white-inner'],
+    },
+    accessibilityFeature: ['readAloud', 'tableOfContents'],
+  };
+  if (wordCount) {
+    blogPosting.wordCount = wordCount;
+  }
+  schemaOrgList.push(blogPosting);
 }
 
 // FAQPage schema
