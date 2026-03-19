@@ -1,5 +1,6 @@
 import React from "react";
 import ReactGA from "react-ga4";
+import { Menu } from "lucide-react";
 
 import NavItem from "./NavItem";
 import ExternalLink from "@/components/ExternalLink";
@@ -55,7 +56,7 @@ const Navbar = ({ isPostPage = false }: { isPostPage?: boolean }) => (
         aria-label="navbar-toggler"
         data-bs-target="#navbarSupportedContent"
       >
-        <span className="icon-bars" />
+        <Menu size={20} aria-hidden="true" />
       </button>
       <div
         className="collapse navbar-collapse flex-row-reverse"

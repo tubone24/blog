@@ -196,7 +196,7 @@ describe("RelatedPosts", () => {
       />,
     );
 
-    const iconSpan = container.querySelector(".icon-newspaper-o");
-    expect(iconSpan).toBeInTheDocument();
+    const svgIcon = container.querySelector("svg");
+    expect(svgIcon).toBeInTheDocument();
   });
 });

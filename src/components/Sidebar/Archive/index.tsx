@@ -1,4 +1,5 @@
 import React from "react";
+import { Calendar } from "lucide-react";
 
 import * as style from "./index.module.scss";
 import ReactGA from "react-ga4";
@@ -14,7 +15,11 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   return (
     <div className={style.archive} data-testid="Archive">
       <div className={style.sectionHeader}>
-        <span className="icon-calendar" />
+        <Calendar
+          size={16}
+          aria-hidden="true"
+          style={{ verticalAlign: "-0.125em" }}
+        />
         &nbsp;Archives
       </div>
       {yearList.map((year) => (

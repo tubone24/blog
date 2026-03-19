@@ -1,4 +1,5 @@
 import React from "react";
+import { Newspaper } from "lucide-react";
 import ReactGA from "react-ga4";
 import * as style from "./index.module.scss";
 
@@ -24,7 +25,11 @@ const LatestPost = ({
 }) => (
   <div className={style.latestPost}>
     <div className={style.sectionHeader} data-testid="latestArticleCount">
-      <span className="icon-newspaper-o" />
+      <Newspaper
+        size={16}
+        aria-hidden="true"
+        style={{ verticalAlign: "-0.125em" }}
+      />
       &nbsp;Recent posts <span className={style.count}>6 / {totalCount}</span>
     </div>
     {posts.map(({ node }) => (

@@ -10,6 +10,7 @@ import Subscription from "./Subscription";
 import TagCloud from "./TagCloud";
 import * as style from "./index.module.scss";
 import { isBrowser } from "@/utils";
+import { GitHubIcon, XIcon, InstagramIcon } from "@/icons/BrandIcons";
 
 const Icon = ({
   href,
@@ -17,7 +18,7 @@ const Icon = ({
   title,
 }: {
   href: string;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
 }) => (
   <a
@@ -27,10 +28,7 @@ const Icon = ({
     rel="external nofollow noopener noreferrer"
     className={style.customIcon}
   >
-    <span className={style.faLayers + " fa-fw fa-2x"}>
-      <span className={icon} />
-      &nbsp;
-    </span>
+    {icon}
   </a>
 );
 
@@ -134,23 +132,18 @@ export const Sidebar = ({
         <p className={style.soliloquy}>It&apos;s my life</p>
         <Icon
           href="https://github.com/tubone24"
-          icon="icon-github"
+          icon={<GitHubIcon size={28} />}
           title="tubone24 github"
         />
         <Icon
-          href="https://soundcloud.com/user-453736300"
-          icon="icon-soundcloud"
-          title="tubone24 SoundCloud"
+          href="https://x.com/tubone24"
+          icon={<XIcon size={28} />}
+          title="tubone24 X"
         />
         <Icon
-          href="https://twitter.com/tubone24"
-          icon="icon-twitter"
-          title="tubone24 twitter"
-        />
-        <Icon
-          href="https://500px.com/tubone24"
-          icon="icon-500px"
-          title="tubone24 500px"
+          href="https://www.instagram.com/mugimugi.cutedog/"
+          icon={<InstagramIcon size={28} />}
+          title="mugimugi.cutedog Instagram"
         />
         <Information posts={lp} totalCount={totalCount} allPosts={ap} />
         <SearchBox />

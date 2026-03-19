@@ -116,26 +116,20 @@ describe("Sidebar", () => {
     expect(githubLink).toBeInTheDocument();
     expect(githubLink).toHaveAttribute("title", "tubone24 github");
 
-    // SoundCloud
-    const soundcloudLink = container.querySelector(
-      'a[href="https://soundcloud.com/user-453736300"]',
-    );
-    expect(soundcloudLink).toBeInTheDocument();
-    expect(soundcloudLink).toHaveAttribute("title", "tubone24 SoundCloud");
+    // X
+    const xLink = container.querySelector('a[href="https://x.com/tubone24"]');
+    expect(xLink).toBeInTheDocument();
+    expect(xLink).toHaveAttribute("title", "tubone24 X");
 
-    // Twitter
-    const twitterLink = container.querySelector(
-      'a[href="https://twitter.com/tubone24"]',
+    // Instagram
+    const instagramLink = container.querySelector(
+      'a[href="https://www.instagram.com/mugimugi.cutedog/"]',
     );
-    expect(twitterLink).toBeInTheDocument();
-    expect(twitterLink).toHaveAttribute("title", "tubone24 twitter");
-
-    // 500px
-    const px500Link = container.querySelector(
-      'a[href="https://500px.com/tubone24"]',
+    expect(instagramLink).toBeInTheDocument();
+    expect(instagramLink).toHaveAttribute(
+      "title",
+      "mugimugi.cutedog Instagram",
     );
-    expect(px500Link).toBeInTheDocument();
-    expect(px500Link).toHaveAttribute("title", "tubone24 500px");
   });
 
   it("renders all child components", () => {

@@ -38,23 +38,19 @@
 }
 
 .custom-icon {
-  i {
-    background: $icon-bg;
-    border-radius: 50%;
-    transition: background 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-
-  .fa-layers {
-    span {
-      font-size: 200%;
-    }
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5em;
+  height: 2.5em;
+  color: $link;
+  transition: color 0.3s ease;
 
   &:hover {
-    border-radius: 50%;
+    color: $link-hover;
+  }
 
-    i {
-      background: $link-hover;
-    }
+  svg {
+    vertical-align: middle;
   }
 }
