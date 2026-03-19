@@ -25,7 +25,11 @@ const LatestPost = ({
 }) => (
   <div className={style.latestPost}>
     <div className={style.sectionHeader} data-testid="latestArticleCount">
-      <Newspaper size={16} aria-hidden="true" />
+      <Newspaper
+        size={16}
+        aria-hidden="true"
+        style={{ verticalAlign: "-0.125em" }}
+      />
       &nbsp;Recent posts <span className={style.count}>6 / {totalCount}</span>
     </div>
     {posts.map(({ node }) => (

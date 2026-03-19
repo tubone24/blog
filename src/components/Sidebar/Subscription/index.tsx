@@ -15,7 +15,7 @@ const Subscription = () => (
       }
     >
       SUBSCRIBE RSS&nbsp;
-      <Rss size={14} aria-hidden="true" />
+      <Rss size={14} aria-hidden="true" style={{ verticalAlign: "-0.125em" }} />
     </a>
   </div>
 );

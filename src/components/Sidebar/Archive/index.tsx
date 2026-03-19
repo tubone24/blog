@@ -15,7 +15,11 @@ const Archive = ({ allPosts }: { allPosts: AllPost[] }) => {
   return (
     <div className={style.archive} data-testid="Archive">
       <div className={style.sectionHeader}>
-        <Calendar size={16} aria-hidden="true" />
+        <Calendar
+          size={16}
+          aria-hidden="true"
+          style={{ verticalAlign: "-0.125em" }}
+        />
         &nbsp;Archives
       </div>
       {yearList.map((year) => (

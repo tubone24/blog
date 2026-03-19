@@ -41,7 +41,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: $text;
+  width: 2.5em;
+  height: 2.5em;
+  color: $link;
   transition: color 0.3s ease;
 
   &:hover {

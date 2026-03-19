@@ -25,7 +25,11 @@ const TagCloud = ({ allPosts }: { allPosts: AllPost[] }) => {
     <div className="d-none d-lg-block information my-2">
       <a href="/tags/" title="Tags">
         <p>
-          <Tags size={16} aria-hidden="true" />
+          <Tags
+            size={16}
+            aria-hidden="true"
+            style={{ verticalAlign: "-0.125em" }}
+          />
           &nbsp;{limitTags.length} / {tags.length} Tags
         </p>
       </a>

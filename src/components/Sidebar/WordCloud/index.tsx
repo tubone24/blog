@@ -15,7 +15,11 @@ const WordCloud = () => {
   return (
     <div className={style.wordcloud}>
       <div className={style.sectionHeader}>
-        <Cloud size={16} aria-hidden="true" />
+        <Cloud
+          size={16}
+          aria-hidden="true"
+          style={{ verticalAlign: "-0.125em" }}
+        />
         &nbsp;WordCloud
       </div>
       <a

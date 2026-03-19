@@ -52,7 +52,11 @@ const RelatedPosts = ({
   return (
     <div className={style.relatedPosts}>
       <h2>
-        <Newspaper size={18} aria-hidden="true" />
+        <Newspaper
+          size={18}
+          aria-hidden="true"
+          style={{ verticalAlign: "-0.125em" }}
+        />
         &nbsp;Related Posts
       </h2>
       {relatedPosts.map((post) => (

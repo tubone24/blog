@@ -82,7 +82,11 @@ class SearchBox extends Component {
       <div>
         <p>
           <label htmlFor="algolia-search-input">
-            <Search size={16} aria-hidden="true" />
+            <Search
+              size={16}
+              aria-hidden="true"
+              style={{ verticalAlign: "-0.125em" }}
+            />
             &nbsp;SearchBox
           </label>
         </p>

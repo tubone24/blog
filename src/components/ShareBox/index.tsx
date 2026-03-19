@@ -42,7 +42,7 @@ const ShareBox = ({ url }: { url: string }) => (
         })
       }
     >
-      <FacebookIcon size={20} />
+      <FacebookIcon size={34} />
     </a>
     <a
       href={`https://x.com/intent/post?text=LikeThis:&url=${encodeURI(url)}`}
