@@ -68,11 +68,7 @@ const Navbar = ({ isPostPage = false }: { isPostPage?: boolean }) => (
             <NavItem url="/tags/" name="Tags" key="/tags/" />
           </li>
           <li>
-            <ExternalLink
-              className="nav-btn btn btn-link"
-              title="About"
-              href="https://portfolio.tubone-project24.xyz/#about-me"
-            />
+            <NavItem url="/about/" name="About" key="/about/" />
           </li>
           <li>
             <ExternalLink

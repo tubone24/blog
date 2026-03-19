@@ -14,6 +14,8 @@ export type AllPost = {
   slug: string;
 };
 
+const MAX_RELATED = 6;
+
 const RelatedPosts = ({
   title,
   tags,
@@ -37,17 +39,24 @@ const RelatedPosts = ({
     }
   }, []);
 
-  const relatedPosts = allPosts.filter((post) => {
-    if (post.title === title) return false;
-    if (post.tags) {
-      for (let i = 0; i < post.tags.length; i++) {
-        if (tags[i] && post.tags[i] === tags[i]) return true;
-      }
-    }
-    return false;
-  });
+  const currentTags = new Set(tags.filter(Boolean) as string[]);
 
-  if (!relatedPosts || relatedPosts.length === 0) return null;
+  const scored = allPosts
+    .filter((post) => post.title !== title)
+    .map((post) => {
+      let score = 0;
+      if (post.tags) {
+        for (const t of post.tags) {
+          if (currentTags.has(t)) score++;
+        }
+      }
+      return { post, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, MAX_RELATED);
+
+  if (scored.length === 0) return null;
 
   return (
     <div className={style.relatedPosts}>
@@ -59,7 +68,7 @@ const RelatedPosts = ({
         />
         &nbsp;Related Posts
       </h2>
-      {relatedPosts.map((post) => (
+      {scored.map(({ post }) => (
         <div key={post.slug}>
           <RelatedCard
             title={post.title}

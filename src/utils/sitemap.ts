@@ -1,4 +1,6 @@
-export const SITE_URL = "https://tubone-project24.xyz";
+import config from "../config/index.json";
+
+export const SITE_URL = config.siteUrl;
 
 export function xmlEscape(str: string): string {
   return str
