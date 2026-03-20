@@ -71,7 +71,7 @@ schemaOrgList.push({
   '@type': 'Person',
   '@id': `${config.siteUrl}/#person`,
   name: author || config.author,
-  url: 'https://portfolio.tubone-project24.xyz',
+  url: `${config.siteUrl}/about/`,
   image: {
     '@type': 'ImageObject',
     '@id': `${config.siteUrl}/#personImage`,
@@ -80,7 +80,7 @@ schemaOrgList.push({
     height: 512,
     caption: config.author,
   },
-  sameAs: ['https://github.com/tubone24', 'https://twitter.com/tubone24'],
+  sameAs: ['https://github.com/tubone24', 'https://twitter.com/tubone24', 'https://portfolio.tubone-project24.xyz'],
   jobTitle: 'Software Engineer',
   knowsAbout: ['Python', 'TypeScript', 'AWS', 'React', 'DevOps', 'Machine Learning', 'Infrastructure'],
   description: 'tubone24はPythonやTypeScriptを中心に、AWS・DevOps・機械学習など幅広い技術領域で活動するソフトウェアエンジニアです。',
