@@ -214,7 +214,7 @@
     "fast-xml-parser": "5.5.7",
     "h3": "1.15.9",
     "tar": "7.5.11",
-    "fastify": "5.8.1",
+    "fastify": "5.8.4",
     "lodash": "4.17.23",
     "axios": "1.13.6",
     "markdown-it": "14.1.1",
