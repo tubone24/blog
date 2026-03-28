@@ -88,6 +88,33 @@ const allPostsForRelated = sorted.map((p) => ({
   headerImage: p.data.headerImage,
   slug: `/${p.slug}/`,
 }));
+
+// Markdownコピー用: YAML frontmatter + body を構築
+function yamlQuote(value: string): string {
+  if (/[:#[{}&*!|>'"%@`,\n\]]/.test(value) || value.startsWith(' ') || value.endsWith(' ')) {
+    return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+  }
+  return value;
+}
+const mdLines: string[] = ['---'];
+mdLines.push(`title: ${yamlQuote(post.data.title)}`);
+mdLines.push(`date: ${post.data.date.toISOString()}`);
+if (post.data.description) {
+  mdLines.push(`description: ${yamlQuote(post.data.description)}`);
+}
+if (post.data.tags && post.data.tags.length > 0) {
+  mdLines.push('tags:');
+  for (const tag of post.data.tags) {
+    mdLines.push(`  - ${tag}`);
+  }
+}
+if (post.data.headerImage) {
+  mdLines.push(`headerImage: ${yamlQuote(post.data.headerImage)}`);
+}
+mdLines.push(`url: ${shareURL}`);
+mdLines.push(`author: ${config.author}`);
+mdLines.push('---');
+const rawMarkdown = mdLines.join('\n') + '\n\n' + rawText;
 ---
 
 <Layout
@@ -114,6 +141,7 @@ const allPostsForRelated = sorted.map((p) => ({
       authorName={config.author}
       authorImage={true}
       subTitle={parseDate(post.data.date.toISOString())}
+      showCopyMd={true}
     />
     <Sidebar
       client:visible
@@ -157,6 +185,9 @@ const allPostsForRelated = sorted.map((p) => ({
     </main>
     <ShareBox client:visible url={shareURL} />
   </div>
+  <script define:vars={{ rawMarkdown }}>
+    window.__RAW_MD__ = rawMarkdown;
+  </script>
   <script is:inline>
     function initAltBadges() {
       var containers = document.querySelectorAll('.content-white-inner');
