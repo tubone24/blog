@@ -167,10 +167,10 @@
   resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-2.13.1.tgz#d3cf26ed98e19d3d100cdbeb661ce7b856719ca7"
   integrity sha512-f3FN83d2G/v32ipNClRKgYv30onQlMZX1vCeZMjPsMMPl1mDpmbl0+N5BYo4S/ofzqJyS5hvwacEo0CCVDn/Qg==
 
-"@astrojs/internal-helpers@0.7.5":
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/@astrojs/internal-helpers/-/internal-helpers-0.7.5.tgz#c1491b70a7ac00efbd0de650f3a4058e07112a31"
-  integrity sha512-vreGnYSSKhAjFJCWAwe/CNhONvoc5lokxtRoZims+0wa3KbHBdPHSSthJsKxPd8d/aic6lWKpRTYGY/hsgK6EA==
+"@astrojs/internal-helpers@0.7.6":
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/@astrojs/internal-helpers/-/internal-helpers-0.7.6.tgz#36d92721f01c18c55928571ecf4ac9418987254c"
+  integrity sha512-GOle7smBWKfMSP8osUIGOlB5kaHdQLV3foCsf+5Q9Wsuu+C6Fs3Ez/ttXmhjZ1HkSgsogcM1RXSjjOVieHq16Q==
 
 "@astrojs/language-server@^2.16.1":
   version "2.16.3"
@@ -196,12 +196,12 @@
     vscode-html-languageservice "^5.6.1"
     vscode-uri "^3.1.0"
 
-"@astrojs/markdown-remark@6.3.10":
-  version "6.3.10"
-  resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-6.3.10.tgz#75b8ce7398eec483006de8d76c604cc6ff841606"
-  integrity sha512-kk4HeYR6AcnzC4QV8iSlOfh+N8TZ3MEStxPyenyCtemqn8IpEATBFMTJcfrNW32dgpt6MY3oCkMM/Tv3/I4G3A==
+"@astrojs/markdown-remark@6.3.11":
+  version "6.3.11"
+  resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-6.3.11.tgz#1bf39e9f95896c2b7af3857ec0660440d5cd461b"
+  integrity sha512-hcaxX/5aC6lQgHeGh1i+aauvSwIT6cfyFjKWvExYSxUhZZBBdvCliOtu06gbQyhbe0pGJNoNmqNlQZ5zYUuIyQ==
   dependencies:
-    "@astrojs/internal-helpers" "0.7.5"
+    "@astrojs/internal-helpers" "0.7.6"
     "@astrojs/prism" "3.3.0"
     github-slugger "^2.0.0"
     hast-util-from-html "^2.0.3"
@@ -215,8 +215,8 @@
     remark-parse "^11.0.0"
     remark-rehype "^11.1.2"
     remark-smartypants "^3.0.2"
-    shiki "^3.19.0"
-    smol-toml "^1.5.2"
+    shiki "^3.21.0"
+    smol-toml "^1.6.0"
     unified "^11.0.5"
     unist-util-remove-position "^5.0.0"
     unist-util-visit "^5.0.0"
@@ -8128,14 +8128,14 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
-astro@5.18.0:
-  version "5.18.0"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-5.18.0.tgz#e3cc9aeee5dfd4f059d007fd80c01c9028a101da"
-  integrity sha512-CHiohwJIS4L0G6/IzE1Fx3dgWqXBCXus/od0eGUfxrZJD2um2pE7ehclMmgL/fXqbU7NfE1Ze2pq34h2QaA6iQ==
+astro@5.18.1:
+  version "5.18.1"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-5.18.1.tgz#7ab7f37ab14b8e6cf03cef706658029e7f96a0c2"
+  integrity sha512-m4VWilWZ+Xt6NPoYzC4CgGZim/zQUO7WFL0RHCH0AiEavF1153iC3+me2atDvXpf/yX4PyGUeD8wZLq1cirT3g==
   dependencies:
     "@astrojs/compiler" "^2.13.0"
-    "@astrojs/internal-helpers" "0.7.5"
-    "@astrojs/markdown-remark" "6.3.10"
+    "@astrojs/internal-helpers" "0.7.6"
+    "@astrojs/markdown-remark" "6.3.11"
     "@astrojs/telemetry" "3.3.0"
     "@capsizecss/unpack" "^4.0.0"
     "@oslojs/encoding" "^1.1.0"
@@ -19920,7 +19920,7 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-shiki@^3.19.0, shiki@^3.21.0:
+shiki@^3.21.0:
   version "3.23.0"
   resolved "https://registry.yarnpkg.com/shiki/-/shiki-3.23.0.tgz#fca5332195e3afd6c94b384103ae9671a29c7fb9"
   integrity sha512-55Dj73uq9ZXL5zyeRPzHQsK7Nbyt6Y10k5s7OjuFZGMhpp4r/rsLBH0o/0fstIzX1Lep9VxefWljK/SKCzygIA==
@@ -20035,7 +20035,7 @@ slide@^1.1.5:
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
   integrity sha512-NwrtjCg+lZoqhFU8fOwl4ay2ei8PaqCBOUV3/ektPY9trO1yQ1oXEfmHAhKArUVUr/hOHvy5f6AdP17dCM0zMw==
 
-smol-toml@^1.5.2, smol-toml@^1.6.0:
+smol-toml@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/smol-toml/-/smol-toml-1.6.0.tgz#7911830b47bb3e87be536f939453e10c9e1dfd36"
   integrity sha512-4zemZi0HvTnYwLfrpk/CF9LOd9Lt87kAt50GnqhMpyF9U3poDAP2+iukq2bZsO/ufegbYehBkqINbsWxj4l4cw==
