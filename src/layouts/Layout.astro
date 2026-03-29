@@ -116,7 +116,7 @@ if (isPost) {
     author: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
     publisher: { '@type': 'Person', '@id': `${config.siteUrl}/#person` },
     inLanguage: 'ja-JP',
-    keywords: tag,
+    keywords: keywords.length > 0 ? keywords : undefined,
     speakable: {
       '@type': 'SpeakableSpecification',
       cssSelector: ['.content-white-inner'],
