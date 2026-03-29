@@ -9,6 +9,7 @@ tags:
   - テーマ
 headerImage: /images/blog/LRpecqU.png
 templateKey: blog-post
+noindex: true
 ---
 作りました。
 
