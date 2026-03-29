@@ -209,7 +209,7 @@
     "cookie": "1.1.1",
     "tmp": "0.2.5",
     "qs": "6.15.0",
-    "serialize-javascript": "7.0.4",
+    "serialize-javascript": "7.0.5",
     "flatted": "3.4.2",
     "fast-xml-parser": "5.5.7",
     "h3": "1.15.9",
