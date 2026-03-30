@@ -110,7 +110,7 @@
     "@babel/preset-modules": "0.1.6",
     "@babel/preset-react": "7.26.3",
     "@babel/preset-typescript": "7.24.1",
-    "@chromatic-com/storybook": "5.0.1",
+    "@chromatic-com/storybook": "5.1.1",
     "@cypress/code-coverage": "3.14.7",
     "@storybook/addon-a11y": "10.2.14",
     "@storybook/addon-docs": "10.2.14",
