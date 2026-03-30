@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Card from '../../components/Card/index.tsx';
 import Sidebar from '../../components/Sidebar/index.tsx';
 import config from '../../config/index.json';
 
@@ -59,20 +61,26 @@ const allPostsForSidebar = allPosts.map((p) => ({
         allPosts={allPostsForSidebar}
         totalCount={allPosts.length}
       />
-      <div class="col order-2" style="padding:2rem;">
-        <h2>{title}</h2>
-        <ul>
-          {posts.map((post) => {
+      <div class="col order-2">
+        <Breadcrumb year={year} title={`${year}年`} />
+        <div class="col-12" style="font-size:1.5rem; font-weight:bold; margin-bottom:1rem;">
+          {title}
+        </div>
+          {posts.map((post, index) => {
             const url = post.slug;
-            const dateStr = new Date(post.data.date).toISOString().split('T')[0];
             return (
-              <li>
-                {dateStr}&nbsp;&nbsp;
-                <a href={`/${url}/`}>{post.data.title}</a>
-              </li>
+              <Card
+                client:load
+                title={post.data.title}
+                date={post.data.date.toISOString()}
+                url={`/${url}/`}
+                headerImage={post.data.headerImage}
+                description={post.data.description}
+                tags={post.data.tags || []}
+                index={index}
+              />
             );
           })}
-        </ul>
       </div>
       <div class="col-xl-2 col-lg-1 order-3"></div>
     </div>
