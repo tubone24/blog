@@ -219,7 +219,7 @@
     "axios": "1.13.6",
     "markdown-it": "14.1.1",
     "lodash-es": "4.17.23",
-    "baseline-browser-mapping": "2.10.0",
+    "baseline-browser-mapping": "2.10.12",
     "immutable": "4.3.8",
     "svgo": "4.0.1"
   },
