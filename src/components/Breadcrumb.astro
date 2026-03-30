@@ -1,10 +1,12 @@
 ---
 interface Props {
   tag?: string;
+  year?: string;
+  month?: string;
   title: string;
 }
 
-const { tag, title } = Astro.props;
+const { tag, year, month, title } = Astro.props;
 ---
 
 <nav aria-label="パンくずリスト" class="breadcrumb-nav">
@@ -15,6 +17,11 @@ const { tag, title } = Astro.props;
     {tag && (
       <li class="breadcrumb-item">
         <a href={`/tag/${tag}/`}>{tag}</a>
+      </li>
+    )}
+    {year && month && (
+      <li class="breadcrumb-item">
+        <a href={`/${year}/`}>{year}年</a>
       </li>
     )}
     <li class="breadcrumb-item active" aria-current="page">
