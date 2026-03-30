@@ -5645,10 +5645,10 @@
     "@storybook/react-dom-shim" "10.2.14"
     react-docgen "^8.0.2"
 
-"@storybook/test-runner@0.24.2":
-  version "0.24.2"
-  resolved "https://registry.yarnpkg.com/@storybook/test-runner/-/test-runner-0.24.2.tgz#59deba0619f7b896f92e186ac108244014859716"
-  integrity sha512-76DbflDTGAKq8Af6uHbWTGnKzKHhjLbJaZXRFhVnKqFocoXcej58C9DpM0BJ3addu7fSDJmPwfR97OINg16XFQ==
+"@storybook/test-runner@0.24.3":
+  version "0.24.3"
+  resolved "https://registry.yarnpkg.com/@storybook/test-runner/-/test-runner-0.24.3.tgz#b990f7b5949636ae0ad024ce861f62ca4b484d8e"
+  integrity sha512-CVHPfMXSkJEvASQo+Xr2VHaLtujoaWhznx8FyvEwIrNR4jtmmSf3G8i0IjEsiOYWG2uw3RRuyRiQSJ93A5BRIA==
   dependencies:
     "@babel/core" "^7.22.5"
     "@babel/generator" "^7.22.5"
