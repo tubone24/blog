@@ -5,7 +5,7 @@
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
     "@astrojs/react": "4.4.2",
-    "@astrojs/rss": "4.0.15",
+    "@astrojs/rss": "4.0.18",
     "@beoe/rehype-mermaid": "^0.4.2",
     "@netlify/blobs": "7.0.1",
     "@popperjs/core": "2.11.8",
@@ -101,7 +101,7 @@
     "agent-browser:install": "agent-browser install"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.6",
+    "@astrojs/check": "0.9.8",
     "@babel/core": "7.24.4",
     "@babel/eslint-parser": "7.24.1",
     "@babel/helper-create-regexp-features-plugin": "7.24.7",
