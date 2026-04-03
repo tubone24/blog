@@ -19,7 +19,7 @@ const Navbar = ({ isPostPage = false }: { isPostPage?: boolean }) => (
     className={`${NavbarClass.join(" ")} navbar-night`}
     title="navbar"
   >
-    <div className="container">
+    <div className="container-fluid">
       <button
         type="button"
         className={style.navbarBrand + " navbar-brand btn btn-default"}

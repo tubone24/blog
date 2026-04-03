@@ -54,3 +54,5 @@ dist
 
 # Astro
 .astro
+.claude-profile
+.envrc
