@@ -1,13 +1,13 @@
 ---
 slug: 2026/04/11/midi-mcp-server-mcp-apps
-title: "MCP AppsでAIが作曲したMIDIの譜面をリアルタイムに可視化するMCPサーバーを作った"
+title: "MCP AppsでMIDIの譜面をリアルタイムに可視化する"
 date: 2026-04-11
 description: "MCP Appsの仕様を活用して、AIが作曲したMIDI楽曲のピアノロール譜面をClaude.ai上でリアルタイムに可視化するMCPサーバーを作りました。MCP Appsのアーキテクチャやライフサイクル、ontoolinputpartialによるプログレッシブレンダリング、Viewからの双方向通信（callServerTool・readServerResource・sendMessage）の仕組みを仕様レベルで解説しつつ、Cloudflare Workersへのデプロイ方法も紹介します。"
 tags:
   - MCP
   - MIDI
   - CloudflareWorkers
-headerImage: https://i.imgur.com/6B7WC7D.jpg
+headerImage: /images/blog/mcp-apps-dakrmode.png
 templateKey: blog-post
 useAi: true
 ---
@@ -37,6 +37,8 @@ https://midi-mcp-server.tubone24.workers.dev
 
 ちょうど1年くらい前に、[MCPについてLTで登壇した](https://slide-tubone24.pages.dev/slides/cline/1)ことがありました（といっても浅い内容でお恥ずかしい限りですが）。
 
+時が経つのは早いですね...。こわいです。
+
 そのときはStdIOベースのMIDI MCP Serverを作って[Cline](https://cline.bot/)と連携させる話だったのですが、MCPの世界はそこからさらに広がっていきました。
 
 <https://www.youtube.com/live/Daew0TUEmR4?si=ejFMXwZRqI8D_OLC&t=2199>
@@ -63,9 +65,11 @@ https://midi-mcp-server.tubone24.workers.dev
 
 プレゼンテーションの資料を作り、出来上がった資料をメールに添付して送信...。なんてことも可能になるわけです。
 
-しかし、**この方式には限界があります**。それは、MCPホスト上のチャットUIから体験が離れてしまうということです。
+しかし、**この方式には限界があります**。それは、**MCPホスト上のチャットUIから体験が離れてしまう**ということです。
 
-例えばデータの可視化をしたい場合、テキストで数値を並べても直感的ではありません。チャートやグラフを使って表現したいですが、従来のチャットUIにそれらを表示させることは難しいので、生成したチャートやグラフを画像化し、それらをダウンロードさせて確認してもらう、という体験になります。
+例えばデータの可視化をしたい場合、テキストで数値を並べても直感的ではありません。
+
+チャートやグラフを使って表現したいですが、従来のチャットUIにそれらを表示させることは難しいので、**生成したチャートやグラフを画像化し、それらをダウンロードさせて確認してもらう**、という体験になります。
 
 以前のmidi-mcp-serverやその進化系Skillsの[midi-agent-skill](https://github.com/tubone24/midi-agent-skill)でも、生成したMIDIやWAVファイルをclaude.aiの画面からダウンロードし、それを自分で再生ソフトを用いて再生する、という体験になってました。
 
