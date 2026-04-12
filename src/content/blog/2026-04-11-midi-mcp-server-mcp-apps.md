@@ -410,7 +410,7 @@ theorySelect.addEventListener('change', async () => {
 });
 ```
 
-サーバー側では `server.registerResource()` で通常のMCPリソースとして登録しているだけです。
+サーバー側では `server.registerResource()` で通常のMCPプリミティブのリソースとして登録しているだけです。
 
 ```typescript{file: "src/server.ts"}
 for (const res of MUSIC_THEORY_RESOURCES) {
