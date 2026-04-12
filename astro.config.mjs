@@ -16,6 +16,7 @@ import rehypeLazyImages from "./src/lib/rehype-lazy-images.mjs";
 import rehypeImageDimensions from "./src/lib/rehype-image-dimensions.mjs";
 import rehypePictureImages from "./src/lib/rehype-picture-images.mjs";
 import rehypeAltBadge from "./src/lib/rehype-alt-badge.mjs";
+import rehypeEmbedWrapper from "./src/lib/rehype-embed-wrapper.mjs";
 import netlifyHeaders from "./src/lib/astro-netlify-headers.mjs";
 import imageVariantFallback from "./src/lib/vite-image-fallback.mjs";
 
@@ -123,6 +124,7 @@ export default defineConfig({
       rehypeImageDimensions,
       rehypePictureImages,
       rehypeAltBadge,
+      rehypeEmbedWrapper,
     ],
     syntaxHighlight: false,
   },
