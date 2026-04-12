@@ -6,10 +6,10 @@ description: "MCP Appsの仕様を活用して、AIが作曲したMIDI楽曲の�
 tags:
   - MCP
   - MIDI
-  - CloudflareWorkers
+  - MCP Apps
 headerImage: /images/blog/mcp-apps-dakrmode.png
 templateKey: blog-post
-useAi: true
+useAi: false
 ---
 
 桜も散ってしまい、センチメンタルな曲が聞きたくなりました。
@@ -25,7 +25,7 @@ useAi: true
 
 <https://midi-mcp-server.tubone24.workers.dev>
 
-Claude.aiから使う場合は、 **設定 → コネクタ → カスタムコネクタを追加** から、上記URLを貼り付けるだけで接続できます。認証なども不要です。
+[Claude.ai](https://claude.ai)から使う場合は、 **設定 → コネクタ → カスタムコネクタを追加** から、上記URLを貼り付けるだけで接続できます。認証なども不要です。
 
 ```text
 https://midi-mcp-server.tubone24.workers.dev
@@ -41,11 +41,13 @@ https://midi-mcp-server.tubone24.workers.dev
 
 そのときはStdIOベースのMIDI MCP Serverを作って[Cline](https://cline.bot/)と連携させる話だったのですが、MCPの世界はそこからさらに広がっていきました。
 
-<https://www.youtube.com/live/Daew0TUEmR4?si=ejFMXwZRqI8D_OLC&t=2199>
+<https://www.youtube.com/live/Daew0TUEmR4?t=2199>
 
 その1つが、2026年1月にリリースされた[MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview)という拡張仕様です。
 
-これは従来のテキスト応答に加えて、**チャットUI上にインタラクティブなHTML画面を直接埋め込める**というもので、はじめて知ったときは、Googleが主導する[A2UI](https://a2ui.org/)（Agent-to-User Interface）と何が違うのか？と思って、自分の理解力では追いつけず、**正直あまり向き合っていませんでした**。ですが、実際に触ってみるとこれがかなり面白いんですよね。
+これは従来のテキスト応答に加えて、**チャットUI上にインタラクティブなHTML画面を直接埋め込める**というものです。はじめて知ったときは、Googleが主導する[A2UI](https://a2ui.org/)（A Protocol for Agent-Driven Interfaces）と何が違うのか？と思って、自分の理解力では追いつけず、**正直あまり向き合っていませんでした**。
+
+ですが、実際に触ってみるとこれがかなり面白いんですよね。
 
 もともとギターを弾いていた（下手の横好きですが）こともあり、MIDIには馴染みがありました。MIDIファイルを生成するだけなら[Skills](https://github.com/tubone24/midi-agent-skill)でもできますが、**AIが作曲した楽曲をその場でピアノロール譜面として可視化し、さらにUI上のボタンからサーバーのツールを呼び出したり、Claudeに「続きを作って」とリクエストしたりできる**としたら、MCP Appsの仕様を広くデモできるのでは...と考えたのがきっかけです。
 
@@ -71,7 +73,7 @@ https://midi-mcp-server.tubone24.workers.dev
 
 チャートやグラフを使って表現したいですが、従来のチャットUIにそれらを表示させることは難しいので、**生成したチャートやグラフを画像化し、それらをダウンロードさせて確認してもらう**、という体験になります。
 
-以前のmidi-mcp-serverやその進化系Skillsの[midi-agent-skill](https://github.com/tubone24/midi-agent-skill)でも、生成したMIDIやWAVファイルをclaude.aiの画面からダウンロードし、それを自分で再生ソフトを用いて再生する、という体験になってました。
+以前のmidi-mcp-serverやその進化系Skillsのmidi-agent-skillでも、生成したMIDIやWAVファイルをclaude.aiの画面からダウンロードし、それを自分で再生ソフトを用いて再生する、という体験になってました。
 
 ![Skillでは作成物をダウンロードさせ、自分で再生させる必要がある](/images/blog/mcp-apps-beforeskill.png)
 
@@ -85,11 +87,11 @@ https://midi-mcp-server.tubone24.workers.dev
 
 MCP Appsを使う利点は、**会話のコンテキスト内にUIが存在する**点にあります。
 
-ユーザーはブラウザのタブを切り替えることなく、テキストでは表現しきれない情報にアクセスできます。さらにMCP Appsのiframeからサーバーのツールを呼び出したり、ホスト（Claude.ai）にメッセージを送信してモデルに再度推論を依頼できます。この一貫性が魅力なのです。
+ユーザーは**ブラウザのタブを切り替えることなく**、テキストでは表現しきれない情報にアクセスできます。さらにMCP Appsのiframeからサーバーのツールを呼び出したり、ホスト（Claude.ai）にメッセージを送信してモデルに再度推論を依頼できます。**この一貫性が魅力なのです**。
 
 セキュリティ面では、サンドボックスiframeによりホスト側のDOM、Cookie、LocalStorageへのアクセスが制限されているため、サードパーティのMCPサーバーが提供するUIでも安全にレンダリングできるのもポイントです。
 
-なお、今回の記事ではMCPホストはClaude.aiでの動作を前提に進めていきますので他のサービスで利用できるかは不明です。
+なお、今回の記事ではMCPホストはClaude.aiでの動作を前提に進めていきますので他のサービスで利用できるかは調査してないです。
 
 ## MCP Appsのアーキテクチャとライフサイクル
 
@@ -97,15 +99,15 @@ MCP Appsのアーキテクチャを、midi-mcp-serverの動作を追いながら
 
 ### 全体の流れ
 
-MCP Appsの動作は、大きく4つのフェーズに分けて理解できます（[MCP Apps Overview](https://modelcontextprotocol.io/extensions/apps/overview)より）。
+MCP Appsの動作は、大きく4つのフェーズに分けて理解できます（[MCP Apps Specification（2026-01-26）](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx)より）。
 
-まず**Discoveryフェーズ**では、ホスト（Claude.ai）がMCPサーバーに接続してツールリストを取得します。このとき、ツールの `_meta.ui.resourceUri` フィールドがあれば**このツールはMCP Appsとしてレンダリング可能なUI付きツール**と判断されます。
+まず**Connection & Discoveryフェーズ**では、ホスト（Claude.ai）がMCPサーバーに接続してツールリストを取得します。このとき、ツールの `_meta.ui.resourceUri` フィールドがあれば**このツールはMCP Appsとしてレンダリング可能なUI付きツール**と判断されます。
 
-次の**Initializeフェーズ**では、ホストがサンドボックスiframeを作成し、 `ui://` URIスキームで指定されたHTMLリソースをロードします。ここでホストとView間のハンドシェイクが行なわれます。ポイントは、**ツールが実際に呼び出される前にUIリソースを事前に読み込める**ことです。（読み込むかどうかはMCPホスト次第ではあります）これが後述する**プログレッシブレンダリング**を可能にしています。
+次の**UI Initializationフェーズ**では、ホストがサンドボックスiframeを作成し、 `ui://` URIスキームで指定されたHTMLリソースをロードします。ここでホストとView間のハンドシェイクが行なわれます。ポイントは、**ツールが実際に呼び出される前にUIリソースを事前に読み込める**ことです。（読み込むかどうかはMCPホスト次第ではあります）これが後述する**プログレッシブレンダリング**を可能にしています。
 
-**Interactiveフェーズ**ではLLMがツールを呼び出すと、ツール入力やツール結果がViewにプッシュされます。そしてLLMがまだツール引数を生成している途中でも、部分的なJSONがViewに逐次プッシュされます。
+**Interactive Phase**ではLLMがツールを呼び出すと、ツール入力やツール結果がViewにプッシュされます。そしてLLMがまだツール引数を生成している途中でも、部分的なJSONがViewに逐次プッシュされます。
 
-最後の**Teardownフェーズ**では、ホストがViewを破棄する前にクリーンアップの通知が送られます。
+最後の**Cleanupフェーズ**では、ホストがViewを破棄する前に `onteardown` フックを通じてクリーンアップの通知が送られます。
 
 この一連の流れを今回のmidi-mcp-serverのシーケンス図で表すと次のようになります。
 
@@ -116,17 +118,17 @@ sequenceDiagram
     participant Server as MCPサーバー
     participant View as View（iframe）
 
-    Note over Host,Server: Discoveryフェーズ
+    Note over Host,Server: Connection & Discoveryフェーズ
     Host->>Server: ツールリスト取得
     Server-->>Host: create_midi（_meta.ui.resourceUri付き）
 
-    Note over Host,View: Initializeフェーズ
+    Note over Host,View: UI Initializationフェーズ
     Host->>Server: ui://midi-preview/app.html を取得
     Server-->>Host: バンドル済みHTML
     Host->>View: サンドボックスiframeでロード
     View-->>Host: ui/initialize ハンドシェイク
 
-    Note over User,View: Interactiveフェーズ
+    Note over User,View: Interactive Phase
     User->>Host: 最近流行りのJ-POPをMIDIで作って
     Host->>Server: tools/call（create_midi）
     Note over Host,View: LLMが引数を生成中
@@ -146,7 +148,7 @@ sequenceDiagram
     View->>Host: sendMessage（続きを作って）
     Note over Host: Claudeが新しいターンを開始
 
-    Note over Host,View: Teardownフェーズ
+    Note over Host,View: Cleanupフェーズ
     Host-->>View: onteardown
     Note over View: AudioContext破棄・リソースクリーンアップ
 ```
@@ -491,7 +493,7 @@ MCP Appsのツール結果には3つのデータ経路があり、用途によ�
 
 `content` はLLMに公開されるデータです。テキストレスポンスや生成結果のサマリーなど、モデルが次のターンで参照するべき情報を入れます。midi-mcp-serverでは `MIDI file generated successfully. 2 track(s), 120 BPM.` のようなテキストを返しています。
 
-`structuredContent` はLLMには見えず、Viewだけが受け取るデータです。大量のデータをUIに渡したいけどトークンを消費したくない場合に便利です。midi-mcp-serverでも、**まさにこの仕組みを使ってMIDI base64データをViewに渡しています**。MIDIのbase64は数KB〜数十KBに及ぶため、これを `content` で返してしまうとLLMが大量のトークンを消費してしまいますが、 `structuredContent` 経由ならLLMには見えず、ダウンロード用にView側でのみ利用できます。波形データや詳細な分析結果など、人間向けの表示データを大量に渡すケースでも同様に活用できます。
+`structuredContent` はViewのレンダリング用に渡す構造化データです。ホストの実装によってはLLMのコンテキストに渡らないよう制御されるため、大量のデータをUIに渡しつつトークン消費を抑えたい場合に便利です。midi-mcp-serverでも、**まさにこの仕組みを使ってMIDI base64データをViewに渡しています**。MIDIのbase64は数KB〜数十KBに及ぶため、これを `content` で返してしまうとLLMが大量のトークンを消費してしまいますが、 `structuredContent` 経由ならダウンロード用にView側でのみ利用できます。波形データや詳細な分析結果など、人間向けの表示データを大量に渡すケースでも同様に活用できます。
 
 ![レスポンスには文字情報が入るけどBase64は入らない](/images/blog/mcp-apps-response.png)
 
@@ -499,7 +501,7 @@ MCP Appsのツール結果には3つのデータ経路があり、用途によ�
 
 `_meta` はタイムスタンプやバージョンなどのメタデータ用で、LLMには非公開です。
 
-この使い分けは、MCP Appsを設計するうえでかなり重要です。**UIの表示にしか使わないデータは `structuredContent` に逃がす**のがベストプラクティスで、 `content` に大量のデータを詰めるとトークンを消費してしまいます。
+この使い分けは、MCP Appsを設計するうえでかなり重要です。**UIの表示にしか使わないデータは `structuredContent` に逃がす**のが定番で、 `content` に大量のデータを詰めるとトークンを消費してしまいます。
 
 ## Claude.aiで使ってみる
 
@@ -517,7 +519,7 @@ https://midi-mcp-server.tubone24.workers.dev
 
 これだけで、AIが `create_midi` ツールを呼び出し、BPM、トラック、ノート情報を構造化データとして生成し始めます。
 
-もし、もう少し音楽理論に沿って作曲してほしければ、MCPのリソースプリミティブで展開されている**Music Theory Reference**を+ボタンから選択し、コンテキストに追加することもできます。
+もし、もう少し音楽理論に沿って作曲してほしければ、MCPのリソースプリミティブで展開されている**Music Theory Reference**を+ボタンから選択し、コンテキストに追加するのも便利です。
 
 ![claude.aiのコンテキストにMusic Theory Referenceを追加している様子](/images/blog/mcp-apps-resource-connector.png)
 
