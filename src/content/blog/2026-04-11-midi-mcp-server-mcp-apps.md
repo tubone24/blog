@@ -45,7 +45,7 @@ https://midi-mcp-server.tubone24.workers.dev
 
 その1つが、2026年1月にリリースされた[MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview)という拡張仕様です。
 
-これは従来のテキスト応答に加えて、**チャットUI上にインタラクティブなHTML画面を直接埋め込める**というものです。はじめて知ったときは、Googleが主導する[A2UI](https://a2ui.org/)（A Protocol for Agent-Driven Interfaces）と何が違うのか？と思って、自分の理解力では追いつけず、**正直あまり向き合っていませんでした**。
+これは従来のテキスト応答に加えて、**チャットUI上にインタラクティブなHTML画面を直接埋め込める**というものです。はじめて知ったときは、Googleが主導する[A2UI](https://a2ui.org/)（Agent-to-User Interface）と何が違うのか？と思って、自分の理解力では追いつけず、**正直あまり向き合っていませんでした**。
 
 ですが、実際に触ってみるとこれがかなり面白いんですよね。
 
