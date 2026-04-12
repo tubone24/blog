@@ -12,26 +12,46 @@ templateKey: blog-post
 useAi: true
 ---
 
-桜も散ってしまい、センチメンタルな曲が聞きたくなりました。ふと思い立って、AIに「最近流行りのJ-POPをMIDIで作って」と頼んでみたら、目の前でピアノロールの譜面がリアルタイムに描かれていきました。
+桜も散ってしまい、センチメンタルな曲が聞きたくなりました。
 
 ## Table of Contents
 
 ```toc
 ```
 
+## 忙しい人向け
+
+今回作ったリモートMCPサーバーのURLはこちらです。
+
+<https://midi-mcp-server.tubone24.workers.dev>
+
+Claude.aiから使う場合は、 **設定 → コネクタ → カスタムコネクタを追加** から、上記URLを貼り付けるだけで接続できます。認証なども不要です。
+
+```text
+https://midi-mcp-server.tubone24.workers.dev
+```
+
+接続後の使い方や実際の動作イメージは [Claude.aiで使ってみる](#claudeaiで使ってみる) セクションを参照してください。
+
 ## はじめに
 
-以前、[MCPについてLTで登壇した](https://slide-tubone24.pages.dev/slides/cline/1)ことがありました（といっても浅い内容でお恥ずかしい限りですが）。そのときはStdIOベースのMCPサーバーを作って[Cline](https://cline.bot/)と連携させる話だったのですが、MCPの世界はそこからさらに広がっていきました。
+ちょうど1年くらい前に、[MCPについてLTで登壇した](https://slide-tubone24.pages.dev/slides/cline/1)ことがありました（といっても浅い内容でお恥ずかしい限りですが）。
 
-その1つが、2026年1月にリリースされた[MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview)という拡張仕様です。これは従来のテキスト応答に加えて、**チャットUI上にインタラクティブなHTML画面を直接埋め込める**というもので、はじめて知ったときは、Googleが主導する[A2UI](https://a2ui.org/)（Agent-to-User Interface、[A2A](https://a2a-protocol.org/)とは独立したプロトコルですが相互補完する関係にあります）と何が違うのか？と思って、自分の理解力では追いつけず、正直あまり向き合っていませんでした。ですが、実際に触ってみるとこれがかなり面白いんですよね。
+そのときはStdIOベースのMIDI MCP Serverを作って[Cline](https://cline.bot/)と連携させる話だったのですが、MCPの世界はそこからさらに広がっていきました。
 
-もともとギターを弾いていた（下手の横好きですが）こともあり、MIDIには馴染みがありました。MIDIファイルを生成するだけなら既存のツールでもできますが、**AIが作曲した楽曲をその場でピアノロール譜面として可視化し、さらにUI上のボタンからサーバーのツールを呼び出したり、Claudeに「続きを作って」とリクエストしたりできる**としたら、MCP Appsの仕様を広くデモできるのでは...と考えたのがきっかけです。
+<https://www.youtube.com/live/Daew0TUEmR4?si=ejFMXwZRqI8D_OLC&t=2199>
 
-そこで作ったのが[midi-mcp-server](https://github.com/tubone24/midi-mcp-server)です。自分の手作りで粗削りなところも多いですが、よければお付き合いください。
+その1つが、2026年1月にリリースされた[MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview)という拡張仕様です。
+
+これは従来のテキスト応答に加えて、**チャットUI上にインタラクティブなHTML画面を直接埋め込める**というもので、はじめて知ったときは、Googleが主導する[A2UI](https://a2ui.org/)（Agent-to-User Interface）と何が違うのか？と思って、自分の理解力では追いつけず、**正直あまり向き合っていませんでした**。ですが、実際に触ってみるとこれがかなり面白いんですよね。
+
+もともとギターを弾いていた（下手の横好きですが）こともあり、MIDIには馴染みがありました。MIDIファイルを生成するだけなら[Skills](https://github.com/tubone24/midi-agent-skill)でもできますが、**AIが作曲した楽曲をその場でピアノロール譜面として可視化し、さらにUI上のボタンからサーバーのツールを呼び出したり、Claudeに「続きを作って」とリクエストしたりできる**としたら、MCP Appsの仕様を広くデモできるのでは...と考えたのがきっかけです。
+
+そこで作った(大幅に作り変えた)のが[midi-mcp-server](https://github.com/tubone24/midi-mcp-server)です。自分の手作りで粗削りなところも多いですが、よければお付き合いください。
 
 ::github{repo="tubone24/midi-mcp-server"}
 
-（ここにClaude.aiでmidi-mcp-serverを使っているデモのGIF/スクリーンショットを挿入）
+![MIDI MCP Serverを使ってユーロビートを作る過程](/images/blog/mcp-apps-demo1.gif)
 
 以下では、midi-mcp-serverの実装を題材にしつつ、MCP Appsの仕様を実際の画面とコードで追っていきます。
 
@@ -39,46 +59,51 @@ useAi: true
 
 ### 従来のMCPツールとの違い
 
-[@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk)の `server.tool()` でMCPサーバーを作ったことがある方なら、テキストや画像をレスポンスとして返すパターンには慣れているはずです。
+[@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk)の `server.registerTool()` でMCPサーバーを作ったことがある方なら、MCPサーバーでツールを作り、AIエージェントが単なるテキスト生成を超えた仕事をこなすことができることは想像できるでしょう。
 
-しかし、この方式には限界があります。データの可視化をしたい場合、テキストで数値を並べても直感的ではありませんし、チャートやグラフ、今回のようなピアノロール譜面を表示したい場合、テキストレスポンスでは表現力が足りないわけです。
+プレゼンテーションの資料を作り、出来上がった資料をメールに添付して送信...。なんてことも可能になるわけです。
 
-[MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview)はこの課題を解決します。**MCPサーバーがサンドボックス化されたiframe内にインタラクティブなHTML UIを直接配信できる仕組み**です。通常のMCPツールとMCP Appsの違いを簡単にまとめると次のようになります。
+しかし、**この方式には限界があります**。それは、MCPホスト上のチャットUIから体験が離れてしまうということです。
 
-| 項目 | 通常のMCPツール | MCP Apps |
-|---|---|---|
-| 応答形式 | テキスト・画像・構造化データ | インタラクティブなHTML UI |
-| ユーザー操作 | チャットでの返答のみ | ボタン、フォーム、ダッシュボード等 |
-| 双方向通信 | なし | postMessageによるJSON-RPC |
-| セキュリティ | ― | サンドボックスiframeで強制隔離 |
+例えばデータの可視化をしたい場合、テキストで数値を並べても直感的ではありません。チャートやグラフを使って表現したいですが、従来のチャットUIにそれらを表示させることは難しいので、生成したチャートやグラフを画像化し、それらをダウンロードさせて確認してもらう、という体験になります。
+
+以前のmidi-mcp-serverやその進化系Skillsの[midi-agent-skill](https://github.com/tubone24/midi-agent-skill)でも、生成したMIDIやWAVファイルをclaude.aiの画面からダウンロードし、それを自分で再生ソフトを用いて再生する、という体験になってました。
+
+![Skillでは作成物をダウンロードさせ、自分で再生させる必要がある](/images/blog/mcp-apps-beforeskill.png)
+
+[MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview)はこのような課題を解決するためのアイディアです。
+
+**MCPサーバーがサンドボックス化されたiframe内にインタラクティブなHTML UIを直接配信できる仕組み**で、専用のAIエージェントを一から作らなくても、既存のチャットクライアント（Claude.aiなど）上で、シームレスにリッチな体験を作ることができます。
 
 ### なぜWebアプリではなくMCP Appsなのか
 
-「別にWebアプリを作ってリンクを送ればいいのでは？」という疑問もあるかもしれません。
+「別にWebアプリを作ってリンクを送ればいいのでは？」という疑問もあるかもしれません。まぁそうですよね。
 
-MCP Appsを使う利点は、**会話のコンテキスト内にUIが存在する**点にあります。ユーザーはタブを切り替える必要がなく、UIの状態はチャットの流れと一体化しています。さらにMCP Appsのiframeからサーバーのツールを呼び出したり、ホスト（Claude.ai）にメッセージを送信してモデルに再度推論を依頼できます。
+MCP Appsを使う利点は、**会話のコンテキスト内にUIが存在する**点にあります。
+
+ユーザーはブラウザのタブを切り替えることなく、テキストでは表現しきれない情報にアクセスできます。さらにMCP Appsのiframeからサーバーのツールを呼び出したり、ホスト（Claude.ai）にメッセージを送信してモデルに再度推論を依頼できます。この一貫性が魅力なのです。
 
 セキュリティ面では、サンドボックスiframeによりホスト側のDOM、Cookie、LocalStorageへのアクセスが制限されているため、サードパーティのMCPサーバーが提供するUIでも安全にレンダリングできるのもポイントです。
 
-現時点でMCP Appsに対応しているクライアントとしては、[Claude](https://claude.ai)、[Claude Desktop](https://claude.com/download)、[VS Code GitHub Copilot](https://code.visualstudio.com/)、[Goose](https://block.github.io/goose/)、[Postman](https://www.postman.com/)、[MCPJam](https://www.mcpjam.com/)などがあります。今回の記事ではClaude.aiでの動作を前提に進めていきます。
+なお、今回の記事ではMCPホストはClaude.aiでの動作を前提に進めていきますので他のサービスで利用できるかは不明です。
 
 ## MCP Appsのアーキテクチャとライフサイクル
 
-ここからがこの記事の本題です。MCP Appsのアーキテクチャを、midi-mcp-serverの動作を追いながら見ていきます。
+MCP Appsのアーキテクチャを、midi-mcp-serverの動作を追いながら見ていきます。
 
 ### 全体の流れ
 
 MCP Appsの動作は、大きく4つのフェーズに分けて理解できます（[MCP Apps Overview](https://modelcontextprotocol.io/extensions/apps/overview)より）。
 
-まず**Discoveryフェーズ**では、ホスト（Claude.ai）がMCPサーバーに接続してツールリストを取得します。このとき、ツールの `_meta.ui.resourceUri` フィールドがあれば**このツールはMCP Appsに対応している**と判断されます。
+まず**Discoveryフェーズ**では、ホスト（Claude.ai）がMCPサーバーに接続してツールリストを取得します。このとき、ツールの `_meta.ui.resourceUri` フィールドがあれば**このツールはMCP Appsとしてレンダリング可能なUI付きツール**と判断されます。
 
-次の**Initializeフェーズ**では、ホストがサンドボックスiframeを作成し、 `ui://` URIスキームで指定されたHTMLリソースをロードします。ここでホストとView間のハンドシェイクが行なわれます。ポイントは、**ツールが実際に呼び出される前にUIリソースを事前に読み込める**ことです。これが後述するプログレッシブレンダリングを可能にしています。
+次の**Initializeフェーズ**では、ホストがサンドボックスiframeを作成し、 `ui://` URIスキームで指定されたHTMLリソースをロードします。ここでホストとView間のハンドシェイクが行なわれます。ポイントは、**ツールが実際に呼び出される前にUIリソースを事前に読み込める**ことです。（読み込むかどうかはMCPホスト次第ではあります）これが後述する**プログレッシブレンダリング**を可能にしています。
 
-**Interactiveフェーズ**が本番です。LLMがツールを呼び出すと、ツール入力やツール結果がViewにプッシュされます。そしてLLMがまだツール引数を生成している途中でも、部分的なJSONがViewに逐次プッシュされます。
+**Interactiveフェーズ**ではLLMがツールを呼び出すと、ツール入力やツール結果がViewにプッシュされます。そしてLLMがまだツール引数を生成している途中でも、部分的なJSONがViewに逐次プッシュされます。
 
 最後の**Teardownフェーズ**では、ホストがViewを破棄する前にクリーンアップの通知が送られます。
 
-この一連の流れをシーケンス図で表すと次のようになります。
+この一連の流れを今回のmidi-mcp-serverのシーケンス図で表すと次のようになります。
 
 ```mermaid
 sequenceDiagram
@@ -172,17 +197,31 @@ registerAppTool(server, 'create_midi', {
 });
 ```
 
-`registerAppResource` で登録したHTMLリソースは、ホストからのリクエストに応じて配信されます。このHTMLは後述する[Vite](https://vite.dev/)の[vite-plugin-singlefile](https://www.npmjs.com/package/vite-plugin-singlefile)で単一ファイルにバンドルされたもので、CSS・JavaScriptがすべてインラインに含まれています。
+`registerAppResource` で登録したHTMLリソースは、**ホストからのリクエストに応じて配信**されます。このHTMLは[Vite](https://vite.dev/)の[vite-plugin-singlefile](https://www.npmjs.com/package/vite-plugin-singlefile)で単一ファイルにバンドルされたもので、CSS・JavaScriptがすべてインラインに含まれています。
 
-ちなみに、MCP Apps対応でないツールは従来どおり `server.tool()` で登録すればOKです。UIを持つツールだけ `registerAppTool` を使い分けます。
+ちなみに、MCP Apps対応でないツールは従来どおり `server.registerTool()` で登録すればOKです。UIを持つツールだけ `registerAppTool` を使い分けます。
 
-midi-mcp-serverではUIリソースに加えて、7つの音楽理論リソース（和声法、コード進行、対位法、モード・スケール、オーケストレーション、リズムパターン、ボイスリーディング）も `server.registerResource()` で登録しています。これらはMCP Apps特有の機能ではなく通常のMCPリソースですが、後述する `readServerResource` でView側から読み出す形で活用しています。
+midi-mcp-serverではUIリソースとは別に、7つの音楽理論リソース（和声法、コード進行、対位法、モード・スケール、オーケストレーション、リズムパターン、ボイスリーディング）を `server.registerResource()` で登録しています。ここでいう`Resource`はMCP AppsのUIリソースではなく、[MCPのプリミティブのリソース](https://modelcontextprotocol.io/docs/learn/server-concepts#resources)です（紛らわしい...。）。
 
-## プログレッシブレンダリング：ontoolinputpartialの仕組み
+これらはチャットUIから直接呼び出すことはできませんが、リソースUI(以降Viewと呼ぶ)のJavaScriptから `readServerResource` を使ってアクセスもできます。
+
+例えば、**Music Theory Reference**というパネルでは、7つの音楽理論リソースをタブ切り替えで参照できるようにしていますが、表示しているMarkdownの内容はMCPサーバーのリソース（プリミティブ）から取得したものです。
+
+![Music Theory ReferenceをAppsから表示する](/images/blog/mcp-apps-show-resource.png)
+
+このように既存のMCPプリミティブとも組み合わせて使えるのもMCP Appsの魅力の1つです。
+
+## プログレッシブレンダリング
 
 **MCP Appsで一番「おお...」となる仕様がこれです。** 自分の拙い説明で伝わるか不安ですが、がんばって書いてみます。
 
-LLMがツール引数のJSONを生成しているとき、まだJSONは途中までしかできていません。普通に考えれば構文エラーのJSONなのでパースできないはずです。ところがMCP Appsのホストは、この不完全なJSONを**常にvalidな形にヒール**（欠けているフィールドをnullやデフォルト値で補完）して、Viewに逐次プッシュしてくれます。
+ご自身でWeb画面をもったAIエージェントアプリを作ったことがある方ならピンとくるかもしれませんが、**AIがツール引数のJSONを生成している途中の段階をあたかも作っていますよ〜と可視化する体験って結構難しくないでしょうか**？
+
+テキストであれば、ストリーミングで逐次文字を出すことによって、それらは簡単に実現できますが、リッチなUIでこれを実現しようとすると難しさがあります。
+
+なぜならLLMがツール引数のJSONを生成しているとき、**まだJSONは途中までしかできていません**。普通に考えれば構文エラーのJSONなのでパースできないはずです。なので、生成途中のJSONを使って何かをする、ということは基本的にはできないわけです。
+
+ところがMCP Appsのホストは、この不完全なJSONを**常にvalidな形にヒール**（閉じられていない `]` や `}` などのブラケット・ブレースを閉じて、構文的に有効なJSONを生成）して、Viewに逐次プッシュしてくれます。このLLMのストリーミングに合わせて段階的にUIを描画することをプログレッシブレンダリングと呼びます。
 
 これが `ontoolinputpartial` フックで受け取れるデータです。
 
@@ -199,11 +238,11 @@ app.ontoolinputpartial = (params) => {
 };
 ```
 
-midi-mcp-serverでは、AIが1つ目のトラックの音符を生成し始めた瞬間からピアノロールが描画され始め、音符が追加されるたびにリアルタイムで譜面が更新されていきます。**テキストが1文字ずつ表示されるストリーミングのピアノロール版です。**
+midi-mcp-serverでは、AIが1つ目のトラックの音符を生成し始めた瞬間からピアノロールが描画され始め、音符が追加されるたびにリアルタイムで譜面が更新されていきます。**テキストが1文字ずつ表示されるストリーミングのピアノロール版と思っていただければわかりやすいでしょう。**
 
-（ここにAIが作曲中のピアノロールが段階的に描画されている様子のスクリーンショット/GIFを挿入）
+![プログレッシブレンダリングによってピアノロールがリアルタイムに作られていく図](/images/blog/mcp-apps-progressive-render.gif)
 
-実装上の工夫として、 `args?.composition?.tracks` の存在チェックをしています。ヒール済みとはいえ、まだ `tracks` プロパティが存在しないタイミングもあるため、描画可能な状態になるまではスキップしています。この**まだ無理ならスルーする**パターンは、 `ontoolinputpartial` を使うときの定番です。
+実装上の工夫として、 `args?.composition?.tracks` の存在チェックをしています。ヒール済みとはいえ、まだ `tracks` プロパティが存在しないタイミングもあるため、描画可能な状態になるまではスキップしています。
 
 そして引数の生成が完了すると `ontoolinput` フックが発火し、完全なデータで最終描画とMIDI生成を行ないます。
 
@@ -213,7 +252,9 @@ app.ontoolinput = (params) => {
 };
 ```
 
-`ontoolinputpartial` との違いは `{ generateMidi: true }` オプションです。部分データの段階ではMIDI生成を行なわず（どうせまだ不完全なので）、 `ontoolinput` で完全なデータが揃ってから生成する、という使い分けです。プログレッシブレンダリングを実装するときの定型パターンとして覚えておくと便利です。
+`ontoolinputpartial` との違いは `{ generateMidi: true }` オプションです。部分データの段階ではMIDI生成を行なわず（どうせまだ不完全なので）、 `ontoolinput` で完全なデータが揃ってから生成する、という使い分けです。
+
+プログレッシブレンダリングを実装するときの定型パターンとして覚えておくと便利です。
 
 ## Appクラスのフックでライフサイクルを管理する
 
@@ -233,22 +274,14 @@ app.ontoolresult = (params) => {
     btnDownload.disabled = false;
     return;
   }
-  // フォールバック：structuredContent 非対応の旧ホスト向け
-  const rb = params.content?.find((c) => c.type === 'resource');
-  if (rb?.type === 'resource') {
-    const text = rb.resource.text;
-    if (text) { currentMidiBase64 = text; btnDownload.disabled = false; }
-  }
 };
 ```
 
 ここでのポイントは、サーバーが返したMIDI base64データを **`structuredContent` 経由** で取得している点です。 `content` ではなく `structuredContent` を使うことで、**LLMにbase64の大量トークンを消費させずにView側だけにデータを渡せる**のがうれしいところです。 `structuredContent` の詳細は後述しますが、MIDIのbase64は数KB〜数十KBに及ぶため、 `content` で返してしまうとLLMが毎ターンこの塊を読み続けることになってしまい、もったいないわけです。
 
-なお、 `structuredContent` 非対応の旧ホストでも動くように、 `content` の `type: 'resource'` 経由のフォールバックも入れています。自分のような手探り実装だと互換性のケアを忘れがちなので、こういう細かい配慮は忘れずに...と毎回反省しています。
+また、MCP AppsのViewはサンドボックスiframe内で動作するため、 `<a download>` のような通常のダウンロード手法が使えません。代わりに、ここで取得したBase64データを後述の `app.downloadFile()` に渡してホスト経由でダウンロードさせる仕組みになっています。
 
-MCP AppsのViewはサンドボックスiframe内で動作するため、 `<a download>` のような通常のダウンロード手法が使えません。代わりに、ここで取得したBase64データを後述の `app.downloadFile()` に渡してホスト経由でダウンロードさせる仕組みになっています。
-
-（ここに完成したピアノロールと再生UIのスクリーンショットを挿入）
+![MCP Appsから直接ファイルのダウンロードはできないので、ホスト経由でダウンロードさせる](/images/blog/mcp-apps-download-midi.gif)
 
 ### ontoolcancelledとonteardown
 
@@ -270,7 +303,7 @@ app.onteardown = (_params, _e) => {
 
 `ontoolcancelled` はユーザーがツール呼び出しを中断した場合に発火し、 `onteardown` はホストがView自体を破棄する際に発火します。midi-mcp-serverでは音声再生の停止や[AudioContext](https://developer.mozilla.org/ja/docs/Web/API/AudioContext)の破棄を行なっています。**リソースリークを防ぐためにも、この2つのフックは忘れずに実装しておきたいところです。**
 
-### onhostcontextchanged：テーマ追従
+### onhostcontextchanged
 
 ホスト環境が変化したとき（ダークモード/ライトモードの切り替え等）に発火するフックです。
 
@@ -288,7 +321,7 @@ app.onhostcontextchanged = (params) => {
 
 `@modelcontextprotocol/ext-apps` が提供する `applyHostStyleVariables` ・ `applyDocumentTheme` ・ `applyHostFonts` を呼ぶだけでホストのスタイル変数・テーマ・フォントを反映できます。テーマが変わったらピアノロールも再描画して、グリッド線やテキストの色を合わせるようにしています。
 
-（ここにダークモードとライトモードでのピアノロール表示比較のスクリーンショットを挿入）
+![テーマ変更に合わせてUIの色も変わる](/images/blog/mcp-apps-dakrmode.png)
 
 さらに `params.context.displayMode` で現在の表示モード（後述する `fullscreen` 等）も取得できるため、表示モード変更時のUI更新もここで行なえます。
 
@@ -321,7 +354,7 @@ app.connect()
 
 MCP Appsが**単なる表示するだけのUI**ではなく**アプリケーション**と呼ばれる所以が、この双方向通信の仕組みです。 `App` クラスはフック以外にも、**View側からホストやサーバーと対話するためのメソッド**を提供しています。
 
-midi-mcp-serverではこれらのメソッドをフル活用しているので、1つずつ実際の動作と合わせて見ていきましょう。
+midi-mcp-serverではこれらのメソッドをフル活用（ただ使いたくて詰め込んだだけ）しているので、1つずつ実際の動作と合わせて見ていきましょう。
 
 ### callServerTool
 
@@ -350,13 +383,13 @@ async function analyzeChord() {
 
 ユーザーがChord Analyzerにコード名（例: `Cmaj7`）を入力してAnalyzeボタンを押すと、View側から `parse_chord` ツールが呼び出されます。**このやり取りはLLMを介さず、View→サーバー間で直接行なわれる**のがポイントです。LLMのターンを消費せず、レスポンスも高速です。
 
-（ここにChord Analyzerパネルで `Cmaj7` を解析した結果のスクリーンショットを挿入）
+![Chord Analyzerを実行している様子](/images/blog/mcp-apps-parse-chord.png)
 
-サーバー側の `parse_chord` ツールは通常の `server.tool()` で登録したMCP Apps非対応のツールですが、View側から `callServerTool` で呼び出せます。つまり、**UIを持たない既存のツールでもView側から利用できる**わけです。
+サーバー側の `parse_chord` ツールは通常の `server.registerTool()` で登録したMCP Apps非対応のツールプリミティブですが、View側から `callServerTool` で呼び出せます。つまり、**UIを持たない既存のツールでもView側から利用できる**ので再利用性が高いです。
 
 ### readServerResource
 
-MCPサーバーが公開しているリソースをView側から直接読み取ることもできます。midi-mcp-serverでは、サーバーに登録した7つの音楽理論リソースを**Music Theory Referenceパネル**から参照できるようにしています。
+MCPサーバーが公開しているプリミティブのリソースをMCP AppsのView側から直接読み取ることもできます。前述しましたがmidi-mcp-serverでは、サーバーに登録した7つの音楽理論リソースを**Music Theory Referenceパネル**から参照できるようにしています。
 
 ```typescript{file: "src/mcp-app.ts"}
 theorySelect.addEventListener('change', async () => {
@@ -387,9 +420,7 @@ for (const res of MUSIC_THEORY_RESOURCES) {
 }
 ```
 
-これは `registerAppResource`（UIリソース用）とは別で、通常のMCPリソース登録です。MCP Appsのツールでないリソースでも、View側から `readServerResource` で読めるということを意味しています。チャット画面を離れることなく、AI作曲のバックグラウンド知識を参照できるわけです。
-
-（ここにMusic Theory Referenceパネルで `Chord Progressions` を表示しているスクリーンショットを挿入）
+これは `registerAppResource`（UIリソース用）とは別で、通常のMCPリソース登録です。MCP Appsのツールでないリソースでも、リソースUI側から `readServerResource` で読めるということを意味しています。チャット画面を離れることなく、AI作曲のバックグラウンド知識を参照できるわけです。
 
 ### sendMessage
 
@@ -414,11 +445,11 @@ btnAskClaude.addEventListener('click', async () => {
 
 ボタンを押すと、現在の楽曲情報を含んだメッセージがClaudeに送られ、Claudeが新しいターンとして**続きの8小節**を作曲し始めます。**UIの操作がそのままAIへの指示になる**という、MCP Appsならではの体験です。
 
-（ここにContinueボタンを押してClaudeが続きを生成している様子のスクリーンショットを挿入）
+![Continueボタンで続きを生成させる](/images/blog/mcp-apps-continue-claude.gif)
 
 ### downloadFileとrequestDisplayMode
 
-先述の `ontoolresult` で触れたとおり、MCP AppsのViewはサンドボックスiframe内で動作するため、通常の `<a download>` によるファイルダウンロードが使えません。 `downloadFile` はこの制約を回避するメソッドで、ホストそばにBase64データを渡して代わりにダウンロードしてもらう仕組みです。midi-mcp-serverではMIDIファイルのダウンロードに使っています。
+先述の `ontoolresult` で触れたとおり、MCP AppsのViewはサンドボックスiframe内で動作するため、通常の `<a download>` によるファイルダウンロードが使えません。 `downloadFile` はこの制約を回避するメソッドで、ホストにBase64データを渡して代わりにダウンロードしてもらう仕組みです。midi-mcp-serverではMIDIファイルのダウンロードに使っています。
 
 ```typescript{file: "src/mcp-app.ts"}
 await app.downloadFile({
@@ -444,7 +475,7 @@ btnFullscreen.addEventListener('click', async () => {
 });
 ```
 
-（ここにフルスクリーンモードでのピアノロール表示のスクリーンショットを挿入）
+![シームレスにFullScreenになる](/images/blog/mcp-apps-fullscreen.gif)
 
 ここまで見てきたように、 `App` クラスのメソッドにより、MCP Appsは**ホスト・サーバー・Viewの三者間で双方向にデータをやり取りできるアプリケーション基盤**として機能します。
 
@@ -458,77 +489,19 @@ MCP Appsのツール結果には3つのデータ経路があり、用途によ�
 
 `structuredContent` はLLMには見えず、Viewだけが受け取るデータです。大量のデータをUIに渡したいけどトークンを消費したくない場合に便利です。midi-mcp-serverでも、**まさにこの仕組みを使ってMIDI base64データをViewに渡しています**。MIDIのbase64は数KB〜数十KBに及ぶため、これを `content` で返してしまうとLLMが大量のトークンを消費してしまいますが、 `structuredContent` 経由ならLLMには見えず、ダウンロード用にView側でのみ利用できます。波形データや詳細な分析結果など、人間向けの表示データを大量に渡すケースでも同様に活用できます。
 
-`structuredContent` を返すには、ツール定義時に `outputSchema` を宣言しておく必要があります。先ほどの `registerAppTool` の例でも、 `midiBase64` ・ `title` ・ `bpm` ・ `trackCount` のスキーマを定義しておくことで、型付きの `structuredContent` を返せるようにしています。ここは最初自分も見落としていて、 `outputSchema` を書かずに `structuredContent` を返そうとして動かず、小一時間ハマったところです...。
+![レスポンスには文字情報が入るけどBase64は入らない](/images/blog/mcp-apps-response.png)
+
+`structuredContent` を返すには、ツール定義時に `outputSchema` を宣言しておく必要があります。先ほどの `registerAppTool` の例でも、 `midiBase64` ・ `title` ・ `bpm` ・ `trackCount` のスキーマを定義しておくことで、型付きの `structuredContent` を返せるようにしています。
 
 `_meta` はタイムスタンプやバージョンなどのメタデータ用で、LLMには非公開です。
 
 この使い分けは、MCP Appsを設計するうえでかなり重要です。**UIの表示にしか使わないデータは `structuredContent` に逃がす**のがベストプラクティスで、 `content` に大量のデータを詰めるとトークンを消費してしまいます。
 
-### Visibilityによるツールの公開範囲制御
-
-`registerAppTool` では `_meta.ui.visibility` を設定することで、ツールの呼び出し元を制御できます。
-
-| 設定値 | 意味 | ユースケース |
-|---|---|---|
-| `["model", "app"]` | LLMからもViewからも呼び出し可能（デフォルト） | 通常のデータ取得ツール |
-| `["app"]` | Viewからのみ呼び出し可能。LLMには見えない | ページネーション、フォーム送信、ポーリング |
-| `["model"]` | LLMからのみ呼び出し可能。Viewからは呼べない | 削除や課金など誤操作を防ぎたいアクション |
-
-midi-mcp-serverの `create_midi` ツールはデフォルト（LLMとView両方）のままにしていますが、たとえば**再生履歴を保存する**ようなツールを追加するなら `["app"]` にして、UIのボタンからだけ呼べるようにするのが安全でしょう。
-
-## Cloudflare Workersへのデプロイ
-
-midi-mcp-serverは[Cloudflare Workers](https://developers.cloudflare.com/workers/)にデプロイして、リモートMCPサーバーとして `https://midi-mcp-server.tubone24.workers.dev` で公開しています。URLを指定するだけで誰でもClaude.aiから使えるようになるので、せっかくならリモートで公開したいところです。
-
-Workers環境ではNode.jsの `http` / `https` モジュールが使えないため（この制約に自分は毎回ハマります...）、MCPのHTTPトランスポートにはFetch APIベースの `WebStandardStreamableHTTPServerTransport` を使います（[Cloudflare Agents ドキュメント](https://developers.cloudflare.com/agents/guides/remote-mcp-server/)より）。
-
-```typescript{file: "src/worker.ts"}
-import { WebStandardStreamableHTTPServerTransport }
-  from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
-
-export default {
-  async fetch(request: Request): Promise<Response> {
-    const server = createWorkerServer();
-    const transport = new WebStandardStreamableHTTPServerTransport({
-      sessionIdGenerator: undefined,  // ステートレスモード
-      enableJsonResponse: true,
-    });
-    await server.connect(transport);
-    try {
-      const response = await transport.handleRequest(request);
-      // CORSヘッダーを追加して返却
-      // ...中略...
-      return new Response(response.body, { status: response.status, headers });
-    } finally {
-      await transport.close();
-      await server.close();
-    }
-  },
-};
-```
-
-Node.js版（`server.ts`）が `McpServer` クラスと `registerAppTool` ヘルパーを使うのに対し、Workers版（`worker.ts`）では低レベルの `Server` クラスに `setRequestHandler` で直接ハンドラーを登録しています。これはWorkers環境でリクエストごとにサーバーインスタンスを生成するステートレスな設計を取るためです。
-
-`wrangler.toml` で押さえておくべきポイントは、MCP SDKが依存する `nodejs_compat` フラグと、HTMLおよびMarkdownファイルをテキストモジュールとしてインポートするための `[[rules]]` 設定の2つです。
-
-```toml{file: "wrangler.toml"}
-name = "midi-mcp-server"
-main = "src/worker.ts"
-compatibility_date = "2024-12-05"
-compatibility_flags = ["nodejs_compat"]
-
-[[rules]]
-type = "Text"
-globs = ["**/*.html", "**/*.md"]
-```
-
-デプロイは `npx wrangler deploy` の一発で完了します。楽ちんです。
-
 ## Claude.aiで使ってみる
 
 midi-mcp-serverをClaude.aiから使うには、設定画面でリモートMCPサーバーのURLを追加するだけです。
 
-（ここにClaude.aiのMCPサーバー設定画面のスクリーンショットを挿入）
+![claude.aiのコネクタからリモートMCPサーバーのアドレスを追加するだけ](/images/blog/mcp-apps-setting.png)
 
 接続ができたら、あとはシンプルに頼むだけです。
 
@@ -540,13 +513,9 @@ midi-mcp-serverをClaude.aiから使うには、設定画面でリモートMCP�
 
 最初のトラックの最初の数音が生成された時点で、ピアノロール上にノートが現れ始めます。AIが音符を追加するたびに譜面がリアルタイムに更新されていく様子は、**まるで作曲家が目の前で楽譜を書いているのを眺めているような感覚**です。
 
-（ここにプログレッシブレンダリングでピアノロールが段階的に描画されている様子のスクリーンショット/GIFを挿入）
-
-生成が完了すると、再生ボタンが有効になります。Soundfontの読み込みが完了していればHDオーディオで、まだならオシレーターサウンドで再生されます。
+生成が完了すると、再生ボタンが有効になります。
 
 トラック情報パネルにはトラック名、GM instrument番号、ノート数が表示されるので、AIがどんな構成で楽曲を作ったのかも一目でわかります。
-
-（ここに完成したピアノロールと再生UIのスクリーンショットを挿入）
 
 Chord Analyzerでコードの構成音を調べたり、Music Theory Referenceで和声法やコード進行の基本を参照しながら、Continueボタンで「あと8小節追加して」とClaudeにリクエストする...という一連の流れが、すべてチャット画面を離れることなく完結します。
 
