@@ -339,13 +339,15 @@ ORDER BY (project_id, toStartOfMinute(start_time), xxHash32(trace_id), span_id, 
 
 v3では `type` が `(project_id, type, ...)` のように2番目のソートキーでした。これは、**`type='GENERATION'` のObservationだけを並べる**みたいなクエリパターンが多かったからです。今はUIからなくなってしまいましたが、Generationのみを集めた画面やLLM-as-a-Judgeなど、特定のtypeのObservationを見たいことが多いためです。
 
-一方v4では、LLM呼び出しは `type='GENERATION'`、ツールは `type='TOOL'`...といった**異なる型のデータがすべて1つのテーブルに混在**します。この状態で `type` を `ORDER BY` の2番目に置いてしまうと、何が起きるか。
+一方v4では、LLM呼び出しは `type='GENERATION'`、ツールは `type='TOOL'`...といった**異なる型のデータがすべて1つのテーブルに混在**します。この状態で `type` を `ORDER BY` の2番目に置いてしまうと、何が起きるかというと...。
 
-（わかりやすい図）
+
 
 特定の `trace_id` に属するSpan群が、`type` ごとに別々のGranuleにバラけてしまうわけです。
 
 これだと**ある1本のトレースに属するすべてのSpanを取りたい**というクエリで、**複数のGranuleを全部開きに行かないといけない**ことになります。
+
+![](/images/blog/Granule_divide.png)
 
 v4のUI(fast preview)を見てみると、フィルターをかけていないとき、単位時間に発生したobservationがtype関係なく表示されています。typeを入れないことで、このUIを表示するときの速度をあげるために物理分散を防ぐ必要がありました。
 
