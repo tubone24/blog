@@ -24,15 +24,19 @@ GWにこんな重たい記事なんか読みたくないっすよね。出かけ
 
 ## はじめに
 
+<div class="alert alert-warning" role="alert">
+<strong>注意</strong><br>この記事で参照しているテーブル構造・スキーマは、Langfuse v4の<a href="https://github.com/langfuse/langfuse/blob/main/packages/shared/clickhouse/scripts/dev-tables.sh" target="_blank" rel="noopener noreferrer">開発用マイグレーションスクリプト（dev-tables.sh）</a>をもとに解説しています。OSS正式版がリリースされた際には、テーブル名・カラム名等が変更される可能性がありますので、あらかじめご了承ください。
+</div>
+
 [Langfuse](https://langfuse.com/) v4のβがついに出ました。
 
 毎度のことながらLLMOps大好きすぎマンの私としては、新バージョンが出るたびにChangelogを眺めるのが楽しみで仕方ないんですけど、今回のv4は単なる機能追加ではなく**ClickHouseのベスプラテーブル設計**に置き換えていく大改修となっています。
 
 具体的には、これまで `traces` と `observations` の2つのテーブルを軸にしていたClickHouseスキーマが、 `events_full` という単一のテーブルにすべて非正規化される形に変わりました。
 
-Langfuseのブログの表現を借りればobservation-centric、つまり**Observation（Span）をデータモデルの主役に据える転換**です。これまでtraceの脇役だったObservationを、テーブル設計の中心そのものに引き上げた、というイメージです。
+Langfuseのブログの表現を借りればobservation-centric、つまり**Observation（Span）をデータモデルの主役に据える転換**です。これまでTraceの子ども的扱いだったObservationを、テーブル設計の中心そのものに引き上げた、というイメージです。
 
-今になってこんな大変なことを...。と感じると思います。結構なマイグレーションじゃないですかこれ。
+今になってこんな大変なことを...。と感じると思います。だって結構なマイグレーションじゃないですかこれ。
 
 こんな大胆な変更が必要だったのかを理解するためには、ClickHouseというデータベースが**どんなクエリパターンに最適化されているか**、そして**どんな書き方をすると本来のパフォーマンスが出ないか**を踏み込んで知る必要があります。
 
@@ -46,9 +50,13 @@ Langfuseのブログの表現を借りればobservation-centric、つまり**Obs
 
 ダッシュボード上の **Fast** と書かれたトグルをONにすると、内部的にはv4の新しい `events_full` テーブル（および後述する `events_core` マテリアライズドビュー）を参照するモードに切り替わります。（ここはおそらくです。というのもまだOSS版のLangfuseにv4はないので、テーブル名などが実際と異なる可能性は十分あります。）
 
+![FastトグルをONにする](/images/blog/fastmode.png)
+
 これだけでもUIの応答が体感で別物になっていて、データが多いプロジェクトだと「これが本来のClickHouseか」というレベルで早くなります。まさしく、Fastモード...。
 
 UIも変わっていて、これまでは **Traces一覧 → 開く → Observation一覧** という階層構造だったのが、**大量のObservationが並列に並んでいる**画面に変わっています。
+
+![新しいtraces一覧画面](/images/blog/observationUI.png)
 
 このあたりのUI変更は個人的には賛否両論あるところで、これは記事の最後の方でぼやかせてください...。
 
@@ -56,13 +64,13 @@ UIも変わっていて、これまでは **Traces一覧 → 開く → Observat
 
 セルフホストの正式リリースはまだなので、ここで参照するスキーマは [packages/shared/clickhouse/scripts/dev-tables.sh](https://github.com/langfuse/langfuse/blob/main/packages/shared/clickhouse/scripts/dev-tables.sh) の開発用マイグレーションスクリプトです。**正式版で項目名が変わる可能性は十分あります**ので、その点はご承知おきください。
 
-v3では次のように **`traces` と `observations` の2テーブル**で構成されています。
+v3では次のように **`traces` と `observations` の2テーブル**で構成されています。(カラムの多くは省略してます。)
 
-(ER図)
+![](/images/blog/v3_er.png)
 
 これがv4ではこうなります。
 
-(ER図)
+![](/images/blog/v4_er.png)
 
 **`traces` テーブルの `trace_name` / `user_id` / `session_id` / `tags` といった列が、すべて `observations` 相当の `events_full` のカラムとして「非正規化」されて流し込まれた**ということです。
 
@@ -74,13 +82,7 @@ v3では次のように **`traces` と `observations` の2テーブル**で構�
 
 ## v3を振り返る
 
-v3で新しく入ったClickHouseは、当初は**ほぼPostgreSQLライクなテーブル設計**として始まりました。Langfuseの[v3アーキテクチャ進化のブログ](https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution)でも、移行コスト最小化のためにスキーマをほぼそのまま移植したことが語られています。
-
-<blockquote>
-<p>Spending a lot of research on schema design had a big payoff in our ClickHouse migration. We only needed minor adjustments throughout the whole process and got away with a single data import from Postgres into ClickHouse.</p>
-<p>（スキーマ設計に多くの時間を投資したことが、ClickHouseへの移行で大きな成果をもたらした。移行プロセス全体を通じてわずかな調整で済み、PostgresからClickHouseへのデータインポートを1回だけで完了できた。）</p>
-<p><cite><a href="https://langfuse.com/blog/2024-12-langfuse-v3-infrastructure-evolution">Langfuse v3: Infrastructure Evolution</a></cite></p>
-</blockquote>
+v3で新しく入ったClickHouseは、当初は**ほぼPostgreSQLライクなテーブル設計**として始まりました。
 
 そしてv4の発表ブログ [Simplifying Langfuse for Scale](https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale) では、当時の設計が抱えていた問題が率直に振り返られています。
 
@@ -90,7 +92,7 @@ v3で新しく入ったClickHouseは、当初は**ほぼPostgreSQLライクな�
 <p><cite><a href="https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale">Simplifying Langfuse for Scale</a> by Steffen, Valeriy, and Max</cite></p>
 </blockquote>
 
-数十億レコードの `traces` と `observations` のJOINがボトルネックになり、大規模プロジェクトでクエリできる範囲が頭打ちになっていた、という話です。
+数十億レコードの `traces` と `observations` の結合がボトルネックになり、大規模プロジェクトでクエリできる範囲が頭打ちになっていた、という話です。
 
 同じブログでは、データ処理量がClickHouse移行あとで**19倍**に増え、ClickHouseノードのサイズが**15倍**に膨らんだとも書かれています。
 
@@ -113,11 +115,13 @@ v3で新しく入ったClickHouseは、当初は**ほぼPostgreSQLライクな�
 
 PostgreSQLに代表されるOLTP（Online Transaction Processing・オンライントランザクション処理）は、データを**行（row）単位**で持ちます。
 
-1行を構成する全カラムが基本的に1つのページに連続して書かれ、行を1つ取り出すとそこに乗っている全カラムが副次的に取れる、という構造です。（行指向ヒープ）
+1行を構成する全カラムが基本的に8KB区切りの1つのページに連続して書かれ、行を1つ取り出すとそこに乗っている全カラムが副次的に取れる、という構造です。（実際はページは行指向ヒープと呼ばれる構造で表現され1ページ内にTupleと呼ばれる領域がヒープとして確保・成長していき、そのTupleの中にユーザーデータとして行の情報が1行1行格納されていますが細かすぎるので詳細の表現はここでは割愛します。）
 
-ClickHouseを含むカラムナーDBは逆で、**カラム（列）単位で別々のファイルに格納**します。ClickHouseの場合、Partというディレクトリの中に `project_id.bin` 、`span_id.bin` 、`input.bin` ...といった具合に**カラムごとのバイナリファイル**が並びます。
+![超アバウトなページの概念](/images/blog/roworient.png)
 
-（ここにClickHouseのカラム単位ファイル格納のスクリーンショット/図を挿入）
+ClickHouseを含むカラムナーDBは反対に、**カラム（列）単位で別々のファイルに格納**します。ClickHouseの場合、Partというディレクトリの中に `project_id.bin` 、`span_id.bin` 、`input.bin` ...といった具合に**カラムごとのバイナリファイル**が並びます。
+
+![実際のClickHouseのデータ構造](/images/blog/clickhouse_tree.png)
 
 この構造のメリットは、**特定カラムだけを集計したいときに効率的な**点です。
 
@@ -145,15 +149,15 @@ ClickHouseを含むカラムナーDBは逆で、**カラム（列）単位で別
 
 行を1つずつ処理するのではなく、**バッチ単位**で渡してSIMD命令で一気に処理する、ということです。
 
-たとえば `total_cost` の合計を計算するとき、メモリ上に並んだコスト値（100, 200, 150, ...）に対して通常のスカラー加算ではなく**SIMDで複数値を1命令で加算**できるので、CPUのクロックサイクルを大きく節約できます。
+たとえば `total_cost` の合計を計算するとき、メモリ上に並んだ`total_cost`の値（100, 200, 150, ...）に対して通常のスカラー加算ではなく**SIMDで複数値を1命令で加算**できるので、CPUのクロックサイクルを大きく節約できます。
 
-(ここにわかりやすい図)
+![実際のClickHouseのデータ構造](/images/blog/simd.png)
 
 つまり **カラムに並んだ大量の数値を集計する** 種類のワークロードに対して効果が発揮しやすいのがClickHouseの素性で、Langfuseのような大量のトレース集計、例えばコストやレイテンシーの集計に向いている、と言えるわけです。
 
 ## ClickHouseのJOINはなぜ高コストか
 
-ClickHouseが集計に強いのは分かりました。ではその際、**2つのテーブルをJOINする**のはどうかと言うと、**残念ながら苦手**です。
+ClickHouseが集計に強いのは分かりました。ではその際、**2つのテーブルをJOINする**のはどうかと言うと、**残念ながら苦手なことが多い**です。
 
 ClickHouseのJOINでは、Hash Joinを中心としたハッシュ系アルゴリズムが基本で動作します（v24.12以降の[デフォルト設定](https://clickhouse.com/docs/operations/settings/settings#join_algorithm)は `direct,parallel_hash,hash` というフォールバックチェーンです）。いずれも共通して**右テーブルをRAM上にハッシュテーブルとして展開する**という仕組みを持っています。
 
@@ -180,6 +184,10 @@ LIMIT 100;
 
 このとき、Hash Joinの動きは概ねこうです。
 
+![Hash Joinの概念図](/images/blog/hashjoin.png)
+
+シーケンス図にするとこのようになります。
+
 ```mermaid
 sequenceDiagram
     participant Q as クエリエンジン
@@ -205,7 +213,7 @@ sequenceDiagram
 <p><cite><a href="https://clickhouse.com/docs/sql-reference/statements/select/join">JOIN Clause</a></cite></p>
 </blockquote>
 
-これが何を意味するかというと、`observations JOIN traces` のように**右側にある `traces` の行数が多いと、ハッシュテーブル構築のコストがダイレクトに跳ねあがる**ということです。
+これが何を意味するかというと、`observations JOIN traces` のように**右側にある `traces` の行数が多いと、ハッシュテーブル構築のコストが跳ねあがる**ということです。
 
 仮にtracesが1億行あれば1億エントリのハッシュテーブルをメモリに展開しないといけないし、そのうえ `join_algorithm = 'auto'` を明示設定している場合は、メモリが足りなくなると**より遅いマージ結合へフォールバック**されてしまいます。
 
@@ -253,11 +261,13 @@ LangfuseのClickHouseのマイグレーションスクリプトを見たこと�
 
 あれは**このORDER BYの順序で並べ替えたテーブルの上から8192行区切りでGranuleが切られる**というまさにこの仕組みを表しています。
 
+![Granuleの概念図](/images/blog/Granule.png)
+
 また、**Sparse**と呼ばれるのは、全行に対してインデックスを持つB-treeとは違って、**Granule単位の粗い解像度**でしか持たないからです。
 
-(わかりやすい図)
-
 これがどうクエリ高速化に効くかと言うと、**ORDER BYに含まれるカラムでフィルターしたとき、不要なGranuleを丸ごと読み飛ばせる**という形で効いてきます。
+
+![](/images/blog/Sparse.png)
 
 v3のobservationsテーブルのDDLを見ながら確認していきましょう。
 
@@ -281,11 +291,9 @@ ORDER BY (project_id, type, toDate(start_time), id);
 
 Langfuse Cloudを使ったことがある方なら分かると思うんですけど、UIから何かを見るときは**必ずプロジェクト単位**で絞り込まれているところからがスタートです。プロジェクトをまたいだ操作は基本的にはできないはずです。
 
-なのでORDER BYの先頭が `project_id` というのは、**スパースインデックスが極端に効きやすい**設計です。
+なのでORDER BYの先頭が `project_id` というのは、**スパースインデックスがとても効きやすい**設計です。
 
 日付フィルターも `toDate(start_time)` で効くので、**直近N日分のあるプロジェクトのobservations**みたいなクエリは高速に処理されていました。
-
-（わかりやすい図）
 
 ここで気にしてほしいのが、`ORDER BY` の **2番目のキーが `type`** だったことです。これがv4で消えるんですが、まずは設計意図から読み解いていきましょう。
 
