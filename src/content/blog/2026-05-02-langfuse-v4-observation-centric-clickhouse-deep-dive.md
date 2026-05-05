@@ -1,13 +1,13 @@
 ---
 slug: 2026/05/02/langfuse-v4-observation-centric-clickhouse-deep-dive
-title: "Langfuse v4はなぜobservation-centricになったのか - ClickHouseの仕組みから読み解くアーキテクチャ転換"
+title: "Langfuse v4はなぜobservation-centricになったのか"
 date: 2026-05-02
-description: "Langfuse v4ベータで導入された events_full / events_core という単一Spanモデルを、ClickHouseのカラムナーストレージ・Granule・スパースインデックス・ReplacingMergeTree・Part/Partition・Materialized Viewといった内部の仕組みから深掘りし、なぜtraces/observations分離型から非正規化されたobservation-centricモデルへ移行する必要があったのかを公式ドキュメントの引用付きで解説します。"
+description: "Langfuse v4で導入された events_full / events_core という単一Spanモデルを、ClickHouseのカラムナーストレージ・Granule・スパースインデックス・ReplacingMergeTree・Part/Partition・Materialized Viewといった内部の仕組みから深掘りし、なぜtraces/observations分離型から非正規化されたobservation-centricモデルへ移行する必要があったのかを公式ドキュメントの引用付きで解説します。"
 tags:
   - Langfuse
   - ClickHouse
-  - LLMOps
-headerImage: https://i.imgur.com/6B7WC7D.jpg
+  - OLAP
+headerImage: /images/blog/langfuse_v4_new.png
 templateKey: blog-post
 useAi: false
 ---
@@ -28,7 +28,9 @@ GWにこんな重たい記事なんか読みたくないっすよね。出かけ
 <strong>注意</strong><br>この記事で参照しているテーブル構造・スキーマは、Langfuse v4の<a href="https://github.com/langfuse/langfuse/blob/main/packages/shared/clickhouse/scripts/dev-tables.sh" target="_blank" rel="noopener noreferrer">開発用マイグレーションスクリプト（dev-tables.sh）</a>をもとに解説しています。OSS正式版がリリースされた際には、テーブル名・カラム名等が変更される可能性がありますので、あらかじめご了承ください。
 </div>
 
-[Langfuse](https://langfuse.com/) v4のβがついに出ました。
+[Langfuse](https://langfuse.com/) v4、ついに出ました!!!
+
+![Langfuse v4ははやい！](/images/blog/langfuse_v4_new.png)
 
 毎度のことながらLLMOps大好きすぎマンの私としては、新バージョンが出るたびにChangelogを眺めるのが楽しみで仕方ないんですけど、今回のv4は単なる機能追加ではなく**ClickHouseのベスプラテーブル設計**に置き換えていく大改修となっています。
 
@@ -52,7 +54,7 @@ Langfuseのブログの表現を借りればobservation-centric、つまり**Obs
 
 ![FastトグルをONにする](/images/blog/fastmode.png)
 
-これだけでもUIの応答が体感で別物になっていて、データが多いプロジェクトだと「これが本来のClickHouseか」というレベルで早くなります。まさしく、Fastモード...。
+これだけでもUIの応答が体感で別物になっていて、データが多いプロジェクトだと「これが本来のLangfuseか」というレベルで早くなります。まさしく、Fastモード...。
 
 UIも変わっていて、これまでは **Traces一覧 → 開く → Observation一覧** という階層構造だったのが、**大量のObservationが並列に並んでいる**画面に変わっています。
 
@@ -66,17 +68,17 @@ UIも変わっていて、これまでは **Traces一覧 → 開く → Observat
 
 v3では次のように **`traces` と `observations` の2テーブル**で構成されています。(カラムの多くは省略してます。)
 
-![](/images/blog/v3_er.png)
+![Langfuse v3のtraces・observationsテーブルER図](/images/blog/er_v3.png)
 
 これがv4ではこうなります。
 
-![](/images/blog/v4_er.png)
+![Langfuse v4のevents_full単一テーブルER図](/images/blog/er_v4.png)
 
 **`traces` テーブルの `trace_name` / `user_id` / `session_id` / `tags` といった列が、すべて `observations` 相当の `events_full` のカラムとして「非正規化」されて流し込まれた**ということです。
 
 細かい話ですがtrace単位の情報を持つだけのSpan（合成Span）も `span_id = 't-' + trace_id` の形で同じテーブルに入っているので、**1つのテーブルで trace と observation の両方を表現する単一Spanモデル**になっています。
 
-ちゃんと大学で正規化とか習った人からすると、「正規化されてないやんけ...」と引いてしまうやつなんですが、ClickHouseの世界では**正解**だったりします。
+ちゃんと大学でRDBの正規化とか習った人からすると、「正規化されてないやんけ...」と引いてしまうやつなんですが、ClickHouseの世界では**正解**だったりします。
 
 なぜそうなのかを順に見ていきます。
 
@@ -115,7 +117,9 @@ v3で新しく入ったClickHouseは、当初は**ほぼPostgreSQLライクな�
 
 PostgreSQLに代表されるOLTP（Online Transaction Processing・オンライントランザクション処理）は、データを**行（row）単位**で持ちます。
 
-1行を構成する全カラムが基本的に8KB区切りの1つのページに連続して書かれ、行を1つ取り出すとそこに乗っている全カラムが副次的に取れる、という構造です。（実際はページは行指向ヒープと呼ばれる構造で表現され1ページ内にTupleと呼ばれる領域がヒープとして確保・成長していき、そのTupleの中にユーザーデータとして行の情報が1行1行格納されていますが細かすぎるので詳細の表現はここでは割愛します。）
+1行を構成する全カラムが基本的に8KB区切りの1つのページに連続して書かれ、行を1つ取り出すとそこに乗っている全カラムが副次的に取れる、という構造です。
+
+（実際はページはヒープファイルと呼ばれる構造として格納され、1ページ内でLine Pointer（行ポインタ）はヘッダー側から下方向に、Tupleと呼ばれる実データはページ末尾から上方向に向かって伸びるスロットページ方式で配置されていますが、細かすぎるので詳細の表現はここでは割愛します。）
 
 ![超アバウトなページの概念](/images/blog/roworient.png)
 
@@ -151,15 +155,15 @@ ClickHouseを含むカラムナーDBは反対に、**カラム（列）単位で
 
 たとえば `total_cost` の合計を計算するとき、メモリ上に並んだ`total_cost`の値（100, 200, 150, ...）に対して通常のスカラー加算ではなく**SIMDで複数値を1命令で加算**できるので、CPUのクロックサイクルを大きく節約できます。
 
-![実際のClickHouseのデータ構造](/images/blog/simd.png)
+![SIMDによるベクトル化実行の概念図](/images/blog/simd.png)
 
 つまり **カラムに並んだ大量の数値を集計する** 種類のワークロードに対して効果が発揮しやすいのがClickHouseの素性で、Langfuseのような大量のトレース集計、例えばコストやレイテンシーの集計に向いている、と言えるわけです。
 
-## ClickHouseのJOINはなぜ高コストか
+## TracesのJOINはなぜ高コストか
 
-ClickHouseが集計に強いのは分かりました。ではその際、**2つのテーブルをJOINする**のはどうかと言うと、**残念ながら苦手なことが多い**です。
+ClickHouseが集計に強いのは分かりました。ではその際、**2つの巨大なテーブルをJOINする**のはどうかと言うと、**残念ながら苦手なことが多い**です。
 
-ClickHouseのJOINでは、Hash Joinを中心としたハッシュ系アルゴリズムが基本で動作します（v24.12以降の[デフォルト設定](https://clickhouse.com/docs/operations/settings/settings#join_algorithm)は `direct,parallel_hash,hash` というフォールバックチェーンです）。いずれも共通して**右テーブルをRAM上にハッシュテーブルとして展開する**という仕組みを持っています。
+ClickHouseのJOINでは、Hash Joinを中心としたハッシュ系アルゴリズムが基本で動作します（v24.12以降の[デフォルト設定](https://clickhouse.com/docs/operations/settings/settings#join_algorithm)では、大多数のケースで `parallel_hash` が選ばれ、適用できない場合に `direct`、さらに `hash` へとフォールバックします）。このうち `hash` と `parallel_hash` は共通して**右テーブルをRAM上にハッシュテーブルとして展開する**という仕組みを持っています（`direct` はDictionaryやJoin table engineへの直接ルックアップを使うため、ハッシュテーブルの構築は不要です）。
 
 たとえば、Langfuse v3のClickHouseで次のようなクエリを投げたとします。
 
@@ -219,7 +223,7 @@ sequenceDiagram
 
 マージ結合とは、両テーブルをJOINキーで事前ソートしたうえで、2つのポインタを順にずらしながら一致行を探していくアルゴリズムです。ハッシュテーブルをRAMに丸ごと乗せる必要がない分メモリは節約できますが、ソート処理がディスクI/Oを伴う場合があり、Hash Joinと比べてスループットが落ちます。
 
-（わかりやすい図）
+![Merge Joinの概念図](/images/blog/merge_join.png)
 
 <blockquote>
 <p>If join_algorithm = 'auto' is enabled, then after some threshold of memory consumption, ClickHouse falls back to merge join algorithm.</p>
@@ -267,7 +271,7 @@ LangfuseのClickHouseのマイグレーションスクリプトを見たこと�
 
 これがどうクエリ高速化に効くかと言うと、**ORDER BYに含まれるカラムでフィルターしたとき、不要なGranuleを丸ごと読み飛ばせる**という形で効いてきます。
 
-![](/images/blog/Sparse.png)
+![スパースインデックスによるGranuleの読み飛ばしの概念図](/images/blog/Sparse.png)
 
 v3のobservationsテーブルのDDLを見ながら確認していきましょう。
 
@@ -341,13 +345,11 @@ v3では `type` が `(project_id, type, ...)` のように2番目のソートキ
 
 一方v4では、LLM呼び出しは `type='GENERATION'`、ツールは `type='TOOL'`...といった**異なる型のデータがすべて1つのテーブルに混在**します。この状態で `type` を `ORDER BY` の2番目に置いてしまうと、何が起きるかというと...。
 
-
-
-特定の `trace_id` に属するSpan群が、`type` ごとに別々のGranuleにバラけてしまうわけです。
+**特定の `trace_id` に属するSpan群が、`type` ごとに別々のGranuleにバラけてしまうわけです**。
 
 これだと**ある1本のトレースに属するすべてのSpanを取りたい**というクエリで、**複数のGranuleを全部開きに行かないといけない**ことになります。
 
-![](/images/blog/Granule_divide.png)
+![typeキーによりSpanが複数Granuleに分散する問題の概念図](/images/blog/Granule_divide.png)
 
 v4のUI(fast preview)を見てみると、フィルターをかけていないとき、単位時間に発生したobservationがtype関係なく表示されています。typeを入れないことで、このUIを表示するときの速度をあげるために物理分散を防ぐ必要がありました。
 
@@ -359,15 +361,7 @@ v3は `toDate(start_time)` で**日次粒度**にしていました。これだ�
 
 v4では `toStartOfMinute(start_time)` にすることで、**分単位**で切り直しています。同じ1分内のSpanが同一キー値を持ち、その中はさらに `xxHash32(trace_id)` でtrace単位にまとまるので、 **同じtraceに属するSpanが物理的に隣接して並ぶ** ようになります。
 
-```text
-V4 Granule の中身（toStartOfMinute + xxHash32順）:
-  [project=A, 14:00, hash=0x0001(trace_abc), span-1]  ← 同一traceが
-  [project=A, 14:00, hash=0x0001(trace_abc), span-2]  ← 物理的に
-  [project=A, 14:00, hash=0x0001(trace_abc), span-3]  ← 隣接している
-  [project=A, 14:00, hash=0x0002(trace_xyz), span-1]
-```
-
-（ここも図）
+![toStartOfMinuteによりtrace内Spanが物理的に隣接して並ぶ概念図](/images/blog/Granule_minutes.png)
 
 ダッシュボードのクエリは性質上**直近15分** **直近1時間**みたいな**リアルタイムに近い分単位の時間範囲**がワークロードとして多いので、`toStartOfMinute()` は不要なGranuleを刈り取りやすくする方向にも効きます。
 
@@ -379,15 +373,13 @@ v4では `xxHash32(trace_id)` が追加されています。
 
 これをソートキーに入れることで、**同じtrace_idのSpanが物理的に隣接して並ぶ**ようになります。
 
-### なぜ `xxHash32(trace_id)` なのか
+#### なぜ `xxHash32(trace_id)` なのか
 
 **同じtrace_idのSpanが物理的に隣接して並ぶ**ことが目的なら、trace_idをそのままソートキーとして使っても良さそうです。
 
-しかしtrace_idはUUIDそれだけでユニークになってしまいます。ようはカーディナリティが高すぎるのです。
+しかしtrace_idはUUIDなので、それだけでユニークになってしまいます。ようはカーディナリティが高すぎるのです。
 
 一方 `xxHash32` は、**任意の文字列を `0 〜 4,294,967,295`（2³² − 1）の `UInt32` 整数にマップ**するハッシュ関数です。ということは同じtrace_idの同一Granuleへのグルーピングという特性を保ちつつ、**全体としては均等に分散された整数値グルーピング**になるわけです。
-
-ちなみにxxHashそのものはYann Collet（[GitHub: Cyan4973](https://github.com/Cyan4973/xxHash)）が開発したアルゴリズムで、[公式サイト](https://xxhash.com/)もあります。
 
 ### Granuleパラメータも併せてチューニング
 
@@ -423,11 +415,15 @@ ClickHouseのテーブルエンジンでLangfuseが使っているのは [Replac
 
 これは何かというと、**ORDER BYキーの組み合わせが一致する行を、バックグラウンドマージ時に重複排除してくれるエンジン**です。**同じORDER BYキーを持つ行は同じレコードとみなす**という規約です。
 
-ClickHouseのようなOLAPでは、 `SELECT` や `INSERT` に比べ、**`UPDATE` のようなミューテーションが極めて高コスト**になります。なぜなら、ClickHouseのMergeTree系エンジンはPartをイミュータブルに管理しており、 `UPDATE`（ALTER TABLE ... UPDATE）を実行すると、対象行を含むPartをカラムごと書き直した新しいPartを生成するMutationが非同期で走るからです。列指向ストレージでは各カラムが個別ファイルに分かれているため、1行の変更でも影響するカラムファイルをすべて再圧縮・書き直す必要があり、書き込み増幅（Write Amplification）が大きくなります。
+ClickHouseのようなOLAPでは、 `SELECT` や `INSERT` に比べ、**`UPDATE` のようなミューテーションが極めて高コスト**になります。
 
-そこで、ReplacingMergeTreeでは**行を更新したい**場合、**新しい状態の行をINSERTで重ねて入れて、バックグラウンドのマージで古い方を捨てる**ことになります。
+**列指向ストレージの特性として各カラムが個別ファイルに分かれているため、1行の変更でも影響するカラムファイルをすべて再圧縮・書き直す必要があり、書き込み増幅（Write Amplification）が大きくなります**。
 
-v3のobservationsだと `ORDER BY (project_id, type, toDate(start_time), id)` なので、**`id` （Observation ID）が同じ新しい行を入れれば、それは更新と見做されてバックグラウンドで古い方が消える**、というモデルです。
+そこで、行の更新によるもたつきを最小限にするため、ReplacingMergeTreeでは**行を更新したい**場合、**新しい状態の行をINSERTで重ねて入れて、バックグラウンドのマージで古い方を捨てる**ことになります。
+
+v3のobservationsだと `ORDER BY (project_id, type, toDate(start_time), id)` なので、**`id` つまり、Observation IDが同じ新しい行を入れれば、それは更新と見做されてバックグラウンドで古い方が消える**、というわけです。
+
+ReplacingMergeTreeの詳しい解説は、[過去記事](https://tubone-project24.xyz/2024/12/30/building-langfuse-v3-with-aws-managed-services/#replacingmergetree)をご参照ください。
 
 ### 困りものの FINAL コスト
 
@@ -441,6 +437,8 @@ v3のobservationsだと `ORDER BY (project_id, type, toDate(start_time), id)` �
 
 バックグラウンドマージが終わるまでの間、**更新があった行では古い行と新しい行が共存してしまう**形になってしまうんですね。
 
+![バックグラウンドマージ前に古い行と新しい行が共存する状態の概念図](/images/blog/non_merge.png)
+
 これを解決するために、SELECT文に、**`FINAL` 修飾子**をつけることができます。
 
 ```sql
@@ -451,21 +449,23 @@ SELECT
 WHERE project_id = 'xxx'
 ```
 
-FINALを付けると、クエリ時にORDER BYのキーで重複排除した結果、つまり最新の行のみが返ります。
+FINALを付けると、クエリ時にORDER BYのキーで重複排除した結果、つまり**最新の行のみ**が返ります。
 
-ただし、これがめちゃくちゃ高コストです。
+ただし、主キーで絞れない場合、高コストなことが多いです。
 
 <blockquote>
-<p>FINAL operator will read and write a large amount of data</p>
-<p>(FINAL演算子は大量のデータを読み書きします。)</p>
-<p><cite><a href="https://clickhouse.com/docs/engines/table-engines/mergetree-family/replacingmergetree">ReplacingMergeTree</a></cite></p>
+<p>The FINAL operator does have a small performance overhead on queries. This will be most noticeable when queries aren't filtering on primary key columns, causing more data to be read and increasing the deduplication overhead. </p>
+<p>(FINAL演算子は、クエリの実行においてわずかなパフォーマンス上のオーバーヘッドをもたらします。これは、クエリが主キー列でフィルタリングを行っていない場合に最も顕著になり、読み込まれるデータ量が増加し、重複排除のオーバーヘッドが高まる原因となります。)</p>
+<p><cite><a href="https://clickhouse.com/docs/guides/replacing-merge-tree#final-performance">ReplacingMergeTree</a></cite></p>
 </blockquote>
 
-ざっくり言うと、同一ORDER BYキーを持つ行が複数のPartに散らばっているため、関連するPartを横断しながらメモリ上で重複排除マージを行ないながら結果を返す動きをします。PARTITION BYのプルーニングやPRIMARY KEYのスパースインデックスは引き続き効きますが、このPart横断の重複排除コストが余分に乗るため、 `FINAL` なしの通常クエリと比べて読み書きが大きく増えます。(Partについてはこのあと後述します。)
+ざっくり言うと、同一ORDER BYキーを持つ行が複数のPartに散らばっているため、**関連するPartを横断しながらメモリ上で重複排除マージ**を行ないながら結果を返す動きをします。
 
-Langfuse v3の規模感だと数十億行のPart横断重複排除が毎クエリで走ることになりかねず、CPU・メモリが張り付いてしまうわけです。
+PARTITION BYのプルーニングやPRIMARY KEYのスパースインデックスは引き続き効きますが、このPart横断の重複排除コストが余分に乗るため、 `FINAL` なしの通常クエリと比べて読み書きが大きく増えます。(Partについてはこのあと後述します。)
 
-実際にLangfuse公式のv4ブログでもこの構造的問題が次のように振り返られています。
+Langfuse v3 Cloud版の規模感だと数十億行のPart横断重複排除が毎クエリで走ることになりかねず、CPU・メモリが張り付いてしまうわけです。
+
+実際にLangfuse公式ブログでもこの構造的問題が次のように振り返られています。
 
 <blockquote>
 <p>ReplacingMergeTree pushed deduplication to background merges, so to guarantee correctness at read-time we had to deduplicate</p>
@@ -534,7 +534,11 @@ ClickHouseでは**INSERTごとに新しいPart（ディレクトリ）が作ら�
 
 Part名は `{partition}_{min_block}_{max_block}_{level}` の形式で、最後の `level` がマージ回数です。
 
-**Partition** はその上位概念で、`PARTITION BY` で指定した式の値が同じPartの集合が同じPartitionに属します。つまり階層としては次のようになります。
+`INSERT`ごとに新しいPart（ディレクトリ）が作られ続けていると、Partが大量になってしまうため、ClickHouseは**複数のPartをマージして1つのPartにまとめる**という動きを**バックグラウンド**で行なっています。
+
+マージをすると、マージしたPartの`min_block`と`max_block`の範囲をカバーする新しいPartができて、`level`が繰り上がり、マージ前のPartは削除される、という流れになります。
+
+また、**Partition** はその上位概念で、`PARTITION BY` で指定した式の値が同じPartの集合が同じPartitionに属します。つまり階層としては次のようになります。
 
 ```text
 テーブル
@@ -561,7 +565,7 @@ ClickHouse公式の[MergeTreeドキュメント](https://clickhouse.com/docs/eng
 
 ### Part数が増えると何が起きるか
 
-問題は、**マージは非同期・バックグラウンドで動く**ということです。ReplacingMergeTreeと同様です。
+問題は、**マージは非同期・バックグラウンドで動く**ということです。
 
 つまりClickHouseへの `INSERT` が多すぎてPartのマージが追いつかないと、Part数がどんどん溜まっていきます。
 
@@ -575,11 +579,15 @@ ClickHouse公式の[MergeTreeドキュメント](https://clickhouse.com/docs/eng
 
 例えば1パーティションのPart数が3000を超えると `Too many parts` という例外でINSERT自体が止まってしまいます。
 
-ちなみに、 `INSERT` と書きましたが、ReplacingMergeTreeの更新モデルでは、**UPDATEもINSERTで行なう**ので、やはりデータの更新頻度が高いとPart数が増えることになります。
+ちなみに、 `INSERT` と書きましたが、ReplacingMergeTreeの更新モデルでは、**`UPDATE`も`INSERT`として実行される**ので、やはり**Spanの更新頻度が高いとPart数が増える**ことになります。
 
 ### v4のイミュータブル化がPart数を減らす
 
-ここでv3を振り返ると、Spanが到着→更新差分INSERT→さらに更新差分INSERT...という具合に**1つのSpanに対して複数のPartが生成**されていました。Langfuse公式ブログによると、
+ここでv3を振り返ると、
+
+Spanが到着→更新差分INSERT→さらに更新差分INSERT...
+
+という具合に**1つのSpanに対して複数のPartが生成**されていました。Langfuse公式ブログによると、
 
 <blockquote>
 <p>Partitions had ~1,000 parts where 150–200 is typical</p>
@@ -591,11 +599,9 @@ ClickHouse公式の[MergeTreeドキュメント](https://clickhouse.com/docs/eng
 
 v4ではSpanがイミュータブル化されたので、**1つのSpanに対するINSERTは1回だけ**となりました。結果としてPart生成頻度が落ち着き、バックグラウンドマージが健全に進む、という改善が連鎖的に効いてきます。
 
-これも公式ブログに書かれています。
+## Materialized Viewによる軽量化（events_core）
 
-## マテリアライズドビューによる軽量化（events_core）
-
-最後に紹介したいのが、v4で導入された**マテリアライズドビュー**を使った軽量テーブル `events_core` の存在です。
+最後に紹介したいのが、v4で導入された**Materialized View**を使った軽量テーブル `events_core` の存在です。
 
 ClickHouseのMaterialized Viewは、**RDBMSのビューとは根本的に違うもの**なので最初に整理しておきます。[ClickHouse公式のIncremental Materialized Viewドキュメント](https://clickhouse.com/docs/materialized-view/incremental-materialized-view)では次のように説明されています。
 
@@ -605,16 +611,9 @@ ClickHouseのMaterialized Viewは、**RDBMSのビューとは根本的に違う�
 <p><cite><a href="https://clickhouse.com/docs/materialized-view/incremental-materialized-view">Incremental Materialized View</a> - ClickHouse公式ドキュメント</cite></p>
 </blockquote>
 
-ClickHouseのマテリアライズドビューは、**INSERT時に発火するトリガー**として動作します。INSERTで入ってきたデータブロックを、定義したSELECT文で変換して**別の宛先テーブルにそのまま書き込んでくれる**、いわばETL的な動きをするわけです。
+ClickHouseのマテリアライズドビューは、**`INSERT`時に発火するトリガー**として動作します。`INSERT`で入ってきたデータブロックを、定義したSELECT文で変換して**別の宛先テーブルにそのまま書き込んでくれる**、いわばETL的な動きをするわけです。
 
-| 比較 | RDBMSのVIEW | ClickHouseのMaterialized View |
-|------|--------------|--------------------------------|
-| データ実体 | なし（クエリ時に計算） | あり（宛先テーブルに実データ） |
-| 評価タイミング | SELECT 時（遅延評価） | INSERT 時（即時評価） |
-| クエリコスト | 毎回変換が走る | 事前計算済みで読み取りは高速 |
-| ストレージ | なし | 宛先テーブル分必要 |
-
-v4の `events_core_mv` は、`events_full` へのINSERTを**`input` / `output` を200文字に切り詰めた状態**で `events_core` テーブルに横流しします。
+v4の `events_core_mv` は、`events_full` へのINSERTを`input` / `output` を**200文字に切り詰めた状態**で `events_core` テーブルに横流しします。
 
 ```sql
 CREATE MATERIALIZED VIEW IF NOT EXISTS events_core_mv TO events_core AS
@@ -641,13 +640,13 @@ sequenceDiagram
 
 これがなぜ必要かというと、Observation一覧UIでは**リスト上にinput/outputのプレビューが表示される**ためです。
 
-（図）
+![Langfuse observation UI](/images/blog/langfuse-observation-input.png)
 
-LLMの入出力はものによっては数MBになるので、リスト表示のたびに `events_full` から大きな列を引っ張ると激重になります。
+LLMの入出力はものによっては数MBになるので、UI上のリスト表示のたびに `events_full` から大きな列を引っ張ると動作が激重になります。
 
 そこで**リスト表示用の軽量版 `events_core` を別テーブルとして物理的に持っておき、詳細画面に遷移したときにはじめて `events_full` を見る**という設計に切り替わっています。
 
-**読み取りパターンに合わせて事前に整形したテーブルを複数持つ** というOLAPらしい解です。
+**読み取りパターンに合わせて事前に整形したテーブルを複数持つ** というOLAPらしい解だと思います。
 
 ### `parallel_view_processing` の話
 
@@ -677,6 +676,8 @@ AIエージェントを日々開発・運用していると、一番見たいの
 
 ところが今回のFastで動くObservation中心のUIだと、**全Observationが並列にずらっと並ぶ**形なんですね。
 
+![新しいtraces一覧画面](/images/blog/observationUI.png)
+
 エラー監視とか、特定のGENERATIONを抽出したいといった**監視系のユースケース**にはこれで全然問題ないんです。フィルターで条件指定もできますし。
 
 でも、 **ある1セッションのエージェントが何を考えて何を呼んで最終的にどんな返事をしたのか** という鳥瞰的な追跡には、トレース単位でツリー表示されるUIの方がやっぱり見やすいと思います。
@@ -685,16 +686,16 @@ Langfuse公式ブログでは保存済みビュー的なものを作って絞り
 
 この辺りは実際にもう少し運用してみて、気になるところがあれば公式にフィードバックを上げていこうと思います。
 
-ともあれ、データベース側の改善はぐうの音も出ないくらいによいので、UIさえうまく折り合いがつけば本当に強いプロダクトになるなと感じています...!!!
+ともあれ、データベース側の改善はぐうの音も出ないくらいによいので、v4のUIとうまく折り合いがつくような運用方法を模索していきたいと思います。
 
 ## 最後に
 
-ということで、Langfuse v4のClickHouseアーキテクチャ改修を、**カラムナーDB → JOINコスト → Granule/スパースインデックス → ORDER BY設計 → ReplacingMergeTreeとイミュータブル設計 → Part/Partition → マテリアライズドビュー** と順番に深掘りしてみました。
+**v4で何が変わったか**だけなら[公式ブログ](https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale)を読めば1分で分かる内容をこんな長々付き合ってくださりありがとうございます。貴重な時間を奪ってしまいました...。
 
-**v4で何が変わったか**だけなら[公式ブログ](https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale)を読めば1分で分かるんですけどね...。
-
-**なぜそうしないとダメだったのか**を腰を据えて考えると、ClickHouseという1つのデータベースの設計思想と、LLMOpsという特定ドメインのワークロード特性が**かなり高い解像度で噛み合った結果**なんだなと改めて感じます。
+ですが、**なぜそうしないとダメだったのか**を腰を据えて考えると、ClickHouseという1つのデータベースの設計思想と、LLMOpsという特定ドメインのワークロード特性が**かなり高い解像度で噛み合った結果**なんだなと改めて感じます。
 
 製品を作る側も使う側も、土台に置いている技術の**得意なこと・苦手なこと**をきちんと理解して、それに合わせて設計することの重要性を改めて噛み締めた連休でした。
 
-私もそういうところを意識して自分のプロダクトを作っていこうかなと改めて思いました。思うだけで行動に移さないんですけどね...。
+私もそういうところを意識して自分のプロダクトを作っていこうかなと改めて思いました。
+
+思うだけで行動に移さないんですけどね...。
