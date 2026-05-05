@@ -388,8 +388,8 @@ ORDER BYの再設計と同時に、v4ではGranule関連のパラメータも調
 公式ブログ [Simplifying Langfuse for Scale](https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale) では次のように書かれています。
 
 <blockquote>
-<p>Moving from 10MiB per granule to 64MiB per granule as the maximum size</p>
-<p>(最大サイズを、1グラニュールあたり10MiBから64MiBに変更する)</p>
+<p>We kept the default of 8192 rows, but moved from 10MiB per granule to 64MiB per granule as the maximum size.</p>
+<p>(行数はデフォルトの8192行のままにしましたが、最大サイズを1グラニュールあたり10MiBから64MiBに変更しました。)</p>
 <p><cite><a href="https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale">Simplifying Langfuse for Scale</a></cite></p>
 </blockquote>
 
@@ -408,8 +408,8 @@ ORDER BYの再設計と同時に、v4ではGranule関連のパラメータも調
 ClickHouseのテーブルエンジンでLangfuseが使っているのは [ReplacingMergeTree](https://clickhouse.com/docs/engines/table-engines/mergetree-family/replacingmergetree) です。
 
 <blockquote>
-<p>removes duplicate entries with the same sorting key value</p>
-<p>(同じソートキー値を持つ重複エントリを削除します)</p>
+<p>The engine differs from MergeTree in that it removes duplicate entries with the same sorting key value.</p>
+<p>(このエンジンは、MergeTreeとは異なり、同じソートキー値を持つ重複エントリを削除します。)</p>
 <p><cite><a href="https://clickhouse.com/docs/engines/table-engines/mergetree-family/replacingmergetree">ReplacingMergeTree</a> - ClickHouse公式ドキュメント</cite></p>
 </blockquote>
 
@@ -430,8 +430,8 @@ ReplacingMergeTreeの詳しい解説は、[過去記事](https://tubone-project2
 問題は、バックグラウンドマージは**いつ走るか保証されない**ことです。公式にも次のように書かれています。
 
 <blockquote>
-<p>Data deduplication occurs only during a merge. Merging happens in the background at an unknown time</p>
-<p>(データの重複排除は、マージ処理中にのみ行われます。マージ処理はバックグラウンドで、いつ行われるかは不明です。)</p>
+<p>Data deduplication occurs only during a merge. Merging occurs in the background at an unknown time, so you can't plan for it. Some of the data may remain unprocessed.</p>
+<p>(データの重複排除は、マージ処理中にのみ行われます。マージ処理はバックグラウンドで不定期に実行されるため、事前に計画を立てることはできません。一部のデータは未処理のまま残る可能性があります。)</p>
 <p><cite><a href="https://clickhouse.com/docs/engines/table-engines/mergetree-family/replacingmergetree">ReplacingMergeTree</a></cite></p>
 </blockquote>
 
@@ -469,8 +469,8 @@ Langfuse v3 Cloud版の規模感だと数十億行のPart横断重複排除が�
 実際にLangfuse公式ブログでもこの構造的問題が次のように振り返られています。
 
 <blockquote>
-<p>ReplacingMergeTree pushed deduplication to background merges, so to guarantee correctness at read-time we had to deduplicate</p>
-<p>(ReplacingMergeTreeの導入により、重複排除処理がバックグラウンドのマージ処理に移行したため、読み取り時の正確性を保証するために、重複排除を行う必要がありました)</p>
+<p>ClickHouse's ReplacingMergeTree pushes deduplication to background merges, so to guarantee correctness at read-time we had to deduplicate any rows not yet merged during the read itself.</p>
+<p>(ClickHouseのReplacingMergeTreeは重複排除をバックグラウンドのマージ処理に委ねるため、読み取り時の正確性を保証するには、読み取り処理中にまだマージされていない行について、その場で重複排除を行う必要がありました。)</p>
 <p><cite><a href="https://langfuse.com/blog/2026-03-10-simplify-langfuse-for-scale">Simplifying Langfuse for Scale</a></cite></p>
 </blockquote>
 
