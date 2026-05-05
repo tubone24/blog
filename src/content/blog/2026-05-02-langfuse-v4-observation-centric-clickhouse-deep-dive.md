@@ -445,13 +445,14 @@ ReplacingMergeTreeの詳しい解説は、[過去記事](https://tubone-project2
 SELECT 
     project_id,
     -- 省略
+    event_ts
     FROM observations FINAL
 WHERE project_id = 'xxx'
 ```
 
-FINALを付けると、クエリ時にORDER BYのキーで重複排除した結果、つまり**`ver` カラム（ここでは `event_ts`）の値が最も大きい行のみ**が返ります。
+FINALを付けると、クエリ時にORDER BYのキーで重複排除した結果、つまり、**`ver` カラム（ここでは `event_ts`）の値が最も大きい行のみ**が返ります。
 
-ただし、主キーで絞れない場合、高コストなことが多いです。
+ただし、FINALは主キーで絞れない場合などで高コストなことが多いです。
 
 <blockquote>
 <p>The FINAL operator does have a small performance overhead on queries. This will be most noticeable when queries aren't filtering on primary key columns, causing more data to be read and increasing the deduplication overhead. </p>
