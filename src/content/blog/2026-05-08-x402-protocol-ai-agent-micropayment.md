@@ -224,7 +224,7 @@ x402対応クライアントは、HTTPリクエストを送って402を受け取
 
 ### 何が発表されたのか
 
-[Amazon Bedrock](https://aws.amazon.com/jp/bedrock/) の [AgentCore](https://aws.amazon.com/jp/bedrock/agentcore/) ファミリに **Payments** という新コンポーネントが追加され、現在プレビュー公開中です。
+[Amazon Bedrock](https://aws.amazon.com/jp/bedrock/) の [AgentCore](https://aws.amazon.com/jp/bedrock/agentcore/) に **Payments** という新コンポーネントが追加され、現在プレビュー公開中です。
 
 Coinbaseおよび、 Stripe傘下の [Privy](https://www.privy.io/) との共同開発という体裁で、AIエージェントが自律的にx402決済できる基盤が提供されます。
 
