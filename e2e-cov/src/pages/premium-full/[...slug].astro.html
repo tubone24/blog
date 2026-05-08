@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/Sidebar/index.tsx</title>
+    <title>Code coverage report for src/pages/premium-full/[...slug].astro</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/Sidebar</a> index.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/pages/premium-full</a> [...slug].astro</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -222,7 +222,10 @@
 <a name='L157'></a><a href='#L157'>157</a>
 <a name='L158'></a><a href='#L158'>158</a>
 <a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -381,165 +384,171 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
-import ReactGA from "react-ga4";
-import lozad from "lozad";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header/index.tsx';
+import ShareBox from '../../components/ShareBox/index.tsx';
+import Sidebar from '../../components/Sidebar/index.tsx';
+import RelatedPosts from '../../components/Relateds/index.tsx';
+import TimeToRead from '../../components/TimeToRead/index.tsx';
+import TextToSpeech from '../../components/TextToSpeech/index.tsx';
+import AuthorBio from '../../components/AuthorBio/index.tsx';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import config from '../../config/index.json';
+import { parseDate } from '../../utils/index';
 &nbsp;
-import Information from "./Information";
-import type { Post as LatestPostProps } from "./LatestPost";
-import type { AllPost } from "./entity";
-import SearchBox from "@/components/SearchBox";
-import Subscription from "./Subscription";
-import TagCloud from "./TagCloud";
-import * as style from "./index.module.scss";
-import { isBrowser } from "@/utils";
-import { GitHubIcon, XIcon, InstagramIcon } from "@/icons/BrandIcons";
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter((post) =&gt; post.data.premium === true)
+    .map((post) =&gt; {
+      const slug = post.slug;
+      return {
+        params: { slug },
+        props: { post },
+      };
+    });
+}
 &nbsp;
-const Icon = ({
-  href,
-  icon,
-  title,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  title: string;
-}) =&gt; (
-  &lt;a
-    target="_blank"
-    href={href}
-    title={title}
-    rel="external nofollow noopener noreferrer"
-    className={style.customIcon}
-  &gt;
-    {icon}
-  &lt;/a&gt;
+const { post } = Astro.props;
+const { Content: PostContent } = await render(post);
+&nbsp;
+const rawText = post.body || '';
+const speechText = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`([^`]*)`/g, '$1')
+  .replace(/&lt;[^&gt;]+&gt;/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~&gt;]/g, '')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim();
+const wordCount = rawText
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/`([^`]*)`/g, '$1')
+  .replace(/[#*_\[\]()!]/g, '')
+  .replace(/\s+/g, '')
+  .length;
+const minutes = Math.ceil(wordCount / 400);
+&nbsp;
+const slug = post.slug;
+const shareURL = `${config.siteUrl}/${slug}/`;
+&nbsp;
+const fallbackDescription = rawText
+  .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
+  .replace(/```[\s\S]*?```/g, '')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/`([^`]*)`/g, '$1')
+  .replace(/&lt;[^&gt;]+&gt;/g, '')
+  .replace(/^#{1,6}\s*/gm, '')
+  .replace(/[*_~&gt;|]/g, '')
+  .replace(/\n+/g, ' ')
+  .trim()
+  .slice(0, 120);
+const postDescription = post.data.description || `${fallbackDescription}...`;
+&nbsp;
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort(
+  (a, b) =&gt; new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 &nbsp;
-export type SidebarLatestPost = {
-  title: string;
-  slug: string;
-  date: string;
-  url?: string;
-};
+const latestPosts = sorted.slice(0, 6).map((p) =&gt; ({
+  title: p.data.title,
+  slug: p.slug,
+  date: p.data.date.toISOString(),
+  url: p.slug,
+}));
 &nbsp;
-export type SidebarAllPost = {
-  date: string;
-  tags: string[];
-};
+const allPostsForSidebar = sorted.map((p) =&gt; ({
+  date: p.data.date.toISOString(),
+  tags: p.data.tags || [],
+}));
 &nbsp;
-export const Sidebar = ({
-  latestPosts = [],
-  totalCount = 0,
-  allPosts = [],
-}: {
-  allPosts: SidebarAllPost[];
-  totalCount: number;
-  latestPosts: SidebarLatestPost[];
-}) =&gt; {
-  React.useEffect(() =&gt; {
-    if (isBrowser()) {
-      const observer = lozad(".lozad", {
-        loaded(el) {
-          el.classList.add("loaded");
-        },
-      });
-      observer.observe();
-    }
-  }, []);
-  const lp = latestPosts.map(
-    (p) =&gt;
-      ({
-        node: {
-          frontmatter: {
-            url: p.url || p.slug || "",
-            title: p.title || "",
-            slug: p.url || p.slug,
-          },
-          fields: { slug: p.slug || "" },
-        },
-      }) as LatestPostProps,
-  );
-  const ap = allPosts.map(
-    (p) =&gt;
-      ({
-        node: {
-          frontmatter: {
-            date: p.date || "",
-            tags: p.tags || [],
-          },
-        },
-      }) as AllPost,
-  );
-  return (
-    &lt;header
-      className={
-        style.introHeader +
-        " site-heading text-center col-xl-2 col-lg-3 col-12 order-lg-1"
-      }
-    &gt;
-      &lt;div className={style.aboutMe}&gt;
-        &lt;a
-          href="https://portfolio.tubone-project24.xyz/"
-          onClick={() =&gt;
-            ReactGA.event({
-              category: "User",
-              action: "push tubone Avatar",
-            })
-          }
-        &gt;
-          &lt;picture&gt;
-            &lt;source
-              className={style.avatar}
-              srcSet="/assets/avater.webp"
-              type="image/webp"
-            /&gt;
-            &lt;img
-              className={style.avatar}
-              src="/assets/avater.png"
-              alt="tubone"
-              decoding="async"
-            /&gt;
-          &lt;/picture&gt;
-        &lt;/a&gt;
-        &lt;a
-          href="https://portfolio.tubone-project24.xyz/"
-          onClick={() =&gt;
-            ReactGA.event({
-              category: "User",
-              action: "push tubone Avatar Str",
-            })
-          }
-        &gt;
-          &lt;h2&gt;tubone&lt;/h2&gt;
-        &lt;/a&gt;
-        &lt;p className={style.soliloquy}&gt;It&amp;apos;s my life&lt;/p&gt;
-        &lt;Icon
-          href="https://github.com/tubone24"
-          icon={&lt;GitHubIcon size={28} /&gt;}
-          title="tubone24 github"
-        /&gt;
-        &lt;Icon
-          href="https://x.com/tubone24"
-          icon={&lt;XIcon size={28} /&gt;}
-          title="tubone24 X"
-        /&gt;
-        &lt;Icon
-          href="https://www.instagram.com/mugimugi.cutedog/"
-          icon={&lt;InstagramIcon size={28} /&gt;}
-          title="mugimugi.cutedog Instagram"
-        /&gt;
-        &lt;Information posts={lp} totalCount={totalCount} allPosts={ap} /&gt;
-        &lt;SearchBox /&gt;
-        &lt;hr /&gt;
-        &lt;Subscription /&gt;
-        &lt;hr /&gt;
-        &lt;TagCloud allPosts={ap} /&gt;
+const allPostsForRelated = sorted.map((p) =&gt; ({
+  title: p.data.title,
+  tags: p.data.tags || [],
+  date: p.data.date.toISOString(),
+  headerImage: p.data.headerImage,
+  slug: `/${p.slug}/`,
+}));
+---
+&nbsp;
+&lt;Layout
+  title={post.data.title}
+  description={postDescription}
+  ogImage={post.data.headerImage || config.defaultImage}
+  ogpPath={`/og/${slug}.png`}
+  isPostPage={true}
+  isPost={true}
+  tag={post.data.tags?.[0] || ''}
+  canonicalUrl={shareURL}
+  datePublished={post.data.date.toISOString()}
+  dateModified={(post.data.updatedDate || post.data.date).toISOString()}
+  keywords={post.data.tags || []}
+  faq={post.data.faq || []}
+  noindex={true}
+  wordCount={wordCount}
+&gt;
+  &lt;div class="post row order-2"&gt;
+    &lt;Header
+      client:idle
+      img={post.data.headerImage || config.defaultImage}
+      title={post.data.title}
+      authorName={config.author}
+      authorImage={true}
+      subTitle={parseDate(post.data.date.toISOString())}
+      showCopyMd={false}
+    /&gt;
+    &lt;Sidebar
+      client:visible
+      latestPosts={latestPosts}
+      allPosts={allPostsForSidebar}
+      totalCount={sorted.length}
+    /&gt;
+    &lt;main class="col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2"&gt;
+      &lt;Breadcrumb tag={post.data.tags?.[0] || ''} title={post.data.title} /&gt;
+      &lt;TimeToRead client:idle words={wordCount} minutes={minutes} /&gt;
+      &lt;TextToSpeech client:idle text={speechText} /&gt;
+      {post.data.useAi &amp;&amp; (
+        &lt;aside style="background:#fffbe6; border-left:4px solid #f0c040; padding:12px; margin-bottom:16px; border-radius:4px;"&gt;
+          &lt;p&gt;この記事はAIにて執筆を実施したものです。&lt;/p&gt;
+        &lt;/aside&gt;
+      )}
+      &lt;div class="content-white-inner"&gt;
+        &lt;PostContent /&gt;
       &lt;/div&gt;
-    &lt;/header&gt;
-  );
-};
-&nbsp;
-export default Sidebar;
+      &lt;div class="content-white-inner"&gt;
+        &lt;h2&gt;tubone24にラーメンを食べさせよう！&lt;/h2&gt;
+        &lt;p&gt;ぽちっとな↓&lt;/p&gt;
+        &lt;a href="https://www.buymeacoffee.com/tubone24"&gt;
+          &lt;img
+            src="https://img.buymeacoffee.com/button-api/?text=Buy me a ramen&amp;emoji=🍜&amp;slug=tubone24&amp;button_colour=40DCA5&amp;font_colour=ffffff&amp;font_family=Lato&amp;outline_colour=000000&amp;coffee_colour=FFDD00"
+            alt="Buy me a ramen"
+            width="217"
+            height="60"
+            loading="lazy"
+            decoding="async"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;AuthorBio client:idle /&gt;
+      &lt;RelatedPosts
+        client:idle
+        title={post.data.title}
+        tags={post.data.tags || []}
+        allPosts={allPostsForRelated}
+      /&gt;
+    &lt;/main&gt;
+    &lt;ShareBox client:visible url={shareURL} /&gt;
+  &lt;/div&gt;
+&lt;/Layout&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
