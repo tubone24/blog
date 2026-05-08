@@ -396,6 +396,7 @@ jobs:
           FAUNADB_SERVER_SECRET: ${{secrets.FAUNADB_SERVER_SECRET}}
           NETLIFY_ENV: deploy-preview
           ASTRO_ACTIVE_ENV: deploy-preview
+          SITE_SECRET: ${{ secrets.SITE_SECRET }}
         run: yarn build
       - name: Deploy to netlify
         run: npx netlify-cli deploy --no-build --dir=./dist --functions=./functions/src > cli.txt

@@ -8,6 +8,18 @@ interface PaywallProps {
 }
 
 const FUNCTION_URL = "/.netlify/functions/premium-content";
+
+function toErrorMessage(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  if (typeof e === "object" && e !== null) {
+    const obj = e as Record<string, unknown>;
+    // MetaMask cancel: { code: 4001, message: "User denied..." }
+    if (obj.code === 4001) return "署名をキャンセルしました";
+    if (typeof obj.message === "string" && obj.message) return obj.message;
+  }
+  if (typeof e === "string") return e;
+  return "予期しないエラーが発生しました";
+}
 const NETWORK_CHAIN_ID = 84532; // base-sepolia
 
 declare global {
@@ -206,7 +218,7 @@ export default function Paywall({ slug, priceUsd = 0.05 }: PaywallProps) {
       const { password } = await fetchWithX402(url);
       window.location.href = `/${slug}/encrypted.html#${password}`;
     } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
+      const msg = toErrorMessage(e);
       setErrorMsg(msg);
       setState("error");
     }
