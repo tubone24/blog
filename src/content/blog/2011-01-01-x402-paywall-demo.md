@@ -5,8 +5,7 @@ date: 2011-01-01
 description: x402プロトコルによるペイウォールの動作確認用デモ記事です。Base Sepoliaテストネット上のUSDCで課金フローを体験できます。
 tags:
   - x402
-  - ペイウォール
-headerImage: https://i.imgur.com/6B7WC7D.jpg
+headerImage: /images/blog/x402/demo.gif
 templateKey: blog-post
 useAi: false
 premium: true
