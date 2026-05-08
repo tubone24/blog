@@ -9,17 +9,35 @@ interface PaywallProps {
 
 const FUNCTION_URL = "/.netlify/functions/premium-content";
 
+// Blog design tokens
+const colors = {
+  primary: "#1bd77f",
+  primaryDark: "#15a863",
+  primaryDeeper: "#288378",
+  iconBg: "#034378",
+  surface: "#f0f7f1",
+  bg: "#d5ffd7",
+  text: "#212529",
+  textSecondary: "#555",
+  textMuted: "#767676",
+  border: "#d7d7d7",
+  pink: "#ff7e79",
+  pinkDark: "#ff4d46",
+  pinkLight: "#ffe8e7",
+  white: "#fff",
+} as const;
+
 function toErrorMessage(e: unknown): string {
   if (e instanceof Error) return e.message;
   if (typeof e === "object" && e !== null) {
     const obj = e as Record<string, unknown>;
-    // MetaMask cancel: { code: 4001, message: "User denied..." }
     if (obj.code === 4001) return "署名をキャンセルしました";
     if (typeof obj.message === "string" && obj.message) return obj.message;
   }
   if (typeof e === "string") return e;
   return "予期しないエラーが発生しました";
 }
+
 const NETWORK_CHAIN_ID = 84532; // base-sepolia
 
 declare global {
@@ -105,8 +123,6 @@ async function buildPaymentSignature(
     params: [from, typedData],
   })) as string;
 
-  // Build paymentPayload in the format x402 facilitator expects:
-  // { x402Version, resource, accepted, payload }
   const paymentPayload = {
     x402Version: 2,
     resource: {
@@ -130,7 +146,6 @@ async function buildPaymentSignature(
 }
 
 async function fetchWithX402(url: string): Promise<{ password: string }> {
-  // Initial request — no payment header
   const res1 = await fetch(url, { method: "POST" });
 
   if (res1.ok) {
@@ -148,7 +163,6 @@ async function fetchWithX402(url: string): Promise<{ password: string }> {
     throw new Error(msg);
   }
 
-  // Parse x402 v2 PAYMENT-REQUIRED header
   const b64 = res1.headers.get("payment-required");
   if (!b64) {
     throw new Error(
@@ -174,16 +188,13 @@ async function fetchWithX402(url: string): Promise<{ password: string }> {
     );
   }
 
-  // Request wallet access
   const accounts = (await window.ethereum.request({
     method: "eth_requestAccounts",
   })) as string[];
   const from = accounts[0];
 
-  // Sign the payment authorization
   const paymentSignature = await buildPaymentSignature(accept, from);
 
-  // Retry with payment signature
   const res2 = await fetch(url, {
     method: "POST",
     headers: { "PAYMENT-SIGNATURE": paymentSignature },
@@ -201,6 +212,27 @@ async function fetchWithX402(url: string): Promise<{ password: string }> {
   }
 
   return res2.json();
+}
+
+// Lock SVG icon matching blog's teal palette
+function LockIcon() {
+  return (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={colors.primaryDeeper}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ display: "block", margin: "0 auto 0.75rem" }}
+      aria-hidden="true"
+    >
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+  );
 }
 
 export default function Paywall({ slug, priceUsd = 0.05 }: PaywallProps) {
@@ -226,62 +258,110 @@ export default function Paywall({ slug, priceUsd = 0.05 }: PaywallProps) {
 
   return (
     <div
-      className="paywall-container"
       style={{
-        background:
-          "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+        background: colors.white,
         borderRadius: "12px",
-        padding: "2rem",
+        border: `1px solid ${colors.border}`,
+        borderTop: `4px solid ${colors.primary}`,
+        padding: "1.75rem 2rem",
         margin: "2rem 0",
-        color: "#fff",
+        color: colors.text,
         textAlign: "center",
-        border: "1px solid rgba(255,255,255,0.1)",
       }}
     >
-      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔒</div>
-      <h3 style={{ color: "#e2e8f0", marginBottom: "0.5rem" }}>
-        プレミアムコンテンツ
-      </h3>
-      <p
-        style={{ color: "#94a3b8", marginBottom: "1.5rem", fontSize: "0.9rem" }}
-      >
-        この記事の続きを読むには x402 プロトコルによる支払いが必要です。
-      </p>
+      <LockIcon />
 
-      <div
+      <p
         style={{
-          background: "rgba(255,255,255,0.05)",
-          borderRadius: "8px",
-          padding: "1rem",
-          marginBottom: "1.5rem",
-          display: "inline-block",
+          color: colors.iconBg,
+          fontSize: "1.15rem",
+          fontWeight: 700,
+          marginBottom: "0.5rem",
+          marginTop: 0,
         }}
       >
-        <div
-          style={{ color: "#f1fa8c", fontSize: "1.5rem", fontWeight: "bold" }}
+        プレミアムコンテンツ
+      </p>
+
+      <p
+        style={{
+          color: colors.textSecondary,
+          fontSize: "0.875rem",
+          marginBottom: "1.25rem",
+          lineHeight: 1.6,
+        }}
+      >
+        この続きを読むには x402 プロトコルによる支払いが必要です。
+      </p>
+
+      {/* Price badge */}
+      <div
+        style={{
+          display: "inline-flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: colors.surface,
+          border: `1px solid ${colors.primary}`,
+          borderRadius: "8px",
+          padding: "0.6rem 1.5rem",
+          marginBottom: "1.5rem",
+        }}
+      >
+        <span
+          style={{
+            color: colors.primaryDeeper,
+            fontSize: "1.4rem",
+            fontWeight: 700,
+            lineHeight: 1.2,
+          }}
         >
           ${priceUsd.toFixed(2)} USDC
-        </div>
-        <div style={{ color: "#94a3b8", fontSize: "0.75rem" }}>
+        </span>
+        <span
+          style={{
+            color: colors.textMuted,
+            fontSize: "0.7rem",
+            marginTop: "2px",
+          }}
+        >
           Base Sepolia テストネット
-        </div>
+        </span>
       </div>
 
+      {/* Locked state */}
       {state === "locked" && (
         <div>
           <button
-            className="btn btn-primary"
             onClick={handleUnlock}
-            style={{ minWidth: "180px", fontWeight: "bold" }}
+            style={{
+              display: "inline-block",
+              minWidth: "180px",
+              padding: "0.55rem 1.5rem",
+              background: colors.primary,
+              color: colors.white,
+              border: "none",
+              borderRadius: "6px",
+              fontWeight: 600,
+              fontSize: "0.95rem",
+              cursor: "pointer",
+              transition: "background 0.2s",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.background = colors.primaryDark)
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.background = colors.primary)
+            }
           >
-            {hasMetaMask ? "🔓 記事をアンロックする" : "🔓 Unlock Full Article"}
+            記事をアンロックする
           </button>
           {!hasMetaMask && (
             <p
               style={{
-                color: "#94a3b8",
+                color: colors.textMuted,
                 fontSize: "0.75rem",
                 marginTop: "0.75rem",
+                marginBottom: 0,
               }}
             >
               ブラウザで読む場合は MetaMask が必要です。
@@ -292,87 +372,84 @@ export default function Paywall({ slug, priceUsd = 0.05 }: PaywallProps) {
         </div>
       )}
 
-      {state === "connecting" && (
+      {/* Connecting / paying state */}
+      {(state === "connecting" || state === "paying") && (
         <div>
           <div
-            className="spinner-border text-primary"
+            className="spinner-border"
             role="status"
-            style={{ width: "1.5rem", height: "1.5rem" }}
+            style={{
+              width: "1.5rem",
+              height: "1.5rem",
+              color: colors.primary,
+            }}
           >
-            <span className="visually-hidden">Connecting...</span>
+            <span className="visually-hidden">処理中...</span>
           </div>
           <p
             style={{
-              color: "#94a3b8",
+              color: colors.textSecondary,
               marginTop: "0.75rem",
+              marginBottom: 0,
               fontSize: "0.875rem",
             }}
           >
-            ウォレットに接続中...
+            {state === "connecting"
+              ? "ウォレットに接続中..."
+              : "MetaMask で署名を確認してください..."}
           </p>
         </div>
       )}
 
-      {state === "paying" && (
-        <div>
-          <div
-            className="spinner-border text-warning"
-            role="status"
-            style={{ width: "1.5rem", height: "1.5rem" }}
-          >
-            <span className="visually-hidden">Processing...</span>
-          </div>
-          <p
-            style={{
-              color: "#94a3b8",
-              marginTop: "0.75rem",
-              fontSize: "0.875rem",
-            }}
-          >
-            MetaMask で署名を確認してください...
-          </p>
-        </div>
-      )}
-
+      {/* Error state */}
       {state === "error" && (
         <div>
           <div
-            className="alert"
             style={{
-              background: "rgba(239,68,68,0.15)",
-              border: "1px solid rgba(239,68,68,0.4)",
+              background: colors.pinkLight,
+              border: `1px solid ${colors.pink}`,
               borderRadius: "8px",
-              color: "#fca5a5",
+              color: colors.pinkDark,
               padding: "0.75rem 1rem",
               marginBottom: "1rem",
               fontSize: "0.875rem",
+              textAlign: "left",
             }}
           >
-            ⚠️ {errorMsg}
+            {errorMsg}
           </div>
           <button
-            className="btn btn-outline-light btn-sm"
             onClick={() => setState("locked")}
+            style={{
+              padding: "0.4rem 1.25rem",
+              background: "transparent",
+              color: colors.primaryDeeper,
+              border: `1px solid ${colors.primaryDeeper}`,
+              borderRadius: "6px",
+              fontSize: "0.875rem",
+              cursor: "pointer",
+            }}
           >
             再試行
           </button>
         </div>
       )}
 
+      {/* Footer */}
       <div
         style={{
           marginTop: "1.5rem",
           paddingTop: "1rem",
-          borderTop: "1px solid rgba(255,255,255,0.1)",
+          borderTop: `1px solid ${colors.border}`,
         }}
       >
-        <p style={{ color: "#475569", fontSize: "0.7rem", margin: 0 }}>
+        <p style={{ color: colors.textMuted, fontSize: "0.7rem", margin: 0 }}>
           Powered by{" "}
           <a
             href="https://x402.org"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#60a5fa" }}
+            style={{ color: colors.primaryDeeper }}
           >
             x402 protocol
           </a>{" "}

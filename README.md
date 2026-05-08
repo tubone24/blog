@@ -331,6 +331,22 @@ x402 settles in USDC. Claim Base Sepolia USDC from:
 Copy your MetaMask address (42 characters starting with `0x`) and set it as `WALLET_ADDRESS`.
 You can use the same address as both sender and receiver when testing.
 
+### Checklist Before Testing a Payment
+
+Before clicking **Unlock** in the browser, verify that the **payer wallet** (the MetaMask account) has:
+
+- [ ] MetaMask installed and connected to **Base Sepolia** (Chain ID 84532)
+- [ ] Some test ETH (needed for ERC-3009 signature gas — usually a tiny amount, often zero for off-chain signatures)
+- [ ] At least **0.05 USDC** on Base Sepolia (the payment amount, default `$0.05`)
+
+If the unlock button returns `invalid_exact_evm_insufficient_balance`, the payer wallet does not hold enough USDC. Use the [Circle Faucet](https://faucet.circle.com/) to top up:
+
+1. Go to <https://faucet.circle.com/>
+2. Select **Base Sepolia** as the network
+3. Paste your wallet address and click **Send**
+4. Wait 2–3 minutes for 20 USDC to arrive
+5. Try the payment again
+
 ### Generating SITE_SECRET
 
 ```bash

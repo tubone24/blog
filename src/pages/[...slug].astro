@@ -1,5 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-yaml';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/index.tsx';
 import ShareBox from '../components/ShareBox/index.tsx';
@@ -39,8 +46,35 @@ const rawText = post.body || '';
 // We never include the full content in the teaser page HTML.
 const teaserMarkdown = isPremium ? rawText.split('<!-- paywall -->')[0].trim() : '';
 
+function renderTableBlock(block: string): string {
+  const lines = block.split('\n').filter((l) => l.trim().startsWith('|'));
+  if (lines.length < 2) return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+  const rows = lines.map((l) =>
+    l.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim())
+  );
+  const isSeparator = rows[1]?.every((c) => /^[-: ]+$/.test(c));
+  if (!isSeparator) return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+  const header = `<thead><tr>${rows[0].map((c) => `<th>${c}</th>`).join('')}</tr></thead>`;
+  const body = `<tbody>${rows.slice(2).map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  return `<div class="table-responsive"><table class="table">${header}${body}</table></div>`;
+}
+
 function renderTeaserHtml(md: string): string {
   return md
+    .replace(/```(?:toc|mermaid)[\s\S]*?```\n?/g, '') // strip toc/mermaid blocks (can't render in teaser)
+    .replace(/^## Table of Contents\s*$/gm, '') // strip bare ToC heading left after block removal
+    .replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
+      const grammar = lang && Prism.languages[lang];
+      const highlighted = grammar
+        ? Prism.highlight(code.trimEnd(), grammar, lang)
+        : code.trimEnd().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return `<pre class="language-${lang}"><code class="language-${lang}">${highlighted}</code></pre>`;
+    })
+    .replace(/::github\{repo="([^"]+)"\}/g, (_, repo) =>
+      `<a href="https://github.com/${repo}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid #d7d7d7;border-radius:6px;font-size:0.875rem;color:#005b94;text-decoration:none;">` +
+      `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>` +
+      `${repo}</a>`
+    )
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
@@ -52,7 +86,11 @@ function renderTeaserHtml(md: string): string {
     .split('\n\n')
     .map((p) => p.trim())
     .filter(Boolean)
-    .map((p) => (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol') ? p : `<p>${p.replace(/\n/g, '<br>')}</p>`))
+    .map((p) => {
+      if (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol') || p.startsWith('<div') || p.startsWith('<a') || p.startsWith('<pre')) return p;
+      if (p.startsWith('|')) return renderTableBlock(p);
+      return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+    })
     .join('\n');
 }
 const teaserHtml = isPremium ? renderTeaserHtml(teaserMarkdown) : '';
