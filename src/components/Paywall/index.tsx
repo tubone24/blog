@@ -21,18 +21,29 @@ declare global {
   }
 }
 
+interface AcceptRequirement {
+  scheme: string;
+  network: string;
+  asset: string;
+  amount?: string;
+  maxAmountRequired?: string;
+  payTo: string;
+  maxTimeoutSeconds?: number;
+  extra?: { name?: string; version?: string };
+  resource?: string;
+  description?: string;
+  mimeType?: string;
+}
+
 async function buildPaymentSignature(
-  accept: {
-    payTo: string;
-    maxAmountRequired?: string;
-    amount?: string;
-    maxTimeoutSeconds?: number;
-    asset: string;
-  },
+  accept: AcceptRequirement,
   from: string,
 ): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   const validBefore = now + (accept.maxTimeoutSeconds ?? 300);
+  const value = accept.amount ?? accept.maxAmountRequired ?? "0";
+  const domainName = accept.extra?.name ?? "USD Coin";
+  const domainVersion = accept.extra?.version ?? "2";
 
   const nonceBytes = crypto.getRandomValues(new Uint8Array(32));
   const nonce =
@@ -44,7 +55,7 @@ async function buildPaymentSignature(
   const authorization = {
     from,
     to: accept.payTo,
-    value: accept.maxAmountRequired ?? accept.amount ?? "0",
+    value,
     validAfter: "0",
     validBefore: String(validBefore),
     nonce,
@@ -68,8 +79,8 @@ async function buildPaymentSignature(
       ],
     },
     domain: {
-      name: "USD Coin",
-      version: "2",
+      name: domainName,
+      version: domainVersion,
       chainId: NETWORK_CHAIN_ID,
       verifyingContract: accept.asset,
     },
@@ -82,14 +93,28 @@ async function buildPaymentSignature(
     params: [from, typedData],
   })) as string;
 
-  return btoa(
-    JSON.stringify({
-      x402Version: 2,
-      scheme: "exact",
-      network: `eip155:${NETWORK_CHAIN_ID}`,
-      payload: { signature, authorization },
-    }),
-  );
+  // Build paymentPayload in the format x402 facilitator expects:
+  // { x402Version, resource, accepted, payload }
+  const paymentPayload = {
+    x402Version: 2,
+    resource: {
+      url: accept.resource ?? "",
+      description: accept.description ?? "",
+      mimeType: accept.mimeType ?? "application/json",
+    },
+    accepted: {
+      scheme: accept.scheme,
+      network: accept.network,
+      asset: accept.asset,
+      amount: value,
+      payTo: accept.payTo,
+      maxTimeoutSeconds: accept.maxTimeoutSeconds ?? 300,
+      extra: accept.extra ?? { name: domainName, version: domainVersion },
+    },
+    payload: { signature, authorization },
+  };
+
+  return btoa(JSON.stringify(paymentPayload));
 }
 
 async function fetchWithX402(url: string): Promise<{ password: string }> {
@@ -119,15 +144,7 @@ async function fetchWithX402(url: string): Promise<{ password: string }> {
     );
   }
 
-  let requirements: {
-    accepts?: {
-      payTo: string;
-      maxAmountRequired?: string;
-      amount?: string;
-      maxTimeoutSeconds?: number;
-      asset: string;
-    }[];
-  };
+  let requirements: { accepts?: AcceptRequirement[] };
   try {
     requirements = JSON.parse(atob(b64));
   } catch {
