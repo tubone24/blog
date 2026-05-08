@@ -1,7 +1,7 @@
 import express from "express";
 import serverless from "serverless-http";
 import { paymentMiddleware, x402ResourceServer } from "@x402/express";
-import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { ExactEvmScheme } from "@x402/evm";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { createHmac } from "crypto";
 import * as Sentry from "@sentry/node";
