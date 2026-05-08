@@ -242,7 +242,7 @@ Coinbaseおよび、 Stripe傘下の [Privy](https://www.privy.io/) との共同
 
 ## このブログでの自前実装
 
-フロントエンドの [Paywallコンポーネント](https://github.com/tubone24/blog/blob/main/src/components/Paywall/index.tsx)（React）がMetaMaskで署名し、バックエンドのNetlify Functionがfacilitatorに検証を依頼、検証OKで記事ごとのパスワードを返す仕組みです。
+フロントエンドの [Paywallコンポーネント](https://github.com/tubone24/blog/blob/main/src/components/Paywall/index.tsx)（Astro）がMetaMaskで署名し、バックエンドのNetlify Functionがfacilitatorに検証を依頼、検証OKで記事ごとのパスワードを返す仕組みです。
 
 [pagecrypt](https://www.npmjs.com/package/pagecrypt) というライブラリを使って、有料記事は暗号化されているのですが、 Netlify Functionから受け取ったパスワードで暗号化済みのHTMLを復号して、プレミアムコンテンツが表示される仕組みです。
 
