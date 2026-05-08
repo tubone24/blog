@@ -208,7 +208,7 @@ x402の公式TypeScript SDKには `@x402/express` というミドルウェアパ
 
 記事のMarkdownファイルには以下のようなFront Matterを追加しています。
 
-```yaml{file: "src/content/blog/2026-05-08-x402-protocol-ai-agent-micropayment.md"}
+```yaml{file: "src/content/blog/2011-01-01-x402-paywall-demo.md"}
 premium: true
 priceUsd: 0.05
 ```
@@ -499,7 +499,7 @@ v1では支払い要件はサーバーがHTTP 402のレスポンスボディにJ
 
 実際に動かすには、MetaMaskに **Base Sepoliaテストネット** を追加して、テスト用USDCを入手する必要があります。ただ、ここは**テストネットなので実際のお金は一切かかりません**。
 
-[Base Sepolia](https://docs.base.org/network-information/#base-testnet-sepolia) は [Base](https://base.org/) のテストネットで、ChainIDは `84532`、CAIP-2識別子は `eip155:84532` です。MetaMaskへのネットワーク追加は、 [Chainlist](https://chainlist.org/chain/84532) から "Add to MetaMask" ボタン一発でできます。
+[Base Sepolia](https://docs.base.org/network-information/#base-testnet-sepolia) は [Base](https://base.org/) のテストネットで、ChainIDは `84532`、CAIP-2識別子は `eip155:84532` です。MetaMaskへのネットワーク追加は、 [Chainlist](https://chainlist.org/chain/84532) の `Add to MetaMask` ボタン一発でできます。
 
 テスト用USDCは [Circle Faucet](https://faucet.circle.com/) から無料で入手できます。手順はシンプルで、Circle Faucetにアクセスして **USDC on Base Sepolia** を選び、MetaMaskのウォレットアドレスを貼り付けて送信するだけです。1回につき10 USDC程度もらえるので、0.05 USDCのこの記事を200回読めてしまいます。
 
