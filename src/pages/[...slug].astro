@@ -9,6 +9,7 @@ import TimeToRead from '../components/TimeToRead/index.tsx';
 import TextToSpeech from '../components/TextToSpeech/index.tsx';
 import AuthorBio from '../components/AuthorBio/index.tsx';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import Paywall from '../components/Paywall/index.tsx';
 import config from '../config/index.json';
 import { parseDate } from '../utils/index';
 
@@ -24,9 +25,37 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content: PostContent } = await render(post);
+
+const isPremium = post.data.premium === true;
+// For premium posts, only render the full post on premium-full page (for encryption).
+// The teaser page renders only the content before <!-- paywall -->.
+const { Content: PostContent } = isPremium
+  ? { Content: null }
+  : await render(post);
 
 const rawText = post.body || '';
+
+// Extract teaser markdown for premium posts (content before <!-- paywall --> marker).
+// We never include the full content in the teaser page HTML.
+const teaserMarkdown = isPremium ? rawText.split('<!-- paywall -->')[0].trim() : '';
+
+function renderTeaserHtml(md: string): string {
+  return md
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer">$1</a>')
+    .split('\n\n')
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<ol') ? p : `<p>${p.replace(/\n/g, '<br>')}</p>`))
+    .join('\n');
+}
+const teaserHtml = isPremium ? renderTeaserHtml(teaserMarkdown) : '';
 const speechText = rawText
   .replace(/## Table of Contents[\s\S]*?(?=\n## )/g, '')
   .replace(/```[\s\S]*?```/g, '')
@@ -159,7 +188,18 @@ const rawMarkdown = mdLines.join('\n') + '\n\n' + rawText;
         </aside>
       )}
       <div class="content-white-inner">
-        <PostContent />
+        {isPremium ? (
+          <Fragment>
+            <div set:html={teaserHtml} />
+            <Paywall
+              client:load
+              slug={slug}
+              priceUsd={post.data.priceUsd ?? 0.05}
+            />
+          </Fragment>
+        ) : (
+          PostContent && <PostContent />
+        )}
       </div>
       <div class="content-white-inner">
         <h2>tubone24にラーメンを食べさせよう！</h2>

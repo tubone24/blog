@@ -264,6 +264,125 @@ cp .env.example .env
 | PUBLIC_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
 | PUBLIC_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
 | FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       |
+| WALLET_ADDRESS                   | EVM wallet address to receive USDC payments (x402)       | -       |
+| SITE_SECRET                      | HMAC key for premium content password derivation (x402)  | -       |
+| PREMIUM_PRICE_USD                | Price in USD for premium articles (x402)                 | 0.05    |
+
+## x402 Premium Content (Paywall)
+
+特定のブログ記事を有料コンテンツとして配信する機能。[x402 プロトコル](https://x402.org)（HTTP 402 Payment Required）を使い、AIエージェントや MetaMask ユーザーが自動決済できる仕組み。
+
+### アーキテクチャ概要
+
+```text
+[記事公開ページ /{slug}/]
+  ↓ ティーザー（<!-- paywall --> 以前）+ Paywall UI を表示
+
+[Paywall クリック]
+  ↓ POST /.netlify/functions/premium-content?slug={slug}
+  ↓ 402 → x402 handshake（MetaMask で USDC 署名）
+  ↓ 決済確認後: { password } を受け取り
+  ↓ /{slug}/encrypted.html#{password} へ遷移
+
+[/{slug}/encrypted.html]
+  pagecrypt 暗号化 HTML を URL fragment のパスワードで自動復号 → フルコンテンツ表示
+```
+
+### Base Sepolia テスト用ウォレットの作成手順
+
+Phase 1 はテストネット（Base Sepolia）で動作確認する。
+
+#### 1. MetaMask をインストール
+
+[MetaMask](https://metamask.io) をブラウザ拡張機能としてインストールし、新規ウォレットを作成する。
+シードフレーズは安全な場所に保管すること。
+
+#### 2. Base Sepolia ネットワークを追加
+
+MetaMask の「ネットワークを追加」から以下を入力する。
+
+| 項目 | 値 |
+| --- | --- |
+| ネットワーク名 | Base Sepolia |
+| RPC URL | `https://sepolia.base.org` |
+| チェーン ID | `84532` |
+| 通貨シンボル | ETH |
+| ブロックエクスプローラー | `https://sepolia.basescan.org` |
+
+または [Chainlist](https://chainlist.org/?search=base+sepolia&testnets=true) から「Add to MetaMask」で一発追加できる。
+
+#### 3. テスト ETH を入手（ガス代用）
+
+以下のいずれかで Base Sepolia テスト ETH を取得する。
+
+- [Coinbase Developer Platform Faucet](https://portal.cdp.coinbase.com/products/faucet) — Coinbase アカウント必要
+- [Alchemy Base Sepolia Faucet](https://www.alchemy.com/faucets/base-sepolia) — Alchemy アカウント必要
+- [QuickNode Base Sepolia Faucet](https://faucet.quicknode.com/base/sepolia) — アカウント不要
+
+#### 4. テスト USDC を入手（決済用）
+
+x402 は USDC で決済する。Base Sepolia USDC は以下から入手できる。
+
+- [Circle Faucet](https://faucet.circle.com/) — Base Sepolia を選んでウォレットアドレスを入力
+- コントラクトアドレス: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
+
+#### 5. 受け取りアドレスを確認
+
+MetaMask で作成したウォレットのアドレス（`0x` から始まる 42 文字）を `WALLET_ADDRESS` に設定する。
+送金先と受け取り先を同じアドレスにしてテストする場合も、このアドレスを使う。
+
+### SITE_SECRET の生成
+
+```bash
+openssl rand -hex 32
+# 例: a3f8c2d1e9b7a4f6c3d2e1b8a7f4c9d3e2b1a8f7c4d3e2b9a8f7c6d5e4b3a2f1
+```
+
+> ⚠️ **重要**: `SITE_SECRET` が漏洩すると全プレミアム記事のパスワードが導出される。Netlify 環境変数で厳重管理し、`.env` にコミットしないこと。
+
+### Netlify 環境変数の設定
+
+Netlify Dashboard → **Site configuration** → **Environment variables** で設定する。
+
+```bash
+WALLET_ADDRESS=0xYourWalletAddress
+SITE_SECRET=your_32_byte_hex_secret
+PREMIUM_PRICE_USD=0.05   # 省略可、デフォルト $0.05
+```
+
+### 記事をプレミアムコンテンツにする方法
+
+Markdown frontmatter に以下を追加し、本文に `<!-- paywall -->` マーカーを挿入する。
+
+```markdown
+---
+title: "記事タイトル"
+date: 2026-01-01
+premium: true
+priceUsd: 0.05
+---
+
+ここは無料で表示されるティーザーです。
+
+<!-- paywall -->
+
+## ここからが有料コンテンツ
+
+購入後に表示されます。
+```
+
+### ローカルでのビルドテスト
+
+```bash
+# .env に SITE_SECRET を設定
+echo "SITE_SECRET=$(openssl rand -hex 32)" >> .env
+
+# ビルド（暗号化まで実行）
+yarn build
+
+# dist/{slug}/encrypted.html が生成されていることを確認
+ls dist/2026/*/encrypted.html
+```
 
 ## CI/CD
 

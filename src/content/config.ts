@@ -21,6 +21,8 @@ const blog = defineCollection({
     templateKey: z.string().optional(),
     useAi: z.boolean().optional().default(false),
     noindex: z.boolean().optional().default(false),
+    premium: z.boolean().optional().default(false),
+    priceUsd: z.number().optional().default(0.05),
   }),
 });
 
