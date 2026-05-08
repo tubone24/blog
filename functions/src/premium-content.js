@@ -91,10 +91,17 @@ export const handler = async (event) => {
 
   // ── Verify with facilitator ───────────────────────────────────────────
   try {
+    // facilitator expects the full PAYMENT-REQUIRED wrapper { x402Version, accepts, error }
+    // not a bare requirements object — it reads paymentRequirements.accepts[0].scheme
+    const paymentRequired = {
+      x402Version: 2,
+      accepts: [requirements],
+      error: null,
+    };
     const verifyBody = {
       x402Version: 2,
       paymentPayload,
-      paymentRequirements: requirements,
+      paymentRequirements: paymentRequired,
     };
     console.log(
       "[premium-content] verify request:",
@@ -143,7 +150,11 @@ export const handler = async (event) => {
     body: JSON.stringify({
       x402Version: 2,
       paymentPayload,
-      paymentRequirements: requirements,
+      paymentRequirements: {
+        x402Version: 2,
+        accepts: [requirements],
+        error: null,
+      },
     }),
   }).catch((e) => Sentry.captureException(e));
 
