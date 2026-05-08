@@ -49,7 +49,7 @@ function json(statusCode, body, extraHeaders = {}) {
   };
 }
 
-export const handler = Sentry.wrapHandler(async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: CORS };
   }
@@ -144,4 +144,4 @@ export const handler = Sentry.wrapHandler(async (event) => {
     .digest("hex");
 
   return json(200, { password });
-});
+};
