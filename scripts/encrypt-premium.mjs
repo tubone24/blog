@@ -1,12 +1,20 @@
-import { encryptHTML } from 'pagecrypt/core';
 import { createHmac } from 'crypto';
-import { readFileSync, writeFileSync, rmSync, readdirSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, rmSync, readdirSync } from 'fs';
 import { existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
 
 config();
+
+// pagecrypt's core.js references window.crypto directly, which throws ReferenceError in Node.js.
+// Polyfill window with globalThis so `window.crypto` resolves to Node.js's built-in WebCrypto.
+// This must be set BEFORE the dynamic import of pagecrypt so the polyfill is in place
+// when pagecrypt's top-level await runs its loadCrypto() call.
+if (typeof globalThis.window === 'undefined') {
+  globalThis.window = globalThis;
+}
+const { encryptHTML } = await import('pagecrypt');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(__dirname, '..', 'dist');
@@ -24,14 +32,12 @@ if (!existsSync(premiumFullDir)) {
   process.exit(0);
 }
 
-// Walk directory tree and collect all index.html files
-function walkDir(dir, baseDir = dir) {
+function walkDir(dir) {
   const results = [];
-  const entries = readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      results.push(...walkDir(fullPath, baseDir));
+      results.push(...walkDir(fullPath));
     } else if (entry.name === 'index.html') {
       results.push(fullPath);
     }
@@ -45,29 +51,25 @@ if (htmlFiles.length === 0) {
   console.log('[encrypt-premium] No HTML files found in dist/premium-full/');
 } else {
   for (const htmlFile of htmlFiles) {
-    // Derive slug from path relative to dist/premium-full/
     const relPath = path.relative(premiumFullDir, htmlFile);
-    // relPath = "2026/05/08/x402-premium-test/index.html"
     const slug = relPath.replace(/\/index\.html$/, '');
 
-    // HMAC-SHA256(SITE_SECRET, slug) — same derivation used in the Function
+    // HMAC-SHA256(SITE_SECRET, slug) — same derivation used in the Netlify Function
     const password = createHmac('sha256', SITE_SECRET).update(slug).digest('hex');
 
     const html = readFileSync(htmlFile, 'utf8');
 
-    // 200k iterations: ~10x faster than default 2M, still secure for a paywall
+    // 200k iterations: ~10x faster than default 2M, still strong enough for a paywall
     const encrypted = await encryptHTML(html, password, 200_000);
 
     const outDir = path.join(distDir, slug);
     if (!existsSync(outDir)) {
       mkdirSync(outDir, { recursive: true });
     }
-    const outFile = path.join(outDir, 'encrypted.html');
-    writeFileSync(outFile, encrypted, 'utf8');
+    writeFileSync(path.join(outDir, 'encrypted.html'), encrypted, 'utf8');
     console.log(`[encrypt-premium] Encrypted: ${slug} → dist/${slug}/encrypted.html`);
   }
 }
 
-// Remove dist/premium-full/ entirely so it cannot be accessed directly
 rmSync(premiumFullDir, { recursive: true, force: true });
 console.log('[encrypt-premium] Removed dist/premium-full/');

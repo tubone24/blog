@@ -264,123 +264,124 @@ cp .env.example .env
 | PUBLIC_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
 | PUBLIC_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
 | FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       |
-| WALLET_ADDRESS                   | EVM wallet address to receive USDC payments (x402)       | -       |
+| WALLET_ADDRESS                   | EVM wallet address to receive USDC payments via x402     | -       |
 | SITE_SECRET                      | HMAC key for premium content password derivation (x402)  | -       |
-| PREMIUM_PRICE_USD                | Price in USD for premium articles (x402)                 | 0.05    |
+| PREMIUM_PRICE_USD                | Price in USD charged per premium article access (x402)   | 0.05    |
 
 ## x402 Premium Content (Paywall)
 
-特定のブログ記事を有料コンテンツとして配信する機能。[x402 プロトコル](https://x402.org)（HTTP 402 Payment Required）を使い、AIエージェントや MetaMask ユーザーが自動決済できる仕組み。
+Gate specific blog articles behind a paywall using the [x402 protocol](https://x402.org) (HTTP 402 Payment Required). AI agents and MetaMask users can pay automatically via USDC on Base.
 
-### アーキテクチャ概要
+### Architecture
 
 ```text
-[記事公開ページ /{slug}/]
-  ↓ ティーザー（<!-- paywall --> 以前）+ Paywall UI を表示
+[Article teaser page /{slug}/]
+  Shows content before <!-- paywall --> marker + Paywall UI
 
-[Paywall クリック]
-  ↓ POST /.netlify/functions/premium-content?slug={slug}
-  ↓ 402 → x402 handshake（MetaMask で USDC 署名）
-  ↓ 決済確認後: { password } を受け取り
-  ↓ /{slug}/encrypted.html#{password} へ遷移
+[Paywall "Unlock" click]
+  POST /.netlify/functions/premium-content?slug={slug}
+  402 → x402 handshake (MetaMask signs USDC authorization)
+  On success: receive { password }
+  Navigate to /{slug}/encrypted.html#{password}
 
 [/{slug}/encrypted.html]
-  pagecrypt 暗号化 HTML を URL fragment のパスワードで自動復号 → フルコンテンツ表示
+  pagecrypt-encrypted HTML auto-decrypts via URL fragment → full article
 ```
 
-### Base Sepolia テスト用ウォレットの作成手順
+### Setting Up a Base Sepolia Test Wallet (Phase 1)
 
-Phase 1 はテストネット（Base Sepolia）で動作確認する。
+Phase 1 runs on the Base Sepolia testnet — no real funds required.
 
-#### 1. MetaMask をインストール
+#### 1. Install MetaMask
 
-[MetaMask](https://metamask.io) をブラウザ拡張機能としてインストールし、新規ウォレットを作成する。
-シードフレーズは安全な場所に保管すること。
+Install [MetaMask](https://metamask.io) as a browser extension and create a new wallet.
+Store your seed phrase somewhere safe.
 
-#### 2. Base Sepolia ネットワークを追加
+#### 2. Add the Base Sepolia Network
 
-MetaMask の「ネットワークを追加」から以下を入力する。
+Go to **Add Network** in MetaMask and enter the following:
 
-| 項目 | 値 |
+| Field | Value |
 | --- | --- |
-| ネットワーク名 | Base Sepolia |
+| Network name | Base Sepolia |
 | RPC URL | `https://sepolia.base.org` |
-| チェーン ID | `84532` |
-| 通貨シンボル | ETH |
-| ブロックエクスプローラー | `https://sepolia.basescan.org` |
+| Chain ID | `84532` |
+| Currency symbol | ETH |
+| Block explorer | `https://sepolia.basescan.org` |
 
-または [Chainlist](https://chainlist.org/?search=base+sepolia&testnets=true) から「Add to MetaMask」で一発追加できる。
+You can also add it in one click via [Chainlist](https://chainlist.org/?search=base+sepolia&testnets=true).
 
-#### 3. テスト ETH を入手（ガス代用）
+#### 3. Get Test ETH (for gas)
 
-以下のいずれかで Base Sepolia テスト ETH を取得する。
+Claim Base Sepolia test ETH from any of these faucets:
 
-- [Coinbase Developer Platform Faucet](https://portal.cdp.coinbase.com/products/faucet) — Coinbase アカウント必要
-- [Alchemy Base Sepolia Faucet](https://www.alchemy.com/faucets/base-sepolia) — Alchemy アカウント必要
-- [QuickNode Base Sepolia Faucet](https://faucet.quicknode.com/base/sepolia) — アカウント不要
+- [Coinbase Developer Platform Faucet](https://portal.cdp.coinbase.com/products/faucet) — requires Coinbase account
+- [Alchemy Base Sepolia Faucet](https://www.alchemy.com/faucets/base-sepolia) — requires Alchemy account
+- [QuickNode Base Sepolia Faucet](https://faucet.quicknode.com/base/sepolia) — no account needed
 
-#### 4. テスト USDC を入手（決済用）
+#### 4. Get Test USDC (for payments)
 
-x402 は USDC で決済する。Base Sepolia USDC は以下から入手できる。
+x402 settles in USDC. Claim Base Sepolia USDC from:
 
-- [Circle Faucet](https://faucet.circle.com/) — Base Sepolia を選んでウォレットアドレスを入力
-- コントラクトアドレス: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
+- [Circle Faucet](https://faucet.circle.com/) — select Base Sepolia and enter your wallet address
+- Contract address: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
 
-#### 5. 受け取りアドレスを確認
+#### 5. Copy Your Wallet Address
 
-MetaMask で作成したウォレットのアドレス（`0x` から始まる 42 文字）を `WALLET_ADDRESS` に設定する。
-送金先と受け取り先を同じアドレスにしてテストする場合も、このアドレスを使う。
+Copy your MetaMask address (42 characters starting with `0x`) and set it as `WALLET_ADDRESS`.
+You can use the same address as both sender and receiver when testing.
 
-### SITE_SECRET の生成
+### Generating SITE_SECRET
 
 ```bash
 openssl rand -hex 32
-# 例: a3f8c2d1e9b7a4f6c3d2e1b8a7f4c9d3e2b1a8f7c4d3e2b9a8f7c6d5e4b3a2f1
+# e.g. a3f8c2d1e9b7a4f6c3d2e1b8a7f4c9d3e2b1a8f7c4d3e2b9a8f7c6d5e4b3a2f1
 ```
 
-> ⚠️ **重要**: `SITE_SECRET` が漏洩すると全プレミアム記事のパスワードが導出される。Netlify 環境変数で厳重管理し、`.env` にコミットしないこと。
+> ⚠️ **Important**: Anyone who obtains `SITE_SECRET` can derive every premium article password.
+> Keep it in Netlify environment variables only — never commit it to `.env`.
 
-### Netlify 環境変数の設定
+### Setting Netlify Environment Variables
 
-Netlify Dashboard → **Site configuration** → **Environment variables** で設定する。
+Go to **Netlify Dashboard → Site configuration → Environment variables** and add:
 
 ```bash
 WALLET_ADDRESS=0xYourWalletAddress
 SITE_SECRET=your_32_byte_hex_secret
-PREMIUM_PRICE_USD=0.05   # 省略可、デフォルト $0.05
+PREMIUM_PRICE_USD=0.05   # optional, default $0.05
 ```
 
-### 記事をプレミアムコンテンツにする方法
+### Making an Article Premium
 
-Markdown frontmatter に以下を追加し、本文に `<!-- paywall -->` マーカーを挿入する。
+Add the following to the Markdown frontmatter and insert a `<!-- paywall -->` marker in the body:
 
 ```markdown
 ---
-title: "記事タイトル"
+title: "Article Title"
 date: 2026-01-01
 premium: true
 priceUsd: 0.05
 ---
 
-ここは無料で表示されるティーザーです。
+This is the free teaser visible to all readers.
 
 <!-- paywall -->
 
-## ここからが有料コンテンツ
+## Premium Content Starts Here
 
-購入後に表示されます。
+This section is only visible after payment.
 ```
 
-### ローカルでのビルドテスト
+### Testing the Build Locally
 
 ```bash
-# .env に SITE_SECRET を設定
+# Add SITE_SECRET to .env
 echo "SITE_SECRET=$(openssl rand -hex 32)" >> .env
 
-# ビルド（暗号化まで実行）
+# Build (encryption step runs automatically)
 yarn build
 
-# dist/{slug}/encrypted.html が生成されていることを確認
+# Verify encrypted.html was generated
 ls dist/2026/*/encrypted.html
 ```
 
