@@ -36,8 +36,6 @@ function buildPaymentRequirements(event) {
     payTo: process.env.WALLET_ADDRESS,
     maxTimeoutSeconds: 300,
     asset: USDC_BASE_SEPOLIA,
-    outputSchema: null,
-    extra: null,
   };
 }
 
@@ -93,30 +91,49 @@ export const handler = async (event) => {
 
   // ── Verify with facilitator ───────────────────────────────────────────
   try {
+    const verifyBody = {
+      x402Version: 2,
+      paymentPayload,
+      paymentRequirements: requirements,
+    };
+    console.log(
+      "[premium-content] verify request:",
+      JSON.stringify(verifyBody),
+    );
+
     const verifyRes = await fetch(`${FACILITATOR_URL}/verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        x402Version: 2,
-        paymentPayload,
-        paymentRequirements: requirements,
-      }),
+      body: JSON.stringify(verifyBody),
     });
 
-    if (!verifyRes.ok) {
-      const err = await verifyRes.json().catch(() => ({}));
-      return json(402, {
-        error: err.invalidReason || `Verification failed (${verifyRes.status})`,
-      });
+    const verifyText = await verifyRes.text();
+    console.log(
+      "[premium-content] verify response:",
+      verifyRes.status,
+      verifyText,
+    );
+
+    let verifyData;
+    try {
+      verifyData = JSON.parse(verifyText);
+    } catch {
+      verifyData = {};
     }
 
-    const { isValid, invalidReason } = await verifyRes.json();
-    if (!isValid) {
-      return json(402, { error: invalidReason || "Invalid payment" });
+    if (!verifyRes.ok || !verifyData.isValid) {
+      return json(402, {
+        error:
+          verifyData.invalidReason ||
+          verifyData.error ||
+          `Verification failed (${verifyRes.status})`,
+        debug: verifyData,
+      });
     }
   } catch (e) {
     Sentry.captureException(e);
-    return json(502, { error: "Facilitator unreachable" });
+    console.error("[premium-content] facilitator error:", e);
+    return json(502, { error: "Facilitator unreachable", message: String(e) });
   }
 
   // ── Settle (best-effort; non-blocking on error) ───────────────────────
