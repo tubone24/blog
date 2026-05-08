@@ -98,8 +98,11 @@ export const handler = async (event) => {
       accepts: [requirements],
       error: null,
     };
+    // x402.org public facilitator reads scheme/network from top-level request fields
     const verifyBody = {
       x402Version: 2,
+      scheme: paymentPayload.scheme,
+      network: paymentPayload.network,
       paymentPayload,
       paymentRequirements: paymentRequired,
     };
@@ -149,6 +152,8 @@ export const handler = async (event) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       x402Version: 2,
+      scheme: paymentPayload.scheme,
+      network: paymentPayload.network,
       paymentPayload,
       paymentRequirements: {
         x402Version: 2,
