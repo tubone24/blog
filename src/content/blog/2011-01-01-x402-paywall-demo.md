@@ -17,7 +17,7 @@ priceUsd: 0.05
 
 実装の解説記事は「[x402プロトコルでブログにペイウォールを実装してみた](/2026/05/08/x402-protocol-ai-agent-micropayment/)」をご覧ください。
 
-このデモを試すには、MetaMaskにBase Sepoliaテストネットを追加して、[Circle Faucet](https://faucet.circle.com/)からテスト用USDCを無料入手すると試せます。
+このデモを試すには、MetaMaskを設定後にBase Sepoliaテストネットを追加して、[Circle Faucet](https://faucet.circle.com/)からテスト用USDCを無料入手すると試せます。
 
 0.05 USDCで下のボタンからアンロックしてみてください。
 

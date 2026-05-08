@@ -45,23 +45,23 @@ GW明け、なんとも気の抜けた朝。
 
 AIエージェントが自律的に支払いを完了させる基盤として、**x402というHTTPベースの決済プロトコル**を採用したサービスです。
 
-x402を調べてみると [Coinbase](https://www.coinbase.com/) が2025年5月にオープンソース化し、 [2026年4月にはLinux Foundation配下のx402 Foundationに移管](https://blog.cloudflare.com/x402/) されているプロトコルで、Cloudflareをはじめ複数の事業者が参画するエコシステムに成長していました。
+x402を調べてみると [Coinbase](https://www.coinbase.com/) が2025年5月にオープンソース化し、 [2026年4月にはLinux Foundation配下のx402 Foundationに移管](https://www.linuxfoundation.org/press/linux-foundation-is-launching-the-x402-foundation-and-welcoming-the-contribution-of-the-x402-protocol) されているプロトコルで、Cloudflareをはじめ複数の事業者が参画するエコシステムに成長していました。
 
 しかし、仕様を読んでいるだけではイマイチ実感が持てないタイプなので...。せっかくなら自分のブログに実際に組み込んでみようと思い、x402ベースのペイウォールを作ってみました。
 
 ## x402プロトコルとは
 
-### HTTP 402の復権
+### HTTP 402 Payment Required
 
 x402を理解する上で、まずは [HTTP 402 Payment Required](https://developer.mozilla.org/ja/docs/Web/HTTP/Status/402) というステータスコードの存在を思い出す必要があります。
 
 [HTTPステータスコード百人一首](https://booth.pm/ja/items/2866153)とかでも、なにこれ!?ってなるようなステータスコードです。
 
-このステータスコード、HTTPの仕様には**1990年代から予約されていた**のですが、長らく標準的な使い方が決まらず、ずっと将来の利用のために `Reserved` のまま放置されていました。
+このステータスコード、HTTPの仕様には [**1990年代から予約されていた**](https://datatracker.ietf.org/doc/html/rfc2068#section-10.4.3) のですが、長らく標準的な使い方が決まらず、ずっと将来の利用のために `Reserved` のまま放置されていました。
 
 考え方はあるものの、クライアント・サーバー間で**ここから先は支払いが必要**と表現する手段が標準化されないまま、現代まで来てしまったわけです。
 
-x402はこの402ステータスコードに **マシンリーダブルな決済プロトコル** を載せようというアイディアで、HTTPの上に薄く乗っかる、チェーン非依存の決済プロトコルとして設計されています。
+x402はこの402ステータスコードに **マシンリーダブルな決済プロトコル** を載せようというアイディアで、HTTPの上に薄く乗っかる、チェーン非依存（というお題目の）の決済プロトコルとして設計されています。
 
 ### プロトコルの基本フロー
 
@@ -90,11 +90,11 @@ participant B as Blockchain (Base等)
 
 サーバーは**この資源は有料だよ。支払い条件はこちら**と**402 Payment Required**を返します。
 
-![](/images/blog/x402/payment_required.png)
+![有料リソースに支払いヘッダーなしでアクセスし、サーバーから 402 Payment Required が返されている DevTools のスクリーンショット](/images/blog/x402/payment_required.png)
 
-また、レスポンスヘッダーの`PAYMENT-REQUIRED` ヘッダーには、サーバーからの決済要件がBase64エンコードされたJSON文字列として格納されています。 受け入れ可能な決済スキーム・価格・ネットワーク・送金先アドレスなどの詳細が含まれます。
+また、レスポンスヘッダーの `PAYMENT-REQUIRED` ヘッダーには、サーバーからの決済要件がBase64エンコードされたJSON文字列として格納されています。 受け入れ可能な決済スキーム・価格・ネットワーク・送金先アドレスなどの詳細が含まれます。
 
-![](/images/blog/x402/PAYMENT-REQUIRED.png)
+![402 レスポンスに含まれる PAYMENT-REQUIRED ヘッダーの値（Base64文字列）が DevTools に表示されている様子](/images/blog/x402/PAYMENT-REQUIRED.png)
 
 デコードしてみると、こんな感じです。
 
@@ -122,11 +122,11 @@ participant B as Blockchain (Base等)
 }
 ```
 
-`amount` はUSDCのSmallest Unit（小数点6桁）なので、0.05 USDCは `50000` です。 `scheme: "exact"` は **ちょうどこの金額を払え** という意味で、x402の基本スキームです。
+`amount` はUSDCのSmallest Unit（小数点6桁）なので、0.05 USDCは `50000` です。 `asset` は決済に使うトークンのコントラクトアドレス（このケースではBase Sepolia上のUSDCコントラクト）で、後ほどEIP-712署名の `verifyingContract` にもこの値が入ります。 `scheme: "exact"` は **ちょうどこの金額を払え** という意味で、x402の基本スキームです。
 
-クライアントが署名を作ってリクエストヘッダーの`Payment-Signature`にbase64で設定し再度リクエストを送ると、サーバーが [Coinbase facilitator](https://docs.cdp.coinbase.com/x402/welcome) などの代行サービスで署名の検証をします。
+クライアントが署名を作ってリクエストヘッダーの `PAYMENT-SIGNATURE` にbase64で設定し再度リクエストを送ると、サーバーが [Coinbase facilitator](https://docs.cdp.coinbase.com/x402/welcome) などの代行サービスで署名の検証をします。
 
-![](/images/blog/x402/request-payment-signature.png)
+![PAYMENT-SIGNATURE ヘッダーに Base64 エンコードされた署名済みペイロードを乗せて再リクエストしている DevTools のスクリーンショット](/images/blog/x402/request-payment-signature.png)
 
 こちらもデコードするとこんな感じです。
 
@@ -166,7 +166,7 @@ participant B as Blockchain (Base等)
 
 検証がOKなら実際のリソースを返す、という流れです。
 
-オンチェーン送金（settle）は、検証が通った時点で**非同期で実行する**のが基本です。つまり検証が通った時点で決済結果を待たずにコンテンツの取得ができます。
+オンチェーン送金（settle）は、検証が通った時点で**非同期で実行する**のが実装が多いです。つまり検証が通った時点で決済結果を待たずにコンテンツの取得ができます。
 
 クライアントは送金の確定を待たずにリソースを受け取れるので、体感的にはほぼリアルタイムです。 [Base](https://base.org/) のような低レイテンシの下位テストネット上であれば送金費用も安価で、AIエージェントが大量に呼び出すユースケースにも耐えられる設計になっています。
 
@@ -196,7 +196,7 @@ x402の面白さは、 **AIエージェントの自律的な決済を可能に�
 
 MetaMaskは [Web3 Wallet](https://ethereum.org/ja/wallets/) として動作するブラウザ拡張で、 `window.ethereum.request({ method: "eth_signTypedData_v4", ... })` を呼ぶと、ユーザーに対してこんなポップアップが出ます。
 
-![](/images/blog/x402/check-sig.png)
+![MetaMask が EIP-712 typedData の中身を表示し、ユーザーに署名内容の確認を求めているポップアップ](/images/blog/x402/check-sig.png)
 
 人間がこれを見て、目視で内容を確認し、**OK**と署名ボタンを押すことで決済が進む形です。
 
@@ -242,26 +242,6 @@ Coinbaseおよび、 Stripe傘下の [Privy](https://www.privy.io/) との共同
 
 ## このブログでの自前実装
 
-### アーキテクチャ全体像
-
-実装は大きく3層に分かれています。
-
-```mermaid
-flowchart TD
-    U[ユーザー / AIエージェント] -->|POST /.netlify/functions/premium-content| NF
-    NF[Netlify Function\npremium-content.js] -->|POST /verify| FA
-    NF -->|POST /settle\nfire-and-forget| FA
-    FA[x402 Facilitator\nx402.org/facilitator] -->|transferWithAuthorization| BC
-    BC[Base Sepolia\nUSDC Contract]
-    NF -->|password| U
-    U -->|password| EH[encrypted.html]
-    EH -->|PBKDF2 + AES-GCM| PC[pagecrypt\n復号]
-
-    style NF fill:#f0f0f0
-    style FA fill:#e8f4fd
-    style BC fill:#fff3e0
-```
-
 フロントエンドの [Paywallコンポーネント](https://github.com/tubone24/blog/blob/main/src/components/Paywall/index.tsx)（React）がMetaMaskで署名し、バックエンドのNetlify Functionがfacilitatorに検証を依頼、検証OKで記事ごとのパスワードを返す仕組みです。
 
 [pagecrypt](https://www.npmjs.com/package/pagecrypt) というライブラリを使って、有料記事は暗号化されているのですが、 Netlify Functionから受け取ったパスワードで暗号化済みのHTMLを復号して、プレミアムコンテンツが表示される仕組みです。
@@ -297,7 +277,7 @@ if (!verifyRes.ok || !verifyData.isValid) {
 
 facilitatorは `isValid: true/false` で返してきます。 `isValid: false` の場合は `invalidReason` に理由が入ります（残高不足、署名期限切れなど）。
 
-検証が通ったら、`/settle` を、**火忘れ**（**fire-and-forget**）つまり非同期で発火させます。
+検証が通ったら、`/settle` を **fire-and-forget**（投げっぱなし）、つまり非同期で発火させます。
 
 ```javascript{file: "functions/src/premium-content.js"}
 // settle は検証OKと同時に発火するが、応答を待たない
@@ -321,7 +301,7 @@ settleはオンチェーン送金（`transferWithAuthorization()` 呼び出し�
 
 x402でのUSDC決済には [EIP-712](https://eips.ethereum.org/EIPS/eip-712) の構造化署名と、[EIP-3009](https://eips.ethereum.org/EIPS/eip-3009) の `TransferWithAuthorization` が使われます。
 
-EIP-712は **人間が読める形でEthereumの構造化データに署名する** 仕様で、MetaMaskのポップアップで **何に署名しようとしているか** が日本語でわかるようになっています。
+EIP-712は **Ethereumの構造化データを型情報付きでハッシュ化・署名する** ための仕様で、署名対象を型と値のペアで表現することにより、MetaMaskのようなウォレット側で **何に署名しようとしているか** を人間可読に表示しやすくしています（人間可読のUI自体はウォレット実装側の責務です）。
 
 EIP-3009はその上に乗って、**送金者がオフチェーンで署名するだけで、第三者（facilitator）がガス代を払って代わりにオンチェーン送金できる**仕組みを提供します。
 
@@ -357,8 +337,8 @@ const typedData = JSON.stringify({
     to:          accept.payTo,           // 受取人（著者ウォレット）
     value:       "50000",               // 0.05 USDC (6桁小数)
     validAfter:  "0",                    // 即時有効
-    validBefore: String(now + 300),      // 5分後に失効
-    nonce:       "0x...32バイトランダム", // リプレイ攻撃防止
+    validBefore: String(now + 300),      // 5分後に失効（now はUnix秒）
+    nonce:       "0x...32バイトランダム", // 同一authorizationの再使用を防ぐ
   },
 });
 ```
@@ -373,7 +353,7 @@ const typedData = JSON.stringify({
 
 **TransferWithAuthorization**はEIP-3009の送金指示本体です。 `validAfter / validBefore` で有効期間を設定でき、今回は署名後5分で失効するようにしています。
 
-`nonce` が **bytes32のランダム値** になっている点が重要で、同一のnonceは一度しか使えないため、**同じ署名を使い回すリプレイ攻撃が不可能**になっています。
+`nonce` が **bytes32のランダム値** になっている点が重要で、USDCコントラクトが `usedAuthorizations[authorizer][nonce]` のマップで使用済みnonceを管理しているため、**まったく同じauthorizationを2回送信して二重に送金させる**ことができないようになっています。
 
 ### eth_signTypedData_v4でMetaMaskから署名を取る
 
@@ -467,7 +447,7 @@ pagecryptはAES-GCM + PBKDF2 (SHA-256) でHTMLを暗号化するnpmライブラ�
 
 ```javascript{file: "scripts/encrypt-premium.mjs"}
 const password = createHmac("sha256", SITE_SECRET).update(slug).digest("hex");
-const encrypted = await encryptHTML(html, password, 2_000_000); // PBKDF2 200万イテレーション（pagecryptデフォルト）
+const encrypted = await encryptHTML(html, password, 200_000);
 writeFileSync(path.join(outDir, "encrypted.html"), encrypted, "utf8");
 ```
 
