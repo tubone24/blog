@@ -42,7 +42,7 @@ x402を調べてみると [Coinbase](https://www.coinbase.com/) が2025年5月�
 
 ## x402プロトコルとは
 
-### HTTP 402という"予約席"の復権
+### HTTP 402の復権
 
 x402を理解する上で、まずは [HTTP 402 Payment Required](https://developer.mozilla.org/ja/docs/Web/HTTP/Status/402) というステータスコードの存在を思い出す必要があります。
 
@@ -56,7 +56,7 @@ x402はこの402ステータスコードに **マシンリーダブルな決済�
 
 x402は当初Coinbaseが2025年5月に発表したものでしたが、その後の経緯がそれなりに面白いです。
 
-2026年4月2日、Coinbaseはx402を [Linux Foundation](https://www.linuxfoundation.org/) 配下に新設された **x402 Foundation** に寄贈し、 [Cloudflare](https://blog.cloudflare.com/x402/) を含む複数社の共同運営に切り替えました。Cloudflare Workersがx402対応を発表したのもこのタイミングです。
+2026年4月2日、Coinbaseはx402を [Linux Foundation](https://www.linuxfoundation.org/) 配下に新設された **x402 Foundation** に寄贈し、Cloudflareを含む創設メンバー企業による中立的なオープンガバナンスに移行しました。なお、Cloudflare自身は [これに先立ち2025年9月23日に Workers / Agents SDK / MCPサーバーでのx402対応を発表](https://blog.cloudflare.com/x402/) しており、Linux Foundation配下への移管はその参画関係を制度化したものという位置づけです。
 
 つまり**今のx402はCoinbase固有の規格ではなく、業界横断のオープンスタンダード**になっています。CoinbaseはBaseチェーン上のfacilitatorをホスティング提供する立ち位置ですが、プロトコル自体は誰でも実装できます。実際、 [QuickNode](https://blog.quicknode.com/x402-protocol-explained-inside-the-https-native-payment-layer/) や [Hyperbolic Labs](https://github.com/HyperbolicLabs/hyperbolic-x402) など、独自のfacilitatorやx402対応APIを提供する事業者が増えています。
 
@@ -87,11 +87,11 @@ participant B as Blockchain (Base等)
 
 サーバーは「この資源は有料だよ。支払い条件はこちら」と402を返し、クライアントが署名を作って再送、サーバーが [Coinbase facilitator](https://docs.cdp.coinbase.com/x402/welcome) などの代行サービスで検証してOKならリソースを返す、という流れです。
 
-オンチェーン送金（settle）は、検証が通った時点で**サーバーから fire-and-forget で発火させる**のがセオリーになっています。クライアントは送金の確定を待たずにリソースを受け取れるので、体感的にはほぼリアルタイムです。実際、[Base上のUSDC settle は約200msで完了](https://aws.amazon.com/blogs/machine-learning/agents-that-transact-introducing-amazon-bedrock-agentcore-payments-built-with-coinbase-and-stripe/) し、1txあたりのコストは1セント未満とのこと。
+オンチェーン送金（settle）は、検証が通った時点で**サーバーから fire-and-forget で発火させる**のが基本です。クライアントは送金の確定を待たずにリソースを受け取れるので、体感的にはほぼリアルタイムです。 [Base](https://base.org/) のような低レイテンシの下位テストネット上であれば送金費用も安価で、AIエージェントが大量に呼び出すユースケースにも耐えられる設計になっています。
 
-## なぜ今x402なのか — AIエージェント時代の決済問題
+## なぜ今x402なのか
 
-x402の本質的な価値は、 **AIエージェントの自律的な決済を可能にする** という点にあります。
+x402の面白さは、 **AIエージェントの自律的な決済を可能にする** という点にあります。
 
 ここはちょっと厚めに書きたいので、まず「人間向け決済UXがエージェントに合わない理由」から整理させてください。
 
@@ -99,11 +99,11 @@ x402の本質的な価値は、 **AIエージェントの自律的な決済を�
 
 これまでのWebの課金は、結局のところ**人間がブラウザの前にいる**ことを前提に作られてきました。クレジットカード入力フォーム、 [Stripe](https://stripe.com/jp) のCheckout画面、 [Apple Pay](https://www.apple.com/jp/apple-pay/) のFace ID認証...どれも、人間の判断と操作を必要とします。
 
-ところが、AIエージェントが自律的にWebを巡回し、APIを呼び、必要に応じて有料リソースを使うようになると、この前提が一気に崩壊します。
+ところが、AIエージェントが自律的にWebを巡回し、APIを呼び、必要に応じて有料リソースを使うようになると、この前提が崩れます。
 
 エージェントが論文1本を読みたいだけなのに、人間に**わざわざ「クレカ番号入れてください」と確認**を取らないといけないのはおかしいですよね。一方で、エージェントに無制限のクレカ番号を渡すのも、それはそれで怖い。1日何万件のAPIコールをするエージェントに、人間と同じ決済UXを提供するのは無理があります。
 
-### MetaMaskポップアップという"人間専用"インターフェース
+### MetaMaskポップアップは人間専用のインターフェース
 
 私の今回の実装では、人間ユーザー向けに **[MetaMask](https://metamask.io/) で署名する** UXを採用しています。が、これも厳密には人間専用UXです。
 
@@ -124,17 +124,19 @@ MetaMask: TransferWithAuthorization
 
 しかし、これが**エージェントには通用しません**。エージェントはMetaMaskポップアップをクリックできないからです。
 
-### x402が解く"マシンネイティブ"な決済
+### x402が解くマシンネイティブな決済
 
-x402は、この問題を **決済を完全にHTTPのなかで完結させる** ことで解決します。
+x402は、この問題を **決済をHTTPのなかで完結させる** ことで解決します。
 
 x402対応クライアントは、HTTPリクエストを送って402を受け取った時点で、自分のキー（あるいは委任されたキー）で署名を作り、自分でPAYMENT-SIGNATUREヘッダーをセットして再送します。MetaMaskのような人間向けUIは介在しません。
 
 つまりx402では、 **お金を払うというアクションが、HTTPリクエストの一部として記述可能** になります。これがマシンネイティブの決済プロトコルと呼ばれる所以です。
 
-実際、Coinbaseの [x402 Bazaar](https://docs.cdp.coinbase.com/x402/bazaar) という [MCP](https://modelcontextprotocol.io/) サーバーには、すでに**1万以上のx402対応エンドポイント**が登録されています。エージェントは `search_resources` で目的に合うAPIを探し、 `proxy_tool_call` で支払って呼び出す、ということが**プロトコルレベルで完結**しています。「次のAPIは課金が必要なので、人間に許可を取ってきます」という従来のフローが、もはや存在しないわけです。
+実際、Coinbaseの [x402 Bazaar](https://docs.cdp.coinbase.com/x402/bazaar) という [MCP](https://modelcontextprotocol.io/) サーバー経由で、x402対応エンドポイントを動的に検索できるようになっています。エージェントは `search_resources` で目的に合うAPIを探し、 `proxy_tool_call` で支払って呼び出す、ということがプロトコルレベルで完結します。
 
-## 今回のきっかけ Amazon Bedrock AgentCore Payments
+「次のAPIは課金が必要なので、人間に許可を取ってきます」という従来のフローが、もはや存在しないわけです。
+
+## きっかけはAmazon Bedrock AgentCore Payments
 
 そもそもの話に戻ると、この記事を書こうと思ったきっかけは **2026年5月7日に発表された [Amazon Bedrock AgentCore Payments](https://aws.amazon.com/blogs/machine-learning/agents-that-transact-introducing-amazon-bedrock-agentcore-payments-built-with-coinbase-and-stripe/)** です。
 
@@ -142,7 +144,7 @@ x402対応クライアントは、HTTPリクエストを送って402を受け取
 
 ### 何が発表されたのか
 
-[Amazon Bedrock](https://aws.amazon.com/jp/bedrock/) の [AgentCore](https://aws.amazon.com/jp/bedrock/agentcore/) ファミリに **Payments** という新コンポーネントが追加され、現在プレビュー公開中です。Coinbaseおよび [Stripe (Privy)](https://www.privy.io/) との共同開発という体裁で、 **AIエージェントが自律的にx402決済できる基盤** が提供されます。
+[Amazon Bedrock](https://aws.amazon.com/jp/bedrock/) の [AgentCore](https://aws.amazon.com/jp/bedrock/agentcore/) ファミリに **Payments** という新コンポーネントが追加され、現在プレビュー公開中です。 Coinbaseおよび、 Stripe傘下の [Privy](https://www.privy.io/) との共同開発という体裁で、AIエージェントが自律的にx402決済できる基盤が提供されます。
 
 特徴をざっくりまとめるとこんな感じです。
 
@@ -150,15 +152,15 @@ x402対応クライアントは、HTTPリクエストを送って402を受け取
 |------|------|
 | ウォレット管理 | Coinbase ウォレット（USDCステーブルコイン）と Stripe Privy ウォレット（フィアット）の2系統 |
 | 決済プロトコル | x402（HTTP 402ベース） |
-| ガバナンス | Spend Policy（セッション単位の支出上限、用途制限） |
+| ガバナンス | セッション単位の支出上限・用途制限 |
 | 監査 | 全決済のオンチェーン履歴 + AgentCoreの実行ログに統合 |
-| ディスカバリ | [Coinbase x402 Bazaar](https://docs.cdp.coinbase.com/x402/bazaar) MCPサーバー連携で1万以上のx402リソースを動的検索 |
+| ディスカバリ | [Coinbase x402 Bazaar](https://docs.cdp.coinbase.com/x402/bazaar) MCPサーバー連携でx402リソースを動的検索 |
 
-### Spend Policyという発想
+### セッション単位の支出上限という発想
 
-個人的に「これはうまいな」と思ったのが **Spend Policy** という仕組みです。
+個人的に「これはうまいな」と思ったのが **セッション単位の支出上限** という仕組みです（AWSブログでは "session-level spending limits" と表現されています）。
 
-エージェントに無制限の財布を持たせるのは怖いので、AgentCore Paymentsでは**セッション単位で予算上限を設定**できます。たとえば「このエージェントの今回の実行では、最大1ドルまで使ってよい」と渡しておけば、それを超える決済はそもそも実行されません。
+エージェントに無制限の財布を持たせるのは怖いので、AgentCore Paymentsではセッション単位で予算上限を設定できます。たとえば「このエージェントの今回の実行では、最大1ドルまで使ってよい」と渡しておけば、それを超える決済はそもそも実行されません。
 
 これは人間向け決済では成立しにくい考え方ですよね。普通のクレカは **総額の上限** しか持たず、セッション概念がありません。AIエージェントが自律的に動くからこそ、 **今日のこのタスクに対する予算** みたいな単位で予算をくくる必要が出てくるわけです。
 
@@ -249,7 +251,9 @@ x402 v2では、リクエスト・レスポンスに3つのHTTPヘッダーが�
 
 ### facilitator の /verify と /settle
 
-署名付きのリクエストを受け取ったNetlify Functionは、まず [Coinbase facilitator](https://x402.org/facilitator) の `/verify` エンドポイントに検証を依頼します。
+今回はテストネット用途なので、認証不要の公開facilitatorである [x402.org/facilitator](https://x402.org/facilitator) を使います。本番環境では [Coinbase CDP](https://docs.cdp.coinbase.com/x402/welcome) の `https://api.cdp.coinbase.com/platform/v2/x402`（CDP APIキー必須）を使うのが推奨ですが、Base SepoliaやSolana Devnetなどテストネット上のデモであれば認証なしの公開facilitatorで十分動きます。
+
+署名付きのリクエストを受け取ったNetlify Functionは、まずこのfacilitatorの `/verify` エンドポイントに検証を依頼します。
 
 ```javascript{file: "functions/src/premium-content.js"}
 const verifyBody = {
@@ -421,7 +425,7 @@ sequenceDiagram
     A->>S: POST /premium-content（支払いなし）
     S-->>A: 402 + PAYMENT-REQUIREDヘッダー
     Note over A: 推論ループ内で自動処理
-    A->>W: Spend Policy確認 + 署名依頼
+    A->>W: 支出上限の確認 + 署名依頼
     W-->>A: EIP-712署名
     A->>S: POST /premium-content + PAYMENT-SIGNATUREヘッダー
     S->>F: POST /verify
@@ -430,21 +434,21 @@ sequenceDiagram
     Note over A: 人間への確認なしで処理継続
 ```
 
-エージェントのフローには、**ポップアップも確認ステップも存在しません**。402レスポンスを受け取った瞬間に「支払いが必要だ」と理解し、Spend Policyの範囲内であれば自動的に署名して再送します。人間に「課金してもいいですか」と聞く必要がなく、 **推論ループが中断されないまま** 有料リソースにアクセスできます。
+エージェントのフローには、ポップアップも確認ステップも存在しません。402レスポンスを受け取った瞬間に「支払いが必要だ」と理解し、設定された支出上限の範囲内であれば自動的に署名して再送します。人間に「課金してもいいですか」と聞く必要がなく、 **推論ループが中断されないまま** 有料リソースにアクセスできます。
 
 ### 2つのフローを比べると
 
 | 観点 | 人間（MetaMask） | AIエージェント（AgentCore等） |
 |------|----------------|--------------------------|
-| 認可主体 | ユーザー本人 | Spend Policyによる事前設定 |
+| 認可主体 | ユーザー本人 | セッション単位の事前設定 |
 | トリガー | ボタンクリック | HTTP 402受信 |
 | 署名UI | MetaMaskポップアップ2回 | なし（自動署名）|
-| レイテンシ | ユーザー応答待ち（数秒〜数十秒） | 署名＋verify完了まで約200ms |
-| エラー時 | エラー表示 → ユーザーがリトライ | Spend Policyエラーであれば人間にエスカレーション |
-| 予算管理 | ウォレット残高（総額） | セッション単位のSpend Policy |
+| レイテンシ | ユーザー応答待ち（数秒〜数十秒） | 署名＋verify完了までごく短時間 |
+| エラー時 | エラー表示 → ユーザーがリトライ | 上限超過時は人間にエスカレーション |
+| 予算管理 | ウォレット残高（総額） | セッション単位の支出上限 |
 | 監査 | ウォレット履歴 | AgentCore実行ログ＋オンチェーン |
 
-特に「予算管理」の違いが面白いです。人間のクレカやウォレットには**総額の上限**しかありませんが、エージェントのSpend Policyは**このタスク・このセッションにいくらまで使っていいか**という粒度で制御できます。
+特に「予算管理」の違いが面白いです。人間のクレカやウォレットには**総額の上限**しかありませんが、エージェントの場合は**このタスク・このセッションにいくらまで使っていいか**という粒度で制御できます。
 
 **未来の読者の多くは、人間ではないかもしれない。**
 
@@ -456,26 +460,27 @@ sequenceDiagram
 
 ブログはAstroで静的生成しているので、プレミアムコンテンツも最終的にはHTMLファイルになります。このHTMLをビルド時に `scripts/encrypt-premium.mjs` が [pagecrypt](https://www.npmjs.com/package/pagecrypt) で暗号化し、 `dist/<slug>/encrypted.html` として出力します。
 
-pagecryptはAES-GCM + PBKDF2でHTMLを暗号化するnpmライブラリで、ブラウザそばにJavaScriptが仕込まれているため、正しいパスワードを与えると**クライアントサイドで復号して表示**されます。サーバーは暗号化済みHTMLを配信するだけです。
+pagecryptはAES-GCM + PBKDF2 (SHA-256) でHTMLを暗号化するnpmライブラリで、HTMLにJavaScriptが仕込まれているため、正しいパスワードを与えると**クライアントサイドで復号して表示**されます。サーバーは暗号化済みHTMLを配信するだけです。
 
 ```javascript{file: "scripts/encrypt-premium.mjs"}
 const password = createHmac("sha256", SITE_SECRET).update(slug).digest("hex");
-const encrypted = await encryptHTML(html, password, 200_000); // PBKDF2 200kイテレーション
+const encrypted = await encryptHTML(html, password, 2_000_000); // PBKDF2 200万イテレーション（pagecryptデフォルト）
 writeFileSync(path.join(outDir, "encrypted.html"), encrypted, "utf8");
 ```
+
+`encryptHTML` の第3引数はPBKDF2のイテレーション数で、 [pagecryptのデフォルトは `2e6`（200万）](https://github.com/Greenheart/pagecrypt) です。READMEでは `3e6` 以上が推奨されているので、用途やビルド時間とのトレードオフでもう少し増やしても良いかもしれません。
 
 Netlify Functionが返すパスワードと、ビルド時の暗号化パスワードが `HMAC-SHA256(SITE_SECRET, slug)` で一致するように設計されています。
 
 ## ハマったポイント
 
-### x402 v2のヘッダー名変更
+### x402 v2のヘッダー仕様の変更
 
-x402にはv1とv2があり、ヘッダー名が変わっています。
+x402にはv1とv2があり、HTTPヘッダーの構造が変わっています。
 
-- v1: `X-PAYMENT-REQUIRED` / `X-PAYMENT`
-- v2: `PAYMENT-REQUIRED` / `PAYMENT-SIGNATURE` / `PAYMENT-RESPONSE`
+v1では支払い要件はサーバーがHTTP 402のレスポンスボディにJSONで返し、クライアントは `X-PAYMENT` ヘッダーで支払いペイロードを送り、サーバーは `X-PAYMENT-RESPONSE` ヘッダーで決済結果を返していました。一方v2では支払い要件もヘッダーに移り、 `PAYMENT-REQUIRED`（要件）/ `PAYMENT-SIGNATURE`（支払い）/ `PAYMENT-RESPONSE`（結果）の3ヘッダー構成になっています。 `X-` プレフィックスがなくなった点も差分の1つです。
 
-古い記事を参考にしているとv1のヘッダー名で実装してしまいがちです。Coinbase facilitatorは今も両バージョンを受け付けていますが、公式ドキュメントや `@x402/express` はv2前提なので、素直にv2で実装した方が無難です。
+古い記事を参考にしているとv1のスタイルで実装してしまいがちです。 Coinbase facilitatorは両バージョンを受け付けていますが、公式ドキュメントや `@x402/express` はv2前提なので、素直にv2で実装した方が無難です（[x402 v2仕様](https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md) より）。
 
 ### facilitatorリクエストの構造
 
