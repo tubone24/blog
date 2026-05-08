@@ -3,9 +3,12 @@ import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
   const posts = await getCollection("blog");
-  const sorted = posts.sort(
-    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-  );
+  const sorted = posts
+    .filter((p) => !p.data.premium)
+    .sort(
+      (a, b) =>
+        new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    );
 
   const siteUrl = context.site?.origin || "https://tubone-project24.xyz";
 

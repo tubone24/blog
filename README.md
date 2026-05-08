@@ -264,6 +264,142 @@ cp .env.example .env
 | PUBLIC_GITHUB_CLIENT_ID          | GitHub oAuth Client ID, use Gitalk                       | -       |
 | PUBLIC_GITHUB_CLIENT_SECRET      | GitHub oAuth Client Secret, use Gitalk                   | -       |
 | FAUNADB_SERVER_SECRET            | FaunaDB's Secret, use FaunaDB                            | -       |
+| WALLET_ADDRESS                   | EVM wallet address to receive USDC payments via x402     | -       |
+| SITE_SECRET                      | HMAC key for premium content password derivation (x402)  | -       |
+| PREMIUM_PRICE_USD                | Price in USD charged per premium article access (x402)   | 0.05    |
+
+## x402 Premium Content (Paywall)
+
+Gate specific blog articles behind a paywall using the [x402 protocol](https://x402.org) (HTTP 402 Payment Required). AI agents and MetaMask users can pay automatically via USDC on Base.
+
+### Architecture
+
+```text
+[Article teaser page /{slug}/]
+  Shows content before <!-- paywall --> marker + Paywall UI
+
+[Paywall "Unlock" click]
+  POST /.netlify/functions/premium-content?slug={slug}
+  402 → x402 handshake (MetaMask signs USDC authorization)
+  On success: receive { password }
+  Navigate to /{slug}/encrypted.html#{password}
+
+[/{slug}/encrypted.html]
+  pagecrypt-encrypted HTML auto-decrypts via URL fragment → full article
+```
+
+### Setting Up a Base Sepolia Test Wallet (Phase 1)
+
+Phase 1 runs on the Base Sepolia testnet — no real funds required.
+
+#### 1. Install MetaMask
+
+Install [MetaMask](https://metamask.io) as a browser extension and create a new wallet.
+Store your seed phrase somewhere safe.
+
+#### 2. Add the Base Sepolia Network
+
+Go to **Add Network** in MetaMask and enter the following:
+
+| Field | Value |
+| --- | --- |
+| Network name | Base Sepolia |
+| RPC URL | `https://sepolia.base.org` |
+| Chain ID | `84532` |
+| Currency symbol | ETH |
+| Block explorer | `https://sepolia.basescan.org` |
+
+You can also add it in one click via [Chainlist](https://chainlist.org/?search=base+sepolia&testnets=true).
+
+#### 3. Get Test ETH (for gas)
+
+Claim Base Sepolia test ETH from any of these faucets:
+
+- [Coinbase Developer Platform Faucet](https://portal.cdp.coinbase.com/products/faucet) — requires Coinbase account
+- [Alchemy Base Sepolia Faucet](https://www.alchemy.com/faucets/base-sepolia) — requires Alchemy account
+- [QuickNode Base Sepolia Faucet](https://faucet.quicknode.com/base/sepolia) — no account needed
+
+#### 4. Get Test USDC (for payments)
+
+x402 settles in USDC. Claim Base Sepolia USDC from:
+
+- [Circle Faucet](https://faucet.circle.com/) — select Base Sepolia and enter your wallet address
+- Contract address: `0x036CbD53842c5426634e7929541eC2318f3dCF7e`
+
+#### 5. Copy Your Wallet Address
+
+Copy your MetaMask address (42 characters starting with `0x`) and set it as `WALLET_ADDRESS`.
+You can use the same address as both sender and receiver when testing.
+
+### Checklist Before Testing a Payment
+
+Before clicking **Unlock** in the browser, verify that the **payer wallet** (the MetaMask account) has:
+
+- [ ] MetaMask installed and connected to **Base Sepolia** (Chain ID 84532)
+- [ ] Some test ETH (needed for ERC-3009 signature gas — usually a tiny amount, often zero for off-chain signatures)
+- [ ] At least **0.05 USDC** on Base Sepolia (the payment amount, default `$0.05`)
+
+If the unlock button returns `invalid_exact_evm_insufficient_balance`, the payer wallet does not hold enough USDC. Use the [Circle Faucet](https://faucet.circle.com/) to top up:
+
+1. Go to <https://faucet.circle.com/>
+2. Select **Base Sepolia** as the network
+3. Paste your wallet address and click **Send**
+4. Wait 2–3 minutes for 20 USDC to arrive
+5. Try the payment again
+
+### Generating SITE_SECRET
+
+```bash
+openssl rand -hex 32
+# e.g. a3f8c2d1e9b7a4f6c3d2e1b8a7f4c9d3e2b1a8f7c4d3e2b9a8f7c6d5e4b3a2f1
+```
+
+> ⚠️ **Important**: Anyone who obtains `SITE_SECRET` can derive every premium article password.
+> Keep it in Netlify environment variables only — never commit it to `.env`.
+
+### Setting Netlify Environment Variables
+
+Go to **Netlify Dashboard → Site configuration → Environment variables** and add:
+
+```bash
+WALLET_ADDRESS=0xYourWalletAddress
+SITE_SECRET=your_32_byte_hex_secret
+PREMIUM_PRICE_USD=0.05   # optional, default $0.05
+```
+
+### Making an Article Premium
+
+Add the following to the Markdown frontmatter and insert a `<!-- paywall -->` marker in the body:
+
+```markdown
+---
+title: "Article Title"
+date: 2026-01-01
+premium: true
+priceUsd: 0.05
+---
+
+This is the free teaser visible to all readers.
+
+<!-- paywall -->
+
+## Premium Content Starts Here
+
+This section is only visible after payment.
+```
+
+### Testing the Build Locally
+
+```bash
+# Add SITE_SECRET to .env
+echo "SITE_SECRET=$(openssl rand -hex 32)" >> .env
+
+# Build (encryption step runs automatically)
+yarn build
+
+# Verify encrypted.html was generated
+ls dist/2026/*/encrypted.html
+```
 
 ## CI/CD
 

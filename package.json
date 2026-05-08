@@ -43,7 +43,10 @@
     "rimraf": "4.0.0",
     "sass": "1.59.3",
     "satori": "0.25.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "pagecrypt": "^5.2.1",
+    "@x402/fetch": "^2.0.0",
+    "viem": "^2.30.4"
   },
   "keywords": [
     "astro",
@@ -53,7 +56,7 @@
   "main": "n/a",
   "scripts": {
     "start": "astro dev",
-    "build": "astro build && node scripts/generate-image-variants.mjs",
+    "build": "astro build && node scripts/generate-image-variants.mjs && node scripts/encrypt-premium.mjs",
     "build:nocache": "astro build && node scripts/generate-image-variants.mjs",
     "develop": "astro dev",
     "develop:e2e": "NODE_ENV=development astro dev",
