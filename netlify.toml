@@ -12,11 +12,6 @@
   directory = "functions/src"
   included_files = ["functions/src/KaiseiTokumin-Bold.ttf", "functions/src/0ad4b265-2c11-41dd-bfa4-151b4bb4032e.webp", "static/assets/prIxc3vbVpBQEws1710503052_1710503091.png",  "functions/src/node_modules/**/*"]
 
-# Use NFT (Node File Tracer) for premium-content to correctly resolve
-# @x402/evm and its deep subpath exports that esbuild fails to bundle inline
-[functions.premium-content]
-  node_bundler = "nft"
-
 # Block direct access to un-encrypted premium-full pages
 [[redirects]]
   from = "/premium-full/*"

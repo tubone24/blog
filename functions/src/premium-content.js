@@ -1,8 +1,3 @@
-import express from "express";
-import serverless from "serverless-http";
-import { paymentMiddleware, x402ResourceServer } from "@x402/express";
-import { ExactEvmScheme } from "@x402/evm";
-import { HTTPFacilitatorClient } from "@x402/core/server";
 import { createHmac } from "crypto";
 import * as Sentry from "@sentry/node";
 
@@ -12,83 +7,141 @@ Sentry.init({
   enabled: !!process.env.SENTRY_DSN,
 });
 
-const WALLET_ADDRESS = process.env.WALLET_ADDRESS;
-const SITE_SECRET = process.env.SITE_SECRET;
-const PRICE_USD = process.env.PREMIUM_PRICE_USD || "0.05";
+const FACILITATOR_URL = "https://x402.org/facilitator";
 const NETWORK = "eip155:84532"; // base-sepolia (Phase 1)
+const USDC_BASE_SEPOLIA = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
 
-if (!WALLET_ADDRESS) {
-  console.warn("[premium-content] WALLET_ADDRESS not set");
+const CORS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers":
+    "Content-Type, PAYMENT-SIGNATURE, payment-signature",
+  "Access-Control-Expose-Headers": "PAYMENT-REQUIRED, PAYMENT-RESPONSE",
+};
+
+function buildPaymentRequirements(event) {
+  const priceUsd = parseFloat(process.env.PREMIUM_PRICE_USD || "0.05");
+  const amount = String(Math.round(priceUsd * 1_000_000)); // USDC 6 decimals
+  const origin =
+    process.env.SITE_URL ||
+    `https://${event.headers?.host || "tubone-project24.xyz"}`;
+
+  return {
+    scheme: "exact",
+    network: NETWORK,
+    maxAmountRequired: amount,
+    resource: `${origin}/.netlify/functions/premium-content`,
+    description: "Premium article decryption password",
+    mimeType: "application/json",
+    payTo: process.env.WALLET_ADDRESS,
+    maxTimeoutSeconds: 300,
+    asset: USDC_BASE_SEPOLIA,
+    outputSchema: null,
+    extra: null,
+  };
 }
 
-const facilitatorClient = new HTTPFacilitatorClient({
-  url: "https://x402.org/facilitator",
-});
+function json(statusCode, body, extraHeaders = {}) {
+  return {
+    statusCode,
+    headers: { ...CORS, "Content-Type": "application/json", ...extraHeaders },
+    body: JSON.stringify(body),
+  };
+}
 
-const resourceServer = new x402ResourceServer(facilitatorClient).register(
-  NETWORK,
-  new ExactEvmScheme(),
-);
+export const handler = Sentry.wrapHandler(async (event) => {
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: CORS };
+  }
 
-const app = express();
-app.use(express.json());
+  if (event.httpMethod !== "POST") {
+    return json(405, { error: "Method Not Allowed" });
+  }
 
-// CORS for browser clients
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, PAYMENT-SIGNATURE, payment-signature",
-  );
-  res.setHeader(
-    "Access-Control-Expose-Headers",
-    "PAYMENT-REQUIRED, PAYMENT-RESPONSE",
-  );
-  if (req.method === "OPTIONS") return res.status(204).end();
-  next();
-});
+  const paymentSignatureHeader =
+    event.headers["payment-signature"] || event.headers["PAYMENT-SIGNATURE"];
 
-// x402 payment gate — guards all POST routes
-app.use(
-  paymentMiddleware(
-    {
-      // Wildcard: matches any POST path, including /.netlify/functions/premium-content
-      "POST *": {
-        accepts: [
-          {
-            scheme: "exact",
-            price: `$${PRICE_USD}`,
-            network: NETWORK,
-            payTo: WALLET_ADDRESS,
-          },
-        ],
-        description: "Premium article decryption password",
-        mimeType: "application/json",
+  const requirements = buildPaymentRequirements(event);
+
+  // ── No payment header → return 402 with payment requirements ──────────
+  if (!paymentSignatureHeader) {
+    const paymentRequired = {
+      x402Version: 2,
+      accepts: [requirements],
+      error: null,
+    };
+    return json(
+      402,
+      { error: "Payment required" },
+      {
+        "PAYMENT-REQUIRED": Buffer.from(
+          JSON.stringify(paymentRequired),
+        ).toString("base64"),
       },
-    },
-    resourceServer,
-  ),
-);
+    );
+  }
 
-// Reached only after successful payment verification
-app.post("*", (req, res) => {
-  return Sentry.startSpan(
-    { op: "premium-content", name: "deliver-password" },
-    () => {
-      const slug = req.query.slug || (req.body && req.body.slug);
-      if (!slug) {
-        return res.status(400).json({ error: "slug is required" });
-      }
-      if (!SITE_SECRET) {
-        return res.status(500).json({ error: "Server misconfigured" });
-      }
-      const password = createHmac("sha256", SITE_SECRET)
-        .update(String(slug))
-        .digest("hex");
-      return res.json({ password });
-    },
-  );
+  // ── Parse PAYMENT-SIGNATURE header ────────────────────────────────────
+  let paymentPayload;
+  try {
+    paymentPayload = JSON.parse(
+      Buffer.from(paymentSignatureHeader, "base64").toString("utf8"),
+    );
+  } catch {
+    return json(400, { error: "Invalid PAYMENT-SIGNATURE header" });
+  }
+
+  // ── Verify with facilitator ───────────────────────────────────────────
+  try {
+    const verifyRes = await fetch(`${FACILITATOR_URL}/verify`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        x402Version: 2,
+        paymentPayload,
+        paymentRequirements: requirements,
+      }),
+    });
+
+    if (!verifyRes.ok) {
+      const err = await verifyRes.json().catch(() => ({}));
+      return json(402, {
+        error: err.invalidReason || `Verification failed (${verifyRes.status})`,
+      });
+    }
+
+    const { isValid, invalidReason } = await verifyRes.json();
+    if (!isValid) {
+      return json(402, { error: invalidReason || "Invalid payment" });
+    }
+  } catch (e) {
+    Sentry.captureException(e);
+    return json(502, { error: "Facilitator unreachable" });
+  }
+
+  // ── Settle (best-effort; non-blocking on error) ───────────────────────
+  fetch(`${FACILITATOR_URL}/settle`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      x402Version: 2,
+      paymentPayload,
+      paymentRequirements: requirements,
+    }),
+  }).catch((e) => Sentry.captureException(e));
+
+  // ── Deliver password ──────────────────────────────────────────────────
+  const slug = event.queryStringParameters?.slug;
+  if (!slug) {
+    return json(400, { error: "slug is required" });
+  }
+  if (!process.env.SITE_SECRET) {
+    return json(500, { error: "Server misconfigured" });
+  }
+
+  const password = createHmac("sha256", process.env.SITE_SECRET)
+    .update(String(slug))
+    .digest("hex");
+
+  return json(200, { password });
 });
-
-export const handler = serverless(app);
