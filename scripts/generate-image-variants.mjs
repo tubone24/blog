@@ -33,9 +33,10 @@ async function processImage(filePath) {
     return { skipped: true };
   }
 
-  const resizedPath = join(IMAGE_DIR, `${name}-640${ext}`);
-  const resizedWebpPath = join(IMAGE_DIR, `${name}-640.webp`);
-  const originalWebpPath = join(IMAGE_DIR, `${name}.webp`);
+  const dir = dirname(filePath);
+  const resizedPath = join(dir, `${name}-640${ext}`);
+  const resizedWebpPath = join(dir, `${name}-640.webp`);
+  const originalWebpPath = join(dir, `${name}.webp`);
 
   let generated = 0;
 
@@ -97,7 +98,7 @@ async function main() {
     process.exit(1);
   }
 
-  const files = readdirSync(IMAGE_DIR)
+  const files = readdirSync(IMAGE_DIR, { recursive: true })
     .filter((f) => /\.(png|jpg|jpeg|gif)$/i.test(f))
     .map((f) => join(IMAGE_DIR, f));
 
