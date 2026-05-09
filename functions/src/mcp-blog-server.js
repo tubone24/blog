@@ -9,7 +9,48 @@ import {
   getPostsByDateRange,
   searchPosts,
   createPostSummary,
+  getPremiumPosts,
 } from "./utils/blog-utils.js";
+import {
+  unlockPremium,
+  decryptEncryptedHtml,
+  getPremiumContent,
+} from "./utils/x402-paywall.js";
+
+// x402 paywall 設定（premium-content.js と同じ値を使用）
+const PAYWALL_NETWORK = "eip155:84532"; // Base Sepolia
+const PAYWALL_ASSET_USDC = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
+const PAYWALL_DEFAULT_PRICE_USD = parseFloat(
+  process.env.PREMIUM_PRICE_USD || "0.05",
+);
+const PAYWALL_FACILITATOR_URL = "https://x402.org/facilitator";
+
+// カストディアル: サーバー側 EVM_PRIVATE_KEY で決済を実行するツール群。
+// 必ず X-MCP-AUTH ヘッダ (= MCP_PAYWALL_TOKEN env var) で保護する。
+const CUSTODIAL_TOOLS = new Set(["unlock_premium_post", "get_premium_content"]);
+const MCP_PAYWALL_AUTH_HEADER = "x-mcp-auth";
+
+function assertCustodialAuth(toolName, headers) {
+  if (!CUSTODIAL_TOOLS.has(toolName)) return;
+
+  const expected = process.env.MCP_PAYWALL_TOKEN;
+  if (!expected) {
+    throw new Error(
+      "Server misconfigured: MCP_PAYWALL_TOKEN env var が未設定のためカストディアル決済ツールを呼び出せません",
+    );
+  }
+
+  const provided =
+    headers?.[MCP_PAYWALL_AUTH_HEADER] ||
+    headers?.[MCP_PAYWALL_AUTH_HEADER.toUpperCase()] ||
+    headers?.["X-MCP-Auth"];
+
+  if (!provided || provided !== expected) {
+    throw new Error(
+      `Unauthorized: ${toolName} は X-MCP-AUTH ヘッダによる認証が必要です`,
+    );
+  }
+}
 
 // MCPサーバーのメタデータ
 const SERVER_INFO = {
@@ -155,6 +196,77 @@ const TOOLS = {
     inputSchema: {
       type: "object",
       properties: {},
+    },
+  },
+  list_premium_posts: {
+    name: "list_premium_posts",
+    description:
+      "ペイウォール（x402決済）で保護されている記事の一覧を返します。各記事のslug・タイトル・priceUsd・暗号化HTMLのURLを含みます",
+    inputSchema: {
+      type: "object",
+      properties: {
+        limit: {
+          type: "number",
+          description: "取得する記事数の上限（デフォルト: 100）",
+          default: 100,
+        },
+      },
+    },
+  },
+  get_premium_post_paywall_info: {
+    name: "get_premium_post_paywall_info",
+    description:
+      "指定slugのペイウォール記事の決済情報を返します。x402決済に必要なエンドポイント・ネットワーク・アセット・価格・送金先・暗号化HTMLのURLをひとまとめに取得します",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: {
+          type: "string",
+          description: "ペイウォール記事のslug",
+        },
+      },
+      required: ["slug"],
+    },
+  },
+  unlock_premium_post: {
+    name: "unlock_premium_post",
+    description:
+      "[CUSTODIAL][AUTH-REQUIRED] サーバーが保持する EVM_PRIVATE_KEY で x402 (Base Sepolia USDC) 決済を実行し、指定slugの記事の復号 password を返します。リクエストヘッダ X-MCP-AUTH に MCP_PAYWALL_TOKEN を設定する必要があります。実費が発生するため、AIエージェントは必ずユーザーの明示的承認を得てから呼び出すこと",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: { type: "string", description: "ペイウォール記事のslug" },
+      },
+      required: ["slug"],
+    },
+  },
+  decrypt_premium_post: {
+    name: "decrypt_premium_post",
+    description:
+      "encrypted.html を取得して pagecrypt フォーマット (PBKDF2-SHA256 2M回 + AES-GCM-256) を password で復号し、plaintext HTML を返します。決済済みで password を既に持っている場合に使用",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: { type: "string", description: "ペイウォール記事のslug" },
+        password: { type: "string", description: "復号 password (hex)" },
+      },
+      required: ["slug", "password"],
+    },
+  },
+  get_premium_content: {
+    name: "get_premium_content",
+    description:
+      "[CUSTODIAL][AUTH-REQUIRED] 1個以上のslug（推奨上限3件、Netlify 10秒タイムアウト対策）に対して x402 決済 → encrypted.html 取得 → 復号 → plaintext を一気通貫で返します。リクエストヘッダ X-MCP-AUTH に MCP_PAYWALL_TOKEN を設定する必要があります。実費が発生するため、AIエージェントは必ずユーザーの明示的承認を得てから呼び出すこと",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slugs: {
+          type: "array",
+          items: { type: "string" },
+          description: "ペイウォール記事のslug配列（1件以上）",
+        },
+      },
+      required: ["slugs"],
     },
   },
   get_last_updated: {
@@ -379,7 +491,7 @@ function handleResourcesRequest(method, params) {
 /**
  * ツールハンドラー
  */
-async function handleToolsRequest(method, params) {
+async function handleToolsRequest(method, params, headers = {}) {
   switch (method) {
     case "tools/list":
       return {
@@ -388,6 +500,7 @@ async function handleToolsRequest(method, params) {
 
     case "tools/call": {
       const { name, arguments: args } = params;
+      assertCustodialAuth(name, headers);
 
       switch (name) {
         case "search_posts": {
@@ -515,8 +628,129 @@ async function handleToolsRequest(method, params) {
           };
         }
 
+        case "list_premium_posts": {
+          const limit = args.limit || 100;
+          const posts = getPremiumPosts().slice(0, limit);
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(
+                  posts.map((post) => createPostSummary(post, BLOG_BASE_URL)),
+                  null,
+                  2,
+                ),
+              },
+            ],
+          };
+        }
+
+        case "get_premium_post_paywall_info": {
+          const post = getPostBySlug(args.slug);
+          if (!post) {
+            throw new Error(`Post not found: ${args.slug}`);
+          }
+          if (post.premium !== true) {
+            throw new Error(
+              `Post is not premium (paywalled): ${args.slug}. premium:true がフロントマターに必要です`,
+            );
+          }
+
+          const priceUsd =
+            typeof post.priceUsd === "number"
+              ? post.priceUsd
+              : PAYWALL_DEFAULT_PRICE_USD;
+          const amountAtomic = String(Math.round(priceUsd * 1_000_000));
+
+          const info = {
+            slug: post.slug,
+            title: post.title,
+            premium: true,
+            paywall: {
+              endpoint: `${BLOG_BASE_URL}/.netlify/functions/premium-content?slug=${encodeURIComponent(
+                post.slug,
+              )}`,
+              method: "POST",
+              x402Version: 2,
+              scheme: "exact",
+              network: PAYWALL_NETWORK,
+              asset: PAYWALL_ASSET_USDC,
+              assetSymbol: "USDC",
+              priceUsd,
+              amountAtomic,
+              decimals: 6,
+              payTo: process.env.WALLET_ADDRESS || null,
+              maxTimeoutSeconds: 300,
+              facilitatorUrl: PAYWALL_FACILITATOR_URL,
+            },
+            encryptedUrl: `${BLOG_BASE_URL}/${post.slug}/encrypted.html`,
+            instructions:
+              "このエンドポイントへPAYMENT-SIGNATUREヘッダなしでPOSTすると402が返り、PAYMENT-REQUIREDヘッダにx402チャレンジが入ります。`get-premium-content` Skill の unlock スクリプトが標準フローを実装しています",
+          };
+
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(info, null, 2),
+              },
+            ],
+          };
+        }
+
+        case "unlock_premium_post": {
+          const post = getPostBySlug(args.slug);
+          if (!post) throw new Error(`Post not found: ${args.slug}`);
+          if (post.premium !== true) {
+            throw new Error(`Post is not premium (paywalled): ${args.slug}`);
+          }
+          const result = await unlockPremium(args.slug, {
+            blogBaseUrl: BLOG_BASE_URL,
+          });
+          return {
+            content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+          };
+        }
+
+        case "decrypt_premium_post": {
+          if (!args.slug || !args.password) {
+            throw new Error("slug と password の両方が必要です");
+          }
+          const result = await decryptEncryptedHtml(args.slug, args.password, {
+            blogBaseUrl: BLOG_BASE_URL,
+          });
+          return {
+            content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+          };
+        }
+
+        case "get_premium_content": {
+          const slugs = Array.isArray(args.slugs) ? args.slugs : [];
+          if (slugs.length === 0) {
+            throw new Error("slugs は1件以上必要です");
+          }
+          const articles = [];
+          for (const slug of slugs) {
+            const post = getPostBySlug(slug);
+            if (!post) throw new Error(`Post not found: ${slug}`);
+            if (post.premium !== true) {
+              throw new Error(`Post is not premium: ${slug}`);
+            }
+            // eslint-disable-next-line no-await-in-loop -- 直列処理: 決済の冪等性確保のため並列化しない
+            const article = await getPremiumContent(slug, {
+              blogBaseUrl: BLOG_BASE_URL,
+            });
+            articles.push(article);
+          }
+          return {
+            content: [
+              { type: "text", text: JSON.stringify(articles, null, 2) },
+            ],
+          };
+        }
+
         case "get_last_updated": {
-          const resource = arguments.resource || "blog://posts";
+          const resource = args.resource || "blog://posts";
           const lastUpdated = await getLastUpdatedFromBlob(resource);
 
           const result = {
@@ -630,7 +864,7 @@ function handlePromptsRequest(method, params) {
 /**
  * JSON-RPCリクエストハンドラー
  */
-async function handleJsonRpcRequest(request) {
+async function handleJsonRpcRequest(request, headers = {}) {
   const { jsonrpc, id, method, params } = request;
 
   if (jsonrpc !== "2.0") {
@@ -657,7 +891,7 @@ async function handleJsonRpcRequest(request) {
     }
     // Tools
     else if (method.startsWith("tools/")) {
-      result = await handleToolsRequest(method, params);
+      result = await handleToolsRequest(method, params, headers);
     }
     // Prompts
     else if (method.startsWith("prompts/")) {
@@ -694,7 +928,7 @@ export const handler = async (event, context) => {
   // CORSヘッダー
   const headers = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, X-MCP-AUTH, x-mcp-auth",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Content-Type": "application/json",
   };
@@ -737,7 +971,12 @@ export const handler = async (event, context) => {
   if (event.httpMethod === "POST") {
     try {
       const request = JSON.parse(event.body);
-      const response = await handleJsonRpcRequest(request);
+      // ヘッダ名は大文字小文字混在のためキー名を小文字化したマップを作る
+      const lowerHeaders = {};
+      for (const [k, v] of Object.entries(event.headers || {})) {
+        lowerHeaders[k.toLowerCase()] = v;
+      }
+      const response = await handleJsonRpcRequest(request, lowerHeaders);
 
       return {
         statusCode: 200,

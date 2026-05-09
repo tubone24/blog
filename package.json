@@ -101,7 +101,10 @@
     "lint-staged": "lint-staged",
     "index:algolia": "node scripts/index-algolia.mjs",
     "agent-browser": "agent-browser",
-    "agent-browser:install": "agent-browser install"
+    "agent-browser:install": "agent-browser install",
+    "unlock-premium": "tsx .claude/skills/get-premium-content/scripts/unlock.ts",
+    "decrypt-premium": "tsx .claude/skills/get-premium-content/scripts/decrypt.ts",
+    "get-premium-content": "tsx .claude/skills/get-premium-content/scripts/get-premium-content.ts"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.6",
@@ -194,6 +197,7 @@
     "textlint-rule-prh": "5.3.0",
     "textlint-rule-terminology": "3.0.5",
     "ts-node": "10.9.2",
+    "tsx": "4.19.2",
     "yaml-lint": "1.7.0"
   },
   "resolutions": {
