@@ -57,7 +57,7 @@
   "scripts": {
     "start": "astro dev",
     "build": "astro build && node scripts/generate-image-variants.mjs && node scripts/encrypt-premium.mjs",
-    "build:nocache": "astro build && node scripts/generate-image-variants.mjs",
+    "build:nocache": "astro build && node scripts/generate-image-variants.mjs && node scripts/encrypt-premium.mjs",
     "develop": "astro dev",
     "develop:e2e": "NODE_ENV=development astro dev",
     "develop:remote": "astro dev --port 8080 --host 0.0.0.0",
