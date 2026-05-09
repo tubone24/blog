@@ -33,28 +33,23 @@ tubone24ブログのペイウォール記事を、AIエージェントが**自�
         │ A) リモートMCP      │  │ B) Skill CLI    │
         │ mcp-blog-server.js  │  │ (Skill scripts) │
         │ (Netlify Function)  │  │ via yarn        │
+        │ 【読み取り専用】    │  │ 【決済・取得】  │
         └─────────────────────┘  └─────────────────┘
 ```
 
-### A) リモートMCPツール（推奨）
+### A) リモートMCPツール（読み取り専用・将来用）
 
-`mcp-blog-server.js` (Netlify Function) が以下のMCPツールを公開する。AIエージェントは MCP プロトコル経由で直接呼び出せる:
+`mcp-blog-server.js` (Netlify Function) が以下のMCPツールを公開する。**決済を伴わない読み取り専用ツールのみ**利用可能。
 
 | MCPツール | 種別 | 役割 |
 | --- | --- | --- |
 | `list_premium_posts` | 読み取り | premium:true な記事一覧（priceUsd込み） |
 | `get_premium_post_paywall_info` | 読み取り | 単一slugの決済メタデータ（endpoint・network・asset・payTo） |
-| `unlock_premium_post` | 決済 | x402 決済 → password を返却 |
 | `decrypt_premium_post` | 計算のみ | password既知時の encrypted.html 取得・復号 |
-| `get_premium_content` | 決済 | 決済〜復号〜plaintext を一気通貫（複数slug対応） |
 
-**重要: カストディアル構成 + 必須認証**
+> **注意:** 決済ツール (`unlock_premium_post` / `get_premium_content`) はMCPサーバー側に `EVM_PRIVATE_KEY` を設置する必要があるため実装不可。決済は必ず Skill CLI（B）で行う。
 
-リモートMCPに決済機能を置く設計は、Netlify環境変数として `EVM_PRIVATE_KEY` をサーバーに保管する **カストディアル構成**。Base Sepolia（テストネット）専用。**メインネットへの転用は禁止**。
-
-カストディアル決済ツール (`unlock_premium_post` / `get_premium_content`) を呼ぶには、リクエストヘッダ `X-MCP-AUTH` に Netlify env vars の `MCP_PAYWALL_TOKEN` と一致する値を設定すること。トークンが無い／一致しない場合はサーバーが `Unauthorized` で拒否する。
-
-### B) Skill CLI（補助・ローカル実行）
+### B) Skill CLI（決済・コンテンツ取得の主経路）
 
 | コマンド | 入力 | 出力 |
 | --- | --- | --- |
@@ -68,20 +63,41 @@ CLI 経由の場合、決済署名は **ローカルプロセス内** で完結�
 
 実行前に必ず確認すること:
 
-1. **Netlify env var `EVM_PRIVATE_KEY`** が設定されている（リモートMCP使用時）。または `.env` に設定されている（CLI使用時）
+1. **`.env` に `EVM_PRIVATE_KEY`** が設定されている（CLI使用時）
 2. ウォレットに **Base Sepolia の USDC** 残高がある（[USDC Faucet](https://faucet.circle.com/) で取得可能）
-3. リモートMCPの場合、`SITE_SECRET` / `WALLET_ADDRESS` / `PREMIUM_PRICE_USD` / `MCP_PAYWALL_TOKEN` も Netlify env vars に設定済みであること
-4. リモートMCPからカストディアル決済ツールを呼ぶ際、AIエージェントが `X-MCP-AUTH` ヘッダにトークン値を載せられること（MCPクライアント設定で透過設定する想定）
+3. `tsx` が `node_modules/.bin/tsx` に存在する — 存在しない場合は `yarn install` を促す
+
+## 実行上の注意
+
+CLI は Claude Code エージェントから自律実行することを **優先する**。ただし以下の制約がある:
+
+- サンドボックスがデフォルトで `.env` ファイルの読み取りを拒否する → `dangerouslyDisableSandbox: true` で実行すること
+- hook がサンドボックス無効化 + `.env` 読み取りの組み合わせを拒否した場合のみ、ユーザーに `!` プレフィックスで実行を依頼する（フォールバック）
+
+```bash
+# フォールバック: hook に拒否された場合のみユーザーに依頼
+! yarn get-premium-content "<slug>"
+```
 
 ## 標準フロー
 
 ### ステップ1: アンロック対象の特定
 
-リモートMCP `mcp-blog-server` の以下ツールで発見:
+**方法A（MCPサーバー接続時）**: `list_premium_posts` / `search_posts` / `get_premium_post_paywall_info` を使用。
 
-- `list_premium_posts` — premium 記事一覧
-- `search_posts` — キーワード検索（戻り値の `premium` フラグで判定）
-- `get_premium_post_paywall_info` — 単一記事の決済メタデータ
+**方法B（MCPサーバー未接続時）**: curl プリフライトリクエストで 402 レスポンスから決済情報を取得:
+
+```bash
+curl -s -i -X POST "https://tubone-project24.xyz/.netlify/functions/premium-content?slug=<slug>" \
+  -H "Content-Type: application/json" -d "{}"
+```
+
+レスポンスの `payment-required` ヘッダは Base64 エンコードされた JSON で、デコードすると `payTo` / `amount` / `network` / `asset` が得られる:
+
+```bash
+# ヘッダ値をデコード
+echo "<base64値>" | base64 -d | python3 -m json.tool
+```
 
 ### ステップ2: ユーザー確認（必須）
 
@@ -92,12 +108,17 @@ CLI 経由の場合、決済署名は **ローカルプロセス内** で完結�
 - 送金先（`payTo`）
 - ネットワーク（Base Sepolia）
 
-ユーザーが明示的に承認するまで `unlock_premium_post` / `get_premium_content` / 関連CLIを実行しないこと。
+ユーザーが明示的に承認するまで関連CLIを実行しないこと。
 
-### ステップ3: 決済とコンテンツ取得
+### ステップ3: CLI実行（自律実行を優先）
 
-- リモートMCP: `get_premium_content` を `slugs: [...]` で呼ぶ
-- CLI: `yarn get-premium-content <slug1> [slug2]...`
+確認後、`dangerouslyDisableSandbox: true` で CLI を自律実行する:
+
+```bash
+yarn get-premium-content "<slug>"
+```
+
+hook に拒否された場合のみ、ユーザーに `! yarn get-premium-content "<slug>"` で実行を依頼する（フォールバック）。
 
 各slugに対して内部的に:
 
@@ -106,6 +127,19 @@ CLI 経由の場合、決済署名は **ローカルプロセス内** で完結�
 3. pagecrypt フォーマット（PBKDF2-SHA256 2M回 → AES-GCM-256）で復号
 4. plaintext HTML を返却
 
+出力形式:
+
+```json
+[
+  {
+    "slug": "...",
+    "password": "...",
+    "encryptedUrl": "https://tubone-project24.xyz/.../encrypted.html",
+    "contentHtml": "<!-- 復号されたHTML -->"
+  }
+]
+```
+
 ### ステップ4: 後処理
 
 - 取得したplaintextは原則 **メモリ上のみで扱い、ファイルに保存しない**
@@ -113,9 +147,11 @@ CLI 経由の場合、決済署名は **ローカルプロセス内** で完結�
 
 ## エラーハンドリング指針
 
-- `EVM_PRIVATE_KEY が未設定` → CLI なら `.env`、リモートMCP なら Netlify env vars への設定を促す
+- `EVM_PRIVATE_KEY が未設定` → `.env` への設定を促す
+- `invalid private key` → `.env` の `EVM_PRIVATE_KEY` が `0x` プレフィックス付き64桁の16進数形式であることを確認するよう促す
+- `tsx: command not found` → `yarn install` を実行するよう促す
 - `Verification failed` / `Insufficient funds` → ウォレット残高をfaucetで補充するよう促す
-- `Post not found` / `Post is not premium` → `list_premium_posts` で存在確認するよう案内
+- `Post not found` / `Post is not premium` → slugが正しいか確認するよう案内
 - `復号失敗` → `SITE_SECRET` の不一致（運営者側の問題）。ユーザーに連絡を促す
 
 ## してはいけないこと
@@ -124,4 +160,3 @@ CLI 経由の場合、決済署名は **ローカルプロセス内** で完結�
 - 取得したplaintextをchatログ以外（Slack・GitHub Issue・Gist等）に転記しない
 - `EVM_PRIVATE_KEY` をログ・stdoutに出力しない
 - 同一slugを大量回数呼び出さない（重複決済の防止）
-- **メインネットでこのカストディアル構成を再利用しない**（Base Sepoliaテストネット専用）
