@@ -28,6 +28,8 @@ export function getAllPosts() {
         tags: data.tags || [],
         headerImage: data.headerImage || "",
         templateKey: data.templateKey || "blog-post",
+        premium: data.premium === true,
+        priceUsd: typeof data.priceUsd === "number" ? data.priceUsd : null,
         content: content,
         filename: filename,
       };
@@ -128,12 +130,24 @@ export function createPostSummary(post, baseUrl = null) {
     description: post.description,
     tags: post.tags,
     headerImage: post.headerImage,
+    premium: post.premium === true,
+    priceUsd: typeof post.priceUsd === "number" ? post.priceUsd : null,
   };
 
-  // ベースURLが提供されている場合はURLを追加
   if (baseUrl) {
     summary.url = `${baseUrl}/${post.slug}`;
+    if (summary.premium) {
+      summary.encryptedUrl = `${baseUrl}/${post.slug}/encrypted.html`;
+    }
   }
 
   return summary;
+}
+
+/**
+ * premium: true な記事だけを返す
+ * @returns {Array}
+ */
+export function getPremiumPosts() {
+  return getAllPosts().filter((post) => post.premium === true);
 }
