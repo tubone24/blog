@@ -1,8 +1,8 @@
 ---
 slug: 2026/05/19/mspec-spec-driven-development-framework
-title: "mspecという仕様駆動開発フレームワークを作った"
+title: "mspecという仕様駆動開発フレームワークを作っている"
 date: 2026-05-19
-description: "AIで仕様駆動開発をやっていて、仕様とコードのドリフト、AIが書くドキュメントの読みにくさ、LLMがLLMを採点する閉鎖ループ、TDDの形骸化...と気になる点が積もってきたので、自分用の仕様駆動開発フレームワーク mspec を作りました。コードと仕様を物理的なアンカーで縛り、CLIで決定論的に検証し、Diátaxisで読み手を意識する。3つのM（Manifest / Mapped / Machine-checkable）を軸にした設計と、OpenSpecの系譜を踏まえた背景まで踏み込んで解説します。"
+description: "AIで仕様駆動開発をやっていて、仕様とコードのドリフト、AIが書くドキュメントの読みにくさ、LLMがLLMを採点する閉鎖ループ、TDDの形骸化...と気になる点が積もってきたので、自分用の仕様駆動開発フレームワーク mspec を作りました。"
 tags:
   - mspec
   - 仕様駆動開発
@@ -12,7 +12,7 @@ templateKey: blog-post
 useAi: false
 ---
 
-GWも明けて、初夏の陽気が眩しい今日この頃です。今年もまた紫陽花の季節がやってきますね。
+嫌なこといいますが、6月って祝日ないんですよ。
 
 ## Table of Contents
 
@@ -43,9 +43,9 @@ GWも明けて、初夏の陽気が眩しい今日この頃です。今年もま
 
 どちらも素晴らしいフレームワークなのですが、使い込んでいくうちに **自分のワークフローや好みと噛み合わない部分** が積もってきました。
 
-具体的には、AIにTDDをやらせると形骸化したテストが量産されたり、フレームワークが出すドキュメントが重量級すぎてレビューだけで疲れたり、確率的に動くLLMにどこまで自律性を委ねるかというラインがふわっとしていたり、 **仕様とコードのドリフト（drift）に対する仕組みが弱いのでは...** といった点です。
+具体的には、**AIにTDDをやらせると形骸化したテストが量産されたり**、**フレームワークが出すドキュメントが重量級すぎてレビューだけで疲れたり**、確率的に動くLLMにどこまで自律性を委ねるかというラインがふわっとしていたり、 **仕様とコードのドリフト（drift）に対する仕組みが弱いのでは...** といった点です。
 
-そんな違和感を「自分の手で解いてみたい」と思い立ったのが、mspecを作るきっかけになりました。
+そんな違和感が、mspecを作るきっかけになりました。
 
 このブログでは、mspecの設計思想と、その背景にある [Kent BeckのTDD](https://www.oreilly.com/library/view/test-driven-development/0321146530/) や [Daniele ProcidaのDiátaxis](https://diataxis.fr/)、 [GitHub Spec Kit](https://github.com/github/spec-kit) と [OpenSpec](https://github.com/Fission-AI/OpenSpec) の系譜まで踏み込んで紹介します。
 
@@ -57,29 +57,35 @@ mspecは **仕様駆動開発で繰り返し遭遇する3つの困りごと** �
 
 ### Spec Drift（仕様の漂流）
 
-一番よく起きるやつです。
+いわゆる仕様とコードがズレている状態です。
 
-エージェントに「とりあえずこの修正だけ入れて」と頼むと、コードは進むのに仕様は1コミット前のまま、誰も気づかないまま1週間が経って...というよくある光景です。
-
-1ヶ月もすれば、**仕様が正しいのか、コードが正しいのか、本番の挙動から逆算しないとわからない** という事態になります。
+コードは進むのにその元になっているはずの仕様は1コミット前のまま、誰も気づかないまま1ヶ月もすれば、**仕様が正しいのか、コードが正しいのか、本番の挙動から逆算しないとわからない** という事態になります。
 
 さらに厄介なのが、 **ある実装がどの変更のために書かれたのか、その根拠になった仕様を後から追えない** 点です。コードから変更の文脈を辿れないので、リファクタや削除のたびに、このコードを本当に消していいのかという確認コストが発生します。
 
-仕様と実装が乖離しているときに、 **どちらが正しいかを判断するための根拠** もありません。ドリフトを検知して仕様と実装を揃えるのが非常に難しい状態になります。
+(ただし、git運用を整えて単一のコミット点で仕様とコードをコミットしていればgit logなどで追うことは可能です)
 
-既存の仕様駆動開発フレームワークも仕様の更新フローは持っていますが、私の使い方だと、 **完成した仕様** と **実装** をあとから紐づけ直すのが結構しんどかったんですよね。
+また、仕様と実装が乖離しているときに **どちらが正しいかを判断するための根拠** もありません。あるのはそれっぽく動くだけのプロダクトのみです。
 
-mspecではこれに対して、後述の `@mspec-delta` アンカーで **コードから仕様への物理的なリンク** を埋め込み、CLIで双方向に検証します。
+ドリフトを検知して仕様と実装を揃えるのは非常に難しい状態といえます。
+
+mspecではSpec Driftに対して、後述の `@mspec-delta` アンカーで **コードから仕様への物理的なリンク** を埋め込み、CLIで双方向に検証するアプローチを取ってます。
 
 ### AIが書くドキュメントの読みにくさ
 
 仕様駆動開発フレームワークを回すと、 **大量のMarkdownファイル** が生成されます。
 
-困るのは、その中に **読み手の目的が混在しているドキュメント** が大量に含まれることです。AIの生成ブレを抑えるためだけに書かれた詳細な手順書と、人間が設計の意図を確認するための概説が、同じMarkdownファイルに混ざっていたりします。
+困るのは、その中に **読み手や目的が混在しているドキュメント** が大量に含まれることです。
 
-特に辛いのが **実装を自然言語でなぞったタスクリスト** です。コードが読める人間にとって、自然言語で書かれた「○○クラスに△△メソッドを実装し、引数として〜〜を受け取り、〜〜を返す」という記述は、コードを読むよりも圧倒的にイメージしにくい。
+もっとわかりやすく言えばAIの生成ブレを抑えるためだけに書かれた詳細な手順書と、人間が設計の意図を確認するための概説が、同じMarkdownファイルに混ざっていたりします。
 
-そのタスクリストをレビューの主要成果物として人間に読ませる設計になっているフレームワークは、 **実装コードを直接見るよりも理解のコストが高い逆転現象** が起きがちです。
+特に私が辛いと感じたのは、**実装を自然言語でなぞったタスクリスト**です。
+
+ある程度コードが読める人間にとって、次のような自然言語で書かれた記述は、コードを読むよりも圧倒的にイメージしにくいものです。
+
+> ○○クラスに△△メソッドを実装し、引数として〜〜を受け取り、〜〜を返す
+
+そのタスクリストをレビューで人間に読ませる設計になっているフレームワークは、**実装コードを直接見るよりも理解のコストが高い逆転現象**が起きがちです。
 
 mspecではこの問題に対して、後述のDiátaxisの `doc_type` を全成果物に必須化することで、 **読み手がいまどのカテゴリのドキュメントを読んでいるか** を明示し、不要なドキュメントをスキップできる設計にしました。
 
@@ -89,11 +95,15 @@ mspecではこの問題に対して、後述のDiátaxisの `doc_type` を全成
 
 仕様を書くのも、レビューするのも、テストを書くのも、実装するのも、 **同じくらいの能力のモデル** だったとしたらどうでしょう。
 
-**失敗が次のパスで成功に再構成される** だけで、外部からの信号がない閉ループになります。品質は早々に頭打ちになり、コードカバレッジだけが妙に高い、よくわからない結果ができあがります。
+仕様駆動開発フレームワークの動き自体はいわゆるエージェントスキルで定義された手順でしかありません。
 
-LLMの確率的な振る舞いを **どこまで許容し、どこから決定論で締めるか**。これは私のなかでずっと宿題だったポイントです。
+それはそれでいいのですが、フローの決定的なポイントで **LLMがLLMを採点する** ような設計になっていると、**AIの確率的な振る舞いがそのままフレームワークの不確実性に直結する**ことになります。
 
-mspecではゲートに **LLMを介在させない** ことをルールにしました。すべての検証はパーサーか正規表現で実装されており、`mspec validate`、`mspec anchor check`、`mspec spec lint`、`mspec test expect-red/green`、そして `mspec archive` のマージまですべてCLIが決定論的に判断します。
+LLMの確率的な振る舞いを **どこまで許容し、どこから決定論で締めるか**が悩みのポイントでした。
+
+mspecではゲートに **LLMを介在させない** ことをルールにしました。
+
+すべての検証はパーサーか正規表現で実装されており、`mspec validate`、`mspec anchor check`、`mspec spec lint`、`mspec test expect-red/green`、そして `mspec archive` のマージまですべてCLIが決定論的に判断します。
 
 ## 生成AIで形骸化するTDD
 
@@ -105,11 +115,11 @@ mspecではゲートに **LLMを介在させない** ことをルールにしま
 2. **Green**: そのテストが通るように、罪深いコードでもいいから書く
 3. **Refactor**: 重複と汚れを取り除く
 
-このサイクルは「**clean code that works**」、つまり **動くきれいなコード** を出口に置く設計手順です。各サイクルが1〜10分のはずで、10分を超えていたらステップが大きすぎるとも書かれています。
+このサイクルは「**clean code that works**」、つまり **動くきれいなコード** を出口に置く設計手順です。
 
 ### 形骸化が起きる仕組み
 
-生成AIにこのリズムを実行させると、表面的にはRed→Greenに見えるのですが、 **テストを書く時点でAIの頭の中には実装イメージができてしまっている** ことが多いです。
+生成AIにこのリズムを実行させると、表面的にはRed→Greenに見えるのですが、**テストを書く時点でAIの頭の中には実装イメージができてしまっている**ことが多いです。
 
 その結果出てくるのが、次のようなコードたちです。
 
@@ -117,13 +127,13 @@ mspecではゲートに **LLMを介在させない** ことをルールにしま
 - 通らない（というかコードがない）はずのエッジケースに対する未到達テスト
 - 実装の振る舞いではなく、 **実装そのものをコピーした検証**
 
-しかも、テストが落ちると平気で **テストを実装に合わせて書き換える** ようなコミットを打ってくるので、Red→Greenの順序が崩れていてもエージェントのなかでは「ちゃんとテスト書いて通しました」になっています。
+しかも、テストが落ちると平気で **テストを実装に合わせて書き換える** ようなコミットを打ってくるので、Red→Greenの順序が崩れていてもエージェントのなかでは**ちゃんとテスト書いて通しました**になっています。
 
 ### mspecが取るアプローチ
 
-mspecではこの問題に対して、 **テストの実行順序そのものを証跡として記録する** という素朴なアプローチを取りました。
+mspecではこの問題に対して、**テストの実行順序そのものを証跡として記録する**というごく単純で素朴なアプローチを取っています。
 
-具体的には、 [`mspec test expect-red <task-id>`](https://tubone24.github.io/mspec/reference/cli) と [`mspec test expect-green <task-id>`](https://tubone24.github.io/mspec/reference/cli) という2つのコマンドを用意して、エージェントはタスクごとにこの順序を **CLIで物理的に踏ませる** ようになっています。
+具体的には、 [`mspec test expect-red <task-id>`](https://tubone24.github.io/mspec/reference/cli) と [`mspec test expect-green <task-id>`](https://tubone24.github.io/mspec/reference/cli) という2つのコマンドを用意して、エージェントはタスクごとにこの順序を**CLIで物理的に記録させる**ようになっています。
 
 ```bash
 # テストが落ちることを確認（Red）
@@ -137,19 +147,31 @@ mspec test expect-green T-001
 # → 成功証跡を .mspec/cache/green-evidence/ に保存
 ```
 
-ポイントは **CLIが期待する終了コードに合致しないと exit 1 を返す** ことです。終了コードの定義は `.mspec/config.yaml` の `test.expect_red_on_exit` / `test.expect_green_on_exit` でカスタマイズできて、 [Vitest](https://vitest.dev/) や [Jest](https://jestjs.io/)、 [pytest](https://docs.pytest.org/) みたいな主要なテストランナーをカバーする想定です。
+ポイントは **CLIが期待する終了コードに合致しないと`exit 1`を返す**ことです。終了コードの定義は `.mspec/config.yaml` の `test:` セクションでカスタマイズできます。
+
+```yaml{file: ".mspec/config.yaml"}
+test:
+  # mspec test expect-red/expect-green が叩くコマンド
+  command: "vitest run"
+  # この終了コードならテスト失敗（Red）とみなす
+  expect_red_on_exit: [1, 2]
+  # この終了コードならテスト成功（Green）とみなす
+  expect_green_on_exit: [0]
+```
+
+このデフォルト値（失敗 `[1, 2]` / 成功 `[0]`）は、 [Vitest](https://vitest.dev/) や [Jest](https://jestjs.io/)、 [pytest](https://docs.pytest.org/) みたいな主要なテストランナーをそのままカバーする想定です。ランナーを変えるときは基本的に `command` を差し替えるだけ（`"pytest -x -q"` など）で済み、 `expect_*_on_exit` は終了コードが非標準なランナーのときだけ上書きします。
 
 そして実装ステップ（`implement`）のフラグ `enforce_tdd: true` が立っている状態だと、 **`expect-red` を踏んでいないタスクの `expect-green` を拒否する** 動きになります。
 
-つまり、 **実装に合わせてテストを後から書き換える** とか、 **テストを消して実装に合わせる** といった乱暴な手は、CLIのゲートで弾かれるわけです。
+つまり、 **実装に合わせてテストを後から書き換える** とか、 **テストを消して実装に合わせる** といった乱暴な動きをCLIのゲートで弾けるということです。
 
-正直に書くと、この仕組みはまだ完成にはほど遠いです。
+ただ...。正直に書くと、この仕組みはまだ完成にはほど遠いです。
 
 対応しているテストフレームワークの種類は多くないですし、Red→Greenの順序を守らせたところで、 **その中身が本当に振る舞いを表したテストか** までは保証できません。このあたりはドッグフーディングしながら少しずつ育てている段階です。
 
 ## 重量級ドキュメント問題とDiátaxis
 
-もう1つの動機が、 **大きな仕様駆動フレームワークが出すドキュメントが、レビューだけで疲れてしまう問題** です。
+もう1つの動機が、 **大きな仕様駆動フレームワークが出すドキュメントレビューで疲れてしまう問題**です。
 
 仕様駆動開発フレームワークを使ったことがある方ならわかると思うのですが、ワークフローを一通り回すと、仕様・設計・タスク・APIスペック・クイックスタート...と、 **そこそこの量のMarkdownが一気に降ってきます**。
 
@@ -157,17 +179,19 @@ mspec test expect-green T-001
 
 ここで参考にしたのが [Daniele Procida](https://en.wikipedia.org/wiki/Daniele_Procida) が提唱した **[Diátaxis](https://diataxis.fr/)** というドキュメンテーションフレームワークです。
 
-ギリシャ語の **dia（across）+ taxis（arrangement）** に由来する造語で、 [Pythonコミュニティでの採用議論](https://discuss.python.org/t/adopting-the-diataxis-framework-for-python-documentation/15072) や [Django](https://docs.djangoproject.com/)、 [Cloudflare](https://developers.cloudflare.com/workers/) などのドキュメントで採用されているので、ご存じの方も多いと思います。
+ギリシャ語の **dia（across）+ taxis（arrangement）** に由来する造語で、[Django](https://docs.djangoproject.com/)、 [Cloudflare](https://developers.cloudflare.com/workers/) などのドキュメントで採用されているので、ご存じの方も多いと思います。
 
 Diátaxisは、技術文書を **読み手のニーズ** で4象限に分類します。
 
-（ココは公式の図を使ったほうがいい）
+![Diátaxisの4象限マップ：縦軸がAction（行動）とCognition（認知）、横軸がAcquisition（習得）とApplication（応用）。左上がTutorials（学習）、右上がHow-to guides（目標）、左下がExplanation（理解）、右下がReference（情報）](/images/blog/mspec/diataxis.webp)
+
+上の図のとおり、 **Tutorials（学習）・How-to guides（目標達成）・Reference（情報参照）・Explanation（理解）** の4つに、「読み手がいま行動したいのか理解したいのか」「知識を習得する段階なのか応用する段階なのか」という2軸で分けるのが特徴です。
 
 これがそのままmspecの **Manifest** という設計軸につながります。
 
 ## Manifest doc_typeで読み手の意図を明示する
 
-mspecでは、ワークフローが生成する **すべてのMarkdownアーティファクト** にYAML Front Matterで `doc_type:` を必須にしています。
+mspecでは、ワークフローが生成する**すべてのMarkdownアーティファクト**にYAML Front Matterで `doc_type:` を必須にしています。
 
 [doc-types リファレンス](https://tubone24.github.io/mspec/reference/doc-types) を見るとわかりますが、 `Tutorial / How-to / Reference / Explanation` の4種類だけを許容しています。
 
@@ -193,13 +217,9 @@ doc_typeを宣言することで、書き手のAIには「**いまから Referen
 
 大量のドキュメントで疲弊しない仕様駆動開発がしたいという気持ちから生まれたアプローチです。
 
-## Mapped @mspec-deltaで仕様とコードを物理的に縛る
+## Mapped @mspec-deltaで仕様とコードを紐づける
 
-mspecのなかで個人的に一番気に入っている仕組みが、 [Anchor Reference](https://tubone24.github.io/mspec/reference/anchors) で定義されている **`@mspec-delta` アンカー** です。
-
-仕様駆動開発の長年の課題である **仕様 ↔ コードのトレーサビリティ** を、 **3行のコメントブロックだけで** 解こうという素朴な仕組みです。
-
-### フォーマット
+mspecのなかで個人的に一番気に入っている仕組みが、 [Anchor Reference](https://tubone24.github.io/mspec/reference/anchors) で定義されている、**`@mspec-delta`アンカー**です。
 
 ```typescript{file: "src/search.ts"}
 /**
@@ -209,6 +229,8 @@ mspecのなかで個人的に一番気に入っている仕組みが、 [Anchor 
  */
 export function searchDocs() { /* ... */ }
 ```
+
+このように実装されるコードの先頭にDocstringのような形でアンカーが書き込まれます。
 
 ### 配置ルール
 
@@ -224,7 +246,7 @@ export function searchDocs() { /* ... */ }
 | Git trailers（`Spec: FR-005`） | コミットにしか残らず、作業ツリーから見えない |
 | 外部のトレーサビリティDB | インフラが必要、SoTが分裂、リベースで壊れる |
 
-3行コメントはどんな [grep](https://www.gnu.org/software/grep/) でも、どんなLLMのコンテキストウィンドウでも素直に見えるのが強みです。CLIは構造チェックだけ足してあげればよい、というシンプルな分担です。
+3行コメントはどんな [grep](https://www.gnu.org/software/grep/) でも、どんなLLMのコンテキストウィンドウでも扱えます。CLIは構造チェックだけ足してあげればよい、というシンプルな分担にすることで、 **コードと仕様のドリフトを物理的に防ぐ** ことができます。
 
 ### 双方向の検証
 
@@ -242,13 +264,13 @@ mspec anchor list --orphans
 mspec anchor extract <change-name>
 ```
 
-最後の `mspec anchor extract` がmspec独自の面白いところで、 **特定の変更について、どのコードが何のFRを実装したかをJSONでまとめて出す** ので、これをそのままClaude Codeにペーストすれば、その変更のコード網羅レビューがLLMで回せる、という仕組みです。
+最後の `mspec anchor extract` がmspec独自の面白いところで、**特定の変更について、どのコードが何のFRを実装したかをJSONでまとめて出す**ので、これをそのままClaude Codeにペーストすれば、その変更のコード網羅レビューがLLMで回せる、という仕組みです。
 
-つまり、 **検証ゲートではLLMを使わないけれど、深掘り分析にはLLMをガッツリ使える** ように、CLI側から **決定論的に集めた素材** を渡せるわけです。
+つまり、**検証ゲートではLLMを使わないけれど、深掘り分析にはLLMをガッツリ使える**ように、CLI側から**決定論的に集めた素材**を渡せるわけです。
 
 ### 実装ステップでの強制
 
-`.mspec/workflow.yaml` の `implement` ステップでは、次のフラグがデフォルトで `true` になっています（[Workflow Reference](https://tubone24.github.io/mspec/reference/workflow) より）。
+`.mspec/workflow.yaml` の `implement` ステップでは、次のフラグがデフォルトで `true` になっています。
 
 ```yaml{file: ".mspec/workflow.yaml"}
 - id: implement
@@ -263,29 +285,39 @@ mspec anchor extract <change-name>
   enforce_tdd: true
 ```
 
-これにより、 **Delta Specに書かれた `FR-NNN` のうち、コードアンカーが1つもないFR-IDがあれば実装ステップを完了できない** という縛りが入ります。
+これにより、**Delta Specに書かれた `FR-NNN` のうち、コードアンカーが1つもないFR-IDがあれば実装ステップを完了できない**という縛りが入ります。
 
-合わせて `enforce_e2e: true` の方は **Delta Spec内の `#### Scenario:` ブロックに対応するE2Eタスクが `tasks.md` にあるか** を見ており、シナリオとテストがズレないようになっています。
+合わせて**Delta Spec内の `#### Scenario:` ブロックに対応するE2Eタスクが `tasks.md` にあるか**を見ており、シナリオとテストがズレないようになっています。
 
 このラウンドトリップ保証が、Mapped軸の核です。
 
-```
-Delta Spec FR-NNN  ←──── anchor ──── implementation code
-       │
-       └── Scenario ──── E2E task ─── E2E test ──── (test passes green)
+```mermaid
+flowchart LR
+    FR["Delta Spec<br/>FR-NNN"]
+    Code["実装コード"]
+    Scenario["Scenario"]
+    Task["E2E task"]
+    Test["E2E test"]
+    Green["テストがGreenで通る"]
+
+    Code -- "@mspec-delta アンカー" --> FR
+    FR --> Scenario
+    Scenario --> Task
+    Task --> Test
+    Test --> Green
 ```
 
 ## Machine-checkable CLIで決定論的にゲートする
 
-mspecの3つ目の柱が **Machine-checkable** です。
+mspecの3つ目の柱が**Machine-checkable**です。
 
-ワークフローの **意思決定が起きる場所** では、必ずCLIが **パーサーまたは正規表現** で答えを出します。 **LLMは検証経路に入れない** という強い制約を掛けています。
+ワークフローの**意思決定が起きる場所**では、必ずCLIが**パーサーまたは正規表現**で答えを出します。**LLMは検証経路に入れない** という強い制約を掛けています。
 
 ### LLMをゲートから外す意味
 
-ここまで何度か書いてきましたが、LLMは確率的に動くプロダクトです。同じ入力でも、温度や前後の文脈で出力が変わります。
+ここまで何度か書いてきましたが、LLMは確率的に動くものです。当たり前ですが同じ入力でも、前後の文脈で出力が変わります。
 
-そんなLLMに、仕様の十分性やテストの妥当性、アンカーの対応関係といった真偽をジャッジさせてしまうと、 **次のパスで結果が変わる** という状況が普通に起きます。これだとCIの再現性も保証できません。
+そんなLLMに、仕様の十分性やテストの妥当性、アンカーの対応関係といった真偽をジャッジさせてしまうことが自分のなかでは納得できませんでした。
 
 mspecでは [Workflow Reference](https://tubone24.github.io/mspec/reference/workflow) のとおり、各ステップにフラグが立っています。
 
@@ -297,15 +329,7 @@ mspecでは [Workflow Reference](https://tubone24.github.io/mspec/reference/work
 | `enforce_tdd` | `implement` | `expect-red` → `expect-green` の順序を強制 |
 | `constitution_check` | `proposal` / `research` / `design` / `self-review` / `tasks` | Phase 0 / Phase 1 Constitution Check の表を含む |
 
-ここで重要なのは、 **CLIが具体的な真偽を返す** ことです。失敗するときは具体的なファイルパスとFR-IDが、エラーメッセージとして出るので、 **AIエージェントが直しにいける形** で返ってきます。
-
-### archive はパーサーで決定論的にマージする
-
-mspecの `mspec archive <change-name>` は、Delta Specを **OpenSpec互換の `ADDED / MODIFIED / REMOVED / RENAMED` セクション** として解析し、 `specs/<capability>/spec.md` にマージします。
-
-ここも **同じ入力なら必ずバイト単位で同じ出力** になります。LLMを介在させると、ここに揺らぎが出るので、 **アーカイブだけはどれだけAIが進化しても決定論で押す** という設計です。
-
-ちなみに [_Constitutional AI_](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) のような、 [Anthropic](https://www.anthropic.com/) が提唱する **AIでAIをアラインメントする** アプローチは個人的にすごく魅力的だと思っています。ただ、それを **CIゲートのような決定論が求められる場所** に直接持ち込むと、再現性が崩れて運用しんどそうだな、というのが私の私見です。あくまで **検証経路の外側** でAIによる深掘りやレビューを行ない、ゲート判断は決定論的な仕組みで担保する、という分担にmspecではかなり振り切りました。
+ここで重要なのは、**CLIが具体的な真偽を返す**ことです。失敗するときは具体的なファイルパスとFR-IDが、エラーメッセージとして出るので、**AIエージェントが直しにいける形**で返ってくるのです。
 
 ## Delta SpecとOpenSpecの系譜、Spec Kitとの比較
 
@@ -315,31 +339,33 @@ mspecの `mspec archive <change-name>` は、Delta Specを **OpenSpec互換の `
 
 [GitHub Spec Kit](https://github.com/github/spec-kit) はGitHub公式のSDDツールキットで、 [GitHub Blog の解説記事](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-from-chaos-to-structure/) でも言及されているとおり、 **`/speckit.constitution → specify → plan → tasks → implement`** という流れで、 [GitHub Copilot](https://github.com/features/copilot)、Claude Code、 [Cursor](https://www.cursor.com/) などに対応します。
 
-`constitution` でプロジェクト原則を立てて、 `specify` で仕様を、 `plan` で技術設計を、 `tasks` で分解して、 `implement` で実装、というフローです。
+`constitution` でプロジェクト原則を立てて、`specify`で仕様を、`plan`で技術設計を、`tasks`で分解して、`implement` で実装、というフローです。
 
-ここで参考にしたのが **Constitution（憲法）** という考え方です。mspecでも `memory/constitution.md` を `mspec init` 時に生成し、 `proposal / research / design / self-review / tasks` の各ステップで **Phase 0 / Phase 1 Constitution Check** の表を必須にしています。
+ここで参考にしたのが **Constitution（憲法）** という考え方です。
 
-もう1つ気に入っているのが **quickstart.md** というドキュメントの存在です。これはAIが書いたゴールデンパスの確認手順書で、 **実装後に開発者が自分で触ってみる** ためのものです。AIに任せっぱなしで「実装しました」とされても、ゴールデンパスを人間の感覚で確認しないと本当にOKかどうかは判断できないんですよね。なのでquickstart.mdはあえてワークフローに残しています。
+憲法ファイルとは、 **個々の仕様より一段上にある、プロジェクト全体で守るべき原則を書いたMarkdown** です。アーキテクチャの方針、テスト戦略、命名規約、依存ライブラリの選定基準といった「変更ごとにブレてはいけないこと」をここに固定しておきます。各変更の仕様（spec）が「今回なにを作るか」を書くのに対して、憲法は「どの変更でも従うべき土台」を書く、という棲み分けです。これがあると、AIエージェントが個別の変更に集中しても、プロジェクト全体の一貫性が崩れにくくなります。
 
-ただ、Spec Kit単体だと **完成した仕様 ↔ 実装コードの後追い** が私のなかではしんどく、リファクタや削除が走ったあとに、現在の `spec.md` のFR-005がどのコードに対応していたのかを辿りづらくなりがちでした。
+mspecでも `memory/constitution.md` を `mspec init` 時に生成し、 `proposal / research / design / self-review / tasks` の各ステップで **Phase 0 / Phase 1 Constitution Check**の表を必須にしています。これは「この変更が憲法に違反していないか」をステップごとに突き合わせる仕組みです。
+
+もう1つ気に入っているのが**quickstart.md**というドキュメントの存在です。これはAIが書いたゴールデンパスの確認手順書で、**実装後に開発者が自分で触ってみる**ためのものです。AIに任せっぱなしで「実装しました」とされても、ゴールデンパスを人間の感覚で確認しないと本当にOKかどうかは判断できないんですよね。なのでquickstart.mdはあえてワークフローに残しています。
+
+ただ、Spec Kit単体だと **完成した仕様 ↔ 実装コードの後追い** が私のなかではしんどく、リファクタや削除が走ったあとに、現在の `spec.md` のFRがどのコードに対応していたのかを辿りづらくなりがちでした。
 
 ### OpenSpec の Delta Spec方式
 
-その悩みに対して **すごくフィット** したのが、 [Fission AIのOpenSpec](https://github.com/Fission-AI/OpenSpec) の **Delta Spec** という考え方です。
+その悩みに対して **すごくフィット** したのが、 [Fission AIのOpenSpec](https://github.com/Fission-AI/OpenSpec) の**Delta Spec**という考え方です。
 
-OpenSpecでは、変更ごとに **`changes/<change-id>/specs/...`** というディレクトリに **差分の仕様** を書き起こします。 `ADDED Requirements` / `MODIFIED Requirements` / `REMOVED Requirements` といったセクションで **何が増えて、何が変わって、何が消えたか** を明示し、それを **SoT（Source of Truth）の `specs/`** にマージしていくスタイルです。
+OpenSpecでは、変更ごとに **`changes/<change-id>/specs/...`** というディレクトリに**差分の仕様**を書き起こします。`ADDED Requirements` / `MODIFIED Requirements` / `REMOVED Requirements` といったセクションで **何が増えて、何が変わって、何が消えたか** を明示し、それを **SoT（Source of Truth）の `specs/`** にマージしていくスタイルです。
 
-差分思考と、変更のスコープが明確なこの方式は、 **Gitの感覚に近くて理解しやすい** し、 **その変更だけのドキュメント** をひと固まりに保てる強みがあります。
+差分思考と、変更のスコープが明確なこの方式は、**Gitの感覚に近くて理解しやすい**し、**その変更だけのドキュメント**をひと固まりに保てる強みがあります。
 
-mspecもこのDelta Spec方式をそのまま踏襲しています。 `mspec new <feature-kebab>` で `changes/YYYY-MM-DD-HHMMSS-<feature>/` を作って、そのなかで **差分の仕様を書く → 実装する → アーカイブする** という流れです。
+mspecもこのDelta Spec方式をそのまま踏襲しています。`mspec new <feature-kebab>` で `changes/YYYY-MM-DD-HHMMSS-<feature>/`を作って、そのなかで**差分の仕様を書く → 実装する → アーカイブする**という流れです。
 
 ### mspecの差分
 
-私のなかでの課題感は、 **Delta Specが書けても、そこから実装コードへの向き合うべき箇所が見えにくい** という点でした。
+私のなかでの課題感は、**Delta Specが書けても、そこから実装コードへの向き合うべき箇所が見えにくい**という点でした。
 
-そこで、 `@mspec-delta` アンカーを **コード側からDelta Specへの逆リンク** として埋め込み、 `mspec anchor check / list / extract` で双方向に検証・抽出できるようにしました。
-
-差分仕様の良さ（OpenSpec）と、コードと仕様の物理リンク（mspec独自）、Constitution（Spec Kit由来）と、Diátaxis（既存のドキュメンテーション理論）を **重ね合わせたら、自分が一番使いやすいフレームワーク** になった、というのが正直なところです。
+そこで、`@mspec-delta`アンカーを**コード側からDelta Specへの逆リンク**として埋め込み、`mspec anchor check / list / extract`で双方向に検証・抽出できるようにしました。
 
 **Spec KitもOpenSpecも素晴らしいフレームワークです**。それぞれの強みを別個に伸ばしているだけで、mspecはあくまで「私の使い方ではこれが嬉しい」をまとめたものに過ぎません。
 
@@ -395,12 +421,6 @@ sequenceDiagram
 
 AIが書いたものをAIがチェックするだけでは見落とされる観点を、人間が拾う。反対に、定型的なカバレッジチェックや機械的に確認できるところはAIに任せる。この2層を組み合わせることで、トータルの品質カバレッジを上げていこうというのがmspecの作戦です。
 
-### Constitutional Check（憲法チェック）
-
-`mspec init` を叩くと、 `memory/constitution.md` という **プロジェクト憲法** のテンプレートが書き出されます。Core Principlesのセクションを埋めると、 `proposal / research / design / self-review / tasks` の各ステップで **Phase 0 / Phase 1 Constitution Check** の表を書くことが要求されます。
-
-これは [GitHub Spec Kit](https://github.com/github/spec-kit) の `/speckit.constitution` の影響を強く受けています。 **プロジェクトとして譲れない原則** を最初に明文化し、各設計判断がそこから逸脱していないかを **毎ステップで自己確認** してもらう、という考え方です。
-
 ### ライトウェイトモード
 
 11ステップは正直、誤字修正やワンライナーのバグフィックスにはオーバーキルです。
@@ -423,15 +443,15 @@ AIが書いたものをAIがチェックするだけでは見落とされる観�
 
 仕様駆動開発のドキュメントは、たいてい **Markdownを人間が読んだり書いたりする** 前提で組まれています。
 
-ですが、AIエージェントと一緒に開発していると、 **AIが下書きしたMarkdownを人間がレビューする** ことが圧倒的に多くなります。これ、毎回しんどいんですよね。
+ですが、AIエージェントと一緒に開発していると、 **AIが下書きしたMarkdownを人間がレビューし清書する** ことが圧倒的に多くなります。
 
-なので、mspecでは **AIが人間にチャット形式で問いかけ、その回答からMarkdownの中身を補完していく** という体験を、可能なかぎり優先しています。
+なので、mspecでは **AIが人間にチャット形式で問いかけ、その回答からMarkdownの中身を補完していく** という体験を、可能なかぎり優先しています。つまり膨大なMarkdownを直接編集する必要ができるだけないようにしています。
 
 [Workflow Reference](https://tubone24.github.io/mspec/reference/workflow) の `proposal / research / design / implement` には `ask_questions: true` フラグが立っており、対応するskillがClaude Codeの `AskUserQuestion` ツールを呼ぶことが許可される設計になっています。
 
-人間は **Markdownを直接編集することなく、問答に答えるだけで仕様を肉付けできる** わけです。
+人間は**Markdownを直接編集することなく、問答に答えるだけで仕様を肉付けできる**わけです。
 
-なお、現在のmspecはClaude Code専用なのでAskUserQuestionツールに直接依存していますが、将来的にホストが変わっても動くよう、 **問答機構そのもの** を抽象化していくのが個人的な宿題です。
+なお、現在のmspecはClaude Code専用なのでAskUserQuestionツールに直接依存していますが、将来的にホストが変わっても動くよう、**問答機構そのもの**を抽象化していくのが個人的な宿題です。
 
 ## ドッグフーディングと今後の課題
 
@@ -442,25 +462,26 @@ AIが書いたものをAIがチェックするだけでは見落とされる観�
 - 対応するテストランナーの種類が少ない（exit codeのカスタムだけだとカバーしきれない言語/フレームワークがある）
 - アンカーの **追加** と **削除** は検証できるが、 **コード移動・リネーム** に伴うアンカー追従はまだ手作業
 - `mspec spec lint` の正規表現ルールはチューニング途中で、誤検出も誤通過もあり得る
-- Constitutional Checkは表が書かれていることをチェックするだけで、 **書かれた内容の妥当性** までは見ない
+- Constitutional Checkは表が書かれていることをチェックするだけで、**書かれた内容の妥当性**までは見ない
 - Claude Code以外への対応（`integrations` の枠は用意したが、実装はまだ）
 
-ただ、 **設計の骨格** はかなり気に入っており、自分自身がmspecでmspec自体の変更を回すドッグフーディングを続けています。実際、mspec自身のリポジトリにある `.mspec/workflow.yaml` には、 `@mspec-delta 2026-05-18-044538-revise-artifact-taxonomy/...` のようなコメントが入っていて、 **mspecがmspec自身を仕様駆動で進化させている** 状態です。
-
-ちなみに、mspecがmspec自身のリポジトリで作ったDelta Specを `mspec anchor extract` でJSON化して、それをClaude Codeに食わせる、というメタな運用も最近やっています。 **検証はCLIで、深掘りはLLMで** という設計の使い心地が、自分でも結構気に入っています。
+ただ、**設計の骨格**はかなり気に入っており、自分自身がmspecでmspec自体の変更を回すドッグフーディングを続けています。
 
 ## 最後に
 
-長々と書きましたが、mspecは **既存の仕様駆動フレームワークに対する、私個人の違和感を埋めるためのフレームワーク** です。 [Spec Kit](https://github.com/github/spec-kit) や [OpenSpec](https://github.com/Fission-AI/OpenSpec) を否定するためのものではまったくなく、どちらも素晴らしいので **適材適所で使えばいい** と思っています。
+長々と書きましたが、mspecは **既存の仕様駆動フレームワークに対する、私個人の違和感を埋めるためのフレームワーク** です。 [Spec Kit](https://github.com/github/spec-kit) や [OpenSpec](https://github.com/Fission-AI/OpenSpec) を否定するためのものではまったくなく、どちらも素晴らしいので**適材適所で使えばいい**と思っています。
 
-それでも自作するに値する違和感だったか、と言われると、 **正直、自分が一番楽しく開発できる仕組み** ができたのでよかったかな、と思っています。LLMの確率的な部分と、CLIの決定論的な部分の **境界線をどこに置くか** という設計問題は、これからもしばらく宿題として残りそうです。
+仕様駆動開発フレームワークを自作する意味は正直ないと思います。既存のフレームワークをカスタマイズできますので。
 
-最後にちょっとだけ自慢させてください。
+ただ、仕様駆動開発フレームワークを作ることは、自分自身でAIに何を求めているのか、何が課題なのかを可視化する良い機会になります。
 
-mspecの **M** は、最初は私の飼い犬である[むぎ](https://www.instagram.com/mugimugi.cutedog/)の **む** から取った **むぎぼーspec** でした。本当です。
+mspecの **M** は、最初は私の飼い犬である[むぎ](https://www.instagram.com/mugimugi.cutedog/)の **む** から取った **むぎぼーspec** でした。
 
-で、開発を進めていくうちに、 **アンカーで仕様とコードを紐づける（Mapped）** という考え方から、 **読み手の意図を明示する（Manifest）** **CLIで決定論を保つ（Machine-checkable）** が見えてきて、 **3つのM** に育ってくれました。
+で、開発を進めていくうちに**アンカーで仕様とコードを紐づける（Mapped）**、という考え方から、**読み手の意図を明示する（Manifest）**、**CLIで決定論を保つ（Machine-checkable）**、が見えてきて、**3つのM**に育ってくれました。
+
+![mspecのロゴ](/images/blog/mspec/logo.png)
+
 
 最初に **む** から始まったやつが、ちゃんとした3つのMに育ってくれた、というのが個人的にはとても嬉しいです。むぎぼーすごい。
 
-そんなことを思いながら、しばらくはmspecをドッグフーディングで育てていく予感がするこの頃です。
+むぎぼーは2歳になりました。これからも元気に長生きしてほしいです。
