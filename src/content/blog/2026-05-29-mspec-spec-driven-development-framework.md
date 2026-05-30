@@ -267,15 +267,21 @@ mspec内部でAIエージェントがセルフレビューを行なうとき、*
 
 チェックリストの項目のうち、自動テストで検証できるものは、テストが通ったあとに自動でチェックされます。
 
-全文検索の例なら「`FR-001` の検索機能が動くか」は、E2Eテストが通った時点でチェック済みになります。
+全文検索の例なら、**`FR-001` の検索機能が動くか**は、自動テストが通った時点でチェック済みになります。
 
 一方、**人間でしか確認できない項目**（UIの見た目、操作の自然さ、エッジケースの感覚的な妥当性など）については、`<!-- verify: human -->` のコメントと具体的な確認手順が併記されています。
 
 すべてAIエージェントが品質保証するわけではなく、重要なところは人間が確認するという設計になっています。
 
+![checklist.mdをWebUIで見ると人間が見なきゃいけないポイントが丸わかり](/images/blog/mspec/checklist.png)
+
 ### archiveで完了
 
 最後の`archive`ステップでDelta Specが正式な仕様（SoT）にマージされて、1つの変更が完了します。
+
+SoTは同じくMarkdownでレポジトリ内にfeatureごとに格納されるほか、Web UIでもわかりやすく可視化されます。
+
+![Spec Viewer](/images/blog/mspec/sot.png)
 
 これがmspecの一連の体験です。
 
@@ -309,7 +315,7 @@ Diátaxisは、技術文書を**読み手のニーズ**で4象限に分類しま
 
 **Tutorials（学習）・How-to guides（目標達成）・Reference（情報参照）・Explanation（理解）** の4つに、読み手がいま行動したいのか理解したいのか、知識を習得する段階なのか応用する段階なのか、という2軸で分けるのが特徴です。
 
-mspecでは、ワークフローが生成する**すべてのMarkdownアーティファクト**にYAML Front Matterで `doc_type:`の指定を必須にしています。（[doc-types リファレンス](https://tubone24.github.io/mspec/reference/doc-types)）。
+mspecでは、ワークフローが生成する**すべてのMarkdownアーティファクト**にYAML Front Matterで `doc_type:`の指定を必須にしています。
 
 たとえば `proposal.md` は変更の理由を語る `Explanation`、 `quickstart.md` は手順を追う `How-to`、 `tasks.md` や `glossary.md` は引きやすさ優先の `Reference`、という割り当てです。
 
@@ -321,11 +327,11 @@ doc_typeを宣言することで、書き手のAIには**いまからReference�
 
 大量のドキュメントで疲弊しない仕様駆動開発がしたい、という気持ちから生まれたアプローチです。
 
-この「読み手の理解を守る」という発想は、 [Thoughtworks](https://www.thoughtworks.com/) の [Future of Software Engineering Retreat の振り返り記事](https://www.thoughtworks.com/en-us/insights/articles/reflections-future-software-engineering-retreat) で語られていた、こんな一節とも重なります。
+この**読み手の理解を意識する**という発想は、 [Thoughtworks](https://www.thoughtworks.com/) が公開した [The Future of Software Engineering — Retreat Findings](https://www.thoughtworks.com/content/dam/thoughtworks/documents/report/tw_future%20_of_software_development_retreat_%20key_takeaways.pdf)（2026年2月）で語られていた、こんな一節とも重なります。
 
-> velocity without understanding is not sustainable
+> Losing that channel without replacing it creates a comprehension gap that compounds over time.
 
-**理解を伴わない速度は続かない**、というわけです。
+**理解のギャップが時間とともに積み重なっていく**、というわけです。
 
 AIエージェントがドキュメントを大量生成できる時代だからこそ、**読み手が何を理解すべきか**を見失わない仕掛けがいると思ってます。
 
@@ -398,11 +404,9 @@ test:
       expect_green_on_exit: [0]
 ```
 
-デフォルト値（失敗 `[1, 2]` / 成功 `[0]`）は、 [Vitest](https://vitest.dev/) や [Jest](https://jestjs.io/)、 [pytest](https://docs.pytest.org/) みたいな主要なテストランナーをそのままカバーする想定です。
-
 これにより、**実装に合わせてテストを後から書き換える**とか、**テストを消して実装に合わせる**といったAIエージェントの乱暴な動きを、CLIのゲートで弾くことができます。
 
-ただ、正直に書くと、この仕組みはまだ完成にはほど遠いです。
+ただ、正直に書くと、**この仕組みはまだ完成にはほど遠い**です。
 
 Red→Greenの順序を守らせたところで、 **その中身が本当に振る舞いを表したテストか** までは保証できません。このあたりはドッグフーディングしながら少しずつ育てている段階です。
 
@@ -450,23 +454,25 @@ sequenceDiagram
 
 ちなみに**どこに人間を残すか**という問いは、どうやら私だけの悩みではないようです。
 
-さきほども引いたThoughtworksの記事では、これからのエンジニアリングの重心が、コードを書くこととリリース管理のあいだにある **middle loop**（中間ループ）に移っていくとも論じられています。
+さきほども引いたThoughtworksのレポートでは、コードを書くこと（inner loop）とCI/CD・デプロイ（outer loop）のあいだに **middle loop** という新しい仕事のカテゴリが生まれていると論じられています。
 
-> greater focus on the 'middle loop' of supervisory work. This is situated somewhere between writing code and release management, with its objectives being agent orchestration and governance
+> The retreat identified a third: a middle loop of supervisory engineering work that sits between them. This middle loop involves directing, evaluating and fixing the output of AI agents.
 
-エージェントのオーケストレーションとガバナンスを担う、監督的な仕事のことですね。 `checklist` と `self-review`、そして各ステップの人間確認ポイントは、このmiddle loopをmspecなりに形にしたもの、と言えるのかもしれません。
+AIエージェントの出力を指揮・評価・修正する、監督的な仕事のことですね。 `checklist` と `self-review`、そして各ステップの人間確認ポイントは、このmiddle loopをmspecなりに形にしたもの、と言えるのかもしれません。
 
 Thoughtworksを読んでmspecに4つ目のMを足すことを思いつきました。Middle Loopです。
 
-## Delta SpecとOpenSpecの系譜、Spec Kitとの比較
+## Delta SpecとOpenSpecとSpec Kitと
 
 3つのMの設計は、当然ながらゼロから降ってきたわけではなく、 **既存の仕様駆動フレームワークの良いところをかなり拝借しています**。
 
 特に、 [Spec Kit](https://github.com/github/spec-kit) と [OpenSpec](https://github.com/Fission-AI/OpenSpec) をすごい参考にしています。
 
+ChangesからSoTの管理方法などはOpenSpecをかなり踏襲していますし、`quickstart.md`や`checklist.md`などの品質ゲートの考え方はSpec Kitからの影響が大きいです。
+
 ## オマケ機能
 
-~~3~~4つのMが骨格ですが、ドッグフーディングを続けるなかで「これも欲しい」と足してきた機能がいくつかあります。
+~~3~~4つのMが骨格ですが、ドッグフーディングを続けるなかで**これも欲しい**と足してきた機能がいくつかあります。
 
 ### プロトタイプ（visual-mock）ステップ
 
@@ -474,61 +480,67 @@ UIの変更を仕様書に起こそうとして、うまく言葉にできなか
 
 **このボタンの色をこうしたい**、**画面全体の背景はこの色で**みたいな話は、振る舞いベースの仕様の書き方ではどうにも表現しにくいんですよね。
 
-そうして曖昧なまま作られたUIは、最後の実装ステップで実物を触ってはじめて「あれ、思ってたのと違う」となりがちです。それならバイブコーディングで実装と確認のループをたくさん回したほうが圧倒的に早いし楽です。
+そうして曖昧なまま作られたUIは、最後の実装ステップで実物を触ってはじめて**思ってたのと違う**となりがちです。
+
+それなら**バイブコーディングで実装と確認のループをたくさん回したほうが圧倒的に早いし楽**です。
 
 **仕様駆動とUIのスタイル**、特に見た目まわりの相性の悪さは、私のなかでずっと課題でした。
 
-mspecではUIやスタイルに影響する変更と判断した際、仕様を固める前に、まず簡単なプロトタイプを作って認識を合わせることをします。
+mspecではUIやスタイルに影響する変更と判断した際、仕様を固める前に、**まず簡単なプロトタイプを作って認識を合わせる**ことをします。
 
 それがワークフローの `/mspec:prototype` ステップ（ステップidは `visual-mock`）です。
 
-AIがHTMLのモックアップを生成してローカルで表示し、ユーザーからのフィードバックを `prototype-feedback.md` に収集します。
+AIエージェントがHTMLのモックアップを生成してWeb UI経由で表示し、ユーザーからのフィードバックを`prototype-feedback.md`に収集します。
 
-仕様策定のいちばん初期に、見た目の認識だけ先に合わせてしまうわけです。
+仕様策定のいちばん初期に、**見た目の認識だけ先に合わせてしまう**わけです。
 
 ### Web UI
 
 仕様駆動開発を回すと、生成された大量のMarkdownを、ひたすらエディタで開いて確認することになります。疲れますよね。
 
-私はコードを書くときはIDEの設定をダークモードにしているのですが、どうにもMarkdownを読み切れていない気がしていました。
+私はコードを書くときはIDEの設定をダークモードにしているのですが、**どうにもMarkdownを読み切れていない**気がしていました。
 
-そんな悩みを持っているときに、[ダークモードは本当に読みやすいのか？コントラスト極性の研究から考える表示モードの設計](https://qiita.com/tanay/items/1609d7989268aa3e35bf)の記事を読んでライトモードにIDEの設定を切り替えてみました。
+そんな悩みを持っているときに、[ダークモードは本当に読みやすいのか？コントラスト極性の研究から考える表示モードの設計](https://qiita.com/tanay/items/1609d7989268aa3e35bf)の記事を読んで、思い切ってライトモードにIDEの設定を切り替えてみました。
 
-**文字を正確に認識する・校正するようなタスク**では、正のコントラスト極性（**ライトモード**）が有利な傾向があるというものです。
+**文字を正確に認識する・校正するようなタスク**では、正のコントラスト極性（**ライトモード**）が有利な傾向があるとのことで...。
 
-なるほどと思って、仕様書を読むときだけライトモードに切り替えてみたんです。が、今度は **コードを読むときに目が痛くなりました**。困りましたね...。
+なるほどと思って、仕様書を読むときだけライトモードに切り替えてみたのですが、今度は **コードを読むときに目が痛くなりました**。困りましたね...。
 
-そこで気づいたのが、そもそも仕様駆動開発のアーティファクトとコードは、別のUIで見たほうがいいんじゃないか、ということでした。 ならフレームワークのなかで完結させよう、と作ったのがこのWeb UIです。
+そこで気づいたのが、そもそも仕様駆動開発のアーティファクトとコードは、**別のUIで見たほうがいいんじゃないか**、ということでした。 ならフレームワークのなかで完結させよう、と作ったのがこのWeb UIです。
 
 実際にMarkdownを可視化するものを作ってみると、 [Kindle](https://www.amazon.co.jp/kindle) のセピアやグリーンのような色合いがとても読みやすくて、私はmspecを使うときは基本グリーンの背景にしています。
+
+![Greenの見た目、とっても文字が読みやすい](/images/blog/mspec/green.png)
 
 目に優しいし、視認性も高いんですよね（気のせいかも）。
 
 ### （実験的な機能）FR単位のリスク分類
 
-AIにレビューや実装をやらせていると、**どんな変更も同じ重さで、律儀に厳密に扱おうとする**のが気になりませんか。
+AIにレビューや実装をやらせていると、**どんな変更も同じ頑張りで、律儀に厳密に扱おうとする**のが気になりませんか。
 
-誤字修正も、決済まわりの根幹も、同じ厳密さで進めてしまいます。
+Typo修正も、決済まわりの根幹も、同じ厳密さで進めてしまいます。
 
-人間のレビュアーなら、ここは軽く流す・ここは全力で見る、という強弱を自然につけるところです。
+人間のレビュアーなら、**ここは軽く流す・ここは全力で見る**、という強弱を自然につけるところです。
 
-この感覚もまた、さきほど引いたThoughtworksの振り返り記事のなかで、はっきり言語化されていました。
+この感覚もまた、さきほど引いたThoughtworksのレポートのなかで、はっきり言語化されていました。
 
-> the possibility of tiering software in terms of importance and criticality. In other words, we may be able to circumvent code reviews where code quality is deemed of less importance
+> Not all code carries the same risk. [...] instead of asking "did someone review this code?" organizations need to ask "what is the blast radius if this code is wrong, and is our verification proportional to that risk?"
 
-ソフトウェアを重要度と危険度で **階層化（tiering）** し、品質がさほど問われない箇所のレビューは省いて、本当に大事なところに注意を集中させられるのではないか、という指摘です。
+コードの **blast radius**（影響範囲）でリスクを評価し、検証コストをリスクに比例させようという考え方です。
 
 mspecではこの考え方を、Delta SpecのFR単位で `risk_tier`（critical / standard / trivial）と `blast_radius`（local / module / system / external）を宣言する形に落とし込みました。
 
 **どの要件がどれだけ危ないか、影響がどこまで及ぶか**に色をつけておくわけです。TierごとにProposalステップで質問される内容、特にセキュリティ周りの質問の数や質が変わってきます。
 
-ですが、mspecを使ってもセキュリティ的な観点の洗い出しはまだ甘いですし、リスクの線引きを固定ルールで縛るべきか、AIに柔軟に判断させるべきかは、自分のなかでもまだ答えが出ていません。
+ですが、**mspecを使ってもセキュリティ的な観点の洗い出しはまだ甘い**です。なので実験的機能にとどめておきます。
+
+リスクの線引きを固定ルールで縛るべきか、AIに柔軟に判断させるべきかは、自分のなかでもまだ答えが出ていません。
 
 ### アーカイブから学ぶ
 
 仕様駆動で進めていて、**実装ステップあたりで違ったと気づく**ことってありませんか。
 
-要件定義から着々と下ってきたウォーターフォールの、いちばん最後の後戻りしにくいところで、お客さんとの認識がズレていたと気づく感覚に似ています。
+要件定義から着々と下ってきて、いちばん最後の後戻りしにくいところで、お客さんとの認識がズレていたと気づく感覚に似ています。
 
 要因はいくつもあると思っています。
 
@@ -536,36 +548,40 @@ Proposalの段階で自分の要求やコンテキストをAIエージェント�
 
 だからこそ、その失敗をちゃんと振り返って次に活かしたい。**人間が振り返るのはもちろん、AIにも振り返りのきっかけを渡したい**と思ったのが、この機能の出発点です。
 
-着想の1つになったのが、AWSが提唱する [AI-DLC（AI-Driven Development Life Cycle）](https://github.com/awslabs/aidlc-workflows) です。AI-DLCは、
+着想の1つになったのが、AWSが提唱する [AI-DLC（AI-Driven Development Life Cycle）Workflows 2.0](https://github.com/awslabs/aidlc-workflows) の仕様書です。
 
-> AI-DLC is an intelligent software development workflow that adapts to your needs, maintains quality standards, and keeps you in control of the process.
+2.0では、ワークフローを構成する各 **Skill** が「生成仕様・自己検証仕様・**学習仕様**」という3コンパートメントモデルを持つことが定義されています。特に **Principle 9 — Learning from Practice** では、こう述べられています。
 
-と定義される（[awslabs/aidlc-workflows](https://github.com/awslabs/aidlc-workflows) より）、AIを開発ライフサイクルの中心に据えつつ人間が主導権を握り続ける手法で、[AWSがオープンソースとして公開しています](https://aws.amazon.com/blogs/devops/open-sourcing-adaptive-workflows-for-ai-driven-development-life-cycle-ai-dlc/)。問題に合わせてプロセスの深さ自体を変える、という適応的な考え方に触れて、**変更が閉じたあとに学びを回収するループ**もフレームワークに組み込めないか、と考えました。
+> Today, when a human corrects an AI output, that correction is typically applied once and forgotten. Under Principle 9, every correction is a candidate learning.
 
-それが `mspec learn` です。アーカイブ済みの変更から、次に活かせるレッスンと、今回はやりきれなかったけれど重要なネクストアクションを拾い上げます。あわせて `mspec agent-run record` で、サブエージェントの実行ログ（コンテキストサイズや成果物、self-reviewでの修正数）も記録しています。
+**人間がAIの出力を修正しても、今まではその修正は一度きりで忘れ去られていた。すべての修正が次の学習の候補になる**、という考え方です。この**実践から学ぶ**という発想に触れて、**変更が閉じたあとにフィードバックを回収するループ**もフレームワークに組み込めないか、と考えました。
 
-ただ、まだ完成形にはほど遠くて、拾ってくるレッスンが **そのセッションでしか起きないような具体的すぎる内容** に寄りがちです。このあたりのチューニングは、これからの課題ですね。
+それが `mspec learn` です。アーカイブ済みの変更から、次に活かせるレッスンと、今回はやりきれなかったけれど重要なネクストアクションを拾い上げます。
 
-## 今後の課題
+学びとして有用と人間に選択されたレッスンはmemoryとして、次回変更時の憲法ファイルに追記されます。
 
-正直、mspecはまだ完成にはほど遠いです。直近で残っているのは、こんなところです。
+ネクストアクションは、そのまま `/mspec:new` のプロンプトに渡され、次の変更の起点(changesディレクトリの作成)になります。
 
-アンカーの **追加** と **削除** は検証できるのですが、 **コード移動・リネーム** に伴うアンカー追従はまだ手作業です。 `mspec spec lint` の正規表現ルールもチューニング途中で、誤検出も誤通過もあり得ます。Constitution Checkは `mspec verify llm` で内容評価への足がかりは作ったものの、CLIが決定論的に妥当性を判断するところまではいっていません。そして、 `integrations` の枠は用意したものの、Claude Code以外のホストへの対応はまだ実装できていません。
+ただ、まだ完成形にはほど遠くて、拾ってくるレッスンが **そのセッションでしか起きないような具体的すぎる内容** に寄りがちです。
 
-ただ、 **設計の骨格** はかなり気に入っており、自分自身がmspecでmspec自体の変更を回すドッグフーディングを続けています。
+このあたりのチューニングは、これからの課題ですね。
 
 ## 最後に
 
-長々と書きましたが、mspecは **既存の仕様駆動フレームワークに対する、私個人の違和感を埋めるためのフレームワーク** です。 [Spec Kit](https://github.com/github/spec-kit) や [OpenSpec](https://github.com/Fission-AI/OpenSpec) を否定するためのものではまったくなく、どちらも素晴らしいので **適材適所で使えばいい** と思っています。
+長々と書きましたが、mspecは**既存の仕様駆動開発に対する、私個人の違和感を埋めるためのフレームワーク**です。
 
-仕様駆動開発フレームワークを自作する意味は、正直あまりないかもしれません。既存のフレームワークをカスタマイズできますので。ただ、自分で作ってみると、自分自身がAIに何を求めているのか、何が課題なのかを可視化する良い機会になります。
+仕様駆動開発フレームワークを自作する意味は、正直あまりないかもしれません。
 
-mspecの **M** は、最初は私の飼い犬である[むぎ](https://www.instagram.com/mugimugi.cutedog/)の **む** から取った **むぎぼーspec** でした。
+既存のフレームワークも十分にカスタマイズできますので。
 
-で、開発を進めていくうちに **アンカーで仕様とコードを紐づける（Mapped）** という考え方から、 **読み手の意図を明示する（Manifest）**、 **CLIで決定論を保つ（Machine-checkable）** が見えてきて、 **3つのM** に育ってくれました。
+ただ、自分で作ってみると、**自分自身が開発という文脈においてAIに何を求めているのか**、**何が課題なのか**を可視化する良い機会になります。
+
+mspecの**M** は、最初は私の飼い犬である[むぎ](https://www.instagram.com/mugimugi.cutedog/)の**む**から取った**むぎぼーspec**という意味でした。それくらい何の考えもなしにとりあえず作ろうかなと思った感じです。
+
+開発を進めていくうちに **アンカーで仕様とコードを紐づけるMapped** という考え方から、 **読み手の意図を明示するManifest**、 **CLIで決定論を保つMachine-checkable** が見えてきて、 さらには、**人間を監督者として置くMiddle-loop**の**4つのM** に育ってくれました。
 
 ![mspecのロゴ](/images/blog/mspec/logo.png)
 
-最初に **む** から始まったやつが、ちゃんとした3つのMに育ってくれた、というのが個人的にはとても嬉しいです。むぎぼーすごい。
+むぎぼーのおかげですね。むぎぼーすごい。
 
-むぎぼーは2歳になりました。これからも元気に長生きしてほしいです。
+むぎぼーは2歳になりました。これからも元気に長生きしてほしいですわん。
