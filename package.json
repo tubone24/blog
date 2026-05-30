@@ -219,7 +219,7 @@
     "qs": "6.15.0",
     "serialize-javascript": "7.0.5",
     "flatted": "3.4.2",
-    "fast-xml-parser": "5.5.7",
+    "fast-xml-parser": "5.7.0",
     "h3": "1.15.9",
     "tar": "7.5.11",
     "fastify": "5.8.1",
