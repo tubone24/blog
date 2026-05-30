@@ -207,7 +207,7 @@ Function Requirement(機能要件、FR)は、**EARS（Easy Approach to Requireme
 
 後続の実装タスクも、E2Eテストも、すべてここに書かれたシナリオから派生します。逆に言えば、ここで仕様が曖昧なまま進むと後からの手戻りが大きくなるということです。より網羅性の高い記法が必要だった、というわけです。
 
-EARSとGherkinで書かせることで、その曖昧さをdelta specステップでしておく、というのがmspecの思想です。
+EARSとGherkinで書かせることで、その曖昧さをdelta specステップで潰しておく、というのがmspecの思想です。
 
 **インデックス構築のFRが抜けていないか**、**受け入れシナリオは実際に確認できる形か**を引きながら確認すると良いでしょう。
 
@@ -415,20 +415,6 @@ AIが自分でやったことを自分でチェックするための成果物で
 そのチェックリストのうち人間で見たほうがいいものは、AIでは完結せず**人間が見て最終確認**します。
 
 AIの自己評価に依存せず、人間の目を通すわけです。
-
-```mermaid
-sequenceDiagram
-    participant AI as AIエージェント
-    participant CLI as mspec CLI
-    participant H as 開発者
-
-    AI->>AI: checklist.md 生成（FR / リグレッション / 確認項目）
-    AI->>CLI: /mspec:continue
-    CLI-->>H: self-review ステップへ（人間待ち）
-    H->>H: checklist.md をレビュー・判断
-    H->>CLI: /mspec:continue
-    CLI-->>AI: tasks.md フェーズへ
-```
 
 もう1つのこだわりが、さきほど少し触れた**問答（`ask_questions`）** です。
 
