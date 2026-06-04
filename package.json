@@ -230,7 +230,6 @@
     "baseline-browser-mapping": "2.10.0",
     "immutable": "4.3.8",
     "svgo": "4.0.1",
-    "js-yaml": "4.2.0",
     "path-to-regexp": "0.1.13",
     "multiparty": "4.3.0",
     "ws": "8.21.0",
