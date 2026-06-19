@@ -109,7 +109,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.6",
-    "@babel/core": "7.24.4",
+    "@babel/core": "7.29.6",
     "@babel/eslint-parser": "7.24.1",
     "@babel/helper-create-regexp-features-plugin": "7.24.7",
     "@babel/plugin-syntax-typescript": "7.24.1",
