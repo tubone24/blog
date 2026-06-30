@@ -304,6 +304,11 @@ h6 {
     cursor: zoom-in;
   }
 
+  .beoe svg {
+    max-width: 100%;
+    height: auto;
+  }
+
   a {
     font-weight: 700;
     color: $link;
