@@ -237,7 +237,7 @@
     "follow-redirects": "1.16.0",
     "dompurify": "3.4.8",
     "postcss": "8.5.15",
-    "protobufjs": "8.5.0",
+    "protobufjs": "8.6.5",
     "fast-uri": "3.1.2",
     "fast-xml-builder": "1.2.0",
     "mermaid": "11.15.0",
