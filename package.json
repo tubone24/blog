@@ -214,7 +214,7 @@
     "node-forge": "1.4.0",
     "jws": "4.0.1",
     "cookie": "1.1.1",
-    "tmp": "0.2.6",
+    "tmp": "0.2.7",
     "qs": "6.15.2",
     "serialize-javascript": "7.0.5",
     "flatted": "3.4.2",
