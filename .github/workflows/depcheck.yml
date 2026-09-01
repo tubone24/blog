@@ -10,6 +10,10 @@ on:
 env:
   cache-version: v2
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   dep-check:
     runs-on: ubuntu-latest

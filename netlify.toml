@@ -5,7 +5,7 @@
 
   # Build environment
   [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "24.20.0"
   NODE_OPTIONS = "--max-old-space-size=4096"
 
 [functions]

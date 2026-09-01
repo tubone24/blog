@@ -1,5 +1,5 @@
 {
-  "name": "Node.js (v16)",
+  "name": "Node.js (v24)",
   "dockerComposeFile": "docker-compose.yml",
   "service": "blog",
   "workspaceFolder": "/app",

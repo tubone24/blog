@@ -5,6 +5,10 @@ on:
     types:
       - opened
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   assign:
     if: github.actor != 'dependabot[bot]'
