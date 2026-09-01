@@ -230,13 +230,14 @@
     ultrahtml "^1.6.0"
     vite "^6.4.1"
 
-"@astrojs/rss@4.0.15":
-  version "4.0.15"
-  resolved "https://registry.yarnpkg.com/@astrojs/rss/-/rss-4.0.15.tgz#7884adaf52da45e747175e5e225e18ce7e08743d"
-  integrity sha512-uXO/k6AhRkIDXmRoc6xQpoPZrimQNUmS43X4+60yunfuMNHtSRN5e/FiSi7NApcZqmugSMc5+cJi8ovqgO+qIg==
+"@astrojs/rss@4.0.19":
+  version "4.0.19"
+  resolved "https://registry.yarnpkg.com/@astrojs/rss/-/rss-4.0.19.tgz#a0e6198dba8125fc3e0d8a2645d0987f538cbc09"
+  integrity sha512-e+z5wYeYtffQdHQO8c2tkSd2JEBdAuRXJV4ZEU5IxkYeE6e39woDd7nw1PH1Kk2tEYNCYuKdylnnbhGmt61awA==
   dependencies:
-    fast-xml-parser "^5.3.3"
+    fast-xml-parser "^5.5.7"
     piccolore "^0.1.3"
+    zod "^4.3.6"
 
 "@astrojs/telemetry@3.3.0":
   version "3.3.0"
@@ -12353,7 +12354,7 @@ fast-xml-builder@1.2.0, fast-xml-builder@^1.2.0:
     path-expression-matcher "^1.5.0"
     xml-naming "^0.1.0"
 
-fast-xml-parser@5.8.0, fast-xml-parser@^5.3.3:
+fast-xml-parser@5.8.0, fast-xml-parser@^5.5.7:
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-5.8.0.tgz#64d71f0f8d4bf23621dffd762aef7e98c1884fc1"
   integrity sha512-6bIM7fsJxeo3uXv7OncQYsBAMPJ7V16Slahl/6M98C/i2q+vB1+4a0MtrvYwDFEUrwDSbAmeLDRXsOBwrL7yAg==
@@ -23384,6 +23385,11 @@ zod@^4.0.5:
   version "4.1.12"
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.1.12.tgz#64f1ea53d00eab91853195653b5af9eee68970f0"
   integrity sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==
+
+zod@^4.3.6:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-4.5.4.tgz#e215c62420c528dd7951e31fb52c5438f1fd184a"
+  integrity sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==
 
 zwitch@^1.0.0:
   version "1.0.5"

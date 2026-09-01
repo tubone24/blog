@@ -5,7 +5,7 @@
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
     "@astrojs/react": "4.4.2",
-    "@astrojs/rss": "4.0.15",
+    "@astrojs/rss": "4.0.19",
     "@beoe/rehype-mermaid": "^0.4.2",
     "@netlify/blobs": "7.0.1",
     "@popperjs/core": "2.11.8",
