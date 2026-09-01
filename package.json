@@ -4,7 +4,8 @@
   "version": "1.0.1",
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
-    "@astrojs/react": "4.4.2",
+    "@astrojs/markdown-remark": "7.3.0",
+    "@astrojs/react": "6.0.5",
     "@astrojs/rss": "4.0.19",
     "@beoe/rehype-mermaid": "^0.4.2",
     "@netlify/blobs": "7.0.1",
@@ -19,7 +20,7 @@
     "@x402/evm": "2.11.0",
     "@x402/fetch": "^2.0.0",
     "algoliasearch": "4.19.1",
-    "astro": "5.18.1",
+    "astro": "7.2.10",
     "autocomplete.js": "0.38.1",
     "axios": "1.20.0",
     "babel-loader": "8.3.0",
@@ -44,7 +45,7 @@
     "remark-directive": "4.0.0",
     "remark-toc": "^9.0.0",
     "rimraf": "4.0.0",
-    "sass": "1.59.3",
+    "sass": "1.103.1",
     "satori": "0.25.0",
     "typescript": "5.9.3",
     "viem": "^2.30.4"
@@ -259,9 +260,7 @@
     "readdirp/picomatch": "2.3.2",
     "uuid": "11.1.1",
     "mermaid/uuid": "14.0.2",
-    "astro/esbuild": "0.28.2",
     "tsx/esbuild": "0.28.2",
-    "vite": "6.4.3",
     "@opentelemetry/core": "2.11.0",
     "find-my-way": "9.9.0",
     "**/jest-process-manager/**/joi": "17.13.4"

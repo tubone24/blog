@@ -19,9 +19,9 @@ const pagePosts = sorted.slice(0, POSTS_PER_PAGE);
 // Sidebar用データ
 const latestPosts = sorted.slice(0, 6).map((p) => ({
   title: p.data.title,
-  slug: p.slug,
+  slug: p.id,
   date: p.data.date.toISOString(),
-  url: p.slug,
+  url: p.id,
 }));
 
 const allPostsForSidebar = sorted.map((p) => ({
@@ -47,7 +47,7 @@ const allPostsForSidebar = sorted.map((p) => ({
       />
       <main class="col-xl-6 col-lg-7 col-md-12 col-12 order-2">
           {pagePosts.map((post, num) => {
-            const url = post.slug;
+            const url = post.id;
             return (
               <Card
                 client:idle

@@ -1,8 +1,19 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const blog = defineCollection({
-  type: "content",
+  // 記事の URL は frontmatter の slug がそのまま決めているので、
+  // Content Layer の id にもそれを使って従来の URL を維持する
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./src/content/blog",
+    generateId: ({ data, entry }) =>
+      typeof data.slug === "string" && data.slug.length > 0
+        ? data.slug
+        : entry.replace(/\.md$/, ""),
+  }),
   schema: z.object({
+    slug: z.string(),
     title: z.string(),
     date: z.coerce.date(),
     description: z.string().optional().default(""),

@@ -26,7 +26,7 @@ const latestPosts = allPosts
         <h3 style="margin-bottom:1.5rem;">最近の記事</h3>
       </div>
       {latestPosts.map((post, index) => {
-        const url = post.slug;
+        const url = post.id;
         return (
           <div class="col-sm-12 pb-4">
             <Card

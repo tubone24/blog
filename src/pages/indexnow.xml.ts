@@ -17,7 +17,7 @@ export async function GET(_context: APIContext) {
   const recentPosts = sorted.slice(0, 30);
 
   const urlList = recentPosts
-    .map((post) => `    <url><loc>${SITE_URL}/${post.slug}/</loc></url>`)
+    .map((post) => `    <url><loc>${SITE_URL}/${post.id}/</loc></url>`)
     .join("\n");
 
   // 静的ページも含める

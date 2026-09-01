@@ -15,7 +15,7 @@ export async function GET(_context: APIContext) {
     .map((post) => {
       const lastmod = formatDate(post.data.updatedDate || post.data.date);
       return `  <url>
-    <loc>${SITE_URL}/${xmlEscape(post.slug)}/</loc>
+    <loc>${SITE_URL}/${xmlEscape(post.id)}/</loc>
     <lastmod>${lastmod}</lastmod>
   </url>`;
     })

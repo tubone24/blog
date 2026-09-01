@@ -15,7 +15,7 @@ export async function GET(context: APIContext) {
   const postsList = sorted
     .slice(0, 10)
     .map((post) => {
-      const slug = post.slug;
+      const slug = post.id;
       const url = `${siteUrl}/${slug}/`;
       const title = post.data.title;
       const description = post.data.description || "";
