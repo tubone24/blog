@@ -8504,11 +8504,6 @@ aws-sign2@~0.7.0:
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
   integrity sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==
 
-aws-word-rules@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/aws-word-rules/-/aws-word-rules-1.3.0.tgz#ba3f999f7549b36cb3f807d3af51dedd4d8b76f5"
-  integrity sha512-U5OkC/zloe2o7WipkRvWaxLGUER+Dnv/LNj4T4mnsuUj2y63FrI33xyHB3lJb4x49r6geUBqaZvBcb4KR9o9Bg==
-
 aws4@^1.8.0:
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.13.2.tgz#0aa167216965ac9474ccfa83892cfb6b3e1e52ef"
@@ -20419,14 +20414,6 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.22.tgz#abf5a08a6f5d7279559b669f47f0a43e8f3464ef"
   integrity sha512-4PRT4nh1EImPbt2jASOKHX7PB7I+e4IWNLvkKFDxNhJlfjbYlleYQh285Z/3mPTHSAK/AvdMmw5BNNuYH8ShgQ==
 
-spellcheck-technical-word@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/spellcheck-technical-word/-/spellcheck-technical-word-2.0.0.tgz#cb0376b8bbda6239b6be009878cf81cf17080503"
-  integrity sha512-8hcSijidDE5oemF66L3ASQBFtFjVaiEw+YfrIksmIW6pppko83uV8eb7Pszyf0YOAT1Ew/7+O7CENWxRUXlGyQ==
-  dependencies:
-    structured-source "^3.0.2"
-    technical-word-rules "^1.4.2"
-
 split2@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/split2/-/split2-1.1.1.tgz#162d9b18865f02ab2f2ad9585522db9b54c481f9"
@@ -21111,11 +21098,6 @@ tar@7.5.11, tar@^7.4.0, tar@^7.4.3:
     minizlib "^3.1.0"
     yallist "^5.0.0"
 
-technical-word-rules@^1.4.2:
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/technical-word-rules/-/technical-word-rules-1.9.5.tgz#49f0a9e78c6b2ef02a1a404790ddd8f5310aafbc"
-  integrity sha512-2sqzeb3aE23GtIO9fL9sDbqdt4vnoks7nWZRUgqEvYkjEmmQjrnVfl3WTURBZFrpgAXBNk0AMhWCj+17mzYXhw==
-
 terminal-link@4.0.0, terminal-link@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/terminal-link/-/terminal-link-4.0.0.tgz#5f3e50329420fad97d07d624f7df1851d82963f1"
@@ -21195,16 +21177,6 @@ textlint-filter-rule-comments@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/textlint-filter-rule-comments/-/textlint-filter-rule-comments-1.2.2.tgz#3a72c494994e068e0e4aaad0f24ea7cfe338503a"
   integrity sha512-AtyxreCPb3Hq/bd6Qd6szY1OGgnW34LOjQXAHzE8NoXbTUudQqALPdRe+hvRsf81rnmGLxBiCUXZbnbpIseFyw==
-
-textlint-rule-aws-spellcheck@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/textlint-rule-aws-spellcheck/-/textlint-rule-aws-spellcheck-1.3.0.tgz#fdacdc06692bf3e422bdfc85342c2be672fb629e"
-  integrity sha512-Z48avILeTK6KOdDdKoIP58UPM3qm1ZWGSmUkSnl08e1EL/j27NRPKnnYKo0nFbZ+8Z0aDzkIIzhbjO3lljl/ig==
-  dependencies:
-    aws-word-rules "^1.3.0"
-    spellcheck-technical-word "^2.0.0"
-    structured-source "^3.0.2"
-    textlint-rule-helper "^2.1.1"
 
 textlint-rule-helper@2.0.1:
   version "2.0.1"
