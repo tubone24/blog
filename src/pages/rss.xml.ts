@@ -17,7 +17,7 @@ export async function GET(context: APIContext) {
     description: config.description,
     site: context.site || config.siteUrl,
     items: sorted.slice(0, 100).map((post) => {
-      const slug = post.slug;
+      const slug = post.id;
       return {
         title: post.data.title,
         pubDate: post.data.date,

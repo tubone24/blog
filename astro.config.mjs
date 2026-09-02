@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import react from "@astrojs/react";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -53,9 +54,6 @@ const retryableOembedTransformer = {
 export default defineConfig({
   site: "https://tubone-project24.xyz",
   publicDir: "static",
-  legacy: {
-    collections: true,
-  },
   integrations: [react(), netlifyHeaders()],
   vite: {
     plugins: [imageVariantFallback()],
@@ -76,6 +74,8 @@ export default defineConfig({
     },
   },
   markdown: {
+    // Astro 7 の既定は Sätteri。既存の remark/rehype プラグインを使い続ける
+    processor: unified(),
     remarkPlugins: [
       remarkDirective,
       remarkGithubCard,
@@ -133,5 +133,7 @@ export default defineConfig({
     defaultStrategy: "hover",
   },
   trailingSlash: "always",
+  // Astro 7 の既定は 'jsx'。空白の詰まり方が変わるため従来どおりにする
+  compressHTML: true,
   output: "static",
 });

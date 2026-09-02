@@ -12,7 +12,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // 記事ページ
   for (const post of posts) {
     paths.push({
-      params: { path: post.slug },
+      params: { path: post.id },
       props: { title: post.data.title },
     });
   }

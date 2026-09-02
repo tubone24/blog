@@ -8,7 +8,11 @@ on:
       - yarn.lock
       - .terraform.lock.hcl
 env:
-  cache-version: v2
+  cache-version: v3
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   dep-check:

@@ -7,7 +7,7 @@ on:
         default: "0"
         type: string
 env:
-  cache-version: v2
+  cache-version: v3
 jobs:
   website-scan:
     runs-on: ubuntu-latest
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24.14.0
+          node-version: 24.20.0
           registry-url: https://npm.pkg.github.com/
           scope: '@tubone24'
       - name: Get yarn cache directory path

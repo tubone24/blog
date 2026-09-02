@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   return posts
     .filter((post) => post.data.premium === true)
     .map((post) => {
-      const slug = post.slug;
+      const slug = post.id;
       return {
         params: { slug },
         props: { post },
@@ -48,7 +48,7 @@ const wordCount = rawText
   .length;
 const minutes = Math.ceil(wordCount / 400);
 
-const slug = post.slug;
+const slug = post.id;
 const shareURL = `${config.siteUrl}/${slug}/`;
 
 const fallbackDescription = rawText
@@ -72,9 +72,9 @@ const sorted = allPosts.sort(
 
 const latestPosts = sorted.slice(0, 6).map((p) => ({
   title: p.data.title,
-  slug: p.slug,
+  slug: p.id,
   date: p.data.date.toISOString(),
-  url: p.slug,
+  url: p.id,
 }));
 
 const allPostsForSidebar = sorted.map((p) => ({
@@ -87,7 +87,7 @@ const allPostsForRelated = sorted.map((p) => ({
   tags: p.data.tags || [],
   date: p.data.date.toISOString(),
   headerImage: p.data.headerImage,
-  slug: `/${p.slug}/`,
+  slug: `/${p.id}/`,
 }));
 ---
 

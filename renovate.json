@@ -3,7 +3,11 @@
     "config:base"
   ],
   "branchPrefix": "renovate-",
-  "prHourlyLimit": 12,
+  "prHourlyLimit": 4,
+  "prConcurrentLimit": 3,
+  "branchConcurrentLimit": 3,
+  "rebaseWhen": "conflicted",
+  "platformAutomerge": true,
   "timezone": "Asia/Tokyo",
   "labels": ["renovate"],
   "packageRules": [

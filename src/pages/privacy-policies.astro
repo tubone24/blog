@@ -12,7 +12,7 @@ const sorted = allPosts.sort(
 
 const latestPosts = sorted.slice(0, 6).map((p) => ({
   title: p.data.title,
-  slug: p.slug,
+  slug: p.id,
   date: p.data.date.toISOString(),
 }));
 
