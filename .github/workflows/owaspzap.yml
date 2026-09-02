@@ -7,7 +7,7 @@ on:
         default: "0"
         type: string
 env:
-  cache-version: v2
+  cache-version: v3
 jobs:
   website-scan:
     runs-on: ubuntu-latest

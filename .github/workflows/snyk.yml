@@ -2,7 +2,7 @@ name: Snyk
 on:
   workflow_dispatch:
 env:
-  cache-version: v2
+  cache-version: v3
 
 jobs:
   snyk:
