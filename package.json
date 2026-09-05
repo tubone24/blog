@@ -20,7 +20,7 @@
     "@x402/evm": "2.11.0",
     "@x402/fetch": "^2.0.0",
     "algoliasearch": "4.19.1",
-    "astro": "7.2.10",
+    "astro": "7.3.1",
     "autocomplete.js": "0.38.1",
     "axios": "1.20.0",
     "babel-loader": "8.3.0",
@@ -112,7 +112,7 @@
     "get-premium-content": "tsx .claude/skills/get-premium-content/scripts/get-premium-content.ts"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.6",
+    "@astrojs/check": "0.9.10",
     "@babel/core": "7.29.6",
     "@babel/eslint-parser": "7.24.1",
     "@babel/helper-create-regexp-features-plugin": "7.24.7",
