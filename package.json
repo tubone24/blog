@@ -236,7 +236,7 @@
     "multiparty": "4.3.0",
     "ws": "8.21.0",
     "devalue": "5.8.1",
-    "smol-toml": "1.7.0",
+    "smol-toml": "1.7.1",
     "follow-redirects": "1.16.0",
     "dompurify": "3.4.14",
     "postcss": "8.5.26",
