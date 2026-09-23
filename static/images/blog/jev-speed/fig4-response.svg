@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 416" width="760" height="416" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+  <defs>
+    <style>
+      .ttl { fill: #0f172a; font-size: 17px; font-weight: 700; }
+      .hd  { fill: #0f172a; font-size: 13.5px; font-weight: 700; }
+      .lb  { fill: #475569; font-size: 12px; }
+      .nt  { fill: #475569; font-size: 12.5px; }
+      .mn  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #1e293b; }
+      .ky  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #7c3aed; }
+      .ty  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #0d9488; }
+      .nm  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #0369a1; }
+    </style>
+  </defs>
+  <rect width="760" height="416" fill="#f8fafc"/>
+  <text x="24" y="32" class="ttl">返ってくるのは確率だけ。文章は1文字もない</text>
+  <rect x="24" y="52" width="712" height="268" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="44" y="80" class="hd">answers</text>
+  <text x="44" y="126" class="mn"><tspan class="ky">"m2"</tspan>: { noul: <tspan class="nm">0.99</tspan> }</text>
+  <g><rect x="214" y="104" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#0d9488" stroke-width="1.3"/><text x="225.0" y="117.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">4</text><path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(220.38 121.56) scale(0.0924)"/></g>
+  <g transform="translate(0 104)" fill="none" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M 258 16 l 6 7 l 11 -13"/></g>
+  <g><rect x="288" y="104" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#0f172a" stroke-width="1.3"/><text x="299.0" y="117.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">5</text><path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(294.38 121.56) scale(0.0924)"/></g>
+  <text x="326" y="128" class="nt" fill="#0f766e">置ける</text>
+  <text x="44" y="172" class="mn"><tspan class="ky">"m6"</tspan>: { noul: <tspan class="nm">0.99</tspan> }</text>
+  <g><rect x="214" y="150" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#0d9488" stroke-width="1.3"/><text x="225.0" y="163.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">6</text><path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(220.38 167.56) scale(0.0924)"/></g>
+  <g transform="translate(0 150)" fill="none" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M 258 16 l 6 7 l 11 -13"/></g>
+  <g><rect x="288" y="150" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#0f172a" stroke-width="1.3"/><text x="299.0" y="163.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">5</text><path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(294.38 167.56) scale(0.0924)"/></g>
+  <text x="326" y="174" class="nt" fill="#0f766e">これも置ける</text>
+  <text x="44" y="218" class="mn"><tspan class="ky">"m3"</tspan>: { noul: <tspan class="nm">0.10</tspan> }</text>
+  <g><rect x="214" y="196" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/><text x="225.0" y="209.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">4</text><path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(220.38 213.56) scale(0.0924)"/></g>
+  <g transform="translate(0 196)" fill="none" stroke="#ef4444" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M 258 10 l 15 15 M 273 10 l -15 15"/></g>
+  <g><rect x="288" y="196" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#0f172a" stroke-width="1.3"/><text x="299.0" y="209.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">9</text><path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(294.38 213.56) scale(0.0924)"/></g>
+  <text x="326" y="220" class="nt" fill="#64748b">置けない</text>
+  <text x="44" y="266" class="mn"><tspan class="ky">"best"</tspan>: { choice: "m6", confidence: <tspan class="nm">0.52</tspan> }</text>
+  <g><rect x="400" y="242" width="22" height="30.8" rx="3.1" fill="#ffffff" stroke="#0d9488" stroke-width="1.3"/><text x="411.0" y="255.9" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="13.6" font-weight="700" fill="#1f2937">6</text><path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(406.38 259.56) scale(0.0924)"/></g>
+  <text x="436" y="266" class="nt" fill="#b45309">を出す。五分五分の自信</text>
+  <text x="44" y="308" class="mn"><tspan class="ky">"pressure"</tspan>: { score: <tspan class="nm">1</tspan> }</text>
+  <text x="400" y="308" class="nt">出せる手は、少しだけある</text>
+  <rect x="24" y="340" width="712" height="52" rx="10" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+  <text x="44" y="371" class="mn">latencyMs: 228   input_tokens: 2964   output_tokens: 289</text>
+  <text x="460" y="371" class="nt" fill="#0f766e">課金されるのは入力トークンだけ</text>
+</svg>
