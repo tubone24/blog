@@ -1,6 +1,6 @@
-@import "bootstrap/scss/bootstrap";
-@import "prismjs/themes/prism-tomorrow.css";
-@import "colors";
+@use "bootstrap/scss/bootstrap";
+@use "prismjs/themes/prism-tomorrow.css";
+@use "colors" as *;
 
 // インラインcode（pre外のcode要素）
 :not(pre) > code {

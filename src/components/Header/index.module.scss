@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@use "../../styles/colors" as *;
 
 .img-container {
   $height: 500px;

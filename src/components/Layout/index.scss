@@ -1,4 +1,4 @@
-@import "../../styles/colors";
+@use "../../styles/colors" as *;
 
 /* stylelint-disable selector-class-pattern, selector-id-pattern, keyframes-name-pattern */
 .fadeIn {
