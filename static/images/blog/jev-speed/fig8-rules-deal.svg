@@ -1,0 +1,393 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 394" width="760" height="394" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+  <defs>
+    <style>
+      .ttl { fill: #0f172a; font-size: 17px; font-weight: 700; }
+      .hd  { fill: #0f172a; font-size: 13.5px; font-weight: 700; }
+      .lb  { fill: #475569; font-size: 12px; }
+      .nt  { fill: #475569; font-size: 12.5px; }
+      .mn  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #1e293b; }
+      .ky  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #7c3aed; }
+      .ty  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #0d9488; }
+      .nm  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 12px; fill: #0369a1; }
+    </style>
+    <pattern id="backpat" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#1d4ed8"/><path d="M0 0 H8 M0 4 H8" stroke="#93c5fd" stroke-width="1.1" opacity="0.55"/><path d="M0 0 V8 M4 0 V8" stroke="#bfdbfe" stroke-width="0.8" opacity="0.4"/></pattern>
+    <marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0d9488"/></marker>
+  </defs>
+  <rect width="760" height="394" fill="#f8fafc"/>
+  <text x="24" y="30" class="ttl">スピードのルールと配り方</text>
+  <text x="24" y="54" class="lb">台札の1つ上か1つ下だけ重ねられる。同じ数字は重ねられない</text>
+  <g>
+  <rect x="30" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="30" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="36.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">A</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(33.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 55.0 121.0)">
+  <text x="36.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">A</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(33.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(44.50 110.50) scale(0.2100)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="84" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="84" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="90.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">2</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(87.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 109.0 121.0)">
+  <text x="90.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">2</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(87.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(103.62 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 109.00 137.80) translate(103.62 132.43) scale(0.1075)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="138" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="138" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="144.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">3</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(141.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 163.0 121.0)">
+  <text x="144.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">3</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(141.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(157.62 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(157.62 115.62) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 163.00 137.80) translate(157.62 132.43) scale(0.1075)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="192" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="192" y="86" width="50" height="70" rx="5.0" fill="#f6fffd" stroke="#0d9488" stroke-width="2.4"/>
+  <g>
+  <g>
+  <text x="198.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">4</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(195.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 217.0 121.0)">
+  <text x="198.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">4</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(195.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(203.38 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(219.88 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 208.75 137.80) translate(203.38 132.43) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 225.25 137.80) translate(219.88 132.43) scale(0.1075)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="246" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="246" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#0f172a" stroke-width="2.4"/>
+  <g>
+  <g>
+  <text x="252.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">5</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(249.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 271.0 121.0)">
+  <text x="252.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">5</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(249.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(257.38 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(273.88 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(265.62 115.62) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 262.75 137.80) translate(257.38 132.43) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 279.25 137.80) translate(273.88 132.43) scale(0.1075)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="300" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="300" y="86" width="50" height="70" rx="5.0" fill="#f6fffd" stroke="#0d9488" stroke-width="2.4"/>
+  <g>
+  <g>
+  <text x="306.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">6</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(303.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 325.0 121.0)">
+  <text x="306.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">6</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(303.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(311.38 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(327.88 98.83) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(311.38 115.62) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(327.88 115.62) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 316.75 137.80) translate(311.38 132.43) scale(0.1075)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 333.25 137.80) translate(327.88 132.43) scale(0.1075)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="354" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="354" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="360.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">7</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(357.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 379.0 121.0)">
+  <text x="360.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">7</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(357.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(365.81 99.25) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(382.31 99.25) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(374.06 107.66) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(365.81 116.06) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(382.31 116.06) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 370.75 137.80) translate(365.81 132.86) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 387.25 137.80) translate(382.31 132.86) scale(0.0989)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="408" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="408" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="414.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">8</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(411.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 433.0 121.0)">
+  <text x="414.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">8</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(411.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(419.81 99.25) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(436.31 99.25) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(428.06 107.66) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(419.81 116.06) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(436.31 116.06) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 433.00 129.40) translate(428.06 124.46) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 424.75 137.80) translate(419.81 132.86) scale(0.0989)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 441.25 137.80) translate(436.31 132.86) scale(0.0989)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="462" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="462" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="468.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">9</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(465.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 487.0 121.0)">
+  <text x="468.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">9</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(465.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(474.29 98.69) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(490.79 98.69) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(474.29 110.59) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(490.79 110.59) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(482.54 116.54) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 478.75 126.95) translate(474.29 122.49) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 495.25 126.95) translate(490.79 122.49) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 478.75 138.85) translate(474.29 134.39) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 495.25 138.85) translate(490.79 134.39) scale(0.0892)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="516" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="516" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="522.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="10.8" font-weight="700" fill="#dc2626">10</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(519.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 541.0 121.0)">
+  <text x="522.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="10.8" font-weight="700" fill="#dc2626">10</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(519.38 105.72) scale(0.0675)"/>
+  </g>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(528.29 98.69) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(544.79 98.69) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(536.54 104.64) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(528.29 110.59) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(544.79 110.59) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 532.75 126.95) translate(528.29 122.49) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 549.25 126.95) translate(544.79 122.49) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 541.00 132.90) translate(536.54 128.44) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 532.75 138.85) translate(528.29 134.39) scale(0.0892)"/>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="rotate(180 549.25 138.85) translate(544.79 134.39) scale(0.0892)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="570" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="570" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="576.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">J</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(573.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 595.0 121.0)">
+  <text x="576.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">J</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(573.38 105.72) scale(0.0675)"/>
+  </g>
+  <g><rect x="579.2" y="94.8" width="31.5" height="52.5" rx="2.5" fill="#ffffff"/><clipPath id="cc5"><rect x="579.2" y="94.8" width="31.5" height="52.5" rx="2.5"/></clipPath><g clip-path="url(#cc5)"><g transform="translate(579.25 95.80) scale(0.3150)"><path d="M32 28 C 26 35 25 48 28 59 L36 55 C 33 46 34 35 38 30 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M68 28 C 74 35 75 48 72 59 L64 55 C 67 46 66 35 62 30 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M35 56 C 37 65 43 69 50 69 C 57 69 63 65 65 56" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#dc2626" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#dc2626"/><circle cx="54" cy="35" r="1.7" fill="#dc2626"/><path d="M24 24 C 24 10 36 3 52 3 C 66 3 76 10 76 19 L76 24 Z" fill="#dc2626" fill-opacity="0.85"/><rect x="18" y="21" width="64" height="7" rx="3.5" fill="#dc2626"/></g><g transform="rotate(180 595.00 121.00)"><g transform="translate(579.25 95.80) scale(0.3150)"><path d="M32 28 C 26 35 25 48 28 59 L36 55 C 33 46 34 35 38 30 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M68 28 C 74 35 75 48 72 59 L64 55 C 67 46 66 35 62 30 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M35 56 C 37 65 43 69 50 69 C 57 69 63 65 65 56" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#dc2626" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#dc2626"/><circle cx="54" cy="35" r="1.7" fill="#dc2626"/><path d="M24 24 C 24 10 36 3 52 3 C 66 3 76 10 76 19 L76 24 Z" fill="#dc2626" fill-opacity="0.85"/><rect x="18" y="21" width="64" height="7" rx="3.5" fill="#dc2626"/></g></g></g><line x1="579.2" y1="121.0" x2="610.8" y2="121.0" stroke="#dc2626" stroke-width="0.9" opacity="0.5"/><rect x="579.2" y="94.8" width="31.5" height="52.5" rx="2.5" fill="none" stroke="#dc2626" stroke-width="1.1" opacity="0.6"/></g>
+  </g>
+  </g>
+  <g>
+  <rect x="624" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="624" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="630.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">Q</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(627.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 649.0 121.0)">
+  <text x="630.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">Q</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(627.38 105.72) scale(0.0675)"/>
+  </g>
+  <g><rect x="633.2" y="94.8" width="31.5" height="52.5" rx="2.5" fill="#ffffff"/><clipPath id="cc6"><rect x="633.2" y="94.8" width="31.5" height="52.5" rx="2.5"/></clipPath><g clip-path="url(#cc6)"><g transform="translate(633.25 95.80) scale(0.3150)"><path d="M32 27 C 24 37 23 55 26 70 L36 64 C 32 51 33 39 38 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M68 27 C 76 37 77 55 74 70 L64 64 C 68 51 67 39 62 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M37 56 L50 68 L63 56" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#dc2626" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#dc2626"/><circle cx="54" cy="35" r="1.7" fill="#dc2626"/><rect x="22" y="20" width="56" height="9" rx="4" fill="#dc2626"/><circle cx="30" cy="13" r="5" fill="#dc2626" fill-opacity="0.9"/><circle cx="50" cy="7" r="6.5" fill="#dc2626" fill-opacity="0.9"/><circle cx="70" cy="13" r="5" fill="#dc2626" fill-opacity="0.9"/></g><g transform="rotate(180 649.00 121.00)"><g transform="translate(633.25 95.80) scale(0.3150)"><path d="M32 27 C 24 37 23 55 26 70 L36 64 C 32 51 33 39 38 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M68 27 C 76 37 77 55 74 70 L64 64 C 68 51 67 39 62 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M37 56 L50 68 L63 56" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#dc2626" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#dc2626"/><circle cx="54" cy="35" r="1.7" fill="#dc2626"/><rect x="22" y="20" width="56" height="9" rx="4" fill="#dc2626"/><circle cx="30" cy="13" r="5" fill="#dc2626" fill-opacity="0.9"/><circle cx="50" cy="7" r="6.5" fill="#dc2626" fill-opacity="0.9"/><circle cx="70" cy="13" r="5" fill="#dc2626" fill-opacity="0.9"/></g></g></g><line x1="633.2" y1="121.0" x2="664.8" y2="121.0" stroke="#dc2626" stroke-width="0.9" opacity="0.5"/><rect x="633.2" y="94.8" width="31.5" height="52.5" rx="2.5" fill="none" stroke="#dc2626" stroke-width="1.1" opacity="0.6"/></g>
+  </g>
+  </g>
+  <g>
+  <rect x="678" y="86" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="678" y="86" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g opacity="0.45">
+  <g>
+  <text x="684.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">K</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(681.38 105.72) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 703.0 121.0)">
+  <text x="684.8" y="100.3" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#dc2626">K</text>
+  <path d="M50 92 C 20 68 6 50 6 33 C 6 18 17 9 29 9 C 39 9 46 15 50 22 C 54 15 61 9 71 9 C 83 9 94 18 94 33 C 94 50 80 68 50 92 Z" fill="#dc2626" transform="translate(681.38 105.72) scale(0.0675)"/>
+  </g>
+  <g><rect x="687.2" y="94.8" width="31.5" height="52.5" rx="2.5" fill="#ffffff"/><clipPath id="cc7"><rect x="687.2" y="94.8" width="31.5" height="52.5" rx="2.5"/></clipPath><g clip-path="url(#cc7)"><g transform="translate(687.25 95.80) scale(0.3150)"><path d="M32 29 C 26 35 25 46 28 57 L36 53 C 33 45 34 35 38 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M68 29 C 74 35 75 46 72 57 L64 53 C 67 45 66 35 62 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M37 56 L50 68 L63 56" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#dc2626" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#dc2626"/><circle cx="54" cy="35" r="1.7" fill="#dc2626"/><path d="M37 41 C 40 46 44 48 50 48 C 56 48 60 46 63 41 C 64 55 58 64 50 64 C 42 64 36 55 37 41 Z" fill="#dc2626" fill-opacity="0.38"/><path d="M43 45 C 46 42 54 42 57 45" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M18 26 L23 4 L34 17 L50 0 L66 17 L77 4 L82 26 Z" fill="#dc2626" fill-opacity="0.9"/><rect x="15" y="21" width="70" height="10" rx="4" fill="#dc2626"/></g><g transform="rotate(180 703.00 121.00)"><g transform="translate(687.25 95.80) scale(0.3150)"><path d="M32 29 C 26 35 25 46 28 57 L36 53 C 33 45 34 35 38 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M68 29 C 74 35 75 46 72 57 L64 53 C 67 45 66 35 62 31 Z" fill="#dc2626" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M37 56 L50 68 L63 56" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#dc2626" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#dc2626"/><circle cx="54" cy="35" r="1.7" fill="#dc2626"/><path d="M37 41 C 40 46 44 48 50 48 C 56 48 60 46 63 41 C 64 55 58 64 50 64 C 42 64 36 55 37 41 Z" fill="#dc2626" fill-opacity="0.38"/><path d="M43 45 C 46 42 54 42 57 45" fill="none" stroke="#dc2626" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M18 26 L23 4 L34 17 L50 0 L66 17 L77 4 L82 26 Z" fill="#dc2626" fill-opacity="0.9"/><rect x="15" y="21" width="70" height="10" rx="4" fill="#dc2626"/></g></g></g><line x1="687.2" y1="121.0" x2="718.8" y2="121.0" stroke="#dc2626" stroke-width="0.9" opacity="0.5"/><rect x="687.2" y="94.8" width="31.5" height="52.5" rx="2.5" fill="none" stroke="#dc2626" stroke-width="1.1" opacity="0.6"/></g>
+  </g>
+  </g>
+  <text x="217" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">重ねられる</text>
+  <text x="271" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">台札</text>
+  <text x="325" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">重ねられる</text>
+  <path d="M 703 162 C 703 200, 55 200, 55 162" fill="none" stroke="#0d9488" stroke-width="1.8" marker-end="url(#aw)"/>
+  <text x="380" y="218" text-anchor="middle" class="nt" fill="#0f766e">K と A も隣接している（K → A → 2 と循環する）</text>
+  <text x="24" y="268" class="hd">1人26枚（黒札か赤札のどちらか一組）の内訳</text>
+  <g>
+  <rect x="32" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="32" y="286" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#0f172a" stroke-width="2.4"/>
+  <g>
+  <g>
+  <text x="38.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">7</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(35.38 305.73) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 57.0 321.0)">
+  <text x="38.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">7</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(35.38 305.73) scale(0.0675)"/>
+  </g>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(43.80 299.25) scale(0.0989)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(60.30 299.25) scale(0.0989)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(52.05 307.66) scale(0.0989)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(43.80 316.06) scale(0.0989)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(60.30 316.06) scale(0.0989)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="rotate(180 48.75 337.80) translate(43.80 332.86) scale(0.0989)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="rotate(180 65.25 337.80) translate(60.30 332.86) scale(0.0989)"/>
+  </g>
+  </g>
+  <text x="57" y="374" text-anchor="middle" class="lb">台札 1枚</text>
+  <g>
+  <rect x="140" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="140" y="286" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g>
+  <g>
+  <text x="146.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">3</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(143.38 305.73) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 165.0 321.0)">
+  <text x="146.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">3</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(143.38 305.73) scale(0.0675)"/>
+  </g>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(159.62 298.82) scale(0.1075)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(159.62 315.62) scale(0.1075)"/>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="rotate(180 165.00 337.80) translate(159.62 332.43) scale(0.1075)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="176" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="176" y="286" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g>
+  <g>
+  <text x="182.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">8</text>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(179.38 305.73) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 201.0 321.0)">
+  <text x="182.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">8</text>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(179.38 305.73) scale(0.0675)"/>
+  </g>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(187.81 299.25) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(204.31 299.25) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(196.06 307.66) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(187.81 316.06) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(204.31 316.06) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 201.00 329.40) translate(196.06 324.45) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 192.75 337.80) translate(187.81 332.86) scale(0.0989)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 209.25 337.80) translate(204.31 332.86) scale(0.0989)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="212" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="212" y="286" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g>
+  <g>
+  <text x="218.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">J</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(215.38 305.73) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 237.0 321.0)">
+  <text x="218.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">J</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(215.38 305.73) scale(0.0675)"/>
+  </g>
+  <g><rect x="221.2" y="294.8" width="31.5" height="52.5" rx="2.5" fill="#ffffff"/><clipPath id="cc8"><rect x="221.2" y="294.8" width="31.5" height="52.5" rx="2.5"/></clipPath><g clip-path="url(#cc8)"><g transform="translate(221.25 295.80) scale(0.3150)"><path d="M32 28 C 26 35 25 48 28 59 L36 55 C 33 46 34 35 38 30 Z" fill="#1f2937" fill-opacity="0.32"/><path d="M68 28 C 74 35 75 48 72 59 L64 55 C 67 46 66 35 62 30 Z" fill="#1f2937" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#1f2937" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#1f2937" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M35 56 C 37 65 43 69 50 69 C 57 69 63 65 65 56" fill="none" stroke="#1f2937" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#1f2937" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#1f2937" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#1f2937" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#1f2937"/><circle cx="54" cy="35" r="1.7" fill="#1f2937"/><path d="M24 24 C 24 10 36 3 52 3 C 66 3 76 10 76 19 L76 24 Z" fill="#1f2937" fill-opacity="0.85"/><rect x="18" y="21" width="64" height="7" rx="3.5" fill="#1f2937"/></g><g transform="rotate(180 237.00 321.00)"><g transform="translate(221.25 295.80) scale(0.3150)"><path d="M32 28 C 26 35 25 48 28 59 L36 55 C 33 46 34 35 38 30 Z" fill="#1f2937" fill-opacity="0.32"/><path d="M68 28 C 74 35 75 48 72 59 L64 55 C 67 46 66 35 62 30 Z" fill="#1f2937" fill-opacity="0.32"/><path d="M22 80 L25 66 L34 56 L66 56 L75 66 L78 80 Z" fill="#ffffff" stroke="#1f2937" stroke-width="2.4" stroke-linejoin="round"/><path d="M45 51 L45 56 M55 51 L55 56" fill="none" stroke="#1f2937" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M35 56 C 37 65 43 69 50 69 C 57 69 63 65 65 56" fill="none" stroke="#1f2937" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M23 74 L77 74" fill="none" stroke="#1f2937" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="1.0"/><path d="M24 78 L76 78" fill="none" stroke="#1f2937" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M33 60 L31 72 M67 60 L69 72" fill="none" stroke="#1f2937" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><ellipse cx="50" cy="38" rx="12" ry="13" fill="#ffffff" stroke="#1f2937" stroke-width="2.4"/><circle cx="46" cy="35" r="1.7" fill="#1f2937"/><circle cx="54" cy="35" r="1.7" fill="#1f2937"/><path d="M24 24 C 24 10 36 3 52 3 C 66 3 76 10 76 19 L76 24 Z" fill="#1f2937" fill-opacity="0.85"/><rect x="18" y="21" width="64" height="7" rx="3.5" fill="#1f2937"/></g></g></g><line x1="221.2" y1="321.0" x2="252.8" y2="321.0" stroke="#1f2937" stroke-width="0.9" opacity="0.5"/><rect x="221.2" y="294.8" width="31.5" height="52.5" rx="2.5" fill="none" stroke="#1f2937" stroke-width="1.1" opacity="0.6"/></g>
+  </g>
+  </g>
+  <g>
+  <rect x="248" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="248" y="286" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g>
+  <g>
+  <text x="254.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="10.8" font-weight="700" fill="#1f2937">10</text>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(251.38 305.73) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 273.0 321.0)">
+  <text x="254.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="10.8" font-weight="700" fill="#1f2937">10</text>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(251.38 305.73) scale(0.0675)"/>
+  </g>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(260.29 298.69) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(276.79 298.69) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(268.54 304.64) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(260.29 310.59) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="translate(276.79 310.59) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 264.75 326.95) translate(260.29 322.49) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 281.25 326.95) translate(276.79 322.49) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 273.00 332.90) translate(268.54 328.44) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 264.75 338.85) translate(260.29 334.39) scale(0.0892)"/>
+  <path d="M50 5 C 61 5 70 14 70 25 C 70 29 69 33 67 36 C 70 34 74 33 78 33 C 89 33 97 42 97 52 C 97 63 89 71 78 71 C 69 71 62 66 58 58 C 58 66 61 79 67 94 L 33 94 C 39 79 42 66 42 58 C 38 66 31 71 22 71 C 11 71 3 63 3 52 C 3 42 11 33 22 33 C 26 33 30 34 33 36 C 31 33 30 29 30 25 C 30 14 39 5 50 5 Z" fill="#1f2937" transform="rotate(180 281.25 338.85) translate(276.79 334.39) scale(0.0892)"/>
+  </g>
+  </g>
+  <g>
+  <rect x="284" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/>
+  <rect x="284" y="286" width="50" height="70" rx="5.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <g>
+  <g>
+  <text x="290.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">A</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(287.38 305.73) scale(0.0675)"/>
+  </g>
+  <g transform="rotate(180 309.0 321.0)">
+  <text x="290.8" y="300.4" text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif" font-size="12.9" font-weight="700" fill="#1f2937">A</text>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(287.38 305.73) scale(0.0675)"/>
+  </g>
+  <path d="M50 6 C 50 6 10 36 10 58 C 10 72 21 81 32 81 C 39 81 45 77 48 71 C 47 80 43 88 35 94 L 65 94 C 57 88 53 80 52 71 C 55 77 61 81 68 81 C 79 81 90 72 90 58 C 90 36 50 6 50 6 Z" fill="#1f2937" transform="translate(298.50 310.50) scale(0.2100)"/>
+  </g>
+  </g>
+  <text x="257" y="374" text-anchor="middle" class="lb">手札 5枚</text>
+  <g><rect x="430" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="430" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="434.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="443" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="443" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="447.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="456" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="456" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="460.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="469" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="469" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="473.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="482" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="482" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="486.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="495" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="495" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="499.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="508" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="508" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="512.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="521" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="521" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="525.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <g><rect x="534" y="286" width="50" height="70" rx="5.0" fill="#0f172a" opacity="0.10" transform="translate(1.5 2.5)"/><rect x="534" y="286" width="50" height="70" rx="5.0" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.2"/><rect x="538.5" y="290.9" width="41.0" height="60.2" rx="3.0" fill="url(#backpat)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.75"/></g>
+  <text x="533" y="374" text-anchor="middle" class="lb">伏せた山 20枚</text>
+  <text x="662" y="316" text-anchor="middle" class="hd">合計 26枚</text>
+  <text x="662" y="338" text-anchor="middle" class="lb">これが2人ぶん</text>
+</svg>

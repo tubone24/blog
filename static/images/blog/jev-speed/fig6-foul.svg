@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+  <defs>
+    <style>
+      .ttl { fill: #0f172a; font-size: 17px; font-weight: 700; }
+      .lb  { fill: #0f172a; font-size: 12.5px; font-weight: 700; }
+      .nt  { fill: #475569; font-size: 12.5px; }
+      .in  { fill: #ffffff; font-size: 12.5px; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="760" height="280" fill="#f8fafc"/>
+  <text x="24" y="32" class="ttl">お手付き1回で、Jev の数十手ぶんを失う</text>
+
+  <text x="24" y="74" class="lb">Jev の1手</text>
+  <text x="24" y="92" class="nt" font-size="11">約200ms</text>
+  <rect x="150" y="62" width="12" height="24" rx="2" fill="#0d9488"/>
+  <text x="172" y="80" class="nt">これ1本ぶん</text>
+
+  <text x="24" y="136" class="lb">お手付き</text>
+  <text x="24" y="154" class="nt" font-size="11">基本10秒</text>
+  <rect x="150" y="124" width="580" height="26" rx="4" fill="#dc2626"/>
+  <text x="164" y="142" class="in">10秒（連続すると1.5倍ずつ、上限30秒）</text>
+
+  <text x="24" y="200" class="lb">その間に</text>
+  <text x="24" y="218" class="lb">Jev が打てる手</text>
+  <rect x="150.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="161.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="173.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="184.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="196.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="208.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="219.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="231.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="242.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="254.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="266.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="277.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="289.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="300.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="312.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="324.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="335.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="347.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="358.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="370.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="382.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="393.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="405.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="416.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="428.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="440.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="451.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="463.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="474.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="486.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="498.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="509.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="521.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="532.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="544.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="556.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="567.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="579.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="590.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="602.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="614.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="625.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="637.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="648.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="660.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="672.0" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="683.6" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="695.2" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="706.8" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+  <rect x="718.4" y="186" width="8" height="22" rx="2" fill="#0d9488" opacity="0.85"/>
+
+  <text x="24" y="258" class="nt">同じ10秒のあいだに、Jev はこれだけ手を打てる。人間が勝てる余地はここにしかない</text>
+</svg>

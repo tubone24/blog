@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .ttl { fill: #0f172a; font-size: 17px; font-weight: 700; }
+      .hd  { fill: #0f172a; font-size: 13.5px; font-weight: 700; }
+      .mn  { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 11.5px; fill: #334155; }
+      .nt  { fill: #475569; font-size: 12.5px; }
+    </style>
+  </defs>
+  <rect width="760" height="300" fill="#f8fafc"/>
+  <text x="24" y="32" class="ttl">JEV SPEED の全体構成</text>
+
+  <rect x="24" y="56" width="220" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="42" y="84" class="hd">ブラウザ</text>
+  <text x="42" y="112" class="mn">render3d.js</text><text x="128" y="112" class="mn">盤面の描画</text>
+  <text x="42" y="136" class="mn">main.js</text><text x="128" y="136" class="mn">ゲームループ</text>
+  <text x="42" y="160" class="mn">ai.js</text><text x="128" y="160" class="mn">質問の組み立て</text>
+  <text x="42" y="184" class="mn" fill="#0d9488">rules.js</text><text x="128" y="184" class="mn" fill="#0d9488">ルール検証器</text>
+
+  <path d="M 248 131 L 264 131" stroke="#64748b" stroke-width="1.8" marker-end="url(#a1)"/>
+
+  <rect x="268" y="56" width="220" height="150" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="286" y="84" class="hd">Cloudflare Workers</text>
+  <text x="286" y="112" class="mn">/api/jev</text>
+  <text x="286" y="136" class="mn">APIキーはここだけ</text>
+  <text x="286" y="160" class="mn">レート制限</text>
+  <text x="286" y="184" class="mn">上限超過でモックに降格</text>
+
+  <path d="M 492 131 L 508 131" stroke="#64748b" stroke-width="1.8" marker-end="url(#a1)"/>
+
+  <rect x="512" y="56" width="220" height="150" rx="10" fill="#ecfdf5" stroke="#0d9488" stroke-width="1.5"/>
+  <text x="530" y="84" class="hd" fill="#0f766e">Jev</text>
+  <text x="530" y="112" class="mn">api.typesafe.ai</text>
+  <text x="530" y="136" class="mn">12個の質問を1パスで</text>
+  <text x="530" y="160" class="mn">70〜500ms</text>
+  <text x="530" y="184" class="mn">出力トークンは無料</text>
+
+  <rect x="24" y="230" width="708" height="46" rx="8" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="42" y="258" class="nt" fill="#9a3412">Jev が返すのは判断だけ。場に出す前に、必ず rules.js が機械的に検証する</text>
+</svg>
