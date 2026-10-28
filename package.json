@@ -4,8 +4,8 @@
   "version": "1.0.1",
   "author": "tubone <tubo.yyyuuu@gmail.com>",
   "dependencies": {
-    "@astrojs/markdown-remark": "7.3.0",
-    "@astrojs/react": "6.0.5",
+    "@astrojs/markdown-remark": "7.3.5",
+    "@astrojs/react": "6.0.6",
     "@astrojs/rss": "4.0.19",
     "@beoe/rehype-mermaid": "^0.4.2",
     "@netlify/blobs": "7.0.1",
@@ -112,7 +112,7 @@
     "get-premium-content": "tsx .claude/skills/get-premium-content/scripts/get-premium-content.ts"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.6",
+    "@astrojs/check": "0.9.12",
     "@babel/core": "7.29.6",
     "@babel/eslint-parser": "7.24.1",
     "@babel/helper-create-regexp-features-plugin": "7.24.7",
