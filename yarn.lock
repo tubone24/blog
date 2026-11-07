@@ -5915,10 +5915,10 @@
     react-docgen "^8.0.2"
     react-docgen-typescript "^2.2.2"
 
-"@storybook/test-runner@0.24.2":
-  version "0.24.2"
-  resolved "https://registry.yarnpkg.com/@storybook/test-runner/-/test-runner-0.24.2.tgz#59deba0619f7b896f92e186ac108244014859716"
-  integrity sha512-76DbflDTGAKq8Af6uHbWTGnKzKHhjLbJaZXRFhVnKqFocoXcej58C9DpM0BJ3addu7fSDJmPwfR97OINg16XFQ==
+"@storybook/test-runner@0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@storybook/test-runner/-/test-runner-0.26.0.tgz#b9c81c7efc4461d2f993fb1ad7a74752a4115307"
+  integrity sha512-q/B3Mf5QQuYAQ99AKcxTnNzPBso2OctLy13mEA23kYM8vW+Sz3WysdZIiQvNQ0bQFI9MDRkcLQVGIBcnnkaZXA==
   dependencies:
     "@babel/core" "^7.22.5"
     "@babel/generator" "^7.22.5"
